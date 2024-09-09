@@ -1,0 +1,30 @@
+# dbt
+target/
+dbt_modules/
+dbt_packages/
+config/.user.yml
+config/profiles.yml
+
+.cache
+nohup.out
+
+# Virtual envs
+venv/
+.env
+.venv
+env/
+
+scripts/
+
+# VS Code
+.vscode/
+
+# logs
+*.log
+logs/
+
+# Python cache
+__pycache__
+.gitsecret/keys/random_seed
+load/secrets/**/*.*
+!*.secret

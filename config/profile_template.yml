@@ -1,0 +1,17 @@
+fixed:
+  type: synapse
+  port: 1433
+  target: dev
+  authentication: sql
+prompts:
+  target:
+    type: string
+    hint: your desired target name
+  user:
+    type: string
+    hint: yourname@email.com
+  password:
+    type: string
+  schema:
+    type: string
+    hint: usually dbt_<yourname>
