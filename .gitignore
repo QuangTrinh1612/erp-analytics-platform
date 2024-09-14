@@ -12,7 +12,7 @@ nohup.out
 venv/
 .env
 .venv
-env/
+*env/
 
 scripts/
 
