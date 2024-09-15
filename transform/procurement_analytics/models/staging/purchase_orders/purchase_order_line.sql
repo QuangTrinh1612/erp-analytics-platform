@@ -1,6 +1,3 @@
-{{
-    config(materialized='ephemeral')
-}}
 SELECT
     QuantityCommitted AS QUANTITY_COMMITTED,
     DiscountType AS DISCOUNT_TYPE,

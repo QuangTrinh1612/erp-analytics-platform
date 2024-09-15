@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: purchase_request_header
+    description: "purchase_order_header contains header information for your purchasing documents. You need one row for each document you create. There are six types of documents that use PO_HEADERS_ALL: RFQs, Quotations, Standard purchase orders, Planned purchase orders, Blanket purchase orders and Contracts. Each row contains buyer information, supplier information, brief notes, foreign currency information, terms and conditions information, and the status of the document. Oracle Purchasing uses this information to record information that is related to a complete document. PO_HEADER_ID is the unique system-generated primary key and is invisible to the user. SEGMENT1 is the system-assigned number you use to identify the document in forms and reports. Oracle Purchasing generates SEGMENT1 using the PO_UNIQUE_IDENTIFIER_CONT_ALL table if you choose to let Oracle Purchasing generate document numbers for you. SEGMENT1 is not unique for the entire table. Different document types can share the same numbers. You can uniquely identify a row in PO_HEADERS_ALL using PRC_BU_ID, SEGMENT1, and TYPE_LOOKUP_CODE, or using PO_HEADER_ID. If APPROVED_FLAG is 'Y', the purchase order is approved. If your document type is a blanket purchase order, contract purchase order, RFQ, or quotation, Oracle Purchasing uses START_DATE and END_DATE to store the valid date range for the document. Oracle Purchasing only uses BLANKET_TOTAL_AMOUNT for blanket purchase orders or contract purchase orders. If you autocreate a quotation from an RFQ using the Copy Document window, Oracle Purchasing stores the foreign key to your original RFQ in FROM_HEADER_ID. Oracle Purchasing also uses FROM_TYPE_LOOKUP_CODE to indicate that you copied the quotation from an RFQ. Oracle Purchasing does not use SUMMARY_FLAG and ENABLED_FLAG. Because future versions of Oracle Purchasing will use them, SUMMARY_FLAG and ENABLED_FLAG should always be 'N' and 'Y' respectively. You enter document header information in the Header region of the Purchase Orders, RFQs, and Quotations windows."
+    columns:
+      - name: REQUISITION_HEADER_ID
+        description: "Requisition header unique identifier"
+        data_tests:
+          - unique
+          - not_null
+  - name: purchase_request_line
+    description: "PO_LINES_ALL stores current information about each purchase order line. You need one row for each line you attach to a document. There are five document types that use lines: RFQs, Quotations, Standard purchase orders, Blanket purchase orders and Planned purchase orders. Each row includes the line number, item number, category, unit, price, tax information, matching information, and quantity ordered for the line. Oracle Purchasing uses this information to record and update item and price information for purchase orders, quotations, and RFQs. PO_LINE_ID is the unique system-generated line number invisible to the user. LINE_NUM is the number of the line on the purchase order. Oracle Purchasing uses CONTRACT_ID to reference a contract purchase order from a standard purchase order line. Oracle Purchasing uses ALLOW_PRICE_OVERRIDE_FLAG, COMMITTED_AMOUNT, QUANTITY_COMMITTED, MIN_RELEASE_AMOUNT only for blanket and planned purchase order lines. The QUANTITY field stores the total quantity of all purchase order shipment lines (found in PO_LINE_LOCATIONS_ALL)."
+    columns:
+      - name: REQUISITION_LINE_ID
+        description: "Requisition line unique identifier"
+        data_tests:
+          - unique
+          - not_null

@@ -30,5 +30,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   procurement_analytics:
-    purchase_orders:
+    staging:
+      +materialized: ephemeral
+    intermediate:
       +materialized: table

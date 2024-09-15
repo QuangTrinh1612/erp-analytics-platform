@@ -1,6 +1,3 @@
-{{
-    config(materialized='ephemeral')
-}}
 SELECT
     RetroPriceCommUpdatesFlag AS RETRO_PRICE_COMM_UPDATES_FLAG,
     SupplierAuthoringAcceptance AS SUPPLIER_AUTHORING_ACCEPTANCE,
