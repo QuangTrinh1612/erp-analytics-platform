@@ -140,4 +140,4 @@ SELECT
     Rate AS RATE,
     RevisedDate AS REVISED_DATE,
     VendorContactId AS VENDOR_CONTACT_ID
-FROM brz_fusion.fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentheaderextractpvo
+FROM {{ source('Fusion', 'Purchasing_Document_Header_PVO') }}

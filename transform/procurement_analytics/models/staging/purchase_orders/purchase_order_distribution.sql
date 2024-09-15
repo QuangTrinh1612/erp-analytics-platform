@@ -62,4 +62,4 @@ SELECT
     PJC_EXPENDITURE_TYPE_ID AS PJC_EXPENDITURE_TYPE_ID,
     Rate AS RATE,
     DestVarianceAccountId AS DEST_VARIANCE_ACCOUNT_ID
-FROM brz_fusion.fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentdistributionextractpvo
+FROM {{ source('Fusion', 'Purchasing_Document_Distribution_PVO') }}

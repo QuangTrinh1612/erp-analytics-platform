@@ -106,4 +106,4 @@ SELECT
     PoHeaderId AS PO_HEADER_ID,
     DiscountReason AS DISCOUNT_REASON,
     MatchingBasis AS MATCHING_BASIS
-FROM brz_fusion.fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentlineextractpvo
+FROM {{ source('Fusion', 'Purchasing_Document_Line_PVO') }}

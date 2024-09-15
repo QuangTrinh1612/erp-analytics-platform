@@ -2,8 +2,8 @@ SELECT
     -- Purchase Order Header Information
     poh.po_header_id AS po_header_id,
     poh.segment1 AS po_number, -- Purchase Order Number
-    poh.vendor_id AS supplier_id,
-    poh.vendor_site_id AS supplier_site_id,
+    poh.vendor_id AS vendor_id,
+    poh.vendor_site_id AS vendor_site_id,
     poh.agent_id AS buyer_id,
     poh.currency_code as currency_code,
     poh.approved_date as approved_date,
