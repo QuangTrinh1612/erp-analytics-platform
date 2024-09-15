@@ -28,6 +28,11 @@ dbt documentation serving commands
 dbt docs serve --profiles-dir config --project-dir transform/procurement_analytics --port 8080
 ```
 
+dbt generate model yaml
+```bash
+dbt run-operation generate_model_yaml --args '{"model_names": ["purchase_request_header"]}'
+```
+
 # dbt - Data Models
 ## Procurement Analytics
 ### f_purchase_order

@@ -1,3 +1,6 @@
+WITH pvo AS (
+    SELECT * FROM {{ source('Fusion', 'Requisition_Line_PVO') }}
+)
 SELECT
     ExternalUomValue AS EXTERNAL_UOM_VALUE,
     PoLineId AS PO_LINE_ID,
@@ -183,4 +186,4 @@ SELECT
     ItemUserOverrideFlag AS ITEM_USER_OVERRIDE_FLAG,
     MatchingBasis AS MATCHING_BASIS,
     VendorContactId AS VENDOR_CONTACT_ID
-FROM brz_fusion.fscmtopmodelam_prcextractam_porbiccextractam_requisitionlineextractpvo
+FROM pvo

@@ -9,6 +9,7 @@ models:
         data_tests:
           - unique
           - not_null
+          
   - name: purchase_request_line
     description: "PO_LINES_ALL stores current information about each purchase order line. You need one row for each line you attach to a document. There are five document types that use lines: RFQs, Quotations, Standard purchase orders, Blanket purchase orders and Planned purchase orders. Each row includes the line number, item number, category, unit, price, tax information, matching information, and quantity ordered for the line. Oracle Purchasing uses this information to record and update item and price information for purchase orders, quotations, and RFQs. PO_LINE_ID is the unique system-generated line number invisible to the user. LINE_NUM is the number of the line on the purchase order. Oracle Purchasing uses CONTRACT_ID to reference a contract purchase order from a standard purchase order line. Oracle Purchasing uses ALLOW_PRICE_OVERRIDE_FLAG, COMMITTED_AMOUNT, QUANTITY_COMMITTED, MIN_RELEASE_AMOUNT only for blanket and planned purchase order lines. The QUANTITY field stores the total quantity of all purchase order shipment lines (found in PO_LINE_LOCATIONS_ALL)."
     columns:
