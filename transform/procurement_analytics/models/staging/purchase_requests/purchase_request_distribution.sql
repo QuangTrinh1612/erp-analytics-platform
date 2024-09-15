@@ -1,3 +1,6 @@
+WITH pvo AS (
+    SELECT * FROM {{ source('Fusion', 'Requisition_Distribution_PVO') }}
+)
 SELECT
     DistributionCurrencyAmount AS DISTRIBUTION_CURRENCY_AMOUNT,
     JobDefinitionName AS JOB_DEFINITION_NAME,
@@ -38,4 +41,4 @@ SELECT
     PJC_EXPENDITURE_ITEM_DATE AS PJC_EXPENDITURE_ITEM_DATE,
     PJC_EXPENDITURE_TYPE_ID AS PJC_EXPENDITURE_TYPE_ID,
     PJC_BILLABLE_FLAG AS PJC_BILLABLE_FLAG
-FROM brz_fusion.fscmtopmodelam_prcextractam_porbiccextractam_requisitiondistributionextractpvo
+FROM pvo

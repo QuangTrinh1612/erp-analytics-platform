@@ -2,4 +2,4 @@ version: 2
 
 models:
   - name: f_purchase_request
-    description: "The f_purchase_order table is a fact table in the data warehouse designed to store information related to purchase orders from Oracle Fusion Procurement. It integrates data from both PO_HEADERS_ALL (header-level data) and PO_LINES_ALL (line-level data), providing a comprehensive view of purchase order transactions, including the items purchased, suppliers, prices, and quantities. This table enables detailed analysis of procurement activity, such as total purchase amounts, supplier performance, and procurement trends."
+    description: '{{ doc("f_purchase_request") }}'

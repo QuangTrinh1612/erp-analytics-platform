@@ -1,3 +1,6 @@
+WITH pvo AS (
+    SELECT * FROM {{ source('Fusion', 'Requisition_Header_PVO') }}
+)
 SELECT
     LockedByBuyerFlag AS LOCKED_BY_BUYER_FLAG,
     PcardId AS PCARD_ID,
@@ -47,4 +50,4 @@ SELECT
     OverridingApproverId AS OVERRIDING_APPROVER_ID,
     Justification AS JUSTIFICATION,
     ReqImportApproverId AS REQ_IMPORT_APPROVER_ID
-FROM brz_fusion.fscmtopmodelam_prcextractam_porbiccextractam_requisitionheaderextractpvo
+FROM pvo

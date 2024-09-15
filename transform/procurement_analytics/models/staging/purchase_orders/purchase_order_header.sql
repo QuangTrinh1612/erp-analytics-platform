@@ -1,3 +1,6 @@
+WITH pvo AS (
+    SELECT * FROM {{ source('Fusion', 'Purchasing_Document_Header_PVO') }}
+)
 SELECT
     RetroPriceCommUpdatesFlag AS RETRO_PRICE_COMM_UPDATES_FLAG,
     SupplierAuthoringAcceptance AS SUPPLIER_AUTHORING_ACCEPTANCE,
@@ -140,4 +143,4 @@ SELECT
     Rate AS RATE,
     RevisedDate AS REVISED_DATE,
     VendorContactId AS VENDOR_CONTACT_ID
-FROM brz_fusion.fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentheaderextractpvo
+FROM pvo

@@ -1,3 +1,6 @@
+WITH pvo AS (
+    SELECT * FROM {{ source('Fusion', 'Purchasing_Document_Line_PVO') }}
+)
 SELECT
     QuantityCommitted AS QUANTITY_COMMITTED,
     DiscountType AS DISCOUNT_TYPE,
@@ -106,4 +109,4 @@ SELECT
     PoHeaderId AS PO_HEADER_ID,
     DiscountReason AS DISCOUNT_REASON,
     MatchingBasis AS MATCHING_BASIS
-FROM brz_fusion.fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentlineextractpvo
+FROM pvo
