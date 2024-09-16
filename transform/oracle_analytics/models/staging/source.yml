@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+  - name: Fusion
+    database: '{{ var("catalog") }}'
+    schema: '{{ var("fusion_schema") }}'
+    tables:
+      - name: Purchasing_Document_Header_PVO
+        identifier: fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentheaderextractpvo
+
+      - name: Purchasing_Document_Distribution_PVO
+        identifier: fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentdistributionextractpvo
+      
+      - name: Purchasing_Document_Line_PVO
+        identifier: fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentlineextractpvo
+
+      - name: Requisition_Header_PVO
+        identifier: fscmtopmodelam_prcextractam_porbiccextractam_requisitionheaderextractpvo
+        
+      - name: Requisition_Line_PVO
+        identifier: fscmtopmodelam_prcextractam_porbiccextractam_requisitionlineextractpvo
+      
+      - name: Requisition_Distribution_PVO
+        identifier: fscmtopmodelam_prcextractam_porbiccextractam_requisitiondistributionextractpvo
+
+      - name: Code_Combination_PVO
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_codecombinationextractpvo
+
+      - name: Journal_Header_PVO
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journalheaderextractpvo
+      
+      - name: Journal_Batch_PVO
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journallineextractpvo
+      
+      - name: Journal_Line_PVO
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journalbatchextractpvo
+
+      - name: Ledger_PVO
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_ledgerextractpvo
+
+      - name: Balance_PVO
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_balanceextractpvo
+
+      - name: Journal_Source_PVO
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journalsourceextractpvo
+      
+      - name: Journal_Category_PVO
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journalcategoryextractpvo

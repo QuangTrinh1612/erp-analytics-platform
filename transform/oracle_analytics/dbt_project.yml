@@ -1,8 +1,8 @@
-name: 'procurement_analytics'
+name: 'oracle_analytics'
 version: '1.0.0'
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'procurement_analytics'
+profile: 'oracle_analytics'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -23,8 +23,10 @@ vars:
 models:
   +file_format: delta
 
-  procurement_analytics:
+  oracle_analytics:
     staging:
       +materialized: ephemeral
     intermediate:
       +materialized: table
+      procurement:
+        +schema: procurement

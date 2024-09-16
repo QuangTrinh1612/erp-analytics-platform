@@ -6,9 +6,9 @@
 - `POR_REQ_DISTRIBUTIONS_ALL`: Holds distribution data for each requisition line.
 
 ## Key Features:
-- Header Information: Includes details such as requisition number, status, and preparer.
-- Line Information: Contains item details like item description, price, and quantity.
-- Distribution Data: The distribution details for each requisition line are stored as a JSON string in the distribution_data column. This data includes fields like distribution ID, charge account, and distribution amount.
+- **Header Information**: Includes details such as requisition number, status, and preparer.
+- **Line Information**: Contains item details like item description, price, and quantity.
+- **Distribution Data**: The distribution details for each requisition line are stored as a JSON string in the distribution_data column. This data includes fields like distribution ID, charge account, and distribution amount.
 
 {% enddocs %}
 
