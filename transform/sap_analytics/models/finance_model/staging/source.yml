@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: SAP ECC
+    schema: '{{ var("brz_schema") }}'
+    tables:
+      - name: BKPF
+        identifier: BKPF
+      
+      - name: BSEG
+        identifier: BSEG
+      
+      - name: BSEC
+        identifier: BSEC
+      
+      - name: FAGL_011ZC
+        identifier: FAGL_011ZC
