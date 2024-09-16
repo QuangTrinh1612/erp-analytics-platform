@@ -12,6 +12,13 @@ sources:
       - name: SKB1
       - name: SKAT
       - name: J_3RKKRS
+      
       - name: LFA1
+      - name: LFB1
+      - name: LFBK
+      
       - name: KNA1
+      - name: KNB1
+      - name: KNBK
+      
       - name: T001

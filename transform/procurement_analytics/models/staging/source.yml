@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: Fusion
     database: '{{ var("catalog") }}'
-    schema: brz_fusion
+    schema: '{{ var("fusion_schema") }}'
     tables:
       - name: Purchasing_Document_Header_PVO
         identifier: fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentheaderextractpvo

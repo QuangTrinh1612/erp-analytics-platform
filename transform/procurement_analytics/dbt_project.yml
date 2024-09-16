@@ -18,6 +18,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 vars:
   catalog: 'dev_catalog'
+  fusion_schema: 'brz_fusion'
 
 models:
   +file_format: delta
