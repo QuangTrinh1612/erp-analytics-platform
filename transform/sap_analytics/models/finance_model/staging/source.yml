@@ -5,13 +5,13 @@ sources:
     schema: '{{ var("brz_schema") }}'
     tables:
       - name: BKPF
-        identifier: BKPF
-      
       - name: BSEG
-        identifier: BSEG
-      
       - name: BSEC
-        identifier: BSEC
-      
       - name: FAGL_011ZC
-        identifier: FAGL_011ZC
+      - name: SKA1
+      - name: SKB1
+      - name: SKAT
+      - name: J_3RKKRS
+      - name: LFA1
+      - name: KNA1
+      - name: T001

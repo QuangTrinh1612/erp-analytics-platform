@@ -13,7 +13,9 @@ docs-paths: ["docs"]
 
 vars:
   brz_schema: 'sri_sap'
+  language: 'E'
   version_income_statement: 'ZIS1'
+  local_currency: 'VND'
 
 clean-targets:
   - "target"
