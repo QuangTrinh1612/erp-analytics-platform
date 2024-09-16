@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: SAP ECC
+    schema: '{{ var("brz_schema") }}'
+    tables:
+      - name: BKPF
+      - name: BSEG
+      - name: BSEC
+      - name: FAGL_011ZC
+      - name: SKA1
+      - name: SKB1
+      - name: SKAT
+      - name: J_3RKKRS
+      - name: LFA1
+      - name: KNA1
+      - name: T001

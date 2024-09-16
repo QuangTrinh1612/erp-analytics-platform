@@ -16,6 +16,7 @@ dbt debug --profiles-dir config --project-dir transform/procurement_analytics
 dbt Run commands
 ```bash
 dbt run --profiles-dir config --project-dir transform/procurement_analytics
+dbt run --profiles-dir config --project-dir transform/sap_analytics
 ```
 
 dbt documentation commands

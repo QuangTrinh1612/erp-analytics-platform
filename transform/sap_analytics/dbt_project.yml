@@ -1,0 +1,32 @@
+name: 'sap_analytics'
+version: '1.0.0'
+
+profile: 'sap_analytics'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+docs-paths: ["docs"]
+
+vars:
+  brz_schema: 'sri_sap'
+  language: 'E'
+  version_income_statement: 'ZIS1'
+  local_currency: 'VND'
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  sap_analytics:
+    finance_model:
+      staging:
+        +materialized: ephemeral
+      intermediate:
+        +materialized: table
+        +index: CLUSTERED COLUMNSTORE INDEX
+        +dist: ROUND_ROBIN
