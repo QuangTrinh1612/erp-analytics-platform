@@ -1,0 +1,6 @@
+psycopg2-binary
+dbt-postgres
+dbt-databricks
+astronomer-cosmos
+apache-airflow-providers-databricks
+wtforms
