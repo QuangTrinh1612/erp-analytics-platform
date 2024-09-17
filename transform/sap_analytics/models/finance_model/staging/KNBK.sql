@@ -13,4 +13,4 @@ SELECT
 	MANDT,
 	KOBIS,
 	KOVON,
-FROM {{ source('KNBK') }}
+FROM {{ source('SAP ECC', 'KNBK') }}

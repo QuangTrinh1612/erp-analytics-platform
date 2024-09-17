@@ -7,6 +7,8 @@ sources:
       - name: BKPF
       - name: BSEG
       - name: BSEC
+      - name: BSID
+      - name: BSAD
       - name: FAGL_011ZC
       - name: SKA1
       - name: SKB1

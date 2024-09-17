@@ -78,4 +78,4 @@ SELECT
 	URLID,
 	FDGRV,
 	WBRSL
-FROM {{ source('KNB1') }}
+FROM {{ source('SAP ECC', 'KNB1') }}
