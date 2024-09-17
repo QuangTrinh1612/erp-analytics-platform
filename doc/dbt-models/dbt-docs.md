@@ -10,23 +10,23 @@
 # Code Snippet
 Running Debug Connections
 ```bash
-dbt debug --profiles-dir config --project-dir transform/procurement_analytics
+dbt debug --profiles-dir config --project-dir transform/oracle_analytics
 ```
 
 dbt Run commands
 ```bash
-dbt run --profiles-dir config --project-dir transform/procurement_analytics
+dbt run --profiles-dir config --project-dir transform/oracle_analytics
 dbt run --profiles-dir config --project-dir transform/sap_analytics
 ```
 
 dbt documentation commands
 ```bash
-dbt docs generate --profiles-dir config --project-dir transform/procurement_analytics
+dbt docs generate --profiles-dir config --project-dir transform/oracle_analytics
 ```
 
 dbt documentation serving commands
 ```bash
-dbt docs serve --profiles-dir config --project-dir transform/procurement_analytics --port 8080
+dbt docs serve --profiles-dir config --project-dir transform/oracle_analytics --port 8080
 ```
 
 dbt generate model yaml

@@ -23,9 +23,18 @@ clean-targets:
 
 models:
   sap_analytics:
+    
+    staging:
+      +materialized: ephemeral
+
     finance_model:
-      staging:
-        +materialized: ephemeral
+      
+      intermediate:
+        +materialized: table
+        +index: CLUSTERED COLUMNSTORE INDEX
+        +dist: ROUND_ROBIN
+    
+    sale_model:
       intermediate:
         +materialized: table
         +index: CLUSTERED COLUMNSTORE INDEX
