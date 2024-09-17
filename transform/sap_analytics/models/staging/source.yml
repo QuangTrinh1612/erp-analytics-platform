@@ -9,6 +9,8 @@ sources:
       - name: BSEC
       - name: BSID
       - name: BSAD
+      - name: BSIK
+      - name: BSAK
       - name: FAGL_011ZC
       - name: SKA1
       - name: SKB1
@@ -24,3 +26,9 @@ sources:
       - name: KNBK
       
       - name: T001
+
+      - name: VBAK
+      - name: VBAP
+      - name: VBKD
+      - name: VBRK
+      - name: VBRP
