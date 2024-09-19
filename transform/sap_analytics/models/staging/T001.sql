@@ -46,7 +46,7 @@ SELECT
     ,[KTOP2]
     ,[XSPLT]
     ,[XBBSC]
-    ,[MANDT]
+    ,cast([MANDT] as {{ dbt.type_string() }})
     ,[WFVAR]
     ,[ADRNR]
     ,[SPRAS]
@@ -67,7 +67,7 @@ SELECT
     ,[DKWEG]
     ,[DTAXR]
     ,[FDBUK]
-    ,[BUKRS]
+    ,cast([BUKRS] as {{ dbt.type_string() }})
     ,[BUKRS_GLOB]
     ,[BUVAR]
     ,[PP_PDATE]
