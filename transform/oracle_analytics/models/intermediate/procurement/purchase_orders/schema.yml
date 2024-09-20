@@ -3,3 +3,12 @@ version: 2
 models:
   - name: f_purchase_order
     description: '{{ doc("f_purchase_order") }}'
+    columns:
+      - name: po_line_id
+        description: "{{ doc('po_line_id') }}"
+      
+      - name: quantity
+        description: "{{ doc('quantity') }}"
+
+      - name: unit_price
+        description: "{{ doc('unit_price') }}"
