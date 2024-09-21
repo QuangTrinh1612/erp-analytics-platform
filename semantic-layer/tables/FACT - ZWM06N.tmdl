@@ -1,0 +1,123 @@
+table 'FACT - ZWM06N'
+	lineageTag: 07788c3c-5349-4793-a03a-87c4178d91d3
+
+	column POSTING_DATE
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 97d059ec-a481-4351-8bdd-2fd6de52e298
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: 280101e3-9ea2-4ef0-886e-fc9b545c908e
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: 65a7e5b6-26ad-40b0-bbd7-7c35831bae17
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: 2027e257-a124-424f-ba13-22c02e237ec5
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: f96b3cdd-0d51-4cc5-ad71-2c31051cf270
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: b87922ca-1a77-40ed-84fd-75a2ebd43c7f
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: 5eebf7dd-e7f8-43b6-8969-a25add4f6227
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_INDICATOR
+		dataType: string
+		lineageTag: 5b49ed9c-95e9-4025-9b5e-9fa20f9ae406
+		summarizeBy: none
+		sourceColumn: DC_INDICATOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_TYPE
+		dataType: string
+		lineageTag: 15f4bf70-f00d-4f0c-94bd-bfcfe4ff1dd4
+		summarizeBy: none
+		sourceColumn: MATERIAL_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUOM_QUANTITY
+		dataType: double
+		lineageTag: 3cf1c3d8-9a4f-4977-b23f-cd5f4d7b6943
+		summarizeBy: sum
+		sourceColumn: BUOM_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REC_ISS_TYPE
+		dataType: string
+		lineageTag: 24bc85da-a1b0-4131-86f7-3d780a86ab4e
+		summarizeBy: none
+		sourceColumn: REC_ISS_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUANTITY_TYPE
+		dataType: string
+		lineageTag: 6e4b9548-3ddb-4fd7-8a52-72495a06293f
+		summarizeBy: none
+		sourceColumn: QUANTITY_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ZWM06N = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_VW_FACT_ZWM06N = pvcfcprodsqlpool{[Schema="sil",Item="VW_FACT_ZWM06N"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(sil_VW_FACT_ZWM06N,{{"POSTING_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

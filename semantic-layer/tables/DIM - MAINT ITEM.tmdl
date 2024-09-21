@@ -1,0 +1,235 @@
+table 'DIM - MAINT ITEM'
+	lineageTag: 638b7448-4774-471e-a8bd-8b4a2c0e8d57
+
+	column MAINT_ITEM
+		dataType: string
+		lineageTag: 037b672e-b15b-44e0-b224-3f411d415320
+		summarizeBy: none
+		sourceColumn: MAINT_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_PLAN
+		dataType: string
+		lineageTag: db044645-e532-4cd8-813c-b331d39f737e
+		summarizeBy: none
+		sourceColumn: MAINT_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_STRA
+		dataType: string
+		lineageTag: e303fee9-eb9e-4393-afa6-214b9925cc67
+		summarizeBy: none
+		sourceColumn: MAINT_STRA
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_SHORT_DESC
+		dataType: string
+		lineageTag: c3a9b263-6d7f-49d1-ae2a-7111a82cca09
+		summarizeBy: none
+		sourceColumn: ITEM_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: 79c85d4e-e3ae-4610-9148-bbe5e78b16b7
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_CREATER
+		dataType: string
+		lineageTag: cf644228-0fb1-48ea-aa30-76352ca9c6c4
+		summarizeBy: none
+		sourceColumn: OBJECT_CREATER
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 634daebf-5f85-4704-8d56-92dec3629ec6
+		summarizeBy: none
+		sourceColumn: CREATED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CHANGE_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2c8cf2c7-3fed-4985-bad0-91a6adad4fb7
+		summarizeBy: none
+		sourceColumn: CHANGE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CHANGE_PERS
+		dataType: string
+		lineageTag: 821216c1-7a0a-483d-a16c-1874e72ad18d
+		summarizeBy: none
+		sourceColumn: CHANGE_PERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TASK_LIST_TYPE
+		dataType: string
+		lineageTag: 6ea36d62-d8b3-4d2b-bc78-8c148a67ac16
+		summarizeBy: none
+		sourceColumn: TASK_LIST_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROUP_KEY
+		dataType: string
+		lineageTag: caec3be9-9150-41b2-a547-2487fac2d990
+		summarizeBy: none
+		sourceColumn: GROUP_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRP_COUNTER
+		dataType: string
+		lineageTag: 0e577184-1f6a-4b80-b3f8-3cf403d2462a
+		summarizeBy: none
+		sourceColumn: GRP_COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_STAT
+		dataType: string
+		lineageTag: ace85d54-e24d-4ced-b410-2a0a7adcd26e
+		summarizeBy: none
+		sourceColumn: ITEM_STAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP
+		dataType: string
+		lineageTag: c88c220b-1854-4629-b487-bfd33b564ce8
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER_ID
+		dataType: string
+		lineageTag: 6609b860-be3b-4129-b4cf-a2cc6db2faa9
+		summarizeBy: none
+		sourceColumn: WORK_CENTER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNING_PLANT
+		dataType: string
+		lineageTag: b5c1b5a5-8324-476b-9e98-a98dd09dd882
+		summarizeBy: none
+		sourceColumn: PLANNING_PLANT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC_ACCT_ASSIGN
+		dataType: string
+		lineageTag: ef6324fd-cd28-4673-b3e3-319a0102ef9c
+		summarizeBy: none
+		sourceColumn: LOC_ACCT_ASSIGN
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSEMBLY
+		dataType: string
+		lineageTag: 02f7bf9a-ba24-49cc-9959-8daa76c2cc73
+		summarizeBy: none
+		sourceColumn: ASSEMBLY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_TYPE
+		dataType: string
+		lineageTag: 53dd197a-efb5-4e45-a2bc-1ddf74b18350
+		summarizeBy: none
+		sourceColumn: ORDER_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACT_TYPE_CODE
+		dataType: string
+		lineageTag: b752185e-4e41-4e1d-91a4-ba8453507651
+		summarizeBy: none
+		sourceColumn: ACT_TYPE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUSI_AREA
+		dataType: string
+		lineageTag: d88a24e1-21dd-46c9-a24e-825d0e2ee408
+		summarizeBy: none
+		sourceColumn: BUSI_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUMBER
+		dataType: string
+		lineageTag: 4ec2c346-90b2-458d-bfa5-238b61b4eded
+		summarizeBy: none
+		sourceColumn: OBJECT_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_CODE
+		dataType: string
+		lineageTag: c37526d8-4454-4fc5-89b1-fa4b9bd84bcf
+		summarizeBy: none
+		sourceColumn: SUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELE
+		dataType: string
+		lineageTag: 3cef51bb-9473-49fe-8230-3f818af0ee5d
+		summarizeBy: none
+		sourceColumn: COST_ELE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SETTLE_ORDER
+		dataType: string
+		lineageTag: ad7db4c0-5481-4c60-a796-4c6a18dbe787
+		summarizeBy: none
+		sourceColumn: SETTLE_ORDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIOR_CODE
+		dataType: string
+		lineageTag: ab7b21d4-3e34-4b6f-99d7-fa273c5ef8bf
+		summarizeBy: none
+		sourceColumn: PRIOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - MAINT ITEM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_MAINT_ITEM = pvcfcprodsqlpool{[Schema="sil",Item="DIM_MAINT_ITEM"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_MAINT_ITEM,{"W_INSERT_DT", "W_BATCH_ID"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns","00000000","99991231",Replacer.ReplaceText,{"CREATED_DATE"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","00000000","99991231",Replacer.ReplaceText,{"CHANGE_DATE"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value1",{{"CREATED_DATE", type date}, {"CHANGE_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,64 @@
+table 'Parameter: Balance Stock Dimension (Column)'
+	lineageTag: 496bfa69-70a9-468b-8508-00b1a3ac3337
+
+	column 'Parameter: Balance Stock Dimension (Column)'
+		dataType: string
+		lineageTag: 1ab18b4f-db98-4033-b3b4-32d112973253
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter: Balance Stock Dimension (Column) Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter: Balance Stock Dimension (Column) Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: Balance Stock Dimension (Column) Fields'
+		dataType: string
+		isHidden
+		lineageTag: 79ac2975-8299-4ff3-a97c-ac4d3f9c31a8
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter: Balance Stock Dimension (Column) Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: Balance Stock Dimension (Column) Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 43f16281-1886-4e0f-a02f-3d3d0fd82ab3
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter: Balance Stock Dimension (Column)' = calculated
+		mode: import
+		source =
+				{
+				    ("Năm", NAMEOF('Dim - Date'[Year]), 0), ("Mã Material Type", NAMEOF('Dim - Material'[MATL_TYPE]), 9),("Material Type", NAMEOF('Dim - Material'[MATl_TYPE_DES]), 9),
+				    ("Mã Vật Tư", NAMEOF('Dim - Material'[MATERIAL_CODE]), 9),
+				    ("Plant Code", NAMEOF('Dim - Plant'[PLANT_CODE]), 2),
+				    (" Mã Kho", NAMEOF('Dim - Storage Location'[STORAGE_LOCATION]), 3),("Tên Kho", NAMEOF('Dim - Storage Location'[Đổi tên Kho]), 3),
+				    ("Loại Tồn Kho", NAMEOF('Dim - Material'[Nhóm Material]), 3),
+				    ("Valuation Class (code)", NAMEOF('Dim - Material Plant'[VALUATION_CLASS]), 7),("Valuation Class", NAMEOF('Dim - Material Plant'[VALUATION_CLASS_NAME]), 7),
+				    ("Ngày",NAMEOF('Dim - Date'[Date]),5),
+				    ("Planner",NAMEOF('Dim - Material'[PLANNER_TEXT]),6),
+				    ("Chủng Loại Thiết Bị",NAMEOF('Dim - Material'[EQUIP_TYPE]),5),
+				    ("Chủng Loại Vật Tư",NAMEOF('Dim - Material'[SUPPLY_TYPE]),3),
+				    ("Year-Month",NAMEOF('Dim - Date'[MonthYear]),10),
+				    ("Quarter",NAMEOF('Dim - Date'[Quarter]),10),  ("Vật Tư",NAMEOF('Dim - Material'[MATERIAL_SHORT_DESCRIPTION]),8), ("Chuyên Môn",NAMEOF('Dim - Material'[SPECIALIZE]),4), ("Kho",NAMEOF('Dim - Storage Location'[DESCRIPTION]),2)
+				}
+
+	annotation PBI_Id = d09eefde912648ca94026b5819ae5427
+

@@ -1,0 +1,34 @@
+table 'DIM - SYSTEM STATUS EXCHANGE'
+	lineageTag: b62f569d-caa9-4e6d-abf2-336c69d7992e
+
+	column SYSTEM_STATUS_EXCHANGE
+		dataType: string
+		lineageTag: bc671ca7-d098-4ad4-a95c-9e4d2228be7b
+		summarizeBy: none
+		sourceColumn: SYSTEM_STATUS_EXCHANGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SYSTEM_STATUS_EXCHANGE_DESC
+		dataType: string
+		lineageTag: 1c574149-4bb4-4dc6-b921-c14a6418d4ca
+		summarizeBy: none
+		sourceColumn: SYSTEM_STATUS_EXCHANGE_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - SYSTEM STATUS EXCHANGE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_SYSTEM_STATUS_EXCHANGE = pvcfcprodsqlpool{[Schema="sil",Item="DIM_SYSTEM_STATUS_EXCHANGE"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_SYSTEM_STATUS_EXCHANGE,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

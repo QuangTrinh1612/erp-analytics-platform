@@ -1,0 +1,64 @@
+table 'Parameter: Selection Show'
+	lineageTag: e8fbc08a-646e-41e8-a97d-5fff12f5dd4c
+
+	column Selection
+		dataType: string
+		lineageTag: 0bab45fd-8b6d-4538-86e9-0863eb4b1ae7
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter: Selection Show Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter: Selection Show Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: Selection Show Fields'
+		dataType: string
+		isHidden
+		lineageTag: abdac5aa-4861-4c99-94d5-defb8eff77ed
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter: Selection Show Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: Selection Show Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 526c80f0-24b1-417e-8db3-f425d0040e2f
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter: Selection Show' = calculated
+		mode: import
+		source =
+				{
+				    ("Year", NAMEOF('DIM - DATE'[Year]), 0),
+				    ("CE_NAME", NAMEOF('DIM - COST ELEMENT'[CE_NAME]), 1),
+				    ("EQUI_DESC", NAMEOF('DIM - EQUIPMENT'[EQUI_DESC]), 2),
+				    ("EQUI_TYPE_DESC", NAMEOF('DIM - EQUI TYPE'[EQUI_TYPE_DESC]), 3),
+				    ("ACT_TYPE_DESC", NAMEOF('DIM - MAINT ACT TYPE'[ACT_TYPE_DESC]), 4),
+				    ("PLANNER_GRP_NAME", NAMEOF('DIM - PLANNER GRP'[PLANNER_GRP_NAME]), 5),
+				    ("SUP_NAME", NAMEOF('DIM - SUPERVISOR'[SUP_NAME]), 6),
+				    ("PLNT_SECT_PERS", NAMEOF('DIM - PLANT SECTION'[PLNT_SECT_PERS]), 7),
+				    ("WORK_CENTER_NAME", NAMEOF('DIM - WORK CENTER'[WORK_CENTER_NAME]), 8),
+				    ("HIERARCHY_NAME", NAMEOF('DIM - WORK CENTER HIERARCHY'[HIERARCHY_NAME]), 9),
+				    ("SHORT_NAME", NAMEOF('DIM - COST CENTER'[SHORT_NAME]), 10),
+				    ("EQUI_NUMBER", NAMEOF('DIM - EQUIPMENT'[EQUI_NUMBER]), 11)
+				}
+
+	annotation PBI_Id = 85ffd7b6df2c44ee809522092b547dd4
+

@@ -1,0 +1,224 @@
+table 'FACT - NOTIFICATION'
+	lineageTag: a2a7aa2f-8a49-4fa6-a440-b52ef21de1ba
+
+	column NOTIF_NUM
+		dataType: string
+		lineageTag: 1640c702-fadb-4663-b7b7-611666b68d37
+		summarizeBy: none
+		sourceColumn: NOTIF_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTIF_DESC
+		dataType: string
+		lineageTag: 0174e157-2ebb-4061-b6b1-280a66dacfd2
+		summarizeBy: none
+		sourceColumn: NOTIF_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIOR_CODE
+		dataType: string
+		lineageTag: 6fef9df6-7a3c-4119-a073-3194e4561ee3
+		summarizeBy: none
+		sourceColumn: PRIOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTIF_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: a8e938b0-2d3d-4adf-a8ff-115181bd6e2b
+		summarizeBy: none
+		sourceColumn: NOTIF_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column NOTIF_REPORTER
+		dataType: string
+		lineageTag: 0a6a029c-877c-4246-bd36-296a2144efc7
+		summarizeBy: none
+		sourceColumn: NOTIF_REPORTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 33f69368-2c00-4b3a-9657-617133f61c9a
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUM
+		dataType: string
+		lineageTag: c005d2dc-f877-4a51-ad42-9e9c1ee4b3bd
+		summarizeBy: none
+		sourceColumn: OBJECT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC_ACCT_ASSIGN
+		dataType: string
+		lineageTag: c68b2675-85e7-4974-a1e3-b65571f5fe2d
+		summarizeBy: none
+		sourceColumn: LOC_ACCT_ASSIGN
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: 594594e0-a181-4790-a6df-ed6e53c81c55
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: 46aac91d-98fc-4157-b574-feb61f4404c4
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLAN_PLANT_CODE
+		dataType: string
+		lineageTag: 3838ebdf-ad40-446b-bf92-ff9ce1bac2e3
+		summarizeBy: none
+		sourceColumn: PLAN_PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_CODE
+		dataType: string
+		lineageTag: 7eaddaa1-cf80-46bd-a1d2-091005c56e45
+		summarizeBy: none
+		sourceColumn: SUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER
+		dataType: string
+		lineageTag: 685f1720-6fa9-48c8-936f-536e18c2b335
+		summarizeBy: none
+		sourceColumn: WORK_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQ_START_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 5c4c6ea2-5c3d-4eeb-9745-b8ac12126d67
+		summarizeBy: none
+		sourceColumn: REQ_START_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column REQ_END_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 6b570647-f6cb-40db-94b4-a6011090a4a2
+		summarizeBy: none
+		sourceColumn: REQ_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column MAINT_PLAN
+		dataType: string
+		lineageTag: 66e0f6d6-ae84-44c7-b085-966d0552a59f
+		summarizeBy: none
+		sourceColumn: MAINT_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_ITEM
+		dataType: string
+		lineageTag: 6b5c6a7b-dedb-4f3d-b682-53e6c13a3ec4
+		summarizeBy: none
+		sourceColumn: MAINT_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTIF_TYPE
+		dataType: string
+		lineageTag: 1a00d726-83a0-412b-958c-0de5fe4936ba
+		summarizeBy: none
+		sourceColumn: NOTIF_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTIF_STATUS
+		dataType: int64
+		formatString: 0
+		lineageTag: f1f0915e-25a4-4173-94fd-bad193ad6188
+		summarizeBy: sum
+		sourceColumn: NOTIF_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: 4c0d27df-e309-4f82-89a6-d5119a5b2796
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: 9a2aa7bd-510d-41e1-92b7-339a7218ff08
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_DESC
+		dataType: string
+		lineageTag: 020d6205-743a-4357-8b46-145f76280221
+		summarizeBy: none
+		sourceColumn: STATUS_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONVERTED_NOTI_STATUS
+		dataType: string
+		lineageTag: 43779cf6-02f5-4330-96fb-6c7820af453e
+		summarizeBy: none
+		sourceColumn: CONVERTED_NOTI_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - NOTIFICATION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_NOTIFICATION = pvcfcprodsqlpool{[Schema="gld",Item="FACT_NOTIFICATION"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_NOTIFICATION,{"W_INSERT_DT"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns","00000000","99991231",Replacer.ReplaceText,{"NOTIF_DATE"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value",null,"99991231",Replacer.ReplaceValue,{"REQ_START_DATE"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","00000000","99991231",Replacer.ReplaceText,{"REQ_START_DATE"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2",null,"99991231",Replacer.ReplaceValue,{"REQ_END_DATE"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","00000000","99991231",Replacer.ReplaceText,{"REQ_END_DATE"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value4",{{"NOTIF_DATE", type date}, {"REQ_START_DATE", type date}, {"REQ_END_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

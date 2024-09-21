@@ -1,0 +1,20 @@
+table 'LIST - SCHEDULED START DATE'
+	lineageTag: cc7dea48-3dd4-4651-96a1-cabf424b049e
+
+	column SCHE_START_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2d4e0ee1-52fe-446b-b502-91f0735f32e8
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - SCHEDULING OVERVIEW LIST[SCHE_START_DATE]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LIST - SCHEDULED START DATE' = calculated
+		mode: import
+		source = DISTINCT('FACT - SCHEDULING OVERVIEW LIST'[SCHE_START_DATE])
+
+	annotation PBI_Id = 2cb24e1e8d784e7096b74cc67b5543ce
+

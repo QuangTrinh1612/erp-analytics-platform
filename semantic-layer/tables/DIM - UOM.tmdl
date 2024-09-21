@@ -1,0 +1,67 @@
+table 'DIM - UOM'
+	lineageTag: eaf3014d-7658-48b2-a47b-5821c2c13d3b
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 5db9a55a-3c7e-4472-90de-777545eff553
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AUOM
+		dataType: string
+		lineageTag: 723f1c3c-47a7-424c-8825-3e991d10c62b
+		summarizeBy: none
+		sourceColumn: AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERATOR
+		dataType: double
+		lineageTag: d61549a3-dc19-4c45-a69e-ea1eaee8b24e
+		summarizeBy: none
+		sourceColumn: NUMERATOR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DENOMINATOR
+		dataType: double
+		lineageTag: c67f68ba-7e7b-4306-8121-855adea6739f
+		summarizeBy: none
+		sourceColumn: DENOMINATOR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_UNIT_KEY
+		dataType: string
+		lineageTag: 91f6c741-50a8-496a-8bec-3cbfb8869503
+		summarizeBy: none
+		sourceColumn: MATERIAL_UNIT_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim UOM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_UOM = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_UOM"]}[Data]
+				in
+				    gld_VW_DIM_UOM
+
+	annotation PBI_ResultType = Table
+

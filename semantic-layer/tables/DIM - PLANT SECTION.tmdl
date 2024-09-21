@@ -1,0 +1,50 @@
+table 'DIM - PLANT SECTION'
+	lineageTag: b7cf389d-0995-4bad-ae11-876dd68ededf
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 05d71a93-bfd7-4587-8c3c-54f290bf7d48
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: dd94e7f5-7d5c-4059-8b4d-fa7f90a3abca
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_PERS
+		dataType: string
+		lineageTag: 7d859f4a-cb55-4cb1-8207-21a86eaa6e16
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_PERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_PERS_TEL
+		dataType: string
+		lineageTag: 54e2cfaa-f687-473c-9be6-e05fe545f300
+		summarizeBy: none
+		sourceColumn: PLNT_PERS_TEL
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PLANT SECTION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_PLANT_SECTION = pvcfcprodsqlpool{[Schema="sil",Item="DIM_PLANT_SECTION"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_PLANT_SECTION,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

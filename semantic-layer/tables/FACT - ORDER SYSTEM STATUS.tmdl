@@ -1,0 +1,50 @@
+table 'FACT - ORDER SYSTEM STATUS'
+	lineageTag: f822d833-1cbc-4c35-af68-3f9800bf48dd
+
+	column OBJECT_NUM
+		dataType: string
+		lineageTag: 4e1a0bb0-4048-44b4-9c2b-ee22237f1488
+		summarizeBy: none
+		sourceColumn: OBJECT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column INACT_STAT
+		dataType: string
+		lineageTag: 08107035-30bf-4448-bca6-7936d9235436
+		summarizeBy: none
+		sourceColumn: INACT_STAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_ORDER_STATUS
+		dataType: string
+		lineageTag: e9ac0796-fc26-4f57-96e2-f8327fab7288
+		summarizeBy: none
+		sourceColumn: WORK_ORDER_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column NO_DISPLAY
+		dataType: string
+		lineageTag: 606aa5ef-3c67-42b1-bcbc-37cd944b71b5
+		summarizeBy: none
+		sourceColumn: NO_DISPLAY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - ORDER SYSTEM STATUS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_ORDER_SYSTEM_STATUS = pvcfcprodsqlpool{[Schema="gld",Item="FACT_ORDER_SYSTEM_STATUS"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_ORDER_SYSTEM_STATUS,{"W_INSERT_DT"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

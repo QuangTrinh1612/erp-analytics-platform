@@ -1,0 +1,295 @@
+table 'DIM - CUSTOMER C2 DMS'
+	lineageTag: d270236d-1183-480d-84d2-93114bae9c99
+
+	column CUSTOMER_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 428aefaf-3027-4b4c-a721-7bbb7dfa64ab
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		changedProperty = IsHidden
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANNEL_TYPE_ID
+		dataType: double
+		lineageTag: caa94458-324d-4125-be30-5a8a53264f73
+		summarizeBy: count
+		sourceColumn: CHANNEL_TYPE_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DISTRICT_ID
+		dataType: double
+		lineageTag: 6ffbb605-7b96-493d-b264-f087808d316c
+		summarizeBy: count
+		sourceColumn: DISTRICT_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PROVINCE_ID
+		dataType: double
+		lineageTag: 42a214c2-306d-4420-a18c-3bea68318ff4
+		summarizeBy: count
+		sourceColumn: PROVINCE_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTOMER_CODE
+		dataType: string
+		lineageTag: 26a2a148-a94a-4b93-909a-a7f239e8c898
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHORT_CODE
+		dataType: string
+		lineageTag: 402bb270-a748-4dd0-a54f-a8906f2fa205
+		summarizeBy: none
+		sourceColumn: SHORT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BIRTHDAY
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6a161e9b-cf14-4364-ba3d-e35bdd795fdc
+		summarizeBy: none
+		sourceColumn: BIRTHDAY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_NAME
+		dataType: string
+		lineageTag: 22d252d0-2d16-4027-98d8-40cac45b9b49
+		summarizeBy: none
+		sourceColumn: CUSTOMER_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONTACT_NAME
+		dataType: string
+		lineageTag: be7fa979-74fb-47d8-8a8f-b4fd557c7080
+		summarizeBy: none
+		sourceColumn: CONTACT_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ADDRESS
+		dataType: string
+		lineageTag: dd128bce-b474-4df3-9b99-df71dce5dc03
+		summarizeBy: none
+		sourceColumn: ADDRESS
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GENDER
+		dataType: double
+		lineageTag: 6ecb951c-9a3c-4287-b03d-40f8a5c35d5b
+		summarizeBy: sum
+		sourceColumn: GENDER
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LOGIN_FRIST
+		dataType: double
+		lineageTag: b0199fee-aff2-42ff-96ef-08537ca544ac
+		summarizeBy: sum
+		sourceColumn: LOGIN_FRIST
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IS_GET_DEVICE_INFO
+		dataType: double
+		lineageTag: 18c22e8a-ef8b-4da5-b74c-14d71a500ff4
+		summarizeBy: sum
+		sourceColumn: IS_GET_DEVICE_INFO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STATUS
+		dataType: double
+		lineageTag: 33d63ce7-1b98-45e3-8756-943d9492de0f
+		summarizeBy: sum
+		sourceColumn: STATUS
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IS_VAT
+		dataType: double
+		lineageTag: f9368f60-55ae-49bd-9b42-541765c1752e
+		summarizeBy: sum
+		sourceColumn: IS_VAT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MOBIPHONE
+		dataType: string
+		lineageTag: 086bb236-82c6-4d4c-b265-9bb66b76d57a
+		summarizeBy: none
+		sourceColumn: MOBIPHONE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AREA_ID
+		dataType: string
+		lineageTag: a5185723-65da-4455-882d-a2b3efb3ca10
+		summarizeBy: none
+		sourceColumn: AREA_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVOICE_TAX
+		dataType: string
+		lineageTag: b37c985d-43da-4433-a053-86645c9adcca
+		summarizeBy: none
+		sourceColumn: INVOICE_TAX
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NAME_TEXT
+		dataType: string
+		lineageTag: 3deb37fb-208e-4ad4-ae95-1eabc913886d
+		summarizeBy: none
+		sourceColumn: NAME_TEXT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column IDNO
+		dataType: string
+		lineageTag: 297af462-631f-4004-b796-e5e1434418c8
+		summarizeBy: none
+		sourceColumn: IDNO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_NAME
+		dataType: string
+		lineageTag: eddc6e2b-9e1f-4cd2-a90f-7e49c08d83ba
+		summarizeBy: none
+		sourceColumn: COUNTRY_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROVINCE_NAME
+		dataType: string
+		lineageTag: 60058a3d-1568-42b1-a7f0-1ed5dee6c450
+		summarizeBy: none
+		sourceColumn: PROVINCE_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISTRICT_NAME
+		dataType: string
+		lineageTag: 491e94cf-519d-447e-a601-6b777b9b23a8
+		summarizeBy: none
+		sourceColumn: DISTRICT_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMUNE_NAME
+		dataType: string
+		lineageTag: debb2cd0-f0bb-49ab-b381-64c75cdb4f13
+		summarizeBy: none
+		sourceColumn: COMMUNE_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATE_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: aa9db6d8-ca12-4803-b002-009f656fbfcf
+		summarizeBy: none
+		sourceColumn: CREATE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_C2_TYPE
+		dataType: string
+		lineageTag: 7d16827c-8c55-4ded-80d9-3357021411f4
+		summarizeBy: none
+		sourceColumn: CUSTOMER_C2_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - CUSTOMER C2 DMS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_CUSTOMER_C2_DMS = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_CUSTOMER_C2_DMS"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(gld_VW_DIM_CUSTOMER_C2_DMS,{{"CHANNEL_TYPE_CODE", "CUSTOMER_C2_TYPE"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

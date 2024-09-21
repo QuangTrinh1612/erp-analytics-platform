@@ -1,0 +1,151 @@
+table 'DIM - REGION DMS'
+	isHidden
+	lineageTag: bae0b034-3619-4afb-9e9e-45ae7cb59544
+
+	column area_id
+		dataType: double
+		isHidden
+		lineageTag: 40987c1d-35a9-4437-89f8-61248572279b
+		summarizeBy: sum
+		sourceColumn: area_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column area_code
+		dataType: string
+		isHidden
+		lineageTag: 08091a52-2577-43b0-b034-ddbfa1f4a035
+		summarizeBy: none
+		sourceColumn: area_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column area_name
+		dataType: string
+		isHidden
+		lineageTag: 6700ebb4-8f17-4dd9-87cd-ab34bfd4ac12
+		summarizeBy: none
+		sourceColumn: area_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column area_type
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9aad2945-571e-4024-8e03-d156c90d78d2
+		summarizeBy: sum
+		sourceColumn: area_type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column commune_code
+		dataType: string
+		isHidden
+		lineageTag: 317b863d-ed7b-4957-b7bd-cc5e298935e6
+		summarizeBy: none
+		sourceColumn: commune_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column commune_name
+		dataType: string
+		isHidden
+		lineageTag: 341925bc-3041-471c-b627-fb2fcc36addb
+		summarizeBy: none
+		sourceColumn: commune_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column district_code
+		dataType: string
+		isHidden
+		lineageTag: d219cbaf-09b6-4030-aaaf-d46dbddd937c
+		summarizeBy: none
+		sourceColumn: district_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column district_name
+		dataType: string
+		isHidden
+		lineageTag: aee1fae2-606d-43fb-a370-6461f853b725
+		summarizeBy: none
+		sourceColumn: district_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column province_code
+		dataType: string
+		isHidden
+		lineageTag: 5f10d424-aa3a-4761-971e-ebf40dfd4cee
+		summarizeBy: none
+		sourceColumn: province_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column province_name
+		dataType: string
+		isHidden
+		lineageTag: 113bdbd3-f1de-45ae-a8a2-a9dabb148d17
+		summarizeBy: none
+		sourceColumn: province_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_code
+		dataType: string
+		isHidden
+		lineageTag: 2ca590cb-4c00-40de-a296-a64de752d29e
+		summarizeBy: none
+		sourceColumn: country_code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column country_name
+		dataType: string
+		isHidden
+		lineageTag: 163ee1af-4254-4fee-8c7b-e3009ecb9b46
+		summarizeBy: none
+		sourceColumn: country_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - REGION DMS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_REGION_DMS = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_REGION_DMS"]}[Data]
+				in
+				    gld_VW_DIM_REGION_DMS
+
+	changedProperty = IsHidden
+

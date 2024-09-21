@@ -1,0 +1,56 @@
+table Parameter
+	lineageTag: 1042ebf6-dad7-42e7-a65f-46f990af808a
+
+	column Parameter
+		dataType: string
+		lineageTag: ba321422-52e9-4a52-b6cc-62b01506239a
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		dataType: string
+		isHidden
+		lineageTag: 79b4de3f-f1c3-4e32-8f15-a41a039d45d5
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 92735ab3-0a5f-4915-ba2e-ee7597d91723
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parameter = calculated
+		mode: import
+		source =
+				{
+				    ("Gross Profit Margin - Tỷ suất lợi nhuận gộp", NAMEOF('_FI - Metrics'[Gross Profit Margin - Tỷ suất lợi nhuận gộp]), 0),
+				    ("Net Profit Margin - Tỷ suất lợi nhuận ròng", NAMEOF('_FI - Metrics'[Net Profit Margin - Tỷ suất lợi nhuận ròng]), 1),
+				    ("Hệ số biên EBIT", NAMEOF('_FI - Metrics'[Hệ số biên EBIT]), 2),
+				    ("Hệ số biên EBITDA", NAMEOF('_FI - Metrics'[Hệ số biên EBITDA]), 3)
+				}
+
+	annotation PBI_Id = 10383a89e5a041f3b9cf5c278725ff1e
+

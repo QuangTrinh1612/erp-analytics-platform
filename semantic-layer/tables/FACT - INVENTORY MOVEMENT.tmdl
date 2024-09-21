@@ -1,0 +1,355 @@
+table 'FACT - INVENTORY MOVEMENT'
+	lineageTag: 6b434e7f-7573-40cf-9f5a-4eedd316c822
+
+	measure 'Amount in LC' = SUM('FACT - INVENTORY MOVEMENT'[AMT_LCURR])
+		lineageTag: 432c195d-88d3-48e7-a0f3-42d889fc91fc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'BUOM Quantity' = SUM('FACT - INVENTORY MOVEMENT'[BUOM_QUANTITY])
+		lineageTag: fd18a2b1-4775-477a-a988-70eb995b84d8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Qty in Unit of Entry' = SUM('FACT - INVENTORY MOVEMENT'[UOE_QUANTITY])
+		lineageTag: 054cfc74-89d5-41b3-96f5-21f36a3b17c2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DOC_YEAR
+		dataType: string
+		lineageTag: 414e7e49-5fe4-43d0-a0d7-eb9a04140a1e
+		summarizeBy: none
+		sourceColumn: DOC_YEAR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_PERIOD
+		dataType: string
+		lineageTag: 474d80cd-dc79-4369-8def-cbb4364cfd28
+		summarizeBy: none
+		sourceColumn: DOC_PERIOD
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAT_DOC
+		dataType: string
+		lineageTag: ab226d48-d76d-4929-b88f-0e95f20b72e0
+		summarizeBy: none
+		sourceColumn: MAT_DOC
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAT_ITEM
+		dataType: string
+		lineageTag: d8969a73-e4cb-4edd-ba8f-fb9841e685b6
+		summarizeBy: none
+		sourceColumn: MAT_ITEM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: e42b81d0-6f5b-4ea2-8972-78dada6d723c
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 97779880-f4e1-4a21-894e-1de8a9f5c2c3
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: 1230ce06-6401-4585-842f-208f9bdcfa05
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: 0f614253-9497-4870-bc37-f3374bd98170
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 18e2e6cb-6e71-4236-bb2e-b84499b35b52
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_NO
+		dataType: string
+		lineageTag: b0822101-f6f3-4eba-9b89-f508a2689d2e
+		summarizeBy: none
+		sourceColumn: VENDOR_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_NO
+		dataType: string
+		lineageTag: a1d4e75e-631e-4ab2-92a6-db4a0ee05282
+		summarizeBy: none
+		sourceColumn: CUSTOMER_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANUF_CODE
+		dataType: string
+		lineageTag: 0bacab9a-8adb-46d7-b16b-c9ed637e1554
+		summarizeBy: none
+		sourceColumn: MANUF_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STOCK_TYPE
+		dataType: string
+		lineageTag: 41bde862-737b-403d-b35f-563c48e1d5bf
+		summarizeBy: none
+		sourceColumn: STOCK_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STOCK_CAT
+		dataType: string
+		lineageTag: 900c110c-8b65-45fc-b53d-799dd9e7cf51
+		summarizeBy: none
+		sourceColumn: STOCK_CAT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		isHidden
+		lineageTag: 6e66c0ae-7282-4205-9542-71f83201ec51
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column IND_SPEC_STOCK
+		dataType: string
+		lineageTag: c3fb028c-d284-4f36-a437-4d3c2d7c20a1
+		summarizeBy: none
+		sourceColumn: IND_SPEC_STOCK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_INDICATOR
+		dataType: string
+		lineageTag: 940a067e-d633-419c-8610-89b1c58d338d
+		summarizeBy: none
+		sourceColumn: DC_INDICATOR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACC_NO
+		dataType: string
+		lineageTag: 64e24c82-0a99-4acd-89d5-e29df0a34aab
+		summarizeBy: none
+		sourceColumn: GL_ACC_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: 22e917a9-5906-4e96-bd88-831652659830
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOE
+		dataType: string
+		lineageTag: f7b4a33a-50e9-4677-a3c8-e73a3d596a26
+		summarizeBy: none
+		sourceColumn: UOE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUOM_QUANTITY
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: 84ec5185-c414-4252-b7bd-7026332584fe
+		summarizeBy: sum
+		sourceColumn: BUOM_QUANTITY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column UOE_QUANTITY
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: 3d7acabe-82c5-41ae-a896-f3aeed83b1d0
+		summarizeBy: sum
+		sourceColumn: UOE_QUANTITY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column AMT_LCURR
+		dataType: double
+		formatString: #,0
+		lineageTag: f3af6c21-8430-474e-badc-5f15a787cb18
+		summarizeBy: sum
+		sourceColumn: AMT_LCURR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column SALE_AMT
+		dataType: double
+		formatString: #,#;-#,#;"Zero"
+		lineageTag: 4351b39a-c346-49c5-a5d2-e18e0f984c57
+		summarizeBy: sum
+		sourceColumn: SALE_AMT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column SALE_AMT_WITH_TAX
+		dataType: double
+		formatString: #,#;-#,#;"Zero"
+		lineageTag: 181d2497-2d91-4356-b888-dd9741aefdf4
+		summarizeBy: sum
+		sourceColumn: SALE_AMT_WITH_TAX
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 931ae9fc-4eda-4acb-8acf-7f9a81d5f1a2
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column DOC_HEADER_TEXT
+		dataType: string
+		lineageTag: ee53b577-14c8-436b-b6b7-6ef2c55a2e0c
+		summarizeBy: none
+		sourceColumn: DOC_HEADER_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_ORDER
+		dataType: string
+		lineageTag: fb5e849a-6dc5-4022-9021-66a91d2eb3b2
+		summarizeBy: none
+		sourceColumn: WORK_ORDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		lineageTag: 06c175d5-0aaa-473c-b44e-a9111781089f
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_DATE
+		dataType: string
+		lineageTag: b6e6d64a-db3a-459e-8c12-3da0e8d377ac
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PO_ORDER_NO
+		dataType: string
+		lineageTag: 749a9a57-8ee1-48e1-b7d8-4ffaf6510f87
+		summarizeBy: none
+		sourceColumn: PO_ORDER_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Inventory Movement' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_INVENTORY_MOVEMENT = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_INVENTORY_MOVEMENT"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_INVENTORY_MOVEMENT,{{"POSTING_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,50 @@
+table 'DIM - MAINT STATUS'
+	lineageTag: b377b94c-c2fe-4eac-bebc-95115b37a3ac
+
+	column SYST_STAT
+		dataType: string
+		lineageTag: 9b1f3c18-f1b4-4571-8142-0884292e51ff
+		summarizeBy: none
+		sourceColumn: SYST_STAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: a7ee3450-2da3-41a2-9673-8e5ce9440510
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_DESC
+		dataType: string
+		lineageTag: 79f3c985-0998-4736-92b0-ca27ba6778d9
+		summarizeBy: none
+		sourceColumn: STATUS_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_STATUS_KEY = 'DIM - MAINT STATUS'[SYST_STAT] & "-" & 'DIM - MAINT STATUS'[STATUS]
+		dataType: string
+		lineageTag: 516871b7-732a-4f2e-a187-3a9e86696d9c
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - MAINT STATUS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_MAINT_STATUS = pvcfcprodsqlpool{[Schema="sil",Item="DIM_MAINT_STATUS"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_MAINT_STATUS,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

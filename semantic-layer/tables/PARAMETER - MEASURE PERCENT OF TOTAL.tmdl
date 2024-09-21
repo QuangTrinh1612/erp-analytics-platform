@@ -1,0 +1,60 @@
+table 'PARAMETER - MEASURE PERCENT OF TOTAL'
+	lineageTag: 704bfd68-8665-471e-837f-47c22abcf901
+
+	calculationGroup
+		precedence: 1
+
+		calculationItem Measure = SELECTEDMEASURE()
+
+			formatStringDefinition = "#,##0"
+
+		calculationItem '% of Total by Planner' =
+				DIVIDE(
+				    SELECTEDMEASURE()
+				    ,CALCULATE(SELECTEDMEASURE(),ALLSELECTED('DIM - MATERIAL'[PLANNER]))
+				        )
+
+			formatStringDefinition = "0.00%"
+
+		calculationItem '% of Total by Equip Type' =
+				DIVIDE(
+				    SELECTEDMEASURE()
+				    ,CALCULATE(SELECTEDMEASURE(),ALLSELECTED('DIM - MATERIAL'[EQUIP_TYPE]))
+				        )
+
+			formatStringDefinition = "0.00%"
+
+		calculationItem '% of Total by Supply Type' =
+				DIVIDE(
+				    SELECTEDMEASURE()
+				    ,CALCULATE(SELECTEDMEASURE(),ALLSELECTED('DIM - MATERIAL'[SUPPLY_TYPE]))
+				        )
+
+			formatStringDefinition = "0.00%"
+
+		calculationItem '% of Total by Specialize' =
+				DIVIDE(
+				    SELECTEDMEASURE()
+				    ,CALCULATE(SELECTEDMEASURE(),ALLSELECTED('DIM - MATERIAL'[SPECIALIZE]))
+				        )
+
+			formatStringDefinition = "0.00%"
+
+	column Name
+		dataType: string
+		lineageTag: 1167a3fd-a0fd-4080-83d9-6b2661dbed55
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: 986ab664-e8a8-48ec-beac-ddaf370730ca
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

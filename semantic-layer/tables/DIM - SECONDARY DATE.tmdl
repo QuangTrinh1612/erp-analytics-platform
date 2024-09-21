@@ -1,0 +1,278 @@
+table 'DIM - SECONDARY DATE'
+	lineageTag: b966e87d-322e-45e7-8079-f2cbff948390
+
+	column DateKey
+		dataType: string
+		lineageTag: 75bb1b63-5841-4560-b25b-796438b41f4b
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 08d21664-ba68-4fc7-a65b-7e5c8e8c16f0
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: f89e6b69-a990-4de1-811f-f7b0c4b8b6c2
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column DaySuffix
+		dataType: string
+		lineageTag: 85212bd0-012c-4f0b-9220-6702d983d8f4
+		summarizeBy: none
+		sourceColumn: DaySuffix
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weekday
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f1deddf-35cc-4782-93f4-7f8ff7cefd40
+		summarizeBy: sum
+		sourceColumn: Weekday
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekDayName
+		dataType: string
+		lineageTag: 93811cca-544e-409a-b1b0-c69b5e21b552
+		summarizeBy: none
+		sourceColumn: WeekDayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOWInMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: ae164e24-4516-48ef-90f9-73765adfa83d
+		summarizeBy: sum
+		sourceColumn: DOWInMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d553212-c489-4a45-8d5a-abfc3ecedddc
+		summarizeBy: sum
+		sourceColumn: DayOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekOfMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: bba5363f-c6ee-4fe6-96be-4e4e775fb1d5
+		summarizeBy: sum
+		sourceColumn: WeekOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: c29f89e1-dc10-4585-9566-ba32b9deb353
+		summarizeBy: sum
+		sourceColumn: WeekOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISOWeekOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 62fa37f5-16d0-4f87-aeae-544521372f16
+		summarizeBy: sum
+		sourceColumn: ISOWeekOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 82f305b7-8a33-4e46-855b-879e554bae90
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: edd4c3d4-ce23-46fd-a238-cc8bcce9feee
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 354b50c2-2cb6-4b0d-8d12-cf71de9c71a6
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterName
+		dataType: string
+		lineageTag: ef741f2f-2882-4637-b0c1-fa332923f5bd
+		summarizeBy: none
+		sourceColumn: QuarterName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 458f3025-b348-4e40-a3a1-91fa0716a21a
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column MMYYYY
+		dataType: string
+		lineageTag: 447c7805-a5b8-4d4a-adde-ab77deeb94b5
+		summarizeBy: none
+		sourceColumn: MMYYYY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYear
+		dataType: string
+		lineageTag: 1baed824-4a53-4be0-9f8a-6bda6bc65f97
+		summarizeBy: none
+		sourceColumn: MonthYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 56f5c68e-3a43-47be-b8c2-4281f624415e
+		summarizeBy: none
+		sourceColumn: FirstDayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 701c0054-4997-4716-b580-7df971c2bc4e
+		summarizeBy: none
+		sourceColumn: LastDayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfQuarter
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5324c13f-50e9-432e-b9cd-d636f3678924
+		summarizeBy: none
+		sourceColumn: FirstDayOfQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfQuarter
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 30a272a2-1c7f-4c75-89ca-12dd3ffd86cb
+		summarizeBy: none
+		sourceColumn: LastDayOfQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfYear
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 81acea8e-861a-4e65-a96a-4211a01659bb
+		summarizeBy: none
+		sourceColumn: FirstDayOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfYear
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4a02e726-6c58-4d82-a4a2-65fd93237143
+		summarizeBy: none
+		sourceColumn: LastDayOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfNextMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7bafe76f-ff61-4790-8cb9-6fe59ed19fda
+		summarizeBy: none
+		sourceColumn: FirstDayOfNextMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfNextYear
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dcb6e9a3-be86-437b-8328-3394b72212a1
+		summarizeBy: none
+		sourceColumn: FirstDayOfNextYear
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Monthshortname
+		dataType: string
+		lineageTag: de33dc60-c362-45dd-8ac9-b361135a05ec
+		summarizeBy: none
+		sourceColumn: Monthshortname
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quartershortname
+		dataType: string
+		lineageTag: 01eeeb6e-f2a8-4eb0-820a-8b978755c9b6
+		summarizeBy: none
+		sourceColumn: Quartershortname
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - SECONDARY DATE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_DATE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_DATE"]}[Data]
+				in
+				    gld_VW_DIM_DATE
+
+	annotation PBI_ResultType = Table
+

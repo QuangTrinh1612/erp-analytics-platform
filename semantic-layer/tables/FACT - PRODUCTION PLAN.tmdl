@@ -1,0 +1,98 @@
+table 'FACT - PRODUCTION PLAN'
+	lineageTag: edd2266e-d69a-42a7-9e45-b4ab3f4e8762
+
+	column PLAN_PERIOD
+		dataType: string
+		lineageTag: b18a7f74-88f7-43a8-8a9a-bd4c9e091860
+		summarizeBy: none
+		sourceColumn: PLAN_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 65221634-4573-431c-a9c5-03fafbebf0e4
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRO_SEMI_CODE
+		dataType: string
+		lineageTag: 94bea1d1-5a40-4b40-9ddd-28875fd0893a
+		summarizeBy: none
+		sourceColumn: PRO_SEMI_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VERSION
+		dataType: string
+		lineageTag: aa6c99f5-8a43-4bd0-b36b-aae2366de7b6
+		summarizeBy: none
+		sourceColumn: VERSION
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UNIT
+		dataType: string
+		lineageTag: bba47483-37fa-4630-9f98-62bd86c61d6a
+		summarizeBy: none
+		sourceColumn: BASE_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUANTITY
+		dataType: double
+		lineageTag: fcb02254-f2f3-4700-9fce-fbb883e74f25
+		summarizeBy: sum
+		sourceColumn: QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORD_VER_PVN
+		dataType: int64
+		formatString: 0
+		lineageTag: c704357b-ab00-4469-be33-3afa85f1ab95
+		summarizeBy: sum
+		sourceColumn: ORD_VER_PVN
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORD_VER_PVCFC
+		dataType: int64
+		formatString: 0
+		lineageTag: e9f321a3-4149-41e5-a9d2-0de9dc74dab3
+		summarizeBy: sum
+		sourceColumn: ORD_VER_PVCFC
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c2b8cb12-0d89-4b87-83ed-0114f849d787
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_GROUP_CODE
+		dataType: string
+		lineageTag: 0ed3f1c8-2573-4d72-8061-ea4b1087f0bd
+		summarizeBy: none
+		sourceColumn: PRODUCT_GROUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - PRODUCTION PLAN' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_PRODUCTION_PLAN = pvcfcprodsqlpool{[Schema="gld",Item="FACT_PRODUCTION_PLAN"]}[Data]
+				in
+				    gld_FACT_PRODUCTION_PLAN
+

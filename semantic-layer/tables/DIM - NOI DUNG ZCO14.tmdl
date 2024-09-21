@@ -1,0 +1,18 @@
+table 'DIM - NOI DUNG ZCO14'
+	lineageTag: 938dd62f-79d4-4bb0-b5df-24b107ccbab1
+
+	column 'Nội dung (ZCO14)'
+		dataType: string
+		lineageTag: 72ee0791-681f-4beb-9c5e-4bb948c6e15e
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - NOI DUNG ZCO14' = calculated
+		mode: import
+		source = {"Quỹ tăng thêm","Đã chi từ quỹ"}
+
+	annotation PBI_Id = 92b8ed911f814ad49fe3e02c2a249395
+

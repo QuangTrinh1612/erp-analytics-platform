@@ -1,0 +1,310 @@
+table 'FACT - LOGISTIC TRANSPORT COST'
+	lineageTag: e3382f50-b948-46ca-bab5-46346327b045
+
+	column ACTUAL_GI_DATE
+		dataType: string
+		isHidden
+		lineageTag: ecf8bb74-83b2-4871-815e-2b444ede98af
+		summarizeBy: none
+		sourceColumn: ACTUAL_GI_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELIVERY_NO
+		dataType: string
+		lineageTag: 231f0603-4041-409d-b464-9f795c8317e7
+		summarizeBy: none
+		sourceColumn: DELIVERY_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPMENT_NO
+		dataType: string
+		lineageTag: ba79f669-082c-4f8a-b081-a23d90cc8505
+		summarizeBy: none
+		sourceColumn: SHIPMENT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPMENT_ROUTE
+		dataType: string
+		lineageTag: 02e4061d-996d-4bbb-b858-a67567aba0c4
+		summarizeBy: none
+		sourceColumn: SHIPMENT_ROUTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_CODE
+		dataType: string
+		isHidden
+		lineageTag: c23d920a-1e01-4180-920f-f0fa1be8ca96
+		summarizeBy: none
+		sourceColumn: VENDOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: 38e91d2e-153e-42eb-a6ba-943b3bdef5f0
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column REF_DOC
+		dataType: string
+		lineageTag: 171f99d6-8816-4c68-9475-1de008ea918a
+		summarizeBy: none
+		sourceColumn: REF_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SO_HIEU_TAU
+		dataType: string
+		lineageTag: f95a0473-c645-4e2d-b823-d1eb6d52e704
+		summarizeBy: none
+		sourceColumn: SO_HIEU_TAU
+
+		annotation SummarizationSetBy = Automatic
+
+	column KHO_GNHH
+		dataType: string
+		lineageTag: 083200c8-180c-46c8-b78c-43969feab755
+		summarizeBy: none
+		sourceColumn: KHO_GNHH
+
+		annotation SummarizationSetBy = Automatic
+
+	column NGUOI_NHAN
+		dataType: string
+		lineageTag: 052095d8-efd0-48be-937c-66125b3036b0
+		summarizeBy: none
+		sourceColumn: NGUOI_NHAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHO_VE
+		dataType: string
+		lineageTag: 43e34b58-feee-4d8d-a9d7-493c79c0c904
+		summarizeBy: none
+		sourceColumn: CHO_VE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAI_DIEN_BEN_GIAO
+		dataType: string
+		lineageTag: 6a922ef0-414a-43b7-9dff-c41e1be94718
+		summarizeBy: none
+		sourceColumn: DAI_DIEN_BEN_GIAO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHUC_VU
+		dataType: string
+		lineageTag: 72f0cfda-a309-49ab-8ac8-f3966b78c506
+		summarizeBy: none
+		sourceColumn: CHUC_VU
+
+		annotation SummarizationSetBy = Automatic
+
+	column MO_TA_LENH
+		dataType: string
+		lineageTag: 2a9636a3-da6b-4f5d-9275-4981d3d4e0de
+		summarizeBy: none
+		sourceColumn: MO_TA_LENH
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOM
+		dataType: string
+		lineageTag: 1b42f444-9023-4c5b-8d16-92f9a6401ab6
+		summarizeBy: none
+		sourceColumn: UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE
+		dataType: string
+		isHidden
+		lineageTag: 3da918e9-ef41-4c6d-aba5-568f58b2baf4
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACTUAL_DELIVERY_QTY
+		dataType: double
+		isHidden
+		lineageTag: eb3aa145-d9bb-4cea-8601-c1d10568d3cc
+		summarizeBy: sum
+		sourceColumn: ACTUAL_DELIVERY_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DELIVERY_QTY
+		dataType: double
+		isHidden
+		lineageTag: ed380bcf-f69d-4603-8a8c-7de7894a8381
+		summarizeBy: sum
+		sourceColumn: DELIVERY_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ROUTE_NAME
+		dataType: string
+		lineageTag: 524af8d3-91fd-49aa-8abd-364dffbd933a
+		summarizeBy: none
+		sourceColumn: ROUTE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT_PRICE
+		dataType: double
+		lineageTag: 8627cc6e-2d25-4010-86d6-04d6554cfd43
+		summarizeBy: sum
+		sourceColumn: UNIT_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VALID_FROM
+		dataType: string
+		lineageTag: bccdd559-853c-4596-8fb9-1fa5707552d9
+		summarizeBy: none
+		sourceColumn: VALID_FROM
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_TO
+		dataType: string
+		lineageTag: bce49836-0593-43d7-bfba-095759fc6ab1
+		summarizeBy: none
+		sourceColumn: VALID_TO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY
+		dataType: string
+		lineageTag: f5e2b2e4-605a-4779-b434-3db960f398fc
+		summarizeBy: none
+		sourceColumn: CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANSPORT_COST_ACTUAL
+		dataType: double
+		isHidden
+		lineageTag: 9c539f9f-4e4a-46da-a188-9daa4efe2073
+		summarizeBy: sum
+		sourceColumn: TRANSPORT_COST_ACTUAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PL_GI_DATE
+		dataType: string
+		isHidden
+		lineageTag: b0471d36-1983-49f3-90b2-84529bfeef68
+		summarizeBy: none
+		sourceColumn: PL_GI_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANSPORT_ID
+		dataType: string
+		isHidden
+		lineageTag: 7e6d0f2e-828b-43ae-a800-8c3499830c19
+		summarizeBy: none
+		sourceColumn: TRANSPORT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANSPORT_NAME
+		dataType: string
+		isHidden
+		lineageTag: 5755b771-1593-409e-8f3d-5f152dd36e26
+		summarizeBy: none
+		sourceColumn: TRANSPORT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE_LV4
+		dataType: string
+		lineageTag: 740b623d-af66-48b4-9d6a-aa44de308557
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE_LV4
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANSPORT_INSURANCE_COST
+		dataType: double
+		lineageTag: e2a0f75c-2b0b-4daa-bbc8-a0347600db74
+		summarizeBy: sum
+		sourceColumn: TRANSPORT_INSURANCE_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CONTRACT_PRICE
+		dataType: double
+		lineageTag: f7f5ba7b-b486-4cf7-ade6-42855997a426
+		summarizeBy: sum
+		sourceColumn: CONTRACT_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OD_DATE
+		dataType: string
+		lineageTag: 0712c5e9-fe3c-4962-bf23-4e7e5ae11ef2
+		summarizeBy: none
+		sourceColumn: OD_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PO_DATE
+		dataType: string
+		lineageTag: a6cfe9ff-d537-49b1-a1ba-6b6b5139a38c
+		summarizeBy: none
+		sourceColumn: PO_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPMENT_CREATE_DATE
+		dataType: string
+		lineageTag: eb7b9842-e479-48a4-a1dc-1c6b16d963f2
+		summarizeBy: none
+		sourceColumn: SHIPMENT_CREATE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REF_ITEM
+		dataType: string
+		lineageTag: f7f3c310-78e3-452a-8606-daff3dded761
+		summarizeBy: none
+		sourceColumn: REF_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - LOGISTIC TRANSPORT COST' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_TRANSPORT_COST_ACTUAL = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_TRANSPORT_COST_ACTUAL"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(gld_VW_FACT_TRANSPORT_COST_ACTUAL,{{"CONDITION_PRICE", "UNIT_PRICE"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

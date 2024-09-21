@@ -1,0 +1,55 @@
+table 'Parameter - Đơn giá ZCO12'
+	lineageTag: fa64011e-477e-4730-bc3a-6e53c06b3416
+
+	column 'Parameter - Đơn giá ZCO12'
+		dataType: string
+		lineageTag: 0e889084-84d8-484a-bdee-2cf3762c5ff3
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter - Đơn giá ZCO12 Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter - Đơn giá ZCO12 Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter - Đơn giá ZCO12 Fields'
+		dataType: string
+		isHidden
+		lineageTag: 9dad6f5d-d479-40fb-a4f9-5fa563734fe2
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter - Đơn giá ZCO12 Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter - Đơn giá ZCO12 Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fe97b281-5044-47e9-a239-46608142bdc6
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter - Đơn giá ZCO12' = calculated
+		mode: import
+		source =
+				{
+				    ("Đơn giá (Nghìn Đồng)", NAMEOF('_CO - Metrics'[Đơn giá - PVCFC - all date]), 0),
+				    ("Tổng giá thành (Tỷ Đồng)", NAMEOF('_CO - Metrics'[Tổng giá thành - PVCFC - all date]), 1),
+				    ("Tỷ Trọng", NAMEOF('_CO - Metrics'[Đơn giá_ZCO012_TỶ trọng]), 2)
+				}
+
+	annotation PBI_Id = 38965a0d36c8431581224d63ac3ec9e4
+

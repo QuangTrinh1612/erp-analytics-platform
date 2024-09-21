@@ -1,0 +1,137 @@
+table 'DIM - STAFF DMS'
+	lineageTag: 8527eb80-83a4-474e-86a2-281756a28822
+
+	column STAFF_ID
+		dataType: string
+		lineageTag: d4d49ac4-0f11-41b2-855e-317896e91c58
+		summarizeBy: none
+		sourceColumn: STAFF_ID
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column STAFF_CODE
+		dataType: string
+		lineageTag: 663f44b9-73d1-49e5-8481-66e2d81f048f
+		summarizeBy: none
+		sourceColumn: STAFF_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHOP_ID
+		dataType: double
+		lineageTag: 3f895d05-5c70-43a9-9839-7dd77cf88b16
+		summarizeBy: count
+		sourceColumn: SHOP_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AREA_ID
+		dataType: double
+		lineageTag: d8030ff0-3662-4ab4-9ee4-8af5dc8b44e3
+		summarizeBy: count
+		sourceColumn: AREA_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STAFF_NAME
+		dataType: string
+		lineageTag: 52236523-613c-4a3f-b3fd-cefbaff9d18c
+		summarizeBy: none
+		sourceColumn: STAFF_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORGANIZATION_ID
+		dataType: double
+		lineageTag: cd7aaffb-602d-44d3-a913-6d862193220d
+		summarizeBy: count
+		sourceColumn: ORGANIZATION_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STAFF_TYPE
+		dataType: string
+		lineageTag: 74ebe959-8f14-467e-87ff-b5c6868f63c3
+		summarizeBy: none
+		sourceColumn: STAFF_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STAFF_TYPE_PREFIX
+		dataType: string
+		lineageTag: 7099a51d-55e9-48df-80ca-d1dd4ac0d34b
+		summarizeBy: none
+		sourceColumn: STAFF_TYPE_PREFIX
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMUNE_NAME
+		dataType: string
+		lineageTag: f1e35e28-6417-47b5-9b54-3e1a2b96a6d7
+		summarizeBy: none
+		sourceColumn: COMMUNE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISTRICT_NAME
+		dataType: string
+		lineageTag: 01a0fed6-7652-4424-9a0d-a9726bdf3330
+		summarizeBy: none
+		sourceColumn: DISTRICT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROVINCE_NAME
+		dataType: string
+		lineageTag: 052b7780-4cf9-44e7-949e-9c5814239383
+		summarizeBy: none
+		sourceColumn: PROVINCE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUB_REGION_NAME
+		dataType: string
+		lineageTag: e73732d2-5797-4fdb-96dc-1b257d5ddf43
+		summarizeBy: none
+		sourceColumn: SUB_REGION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column REGION_NAME
+		dataType: string
+		lineageTag: 5b1ecb90-9fc6-4ec9-9601-0d2741ca4771
+		summarizeBy: none
+		sourceColumn: REGION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column REGION_NAME_2 =
+			SWITCH('DIM - STAFF DMS'[REGION_NAME],
+			"Đông Nam Bộ", "Đông Nam Bộ + Tây Nguyên",
+			"Tây Nguyên", "Đông Nam Bộ + Tây Nguyên",
+			'DIM - STAFF DMS'[REGION_NAME])
+		dataType: string
+		lineageTag: e9b4fd81-a56d-465a-bbb2-55b14d1aff32
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - STAFF DMS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_STAFF_DMS = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_STAFF_DMS"]}[Data]
+				in
+				    gld_VW_DIM_STAFF_DMS
+

@@ -1,0 +1,104 @@
+/// Bảng thông tin công ty
+table 'DIM - COMPANY'
+	lineageTag: 00380ed0-2250-40b5-86d0-6687b278e7dc
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 29ed9869-a76a-4cad-9a66-e3fb91ab9220
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE_DESCRIPTION
+		dataType: string
+		lineageTag: 7888926f-4476-46d2-a29f-cd9cc13193ef
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE_DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column ADDRESS
+		dataType: string
+		lineageTag: e8f90891-98fa-40ce-a780-b1c4bf24fbc0
+		summarizeBy: none
+		sourceColumn: ADDRESS
+
+		annotation SummarizationSetBy = Automatic
+
+	column FM_AREA
+		dataType: string
+		lineageTag: 1011252f-c482-4c6f-9fb1-287003b79d9d
+		summarizeBy: none
+		sourceColumn: FM_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREDIT_CO_AREA
+		dataType: string
+		lineageTag: b210001b-57a6-4255-a056-112debf007fc
+		summarizeBy: none
+		sourceColumn: CREDIT_CO_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_KEY
+		dataType: string
+		lineageTag: e333ff6e-7377-49df-b653-3b22bda45e06
+		summarizeBy: none
+		sourceColumn: COUNTRY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY
+		dataType: string
+		lineageTag: 059d7806-c477-4687-be38-185bea993167
+		summarizeBy: none
+		sourceColumn: CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISC_YEAR_VAR
+		dataType: string
+		lineageTag: bfbd2c91-ce5d-4a9f-b0b3-a8d8a721b8fb
+		summarizeBy: none
+		sourceColumn: FISC_YEAR_VAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY
+		dataType: string
+		lineageTag: ddc85248-59c5-45b8-87c4-8fa636e86bf2
+		summarizeBy: none
+		sourceColumn: COMPANY
+
+		annotation SummarizationSetBy = Automatic
+
+	column VAT_REG_NO
+		dataType: string
+		lineageTag: bf6d092b-73cb-4ca2-9262-f3c753478174
+		summarizeBy: none
+		sourceColumn: VAT_REG_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_KEY
+		dataType: string
+		lineageTag: f4827f10-3062-4b5c-b6e4-de6aa241e2fb
+		summarizeBy: none
+		sourceColumn: CURRENCY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - COMPANY' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_VENDOR = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_COMPANY"]}[Data]
+				in
+				    gld_VW_DIM_VENDOR
+
+	annotation PBI_ResultType = Exception
+

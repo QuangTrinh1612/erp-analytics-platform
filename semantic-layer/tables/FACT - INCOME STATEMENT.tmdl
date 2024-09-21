@@ -1,0 +1,110 @@
+table 'FACT - INCOME STATEMENT'
+	lineageTag: 0c2216c6-0782-4dd1-a78c-9f523bdbfd76
+
+	column FISCAL_YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 33bf4886-157c-40fe-a521-00ee6c8686c4
+		summarizeBy: sum
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: int64
+		formatString: 0
+		lineageTag: 020fce46-a74e-4506-8fd4-c850959e2385
+		summarizeBy: sum
+		sourceColumn: FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 7a7bc244-5e85-4376-af46-839e33a05a01
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: e1f3ae3b-919f-4d77-841b-b0925571181e
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_CENTRE
+		dataType: string
+		lineageTag: 48ab82e1-e5cd-4bee-8b19-e0707f552b44
+		summarizeBy: none
+		sourceColumn: PROFIT_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTRE
+		dataType: string
+		lineageTag: 089312fe-05b9-44f8-b4f9-0e4aa4c6f93e
+		summarizeBy: none
+		sourceColumn: COST_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_CODE
+		dataType: string
+		lineageTag: d659cf45-442e-436b-b172-0bfddc6c1214
+		summarizeBy: none
+		sourceColumn: CURRENCY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_NO
+		dataType: string
+		lineageTag: b107f578-0354-4355-9b8c-2989b79a047b
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCAL_AMT
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 5ef012fb-b8c2-4b88-a6c2-df056f7744b4
+		summarizeBy: sum
+		sourceColumn: LOCAL_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_ITEM
+		dataType: string
+		lineageTag: cb7d86a5-48c6-4724-9951-c371d200353a
+		summarizeBy: none
+		sourceColumn: IS_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 2e89c540-f934-4c88-8be4-adc5b85da852
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - INCOME STATEMENT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_INCOME_STATEMENT = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_INCOME_STATEMENT"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_INCOME_STATEMENT,{{"POSTING_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

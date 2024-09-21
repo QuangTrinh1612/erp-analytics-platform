@@ -1,0 +1,352 @@
+table 'FACT - MP ESTIMATED COST'
+	lineageTag: 1ba99503-7c10-4d91-8230-673009acd19c
+
+	column MAINT_PLAN
+		dataType: string
+		lineageTag: 7101d58f-0fc9-4829-913c-3a17988ed534
+		summarizeBy: none
+		sourceColumn: MAINT_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_ITEM
+		dataType: string
+		lineageTag: 99ea082d-8b4b-49b4-9d11-2655e9880465
+		summarizeBy: none
+		sourceColumn: MAINT_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 62a6f52e-30ca-4f46-890b-b2961b771177
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_TYPE
+		dataType: string
+		lineageTag: e72889be-ea56-4b2a-8027-43d137d75f77
+		summarizeBy: none
+		sourceColumn: ORDER_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_ACT_NUM
+		dataType: string
+		lineageTag: 74ab4d1a-013c-44d9-98bf-9f9be7be1777
+		summarizeBy: none
+		sourceColumn: OPER_ACT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_STRA
+		dataType: string
+		lineageTag: ddb27ad1-c550-4c64-8ab5-80d3d90aaa88
+		summarizeBy: none
+		sourceColumn: MAINT_STRA
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIN_PACK_NUM
+		dataType: string
+		lineageTag: 153358a8-d6d3-4ac4-b0e7-9cf3db61f788
+		summarizeBy: none
+		sourceColumn: MAIN_PACK_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNCT_LOC_CODE
+		dataType: string
+		lineageTag: 6f8c921b-5044-4f86-bacf-1ef39047c8d2
+		summarizeBy: none
+		sourceColumn: FUNCT_LOC_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: fa2622a2-8b61-4a92-87d0-a839c495f6c9
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACT_TYPE_CODE
+		dataType: string
+		lineageTag: ae74e1a5-7064-4cfa-b67e-9627e4621d1e
+		summarizeBy: none
+		sourceColumn: ACT_TYPE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_SHORT_DESC
+		dataType: string
+		lineageTag: dedaa142-4617-4ebb-85db-1609554cde42
+		summarizeBy: none
+		sourceColumn: OPER_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: 66fcf4a4-a5ff-4d40-b62d-f7e04b807346
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: bf0e887b-d87c-4849-9835-fffc2c47bf9c
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_CODE
+		dataType: string
+		lineageTag: 1bdd44e3-7bfc-4daa-abef-53646a1c2809
+		summarizeBy: none
+		sourceColumn: SUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER
+		dataType: string
+		lineageTag: d286181e-fa49-4f44-8bc9-d4556b475e20
+		summarizeBy: none
+		sourceColumn: WORK_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		lineageTag: 34cf27fc-99f4-4565-9c56-d9a8dfcee789
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRP_COUNTER
+		dataType: string
+		lineageTag: 0fed820a-528d-4c55-93ca-2372804f2207
+		summarizeBy: none
+		sourceColumn: GRP_COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column FREQUENCY
+		dataType: string
+		lineageTag: b60496d4-28b2-4685-ad2c-64ccb3fdf2a0
+		summarizeBy: none
+		sourceColumn: FREQUENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SYST_COND
+		dataType: string
+		lineageTag: e266e2cb-ed7b-45cc-9654-11fd7645dbff
+		summarizeBy: none
+		sourceColumn: SYST_COND
+
+		annotation SummarizationSetBy = Automatic
+
+	column START_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: a95d4ed0-ca1a-40b6-b1e4-28ddb3440974
+		summarizeBy: none
+		sourceColumn: START_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column CALL_OBJ_PLAN_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 7a9c4bac-e29e-483e-9e28-ee1d808f6a6f
+		summarizeBy: none
+		sourceColumn: CALL_OBJ_PLAN_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 5eb09f0c-37ce-4a64-a40b-ceb07b16fd64
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column RES_PURC_REQ
+		dataType: string
+		lineageTag: 9c24058c-7889-4b7f-863e-e436ae23a6c3
+		summarizeBy: none
+		sourceColumn: RES_PURC_REQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPO_QUANTITY
+		dataType: double
+		lineageTag: 9c2f46d5-c3af-415f-a626-3743f999fd86
+		summarizeBy: sum
+		sourceColumn: COMPO_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'STOCK_PLANT_1000 '
+		dataType: double
+		lineageTag: 47c7643a-0948-4eda-bd68-710683ba7796
+		summarizeBy: sum
+		sourceColumn: "STOCK_PLANT_1000 "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STOCK_PLANT_1999
+		dataType: double
+		lineageTag: f2ec0cc3-cf93-40d8-8c2b-3ed0e7d0fa3e
+		summarizeBy: sum
+		sourceColumn: STOCK_PLANT_1999
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPO_UOM
+		dataType: string
+		lineageTag: 012281d0-bd81-4300-a768-33297230d6b5
+		summarizeBy: none
+		sourceColumn: COMPO_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIM_TASK_LIST_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: fe83e5a6-b323-4846-a112-1de5c4f6dc61
+		summarizeBy: none
+		sourceColumn: DIM_TASK_LIST_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column STOCK_SLOC_1901
+		dataType: double
+		lineageTag: 0b68bdfa-3705-4198-9cfe-12784c21041a
+		summarizeBy: sum
+		sourceColumn: STOCK_SLOC_1901
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REQ_DESC
+		dataType: string
+		lineageTag: a5488da9-110d-4a6f-9f88-4f8fe32bf9a7
+		summarizeBy: none
+		sourceColumn: REQ_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUANTITY_PLANT_1000
+		dataType: double
+		lineageTag: 1d9a8f24-f73e-475c-8180-799fe25064f9
+		summarizeBy: sum
+		sourceColumn: QUANTITY_PLANT_1000
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STOCK_PR
+		dataType: double
+		lineageTag: 8538a7b3-4832-487e-abe0-ababa6bff047
+		summarizeBy: sum
+		sourceColumn: STOCK_PR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRICE
+		dataType: double
+		lineageTag: 47da8bd0-8736-4a1a-bd4f-5e18773fadcb
+		summarizeBy: sum
+		sourceColumn: PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PLAN_COST
+		dataType: double
+		lineageTag: 39a09317-d924-4eba-83fe-30df2529e4e2
+		summarizeBy: sum
+		sourceColumn: PLAN_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MISSING_PLAN_COST
+		dataType: double
+		lineageTag: 6de8835f-5fe5-471a-b605-1fe24d713a43
+		summarizeBy: sum
+		sourceColumn: MISSING_PLAN_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SYSTEM_STATUS_EXCHANGE
+		dataType: string
+		lineageTag: ccb2cc9b-6ef3-4788-a54d-91b3dbcda19b
+		summarizeBy: none
+		sourceColumn: SYSTEM_STATUS_EXCHANGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_PLAN_STATUS
+		dataType: string
+		lineageTag: b012a4fb-e44e-48b7-9019-c09a8782f6b7
+		summarizeBy: none
+		sourceColumn: MAINT_PLAN_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_CODE_KEY = MID('FACT - MP ESTIMATED COST'[SUP_CODE],5,8)
+		dataType: string
+		lineageTag: b96d3a8d-0351-4553-afb6-3430d1409009
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - MP ESTIMATED COST' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_MP_ESTIMATED_COST = pvcfcprodsqlpool{[Schema="gld",Item="FACT_MP_ESTIMATED_COST"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_MP_ESTIMATED_COST,{"W_INSERT_DT"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"START_DATE", type date}, {"CALL_OBJ_PLAN_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,174 @@
+table 'FACT - LDDNB STATUS'
+	lineageTag: eafc7913-d329-48d0-bb9b-a21136f448bf
+
+	column DOC_DATE
+		dataType: string
+		lineageTag: 6b0154af-ac56-49f7-befb-b708e0aaa305
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_ORDER
+		dataType: string
+		lineageTag: b51d5366-ba44-48d6-ae6e-6e94eb2d3af5
+		summarizeBy: none
+		sourceColumn: PURCHASE_ORDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_ITEM
+		dataType: string
+		lineageTag: 7bf4e7f2-b93d-4130-8e3a-bb780f22cbd8
+		summarizeBy: none
+		sourceColumn: PURCHASE_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 559373d5-0137-4ae7-99e7-6cf80c0e12f3
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: 4af73ad8-4ad8-4069-981a-b3e68d90188a
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATE_ON
+		dataType: string
+		lineageTag: 4db4e6c9-7b09-4155-8c87-43c755200478
+		summarizeBy: none
+		sourceColumn: CREATE_ON
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_KEY
+		dataType: string
+		lineageTag: 286227d3-e1fd-45a8-9194-ff8ef985358d
+		summarizeBy: none
+		sourceColumn: CURRENCY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXCHANGE_RATE
+		dataType: double
+		lineageTag: f74635f2-1c0b-4f1f-b181-b31475e90fbe
+		summarizeBy: sum
+		sourceColumn: EXCHANGE_RATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: c1acafc7-1c24-42eb-a681-f20dc0c49d35
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_SHORT_TEXT
+		dataType: string
+		lineageTag: 8a41e578-1512-41df-b6a2-d01e50a37c97
+		summarizeBy: none
+		sourceColumn: MATERIAL_SHORT_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_GROUP
+		dataType: string
+		lineageTag: 19e2e16e-10c9-4ca0-b858-7394e158e88b
+		summarizeBy: none
+		sourceColumn: MATERIAL_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_TYPE
+		dataType: string
+		lineageTag: 8462fbe4-4619-4162-9b29-8ba34ba35f19
+		summarizeBy: none
+		sourceColumn: MATERIAL_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 6d4b6e50-c735-44de-9712-170c769d0d99
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		lineageTag: 2cf402f2-f38a-4431-8509-2f99bd9b9da6
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_QUANTITY
+		dataType: double
+		lineageTag: 76867ac7-2b6b-49c6-bb75-0b6e3f33f5eb
+		summarizeBy: sum
+		sourceColumn: DOC_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UOM
+		dataType: string
+		lineageTag: 26a14f6a-5a6a-4aa1-a179-f562205c9a40
+		summarizeBy: none
+		sourceColumn: UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISSUE_STORAGE_LOC
+		dataType: string
+		lineageTag: e33633b6-548a-468f-9ff1-49c820b08f4f
+		summarizeBy: none
+		sourceColumn: ISSUE_STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column AC_DELIVERY_QUANTITY
+		dataType: double
+		lineageTag: 915ba496-4913-4ecf-9248-bc4b90411d0d
+		summarizeBy: sum
+		sourceColumn: AC_DELIVERY_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AC_GI_DATE
+		dataType: string
+		lineageTag: 58e07580-c637-4feb-8b33-c4165ad9539d
+		summarizeBy: none
+		sourceColumn: AC_GI_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - LDDNB STATUS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_LDDNB_STATUS = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_LDDNB_STATUS"]}[Data]
+				in
+				    gld_VW_FACT_LDDNB_STATUS
+
+	annotation PBI_ResultType = Table
+

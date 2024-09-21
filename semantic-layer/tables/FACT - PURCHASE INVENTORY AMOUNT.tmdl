@@ -1,0 +1,208 @@
+table 'FACT - PURCHASE INVENTORY AMOUNT'
+	lineageTag: 79ab0e11-81b2-4232-87e8-abb143e282d4
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4eabe7ed-7a36-4073-bff6-4b75da714560
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 4df87347-b9ac-4e1c-be8c-5937a634a9ce
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		lineageTag: df6d6144-5c60-4611-a076-417b66e6e84c
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: ff39c93c-fb6a-4d62-b59d-5e5f96993132
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: 0cc36221-74fe-4ce9-9144-d5e8480bb606
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 7f5b2093-ec6e-41b4-9392-6065e8423b81
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: d457c681-29bd-4bb5-8ba6-b7a07e8a86d2
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_SLOC_BATCH_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: 78638ffc-2ec5-4ffd-8712-d0b608b60a6c
+		summarizeBy: sum
+		sourceColumn: IS_SLOC_BATCH_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_VALUATED_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e5ca572-33ba-480f-877c-2ee2392fd247
+		summarizeBy: sum
+		sourceColumn: IS_VALUATED_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_SPECIAL_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: ea229298-1a39-4741-84f5-5207d4e6ca8a
+		summarizeBy: sum
+		sourceColumn: IS_SPECIAL_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIAL_STOCK
+		dataType: string
+		lineageTag: e0eef63a-5ac2-4474-acba-9a5e83be3f30
+		summarizeBy: none
+		sourceColumn: SPECIAL_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_MATERIAL_LEDGER
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f76e75f-2c46-4725-8592-7842a033bf7b
+		summarizeBy: sum
+		sourceColumn: IS_MATERIAL_LEDGER
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECEIPT_AMT
+		dataType: double
+		lineageTag: c9fd78e4-052d-4204-9d24-79d26d3e6031
+		summarizeBy: sum
+		sourceColumn: RECEIPT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_AMT
+		dataType: double
+		lineageTag: 051d1e28-b2d4-44f0-bffd-5fd8fab320c5
+		summarizeBy: sum
+		sourceColumn: ISSUE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_REVERSE_AMT
+		dataType: double
+		lineageTag: a0a6922e-9ee0-4939-8fce-ec213a689319
+		summarizeBy: sum
+		sourceColumn: RECEIPT_REVERSE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_REVERSE_AMT
+		dataType: double
+		lineageTag: 0d987b3c-e3e0-46dc-86e1-2f77ee7906d3
+		summarizeBy: sum
+		sourceColumn: ISSUE_REVERSE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVERSE_AMT
+		dataType: double
+		lineageTag: f2d3b070-08b4-44f8-b539-786d4d72cb28
+		summarizeBy: sum
+		sourceColumn: REVERSE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_REVERSE_REMAIN_AMT
+		dataType: double
+		lineageTag: 095046ea-be43-4409-8990-06b94f99d056
+		summarizeBy: sum
+		sourceColumn: RECEIPT_REVERSE_REMAIN_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_REVERSE_REMAIN_AMT
+		dataType: double
+		lineageTag: 3344c3f0-5c0e-4d54-be41-2bf5f6c7a57f
+		summarizeBy: sum
+		sourceColumn: ISSUE_REVERSE_REMAIN_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVERSE_REMAIN_AMT
+		dataType: double
+		lineageTag: 5a494114-3796-483a-80ad-bd781ab3cf90
+		summarizeBy: sum
+		sourceColumn: REVERSE_REMAIN_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_PLANT_KEY
+		dataType: string
+		lineageTag: 10e34c75-b88f-4e78-811b-401ed8bc2fc8
+		summarizeBy: none
+		sourceColumn: MATERIAL_PLANT_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - PURCHASE INVENTORY AMOUNT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PLANT = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_PURCHASE_INVENTORY_AMT"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_DIM_PLANT,{{"POSTING_DATE", type date}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "MATERIAL_PLANT_KEY", each Text.Trim([MATERIAL_CODE]) &"-"& [PLANT_CODE])
+				in
+				    #"Added Custom"
+
+	annotation PBI_ResultType = Table
+

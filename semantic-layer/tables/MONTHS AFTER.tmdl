@@ -1,0 +1,21 @@
+table 'MONTHS AFTER'
+	isHidden
+	lineageTag: 99be01a4-1437-4402-8e25-af63f123e97a
+
+	column Value
+		dataType: int64
+		formatString: 0
+		lineageTag: 91561832-532e-4e2d-84e7-c2c3c02c3f46
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'MONTHS AFTER' = calculated
+		mode: import
+		source = GENERATESERIES(0,12,1)
+
+	annotation PBI_Id = 6a44869f6c9e4357942d8dacd20fcc86
+

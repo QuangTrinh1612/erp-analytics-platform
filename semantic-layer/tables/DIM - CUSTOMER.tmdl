@@ -1,0 +1,160 @@
+/// Bảng thông tin khách hàng
+table 'DIM - CUSTOMER'
+	lineageTag: 209eb133-52ef-4616-b2d9-e228dfd362c2
+
+	column CUSTOMER_CODE
+		dataType: string
+		lineageTag: d554c861-2342-4483-a7c6-f1e219b03a34
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_NAME
+		dataType: string
+		lineageTag: 007d0352-4680-4ad3-8a46-e5464fa96aae
+		summarizeBy: none
+		sourceColumn: CUSTOMER_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_FULL_NAME
+		dataType: string
+		lineageTag: 28531502-b91e-4ba5-913c-cd9f37cd3b81
+		summarizeBy: none
+		sourceColumn: CUSTOMER_FULL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TITLE
+		dataType: string
+		lineageTag: 03aca3c3-f1f4-44e8-90a5-ed9bc615c158
+		summarizeBy: none
+		sourceColumn: TITLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_KEY
+		dataType: string
+		lineageTag: 96046a3c-a89e-457b-9d5c-9215d3702fad
+		summarizeBy: none
+		sourceColumn: COUNTRY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column VAT_REG_NO
+		dataType: string
+		lineageTag: a1b04314-0f8f-4ebd-a16b-6d68e2e44b19
+		summarizeBy: none
+		sourceColumn: VAT_REG_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACC_GROUP_GROUP
+		dataType: string
+		lineageTag: ad5ea0d8-7879-4cc0-8cfe-caf30ee14dc6
+		summarizeBy: none
+		sourceColumn: ACC_GROUP_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column STREET
+		dataType: string
+		lineageTag: b2d7ec77-1eed-43ce-b982-3eda8a15fcc4
+		summarizeBy: none
+		sourceColumn: STREET
+
+		annotation SummarizationSetBy = Automatic
+
+	column PHONE_NUMBER_1
+		dataType: string
+		lineageTag: 70238c9d-a9a7-4ccd-8ec2-69e8b25c7080
+		summarizeBy: none
+		sourceColumn: PHONE_NUMBER_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column FAX_NUMBER
+		dataType: string
+		lineageTag: a1bd949b-06b4-4919-aad7-e0c16911f0b8
+		summarizeBy: none
+		sourceColumn: FAX_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PHONE_NUMBER_2
+		dataType: string
+		lineageTag: 6d8bb3d9-17a2-4ffb-a810-f83610de0a05
+		summarizeBy: none
+		sourceColumn: PHONE_NUMBER_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column BANK_KEY
+		dataType: string
+		lineageTag: 2a2e31a0-672d-429c-b685-f6a4cad72210
+		summarizeBy: none
+		sourceColumn: BANK_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BANK_ACCT_NO
+		dataType: string
+		lineageTag: a6ce4171-8c6a-4b71-a926-a908e39e333d
+		summarizeBy: none
+		sourceColumn: BANK_ACCT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BACK_ACCT_HOLDER
+		dataType: string
+		lineageTag: c117609c-484e-4455-afce-259a9625b2db
+		summarizeBy: none
+		sourceColumn: BACK_ACCT_HOLDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY
+		dataType: string
+		lineageTag: 39a4c11a-4192-4515-9011-3c4c5f8504ef
+		summarizeBy: none
+		sourceColumn: CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEARCH_TERM
+		dataType: string
+		lineageTag: da4efb8b-70e2-41fb-bbac-849b1d40885d
+		summarizeBy: none
+		sourceColumn: SEARCH_TERM
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECON_ACCT
+		dataType: string
+		lineageTag: e12f5250-845f-4daa-8831-ff75581d03c4
+		summarizeBy: none
+		sourceColumn: RECON_ACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CASH_MGMT_GRP
+		dataType: string
+		lineageTag: f294d3e7-3948-442c-8116-530726da7963
+		summarizeBy: none
+		sourceColumn: CASH_MGMT_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - CUSTOMER' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_CUSTOMER = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_CUSTOMER"]}[Data]
+				in
+				    gld_VW_DIM_CUSTOMER
+
+	annotation PBI_ResultType = Table
+

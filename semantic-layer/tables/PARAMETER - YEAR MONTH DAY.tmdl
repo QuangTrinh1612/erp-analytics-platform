@@ -1,0 +1,38 @@
+table 'PARAMETER - YEAR MONTH DAY'
+	lineageTag: 53a9b519-e0d7-455e-8780-0298e363a94f
+
+	column Value
+		dataType: string
+		lineageTag: 4deb87f8-e66f-4a21-8479-363a4fd1651e
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	column STT
+		dataType: int64
+		formatString: 0
+		lineageTag: e4e19a24-a80f-4d5d-8b76-64bfbbefd87a
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PARAMETER - YEAR MONTH DAY' = calculated
+		mode: import
+		source =
+				DATATABLE (
+				    "Value", STRING,
+				    "STT", INTEGER,
+				    {
+				        {"Year", 1},
+				        {"Month", 2},
+				        {"Day", 3}
+				    })
+
+	annotation PBI_Id = 316f9d3b59264dab81f66ed65239be74
+

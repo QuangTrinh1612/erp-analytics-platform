@@ -1,0 +1,76 @@
+table 'Parameter - Logistic Cost'
+	lineageTag: 09469222-33e1-40ab-a8f8-b081753751b8
+
+	measure 'Đơn Giá logistic cost' =
+			SWITCH(SELECTEDVALUE('Parameter - Logistic Cost'[Parameter - Logistic Cost Order]),
+			0, [Storage Unit Price],
+			3, AVERAGE('FACT - LOGISTIC TRANSPORT COST'[UNIT_PRICE]))
+		lineageTag: dada770d-edcb-4023-aab0-9fb8cff8ef0d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tổng logistic cost' =
+			SWITCH(SELECTEDVALUE('Parameter - Logistic Cost'[Parameter - Logistic Cost Order]),
+			0, [Total Storage Cost Estimate],
+			1, [Storage Insurance Cost],
+			2, [Custom Clearance Cost],
+			3, [Total Transport Cost Estimate],
+			4, [Transport Insurance Cost])
+		lineageTag: 95c11208-7110-400a-b408-6e900043b7e7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Parameter - Logistic Cost'
+		dataType: string
+		lineageTag: 87dc101d-4a9c-46c7-934d-9ead3f311fba
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter - Logistic Cost Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter - Logistic Cost Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter - Logistic Cost Fields'
+		dataType: string
+		isHidden
+		lineageTag: 1a30efb2-5e95-44bd-a133-4d788541327e
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter - Logistic Cost Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter - Logistic Cost Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1a5774bb-f575-4b62-b0f9-82421c8189ac
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter - Logistic Cost' = calculated
+		mode: import
+		source =
+				{
+				    ("Phí Lưu Kho", NAMEOF('_SALES MEASURES'[Total Storage Cost Estimate]), 0),
+				    ("Phí BH Lưu Kho", NAMEOF('_SALES MEASURES'[Storage Insurance Cost]), 1),
+				    ("Phí Thông Quan", NAMEOF('_SALES MEASURES'[Custom Clearance Cost]), 2),
+				    ("Phí Vận Chuyển", NAMEOF('_SALES MEASURES'[Total Transport Cost Estimate]), 3),
+				    ("Phí BH Vận Chuyển", NAMEOF('_SALES MEASURES'[Transport Insurance Cost]), 4)
+				}
+
+	annotation PBI_Id = 81a34bdd22654f8e9853c2421f97ae13
+

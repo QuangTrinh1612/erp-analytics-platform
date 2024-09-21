@@ -1,0 +1,132 @@
+table 'DIM - PRODUCT'
+	lineageTag: 0ce7f07f-02fc-4b9e-8cc0-5f76a839a7f5
+
+	column PRODUCT_CODE_LV1
+		dataType: string
+		lineageTag: e5d485f1-1b11-4b01-9af1-3b5113331a6c
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE_LV1
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_NAME_LV1
+		dataType: string
+		lineageTag: 182c5eaa-77d6-4423-8258-988bd7f9d720
+		summarizeBy: none
+		sourceColumn: PRODUCT_NAME_LV1
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE_LV2
+		dataType: string
+		lineageTag: 6d84093e-241e-4051-bcee-91c35bdd1ac8
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE_LV2
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_NAME_LV2
+		dataType: string
+		lineageTag: b9fd59a7-2e62-448b-ac10-ab3815719fd3
+		summarizeBy: none
+		sourceColumn: PRODUCT_NAME_LV2
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE_LV3
+		dataType: string
+		lineageTag: bfd0e352-14f6-4ea5-9d83-63623553bef5
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE_LV3
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_NAME_LV3
+		dataType: string
+		lineageTag: 42c19445-348f-42a7-9fe7-3e5c46df42a3
+		summarizeBy: none
+		sourceColumn: PRODUCT_NAME_LV3
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE_LV4
+		dataType: string
+		lineageTag: ce49c4ca-5a30-4e77-a498-516ba90d1024
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE_LV4
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_NAME_LV4
+		dataType: string
+		lineageTag: ba7fcb9e-ca50-4066-9c55-d460a70cda71
+		summarizeBy: none
+		sourceColumn: PRODUCT_NAME_LV4
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE
+		dataType: string
+		lineageTag: 016a3365-a07a-4f67-9a4c-10f8e691c4b4
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_NAME
+		dataType: string
+		lineageTag: f3f26ca7-6770-47f1-9d87-9aab6e4c1e5a
+		summarizeBy: none
+		sourceColumn: PRODUCT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_TYPE
+		dataType: string
+		lineageTag: cc633820-ce18-4944-92cd-44b8d0588854
+		summarizeBy: none
+		sourceColumn: PRODUCT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_TYPE_NAME
+		dataType: string
+		lineageTag: d6aa9dc2-83ae-439f-9a71-bcc94b8765e1
+		summarizeBy: none
+		sourceColumn: PRODUCT_TYPE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_MEMO
+		dataType: string
+		lineageTag: 5f38ec27-f2e7-422d-88f3-7e6b64ed0a73
+		summarizeBy: none
+		sourceColumn: PRODUCT_MEMO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_GROUP_LOGISTIC =
+			SWITCH(TRUE(),
+			'DIM - PRODUCT'[PRODUCT_CODE_LV3] IN  {"111111","111211"} && CONTAINSSTRING('DIM - PRODUCT'[PRODUCT_NAME], "hàng xá")
+			, "Phân Ure Hàng xá"
+			,'DIM - PRODUCT'[PRODUCT_CODE_LV1] = "11"&&(CONTAINSSTRING('DIM - PRODUCT'[PRODUCT_NAME], "N46")||CONTAINSSTRING('DIM - PRODUCT'[PRODUCT_NAME], "Bio")), "SPM"
+			, 'DIM - PRODUCT'[PRODUCT_NAME_LV3])
+		dataType: string
+		lineageTag: 6ab27ff1-f152-44b5-8f57-e83ddc6b6e7d
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PRODUCT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PRODUCT = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_PRODUCT"]}[Data]
+				in
+				    gld_VW_DIM_PRODUCT
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,62 @@
+table 'PARAMETER - INVENTORY MEASURES'
+	lineageTag: b28785a2-e44b-4ce7-97e7-e3f94876eda6
+
+	column Parameter
+		dataType: string
+		lineageTag: 40b6681a-c25f-4e96-a888-aa85e9c12a03
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		dataType: string
+		isHidden
+		lineageTag: c233dad5-31a4-43d4-acaf-556c0b229c92
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ad8dc28b-95cc-4e5a-a3cd-bb8241169234
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parameter = calculated
+		mode: import
+		source =
+				{
+				    ("OPENING AMT (V PRICE)", NAMEOF([OPENING AMT (V PRICE)]), 0),
+				    ("RECEIPT AMT (V PRICE)", NAMEOF([RECEIPT AMT (V PRICE)]), 1),
+				    ("ISSUE AMT (V PRICE)", NAMEOF([ISSUE AMT (V PRICE)]), 2),
+				    ("CLOSING AMT (V PRICE)", NAMEOF([CLOSING AMT (V PRICE)]), 3),
+				    ("Closing Amt Allocated (by month)", NAMEOF([Closing Amt Allocated (by month)]), 4),
+				    ("Issue Amt Allocated (by month)", NAMEOF([Issue Amt Allocated (by month)]), 5),
+				    ("Receipt Amt Allocated (by month)", NAMEOF([Receipt Amt Allocated (by month)]), 6),
+				    ("CLOSING QTY (SLOC)", NAMEOF([CLOSING QTY (SLOC)]), 7),
+				    ("ISSUE QTY (SLOC)", NAMEOF([ISSUE QTY (SLOC)]), 8),
+				    ("RECEIPT QTY (SLOC)", NAMEOF([RECEIPT QTY (SLOC)]), 9)
+				}
+
+	annotation PBI_Id = c1ee451181134017b863841a0eb04ab3
+

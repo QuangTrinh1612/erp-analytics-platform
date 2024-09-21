@@ -1,0 +1,39 @@
+table 'DIM - PURCHASE DOCUMENT TYPE'
+	lineageTag: 591d64a7-9f2a-4e5f-8303-ebcd3ed1854c
+
+	column DOC_TYPE
+		dataType: string
+		lineageTag: d24bdd47-1aa2-40f2-b121-ae3b833770d3
+		summarizeBy: none
+		sourceColumn: DOC_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_CAT
+		dataType: string
+		lineageTag: 68ae4e72-9c6f-401d-8dc6-6f7fb0ff9699
+		summarizeBy: none
+		sourceColumn: DOC_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_DES
+		dataType: string
+		lineageTag: 1c8e5ddc-7239-4a4f-a038-d26b653f6ea5
+		summarizeBy: none
+		sourceColumn: DOC_DES
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PURCHASE DOCUMENT TYPE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PURCHASE_DOCUMENT_TYPE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_PURCHASE_DOCUMENT_TYPE"]}[Data]
+				in
+				    gld_VW_DIM_PURCHASE_DOCUMENT_TYPE
+
+	annotation PBI_ResultType = Table
+

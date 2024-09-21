@@ -1,0 +1,59 @@
+table 'Parameter: balance sheet'
+	lineageTag: f454992e-79e7-4f9c-b77e-63d5ed6a53b5
+
+	column 'Parameter: balance sheet'
+		dataType: string
+		lineageTag: 36f101f0-ae92-4bd6-a1e3-17401551ff89
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter: balance sheet Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter: balance sheet Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: balance sheet Fields'
+		dataType: string
+		isHidden
+		lineageTag: 61c0450b-46bb-4d4c-a65c-584a44d13fbe
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter: balance sheet Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: balance sheet Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 88d0978c-490c-4217-bc3c-848cd4ac48aa
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter: balance sheet' = calculated
+		mode: import
+		source =
+				{
+				    ("ROA - Tỷ suất lợi nhuận trên tổng tài sản", NAMEOF('_FI - Metrics'[ROA - Tỷ suất lợi nhuận trên tổng tài sản]), 0),
+				    ("ROE - Tỷ suất lợi nhuận trên vốn chủ sở hữu", NAMEOF('_FI - Metrics'[ROE - Tỷ suất lợi nhuận trên vốn chủ sở hữu]), 1),
+				    ("Tỷ số vốn chủ sở hữu", NAMEOF('_FI - Metrics'[Tỷ số vốn chủ sở hữu]), 2),
+				    ("Tỷ số tài sản ngắn hạn", NAMEOF('_FI - Metrics'[Tỷ số tài sản ngắn hạn]), 3),
+				    ("Tỷ số tài sản dài hạn", NAMEOF('_FI - Metrics'[Tỷ số tài sản dài hạn]), 4),
+				    ("Tỷ số nợ", NAMEOF('_FI - Metrics'[Tỷ số nợ]), 5),
+				    ("Tỷ số thanh toán nhanh", NAMEOF('_FI - Metrics'[Tỷ số thanh toán nhanh]), 6)
+				}
+
+	annotation PBI_Id = b9de1299e3af4e038f653072f4be27fa
+

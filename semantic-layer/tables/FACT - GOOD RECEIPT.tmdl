@@ -1,0 +1,216 @@
+table 'FACT - GOOD RECEIPT'
+	lineageTag: 821ad9c5-a466-4771-9ad3-97523ac7d86e
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 320b7695-9207-4785-bef0-964e7800d60f
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DOC_DATE
+		dataType: string
+		lineageTag: e03aee25-edff-44e2-b444-d713d86168a6
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_ORDER
+		dataType: string
+		lineageTag: da894119-c2a3-43e0-b13d-b5bb2b43c6c6
+		summarizeBy: none
+		sourceColumn: PURCHASE_ORDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_ITEM
+		dataType: string
+		lineageTag: 35786991-8b01-4161-9d81-a8e3f6fc20ba
+		summarizeBy: none
+		sourceColumn: PURCHASE_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PO_DOC_DATE
+		dataType: string
+		lineageTag: 6a417d56-ad0a-4ee9-9553-1b706235c023
+		summarizeBy: none
+		sourceColumn: PO_DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 152e0fd1-57eb-47f9-bfb8-c1962d7c86c1
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		lineageTag: 81130f1e-fa6e-4f61-b833-755c22cd83d9
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: e31fa891-00af-4b67-a2ea-ff661b23d968
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_CODE
+		dataType: string
+		lineageTag: 63841433-496e-4673-865b-6af3e0381e41
+		summarizeBy: none
+		sourceColumn: VENDOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: 5c42e5c3-bf3f-4841-8636-754b5011e179
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 31990373-e270-4411-9698-497d07181302
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_KEY
+		dataType: string
+		lineageTag: 0702e81a-51e4-4995-947d-32ec384f3be5
+		summarizeBy: none
+		sourceColumn: CURRENCY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOM
+		dataType: string
+		lineageTag: 8481feae-32e7-4af0-ad74-e0aa3cf925fd
+		summarizeBy: none
+		sourceColumn: UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_BY
+		dataType: string
+		lineageTag: 9155085d-4291-4be2-b9a4-f4b7d3b27493
+		summarizeBy: none
+		sourceColumn: CREATED_BY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_GROUP
+		dataType: string
+		lineageTag: 9341e86b-59bf-4a6b-aa50-5ae0b2f2981e
+		summarizeBy: none
+		sourceColumn: PURCHASE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column NET_PRICE
+		dataType: double
+		lineageTag: 580124b7-f9b2-47d4-b2d9-4a9e65b8f3f4
+		summarizeBy: sum
+		sourceColumn: NET_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GI_ACTUAL_QUANTITY
+		dataType: double
+		lineageTag: de1e0743-f583-4f11-b2da-87e545e8b04e
+		summarizeBy: sum
+		sourceColumn: GI_ACTUAL_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DOC_AMOUNT
+		dataType: double
+		lineageTag: d07ef93d-3cd4-4299-b54e-b5162aa35fee
+		summarizeBy: sum
+		sourceColumn: DOC_AMOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PO_QUANTITY
+		dataType: double
+		lineageTag: c6003eb1-4ca5-42a8-8a81-327344458e78
+		summarizeBy: sum
+		sourceColumn: PO_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LOC_AMOUNT
+		dataType: double
+		lineageTag: c0f286e7-d934-4a43-90d6-0a878cf4e6ad
+		summarizeBy: sum
+		sourceColumn: LOC_AMOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GR_NET_PRICE = DIVIDE('FACT - GOOD RECEIPT'[LOC_AMOUNT],'FACT - GOOD RECEIPT'[GI_ACTUAL_QUANTITY])
+		dataType: double
+		lineageTag: 07eaed15-ddfc-4c8b-8e07-81477d5b5476
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_PLANT_KEY = 'FACT - GOOD RECEIPT'[MATERIAL_CODE]&"-"&'FACT - GOOD RECEIPT'[PLANT_CODE]
+		dataType: string
+		lineageTag: dd0d6765-a373-46fd-b009-7229741a5692
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSTING_YEAR = YEAR('FACT - GOOD RECEIPT'[POSTING_DATE])
+		dataType: int64
+		formatString: 0
+		lineageTag: dc7dbcc8-a2f3-4d91-b35e-b48df172d9bf
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - GOOD RECEIPT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PURCH_ORG = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_PURCHASE_GOOD_RECEIPT"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_DIM_PURCH_ORG,{{"POSTING_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

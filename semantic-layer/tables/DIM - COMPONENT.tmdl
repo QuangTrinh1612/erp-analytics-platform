@@ -1,0 +1,365 @@
+table 'DIM - COMPONENT'
+	lineageTag: 4f08e141-75a1-4be8-84e2-386f2e781759
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 92c5da58-0dcd-4852-bc07-54770638edcd
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_SHORT_DESCRIPTION
+		dataType: string
+		lineageTag: bec6b921-c866-43a7-9ce6-9b886b89dc8b
+		summarizeBy: none
+		sourceColumn: MATERIAL_SHORT_DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_LONG_DESCRIPTION
+		dataType: string
+		lineageTag: 9290df20-458d-4c40-a9d2-ada144d7e3d0
+		summarizeBy: none
+		sourceColumn: MATERIAL_LONG_DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: cc6ddf8f-c67d-4609-86bc-f90bd5916a4c
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_ON
+		dataType: string
+		lineageTag: 22d22776-d2a6-4abc-b7f4-c9449b04cb02
+		summarizeBy: none
+		sourceColumn: CREATED_ON
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_BY
+		dataType: string
+		lineageTag: 45e42379-e52f-4aba-8d4e-614bf12b4dfb
+		summarizeBy: none
+		sourceColumn: CREATED_BY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGED_ON
+		dataType: string
+		lineageTag: 66cd9613-c620-4ead-8afb-a37003cb1ff4
+		summarizeBy: none
+		sourceColumn: CHANGED_ON
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGED_BY
+		dataType: string
+		lineageTag: a3e6fa32-b19b-479b-b5fd-4cc3b812bab8
+		summarizeBy: none
+		sourceColumn: CHANGED_BY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATL_TYPE
+		dataType: string
+		lineageTag: c238cd5d-c6b7-4be9-bacc-231b43ca3a2e
+		summarizeBy: none
+		sourceColumn: MATL_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATl_TYPE_DES
+		dataType: string
+		lineageTag: dec1f11a-7be8-4c76-8366-ff960d019dcf
+		summarizeBy: none
+		sourceColumn: MATl_TYPE_DES
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATL_GROUP
+		dataType: string
+		lineageTag: e82e7d61-45fc-4b6b-a911-241f4bbde852
+		summarizeBy: none
+		sourceColumn: MATL_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column BRAVO_CODE
+		dataType: string
+		lineageTag: 64506049-fde1-4f80-b168-13a51fedbd64
+		summarizeBy: none
+		sourceColumn: BRAVO_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EANUPC
+		dataType: string
+		lineageTag: 75cc3237-478a-45c0-9a0e-f0f44ca646e7
+		summarizeBy: none
+		sourceColumn: EANUPC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANUFACTOR
+		dataType: string
+		lineageTag: d882373d-a3f5-4fff-86b6-c90f596dac97
+		summarizeBy: none
+		sourceColumn: MANUFACTOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANU_MATNR
+		dataType: string
+		lineageTag: 8ffd2e10-579d-42e2-9c2b-b78eb3f16841
+		summarizeBy: none
+		sourceColumn: MANU_MATNR
+
+		annotation SummarizationSetBy = Automatic
+
+	column NET_CONT
+		dataType: double
+		lineageTag: 311cb66c-ca40-4f0b-8101-2142a0ad0ca8
+		summarizeBy: sum
+		sourceColumn: NET_CONT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_WEIGHT
+		dataType: double
+		lineageTag: 3b77f6a1-1b33-4404-92ca-b07c8b2347d1
+		summarizeBy: sum
+		sourceColumn: NET_WEIGHT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SIZE_DIM
+		dataType: string
+		lineageTag: 464a37c7-719e-4cc6-8008-cd00ea5bb834
+		summarizeBy: none
+		sourceColumn: SIZE_DIM
+
+		annotation SummarizationSetBy = Automatic
+
+	column LENGTH
+		dataType: double
+		lineageTag: 879c425b-b688-4a9d-97e9-2beca8d92664
+		summarizeBy: sum
+		sourceColumn: LENGTH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WIDTH
+		dataType: double
+		lineageTag: 220e6b79-7788-4a0e-9a8b-cf59c8f6154d
+		summarizeBy: sum
+		sourceColumn: WIDTH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HEIGHT
+		dataType: double
+		lineageTag: 72c38b32-9bc1-43c8-85f3-0d0c195d0156
+		summarizeBy: sum
+		sourceColumn: HEIGHT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UNIT_DIM
+		dataType: string
+		lineageTag: 6442b8de-c2fd-4004-9802-c997ac980140
+		summarizeBy: none
+		sourceColumn: UNIT_DIM
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT_OF_WT
+		dataType: string
+		lineageTag: 73889a4c-9330-46d2-bd74-4622736294f1
+		summarizeBy: none
+		sourceColumn: UNIT_OF_WT
+
+		annotation SummarizationSetBy = Automatic
+
+	column VOLUME
+		dataType: double
+		lineageTag: 8984dc23-cccc-4267-ba52-c5861487b452
+		summarizeBy: sum
+		sourceColumn: VOLUME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VOLUMEUNIT
+		dataType: string
+		lineageTag: 206389d0-1bb8-449b-83c4-3213ca18f56b
+		summarizeBy: none
+		sourceColumn: VOLUMEUNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIVISION
+		dataType: string
+		lineageTag: d98238fd-a5c8-410b-b9b3-1b6ecfb9e0b0
+		summarizeBy: none
+		sourceColumn: DIVISION
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXTMATLGRP
+		dataType: string
+		lineageTag: 7b429667-64a8-482f-913e-f6c15a1ecb87
+		summarizeBy: none
+		sourceColumn: EXTMATLGRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column IND_SECTOR
+		dataType: string
+		lineageTag: 90226b98-e03b-4609-a35f-c3ca76679a43
+		summarizeBy: none
+		sourceColumn: IND_SECTOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATL_CAT
+		dataType: string
+		lineageTag: 44d77bae-7b75-41a7-91c5-601810f1fa6b
+		summarizeBy: none
+		sourceColumn: MATL_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROD_HIER
+		dataType: string
+		lineageTag: a7ce15ea-f3e3-43ad-8898-15a3acb4cbff
+		summarizeBy: none
+		sourceColumn: PROD_HIER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROD_NOTE
+		dataType: string
+		lineageTag: 03b64b52-9ea6-4a62-a253-92e2201cceb0
+		summarizeBy: none
+		sourceColumn: PROD_NOTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNCCLAS
+		dataType: string
+		lineageTag: e2edfa01-4538-46e9-8327-71b797eab2dc
+		summarizeBy: none
+		sourceColumn: FUNCCLAS
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_GROUP
+		dataType: string
+		lineageTag: f1229dad-586a-48dc-84f9-5479eea8692b
+		summarizeBy: none
+		sourceColumn: PRODUCT_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROD_MEMO
+		dataType: string
+		lineageTag: 3432e952-f0b9-4169-8687-073f75a601e2
+		summarizeBy: none
+		sourceColumn: PROD_MEMO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER
+		dataType: string
+		lineageTag: 40593815-cd9f-413f-ad8b-613dbcd59d6b
+		summarizeBy: none
+		sourceColumn: PLANNER
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUIPMENT
+		dataType: string
+		lineageTag: c515d1c5-a509-4e83-bc3c-9378b68518a2
+		summarizeBy: none
+		sourceColumn: EQUIPMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPPLY_TYPE
+		dataType: string
+		lineageTag: 831bd516-3bac-4bdf-812d-4696d28f5ba8
+		summarizeBy: none
+		sourceColumn: SUPPLY_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUIP_TYPE
+		dataType: string
+		lineageTag: 09cd6eef-24a5-4096-8f8c-0599103d212f
+		summarizeBy: none
+		sourceColumn: EQUIP_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIALIZE
+		dataType: string
+		lineageTag: d37cc2df-5bc5-4f87-b384-af2890e064d4
+		summarizeBy: none
+		sourceColumn: SPECIALIZE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_LOCKED
+		dataType: string
+		lineageTag: 6df30424-afd1-4aac-a978-c2d4c9bcc0b9
+		summarizeBy: none
+		sourceColumn: MATERIAL_LOCKED
+
+		annotation SummarizationSetBy = Automatic
+
+	column BAO_CONVERT
+		dataType: double
+		lineageTag: 344cb023-81b8-48ae-a998-6bcb477f3c80
+		summarizeBy: sum
+		sourceColumn: BAO_CONVERT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PLANNER_TEXT
+		dataType: string
+		lineageTag: 8bbfde96-4b13-4706-9a90-f293eb0c2d81
+		summarizeBy: none
+		sourceColumn: PLANNER_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - COMPONENT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_MATERIAL = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_MATERIAL"]}[Data]
+				in
+				    gld_VW_DIM_MATERIAL
+
+	annotation PBI_ResultType = Table
+

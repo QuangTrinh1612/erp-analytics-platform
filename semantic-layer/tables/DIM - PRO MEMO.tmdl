@@ -1,0 +1,84 @@
+table 'DIM - PRO MEMO'
+	lineageTag: 7526979a-0145-4bdc-8953-d3a6774f3ce2
+
+	column PROD_MEMO
+		dataType: string
+		lineageTag: a5468222-6b8e-4352-94a4-dee9695c30f3
+		summarizeBy: none
+		sourceColumn: PROD_MEMO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROD_MEMO_DES
+		dataType: string
+		lineageTag: a8329b13-c115-400d-8f22-dd03261e034a
+		summarizeBy: none
+		sourceColumn: PROD_MEMO_DES
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROD_MEMO_LV1
+		dataType: string
+		lineageTag: 91f169eb-9c6f-4f4f-8a3a-8534e0981dbf
+		summarizeBy: none
+		sourceColumn: PROD_MEMO_LV1
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROD_MEMO_LV2
+		dataType: string
+		lineageTag: aa381098-11ea-4aad-8e36-9b479f4aa286
+		summarizeBy: none
+		sourceColumn: PROD_MEMO_LV2
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROD_MEMO_LV3
+		dataType: string
+		lineageTag: 899731c8-404e-4293-a9d5-d3923c3f32c5
+		summarizeBy: none
+		sourceColumn: PROD_MEMO_LV3
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4d0e6804-77d3-44cd-b95e-d2b1cd8b131c
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: dfc66766-8276-41f8-b089-50bcc8a93c87
+		summarizeBy: count
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nhóm Ure' = ```
+			SWITCH(TRUE(),
+			IF(CONTAINSSTRING('DIM - PRO MEMO'[PROD_MEMO_DES] , "N46"),TRUE()), "Ure N46",
+			IF(CONTAINSSTRING('DIM - PRO MEMO'[PROD_MEMO_DES] , "Bio"),TRUE()), "Ure Bio", 
+			'DIM - PRO MEMO'[PROD_MEMO_LV1])
+			```
+		dataType: string
+		lineageTag: e37a793c-42cc-4f47-8f47-81f72be08d7d
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PRO MEMO' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_PRO_MEMO = pvcfcprodsqlpool{[Schema="sil",Item="DIM_PRO_MEMO"]}[Data]
+				in
+				    sil_DIM_PRO_MEMO
+

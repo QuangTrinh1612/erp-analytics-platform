@@ -1,0 +1,17 @@
+table 'PARAMETER - QUANTITY VERSION'
+	lineageTag: 9642d2d4-e7d9-496d-8781-8709fb5e2b34
+
+	column VERSION
+		dataType: string
+		lineageTag: f96260e6-f514-4ac9-aedb-d24fd856c09c
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - MANUF PLAN[VERSION]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source = DISTINCT('FACT - MANUF PLAN'[VERSION])
+

@@ -1,0 +1,19 @@
+table 'LIST - NOTIFICATION NUMBER'
+	lineageTag: 7b779cbb-f715-4d34-a0d7-ed518f3cee85
+
+	column NOTIF_NUM
+		dataType: string
+		lineageTag: f0257a7b-693a-498e-a035-fa24f4f081d0
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - NOTIFICATION[NOTIF_NUM]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LIST - NOTIFICATION NUMBER' = calculated
+		mode: import
+		source = FILTER(DISTINCT('FACT - NOTIFICATION'[NOTIF_NUM]), ISBLANK('FACT - NOTIFICATION'[NOTIF_NUM]) = FALSE())
+
+	annotation PBI_Id = 040fff92c28a430290e078afa3d75da2
+

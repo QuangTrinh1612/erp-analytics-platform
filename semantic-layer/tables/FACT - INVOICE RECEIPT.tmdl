@@ -1,0 +1,312 @@
+table 'FACT - INVOICE RECEIPT'
+	lineageTag: 390d54cd-6a98-4546-979e-f68702c3e0d5
+
+	column GL_ACCOUNT_NO
+		dataType: string
+		lineageTag: ceacd08b-2230-43f6-9351-9eb788e0f086
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		lineageTag: 436874c7-41ec-43a4-af8a-15e260a62b38
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_DATE
+		dataType: string
+		lineageTag: 44b6963f-15c0-4131-bbad-94f9bc136114
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_NUM
+		dataType: string
+		lineageTag: b32fa7fd-4a5c-43d4-8cd7-21cddda283db
+		summarizeBy: none
+		sourceColumn: DOC_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVOICE_ITEM
+		dataType: string
+		lineageTag: 1b162a46-5462-4aa3-ae41-c720d99d0738
+		summarizeBy: none
+		sourceColumn: INVOICE_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_ORDER
+		dataType: string
+		lineageTag: 850e4ef8-5301-450d-bb47-b355a083afd3
+		summarizeBy: none
+		sourceColumn: PURCHASE_ORDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_ITEM
+		dataType: string
+		lineageTag: 5ba9779e-cecf-4450-9ea7-f9ae3e5315ee
+		summarizeBy: none
+		sourceColumn: PURCHASE_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PO_DOC_DATE
+		dataType: string
+		lineageTag: 96ea8e00-5ed4-4055-aad3-b31846650938
+		summarizeBy: none
+		sourceColumn: PO_DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: aab98bd0-6d60-429d-b736-e36d9137fafb
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 70a585b8-b93e-427e-a485-2adeb15466c0
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_HEADER_TXT
+		dataType: string
+		lineageTag: 51382c21-30bd-4f6f-bef9-67f43da45a12
+		summarizeBy: none
+		sourceColumn: DOC_HEADER_TXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_TXT
+		dataType: string
+		lineageTag: 4fb15d77-0ede-43cc-b22a-872b97330cb4
+		summarizeBy: none
+		sourceColumn: ITEM_TXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: dddaee88-002b-484f-984d-b6f7a5013c23
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: a6c6518b-6dad-4122-b590-833bd40c2da9
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY
+		dataType: string
+		lineageTag: 3da63dc5-50ce-49b2-9917-e98d4a999ee4
+		summarizeBy: none
+		sourceColumn: CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUANTITY
+		dataType: double
+		lineageTag: 46986ee8-8cd4-49a2-9bbf-126865518f6e
+		summarizeBy: sum
+		sourceColumn: QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QUANTITY_PO
+		dataType: double
+		lineageTag: 6dcc8f9e-5555-44a6-a49f-c39957ed5ebf
+		summarizeBy: sum
+		sourceColumn: QUANTITY_PO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EXCHANGE_RATE
+		dataType: double
+		lineageTag: 166b8293-2c26-4694-80a2-ac598d50f4fc
+		summarizeBy: sum
+		sourceColumn: EXCHANGE_RATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TAX_RATE
+		dataType: double
+		lineageTag: e3e73216-36e3-4af0-98da-e425f7a38e23
+		summarizeBy: sum
+		sourceColumn: TAX_RATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_AMOUNT
+		dataType: double
+		lineageTag: e71fd537-f993-4044-8c9e-1f0f0a53f572
+		summarizeBy: sum
+		sourceColumn: NET_AMOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GROSS_AMOUNT
+		dataType: double
+		lineageTag: 12d0593b-ecb1-4ee5-95cb-acbf36834f0a
+		summarizeBy: sum
+		sourceColumn: GROSS_AMOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_AMOUNT_VND
+		dataType: double
+		lineageTag: 6e558e9b-7874-496b-83bf-b64c6e4d4ff7
+		summarizeBy: sum
+		sourceColumn: NET_AMOUNT_VND
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GROSS_AMOUNT_VND
+		dataType: double
+		lineageTag: 43f63f8c-d90d-49cd-af06-d5394f1ee8d6
+		summarizeBy: sum
+		sourceColumn: GROSS_AMOUNT_VND
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TAX_CODE
+		dataType: string
+		lineageTag: 21091c03-99d5-4872-92a0-2722e5a26f7e
+		summarizeBy: none
+		sourceColumn: TAX_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANSACTION_TYPE
+		dataType: string
+		lineageTag: 5b05c6f2-fd3e-46d8-a1e8-63a87c52be07
+		summarizeBy: none
+		sourceColumn: TRANSACTION_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVOICE_CATEGORY
+		dataType: string
+		lineageTag: 0bdacd41-2203-46e3-b847-7015ce1b5573
+		summarizeBy: none
+		sourceColumn: INVOICE_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVOICE_PARTY
+		dataType: string
+		lineageTag: acdb5ef3-688a-4795-843a-216dd5e4bbc5
+		summarizeBy: none
+		sourceColumn: INVOICE_PARTY
+
+		annotation SummarizationSetBy = Automatic
+
+	column REVERSE_DOC_NUM
+		dataType: string
+		lineageTag: 0d127322-c28c-4354-a7a4-0abad87d45e2
+		summarizeBy: none
+		sourceColumn: REVERSE_DOC_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_TYPE
+		dataType: string
+		lineageTag: d8ca8e50-6de0-4e1d-8622-5404dc23dc05
+		summarizeBy: none
+		sourceColumn: DOC_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANSACTION_DATE
+		dataType: string
+		lineageTag: c24c10bb-2826-416c-81b5-561b50a1d178
+		summarizeBy: none
+		sourceColumn: TRANSACTION_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSTING_DATE
+		dataType: string
+		lineageTag: 49814658-fe24-4ab0-a0c7-b9510f4ba820
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REF_DOC
+		dataType: string
+		lineageTag: 051fb83f-0ecd-4aa2-b4ae-b090a4486466
+		summarizeBy: none
+		sourceColumn: REF_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPDATE_DELIVERY_COST
+		dataType: string
+		lineageTag: 59740e78-3058-4487-8e3c-012546714c55
+		summarizeBy: none
+		sourceColumn: UPDATE_DELIVERY_COST
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPDATE_PO_HISTORY
+		dataType: string
+		lineageTag: b4131326-8eee-4a8d-8318-168aed4d4e6b
+		summarizeBy: none
+		sourceColumn: UPDATE_PO_HISTORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_PLANT_KEY = [MATERIAL_CODE]&"-"&[PLANT_CODE]
+		dataType: string
+		lineageTag: ccd1ecfd-8ca2-42e7-807c-88149e821e85
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - INVOICE RECEIPT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PURCH_ORG = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_PURCHASE_INVOICE_RECEIPT"]}[Data]
+				in
+				    gld_VW_DIM_PURCH_ORG
+
+	annotation PBI_ResultType = Table
+

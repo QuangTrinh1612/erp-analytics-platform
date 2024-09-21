@@ -1,0 +1,23 @@
+table 'DIM - BATCH NO'
+	lineageTag: 8baad522-010f-4df7-a63f-7dce96197c57
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: 2151f026-283b-46e8-b1aa-83bd234d7a6a
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim Batch No' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_VW_DIM_BATCH_NO = pvcfcprodsqlpool{[Schema="sil",Item="VW_DIM_BATCH_NO"]}[Data]
+				in
+				    sil_VW_DIM_BATCH_NO
+
+	annotation PBI_ResultType = Table
+

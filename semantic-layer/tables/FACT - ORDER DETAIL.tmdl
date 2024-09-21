@@ -1,0 +1,173 @@
+table 'FACT - ORDER DETAIL'
+	lineageTag: 7e0953ef-0f3e-40b8-8781-2ccc61c88b4d
+
+	column FISCAL_DATE
+		dataType: string
+		lineageTag: bf547979-c996-4147-8fd8-c78a6b6c4f7c
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mã kỹ thuật'
+		dataType: string
+		lineageTag: 3fc00490-5726-4ceb-9d61-45bfe5b57a78
+		summarizeBy: none
+		sourceColumn: Mã kỹ thuật
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Số ĐH'
+		dataType: string
+		lineageTag: 8661b68b-b785-4f2e-afe6-a8fa412d3e5d
+		summarizeBy: none
+		sourceColumn: Số ĐH
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tên đơn hàng'
+		dataType: string
+		lineageTag: 44bb9170-2f72-4d77-a264-53b61c34654e
+		summarizeBy: none
+		sourceColumn: Tên đơn hàng
+
+		annotation SummarizationSetBy = Automatic
+
+	column BDTT
+		dataType: string
+		lineageTag: 62ff6c14-e1ca-43e6-b273-10c3866bdbd0
+		summarizeBy: none
+		sourceColumn: BDTT
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Đơn vị yêu cầu'
+		dataType: string
+		lineageTag: 5dfb3570-3d99-461b-9f4a-40a6f0b3a0ac
+		summarizeBy: none
+		sourceColumn: Đơn vị yêu cầu
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nhân sự phụ trách'
+		dataType: string
+		lineageTag: 3c813819-699e-4a20-86f5-e2a78622d5a9
+		summarizeBy: none
+		sourceColumn: Nhân sự phụ trách
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Số PR'
+		dataType: string
+		lineageTag: 2d9795b9-7872-46b5-b952-cbafcf63bde3
+		summarizeBy: none
+		sourceColumn: Số PR
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Chủng loại đơn hàng'
+		dataType: string
+		lineageTag: e280b63b-55a5-4eb0-9568-541fb08d060c
+		summarizeBy: none
+		sourceColumn: Chủng loại đơn hàng
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: cf3448a9-5f8e-44e8-9319-aec4b2c6d319
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column PR_VALUE
+		dataType: double
+		lineageTag: 23511452-aa5e-4ac5-acaa-dfe8e59a51d4
+		summarizeBy: sum
+		sourceColumn: PR_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PR_QUANTITY
+		dataType: double
+		lineageTag: 2be26909-4af3-44d6-9906-801cfd047d9b
+		summarizeBy: sum
+		sourceColumn: PR_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PO_DOC
+		dataType: string
+		lineageTag: b786f800-62a7-44b8-9072-5ee330bb7432
+		summarizeBy: none
+		sourceColumn: PO_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PO_QUANTITY
+		dataType: double
+		lineageTag: 1ee8288f-f365-4076-8be1-0a718c4a92a1
+		summarizeBy: sum
+		sourceColumn: PO_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PO_VALUE
+		dataType: double
+		lineageTag: 9d5d0df7-6337-469a-8ee9-d1e0efc0960f
+		summarizeBy: sum
+		sourceColumn: PO_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GR_QUANTITY
+		dataType: double
+		lineageTag: fc889c67-ca14-4ce8-8a88-cb6c912dffaf
+		summarizeBy: sum
+		sourceColumn: GR_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GR_VALUE
+		dataType: double
+		lineageTag: aa74fdbb-07a1-4356-8937-d11eea3dbf7a
+		summarizeBy: sum
+		sourceColumn: GR_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Open GR (Chi tiết đơn hàng)' = IF('FACT - ORDER DETAIL'[GR_QUANTITY] = 'FACT - ORDER DETAIL'[PO_QUANTITY],0, [PO Value (Chi tiết đơn hàng)] - [GR Value (Chi tiết đơn hàng)])
+		dataType: double
+		lineageTag: 8c038b16-ec7f-42fb-866d-f50621e754a8
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - ORDER DETAIL' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_PO_STATUS = pvcfcprodsqlpool{[Schema="gld",Item="VW_PROCUREMENT_CHI_TIET_PR"]}[Data]
+				in
+				    gld_VW_FACT_PO_STATUS
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,31 @@
+table 'DIM - COST TYPE'
+	lineageTag: f4a487e3-376b-4226-bbdf-11aeb8c627bc
+
+	column TYPE_OF_COST
+		dataType: string
+		lineageTag: 2f8fd8fe-3222-48ea-adec-ab5b70e359f4
+		summarizeBy: none
+		sourceColumn: TYPE_OF_COST
+
+		annotation SummarizationSetBy = Automatic
+
+	column TYPE_OF_COST_SUMMARY
+		dataType: string
+		lineageTag: b9c96a83-d5b1-4d84-a2c4-0f0de6587f2f
+		summarizeBy: none
+		sourceColumn: TYPE_OF_COST_SUMMARY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - COST TYPE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_COST_TYPE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_COST_TYPE"]}[Data]
+				in
+				    gld_VW_DIM_COST_TYPE
+
+	annotation PBI_ResultType = Exception
+

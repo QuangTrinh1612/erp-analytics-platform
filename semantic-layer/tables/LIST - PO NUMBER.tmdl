@@ -1,0 +1,19 @@
+table 'LIST - PO NUMBER'
+	lineageTag: 67b4c0d2-f151-49c9-a1b9-4d5731915143
+
+	column PURCHASE_ORDER
+		dataType: string
+		lineageTag: e41c06e8-d5b7-4eb9-a42e-85956fa579e4
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - PURCHASE ORDER[PURCHASE_ORDER]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LIST - PO NUMBER' = calculated
+		mode: import
+		source = VALUES('FACT - PURCHASE ORDER'[PURCHASE_ORDER])
+
+	annotation PBI_Id = b534825e65b744eba9eb221b35168465
+

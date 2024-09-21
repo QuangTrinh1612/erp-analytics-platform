@@ -1,0 +1,29 @@
+table 'DIM - CUSTOMER GROUP'
+	lineageTag: dee07310-674c-4f7f-8c8d-87ce78285a41
+
+	column CUSTOMER_GROUP
+		dataType: string
+		lineageTag: bff099f5-ab9b-4f2c-b39f-b15a78028ba0
+		summarizeBy: none
+		sourceColumn: CUSTOMER_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_GROUP_NAME
+		dataType: string
+		lineageTag: c0c59dd7-5ea9-48bb-b03a-445cf528ed60
+		summarizeBy: none
+		sourceColumn: CUSTOMER_GROUP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - CUSTOMER GROUP' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_CUSTOMER_GROUP = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_CUSTOMER_GROUP"]}[Data]
+				in
+				    gld_VW_DIM_CUSTOMER_GROUP
+

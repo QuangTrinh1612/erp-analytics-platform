@@ -1,0 +1,158 @@
+table 'FACT - WO CONFIRMATION'
+	lineageTag: bd65925a-8e9f-47c9-a547-45668a6eca31
+
+	column OPERATION_QUANTITY
+		dataType: double
+		lineageTag: 307aa242-a2e5-4a9d-8e47-4950d512733b
+		summarizeBy: sum
+		sourceColumn: OPERATION_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CONF_NUM
+		dataType: string
+		lineageTag: bdbda374-2ade-4097-afce-5559d46af541
+		summarizeBy: none
+		sourceColumn: CONF_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONF_COUNTER
+		dataType: string
+		lineageTag: 411a2d3d-a7fe-41c3-8c24-6eae31de3acb
+		summarizeBy: none
+		sourceColumn: CONF_COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 6fe5f116-a859-47f9-8e4d-3c66ac85461c
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PERSONNEL_NUMBER
+		dataType: string
+		lineageTag: 0d0d9925-ff79-417e-aa9c-d7686d0c8a73
+		summarizeBy: none
+		sourceColumn: PERSONNEL_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_UNIT
+		dataType: string
+		lineageTag: f90daefc-40e8-4eac-b30b-76ecb9b14fbc
+		summarizeBy: none
+		sourceColumn: WORK_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONF_ACT_TYPE
+		dataType: string
+		lineageTag: d5c54676-fa62-4cf4-882a-ee7f5fc4f609
+		summarizeBy: none
+		sourceColumn: CONF_ACT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROCESS_PERCENT
+		dataType: string
+		lineageTag: a7fb9d37-ddc6-48b5-9e16-ee2a426ebdbc
+		summarizeBy: none
+		sourceColumn: PROCESS_PERCENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXE_STAT_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: dac3b4d5-c604-425d-b27a-ba03192bb776
+		summarizeBy: none
+		sourceColumn: EXE_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column REASON
+		dataType: string
+		lineageTag: 7efd3237-a5d7-43aa-8366-563b2c99ee1a
+		summarizeBy: none
+		sourceColumn: REASON
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONF_TYPE_IND
+		dataType: string
+		lineageTag: efba6979-3c64-4926-9291-7a009af136da
+		summarizeBy: none
+		sourceColumn: CONF_TYPE_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 1d3c1b54-f42f-4b72-bb9c-74b6e063642d
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXE_FINISH_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 759d0e44-972c-4c2a-97ce-1be1e6ae00d6
+		summarizeBy: none
+		sourceColumn: EXE_FINISH_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column CANCEL_CONF_COUNTER
+		dataType: string
+		lineageTag: 675927c7-32cb-4071-9e37-902411c3a4c2
+		summarizeBy: none
+		sourceColumn: CANCEL_CONF_COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACTUAL_WORK
+		dataType: double
+		lineageTag: 25066a49-06aa-4508-9cca-4b591a60f49b
+		summarizeBy: sum
+		sourceColumn: ACTUAL_WORK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - WO CONFIRMATION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_WO_CONFIRMATION = pvcfcprodsqlpool{[Schema="gld",Item="FACT_WO_CONFIRMATION"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_WO_CONFIRMATION,{"W_INSERT_DT"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"POSTING_DATE", type date}, {"EXE_STAT_DATE", type date}, {"EXE_FINISH_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

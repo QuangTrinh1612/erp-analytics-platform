@@ -1,0 +1,31 @@
+table 'DIM - PURCHASE GROUP'
+	lineageTag: ab666ef4-c4f7-45fb-bee2-920be5637926
+
+	column PURCHASE_GROUP
+		dataType: string
+		lineageTag: 1c888e0f-a7a4-4833-a823-1fba3b1a7968
+		summarizeBy: none
+		sourceColumn: PURCHASE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_GROUP_NAME
+		dataType: string
+		lineageTag: 048ffc10-4eb0-4be5-940d-ddd95000547a
+		summarizeBy: none
+		sourceColumn: PURCHASE_GROUP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PURCHASE GROUP' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PURCHASE_GROUP = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_PURCHASE_GROUP"]}[Data]
+				in
+				    gld_VW_DIM_PURCHASE_GROUP
+
+	annotation PBI_ResultType = Table
+

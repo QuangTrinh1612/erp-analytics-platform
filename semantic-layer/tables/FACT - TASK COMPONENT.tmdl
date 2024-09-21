@@ -1,0 +1,261 @@
+table 'FACT - TASK COMPONENT'
+	lineageTag: db71c5e4-dc92-4dfe-ba6e-07c0bd8d93e2
+
+	column MAINT_ITEM
+		dataType: string
+		lineageTag: 0353bfdf-792e-4c00-ae23-6d729df6633a
+		summarizeBy: none
+		sourceColumn: MAINT_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: f24a1dd9-9a74-4059-8233-0edc8890ee5e
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: 5b6949e0-ac02-4998-b8de-eebfa0dd1a16
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRP_COUNTER
+		dataType: string
+		lineageTag: 8d28b0f9-72b1-4a4e-89c0-a8aaca2814a6
+		summarizeBy: none
+		sourceColumn: GRP_COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROUP_KEY
+		dataType: string
+		lineageTag: dc9d65da-9db2-40df-b729-3621c23151ce
+		summarizeBy: none
+		sourceColumn: GROUP_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column TASK_LIST_TYPE
+		dataType: string
+		lineageTag: 482960cc-0630-4eee-af51-633c983c8b79
+		summarizeBy: none
+		sourceColumn: TASK_LIST_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTER
+		dataType: string
+		lineageTag: 125798a3-d205-4ace-be10-bca4d1971f01
+		summarizeBy: none
+		sourceColumn: COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER
+		dataType: string
+		lineageTag: 1f9701fd-6d8d-4ca5-9082-c5f999c7c98f
+		summarizeBy: none
+		sourceColumn: WORK_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_FROM
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: f271f437-a5b8-4c17-b816-4006e900c2f1
+		summarizeBy: none
+		sourceColumn: VALID_FROM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column RES_PURC_REQ
+		dataType: string
+		lineageTag: 822390a4-e0c7-47eb-89f0-24202e8ecb75
+		summarizeBy: none
+		sourceColumn: RES_PURC_REQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: d165dba0-0e99-42cc-8a31-6bfb7400e249
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLOC_RES
+		dataType: string
+		lineageTag: 9d0b94e1-ef80-4939-bc19-1a3bac7b9022
+		summarizeBy: none
+		sourceColumn: SLOC_RES
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_BOM_CAT
+		dataType: string
+		lineageTag: 3cee118b-34dc-4b2d-b2ec-cff97f255174
+		summarizeBy: none
+		sourceColumn: MAINT_BOM_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_BOM
+		dataType: string
+		lineageTag: 5101b809-2cef-4885-94be-3c1bfebfd07c
+		summarizeBy: none
+		sourceColumn: MAINT_BOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPO_QUANTITY
+		dataType: double
+		lineageTag: afa15a26-a6c0-4aec-b6be-81dc8c24df40
+		summarizeBy: sum
+		sourceColumn: COMPO_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPO_UOM
+		dataType: string
+		lineageTag: 4f02a828-21b8-40d6-8aec-f11205976937
+		summarizeBy: none
+		sourceColumn: COMPO_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column NODE_NUMBER
+		dataType: string
+		lineageTag: ecd32289-1e5c-42c3-bab6-6820408e5f62
+		summarizeBy: none
+		sourceColumn: NODE_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_CAT
+		dataType: string
+		lineageTag: dab16ad1-4b49-4952-8934-6e259a93110c
+		summarizeBy: none
+		sourceColumn: ITEM_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: ba723830-ed2b-46bc-ada9-c81ae910e918
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 695744bd-515c-4ada-8afe-1940d7f54d97
+		summarizeBy: none
+		sourceColumn: CREATED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column CHANGE_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: cc1cee87-3c40-4a91-9075-cba0483ff221
+		summarizeBy: none
+		sourceColumn: CHANGE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column REQ_DESC
+		dataType: string
+		lineageTag: af6143b9-4418-4424-9e67-9c16d31e965e
+		summarizeBy: none
+		sourceColumn: REQ_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SYST_COND
+		dataType: string
+		lineageTag: 4c7477f0-2ad2-4d17-9b77-4ec99d2f6965
+		summarizeBy: none
+		sourceColumn: SYST_COND
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIM_TASK_LIST_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c345480-a0f2-4c1b-8910-081930bdc42e
+		summarizeBy: none
+		sourceColumn: DIM_TASK_LIST_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELETE_INDICATOR_2
+		dataType: string
+		lineageTag: 1fc7f98b-e112-49a6-8692-d951d518edc8
+		summarizeBy: none
+		sourceColumn: DELETE_INDICATOR_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELETE_INDICATOR_1
+		dataType: string
+		lineageTag: 85a65072-68ed-4c15-a8a7-5d8fa8a51bb7
+		summarizeBy: none
+		sourceColumn: DELETE_INDICATOR_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELETE_INDICATOR
+		dataType: string
+		lineageTag: 77bb33c9-df05-414d-b7eb-ec7816ec73c8
+		summarizeBy: none
+		sourceColumn: DELETE_INDICATOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_CODE
+		dataType: string
+		lineageTag: 79e93cbc-1080-4d18-9530-29fb65b7df22
+		summarizeBy: none
+		sourceColumn: SUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - TASK COMPONENT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_TASK_COMPONENT = pvcfcprodsqlpool{[Schema="gld",Item="FACT_TASK_COMPONENT"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_TASK_COMPONENT,{"W_INSERT_DT"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"CREATED_DATE", type date}, {"CHANGE_DATE", type date}, {"VALID_FROM", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,34 @@
+table 'DIM - STATUS ZBDDK'
+	lineageTag: eb1d33fe-1108-4046-9098-28f2eb95ad31
+
+	column STATUS_ZBDDK
+		dataType: string
+		lineageTag: 6a8016d2-a829-44e9-9797-2c956a8cfe3f
+		summarizeBy: none
+		sourceColumn: STATUS_ZBDDK
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_ZBDDK_DESC
+		dataType: string
+		lineageTag: c301e966-74a2-49f6-a892-3992643fe1b8
+		summarizeBy: none
+		sourceColumn: STATUS_ZBDDK_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - STATUS ZBDDK' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_STATUS_ZBDDK = pvcfcprodsqlpool{[Schema="sil",Item="DIM_STATUS_ZBDDK"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_STATUS_ZBDDK,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

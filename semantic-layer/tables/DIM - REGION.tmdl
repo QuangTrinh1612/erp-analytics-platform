@@ -1,0 +1,55 @@
+table 'DIM - REGION'
+	lineageTag: de98ba38-ee75-4035-9431-688e7bdeeed1
+
+	column SALE_OFF_CODE
+		dataType: string
+		lineageTag: 7e244224-04c5-4d5c-ac57-24668e207d52
+		summarizeBy: none
+		sourceColumn: SALE_OFF_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_OFF_NAME
+		dataType: string
+		lineageTag: 78b47148-1738-4d21-a9c1-e7045ce25dcd
+		summarizeBy: none
+		sourceColumn: SALE_OFF_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_OFF_NAME_2
+		dataType: string
+		lineageTag: 16ba6d0d-1e9c-4473-98bb-a57f9165cdcf
+		summarizeBy: none
+		sourceColumn: SALE_OFF_NAME_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_GRP_CODE
+		dataType: string
+		lineageTag: 3723a219-15c6-47a6-8739-417d82dd0186
+		summarizeBy: none
+		sourceColumn: SALE_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_GRP_NAME
+		dataType: string
+		lineageTag: 69bb47cc-d4b7-4791-b513-1ef37844742b
+		summarizeBy: none
+		sourceColumn: SALE_GRP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - REGION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_REGION = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_REGION"]}[Data]
+				in
+				    gld_VW_DIM_REGION
+
+	annotation PBI_ResultType = Table
+

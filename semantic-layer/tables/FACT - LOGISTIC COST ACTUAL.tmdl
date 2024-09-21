@@ -1,0 +1,234 @@
+table 'FACT - LOGISTIC COST ACTUAL'
+	lineageTag: f778e5ce-5da7-401d-815e-592c348ef9c9
+
+	column DOC_DATE
+		dataType: string
+		isHidden
+		lineageTag: 6a62ce2c-6807-47c0-9a7d-fc1a911d133b
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_CODE
+		dataType: string
+		isHidden
+		lineageTag: 3943e93c-c9b5-4e5f-9d28-f12e335b7f0e
+		summarizeBy: none
+		sourceColumn: VENDOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 4dd6189c-b0df-4de0-b273-0b7290c308f3
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_NUMBER
+		dataType: string
+		isHidden
+		lineageTag: 0ea29c38-dad4-49b3-82bf-2d5efb02dc65
+		summarizeBy: none
+		sourceColumn: ACCOUNT_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column D/C
+		dataType: string
+		lineageTag: d754a47f-5932-4ebc-85a7-e796483ac97f
+		summarizeBy: none
+		sourceColumn: D/C
+
+		annotation SummarizationSetBy = Automatic
+
+	column CP_BH
+		dataType: double
+		isHidden
+		lineageTag: a2434460-c5e8-41d8-9851-8b72b9ffee0a
+		summarizeBy: sum
+		sourceColumn: CP_BH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_VC
+		dataType: double
+		isHidden
+		lineageTag: 8a581fd3-c6fc-4ac1-a438-a33884434d31
+		summarizeBy: sum
+		sourceColumn: CP_VC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_LK
+		dataType: double
+		isHidden
+		lineageTag: f18cabc1-c1f4-40c2-ab0d-282776f2d2cb
+		summarizeBy: sum
+		sourceColumn: CP_LK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_KHAC
+		dataType: double
+		isHidden
+		lineageTag: 0325f7cd-4440-409f-ac8a-6f573ef6b5d8
+		summarizeBy: sum
+		sourceColumn: CP_KHAC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column POSTING_DATE
+		dataType: string
+		isHidden
+		lineageTag: f4aa6a31-0469-4edf-a801-0e470ef26332
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REF_DOC_NO
+		dataType: string
+		lineageTag: 2b9bf654-f1d7-480d-8ad1-a5e49dce10df
+		summarizeBy: none
+		sourceColumn: REF_DOC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column REF_ITEM_NO
+		dataType: string
+		lineageTag: 0c824d54-3702-4f08-b819-1f1f5842ee37
+		summarizeBy: none
+		sourceColumn: REF_ITEM_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column REVERSAL
+		dataType: string
+		isHidden
+		lineageTag: 5877a5ca-ff8b-45ef-b3f3-7072420937a7
+		summarizeBy: none
+		sourceColumn: REVERSAL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PO_NUMBER
+		dataType: string
+		lineageTag: 9ea5c6d0-854f-4c5b-beb7-fe1d49cf7e44
+		summarizeBy: none
+		sourceColumn: PO_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_CENTER
+		dataType: string
+		lineageTag: e7ad7314-7e21-4a4b-b980-630e3511f161
+		summarizeBy: none
+		sourceColumn: PROFIT_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONTROLLING_AREA
+		dataType: string
+		lineageTag: 08241160-47d6-4b51-9852-fef4a064852b
+		summarizeBy: none
+		sourceColumn: CONTROLLING_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		lineageTag: e9da464d-65cd-43ab-a2cc-527a1608f366
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_SEGMENT
+		dataType: string
+		lineageTag: ec058318-c4ab-4b29-b81d-41d2368eba27
+		summarizeBy: none
+		sourceColumn: PROFIT_SEGMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ENTRY_DATE
+		dataType: string
+		lineageTag: cc18ba9f-040c-42c3-8fcf-905c5b37e15f
+		summarizeBy: none
+		sourceColumn: ENTRY_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALUE_DATE
+		dataType: string
+		lineageTag: 30e8f807-82d4-4aba-af06-e0dbfb67e545
+		summarizeBy: none
+		sourceColumn: VALUE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOCUMENT_TYPE
+		dataType: string
+		lineageTag: 589c6c8a-8756-4b9a-be8b-f3379b2b1b08
+		summarizeBy: none
+		sourceColumn: DOCUMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column HEADER_TEXT
+		dataType: string
+		lineageTag: 9a198b92-1695-4fbe-8db8-1711ee19d2fc
+		summarizeBy: none
+		sourceColumn: HEADER_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_TEXT
+		dataType: string
+		lineageTag: 979c8dcc-13fa-49eb-80b8-73e17f38c4b4
+		summarizeBy: none
+		sourceColumn: ITEM_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_SHORT_DESC
+		dataType: string
+		lineageTag: 6a3b01a7-c639-4b27-a4b0-c90616568607
+		summarizeBy: none
+		sourceColumn: ACCOUNT_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_LONG_DESC
+		dataType: string
+		lineageTag: d27f7f77-16db-46d4-8aae-3930d617bc87
+		summarizeBy: none
+		sourceColumn: ACCOUNT_LONG_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - LOGISTIC COST ACTUAL' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_LOGISTIC_COST_ACTUAL = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_LOGISTIC_COST_ACTUAL"]}[Data]
+				in
+				    gld_VW_FACT_LOGISTIC_COST_ACTUAL
+

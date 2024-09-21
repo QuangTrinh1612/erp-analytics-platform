@@ -1,0 +1,106 @@
+table 'FACT - QUALITY STANDARD'
+	lineageTag: c98d1d2a-cba3-4b23-a49a-24503ad39116
+
+	column FISCAL_DATE
+		dataType: string
+		lineageTag: a7d2458f-f7ae-4c7a-b5fb-1f2f35f93d00
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: e9f0b446-877d-41dd-a5ab-a026f4268972
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROUP_NAME
+		dataType: string
+		lineageTag: 518a139a-1006-4bea-9b56-098198108ea3
+		summarizeBy: none
+		sourceColumn: GROUP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column MST_INSPEC_CHAR
+		dataType: string
+		lineageTag: 5943c6ce-5176-4254-ab78-d8431112c15a
+		summarizeBy: none
+		sourceColumn: MST_INSPEC_CHAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 7a524750-6aaf-4ca5-b8e5-35563966c758
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column INSPEC_LOT_CODE
+		dataType: string
+		lineageTag: af4f6a21-590b-4120-b58d-5a382873eb40
+		summarizeBy: none
+		sourceColumn: INSPEC_LOT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUMBER
+		dataType: string
+		lineageTag: 16a8a64f-17c6-4834-a3dd-e78a8d1f241b
+		summarizeBy: none
+		sourceColumn: OBJECT_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column INSPEC_TYPE
+		dataType: string
+		lineageTag: 36830dcf-9524-4ea5-984a-e2e20643f1b3
+		summarizeBy: none
+		sourceColumn: INSPEC_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUALITY_REALITY
+		dataType: double
+		lineageTag: 5924632c-4801-4eb1-85e9-ab14b11991f6
+		summarizeBy: sum
+		sourceColumn: QUALITY_REALITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QUALITY_STANDARD
+		dataType: double
+		lineageTag: 787814cd-8f7b-4d97-8cd6-7481afc8a06e
+		summarizeBy: sum
+		sourceColumn: QUALITY_STANDARD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 854f9a40-593f-4e6a-8a20-0d18c69f059e
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - QUALITY STANDARD' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_QUALITY_STANDARD = pvcfcprodsqlpool{[Schema="gld",Item="FACT_QUALITY_STANDARD"]}[Data]
+				in
+				    gld_FACT_QUALITY_STANDARD
+

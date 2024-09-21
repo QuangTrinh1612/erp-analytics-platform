@@ -1,0 +1,240 @@
+table 'AGG - ALLOCATE SLOC AMT'
+	lineageTag: a892899b-9b47-4e90-919d-954a545f4509
+
+	measure 'Is Storage Cost' = CALCULATE(SELECTEDVALUE('DIM - STORAGE LOCATION'[STORAGE_LOCATION]), CROSSFILTER('DIM - STORAGE LOCATION'[STORAGE_LOCATION], 'FACT - LOGISTIC STORAGE COST'[STORAGE_LOC], Both))
+		displayFolder: Storage Cost
+		lineageTag: d7868f34-a0b9-4f30-9abb-6d03e9443549
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Parameter Sản Xuất'
+		lineageTag: fe097b1b-8ac9-4e54-a13b-8968b4e0c386
+
+	column FISCAL_YEAR
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: da32b479-b763-4a9a-be56-94e7b26a53d2
+		summarizeBy: sum
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 004234f9-602f-4670-9489-c5911f1a616d
+		summarizeBy: sum
+		sourceColumn: FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: b9853edd-4d98-4db1-b46a-cd320d438d96
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: 911d8390-559b-4e74-9d0f-9d5e50e287b3
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 82a56dc4-5104-4973-ba03-93c363c60ed2
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_NAME_LV2
+		dataType: string
+		lineageTag: 5e5b76c1-7d56-4516-8a5b-0919670a1115
+		summarizeBy: none
+		sourceColumn: PRODUCT_NAME_LV2
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLOSING_QTY
+		dataType: double
+		lineageTag: 5df7a2bf-d19d-47a4-9822-edc82257bc3f
+		summarizeBy: sum
+		sourceColumn: CLOSING_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLOSING_V_AMT
+		dataType: double
+		lineageTag: 1d156cba-820c-4303-a894-0e03bf69dca5
+		summarizeBy: sum
+		sourceColumn: CLOSING_V_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLOSING_V_AMT_ALLOCATED
+		dataType: double
+		lineageTag: fb451ac9-24b2-4e30-b3dd-3f0c4eb55c29
+		summarizeBy: sum
+		sourceColumn: CLOSING_V_AMT_ALLOCATED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLOSING_S_AMT_ALLOCATED
+		dataType: double
+		lineageTag: 46d77bd5-5726-4a86-b2d1-ad854bd3c052
+		summarizeBy: sum
+		sourceColumn: CLOSING_S_AMT_ALLOCATED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_QTY
+		dataType: double
+		lineageTag: e110fa31-552d-4532-979c-3681bf1f0831
+		summarizeBy: sum
+		sourceColumn: RECEIPT_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_V_AMT
+		dataType: double
+		lineageTag: ebb490e1-077f-41c3-b46a-185402665f50
+		summarizeBy: sum
+		sourceColumn: RECEIPT_V_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_V_AMT_ALLOCATED
+		dataType: double
+		lineageTag: 86f4f144-7a3d-40c8-bb43-1a9cae91d597
+		summarizeBy: sum
+		sourceColumn: RECEIPT_V_AMT_ALLOCATED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_S_AMT_ALLOCATED
+		dataType: double
+		lineageTag: d550edcc-e5e4-4899-8e9b-275a872e6dad
+		summarizeBy: sum
+		sourceColumn: RECEIPT_S_AMT_ALLOCATED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_QTY
+		dataType: double
+		formatString: 0.00
+		lineageTag: 0f48553b-7434-42ca-9170-f9f7c5528513
+		summarizeBy: sum
+		sourceColumn: ISSUE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISSUE_V_AMT
+		dataType: double
+		lineageTag: 6ccc30ac-9153-4018-a640-7b66781469fb
+		summarizeBy: sum
+		sourceColumn: ISSUE_V_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CONSUMPTION_V_AMT_ALLOCATED
+		dataType: double
+		lineageTag: 583cbf8d-5a0d-4156-a7a7-9ff29f5fa708
+		summarizeBy: sum
+		sourceColumn: CONSUMPTION_V_AMT_ALLOCATED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CONSUMPTION_S_AMT_ALLOCATED
+		dataType: double
+		lineageTag: 9fef49c4-de25-4478-b6d3-9d199cf0a53c
+		summarizeBy: sum
+		sourceColumn: CONSUMPTION_S_AMT_ALLOCATED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DATE = DATE('AGG - ALLOCATE SLOC AMT'[FISCAL_YEAR],'AGG - ALLOCATE SLOC AMT'[FISCAL_PERIOD],1)
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 8462bb0a-6943-4be6-958f-2eedb5d306b6
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column MATERIAL_PLANT_KEY = [MATERIAL_CODE] & "-" & [PLANT_CODE]
+		dataType: string
+		lineageTag: 53baeaea-392e-4fea-9d2f-6507dcb163a0
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nhóm Tồn Kho' = ```
+			SWITCH(TRUE(),
+			RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1431","1401","1003"} && RELATED('Dim - Material'[MATL_TYPE]) IN { "Z00","Z01","Z40", "Z50", "Z60", "Z61"} && not RELATED('Dim - Material Plant'[VALUATION_CLASS]) IN {"V81","V82","V83","V84","V85","V86","V87","V88","V89","V26","V27"}, "NLSX NPK", 
+			RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1003","1301","1302","1303","1304"} && RELATED('Dim - Material Plant'[VALUATION_CLASS]) IN { "V01","V02"}, "Hóa Chất - Xúc Tác",
+			RELATED('Dim - Plant'[PLANT_CODE]) IN {"1000","1100"} && RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1002","1401","1431","1298","1304"} && RELATED('Dim - Material'[MATL_TYPE]) = "Z26", "Bao Bì",
+			RELATED('Dim - Plant'[PLANT_CODE]) IN {"1000","1100"} && RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1002","1401","1431","1304"} && RELATED('Dim - Material'[MATL_TYPE]) = "Z22" && RELATED('Dim - Material Plant'[VALUATION_CLASS]) IN { "V81","V82","V83","V84","V85","V86","V87","V88","V89"}, "Vật Tư Đóng Bao",
+			RELATED('Dim - Plant'[PLANT_CODE]) IN {"1000"} && RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1001","1005","1901","1902","1903","1904","1905","1906","1907"} && RELATED('Dim - Material'[MATL_TYPE]) = "Z00" && RELATED('Dim - Material Plant'[VALUATION_CLASS]) IN { "V00","V05","V06"}, "Vật Tư BDSC" , 
+			RELATED('Dim - Storage Location'[STORAGE_LOCATION])IN { "1001","1308"} && RELATED('Dim - Material'[MATL_TYPE]) = "Z00" && RELATED('Dim - Material Plant'[VALUATION_CLASS]) = "V03", "Vật Tư An Toàn" ,
+			RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1202","1422","1298"} && RELATED('Dim - Material'[MATL_TYPE]) IN { "Z50","Z51","Z61"} , "Thành Phẩm",
+			RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1201","1421"} && RELATED('Dim - Material'[MATL_TYPE]) IN { "Z40","Z44"}, "BTP / SPDD",
+			IF( RELATED('Dim - Storage Location'[STORAGE_CATEGORY]) = "Kho Nhà Máy", VALUE(RELATED('Dim - Storage Location'[STORAGE_LOCATION])) < 1999 &&   VALUE(RELATED('Dim - Storage Location'[STORAGE_LOCATION])) > 1920), "Khách Hàng Gửi tại NM",
+			RELATED('Dim - Plant'[PLANT_CODE]) = "1000" && RELATED('Dim - Storage Location'[STORAGE_LOCATION]) = "1298", "Hàng Hóa tại Nhà Máy"
+			)
+			
+			```
+		dataType: string
+		lineageTag: 2812167f-e0f0-4e15-9c71-7a537474c4a7
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Agg Allocate SLOC Amt' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_AGG_ALLOCATE_SLOC_AMT = pvcfcprodsqlpool{[Schema="sil",Item="VW_AGG_ALLOCATE_SLOC_AMT"]}[Data]
+				in
+				    gld_VW_AGG_ALLOCATE_SLOC_AMT
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,190 @@
+table 'FACT - STORAGE BIN'
+	lineageTag: 3b4011ca-163b-4fb9-9f91-4e19a5c7cc91
+
+	measure 'Count Material Storage Bin' = DISTINCTCOUNT('FACT - STORAGE BIN'[MATERIAL_CODE])
+		formatString: 0.000
+		lineageTag: fc2c835c-6f60-457f-8181-8f3628056675
+
+		changedProperty = IsHidden
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 4230049f-9d4e-43e2-8911-da5a30ad2191
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: aa9ee296-6f50-47cd-a38d-58a5d7068468
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column WH_NUM
+		dataType: string
+		lineageTag: 340b4d75-69cf-4cd2-b461-d87b8d22a135
+		summarizeBy: none
+		sourceColumn: WH_NUM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: 32747a84-fdf3-451a-ac96-d04fa98856c3
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOCATION
+		dataType: string
+		isHidden
+		lineageTag: aa7f7957-0876-4851-98e4-1a5cad5be7c4
+		summarizeBy: none
+		sourceColumn: STORAGE_LOCATION
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STOCK_CAT
+		dataType: string
+		lineageTag: 01506a26-2f99-4eef-8eac-2d20e73a5900
+		summarizeBy: none
+		sourceColumn: STOCK_CAT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH
+		dataType: string
+		lineageTag: 4f866e52-2957-4ec3-879c-6a319e7a56b8
+		summarizeBy: none
+		sourceColumn: BATCH
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIAL_STOCK
+		dataType: string
+		lineageTag: 8953a725-89d3-4d36-b56d-d5b976a08bac
+		summarizeBy: none
+		sourceColumn: SPECIAL_STOCK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIAL_STOCK_NO
+		dataType: string
+		lineageTag: 762eca64-5fdc-45eb-9a38-83d758c90157
+		summarizeBy: none
+		sourceColumn: SPECIAL_STOCK_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_SHORT_DESCRIPTION
+		dataType: string
+		lineageTag: 169820cb-a4b2-40c0-857f-338eac3f5a7d
+		summarizeBy: none
+		sourceColumn: MATERIAL_SHORT_DESCRIPTION
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_TYPE
+		dataType: string
+		lineageTag: a2ef29f4-6ffc-45ca-8ecf-9441f48460f3
+		summarizeBy: none
+		sourceColumn: STORAGE_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_BIN
+		dataType: string
+		lineageTag: 5f4ab1e8-07ae-4c0a-aced-70f39191a05c
+		summarizeBy: none
+		sourceColumn: STORAGE_BIN
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AVAILABLE_STOCK
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: 62c7ad57-95a3-4a66-8f17-18ed8e4d1f11
+		summarizeBy: sum
+		sourceColumn: AVAILABLE_STOCK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column GR_DATE
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 7f2549f7-aef8-4237-945b-db38b4948f04
+		summarizeBy: none
+		sourceColumn: GR_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column GR_DOC_NO
+		dataType: string
+		lineageTag: e18a9198-26de-4c25-9c55-41b8ae5f04e1
+		summarizeBy: none
+		sourceColumn: GR_DOC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column GR_DOC_ITEM
+		dataType: string
+		lineageTag: 78a05680-d67d-4ab0-aed8-175cad6cbef4
+		summarizeBy: none
+		sourceColumn: GR_DOC_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Storage Bin' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_STORAGE_BIN = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_STORAGE_BIN"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_STORAGE_BIN,{{"GR_DATE", type date}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each true)
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,114 @@
+table 'DIM - PM INFORMATION'
+	lineageTag: 3d1b0e94-0b23-49ef-b2f9-49254f8063e5
+
+	column TEXT_ID
+		dataType: string
+		lineageTag: c06343c5-62c9-430c-9696-85c5409ea099
+		summarizeBy: none
+		sourceColumn: TEXT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ERROR_TEXT
+		dataType: string
+		lineageTag: 99223e4b-515c-433f-a098-85c714e19bc7
+		summarizeBy: none
+		sourceColumn: ERROR_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ABNORMAL_TEXT
+		dataType: string
+		lineageTag: 81e884cd-a7b5-4cea-ac14-eb438ce4cfe8
+		summarizeBy: none
+		sourceColumn: ABNORMAL_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEVICE_STATUS_TEXT
+		dataType: string
+		lineageTag: 5d793685-6736-4a3e-8eb4-571da7127189
+		summarizeBy: none
+		sourceColumn: DEVICE_STATUS_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column IMPROVE_TEXT
+		dataType: string
+		lineageTag: 2fcb82fd-ee60-4fb3-a07e-0a3a63693a81
+		summarizeBy: none
+		sourceColumn: IMPROVE_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column IMPLEMENT_TEXT
+		dataType: string
+		lineageTag: de10005d-23e4-4d7e-acc9-32f15d14e1c9
+		summarizeBy: none
+		sourceColumn: IMPLEMENT_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_TEXT
+		dataType: string
+		lineageTag: 996eab64-800c-4829-86fc-d6497b8d6899
+		summarizeBy: none
+		sourceColumn: CHANGE_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCEPT_DATE
+		dataType: string
+		lineageTag: 4aa02141-46ba-443f-b1cf-791d66a8a937
+		summarizeBy: none
+		sourceColumn: ACCEPT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column RESULT_TEXT
+		dataType: string
+		lineageTag: be1f1f60-1c67-448e-af4d-5f4d8b252317
+		summarizeBy: none
+		sourceColumn: RESULT_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUIPMENT_HANDOVER
+		dataType: string
+		lineageTag: 2019241f-8477-4a67-9627-19bc727195be
+		summarizeBy: none
+		sourceColumn: EQUIPMENT_HANDOVER
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE
+		dataType: string
+		lineageTag: 313a610e-8383-4875-91b5-aeb79bffcc82
+		summarizeBy: none
+		sourceColumn: NOTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXPECT_IMPLEMENT_TEXT
+		dataType: string
+		lineageTag: 1b26b30b-32d4-4e29-9e44-829e5070c63e
+		summarizeBy: none
+		sourceColumn: EXPECT_IMPLEMENT_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PM INFORMATION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_PM_INFORMATION = pvcfcprodsqlpool{[Schema="sil",Item="DIM_PM_INFORMATION"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_PM_INFORMATION,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

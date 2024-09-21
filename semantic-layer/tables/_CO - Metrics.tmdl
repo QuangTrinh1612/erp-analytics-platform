@@ -1,0 +1,3726 @@
+table '_CO - Metrics'
+	lineageTag: 6721a719-5b7a-4fb5-b82b-0f9ffa549227
+
+	measure 'Tổng giá thành - PVCFC' = [CO Loc Amt]
+		formatString: #,##0
+		lineageTag: 4c1b6fce-85eb-4f90-a4d2-d1cf7b89d922
+
+	measure 'Tổng giá thành - PPC' = ```
+			CALCULATE([CO Loc Amt], 
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			            'DIM - COST COMPONENT'[COST_COMPONENT_STRUCTURE] = "T2"
+			        ),
+			        FILTER (
+			            'FACT - CO SPLIT ITEM',
+			            'FACT - CO SPLIT ITEM'[COST_CATEGORY] = "Variable"
+			            -- && 'FACT - CO SPLIT ITEM'[LOCAL_AMT] > 0
+			        ))
+			```
+		formatString: #,##0
+		lineageTag: 2265aadf-606d-4353-aff5-3d6bbbeacef5
+
+	measure 'Sản lượng tiêu thụ' = [Consumption Qty (Plant)]
+		formatString: #,##0
+		lineageTag: ebad7fa1-7bca-40b0-acc7-6072db0f6838
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sản lượng SX (ZCO12A)' =
+			
+			/*
+			IF(
+			    MAX('FACT - CO SPLIT ITEM'[PROCESS_CAT]) = "BF",
+			    CALCULATE(
+			        SUMX(
+			            'FACT - CO SPLIT ITEM',
+			            [LOCAL_AMT]
+			        ),
+			        FILTER(
+			            'FACT - CO SPLIT ITEM',
+			            [COST_COMPONENT] = "QUANTITY"
+			        )
+			    )
+			)
+			*/
+			SUMX(
+			    SUMMARIZE(
+			        FILTER(
+			            'FACT - CO SPLIT ITEM',
+			            [COST_COMPONENT] = "QUANTITY"
+			        ),
+			        'DIM - MATERIAL'[MATERIAL_CODE],
+			        'FACT - CO SPLIT ITEM'[COST_COMPONENT_STRUCTURE],
+			        "_process_cat", MAX('FACT - CO SPLIT ITEM'[PROCESS_CAT]),
+			        "_amt", SUM('FACT - CO SPLIT ITEM'[LOCAL_AMT])
+			    ),
+			    IF([_process_cat] = "BF" || [COST_COMPONENT_STRUCTURE] = "T4", [_amt])
+			)
+		formatString: #,0.000
+		lineageTag: 76b01beb-66e1-4a5f-b0ff-7197c3b4f6ad
+
+	measure 'Sản lượng SX' =
+			
+			VAR _production_receipt_qty =
+			    SUMX(
+			        'FACT - INVENTORY BALANCE PLANT',
+			        [PRODUCTION_RECEIPT_QTY]
+			    )
+			VAR _receipt_qty =
+			    SUMX(
+			        'FACT - INVENTORY BALANCE PLANT',
+			        [RECEIPT_QTY]
+			    )
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        _production_receipt_qty <> 0, _production_receipt_qty,
+			        _receipt_qty <> 0, _receipt_qty,
+			        BLANK()
+			    )
+		formatString: #,0.000
+		lineageTag: 14da1235-9428-4bc2-b9c9-d787d63366db
+
+	measure 'Lợi nhuận' = /*CALCULATE([Số liệu P&L kỳ này], 'DIM - REPORTING LINE IS'[ITEM_NO] = "20")*/ [Doanh thu] - [Giá vốn]
+		formatString: #,##0
+		lineageTag: 687986d8-3d8b-41ee-b62c-3759c4bf7069
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Hệ số quy đổi (2000)' =
+			
+			DIVIDE(
+			    SUMX(
+			        'FACT - INVENTORY BALANCE PLANT',
+			        SWITCH(
+			            RELATED('DIM - MATERIAL'[MATERIAL_CODE]),
+			            "0026000000", 'FACT - INVENTORY BALANCE PLANT'[CONSUMPTION_QTY] * 100,
+			            "0026000001", 'FACT - INVENTORY BALANCE PLANT'[CONSUMPTION_QTY] * 200
+			        )
+			    ),
+			    CALCULATE(
+			        SUMX(
+			            'FACT - INVENTORY BALANCE PLANT',
+			            SWITCH(
+			                RELATED('DIM - MATERIAL'[MATERIAL_CODE]),
+			                "0026000000", 'FACT - INVENTORY BALANCE PLANT'[CONSUMPTION_QTY] * 100,
+			                "0026000001", 'FACT - INVENTORY BALANCE PLANT'[CONSUMPTION_QTY] * 200
+			            )
+			        ),
+			        ALL('DIM - MATERIAL')
+			    )
+			)
+		formatString: #,##0
+		lineageTag: 958bd21c-c101-4e9a-b4dd-ab7851cc6da8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá vốn' = CALCULATE([Số liệu P&L kỳ này], 'DIM - REPORTING LINE IS'[ITEM_NO]= "11", 'DIM - GL ACCOUNT'[GL_ACC_NO]<> "6322020590",USERELATIONSHIP('DIM - MATERIAL'[MATERIAL_CODE], 'FACT - INCOME STATEMENT'[MATERIAL_CODE]))
+		formatString: #,##0
+		lineageTag: 0d163073-8eca-472c-bdf5-6bb993dd9a82
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Giá thành toàn bộ' = [Giá thành sản xuất - PPC] + [Chi phí bán hàng / bao (2000)] + [Chi phí quản lý / bao (2000)]+ [Chi phí tài chính / bao (2000)]
+		formatString: #,##0
+		lineageTag: 592cf573-6c05-403e-a3dd-340dd4a07d4d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá thành sản xuất - PVCFC' =
+			
+			DIVIDE ( [Tổng giá thành - PVCFC], [Sản lượng SX (ZCO12A)], BLANK () )
+		formatString: #,0.000
+		lineageTag: f5592c62-e67b-4e8f-80b2-84c9ef006cb8
+
+	measure 'Giá thành sản xuất - PPC' = ```
+			
+			VAR GIA_TRI = CALCULATE([CO Loc Amt], 
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			            'DIM - COST COMPONENT'[COST_COMPONENT_STRUCTURE] = "T2"
+			        ),
+			        FILTER (
+			            'FACT - CO SPLIT ITEM',
+			            'FACT - CO SPLIT ITEM'[COST_CATEGORY] = "Variable"
+			             && 'FACT - CO SPLIT ITEM'[LOCAL_AMT] >0
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+			```
+		formatString: #,##0
+		lineageTag: d3b21f82-bea2-4b27-9da1-bc39bebf50ec
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu' = CALCULATE([Số liệu P&L kỳ này],  'DIM - REPORTING LINE IS'[ITEM_NO] = "01", USERELATIONSHIP('DIM - MATERIAL'[MATERIAL_CODE], 'FACT - INCOME STATEMENT'[MATERIAL_CODE]))
+		formatString: #,##0
+		lineageTag: d1521ae4-212e-4f27-bdbd-20f2767bcbe1
+
+	measure 'Chi phí tài chính / bao (2000)' =
+			
+			VAR _cpbh =
+			CALCULATE(
+			    SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			    FILTER(
+			        'FACT - INCOME STATEMENT',
+			        [IS_ITEM] IN {"23"}
+			    )
+			)
+			VAR _sl = [Sản lượng tiêu thụ]
+			RETURN
+			    DIVIDE(_cpbh * [Hệ số quy đổi (2000)], _sl)
+		formatString: #,##0
+		lineageTag: c9235275-6501-4937-bc88-c72f98506211
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí quản lý / bao (2000)' =
+			
+			VAR _cpbh =
+			CALCULATE(
+			    SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			    FILTER(
+			        'FACT - INCOME STATEMENT',
+			        [IS_ITEM] IN {"26"}
+			    )
+			)
+			VAR _sl = [Sản lượng tiêu thụ]
+			RETURN
+			    DIVIDE(_cpbh * [Hệ số quy đổi (2000)], _sl)
+		formatString: #,##0
+		lineageTag: cc3cf315-0db3-48c4-b8af-a53db7e71ab3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí bán hàng / bao (2000)' =
+			
+			VAR _cpbh =
+			CALCULATE(
+			    SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			    FILTER(
+			        'FACT - INCOME STATEMENT',
+			        [IS_ITEM] IN {"25"}
+			    )
+			)
+			VAR _sl = [Sản lượng tiêu thụ]
+			RETURN
+			    DIVIDE(_cpbh * [Hệ số quy đổi (2000)], _sl)
+		formatString: #,##0
+		lineageTag: 8fbc5de2-dd5d-464d-a334-d77aa2efe916
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TH Sản lượng tiêu thụ Ure (ZCO09)' = ```
+			CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = ""
+			    && 'FACT - COPA LINE ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA LINE ITEM'[CURRENCY_TYPE] = "B0"
+			    && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z500001"
+			    && 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> "0050499999"
+			)
+			        
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 6ad24eda-2953-4cc3-8fd8-fb874f16f2a8
+
+	measure 'TH Sản lượng tiêu thụ Amo (ZCO09)' = ```
+			CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = ""
+			    && 'FACT - COPA LINE ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA LINE ITEM'[CURRENCY_TYPE] = "B0"
+			    && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z400001"
+			)
+			        
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 9689e27f-a485-4791-8b34-dfef4c23c725
+
+	measure 'TH Sản lượng sản xuất Ure (ZCO09)' =
+			ABS(
+			    CALCULATE(
+			        SUM('FACT - CO LINE ITEM'[TOTAL_QUANTITY]),
+			        FILTER(
+			            'FACT - CO LINE ITEM',
+			            'FACT - CO LINE ITEM'[ORDER_NO] >= "000000002000"
+			            && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000002999"
+			            && 'FACT - CO LINE ITEM'[COST_ELEMENT] = "1541000000"
+			            && 'FACT - CO LINE ITEM'[MATERIAL_CODE] <> "0040499999"
+			        )
+			    )
+			)
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: a1ee01f0-1245-4f86-af75-d4fcb41977c2
+
+	measure 'TH Sản lượng sản xuất Amo (ZCO09)' = [TH Sản lượng Amo nhập kho sx (ZCO09)] - [TH Sản lượng Amo xuất sx Urê rời (ZCO09)]
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: da7dc913-65f9-4581-925a-0c433628a496
+
+	measure 'TH Sản lượng Amo xuất sx Urê rời (ZCO09)' =
+			ABS(
+			    CALCULATE(
+			        SUM('FACT - CO LINE ITEM'[TOTAL_QUANTITY]),
+			        FILTER(
+			            'FACT - CO LINE ITEM',
+			            'FACT - CO LINE ITEM'[ORDER_NO] >= "000000002000"
+			            && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000002999"
+			            && 'FACT - CO LINE ITEM'[COST_ELEMENT] = "6211010004"
+			        )
+			    )
+			)
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 3c6057d2-a109-4418-9851-3cacd33da70e
+
+	measure 'TH Sản lượng Amo nhập kho sx (ZCO09)' =
+			ABS(
+			    CALCULATE(
+			        SUM('FACT - CO LINE ITEM'[TOTAL_QUANTITY]),
+			        FILTER(
+			            'FACT - CO LINE ITEM',
+			            'FACT - CO LINE ITEM'[ORDER_NO] >= "000000001000"
+			            && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000001999"
+			            && 'FACT - CO LINE ITEM'[COST_ELEMENT] = "1541000000"
+			        )
+			    )
+			)
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: db2116a5-bdc3-4719-81c6-565448b6a1f1
+
+	measure 'TH Đơn giá -  Khí đầu vào' =
+			DIVIDE (
+			    CALCULATE (
+			        SUMX ( 'FACT - GL ACCOUNT BALANCE OFFSET', [CREDIT_AMT] + [DEBIT_AMT] ),
+			        FILTER (
+			            'FACT - GL ACCOUNT BALANCE OFFSET',
+			            NOT ( [OFFSET_GL_ACCT] IN { "", "1541000000" } )
+			                && [GL_ACCOUNT_NO] = "6211010001"
+			        )
+			    ),
+			    [TH Sản lượng sản xuất Ure quy đổi (ZCO07)]
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: e94dba8e-f67f-44db-81b1-9b599b7b9570
+
+	measure 'TH Đơn giá -  Hóa chất' =
+			DIVIDE (
+			    CALCULATE (
+			        SUMX ( 'FACT - GL ACCOUNT BALANCE OFFSET', [CREDIT_AMT] + [DEBIT_AMT] ),
+			        FILTER (
+			            'FACT - GL ACCOUNT BALANCE OFFSET',
+			            NOT ( [OFFSET_GL_ACCT] IN { "", "1541000000" } )
+			                && [GL_ACCOUNT_NO] = "6212010001"
+			        )
+			    ),
+			    [TH Sản lượng sản xuất Ure quy đổi (ZCO07)]
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 8e401d4c-9a0d-42e4-9f9a-9e277315f709
+
+	measure 'TH Đơn giá -  Điện nhận lưới' =
+			DIVIDE (
+			    CALCULATE (
+			        SUMX ( 'FACT - GL ACCOUNT BALANCE OFFSET', [CREDIT_AMT] + [DEBIT_AMT] ),
+			        FILTER (
+			            'FACT - GL ACCOUNT BALANCE OFFSET',
+			            NOT ( [OFFSET_GL_ACCT] IN { "", "1541000000" } )
+			                && [GL_ACCOUNT_NO] = "6211010002"
+			        )
+			    ),
+			    [TH Sản lượng sản xuất Ure quy đổi (ZCO07)]
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 43b577a0-8985-41ed-83cc-6943c8e4f398
+
+	measure 'TH Đơn giá -  Chi phí nước ngọt' =
+			DIVIDE (
+			    CALCULATE (
+			        SUMX ( 'FACT - GL ACCOUNT BALANCE OFFSET', [CREDIT_AMT] + [DEBIT_AMT] ),
+			        FILTER (
+			            'FACT - GL ACCOUNT BALANCE OFFSET',
+			            NOT ( [OFFSET_GL_ACCT] IN { "", "1541000000" } )
+			                && [GL_ACCOUNT_NO] = "6211010003"
+			        )
+			    ),
+			    [TH Sản lượng sản xuất Ure quy đổi (ZCO07)]
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 02dc6bc9-1982-4f5e-a1fe-111636f4ef64
+
+	measure 'TH Đơn giá -  Chi phí bao bì' =
+			DIVIDE(
+			CALCULATE(
+			    SUMX('FACT - GL ACCOUNT BALANCE OFFSET',[CREDIT_AMT]+[DEBIT_AMT]),
+			    FILTER('FACT - GL ACCOUNT BALANCE OFFSET',
+			                NOT([OFFSET_GL_ACCT] IN {"","1541000000"})
+			                && [GL_ACCOUNT_NO] IN {"6212000001", "6212000002", "6212000003", "6212000004", "6212010003"}
+			             )
+			          ) ,
+			[TH Sản lượng sản xuất Ure quy đổi (ZCO07)]
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 47ff067a-1a5a-4030-bcb9-08f978f9bb5e
+
+	measure 'TH Đơn giá -  Biến phí' = [TH Đơn giá -  Khí đầu vào] + [TH Đơn giá -  Điện nhận lưới] + [TH Đơn giá -  Chi phí nước ngọt] + [TH Đơn giá -  Hóa chất] + [TH Đơn giá -  Chi phí bao bì]
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: c629a592-2992-47cf-bb48-fb365f06eb0c
+
+	measure 'TH Doanh thu Ure (ZCO09)' = ```
+			CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_AMT]),
+			    'FACT - COPA LINE ITEM'[RECORD_TYPE] = "F"
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z500001"
+			)
+			        
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 6b273ae6-38ee-401f-97d0-8920d9487260
+
+	measure 'TH Doanh thu Amo (ZCO09)' =
+			CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_AMT]),
+			    'FACT - COPA LINE ITEM'[RECORD_TYPE] = "F"
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z400001"
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 7ef58711-11d9-4579-b00f-e31dc5001726
+
+	measure 'TH định phí xúc tác' =
+			CALCULATE(
+			    SUMX('FACT - GL ACCOUNT BALANCE OFFSET',[CREDIT_AMT]+[DEBIT_AMT]),
+			    FILTER('FACT - GL ACCOUNT BALANCE OFFSET',
+			                NOT([OFFSET_GL_ACCT] IN {"","1541000000"})
+			                && [GL_ACCOUNT_NO] = "6212010002"
+			             )
+			          )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 68f9647b-b749-4965-8c8b-4e39eee27162
+
+	measure 'TH định phí nhân công trực tiếp' =
+			CALCULATE(
+			    SUMX('FACT - GL ACCOUNT BALANCE OFFSET',[CREDIT_AMT]+[DEBIT_AMT]),
+			    FILTER('FACT - GL ACCOUNT BALANCE OFFSET',
+			                NOT([OFFSET_GL_ACCT] IN {"","1541000000"})
+			                && LEFT([GL_ACCOUNT_NO],3) = "622"
+			             )
+			          )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: cfa39898-dc44-459c-886e-af784d8fa2de
+
+	measure 'TH định phí chi phí tài chính' =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "635"
+			        && RIGHT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],6) <> "999999"
+			        --&& [COST_CENTRE] <> "1A10"
+			    )
+			    )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: f4e63c44-34bc-4d08-8652-9b4c571895ef
+
+	measure 'TH định phí chi phí sản xuất chung' =
+			CALCULATE(
+			    SUMX('FACT - GL ACCOUNT BALANCE OFFSET',[CREDIT_AMT]+[DEBIT_AMT]),
+			    FILTER('FACT - GL ACCOUNT BALANCE OFFSET',
+			                NOT([OFFSET_GL_ACCT] IN {"","1541000000"})
+			                && LEFT([GL_ACCOUNT_NO],3) = "627"
+			             )
+			          )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 5dd90a1d-804c-44c2-8d2d-438dcd895fce
+
+	measure 'TH định phí chi phí quản lý' =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "642"
+			        && RIGHT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],6) <> "999999"
+			       -- && [COST_CENTRE] <> "1A10"
+			    )
+			    )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: f0f8fdc7-a60f-49b1-ac2a-6eb342f0eb05
+
+	measure 'TH định phí chi phí bán hàng' =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "641"
+			        && RIGHT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],6) <> "999999"
+			        --&& [COST_CENTRE] <> "1A10"
+			    )
+			    )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: e079e1b5-7084-4b44-adc4-f5567f001ba8
+
+	measure 'TH Định phí' =
+			[TH định phí xúc tác]
+			    + [TH định phí nhân công trực tiếp]
+			    + [TH định phí chi phí sản xuất chung]
+			    + [TH định phí chi phí quản lý]
+			    + [TH định phí chi phí bán hàng]
+			    + [TH định phí chi phí tài chính]
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Thực hiện
+		lineageTag: 1d933747-8aa9-4a3d-bb6a-32aa0dc45130
+
+	measure 'KH Sản lượng tiêu thụ Ure (ZCO09)' =
+			CALCULATE(
+			    SUM('FACT - COPA PLAN ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA PLAN ITEM'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			    && 'FACT - COPA PLAN ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA LINE ITEM'[CURRENCY_TYPE] = "B0"
+			    && 'FACT - COPA PLAN ITEM'[MATERIAL_GROUP] = "Z500001"
+			    && 'FACT - COPA PLAN ITEM'[MATERIAL_CODE] <> "0050499999"
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: cc0736d1-f4c6-41f7-8ca4-ef310e74d6bd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'KH Sản lượng tiêu thụ Amo (ZCO09)' =
+			CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			    && 'FACT - COPA LINE ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA LINE ITEM'[CURRENCY_TYPE] = "B0"
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z400001"
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> "0050499999"
+			         )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: 5ecb9bd7-a9e8-4121-9476-c4489cb38c14
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'KH Sản lượng sản xuất Ure (ZCO09)' =
+			CALCULATE(
+			    SUM('FACT - MANUF PLAN'[QUANTITY]),
+			    FILTER(
+			        'FACT - MANUF PLAN',
+			        [VERSION] = SELECTEDVALUE('PARAMETER - QUANTITY VERSION'[VERSION])
+			    ),
+			    'DIM - MATERIAL'[MATL_GROUP] = "Z400002"
+			)
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: c0bd7215-66fa-41e2-b945-e8ed8b015e8d
+
+	measure 'KH Sản lượng sản xuất Amo (ZCO09)' = blank()
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: ea2a91f5-150c-4c32-8a83-9080222020e3
+
+	measure 'KH Đơn giá -  Khí đầu vào' =
+			DIVIDE(
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      'FACT - COST PLANNING'[COST_ELEMENT]= "6211010001"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      ),
+			[KH Sản lượng sản xuất Ure quy đổi (ZCO07)]
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: c1111bd0-fa72-4415-b9db-c735ad726938
+
+	measure 'KH Đơn giá -  Hóa chất' =
+			DIVIDE(
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      'FACT - COST PLANNING'[COST_ELEMENT]= "6212010001"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      ),
+			[KH Sản lượng sản xuất Ure quy đổi (ZCO07)]
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: 6bb50860-300e-431c-a232-cca89324aeee
+
+	measure 'KH Đơn giá -  Điện nhận lưới' =
+			DIVIDE(
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      'FACT - COST PLANNING'[COST_ELEMENT]= "6211010002"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      ),
+			[KH Sản lượng sản xuất Ure quy đổi (ZCO07)]
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: b9046b44-d1cb-4e96-addf-a75f073707e3
+
+	measure 'KH Đơn giá -  Chi phí nước ngọt' =
+			DIVIDE(
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      'FACT - COST PLANNING'[COST_ELEMENT]= "6211010003"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      ),
+			[KH Sản lượng sản xuất Ure quy đổi (ZCO07)]
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: 733d7bff-e5f9-4f86-bbd4-2cfaca02c3a7
+
+	measure 'KH Đơn giá -  Chi phí bao bì' =
+			DIVIDE(
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      'FACT - COST PLANNING'[COST_ELEMENT] IN {"6212000001", "6212000002", "6212000003", "6212000004", "6212010003"}
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      ),
+			[KH Sản lượng sản xuất Ure quy đổi (ZCO07)]
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: c2f95f9b-56bf-49b4-bdd1-5e44ed51237c
+
+	measure 'KH Đơn giá -  Biến phí' =
+			[KH Đơn giá -  Khí đầu vào]
+			+ [KH Đơn giá -  Điện nhận lưới]
+			+ [KH Đơn giá -  Chi phí nước ngọt]
+			+ [KH Đơn giá -  Hóa chất]
+			+ [KH Đơn giá -  Chi phí bao bì]
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: a4ec5b67-8d55-4a4f-8895-de2367e38342
+
+	measure 'KH Doanh thu Ure (ZCO09)' =
+			CALCULATE(
+			    SUM('FACT - COPA PLAN ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA PLAN ITEM'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			    && 'FACT - COPA PLAN ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA PLAN ITEM'[CURRENCY_TYPE] = "B0"
+			     && 'FACT - COPA PLAN ITEM'[MATERIAL_GROUP] = "Z500001"
+			         )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: 367dbd46-27d2-4e98-81dd-35bb8d5de74e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'KH Doanh thu Amo (ZCO09)' = ```
+			 CALCULATE(
+			    SUM('FACT - COPA PLAN ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA PLAN ITEM'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			    && 'FACT - COPA PLAN ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA LINE ITEM'[CURRENCY_TYPE] = "B0"
+			     && 'FACT - COPA PLAN ITEM'[MATERIAL_GROUP] = "Z400001"
+			         )
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: d4d89a16-0719-442a-96c9-6e555aa10208
+
+	measure 'KH định phí xúc tác' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      'FACT - COST PLANNING'[COST_ELEMENT] = "6212010002"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: 205b915a-9b6e-4719-980b-3bd696bc4ad6
+
+	measure 'KH định phí nhân công trực tiếp' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      left('FACT - COST PLANNING'[COST_ELEMENT],3) =   "622"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: 7a3399eb-11eb-4667-bde8-a82716c336dc
+
+	measure 'KH định phí chi phí tài chính' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      left('FACT - COST PLANNING'[COST_ELEMENT],3) =   "635"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: e982268d-a9f1-4811-b754-7ad4d0e86938
+
+	measure 'KH định phí chi phí sản xuất chung' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      left('FACT - COST PLANNING'[COST_ELEMENT],3) =   "627"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: 004b727e-4b78-420f-9949-b56a724f8496
+
+	measure 'KH định phí chi phí quản lý' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      left('FACT - COST PLANNING'[COST_ELEMENT],3) =   "642"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: d1d5c0fd-af9c-4f91-a09f-295ceddb2a65
+
+	measure 'KH định phí chi phí bán hàng' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      left('FACT - COST PLANNING'[COST_ELEMENT],3) =   "641"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			      --&&[COST_CENTER] >= "1000" && [COST_CENTER] <= "1ZZZ"
+			      )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: 9529fb96-bf05-4485-890f-a4b2eb1ac46a
+
+	measure 'KH Định phí' = ```
+			[KH định phí chi phí bán hàng]
+			+[KH định phí chi phí quản lý]
+			+[KH định phí chi phí sản xuất chung]
+			+[KH định phí nhân công trực tiếp]
+			+[KH định phí chi phí tài chính]
+			+[KH định phí xúc tác]
+			
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO09\Kế hoạch
+		lineageTag: 0ad62b5e-39f1-49d4-ae34-cde3ae6c2696
+
+	measure 'TH Tổng chi phí (ZCO07)' =
+			[TH Chi phí sản xuất (ZCO07)]
+			+ [TH Chi phí bán hàng (ZCO07)]
+			+ [TH Chi phí quản lý (ZCO07)]
+			+ [TH Chi phí tài chính (ZCO07)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: eccdc29f-6a72-4573-8e03-198558a381c7
+
+	measure 'TH Thu nhập khác' =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        -[DEBIT_AMT] - [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "711"
+			        && RIGHT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],6) <> "999999"
+			    )
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 52c73382-b011-47dc-8e5a-dd9d6210c91c
+
+	measure 'TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)' = [TH Sản lượng tiêu thụ Ure (ZCO07)] + [TH Sản lượng tiêu thụ Amo (ZCO07)] / 0.573
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 218dc789-28d4-46be-99a5-8fea86805039
+
+	measure 'TH Sản lượng tiêu thụ Ure (ZCO07)' = ```
+			CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = ""
+			    && 'FACT - COPA LINE ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA LINE ITEM'[CURRENCY_TYPE] = "B0"
+			    && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z500001"
+			    && 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> "0050499999"
+			)
+			        
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 3014a2e3-21fd-4cfe-8347-1564cfefa20a
+
+	measure 'TH Sản lượng tiêu thụ Amo (ZCO07)' = ```
+			CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = ""
+			    && 'FACT - COPA LINE ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA LINE ITEM'[CURRENCY_TYPE] = "B0"
+			    && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z400001"
+			)
+			        
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 14323bcb-2d79-4dab-8228-61e814bae83f
+
+	measure 'TH Sản lượng sản xuất Ure quy đổi (ZCO07)' = [TH Sản lượng sản xuất Ure (ZCO07)] + [TH Sản lượng sản xuất Amo (ZCO07)] / 0.573
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 93b8fa08-23d2-4c2b-b863-8435f5a2a778
+
+	measure 'TH Sản lượng sản xuất Ure (ZCO07)' =
+			ABS(
+			    CALCULATE(
+			        SUM('FACT - CO LINE ITEM'[TOTAL_QUANTITY]),
+			        FILTER(
+			            'FACT - CO LINE ITEM',
+			            'FACT - CO LINE ITEM'[ORDER_NO] >= "000000002000"
+			            && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000002999"
+			            && 'FACT - CO LINE ITEM'[COST_ELEMENT] = "1541000000"
+			            && 'FACT - CO LINE ITEM'[MATERIAL_CODE] <> "0040499999"
+			        )
+			    )
+			)
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: f622fc71-4bca-4582-a7bd-54be9089b5bc
+
+	measure 'TH Sản lượng sản xuất Amo (ZCO07)' = [TH Sản lượng Amo nhập kho sx (ZCO07)] - [TH Sản lượng Amo xuất sx Urê rời (ZCO07)]
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 34e91162-9a9b-4c2f-9ee2-fe4a78e66ee6
+
+	measure 'TH Sản lượng Amo xuất sx Urê rời (ZCO07)' =
+			ABS(
+			    CALCULATE(
+			        SUM('FACT - CO LINE ITEM'[TOTAL_QUANTITY]),
+			        FILTER(
+			            'FACT - CO LINE ITEM',
+			            'FACT - CO LINE ITEM'[ORDER_NO] >= "000000002000"
+			            && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000002999"
+			            && 'FACT - CO LINE ITEM'[COST_ELEMENT] = "6211010004"
+			        )
+			    )
+			)
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 67b85a94-718d-4c16-b87c-ba126dad75aa
+
+	measure 'TH Sản lượng Amo nhập kho sx (ZCO07)' =
+			ABS(
+			    CALCULATE(
+			        SUM('FACT - CO LINE ITEM'[TOTAL_QUANTITY]),
+			        FILTER(
+			            'FACT - CO LINE ITEM',
+			            'FACT - CO LINE ITEM'[ORDER_NO] >= "000000001000"
+			            && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000001999"
+			            && 'FACT - CO LINE ITEM'[COST_ELEMENT] = "1541000000"
+			        )
+			    )
+			)
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 17da0eb8-66de-4a32-8334-a4995b4cc70f
+
+	measure 'TH Giá thành toàn bộ (ZCO07)' =
+			[TH Giá thành phân xưởng (ZCO07)]
+			+ [TH Chi phí bán hàng - giá thành (ZCO07)]
+			+ [TH Chi phí quản lý - giá thành (ZCO07)]
+			+[TH Chi phí tài chính - giá thành (ZCO07)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: e8691541-f1db-430e-8509-355a8b841807
+
+	measure 'TH Giá thành phân xưởng (ZCO07)' = divide([TH Chi phí sản xuất (ZCO07)],[TH Sản lượng sản xuất Ure quy đổi (ZCO07)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: effc2c19-b9e4-4fae-809b-5bd100f576c6
+
+	measure 'TH Doanh thu tài chính' =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        -[DEBIT_AMT] - [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "515"
+			        && RIGHT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],6) <> "999999"
+			    )
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 2b477d1b-013c-40d1-ae2e-fb607704f7af
+
+	measure 'TH Chi phí tài chính (ZCO07)' =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "635"
+			        && RIGHT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],6) <> "999999"
+			    )
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 64e19f02-67f2-4791-919f-1bc09be40866
+
+	measure 'TH Chi phí tài chính - giá thành (ZCO07)' = divide([TH Chi phí tài chính (ZCO07)],[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 35d62177-baa0-4124-bd02-c7cf7fd6d4fc
+
+	measure 'TH Chi phi sản xuất chung (ZCO07)' =
+			
+			/*
+			CALCULATE(
+			    SUM('FACT - CO LINE ITEM'[VALUE_REPORT_CURR]),
+			    FILTER(
+			        'FACT - CO LINE ITEM',
+			        LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],3) = "627"
+			        && 'FACT - CO LINE ITEM'[COST_ELEMENT] <> "1541000000"
+			        )
+			    )
+			*/
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "627"
+			        && NOT('FACT - GL ACCOUNT BALANCE OFFSET'[OFFSET_GL_ACCT] IN {"", "1541000000"})
+			    )
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: be90534b-3f06-4c77-9ab3-96830585e072
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TH Chi phí sản xuất (ZCO07)' =
+			[TH Chi phí nguyên nhiên vật liệu (ZCO07)]
+			+ [TH Chi phí nhân công trực tiếp (ZCO07)]
+			+ [TH Chi phi sản xuất chung (ZCO07)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 2572f9db-c0c4-408c-93d8-5b1e11d23262
+
+	measure 'TH Chi phí quản lý (ZCO07)' =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "642"
+			        && NOT(
+			            'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO] IN {
+			                "6426999999",
+			                "6425999999",
+			                "6421999999",
+			                "6427999999",
+			                "6428999999",
+			                "6424999999",
+			                "6422999999",
+			                "6423999999"
+			            }
+			        )
+			    )
+			)
+		formatString: #,##0
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 28aab695-cb67-4d15-acc4-06b0d5820959
+
+	measure 'TH Chi phí quản lý - giá thành (ZCO07)' = divide([TH Chi phí quản lý (ZCO07)],[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 9ba5ad14-7ba3-418b-95c6-2080e321a112
+
+	measure 'TH Chi phí nhân công trực tiếp (ZCO07)' = ```
+			
+			/*
+			CALCULATE(
+			    SUM('FACT - CO LINE ITEM'[VALUE_REPORT_CURR]),
+			    FILTER(
+			        'FACT - CO LINE ITEM',
+			        LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],3) = "622"
+			        || LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],5) = "CE622"
+			        -- && 'FACT - CO LINE ITEM'[COST_ELEMENT] <> "1541000000"
+			    )
+			)
+			*/
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "622"
+			        && NOT('FACT - GL ACCOUNT BALANCE OFFSET'[OFFSET_GL_ACCT] IN {"", "1541000000"})
+			    )
+			)
+			
+			```
+		formatString: #,##0
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 85c5cf33-5a9b-4de6-bf8a-8cda0265a9a7
+
+	measure 'TH Chi phí nguyên nhiên vật liệu (ZCO07)' =
+			CALCULATE(
+			    SUM('FACT - CO LINE ITEM'[VALUE_REPORT_CURR]),
+			    FILTER(
+			        'FACT - CO LINE ITEM',
+			        'FACT - CO LINE ITEM'[ORDER_NO] >= "000000001000"
+			        && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000003999"
+			        && (
+			            LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],3) = "621"
+			            || LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],5) = "CE621"
+			        )
+			        && NOT(
+			            'FACT - CO LINE ITEM'[COST_ELEMENT] IN {
+			                "6211010004",
+			                "6211010005",
+			                "6211010006"
+			            }
+			        )
+			    )
+			)
+		formatString: #,##0
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: bd59ec42-d16d-4340-a655-a14e8c28233f
+
+	measure 'TH Chi phí khác' =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        -[DEBIT_AMT] - [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "811"
+			        && RIGHT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],6) <> "999999"
+			    )
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 0f68223b-5ca5-40e1-98f2-949866ea476d
+
+	measure 'TH Chi phí bán hàng (ZCO07)' =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "641"
+			        && NOT(
+			            'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO] IN {
+			                "6417999999",
+			                "6412999999",
+			                "6413999999",
+			                "6414999999",
+			                "6411999999",
+			                "6418999999"
+			            }
+			        )
+			    )
+			)
+		formatString: #,##0
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: 44b6120b-f574-4b1e-a4f1-94c6125ed937
+
+	measure 'TH Chi phí bán hàng - giá thành (ZCO07)' = divide([TH Chi phí bán hàng (ZCO07)],[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Thực hiện
+		lineageTag: fe1bd6e0-decb-448a-8f17-4fda36ba72e7
+
+	measure 'KH Tổng chi phí (ZCO07)' =
+			[KH Chi phí sản xuất (ZCO07)]
+			+ [KH Chi phí bán hàng (ZCO07)]
+			+ [KH Chi phí quản lý (ZCO07)]
+			+ [KH Chi phí tài chính (ZCO07)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 2a2da77a-7b78-420d-acad-3b11f6151377
+
+	measure 'KH Thu nhập khác' = blank()
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: d8171e3c-b82a-4f3e-8f50-f016b55c6b72
+
+	measure 'KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)' = [KH Sản lượng tiêu thụ Ure (ZCO07)] +[KH Sản lượng tiêu thụ Amo (ZCO07)]/0.573
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 66f56320-90e0-4803-afe3-9f80e3c4070e
+
+	measure 'KH Sản lượng tiêu thụ Ure (ZCO07)' = ```
+			 CALCULATE(
+			    SUM('FACT - COPA PLAN ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA PLAN ITEM'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			    && 'FACT - COPA PLAN ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA LINE ITEM'[CURRENCY_TYPE] = "B0"
+			    && 'FACT - COPA PLAN ITEM'[MATERIAL_GROUP] = "Z500001"
+			    && 'FACT - COPA PLAN ITEM'[MATERIAL_CODE] <> "0050499999"
+			)
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: edea92e7-20df-4ca4-aac3-d4e865e525cb
+
+	measure 'KH Sản lượng tiêu thụ Amo (ZCO07)' = ```
+			 CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			    && 'FACT - COPA LINE ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA LINE ITEM'[CURRENCY_TYPE] = "B0"
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z400001"
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> "0050499999"
+			         )
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 55bbb07a-a80c-444d-a997-8218230d5805
+
+	measure 'KH Sản lượng sản xuất Ure quy đổi (ZCO07)' = [KH Sản lượng sản xuất Ure (ZCO07)] + [KH Sản lượng sản xuất Amo (ZCO07)] / 0.573
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: eb80905b-bb65-4d98-8320-1a7a32e5a47a
+
+	measure 'KH Sản lượng sản xuất Ure (ZCO07)' =
+			/*
+			ABS(
+			   CALCULATE(
+			        SUM('FACT - COPA PLAN ITEM'[SALE_QUANTITY]),
+			        ALL('FACT - COPA PLAN ITEM'[FISCAL_PERIOD]),
+			        FILTER('FACT - COPA PLAN ITEM',
+			                [VERSION] = SELECTEDVALUE('Param: Quantity Version'[VERSION])
+			              &&  'FACT - COPA PLAN ITEM'[MATERIAL_GROUP] = "Z400002"
+			              ))
+			)
+			*/
+			CALCULATE(
+			    SUM('FACT - MANUF PLAN'[QUANTITY]),
+			    FILTER(
+			        'FACT - MANUF PLAN',
+			        [VERSION] = SELECTEDVALUE('PARAMETER - QUANTITY VERSION'[VERSION])
+			    ),
+			    'DIM - MATERIAL'[MATL_GROUP] = "Z400002"
+			)
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: e3a37ec6-695a-4329-9cc5-de78ef4b5004
+
+	measure 'KH Sản lượng sản xuất Amo (ZCO07)' = blank()
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 65ea3359-1d1b-48d7-ae64-b20dc154517d
+
+	measure 'KH Sản lượng Amo xuất sx Urê rời (ZCO07)'
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: fa625988-6d70-4239-a01e-a21387e772fc
+
+	measure 'KH Sản lượng Amo nhập kho sx (ZCO07)'
+		formatString: #,0.000
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: c18bbbca-7ed1-4ea6-8a13-0c3bafe2ba8a
+
+	measure 'KH Giá thành toàn bộ (ZCO07)' =
+			[KH Giá thành phân xưởng (ZCO07)]
+			+[KH Chi phí bán hàng - giá thành (ZCO07)]
+			+[KH Chi phí quản lý - giá thành (ZCO07)]
+			+[KH Chi phí tài chính - giá thành (ZCO07)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 2ffee5d7-347a-466a-aca7-b400f25c618c
+
+	measure 'KH Giá thành phân xưởng (ZCO07)' = divide([KH Chi phí sản xuất (ZCO07)],[KH Sản lượng sản xuất Ure quy đổi (ZCO07)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: b265e5b3-206c-41a3-a877-8a122c1a51e4
+
+	measure 'KH Doanh thu tài chính' = ```
+			blank()
+			
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 699a920f-dce0-48e4-a311-e3b0c140f9f2
+
+	measure 'KH Chi phí tài chính (ZCO07)' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      LEFT('FACT - COST PLANNING'[COST_ELEMENT],3)= "635"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 6c8a3889-81c9-4bf4-8f76-1177e4e066a3
+
+	measure 'KH Chi phí tài chính - giá thành (ZCO07)' = divide([KH Chi phí tài chính (ZCO07)],[KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 77d6cf85-a0e2-4828-944d-eb311c591c04
+
+	measure 'KH Chi phi sản xuất chung (ZCO07)' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      LEFT('FACT - COST PLANNING'[COST_ELEMENT],3)= "627"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 18b4799a-f023-4548-ab85-08ab699dd746
+
+	measure 'KH Chi phí sản xuất (ZCO07)' =
+			[KH Chi phí nguyên nhiên vật liệu (ZCO07)]
+			+[KH Chi phí nhân công trực tiếp (ZCO07)]
+			+[KH Chi phi sản xuất chung (ZCO07)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: f11890ca-2b02-4d28-b88f-38cb55081002
+
+	measure 'KH Chi phí quản lý (ZCO07)' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      LEFT('FACT - COST PLANNING'[COST_ELEMENT],3)= "642"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: b28cfff8-ee54-4558-bada-88aa0dc4188a
+
+	measure 'KH Chi phí quản lý - giá thành (ZCO07)' = divide([KH Chi phí quản lý (ZCO07)],[KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 037de4d9-6ddc-4baf-851a-618afab236c2
+
+	measure 'KH Chi phí nhân công trực tiếp (ZCO07)' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      LEFT('FACT - COST PLANNING'[COST_ELEMENT],3)= "622"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 58d391d0-4032-4893-bd4a-7d06334a4b17
+
+	measure 'KH Chi phí nguyên nhiên vật liệu (ZCO07)' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      LEFT('FACT - COST PLANNING'[COST_ELEMENT],3)= "621"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 8f72d996-f6fe-4b71-aaac-f57b7c430c36
+
+	measure 'KH Chi phí khác' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      LEFT('FACT - COST PLANNING'[COST_ELEMENT],3)= "811"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: d0eb265f-1979-42b1-95a6-2c1c5c7dd282
+
+	measure 'KH Chi phí bán hàng (ZCO07)' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      LEFT('FACT - COST PLANNING'[COST_ELEMENT],3)= "641"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) )
+			      )
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: ca07ef80-7cd5-4779-85e4-bea94a7ee35b
+
+	measure 'KH Chi phí bán hàng - giá thành (ZCO07)' = divide([KH Chi phí bán hàng (ZCO07)],[KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO07\Kế hoạch
+		lineageTag: 7cbb92d8-b663-4eb1-8f10-f9a30cd8bd4d
+
+	measure 'TH Tổng chi phí (ZCO05)' = ```
+			[TH Chi phí sản xuất (ZCO05)] 
+			+ [TH Chi phí bán hàng (ZCO05)] 
+			+ [TH Chi phí quản lý (ZCO05)] 
+			+ [TH Chi phí tài chính (ZCO05)]
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: 2e093102-77c1-470e-b2ca-4baaaaf6295d
+
+	measure 'TH Sản lượng tiêu thụ (ZCO05)' =
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "URE",
+			    CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = ""
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z500001"
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> "0050499999"
+			         ),
+			     "NPK",
+			     CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = ""
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z510001"
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> "0050499999"
+			         )
+			        )
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: 53a3f233-6cb3-447f-aa3f-87009761b6d1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TH Sản lượng sản xuất (ZCO05)' =
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "URE",
+			    ABS(
+			    CALCULATE(
+			        SUM('FACT - CO LINE ITEM'[TOTAL_QUANTITY]),
+			        FILTER(
+			            'FACT - CO LINE ITEM',
+			            'FACT - CO LINE ITEM'[ORDER_NO] >= "000000002000"
+			            && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000002999"
+			            && 'FACT - CO LINE ITEM'[COST_ELEMENT] = "1541000000"
+			            && 'FACT - CO LINE ITEM'[MATERIAL_CODE] <> "0040499999"
+			        )
+			    )
+			),
+			    "NPK",
+			        ABS(
+			    CALCULATE(
+			        SUM('FACT - CO LINE ITEM'[QUANTITY]),
+			        FILTER(
+			            'FACT - CO LINE ITEM',
+			            'FACT - CO LINE ITEM'[ORDER_NO] >= "000000008000"
+			            && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000008999"
+			            && 'FACT - CO LINE ITEM'[COST_ELEMENT] = "1541000000"
+			            && 'FACT - CO LINE ITEM'[MATERIAL_CODE] <> "0040499999"
+			        )
+			    )
+			)
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: f418130f-7490-485b-ae57-3990415f75d5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TH Giá thành toàn bộ (ZCO05)' = ```
+			[TH Giá thành phân xưởng (ZCO05)] 
+			+ [TH Chi phí bán hàng - giá thành (ZCO05)]
+			+ [TH Chi phí quản lý - giá thành (ZCO05)]
+			+ [TH Chi phí tài chính - giá thành (ZCO05)]
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: 0d4f005a-821e-4447-8cdf-1c0f5b840c14
+
+	measure 'TH Giá thành phân xưởng (ZCO05)' = ```
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "Ure",
+			CALCULATE(
+			    DIVIDE(
+			            CALCULATE(
+			                SUMX('FACT - PRODUCT COSTING',[VALUE_COA_CURR] + [PRICE_DIFF]),
+			                'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                    "Khí đầu vào",
+			                    "Điện nhận lưới",
+			                    "Chi phí nước ngọt",
+			                    "Hoá chất",
+			                    "Xúc Tác",
+			                    "Dầu mỡ",
+			                    "Bao bì đóng bao",
+			                    "Hàng xá",
+			                    "Amonia",
+			                    "Urê rời",
+			                    "Urê bao",
+			                    "NPK",
+			                    "Chi phí NVQL",
+			                    "Chi phí CCDC",
+			                    "Chi phí K.Hao TSCĐ",
+			                    "Chi phí DVMN",
+			                    "Chi phí BDĐK",
+			                    "Chi phí BDTX",
+			                    "Chi phí khác",
+			                    "Chi phí NC T.tiếp"
+			                }
+			            ),
+			            SUMX(
+			                SUMMARIZE(
+			                    'FACT - PRODUCT COSTING',
+			                    [FISCAL_YEAR],
+			                    [FISCAL_PERIOD],
+			                    [MATERIAL_CODE],
+			                    [TOTAL_MANUF_QUANTITY]
+			                ),
+			                [TOTAL_MANUF_QUANTITY]
+			                )
+			                ),
+			    'FACT - PRODUCT COSTING'[MATERIAL_GROUP_NAME] = "Urê Bao"
+			    ),
+			    "NPK",
+			 CALCULATE(
+			    DIVIDE(
+			            CALCULATE(
+			                SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                    "Khí đầu vào",
+			                    "Điện nhận lưới",
+			                    "Chi phí nước ngọt",
+			                    "Hoá chất",
+			                    "Xúc Tác",
+			                    "Dầu mỡ",
+			                    "Bao bì đóng bao",
+			                    "Hàng xá",
+			                    "Amonia",
+			                    "Urê rời",
+			                    "Urê bao",
+			                    "NPK",
+			                    "Chi phí NVQL",
+			                    "Chi phí CCDC",
+			                    "Chi phí K.Hao TSCĐ",
+			                    "Chi phí DVMN",
+			                    "Chi phí BDĐK",
+			                    "Chi phí BDTX",
+			                    "Chi phí khác",
+			                    "Chi phí NC T.tiếp"
+			                }
+			            ),
+			            SUMX(
+			                SUMMARIZE(
+			                    'FACT - PRODUCT COSTING',
+			                    [FISCAL_YEAR],
+			                    [FISCAL_PERIOD],
+			                    [MATERIAL_CODE],
+			                    [TOTAL_MANUF_QUANTITY]
+			                ),
+			                [TOTAL_MANUF_QUANTITY]
+			                )
+			                ),
+			    'FACT - PRODUCT COSTING'[MATERIAL_GROUP_NAME] = "TP NPK"
+			    )  
+			    )
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: 4309e046-9157-4743-b72d-f1b65b2d4b22
+
+	measure 'TH Chi phí tài chính (ZCO05)' = ```
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "Ure",
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "635"
+			        && RIGHT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],6) <> "999999"
+			    )
+			),
+			    "NPK",
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO] IN {"6350020004","6350020005"}
+			    )
+			) 
+			)   
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: a4f4a937-2271-48b9-948f-4a6cd28259ee
+
+	measure 'TH Chi phí tài chính - giá thành (ZCO05)' = divide([TH Chi phí tài chính (ZCO05)],[TH Sản lượng tiêu thụ (ZCO05)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: 0330cab4-7029-4a88-a36b-230a1a4bc53a
+
+	measure 'TH Chi phí sản xuất chung (ZCO05)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Parameter: Báo cáo Ure & NPK'[Loại báo cáo], "" ),
+			    "Ure",
+			        /*
+			        CALCULATE (
+			            SUMX ( 'FACT - GL ACCOUNT BALANCE OFFSET', [CREDIT_AMT] + [DEBIT_AMT] ),
+			            FILTER (
+			                'FACT - GL ACCOUNT BALANCE OFFSET',
+			                NOT ( [OFFSET_GL_ACCT] IN { "", "1541000000" } )
+			                    && LEFT ( [GL_ACCOUNT_NO], 3 ) = "627"
+			                    && LEFT ( [GL_ACCOUNT_NO], 4 ) <> "6272"
+			                    && NOT ( [COST_CENTRE] IN { "1A10", "1Z99" } )
+			            )
+			        ),
+			        */
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                "Chi phí NVQL",
+			                "Chi phí CCDC",
+			                "Chi phí K.Hao TSCĐ",
+			                "Chi phí DVMN",
+			                "Chi phí BDĐK",
+			                "Chi phí BDTX",
+			                "Chi phí khác"
+			            },
+			            'DIM - MATERIAL'[MATL_GROUP] IN {
+			                "Z400001",
+			                "Z400002",
+			                "Z500001",
+			                "Z500002"
+			            }
+			        ),
+			    "NPK",
+			        /*
+			        CALCULATE (
+			            SUM ( 'FACT - CO LINE ITEM'[VALUE_REPORT_CURR] ),
+			            FILTER (
+			                'FACT - CO LINE ITEM',
+			                'FACT - CO LINE ITEM'[ORDER_NO] >= "000000007000"
+			                    && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000008999"
+			                    && LEFT ( 'FACT - CO LINE ITEM'[COST_ELEMENT], 5 ) = "CE627"
+			                    && 'FACT - CO LINE ITEM'[COST_ELEMENT] <> "CE62720101"
+			            )
+			        )
+			        */
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                "Chi phí NVQL",
+			                "Chi phí CCDC",
+			                "Chi phí K.Hao TSCĐ",
+			                "Chi phí DVMN",
+			                "Chi phí BDĐK",
+			                "Chi phí BDTX",
+			                "Chi phí khác"
+			            },
+			            'DIM - MATERIAL'[MATL_GROUP] IN {
+			                "Z440002", "Z440001", "Z510001"
+			            }
+			        )
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: c9c6f076-c987-460a-8935-83e0d4b4b9c7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TH Chi phí sản xuất (ZCO05)' = [TH Chi phí nguyên nhiên vật liệu (ZCO05)] + [TH Chi phí nhân công trực tiếp (ZCO05)] + [TH Chi phí sản xuất chung (ZCO05)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: 290bf596-8738-428c-a71f-e0bd39926bea
+
+	measure 'TH Chi phí quản lý (ZCO05)' =
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "Ure",
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "642"
+			        && NOT(
+			            'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO] IN {
+			                "6426999999",
+			                "6425999999",
+			                "6421999999",
+			                "6427999999",
+			                "6428999999",
+			                "6424999999",
+			                "6422999999",
+			                "6423999999"
+			            }
+			        )
+			    )
+			),
+			    "NPK", BLANK()
+			    )
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: 24eeeb6e-de48-40d5-9aa0-46b210543171
+
+	measure 'TH Chi phí quản lý - giá thành (ZCO05)' = divide([TH Chi phí quản lý (ZCO05)],[TH Sản lượng tiêu thụ (ZCO05)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: 2975b8e6-edbe-496b-a1d0-c473f7101bdd
+
+	measure 'TH Chi phí nhân công trực tiếp (ZCO05)' = ```
+			
+			SWITCH (
+			    SELECTEDVALUE ( 'Parameter: Báo cáo Ure & NPK'[Loại báo cáo], "" ),
+			    "Ure", 
+			    CALCULATE(
+			    SUMX('FACT - GL ACCOUNT BALANCE OFFSET',[CREDIT_AMT]+[DEBIT_AMT]),
+			    FILTER('FACT - GL ACCOUNT BALANCE OFFSET',
+			                NOT([OFFSET_GL_ACCT] IN {"1541000000"})
+			                && LEFT([GL_ACCOUNT_NO],3) = "622"
+			                && NOT([COST_CENTRE] IN {"1A10","1Z99"})
+			                && [IS_REVERSE_SP] = 0
+			             )
+			          )  ,
+			
+			    "NPK",
+			        CALCULATE (
+			            SUM ( 'FACT - CO LINE ITEM'[VALUE_REPORT_CURR] ),
+			            FILTER (
+			                'FACT - CO LINE ITEM',
+			                    'FACT - CO LINE ITEM'[ORDER_NO] >= "000000007000"
+			                    && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000008999"
+			                    && LEFT ( 'FACT - CO LINE ITEM'[COST_ELEMENT], 5 ) = "CE622"
+			                    )
+			            )
+			        )
+			
+			```
+		formatString: #,##0
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: 4a310844-c2aa-43d9-8b99-f407355fa1d5
+
+	measure 'TH Chi phí nguyên nhiên vật liệu (ZCO05)' =
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "Ure",
+			        /*
+			        CALCULATE(
+			            SUM('FACT - CO LINE ITEM'[VALUE_REPORT_CURR]),
+			            FILTER(
+			                'FACT - CO LINE ITEM',
+			                'FACT - CO LINE ITEM'[OBJECT_NO] >= "OR000000001000"
+			                && 'FACT - CO LINE ITEM'[OBJECT_NO] <= "OR000000004999"
+			                && (
+			                    LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],3) = "621"
+			                    || LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],5) = "CE621"
+			                    || LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],4) = "6272"
+			                    || 'FACT - CO LINE ITEM'[COST_ELEMENT] = "CE62720101"
+			                )
+			                && NOT(
+			                    'FACT - CO LINE ITEM'[COST_ELEMENT] IN {
+			                        "6211010004",
+			                        "6211010005",
+			                        "6211010006"
+			                    }
+			                )
+			            )
+			        ),
+			        */
+			        CALCULATE(
+			            SUMX(
+			                'FACT - PRODUCT COSTING',
+			                [VALUE_COA_CURR] + [PRICE_DIFF]
+			            ),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                "Khí đầu vào",
+			                "Điện nhận lưới",
+			                "Chi phí nước ngọt",
+			                "Hoá chất",
+			                "Xúc Tác",
+			                "Dầu mỡ",
+			                "Bao bì đóng bao",
+			                "Hàng xá"
+			            },
+			            'DIM - MATERIAL'[MATL_GROUP] IN {
+			                "Z400001",
+			                "Z400002",
+			                "Z500001",
+			                "Z500002"
+			            }
+			        ),
+			    "NPK",
+			        CALCULATE(
+			            SUM('FACT - CO LINE ITEM'[VALUE_REPORT_CURR]),
+			            FILTER(
+			                'FACT - CO LINE ITEM',
+			                'FACT - CO LINE ITEM'[ORDER_NO] >= "000000007000"
+			                && 'FACT - CO LINE ITEM'[ORDER_NO] <= "000000008999"
+			                && (
+			                    LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],3) = "621"
+			                    || LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],5) = "CE621"
+			                    || 'FACT - CO LINE ITEM'[COST_ELEMENT] = "CE62720101"
+			                    || LEFT('FACT - CO LINE ITEM'[COST_ELEMENT],4) = "6272"
+			                )
+			                && NOT(
+			                    'FACT - CO LINE ITEM'[COST_ELEMENT] IN {
+			                        "6211010010",
+			                        "6211010011",
+			                        "6211010012"
+			                    }
+			                )
+			            )
+			        )
+			        /*
+			        CALCULATE(
+			            SUMX(
+			                'FACT - PRODUCT COSTING',
+			                [VALUE_COA_CURR] + [PRICE_DIFF]
+			            ),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                "Khí đầu vào",
+			                "Điện nhận lưới",
+			                "Chi phí nước ngọt",
+			                "Hoá chất",
+			                "Xúc Tác",
+			                "Dầu mỡ",
+			                "Bao bì đóng bao",
+			                "Urê rời",
+			                "Hàng xá"
+			            },
+			            'DIM - MATERIAL'[MATL_GROUP] IN {
+			                "Z440002", "Z440001", "Z510001"
+			            }
+			        )
+			        */
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: da69ff7d-24e6-4228-950e-459f95f3186f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TH Chi phí bán hàng (ZCO05)' =
+			
+			VAR _CPBH_NPK =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO]
+			                IN {"6417000203",
+			                    "6417300301",
+			                    "6417300302",
+			                    "6417300303",
+			                    "6417300304",
+			                    "6418000109",
+			                    "6418100307"
+			                }
+			    )
+			)
+			VAR _CPBH_TRU_NPK =
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "641"
+			        && RIGHT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],6) <> "999999"
+			        && NOT(
+			            'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO]
+			                IN {"6417000203",
+			                    "6417300301",
+			                    "6417300302",
+			                    "6417300303",
+			                    "6417300304",
+			                    "6418000109",
+			                    "6418100307"
+			                    }
+			        )
+			    )
+			)
+			VAR _SL_URE =
+			CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = ""
+			    && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z500001"
+			    && 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> "0050499999"
+			)
+			VAR _SL_NPK =
+			CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = ""
+			    && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z510001"
+			    && 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> "0050499999"
+			)
+			RETURN
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "Ure",
+			        CALCULATE(
+			            SUMX(
+			                'FACT - GL ACCOUNT BALANCE OFFSET',
+			                [DEBIT_AMT] + [CREDIT_AMT]
+			            ),
+			            FILTER(
+			                'FACT - GL ACCOUNT BALANCE OFFSET',
+			                LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],3) = "641"
+			                && RIGHT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],6) <> "999999"
+			                && [COST_CENTRE] <> "1A10"
+			                && NOT(
+			                    'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO]
+			                        IN {"6417000203",
+			                            "6417300301",
+			                            "6417300302",
+			                            "6417300303",
+			                            "6417300304"
+			                            -- "6418000109",
+			                            -- "6418100307"
+			                            }
+			                )
+			            )
+			        ),
+			    "NPK",
+			        _CPBH_NPK + DIVIDE(_CPBH_TRU_NPK * _SL_NPK, _SL_URE + _SL_NPK)
+			)
+		formatString: #,##0
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: e53bb0b8-95e7-4a83-b4bd-a25ec67a5097
+
+	measure 'TH Chi phí bán hàng - giá thành (ZCO05)' = divide([TH Chi phí bán hàng (ZCO05)],[TH Sản lượng tiêu thụ (ZCO05)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Thực hiện
+		lineageTag: 949cc2d0-70ae-4c0e-aa51-b014556e66c8
+
+	measure 'KH năm Tổng chi phí (ZCO05)' =
+			[KH năm Chi phí sản xuất (ZCO05)]
+			+ [KH năm Chi phí bán hàng (ZCO05)]
+			+ [KH năm Chi phí quản lý (ZCO05)]
+			+ [KH năm Chi phí tài chính (ZCO05)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: df0341eb-13e7-460e-a36d-3f010d7e4228
+
+	measure 'KH năm Sản lượng sản xuất (ZCO05)' = CALCULATE([KH Sản lượng sản xuất (ZCO05)], ALL('DIM - DATE'[Month]))
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: 34954671-1a1a-4152-bba0-dbd943caa13e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'KH năm Giá thành toàn bộ (ZCO05)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Parameter: Báo cáo Ure & NPK'[Loại báo cáo], "" ),
+			    "Ure",
+			        DIVIDE (
+			            [KH năm Chi phí sản xuất (ZCO05)],
+			            [KH năm Sản lượng sản xuất (ZCO05)]
+			        ),
+			    "NPK", BLANK ()
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: 5d00f709-21de-4935-9ea0-d99557f2892e
+
+	measure 'KH năm Giá thành phân xưởng (ZCO05)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Parameter: Báo cáo Ure & NPK'[Loại báo cáo], "" ),
+			    "Ure", DIVIDE ( [KH năm Chi phí sản xuất (ZCO05)], [KH năm Sản lượng sản xuất (ZCO05)] ),
+			    "NPK", BLANK ()
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: a550ab6e-e97d-44bd-8a80-bbc0c4d17efc
+
+	measure 'KH năm Chi phí tài chính (ZCO05)' = CALCULATE([KH Chi phí tài chính (ZCO05)], ALL('DIM - DATE'[Month]))
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: ca5d67d9-5463-4abc-9a71-47a26adaba83
+
+	measure 'KH năm Chi phí sản xuất chung (ZCO05)' = CALCULATE([KH Chi phí sản xuất chung (ZCO05)], ALL('DIM - DATE'[Month]))
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: 566a8665-c7ef-4d15-a687-538c9c05e156
+
+	measure 'KH năm Chi phí sản xuất (ZCO05)' =
+			[KH năm Chi phí nguyên nhiên vật liệu (ZCO05)]
+			+ [KH năm Chi phí nhân công trực tiếp (ZCO05)]
+			+ [KH năm Chi phí sản xuất chung (ZCO05)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: 782649c1-df62-4e1c-884f-67430c4bd416
+
+	measure 'KH năm Chi phí quản lý (ZCO05)' = CALCULATE([KH Chi phí quản lý (ZCO05)], ALL('DIM - DATE'[Month]))
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: d7d6c98a-1a86-432a-9a45-ae7e9335a5f6
+
+	measure 'KH năm Chi phí nhân công trực tiếp (ZCO05)' = CALCULATE([KH Chi phí nhân công trực tiếp (ZCO05)], ALL('DIM - DATE'[Month]))
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: a8e075d3-a068-4675-9d94-8df0e2cb441c
+
+	measure 'KH năm Chi phí nguyên nhiên vật liệu (ZCO05)' = CALCULATE([KH Chi phí nguyên nhiên vật liệu (ZCO05) ], ALL('DIM - DATE'[Month]))
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: 79484304-ad31-4d2a-8c65-912838c3208d
+
+	measure 'KH năm Chi phí bán hàng (ZCO05)' = CALCULATE([KH Chi phí bán hàng (ZCO05)], ALL('DIM - DATE'[Month]))
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch năm
+		lineageTag: 33b3740e-34ba-4733-bc49-585ae4e9c586
+
+	measure 'KH Tổng chi phí (ZCO05)' =
+			[KH Chi phí sản xuất (ZCO05)]
+			+ [KH Chi phí bán hàng (ZCO05)]
+			+ [KH Chi phí quản lý (ZCO05)]
+			+ [KH Chi phí tài chính (ZCO05)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: 8efd0d06-d76c-4321-a98b-c9ed04daf9a8
+
+	measure 'KH Sản lượng tiêu thụ (ZCO05)' = ```
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "Ure",
+			 CALCULATE(
+			    SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]),
+			    'FACT - COPA LINE ITEM'[VERSION] = SELECTEDVALUE('PARAMETER - QUANTITY VERSION'[VERSION])
+			    && 'FACT - COPA LINE ITEM'[RECORD_TYPE] = "F"
+			    --&& 'FACT - COPA LINE ITEM'[CURRENCY_TYPE] = "B0"
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_GROUP] = "Z500001"
+			     && 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> "0050499999"
+			         ) ,   
+			    "NPK",
+			 BLANK()   
+			    
+			    )
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: d94b5ed3-b6aa-42a2-820e-292b26d3bda4
+
+	measure 'KH Sản lượng sản xuất (ZCO05)' = ```
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "Ure",
+			        CALCULATE(
+			            SUM('FACT - MANUF PLAN'[QUANTITY]),
+			            FILTER(
+			                'FACT - MANUF PLAN',
+			                [VERSION] = SELECTEDVALUE('PARAMETER - QUANTITY VERSION'[VERSION])
+			            ),
+			            'DIM - MATERIAL'[MATL_GROUP] = "Z400002"
+			        ),
+			    "NPK",
+			        CALCULATE(
+			            SUM('FACT - COPA PLAN ITEM'[SALE_QUANTITY]),
+			            ALL('FACT - COPA PLAN ITEM'[FISCAL_PERIOD]),
+			            FILTER('FACT - COPA PLAN ITEM',
+			                    [VERSION] = SELECTEDVALUE('PARAMETER - QUANTITY VERSION'[VERSION])
+			                &&  'FACT - COPA PLAN ITEM'[MATERIAL_GROUP] = "Z500030"
+			                )    
+			        
+			        )
+			)
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: a6831f50-b92e-469c-9850-f78dbc75a37c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'KH Giá thành toàn bộ (ZCO05)' =
+			[KH Giá thành phân xưởng (ZCO05)]
+			+[KH Chi phí bán hàng - giá thành (ZCO05)]
+			+[KH Chi phí quản lý - giá thành (ZCO05)]
+			+[KH Chi phí tài chính - giá thành (ZCO05)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: 2898e550-cc6a-4cdf-a5b8-b25f131c2876
+
+	measure 'KH Giá thành phân xưởng (ZCO05)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Parameter: Báo cáo Ure & NPK'[Loại báo cáo], "" ),
+			    "Ure",
+			        DIVIDE (
+			            [KH Chi phí sản xuất (ZCO05)],
+			            [KH Sản lượng sản xuất (ZCO05)]
+			        ),
+			    "NPK", BLANK ()
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: 627141d3-ea1c-42ec-a792-fe6674a2c357
+
+	measure 'KH Chi phí tài chính (ZCO05)' = ```
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "Ure",
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      LEFT('FACT - COST PLANNING'[COST_ELEMENT],3)= "635"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])),
+			     ALL('FACT - COST PLANNING'[FISCAL_PERIOD]) 
+			      ) ,   
+			    "NPK",
+			BLANK()     
+			    
+			    )
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: 79135c08-6062-4b64-8437-ccfae061e8c0
+
+	measure 'KH Chi phí tài chính - giá thành (ZCO05)' = divide([KH Chi phí tài chính (ZCO05)],[KH Sản lượng tiêu thụ (ZCO05)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: f23e7c92-4fb3-4a5f-9ad3-56d6a2e60e12
+
+	measure 'KH Chi phí sản xuất chung (ZCO05)' = ```
+			SWITCH (
+			    SELECTEDVALUE ( 'Parameter: Báo cáo Ure & NPK'[Loại báo cáo], "" ),
+			    "Ure",
+			        CALCULATE (
+			            SUM ( 'FACT - COST PLANNING'[TRANSACTION_AMT] ),
+			            FILTER(
+			                'FACT - COST PLANNING',
+			                LEFT('FACT - COST PLANNING'[COST_ELEMENT],3) = "627"
+			                && RIGHT('FACT - COST PLANNING'[OBJECT_NO],4) <> "1A10"
+			                && 'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) 
+			            )
+			        ),
+			    "NPK",
+			        CALCULATE (
+			            SUM ( 'FACT - COST PLANNING'[TRANSACTION_AMT] ),
+			            FILTER(
+			                'FACT - COST PLANNING',
+			                LEFT('FACT - COST PLANNING'[COST_ELEMENT],3) = "627"
+			                && RIGHT('FACT - COST PLANNING'[OBJECT_NO],4) = "1A10"
+			                && 'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) 
+			            )
+			        )
+			)
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: 0fc35053-8b85-42ec-b220-a5e8746cee79
+
+	measure 'KH Chi phí sản xuất (ZCO05)' =
+			[KH Chi phí nguyên nhiên vật liệu (ZCO05) ]
+			+ [KH Chi phí nhân công trực tiếp (ZCO05)]
+			+ [KH Chi phí sản xuất chung (ZCO05)]
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: af741ab3-1070-49d9-9d93-a8717effaf02
+
+	measure 'KH Chi phí quản lý (ZCO05)' = ```
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo],""),
+			    "Ure",
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    FILTER('FACT - COST PLANNING',
+			      LEFT('FACT - COST PLANNING'[COST_ELEMENT],3)= "642"
+			      &&'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])),
+			     ALL('FACT - COST PLANNING'[FISCAL_PERIOD]) 
+			      ) ,   
+			    "NPK",
+			BLANK()     
+			    
+			    )
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: 828b3d30-5ee4-4423-83f9-3e3a28a856bc
+
+	measure 'KH Chi phí quản lý - giá thành (ZCO05)' = divide([KH Chi phí quản lý (ZCO05)],[KH Sản lượng tiêu thụ (ZCO05)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: cdb1dd72-4462-4268-abfa-52431e9f3dbd
+
+	measure 'KH Chi phí nhân công trực tiếp (ZCO05)' = ```
+			SWITCH (
+			    SELECTEDVALUE ( 'Parameter: Báo cáo Ure & NPK'[Loại báo cáo], "" ),
+			    "Ure",
+			        CALCULATE (
+			            SUM ( 'FACT - COST PLANNING'[TRANSACTION_AMT] ),
+			            FILTER(
+			                'FACT - COST PLANNING',
+			                LEFT('FACT - COST PLANNING'[COST_ELEMENT],3) = "622"
+			                && RIGHT('FACT - COST PLANNING'[OBJECT_NO],4) <> "1A10"
+			                && 'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) 
+			            )
+			        ),
+			    "NPK",
+			        CALCULATE (
+			            SUM ( 'FACT - COST PLANNING'[TRANSACTION_AMT] ),
+			            FILTER(
+			                'FACT - COST PLANNING',
+			                LEFT('FACT - COST PLANNING'[COST_ELEMENT],3) = "622"
+			                && RIGHT('FACT - COST PLANNING'[OBJECT_NO],4) = "1A10"
+			                && 'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) 
+			            )
+			        )
+			)
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: c5ebfe38-0157-4f8a-b43c-d33824648fcf
+
+	measure 'KH Chi phí nguyên nhiên vật liệu (ZCO05) ' = ```
+			
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Báo cáo Ure & NPK'[Loại báo cáo], ""),
+			    "Ure",
+			        CALCULATE(
+			            SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			            FILTER(
+			                'FACT - COST PLANNING',
+			                LEFT('FACT - COST PLANNING'[COST_ELEMENT],3) = "621"
+			                && RIGHT('FACT - COST PLANNING'[OBJECT_NO],4) <> "1A10"
+			                && 'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) 
+			            )
+			        ),  
+			    "NPK",     
+			        CALCULATE(
+			            SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			            FILTER(
+			                'FACT - COST PLANNING',
+			                LEFT('FACT - COST PLANNING'[COST_ELEMENT],3) = "621"
+			                && RIGHT('FACT - COST PLANNING'[OBJECT_NO],4) = "1A10"
+			                && 'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]) 
+			            )
+			        )
+			    )
+			```
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: f44a62ef-e592-4bac-b20a-462e3fe17ac9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'KH Chi phí bán hàng (ZCO05)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'Parameter: Báo cáo Ure & NPK'[Loại báo cáo], "" ),
+			    "Ure",
+			        CALCULATE (
+			            SUM ( 'FACT - COST PLANNING'[TRANSACTION_AMT] ),
+			            FILTER (
+			                'FACT - COST PLANNING',
+			                LEFT ( 'FACT - COST PLANNING'[COST_ELEMENT], 3 ) = "641"
+			                && 'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE ( 'PARAMETER - VERSION TẬP ĐOÀN'[VERSION] )
+			            )
+			        ),
+			    "NPK", BLANK ()
+			)
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: 9428fbeb-c0dd-4e53-a670-e7e0ba351b3a
+
+	measure 'KH Chi phí bán hàng - giá thành (ZCO05)' = divide([KH Chi phí bán hàng (ZCO05)],[KH Sản lượng tiêu thụ (ZCO05)])
+		displayFolder: Giá thành toàn bộ - 01\ZCO05\Kế hoạch
+		lineageTag: fe63378b-5561-467d-9647-263117febf9c
+
+	measure 'Xúc Tác' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "005"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: e92d4696-e08c-4c88-8556-affaf84be1e7
+
+	measure 'Urê rời' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "007"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 8f5ab692-a589-4754-a851-27d8b7f05405
+
+	measure 'Ure bao' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "008"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 42a378d0-89dc-4ec7-ab82-f1d2151e2cb1
+
+	measure NPK =
+			CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'FACT - CO SPLIT ITEM',
+			                'FACT - CO SPLIT ITEM'[COST_COMPONENT] = "039"
+			        ))
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 36f76b70-a382-4c9d-a1f8-b4047d407087
+
+	measure 'Khí đầu vào' =
+			CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'FACT - CO SPLIT ITEM',
+			            'FACT - CO SPLIT ITEM'[COST_COMPONENT] = "001"
+			        ))
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: e4c8400f-1731-4f8b-b3aa-2caf4054ea98
+
+	measure 'Hoá chất' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "004"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 83ed9dce-6560-4c2d-ba55-e21cc978e14d
+
+	measure 'Hàng Xá' =
+			CALCULATE (
+			VAR _process_cat =
+			    CALCULATE(
+			        MAX('FACT - CO SPLIT ITEM'[PROCESS_CAT]),
+			        ALLEXCEPT(
+			            'FACT - CO SPLIT ITEM',
+			            'FACT - CO SPLIT ITEM'[FISCAL_DATE],
+			            'FACT - CO SPLIT ITEM'[COST_EST_NO]
+			        )
+			    )
+			RETURN
+			    SUMX(
+			        SUMMARIZE(
+			            FILTER(
+			                'FACT - CO SPLIT ITEM',
+			                'FACT - CO SPLIT ITEM'[COST_CATEGORY] = "Variable"
+			                && 'FACT - CO SPLIT ITEM'[COST_DESC] = "Hàng xá"
+			            ),
+			            'FACT - CO SPLIT ITEM'[MATERIAL_CODE],
+			            'FACT - CO SPLIT ITEM'[COST_COMPONENT_STRUCTURE],
+			            "_amt",
+			                SUM('FACT - CO SPLIT ITEM'[LOCAL_AMT])
+			        ),
+			        IF(
+			            [COST_COMPONENT_STRUCTURE] = "T4"
+			            || _process_cat = "BF",
+			            [_amt]
+			        )
+			    )
+			)
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 55c89016-b312-4b69-b818-9affe4c77e4f
+
+	measure 'Điện nhận lưới' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "002"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 7f382b45-6977-48f3-9857-6a98c72ef7c3
+
+	measure 'Dầu mỡ' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "010"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 01c56ca3-a32c-40e9-8997-0d4b7ab58f2b
+
+	measure 'Chi phí NVQL - PVCFC' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "012"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: f79c765c-5509-4148-a272-22111c8cb906
+
+	measure 'Chi phí nước ngọt' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "003"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 34107e5c-bea8-44a2-a896-647c24db46d5
+
+	measure 'Chi phí NC T.tiếp - PVCFC' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "011"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 4e0baed3-e3be-4264-addf-f278b9aa0bc4
+
+	measure 'Chi phí khác' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "018"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 8a7aef81-9f10-40ab-b875-16cd4fea9956
+
+	measure 'Chi phí K.Hao TSCĐ' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "013"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 7c482fc5-1296-4e03-9bbb-5d8483f43459
+
+	measure 'Chi phí DVMN' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "015"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 05d5ad89-5f8d-4598-a878-0b7ca77162bb
+
+	measure 'Chi phí CCDC' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "014"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 387b9a6f-497e-49a6-b657-888f89f4fc36
+
+	measure 'Chi phí BDTX' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "017"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 40f051fa-8ade-475f-8365-bcbda2679a27
+
+	measure 'Chi phí BDĐK' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "016"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 35b40cb9-420e-4051-bc84-99b5e276a604
+
+	measure 'Bao bì đóng bao' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "009"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: 460a4c4d-d454-49c2-a967-b8e3b61eefef
+
+	measure Amonia = ```
+			    CALCULATE (
+			        [Tổng giá thành - PVCFC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "006"
+			        ))
+			```
+		formatString: #,##0
+		displayFolder: Chi phí SX - PVCFC
+		lineageTag: e7686b69-c1b0-422d-94f6-b8b0df6e75c6
+
+	measure 'Vỏ bao' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "033"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 2cd06648-f347-4242-9590-e2a67077fec2
+
+	measure Variance = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "032"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 18b67f21-a5a5-4395-8ce9-4870d9975e39
+
+	measure 'Vải manh mua ngoài' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "008"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 204b062a-2a4e-41f6-b860-cb166bfeda84
+
+	measure 'Vải manh BTP' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "009"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 6e1ac7e3-2c61-42c0-9bfb-0f0a8b814348
+
+	measure 'Phụ gia túi lồng' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "006"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 45686089-4688-4901-981d-130bfef6726f
+
+	measure 'Phụ gia tráng' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "015"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 9061171f-a232-4f1a-8b07-19f3af32bc48
+
+	measure 'Phụ gia tạo sợi' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "002"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 117c7f99-c75f-43a1-a65a-e40ccba0d58a
+
+	measure 'Phụ gia SX P.Bón' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "028"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 2516f907-4d2f-4efd-bc86-86733202cce1
+
+	measure 'Phụ gia' =
+			
+			[Phụ gia túi lồng] + [Phụ gia tạo sợi]
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 79d7295c-5e3a-4129-a518-2c731b200ead
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Phân Ure' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "014"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 275ff5bc-8477-4862-92a4-60534c01f4b0
+
+	measure 'NVLP Khác' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "020"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: ae264671-1849-4d40-af2d-e45d92a6e197
+
+	measure 'NVLC Khác' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "010"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: c5eac57c-a8f3-4a47-bfda-e3fc99ffa7fe
+
+	measure 'Mực in' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "018"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: b8754de6-51ee-4b16-86ab-f8913c9947fd
+
+	measure 'Màng mờ' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "011"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 9181dab9-7e8c-41e0-a9fa-f21613ea1b34
+
+	measure KCL = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "022"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 2f616fa7-0576-4e2b-91a0-e5a3c0ddfeb8
+
+	measure 'Hạt nhựa tái sinh' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "012"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 2210262c-6bf3-4950-869a-803046efc4fb
+
+	measure 'Hạt nhựa PP tráng' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "007"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 2ae81265-0fcf-4c57-94f5-7e49a627c6a8
+
+	measure 'Hạt nhựa PP' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "001"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 56ffa149-a2ce-4756-a444-1df7dc2a2531
+
+	measure 'Hạt nhựa PE tráng' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "013"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 9df11e29-09a5-49a0-8c05-123ab78773b2
+
+	measure 'Hạt nhựa LLDPE' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "005"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: b8bdf867-1972-461f-9502-0559b58bff69
+
+	measure 'Hạt nhựa LDPE' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "004"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 99937beb-3ff5-45c5-b309-761e9d37c4c8
+
+	measure 'Hạt nhựa HDPE' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "003"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 26c1fb5d-9d55-4086-a014-9b41c019b6d1
+
+	measure 'Dung môi' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "019"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 7e2fa2e7-95b3-4506-bc55-91280a468e43
+
+	measure DAP = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "021"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: c5c3c863-ed3e-4e3b-9f85-706ba8cc7af4
+
+	measure 'CP VLBT, CCDC' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "027"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: b2258086-2b9d-47b6-9a89-dad256c97198
+
+	measure 'CP Điện, nước' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "025"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: b24c4524-6095-491f-8461-efcfdb6cf976
+
+	measure 'Chi phí NVQL PX' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "026"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 3a49fc5d-0898-47a0-9db7-b8bcc186fc1d
+
+	measure 'Chi phí NC T.tiếp' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "024"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 054bafe5-16ba-48cb-a942-ecbb313b6268
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí mua ngoài' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "030"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: ba2f6e1a-5350-4489-bcbc-26c8722a8141
+
+	measure 'Chi phí KH TSCĐ PXSX' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "029"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 16066e95-d240-47fa-b700-9a8069dc9366
+
+	measure 'Chi phí b.tiền khác' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "031"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 23ff9664-97f3-43cb-9f42-8f8461418998
+
+	measure 'Chỉ may' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "017"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: 8d8aa1aa-58cf-4de4-a903-7b0535a0e721
+
+	measure 'BTP Phân bón' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "023"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: c7eb0fb4-1129-48ce-95e1-389074ad820f
+
+	measure 'Axit Humic' = ```
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "016"
+			        ))
+			```
+		displayFolder: Chi phí SX - PPC
+		lineageTag: f9581431-539a-483d-9d67-3ade2d2031f9
+
+	measure 'Định phí (ZCO13)' =
+			
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			            'DIM - COST COMPONENT'[COST_COMPONENT] IN {"031","026","027","029","030"}
+			        )
+			    )
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,0
+		displayFolder: Biến phí - PPC
+		lineageTag: f9028e56-0959-4aa2-9477-c3eaa4a1978b
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Biến phí (ZCP13)' =
+			
+			[Giá thành sản xuất - PPC] - [Định phí (ZCO13)]
+		formatString: #,0
+		displayFolder: Biến phí - PPC
+		lineageTag: 74b25a3d-8548-433c-958a-09364432c322
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '- Vỏ bao' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "033"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: f16aa0c6-3471-4d7f-8789-7d5c497590d4
+
+	measure '- Variance' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "032"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: b8842e5c-e629-4883-bf2e-4609279d0e28
+
+	measure '- Vải manh mua ngoài' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "008"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 45f1a916-1261-44d1-86f8-7976b034f192
+
+	measure '- Vải manh BTP' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "009"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 4f279c64-0878-4782-a9cd-e3bf08e32f05
+
+	measure '- Phụ gia túi lồng' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "006"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: f14efaf5-54b6-4dca-bef2-020eda077f26
+
+	measure '- Phụ gia tráng' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "015"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: d5354c89-6396-4206-b806-919f4bf1a3e9
+
+	measure '- Phụ gia tạo sợi' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "002"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 69603c7a-c8a9-4a55-b27e-b79bf3c568c7
+
+	measure '- Phụ gia SX P.Bón' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "028"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 73292a42-dc09-4b86-abfe-8ae262138b4c
+
+	measure '- Phân Ure' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "014"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: c2f9d755-2a5b-411d-b158-386aa79ea971
+
+	measure '- NVLP Khác' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "020"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 41fb93e2-2b15-4494-b37c-f9fb0dbb7b22
+
+	measure '- NVLC Khác' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "010"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 3fd715ad-5940-4052-a405-24b7521d4595
+
+	measure '- Mực in' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "018"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: d6718ddb-4175-4c15-9070-075b12d56c76
+
+	measure '- Màng mờ' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "011"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: e28333ed-2dff-4d0d-beb4-d0b5bab068c1
+
+	measure '- KCL' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "022"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: f10eb55b-69cf-436b-9ef0-673008844e6d
+
+	measure '- Hạt nhựa tái sinh' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "012"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 498886a6-d83a-409e-ae5f-54b2e555f6b8
+
+	measure '- Hạt nhựa PP tráng' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "007"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: d891af83-0268-4c3e-a6f5-1e311dbb8b4b
+
+	measure '- Hạt nhựa PP' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			            'DIM - COST COMPONENT'[COST_COMPONENT] = "001"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 7fca8241-1186-4d5e-b059-6ec8376ddc6f
+
+	measure '- Hạt nhựa PE tráng' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "013"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 2b70cd47-ef8d-4b97-9ddd-5c27fc93f280
+
+	measure '- Hạt nhựa LLDPE' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "005"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 92260250-e7a8-41af-b8fd-972b4959923d
+
+	measure '- Hạt nhựa LDPE' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "004"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 6456faa4-9079-479d-ad99-88a787e0ea13
+
+	measure '- Hạt nhựa HDPE' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "003"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: f93727ea-0020-4374-9506-7c60dfbb7d6b
+
+	measure '- Dung môi' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "019"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: cbe8a4c3-ceca-4b27-bbff-e365a7efe8e6
+
+	measure '- DAP' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "021"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 22a7014f-e3ec-4676-8e4c-4f9c1f579c80
+
+	measure '- CP VLBT, CCDC' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "027"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: f348575e-94ff-4ef4-b0ba-161a108d2d61
+
+	measure '- CP Điện, nước' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "025"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 673447e7-52e8-4886-81e2-feeed1956df7
+
+	measure '- Chi phí NVQL PX' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "026"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 8bb40e70-6388-4eb0-bb96-7bbdb0979451
+
+	measure '- Chi phí NC T.tiếp' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "024"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: e6b7e003-6dd2-499b-be00-9d41f153ed60
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '- Chi phí mua ngoài' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "030"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: bdec4c18-003c-4a5e-af90-7a8b89bdc411
+
+	measure '- Chi phí KH TSCĐ PXSX' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "029"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: adc93542-8280-4b07-92bf-2ff3df8d1ee4
+
+	measure '- Chi phí b.tiền khác' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "031"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 344b70ad-9d34-4dc8-8c06-a8703ee7ad4f
+
+	measure '- Chỉ may' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "017"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 6c9698f4-ea89-4ae1-86ad-dca876c86ef9
+
+	measure '- BTP Phân bón' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "023"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: 11629368-6153-47ff-8a68-4e09651a98cb
+
+	measure '- Axit Humic' =
+			VAR GIA_TRI =
+			    CALCULATE (
+			        [Tổng giá thành - PPC],
+			        FILTER (
+			            'DIM - COST COMPONENT',
+			                'DIM - COST COMPONENT'[COST_COMPONENT] = "016"
+			        ))
+			VAR SO_LUONG = [Sản lượng SX]
+			RETURN
+			    DIVIDE ( GIA_TRI, SO_LUONG, BLANK () )
+		formatString: #,##0
+		displayFolder: Biến phí - PPC
+		lineageTag: b27abda1-e7af-4676-8661-9af3c7b31933
+
+	measure '% Kế hoạch' = DIVIDE([Chi phí thực hiện lũy kế],[Chi phí kế hoạch theo năm])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 00945209-e708-4105-aa01-4e48dfbdb653
+
+	measure '% Thực hiện lũy kế so với KH Công ty giao (ZCO01)' =
+			DIVIDE(
+			    [Chi phí thực hiện lũy kế],
+			    [Chi phí kế hoạch công ty lũy kế ]
+			)
+		formatString: #,0.00%
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 851f8755-dfef-4e52-867a-f36cc86fa8e2
+
+	measure '% Thực hiện lũy kế so với KH Tập đoàn giao (ZCO01)' =
+			DIVIDE(
+			    [Chi phí thực hiện lũy kế],
+			    [Chi phí kế hoạch tập đoàn lũy kế]
+			)
+		formatString: #,0.00%
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 6531918d-71c6-4270-93ee-ded8ee91625b
+
+	measure '% Thực hiện so với KH Công ty giao (ZCO01)' =
+			DIVIDE(
+			    [Chi phí thực hiện],
+			    [Chi phí kế hoạch công ty]
+			)
+		formatString: #,0.00%
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: d3099430-9cf2-4155-b148-691adc6ddab5
+
+	measure '% Thực hiện so với KH Tập đoàn giao (ZCO01)' =
+			DIVIDE(
+			    [Chi phí thực hiện],
+			    [Chi phí kế hoạch tập đoàn]
+			)
+		formatString: #,0.00%
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 2bce270c-a48e-46fa-bd68-f0988427745d
+
+	measure 'Chi phí kế hoạch công ty' = CALCULATE(SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),'FACT - COST PLANNING'[VERSION]=SELECTEDVALUE('PARAMETER - VERSION CÔNG TY'[VERSION]))
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 7ea98ccb-1eae-495d-9180-d810728df1c4
+
+	measure 'Chi phí kế hoạch công ty lũy kế ' = TOTALYTD([Chi phí kế hoạch công ty], 'DIM - DATE'[Date])
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 47fa1219-6f01-4d9a-9f07-d740d7feb7ad
+
+	measure 'Chi phí kế hoạch tập đoàn' = CALCULATE(SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),'FACT - COST PLANNING'[VERSION]=SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]))
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: c8d8a6d9-23f4-49bf-9895-e9994209769b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí kế hoạch tập đoàn lũy kế' =
+			TOTALYTD (
+			    [Chi phí kế hoạch tập đoàn],
+			    'DIM - DATE'[Date]
+			)
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 6df62aaf-469c-4461-8e97-1c45e555085e
+
+	measure 'Chi phí kế hoạch theo năm' =
+			
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    ALL('DIM - DATE'[Month]),
+			    'FACT - COST PLANNING'[VERSION] = SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION])
+			)
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 84d3bbec-6fe8-4191-abd8-f182a1daa68f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thực hiện lũy kế so với KH Công ty giao (ZCO01)' = [Chi phí thực hiện lũy kế] - [Chi phí kế hoạch công ty lũy kế ]
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: f5efd82d-5b0d-4825-8d6e-78b53f809e74
+
+	measure 'Thực hiện lũy kế so với KH Công ty giao (ZCO01) (display)' = abs([Chi phí thực hiện lũy kế] - [Chi phí kế hoạch công ty lũy kế ])
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: be2f0f70-623d-4eca-8c1c-dc101379ea95
+
+	measure 'Thực hiện lũy kế so với KH Tập đoàn giao (ZCO01)' = [Chi phí thực hiện lũy kế] - [Chi phí kế hoạch tập đoàn lũy kế]
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 2f8a8bf6-7f89-45ec-894e-e1c3349d7e52
+
+	measure 'Thực hiện lũy kế so với KH Tập đoàn giao (ZCO01) (display)' = abs([Chi phí thực hiện lũy kế] - [Chi phí kế hoạch tập đoàn lũy kế])
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 8fe84999-1ef9-4032-a0f4-b3262d605d52
+
+	measure 'Thực hiện so với KH Công ty giao (ZCO01)' = [Chi phí thực hiện] - [Chi phí kế hoạch công ty]
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 3a521734-ba3f-4549-bf3d-80a31acc4651
+
+	measure 'Thực hiện so với KH Công ty giao (ZCO01) (display)' = abs([Chi phí thực hiện] - [Chi phí kế hoạch công ty])
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 60f23a3a-4d66-4e5c-bf0b-7f79c567f95f
+
+	measure 'Thực hiện so với KH Tập đoàn giao (ZCO01)' = [Chi phí thực hiện] - [Chi phí kế hoạch tập đoàn]
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: fd420bf3-ed15-4e9f-9b3d-dab93d27aabe
+
+	measure 'Thực hiện so với KH Tập đoàn giao (ZCO01) (display)' = abs([Chi phí thực hiện] - [Chi phí kế hoạch tập đoàn])
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 63a0c28c-a50c-4fab-b4be-1b723a14b004
+
+	measure '% Thực hiện so với KH (ZCO02)' =
+			DIVIDE(
+			    [Chi phí thực hiện lũy kế],
+			    [Chi phí kế hoạch tập đoàn (ZCO02)]
+			)
+		formatString: #,0.00%
+		displayFolder: CO\CO Planning\ZCO02
+		lineageTag: 85b0f139-13c8-4931-92a6-12ee526a8d4a
+
+	measure 'Chi phí kế hoạch tập đoàn (ZCO02)' =
+			CALCULATE(
+			    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			    'FACT - COST PLANNING'[VERSION]=SELECTEDVALUE('PARAMETER - VERSION TẬP ĐOÀN'[VERSION]),
+			    ALL('DIM - DATE'[Month])
+			)
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO02
+		lineageTag: 6d525089-9489-4edc-abe2-dff1e5c9ec5b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Thực hiện so với KH (ZCO14)' =
+			DIVIDE(
+			    [Chi phí lũy kế của đơn vị (ZCO14)],
+			    [Chi phí kế hoạch (ZCO14)]
+			)
+		formatString: #,0.00%
+		displayFolder: CO\CO Planning\ZCO14
+		lineageTag: 3037a712-ca20-4487-816c-980765f03490
+
+	measure 'Chi phí kế hoạch (ZCO14 - DMQL)' = ```
+			
+			VAR _CNT = DISTINCTCOUNT('FACT - COST PLANNING'[COST_CENTER])
+			RETURN  
+			SUMX(
+			    SUMMARIZE(   
+			            'FACT - COST PLANNING',
+			            [COST_CENTER],
+			            [COST_ELEMENT],
+			            "CNT",
+			                _CNT,
+			            "AMT",
+			                CALCULATE(
+			                    SUM('FACT - COST PLANNING'[TRANSACTION_AMT]),
+			                    ALL('DIM - DATE'[Month])
+			                )
+			    ),
+			    SWITCH(
+			        TRUE(),
+			        [CNT] > 1 && [COST_CENTER] = "1A10" && LEFT([COST_ELEMENT],3) = "621",[AMT],
+			        [CNT] = 1 && LEFT([COST_ELEMENT],3) = "621", [AMT],
+			        LEFT('FACT - COST PLANNING'[COST_ELEMENT], 3) <> "621", [AMT]
+			    )
+			)
+			```
+		displayFolder: CO\CO Planning\ZCO14
+		lineageTag: a34456f1-d4e3-49a7-bdc0-7e6947ab571f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí kế hoạch (ZCO14)' =
+			
+			SUM('FACT - COST PLANNING'[TRANSACTION_AMT])
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO14
+		lineageTag: 9209fd5f-f72c-4b4e-ab4a-fa13cff4f85a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% COGS Amount vs Plan' = ```
+			DIVIDE([COGS Amount],[COGS Amount Plan], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: d29caac1-dc72-42f6-a36f-422f560ddede
+
+	measure '% COGS Amount vs Plan YTD' = ```
+			DIVIDE([COGS Amount YTD],[COGS Amount Plan YTD], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: f94ebdcb-e07e-457d-b7e7-97fe75683ef2
+
+	measure '% Discount Amount vs Plan' = ```
+			DIVIDE([Discount Amount],[Discount Amount Plan], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: 8ec8227c-c6bb-4ee7-a5f3-7c7ac8962a46
+
+	measure '% Discount Amount vs Plan YTD' = ```
+			DIVIDE([Discount Amount YTD],[Discount Amount Plan YTD], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: 0a3b6eb5-96ea-49fb-9ab2-99165b4e5847
+
+	measure '% Giá bán vs Plan' = ```
+			DIVIDE([Giá bán],[Giá bán Plan], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: 9f69dd0d-4677-4132-a15e-7c655f33772a
+
+	measure '% Giá bán vs Plan YTD' = ```
+			DIVIDE([Giá bán YTD],[Giá bán Plan YTD], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: de2676d5-1eac-4c78-995c-95a913c2f28d
+
+	measure '% Lãi gộp vs Plan' = ```
+			DIVIDE([Lãi gộp],[Lãi gộp Plan], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: 5dfa084a-b229-461a-8714-8fe09fc7adf2
+
+	measure '% Lãi gộp vs Plan YTD' = ```
+			DIVIDE([Lãi gộp YTD],[Lãi gộp Plan YTD], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: 9e61724a-a3bc-4e78-9028-9588d718aa06
+
+	measure '% Sale Amount vs Plan' = ```
+			DIVIDE([Sale Amount],[Sale Amount Plan], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: bca079cf-7121-46c9-81b4-518a745a1fb7
+
+	measure '% Sale Amount vs Plan YTD' = ```
+			DIVIDE([Sale Amount YTD],[Sale Amount Plan YTD], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: 94625778-2e63-4f5f-8014-9a157b61b4c1
+
+	measure '% Sale Quantity vs Plan' = ```
+			DIVIDE([Sale Quantity],[Sale Quantity Plan], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: d17391eb-e782-46cf-a50c-79ee8ac08406
+
+	measure '% Sale Quantity vs Plan YTD' = ```
+			DIVIDE([Sale Quantity YTD],[Sale Quantity Plan YTD], BLANK())
+			
+			```
+		formatString: #,##0.00 %
+		displayFolder: COPA
+		lineageTag: fe329392-0672-4164-bef7-5f2a70bd87c4
+
+	measure 'COGS Amount' = CALCULATE(SUM('FACT - COPA LINE ITEM'[COGS_AMT]), 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> BLANK())
+		formatString: #,0
+		displayFolder: COPA
+		lineageTag: 81375e04-6a53-4284-bea9-1b58bd2527f0
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'COGS Amount Plan' = SUM('FACT - COPA PLAN ITEM'[COGS_AMT])
+		displayFolder: COPA
+		lineageTag: 94e8a070-74f0-485d-95cc-1505f7287dd5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'COGS Amount Plan YTD' = TOTALYTD([COGS Amount Plan],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: e35a240c-5397-47f7-ade3-69343dcea1b4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'COGS Amount YTD' = TOTALYTD([COGS Amount],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: bfe48370-400c-4ea0-8bcf-4c528fb04aeb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Discount Amount' = CALCULATE(SUM('FACT - COPA LINE ITEM'[DISCOUNT_AMT]), 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> BLANK())
+		displayFolder: COPA
+		lineageTag: 4aabffd1-f597-447d-8192-2eba6fee73e6
+
+	measure 'Discount Amount Plan' = SUM('FACT - COPA PLAN ITEM'[DISCOUNT_AMT])
+		displayFolder: COPA
+		lineageTag: d758da72-8d48-42c9-b932-0f41bf35485c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Discount Amount Plan YTD' = TOTALYTD([Discount Amount Plan],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: cb621d9a-abec-45a0-8582-bcec1c5236d4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Discount Amount YTD' = TOTALYTD([Discount Amount],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: ed142044-998c-4a15-be96-ccf1b6cd9396
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá bán' = DIVIDE([Sale Amount],[Sale Quantity], BLANK())
+		displayFolder: COPA
+		lineageTag: 053c5278-ffa0-466c-af5a-cf8f01323e69
+
+	measure 'Giá bán Plan' = DIVIDE([Sale Amount Plan],[Sale Quantity Plan], BLANK())
+		displayFolder: COPA
+		lineageTag: d50b75a6-b666-4a75-bfce-336a6a23e488
+
+	measure 'Giá bán Plan YTD' = TOTALYTD([Giá bán Plan],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: 5d3b8ad2-e5c2-4cf7-b1b7-c27e428f5791
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá bán YTD' = TOTALYTD([Giá bán],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: aa6d4d0f-59f1-4a5f-8a85-a59160101796
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lãi gộp' = [Sale Amount]-[COGS Amount]+[Discount Amount]
+		formatString: #,0
+		displayFolder: COPA
+		lineageTag: 12042358-9311-4d77-ad08-f7bf9a3acd3a
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Lãi gộp Plan' = [Sale Amount Plan]-[COGS Amount Plan]+[Discount Amount Plan]
+		displayFolder: COPA
+		lineageTag: f31edcdb-7d74-4504-a1aa-cfca0ecb4e29
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lãi gộp Plan YTD' = TOTALYTD([Lãi gộp Plan],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: e3e40e91-9006-45c1-b1fa-efec0a366e54
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lãi gộp YTD' = TOTALYTD([Lãi gộp],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: ee3260d0-7b48-4172-a9f4-fbf452d9649e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sale Amount' = CALCULATE(SUM('FACT - COPA LINE ITEM'[SALE_AMT]), 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> BLANK())
+		formatString: #,0
+		displayFolder: COPA
+		lineageTag: bd2cfc5e-b657-4e26-98c7-398c8e16ba33
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sale Amount Plan' = SUM('FACT - COPA PLAN ITEM'[SALE_AMT])
+		displayFolder: COPA
+		lineageTag: ebf0a8b0-85b7-4602-8bf7-af07d27ba7b8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sale Amount Plan YTD' = TOTALYTD([Sale Amount Plan],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: 9a1dfde8-6782-4629-b044-cbe7552490e1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sale Amount YTD' = TOTALYTD([Sale Amount],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: 75db9fe4-6429-4d12-b693-63498a84cc76
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sale Quantity' = CALCULATE(SUM('FACT - COPA LINE ITEM'[SALE_QUANTITY]), 'FACT - COPA LINE ITEM'[MATERIAL_CODE] <> BLANK())
+		displayFolder: COPA
+		lineageTag: e1888593-7ccc-4ec7-80ac-518be4ae40d3
+
+	measure 'Sale Quantity Plan' = SUM('FACT - COPA PLAN ITEM'[SALE_QUANTITY])
+		displayFolder: COPA
+		lineageTag: e7421499-b64b-4f5f-8599-aea6cc8d597a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sale Quantity Plan YTD' = TOTALYTD([Sale Quantity Plan],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: 2498609a-04e0-4f7b-b2a9-90dbf50e563a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sale Quantity YTD' = TOTALYTD([Sale Quantity],'DIM - DATE'[Date])
+		displayFolder: COPA
+		lineageTag: 12f51c46-6ee0-49ed-9199-c8dba7c32918
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí thực hiện' =
+			
+			CALCULATE(
+			    SUMX(
+			        'FACT - GL ACCOUNT BALANCE',
+			        [DEBIT_AMT] + [CREDIT_AMT]
+			    ),
+			    'FACT - GL ACCOUNT BALANCE'[COST_CENTRE] <> "1Z99"
+			)
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 04879bd9-717f-4bd9-bb61-c099f8278e2a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí thực hiện lũy kế' = TOTALYTD([Chi phí thực hiện],'DIM - DATE'[Date])
+		formatString: #,##0
+		displayFolder: CO\CO Planning\ZCO01
+		lineageTag: 8e2323f9-82bf-45d2-be0b-a9b108b74aef
+
+	measure 'Đơn giá_ZCO012' = DIVIDE([Tổng giá thành - PVCFC], CALCULATE([Sản lượng SX (ZCO12A)],ALL('FACT - CO SPLIT ITEM'[COST_DESC_NPK]),ALL('FACT - CO SPLIT ITEM'[COST_DESC])),0)
+		lineageTag: 2f32c544-7cb5-4922-b494-b9704bdd13ad
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Đơn giá_ZCO012_TỶ trọng' = DIVIDE([Tổng giá thành - PVCFC], CALCULATE([Tổng giá thành - PVCFC],ALL('FACT - CO SPLIT ITEM'[COST_DESC])))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: dea32791-ad84-4221-bdbc-7addcde569d2
+
+	measure 'Tổng giá thành - PVCFC - all date' = IF([Tổng giá thành - PVCFC] <> BLANK(), [Tổng giá thành - PVCFC]/10^9, 0)
+		formatString: #,0.00
+		isHidden
+		lineageTag: c4f4997c-b011-4a7e-9734-ebf1e7de5241
+
+	measure 'Đơn giá - PVCFC - all date' = IF([Đơn giá_ZCO012] <> BLANK(), [Đơn giá_ZCO012]/10^3 , 0)
+		isHidden
+		lineageTag: 65bcbe5a-660a-4a08-a2f2-7e025b484c83
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Module
+		dataType: string
+		lineageTag: eafa8ef2-f36c-482a-8a61-d2a96fb37fbb
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Module]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Metrics: CO - Controlling' = calculated
+		mode: import
+		source = ```
+				DATATABLE (
+				    "Module", STRING, 
+				    { 
+				        {"FI-CO"}
+				    } 
+				)
+				```
+
+	annotation PBI_Id = 135fb54c1ba44b449a0584fb15f873f6
+
