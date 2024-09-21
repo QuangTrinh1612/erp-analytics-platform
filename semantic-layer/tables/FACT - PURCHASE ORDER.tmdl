@@ -1,0 +1,387 @@
+table 'FACT - PURCHASE ORDER'
+	lineageTag: a5baa1b4-5af0-473a-96c3-748675d06d7d
+
+	column PURCHASE_ORDER
+		dataType: string
+		lineageTag: ad516d34-7dce-4e75-80bc-e66835236c2c
+		summarizeBy: none
+		sourceColumn: PURCHASE_ORDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_ITEM
+		dataType: string
+		lineageTag: e26328ae-5d10-4b90-a404-9c9f290f2585
+		summarizeBy: none
+		sourceColumn: PURCHASE_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_GROUP
+		dataType: string
+		lineageTag: fc4adc79-d706-4334-bcf6-46bc7f3d8c17
+		summarizeBy: none
+		sourceColumn: PURCHASE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_GROUP_NAME
+		dataType: string
+		lineageTag: 8653a3f7-bf4b-4205-a81b-a3f11773d32d
+		summarizeBy: none
+		sourceColumn: PURCHASE_GROUP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_DATE
+		dataType: string
+		lineageTag: d22ec683-b836-45e0-ae37-b8381394c529
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: ce3a9f3e-2e1d-417b-9a0f-22e46b5332e9
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NET_PRICE
+		dataType: double
+		lineageTag: a85d52f8-f9e0-41ac-b2b1-b43c2ac75c90
+		summarizeBy: sum
+		sourceColumn: NET_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_PRICE_VND
+		dataType: double
+		lineageTag: 4eda962f-87dd-40f4-a6aa-689cfdc75164
+		summarizeBy: sum
+		sourceColumn: NET_PRICE_VND
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_VALUE
+		dataType: double
+		lineageTag: 88284a58-e7e6-4dcc-b1fa-7ef517856b00
+		summarizeBy: sum
+		sourceColumn: NET_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_VALUE_VND
+		dataType: double
+		lineageTag: a708abb5-893f-4a84-903b-74a97a7c7ef1
+		summarizeBy: sum
+		sourceColumn: NET_VALUE_VND
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DOC_TYPE
+		dataType: string
+		lineageTag: 3ce4f6b2-ba2a-42ef-b9ff-927249f34d39
+		summarizeBy: none
+		sourceColumn: DOC_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_CATEGORY
+		dataType: string
+		lineageTag: 116f2032-1f54-4132-9e1a-c3330a19101e
+		summarizeBy: none
+		sourceColumn: DOC_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_TYPE_NAME
+		dataType: string
+		lineageTag: eb426cee-a8ec-465b-96c6-12afd8cf1180
+		summarizeBy: none
+		sourceColumn: DOC_TYPE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 3d44f071-fc6b-407b-b338-311fd9f3bdc2
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_TYPE
+		dataType: string
+		lineageTag: 51f1f7ae-0c97-4796-aa1c-633c510b2a90
+		summarizeBy: none
+		sourceColumn: MATERIAL_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_TYPE_NAME
+		dataType: string
+		lineageTag: a30d3183-ad6a-455d-af32-ab85a91f9077
+		summarizeBy: none
+		sourceColumn: MATERIAL_TYPE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_NAME
+		dataType: string
+		lineageTag: 07876894-550e-499d-9d67-c94f41a0b665
+		summarizeBy: none
+		sourceColumn: MATERIAL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_QUANTITY
+		dataType: double
+		lineageTag: 3ac58f5a-15d7-4fed-84bb-8b54d2c8a7bd
+		summarizeBy: sum
+		sourceColumn: DOC_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UOM
+		dataType: string
+		lineageTag: 6d9d4336-304d-4032-a23d-a159a6ead25c
+		summarizeBy: none
+		sourceColumn: UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_CODE
+		dataType: string
+		lineageTag: 4e2a5323-cedc-436a-8d4a-c3b932c9c8d5
+		summarizeBy: none
+		sourceColumn: VENDOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_NAME
+		dataType: string
+		lineageTag: eca8e8dd-117c-479f-b74a-79f7fde0143a
+		summarizeBy: none
+		sourceColumn: VENDOR_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		lineageTag: 1e414efe-92ac-4764-8627-aea76aa40f80
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAX_CODE
+		dataType: string
+		lineageTag: a3d1f7bd-016b-454d-a950-13fae8d5ab5e
+		summarizeBy: none
+		sourceColumn: TAX_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OUTLINE_AGREEMENT
+		dataType: string
+		lineageTag: c8ba0e82-e6b6-4495-93b2-b52f74224a2f
+		summarizeBy: none
+		sourceColumn: OUTLINE_AGREEMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_CONDITION
+		dataType: string
+		lineageTag: bfdd2a38-7d01-4a9f-b525-93d83578297d
+		summarizeBy: none
+		sourceColumn: DOC_CONDITION
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_SHORT_TEXT
+		dataType: string
+		lineageTag: a3b9ebaf-694b-43a5-bd30-e340a6f390ea
+		summarizeBy: none
+		sourceColumn: MATERIAL_SHORT_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXCHANGE_RATE
+		dataType: double
+		lineageTag: 2006c0a8-d7b1-447e-a5c3-685c400e7826
+		summarizeBy: sum
+		sourceColumn: EXCHANGE_RATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CURRENCY_KEY
+		dataType: string
+		lineageTag: c266eb91-b71b-47e7-82c0-49a46d084d3d
+		summarizeBy: none
+		sourceColumn: CURRENCY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column RELEASE_PO
+		dataType: string
+		lineageTag: 0209d791-468d-4e49-a913-9e59526e8b5e
+		summarizeBy: none
+		sourceColumn: RELEASE_PO
+
+		annotation SummarizationSetBy = Automatic
+
+	column RELEASE_STATUS
+		dataType: string
+		lineageTag: 755aa510-d47e-4833-8b2c-068e05d7286a
+		summarizeBy: none
+		sourceColumn: RELEASE_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column PR_DOC
+		dataType: string
+		lineageTag: 603dd023-f85b-463f-9c05-fac3ec5122c1
+		summarizeBy: none
+		sourceColumn: PR_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_PR_DOC
+		dataType: string
+		lineageTag: 2953ff0b-b5d1-4025-9685-b892c2fd805b
+		summarizeBy: none
+		sourceColumn: ITEM_PR_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_ORG
+		dataType: string
+		lineageTag: ba516da3-7220-4701-b6c9-03071e0c295d
+		summarizeBy: none
+		sourceColumn: PURCHASE_ORG
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQUISITION_DATE
+		dataType: string
+		lineageTag: af8def55-b364-4e8c-a8e4-26e09b0f096c
+		summarizeBy: none
+		sourceColumn: REQUISITION_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_BY
+		dataType: string
+		lineageTag: aae01f87-cb30-4d8b-9af5-b335e9d26a2f
+		summarizeBy: none
+		sourceColumn: CREATED_BY
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: d3c390c7-5552-45ce-a801-b167183b4005
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOIDUNG_HD
+		dataType: string
+		lineageTag: 72937dbd-37b1-4617-a1fe-09703e16f903
+		summarizeBy: none
+		sourceColumn: NOIDUNG_HD
+
+		annotation SummarizationSetBy = Automatic
+
+	column SO_HD
+		dataType: string
+		lineageTag: 863ae42a-bb7e-4cc5-af4f-39a4eff82577
+		summarizeBy: none
+		sourceColumn: SO_HD
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_TH
+		dataType: string
+		lineageTag: e669f380-d15c-460f-a67a-bb5e8987949f
+		summarizeBy: none
+		sourceColumn: DV_TH
+
+		annotation SummarizationSetBy = Automatic
+
+	column DV_YC
+		dataType: string
+		lineageTag: 875f3434-48b6-4dd2-a7a9-a9c8179235c5
+		summarizeBy: none
+		sourceColumn: DV_YC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SDT
+		dataType: string
+		lineageTag: 57eb1946-66ab-4173-80b5-78abb0c499f4
+		summarizeBy: none
+		sourceColumn: SDT
+
+		annotation SummarizationSetBy = Automatic
+
+	column FAX
+		dataType: string
+		lineageTag: 8e422b8b-5322-4cbf-ae1a-554585bdb006
+		summarizeBy: none
+		sourceColumn: FAX
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMAIL
+		dataType: string
+		lineageTag: 87f854fa-5d12-49f4-bc39-399a5900e89a
+		summarizeBy: none
+		sourceColumn: EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column GHI_CHU
+		dataType: string
+		lineageTag: d2c4bde3-e714-4225-99ad-82b6272b47d9
+		summarizeBy: none
+		sourceColumn: GHI_CHU
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_PLANT_KEY = [MATERIAL_CODE]&"-"&[PLANT_CODE]
+		dataType: string
+		lineageTag: 6ce24fc8-69a3-4957-a3bc-9af9f4d41b1b
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - PURCHASE ORDER' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_PURCHASE_ORDER = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_PURCHASE_ORDER"]}[Data]
+				in
+				    gld_VW_FACT_PURCHASE_ORDER
+
+	annotation PBI_ResultType = Table
+

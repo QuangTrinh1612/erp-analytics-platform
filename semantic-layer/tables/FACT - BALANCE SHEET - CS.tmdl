@@ -1,0 +1,87 @@
+table 'FACT - BALANCE SHEET - CS'
+	lineageTag: 237b4b28-b3d5-4732-acbd-919197fab74f
+
+	column FISCAL_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dbabf188-bd0e-400a-80b6-d96030ae4295
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FISCAL_YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 0a245037-d4a0-4124-8a16-eb5f3a61dd90
+		summarizeBy: sum
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: int64
+		formatString: 0
+		lineageTag: b88c1635-2776-4eae-bf99-8b528a1a3da8
+		summarizeBy: sum
+		sourceColumn: FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c2d2a68-2a84-48f5-b52e-8b8923ad254f
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_CODE
+		dataType: string
+		lineageTag: 4a7eb8ff-5022-42e2-afde-80e8a27edfa3
+		summarizeBy: none
+		sourceColumn: CURRENCY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_NO
+		dataType: string
+		lineageTag: 6c6c6d09-e80a-4ed2-afa3-530bbb7d2e5e
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BS_ITEM
+		dataType: string
+		lineageTag: a2e923eb-3771-4a38-b66b-1e9a23a570d9
+		summarizeBy: none
+		sourceColumn: BS_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCAL_AMT
+		dataType: double
+		lineageTag: 515b28c8-7e90-4e26-8519-d571df0adb14
+		summarizeBy: sum
+		sourceColumn: LOCAL_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - BALANCE SHEET - CS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_FACT_BALANCE_SHEET_CS = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_BALANCE_SHEET_CS"]}[Data]
+				in
+				    VW_FACT_BALANCE_SHEET_CS
+
+	annotation PBI_ResultType = Exception
+

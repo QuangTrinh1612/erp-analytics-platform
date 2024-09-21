@@ -1,0 +1,170 @@
+table 'FACT - ACTUAL PRODUCTION'
+	lineageTag: 9514c716-96a0-48e6-a528-9dbd8a2c4eff
+
+	column NUM_MATERIAL_DOC
+		dataType: string
+		lineageTag: 0e55c531-f765-4711-b58a-95cfd8dd7c1a
+		summarizeBy: none
+		sourceColumn: NUM_MATERIAL_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_MATERIAL_DOC
+		dataType: string
+		lineageTag: 98e9f148-543d-46b0-b745-d7f00b82c64d
+		summarizeBy: none
+		sourceColumn: ITEM_MATERIAL_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_DATE
+		dataType: string
+		lineageTag: 3b11c678-f23e-4161-9239-8c27c1d5b628
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 7c276712-91cc-45c3-af30-4433e44acac3
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOCATION
+		dataType: string
+		lineageTag: b6f90456-3bcf-43b7-843f-6ea139e1ec52
+		summarizeBy: none
+		sourceColumn: STORAGE_LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRO_SEMI_CODE
+		dataType: string
+		lineageTag: 41c21b4a-372b-4c71-b9c9-c0df731c12d4
+		summarizeBy: none
+		sourceColumn: PRO_SEMI_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: 683bb5b8-50b5-4f18-99a4-e8f826b28e7e
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: f110afd0-e2d2-4146-91f0-8f354877f017
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEB_CRE_INDI
+		dataType: string
+		lineageTag: 3b216f5a-0fd5-4fdd-9c65-92596252d99d
+		summarizeBy: none
+		sourceColumn: DEB_CRE_INDI
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: 3e5e4c30-6fa5-4db8-b08d-6c64cbb7634e
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UNIT
+		dataType: string
+		lineageTag: e3b1ed88-8196-4051-8b17-ef2ed83dc74a
+		summarizeBy: none
+		sourceColumn: BASE_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANUF_QTY
+		dataType: double
+		lineageTag: c9648b5b-c953-4f36-8fd0-960c2d278288
+		summarizeBy: sum
+		sourceColumn: MANUF_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MANUF_QTY_M
+		dataType: double
+		lineageTag: acd6335e-a862-45d2-96be-6793a65044fc
+		summarizeBy: sum
+		sourceColumn: MANUF_QTY_M
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MANUF_QTY_Q
+		dataType: double
+		lineageTag: 953a594f-b861-40e6-9d8f-b3ec64eda2b7
+		summarizeBy: sum
+		sourceColumn: MANUF_QTY_Q
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MANUF_VALUE
+		dataType: double
+		lineageTag: 08d8b448-13f8-4f44-a09b-0ab11064540b
+		summarizeBy: sum
+		sourceColumn: MANUF_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MANUF_VALUE_M
+		dataType: double
+		lineageTag: 9a984f12-d88c-44a1-acc6-a65175f7af53
+		summarizeBy: sum
+		sourceColumn: MANUF_VALUE_M
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MANUF_VALUE_Q
+		dataType: double
+		lineageTag: aa9e4aea-0a7c-4b2a-9260-38e3c26b2194
+		summarizeBy: sum
+		sourceColumn: MANUF_VALUE_Q
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fc24aadc-1247-4348-9386-a7c914112081
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - ACTUAL PRODUCTION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_ACTUAL_PRODUCTION = pvcfcprodsqlpool{[Schema="gld",Item="FACT_ACTUAL_PRODUCTION"]}[Data]
+				in
+				    gld_FACT_ACTUAL_PRODUCTION
+

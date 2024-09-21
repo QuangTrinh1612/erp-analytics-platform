@@ -1,0 +1,252 @@
+table 'FILE GIAITRINH_VT'
+	lineageTag: 2d1799dd-302d-4c7b-bbd7-ef47f6b4debe
+
+	column Material
+		dataType: string
+		lineageTag: ed1b51bd-18d5-4863-957f-1dadc0482436
+		summarizeBy: none
+		sourceColumn: Material
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLĐK
+		dataType: double
+		lineageTag: ba76e990-573b-4d89-b9e5-6bf8555eac79
+		summarizeBy: sum
+		sourceColumn: SLĐK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GTĐK
+		dataType: double
+		lineageTag: 548c9c74-2f45-4a82-9760-28b4df26f775
+		summarizeBy: sum
+		sourceColumn: GTĐK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SLNK
+		dataType: double
+		lineageTag: 90528385-a44b-4898-aebd-c551d6aec33b
+		summarizeBy: sum
+		sourceColumn: SLNK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GTNK
+		dataType: double
+		lineageTag: 67e597e5-8193-4868-a05e-19180741833f
+		summarizeBy: sum
+		sourceColumn: GTNK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SLXK
+		dataType: double
+		lineageTag: 7356f1c6-8e82-4b72-9064-cfa04b8d3fce
+		summarizeBy: sum
+		sourceColumn: SLXK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GTXK
+		dataType: double
+		lineageTag: c0a9c4e3-e3f4-4b5b-b8b5-dac5845e9f5a
+		summarizeBy: sum
+		sourceColumn: GTXK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SLCK
+		dataType: double
+		lineageTag: 6833ab2e-84a0-41e3-b311-6b8df6713bca
+		summarizeBy: sum
+		sourceColumn: SLCK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GTCK
+		dataType: double
+		lineageTag: 6608a520-1014-45c0-8085-7da0fa3d2cd4
+		summarizeBy: sum
+		sourceColumn: GTCK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Đơn giá'
+		dataType: double
+		lineageTag: 5d2971b9-b9ed-4168-a52f-a85dd187cf41
+		summarizeBy: sum
+		sourceColumn: Đơn giá
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GT CK-ĐK'
+		dataType: double
+		lineageTag: 01724c19-4958-4c19-a7d1-1d0c6f61c583
+		summarizeBy: sum
+		sourceColumn: GT CK-ĐK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTN Đã XK'
+		dataType: double
+		lineageTag: e4f5e37f-0526-401d-a58d-a87bb6dfeee2
+		summarizeBy: sum
+		sourceColumn: GTN Đã XK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTN CHƯA XK'
+		dataType: double
+		lineageTag: 1fd6d3b0-4c72-49de-b30b-0f8f75142e35
+		summarizeBy: sum
+		sourceColumn: GTN CHƯA XK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Định mức'
+		dataType: double
+		lineageTag: fd8e47c5-7b69-4a1d-82e9-a70355f35161
+		summarizeBy: sum
+		sourceColumn: Định mức
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GT mua BDTT'
+		dataType: double
+		lineageTag: ce094285-b502-4697-ba0f-01066a74b88f
+		summarizeBy: sum
+		sourceColumn: GT mua BDTT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GT BDTX'
+		dataType: double
+		lineageTag: e3da0aca-5c09-4b39-97f8-8bbc6b8f9aa6
+		summarizeBy: sum
+		sourceColumn: GT BDTX
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GT ĐM'
+		dataType: double
+		lineageTag: b4e705f5-dfb9-469b-a1e2-41d817a6f234
+		summarizeBy: sum
+		sourceColumn: GT ĐM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2024'
+		dataType: double
+		lineageTag: ae9993f3-1503-4b07-a222-80414636a27e
+		summarizeBy: sum
+		sourceColumn: SLSD 2024
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2025'
+		dataType: double
+		lineageTag: a1bd8bac-2d29-4f4c-b0cc-33f916f260b6
+		summarizeBy: sum
+		sourceColumn: SLSD 2025
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2026'
+		dataType: double
+		lineageTag: 9774f396-dd28-409f-9894-938c866ef173
+		summarizeBy: sum
+		sourceColumn: SLSD 2026
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2024'
+		dataType: double
+		lineageTag: 4c1732be-c994-4c17-991d-5bd7998414b9
+		summarizeBy: sum
+		sourceColumn: GTSD 2024
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2025'
+		dataType: double
+		lineageTag: 44a9c6ea-a602-4036-8aa5-85b49b986909
+		summarizeBy: sum
+		sourceColumn: GTSD 2025
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2026'
+		dataType: double
+		lineageTag: 0d8f912d-73b0-4803-bccd-962101aaafda
+		summarizeBy: sum
+		sourceColumn: GTSD 2026
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Material_plant_key ' = 'FILE GIAITRINH_VT'[Material]&& "-1000"
+		dataType: boolean
+		lineageTag: 983bbd4e-07df-453f-b73a-a9169ecd013d
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FILE GIAITRINH_VT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_GIAITRINH_VT = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_GIAITRINH_VT"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_GIAITRINH_VT,{{"SLĐK", type number}, {"GTĐK", type number}, {"SLNK", type number}, {"GTNK", type number}, {"SLXK", type number}, {"GTXK", type number}, {"SLCK", type number}, {"GTCK", type number}, {"Đơn giá", type number}, {"GT CK-ĐK", type number}, {"GTN Đã XK", type number}, {"GTN CHƯA XK", type number}, {"Định mức", type number}, {"GT mua BDTT", type number}, {"GT BDTX", type number}, {"GT ĐM", type number}, {"SLSD 2024", type number}, {"SLSD 2025", type number}, {"SLSD 2026", type number}, {"GTSD 2024", type number}, {"GTSD 2025", type number}, {"GTSD 2026", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

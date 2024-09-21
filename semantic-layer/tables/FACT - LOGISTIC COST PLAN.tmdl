@@ -1,0 +1,253 @@
+table 'FACT - LOGISTIC COST PLAN'
+	lineageTag: 13d645aa-9d4a-470b-ac1c-68925ce8245f
+
+	column FISCAL_DATE
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6cc6d476-d896-4504-b4ed-faccaa219496
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_YEAR
+		dataType: string
+		isHidden
+		lineageTag: 25726b5b-98db-4f91-8277-59c000719e8d
+		summarizeBy: none
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b91e0ddd-1f30-4e65-b6a8-f57d45be51ea
+		summarizeBy: sum
+		sourceColumn: FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CAT
+		dataType: string
+		isHidden
+		lineageTag: 0fc2df13-44a2-4886-8005-1db42ce2813e
+		summarizeBy: none
+		sourceColumn: PRODUCT_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_NAME
+		dataType: string
+		isHidden
+		lineageTag: 70aa863d-1f43-4458-be5d-0711342aee30
+		summarizeBy: none
+		sourceColumn: PRODUCT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_GROUP
+		dataType: string
+		isHidden
+		lineageTag: 4ca7cde4-67b6-4f96-8c41-1b7e0517d931
+		summarizeBy: none
+		sourceColumn: SALE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_OFFICE
+		dataType: string
+		isHidden
+		lineageTag: b361102b-8dfe-46e5-9b83-290180c03cdd
+		summarizeBy: none
+		sourceColumn: SALE_OFFICE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANNEL_CODE
+		dataType: string
+		isHidden
+		lineageTag: ad69427c-70c7-46d2-a3f6-fc844012e87f
+		summarizeBy: none
+		sourceColumn: CHANNEL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_TYPE
+		dataType: string
+		isHidden
+		lineageTag: 4397b217-80f5-46de-9417-e315136ec94c
+		summarizeBy: none
+		sourceColumn: STORAGE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: 2f5cb2d4-fcb0-4113-bb3c-e3ac4ce1416b
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_ADDRESS
+		dataType: string
+		isHidden
+		lineageTag: 17a4412d-297e-4f0d-96e2-1b5692b6dd25
+		summarizeBy: none
+		sourceColumn: STORAGE_ADDRESS
+
+		annotation SummarizationSetBy = Automatic
+
+	column CP_VC
+		dataType: double
+		isHidden
+		lineageTag: 67512c75-f9c3-45f8-a123-48438e196c36
+		summarizeBy: sum
+		sourceColumn: CP_VC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_BHLK
+		dataType: double
+		isHidden
+		lineageTag: 4e81c80c-0226-4b71-8089-20cb0c38fda7
+		summarizeBy: sum
+		sourceColumn: CP_BHLK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_BHNK
+		dataType: double
+		isHidden
+		lineageTag: 30391e2c-99a2-4fce-87e3-803174d00ece
+		summarizeBy: sum
+		sourceColumn: CP_BHNK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_BHVC
+		dataType: double
+		isHidden
+		lineageTag: c34fed7c-35f4-440f-bcaa-b56eaf3b4d4f
+		summarizeBy: sum
+		sourceColumn: CP_BHVC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_LHNK
+		dataType: double
+		isHidden
+		lineageTag: 0d99e4ea-f47d-4683-bcd3-f7fa3a10f5f2
+		summarizeBy: sum
+		sourceColumn: CP_LHNK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_LK
+		dataType: double
+		isHidden
+		lineageTag: eb8d6756-f7cb-41cc-836c-1a733c92f800
+		summarizeBy: sum
+		sourceColumn: CP_LK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_SM
+		dataType: double
+		isHidden
+		lineageTag: dd3ad924-3944-4af2-9a55-1c25998f30f6
+		summarizeBy: sum
+		sourceColumn: CP_SM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_XLT
+		dataType: double
+		isHidden
+		lineageTag: 7c7f591d-0a2c-4080-906f-41382f4e69c9
+		summarizeBy: sum
+		sourceColumn: CP_XLT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRODUCT_SUBCAT = ```
+			SWITCH(TRUE(),
+			             CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "Ure"), "Ure TM",
+			             CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "NPK C") ||CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "Phân NPK"), "NPK",
+			             CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "N46")
+			             ||CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "Bio")
+			             || 'FACT - LOGISTIC COST PLAN'[PRODUCT_NAME]= "SPM", "SPM",
+			             'FACT - LOGISTIC COST PLAN'[PRODUCT_CAT] = "Tự doanh" || CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "Kali") , "Tự doanh",
+			             'FACT - LOGISTIC COST PLAN'[PRODUCT_CAT]= "Nguyên liệu NPK", "Nguyên liệu NPK")
+			
+			```
+		dataType: string
+		lineageTag: e29d6969-ec10-464b-840f-27a6354cefdb
+		summarizeBy: none
+		isDataTypeInferred
+		sortByColumn: PRODUCT_SUBCAT_SORT
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_SUBCAT_SORT =
+			SWITCH(TRUE(),
+			             CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "Ure"), 1,
+			             CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "NPK C") ||CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "Phân NPK"), 2,
+			             CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "N46")
+			             ||CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "Bio")
+			             || 'FACT - LOGISTIC COST PLAN'[PRODUCT_NAME]= "SPM", 3,
+			             'FACT - LOGISTIC COST PLAN'[PRODUCT_CAT] = "Tự doanh" || CONTAINSSTRING('FACT - LOGISTIC COST PLAN'[PRODUCT_NAME], "Kali") , 4,
+			             'FACT - LOGISTIC COST PLAN'[PRODUCT_CAT]= "Nguyên liệu NPK", 5)
+		dataType: int64
+		formatString: 0
+		lineageTag: c2a25064-71b9-47e3-bf3f-1a49c067fb1b
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column CP_SM_632
+		dataType: double
+		isHidden
+		lineageTag: db42ee78-086a-4017-bb64-7eb252bed806
+		summarizeBy: sum
+		sourceColumn: CP_SM_632
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - LOGISTIC COST PLAN' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_LOGISTIC_COST_PLAN = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_LOGISTIC_COST_PLAN"]}[Data]
+				in
+				    gld_VW_FACT_LOGISTIC_COST_PLAN
+

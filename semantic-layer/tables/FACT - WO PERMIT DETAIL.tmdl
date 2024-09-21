@@ -1,0 +1,192 @@
+table 'FACT - WO PERMIT DETAIL'
+	lineageTag: b81b41ec-b62b-458c-9ac4-28939fc0f347
+
+	column OBJECT_NUM
+		dataType: string
+		lineageTag: a525c066-7435-4b34-a06a-3078d1dfadc3
+		summarizeBy: none
+		sourceColumn: OBJECT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTER
+		dataType: string
+		lineageTag: defe1223-db20-4f77-89ea-029bc3059e5d
+		summarizeBy: none
+		sourceColumn: COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 3e4efd4e-83f8-436a-a3ab-841eaf1e3570
+		summarizeBy: none
+		sourceColumn: CREATED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column CREATOR
+		dataType: string
+		lineageTag: cf61f821-ba82-4ba4-9d47-414cad4e7560
+		summarizeBy: none
+		sourceColumn: CREATOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_DATE
+		dataType: string
+		lineageTag: 02cfb56e-ad97-4eeb-a943-6bf9c0c86675
+		summarizeBy: none
+		sourceColumn: CHANGE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_PERS
+		dataType: string
+		lineageTag: 626f4d01-d212-444b-b0d5-614a5e0755b3
+		summarizeBy: none
+		sourceColumn: CHANGE_PERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERMIT_KEY
+		dataType: string
+		lineageTag: 73fdfc71-60ee-4e99-bbec-08af7bed0443
+		summarizeBy: none
+		sourceColumn: PERMIT_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_REL_IND
+		dataType: string
+		lineageTag: f273460e-0236-4580-bea7-2367445e0789
+		summarizeBy: none
+		sourceColumn: ORDER_REL_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_COMP_IND
+		dataType: string
+		lineageTag: c04b36be-c952-4b93-a0c0-f042f2ae629c
+		summarizeBy: none
+		sourceColumn: ORDER_COMP_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERMIT_PAPER
+		dataType: string
+		lineageTag: 7d01118c-5df9-471a-97fc-d8d9e5ff7658
+		summarizeBy: none
+		sourceColumn: PERMIT_PAPER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRO_PERMIT
+		dataType: string
+		lineageTag: 6e27d8fb-f4c9-4134-9bf9-367f4096ec68
+		summarizeBy: none
+		sourceColumn: PRO_PERMIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 222e06b2-43d6-4f9d-a05c-3b74d40392d7
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISSUE_NAME
+		dataType: string
+		lineageTag: 3d391af8-5ecf-4263-b50c-03a4b07053f5
+		summarizeBy: none
+		sourceColumn: ISSUE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERMIT_STATUS
+		dataType: string
+		lineageTag: 1f32131e-7ec7-4419-a205-cba4fc1e8cb5
+		summarizeBy: none
+		sourceColumn: PERMIT_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: c26f0038-ca2e-4e0c-88d9-4f45a02cde6d
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACT_TYPE_CODE
+		dataType: string
+		lineageTag: 72f81ad6-fc03-4e97-9c6e-78b663b3e34f
+		summarizeBy: none
+		sourceColumn: ACT_TYPE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNCT_LOC_CODE
+		dataType: string
+		lineageTag: 5ea90522-0e12-46c1-8ff6-846884200396
+		summarizeBy: none
+		sourceColumn: FUNCT_LOC_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIOR_CODE
+		dataType: string
+		lineageTag: c67f90b7-3647-4d2f-bc84-81fd6a0326f8
+		summarizeBy: none
+		sourceColumn: PRIOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: 4aa3392a-232d-4c54-8347-5bef239f1672
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: 2c2af671-61ff-4e07-a8ce-b6c38a13fb74
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_PLAN
+		dataType: string
+		lineageTag: 6b9a05ef-608a-4563-9d9f-d7697a3bf8e7
+		summarizeBy: none
+		sourceColumn: MAINT_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - WO PERMIT DETAIL' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_WO_PERMIT_DETAIL = pvcfcprodsqlpool{[Schema="gld",Item="FACT_WO_PERMIT_DETAIL"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_WO_PERMIT_DETAIL,{"W_INSERT_DT"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"CREATED_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

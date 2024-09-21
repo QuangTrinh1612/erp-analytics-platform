@@ -1,0 +1,170 @@
+table 'FACT - SHELF LIFE LIST'
+	lineageTag: 7c6ee742-9688-4eda-b64d-a35c65e22bc9
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 4ea0c09f-19c1-4fb3-8248-3b27258037a7
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: 8571e749-dcc9-4271-9d24-ce2bde72eac8
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: d7bb2247-bc75-4fb5-995f-89d1dd6162f3
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: 6c9f2f22-67b3-4d93-8cd6-1abc96cb5fff
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column IND_BATCH_REQ
+		dataType: string
+		lineageTag: c0afeb9a-2598-4654-b400-d4a199f2e740
+		summarizeBy: none
+		sourceColumn: IND_BATCH_REQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLED_BBD
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: 6a8c30d2-67f3-4157-a721-d286dceb0567
+		summarizeBy: none
+		sourceColumn: SLED_BBD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MANUF_DATE
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: 485d3779-b0ef-46eb-9873-cfa4167721c8
+		summarizeBy: none
+		sourceColumn: MANUF_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column STORAGE_PCT
+		dataType: double
+		lineageTag: c325e311-daf9-418a-a193-fba86c7603c7
+		summarizeBy: sum
+		sourceColumn: STORAGE_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOT_SHELF_LIFE
+		dataType: double
+		lineageTag: 2d89d5dc-6090-4b43-a971-73792a65e93a
+		summarizeBy: sum
+		sourceColumn: TOT_SHELF_LIFE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MIN_REM_SHELF_LIFE
+		dataType: double
+		lineageTag: 19266410-3c57-4fa0-9878-4b350820e259
+		summarizeBy: sum
+		sourceColumn: MIN_REM_SHELF_LIFE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PERIOD_IND_SL_EXP
+		dataType: string
+		lineageTag: b7dac3ef-fe49-4c5e-8783-38538a29e588
+		summarizeBy: none
+		sourceColumn: PERIOD_IND_SL_EXP
+
+		annotation SummarizationSetBy = Automatic
+
+	column ROUND_RULE_SLED
+		dataType: string
+		lineageTag: 3313af42-2093-4f21-a888-7d831c89b465
+		summarizeBy: none
+		sourceColumn: ROUND_RULE_SLED
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUOM
+		dataType: string
+		lineageTag: 31d773df-083b-47bb-a289-a3e6bf709dd8
+		summarizeBy: none
+		sourceColumn: BUOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNRESTRICED_STOCK
+		dataType: double
+		lineageTag: 64daef38-3b49-43cf-bc55-2e97e110ecf2
+		summarizeBy: sum
+		sourceColumn: UNRESTRICED_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Remaining Days' = DATEDIFF(TODAY(),[SLED_BBD],DAY)
+		dataType: int64
+		formatString: 0
+		lineageTag: 139893fe-912a-4ffe-b96d-059a6ed48d83
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column CANCEL
+		dataType: string
+		lineageTag: f0fd7880-2538-4f58-8910-74d9e0a15269
+		summarizeBy: none
+		sourceColumn: CANCEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NGÀY THỰC GIAO'
+		dataType: string
+		lineageTag: a48afcd4-c02e-4f2e-80b9-ddb0ece118a5
+		summarizeBy: none
+		sourceColumn: NGÀY THỰC GIAO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Shelf Life List' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_SHELF_LIFE_LIST = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_SHELF_LIFE_LIST"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_SHELF_LIFE_LIST,{{"MANUF_DATE", type date}, {"SLED_BBD", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

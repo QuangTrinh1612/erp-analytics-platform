@@ -1,0 +1,19 @@
+table 'LIST - SALE ORDER'
+	lineageTag: 79bac36f-968c-4639-924b-65453bef5740
+
+	column SALE_ORDER_DOC
+		dataType: string
+		lineageTag: 45bcf933-49d4-4c75-9737-bbc12890c76e
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - SALE ORDER STATUS[SALE_ORDER_DOC]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LIST - SALE ORDER' = calculated
+		mode: import
+		source = FILTER(DISTINCT('FACT - SALE ORDER STATUS'[SALE_ORDER_DOC]), ISBLANK('FACT - SALE ORDER STATUS'[SALE_ORDER_DOC]) = FALSE())
+
+	annotation PBI_Id = 207fef9bd81e4c8eabb6067578610d0d
+

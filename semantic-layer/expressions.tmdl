@@ -1,0 +1,87 @@
+expression 'Errors in Fact Storage Bin' =
+		let
+		Source = #"Fact Storage Bin",
+		  #"Detected Type Mismatches" = let
+		    tableWithOnlyPrimitiveTypes = Table.SelectColumns(Source, Table.ColumnsOfType(Source, {type nullable number, type nullable text, type nullable logical, type nullable date, type nullable datetime, type nullable datetimezone, type nullable time, type nullable duration})),
+		    recordTypeFields = Type.RecordFields(Type.TableRow(Value.Type(tableWithOnlyPrimitiveTypes))),
+		    fieldNames = Record.FieldNames(recordTypeFields),
+		    fieldTypes = List.Transform(Record.ToList(recordTypeFields), each [Type]),
+		    pairs = List.Transform(List.Positions(fieldNames), (i) => {fieldNames{i}, (v) => if v = null or Value.Is(v, fieldTypes{i}) then v else error [Message = "The type of the value does not match the type of the column.", Detail = v], fieldTypes{i}})
+		in
+		    Table.TransformColumns(Source, pairs),
+		  #"Added Index" = Table.AddIndexColumn(#"Detected Type Mismatches", "Row Number" ,1),
+		  #"Kept Errors" = Table.SelectRowsWithErrors(#"Added Index", {"WH_NUM", "MATERIAL_CODE", "PLANT_CODE", "STORAGE_LOCATION", "STOCK_CAT", "BATCH", "SPECIAL_STOCK", "SPECIAL_STOCK_NO", "MATERIAL_SHORT_DESCRIPTION", "STORAGE_TYPE", "STORAGE_BIN", "AVAILABLE_STOCK", "BASE_UOM", "GR_DATE"}),
+		  #"Reordered Columns" = Table.ReorderColumns(#"Kept Errors", {"Row Number", "WH_NUM", "MATERIAL_CODE", "PLANT_CODE", "STORAGE_LOCATION", "STOCK_CAT", "BATCH", "SPECIAL_STOCK", "SPECIAL_STOCK_NO", "MATERIAL_SHORT_DESCRIPTION", "STORAGE_TYPE", "STORAGE_BIN", "AVAILABLE_STOCK", "BASE_UOM", "GR_DATE"})
+		in
+		  #"Reordered Columns"
+	lineageTag: d3cfeea1-7761-427d-95c2-745e6214a3ca
+	queryGroup: 'Query Errors - 19/10/2023 2:23:32 CH'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Fact Inventory Balance Sloc Amount' =
+		let
+		    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+		    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+		    gld_FACT_INVENTORY_BALANCE_SLOC_AMOUNT = pvcfcprodsqlpool{[Schema="gld",Item="FACT_INVENTORY_BALANCE_SLOC_AMOUNT"]}[Data]
+		in
+		    gld_FACT_INVENTORY_BALANCE_SLOC_AMOUNT
+	lineageTag: 2cf052d4-d54e-4369-ad9c-c6c0df7a2d8f
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Fact Inventory Balance Sloc' =
+		let
+		    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+		    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+		    gld_FACT_INVENTORY_BALANCE_SLOC = pvcfcprodsqlpool{[Schema="gld",Item="FACT_INVENTORY_BALANCE_SLOC"]}[Data]
+		in
+		    gld_FACT_INVENTORY_BALANCE_SLOC
+	lineageTag: 1abbc7eb-9e45-4dbf-b6fd-dc5e2c10314f
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'FACT - SHARE TRANSACTION' =
+		let
+		    Source = Json.Document(Web.Contents("https://s.cafef.vn/Ajax/PageNew/DataHistory/PriceHistory.ashx?Symbol=DCM&StartDate=01/01/2015&EndDate=12/31/2023&PageSize=10000"), 65001),
+		    Data = Source[Data],
+		    Data1 = Data[Data],
+		    #"Converted to Table" = Table.FromList(Data1, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table", "Column1", {"Ngay", "GiaDieuChinh", "GiaDongCua", "KhoiLuongKhopLenh", "GiaTriKhopLenh", "KLThoaThuan", "GtThoaThuan", "GiaMoCua", "GiaCaoNhat", "GiaThapNhat"}, {"Date", "GiaDieuChinh", "GiaDongCua", "KhoiLuongKhopLenh", "GiaTriKhopLenh", "KLThoaThuan", "GtThoaThuan", "GiaMoCua", "GiaCaoNhat", "GiaThapNhat"}),
+		    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Expanded Column1", {{"Date", type date}}, "vi-VN"),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Changed Type with Locale",{{"GiaDieuChinh", type number}, {"GiaDongCua", type number}, {"KhoiLuongKhopLenh", Int64.Type}, {"GiaTriKhopLenh", Int64.Type}, {"KLThoaThuan", Int64.Type}, {"GtThoaThuan", Int64.Type}, {"GiaMoCua", type number}, {"GiaCaoNhat", type number}, {"GiaThapNhat", type number}})
+		in
+		    #"Changed Type"
+	lineageTag: 74400866-becc-4e7e-b2cd-920c2e5c4d93
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
+expression 'Errors in FACT - HISTORY APPROVAL' =
+		let
+		Source = #"FACT - HISTORY APPROVAL",
+		  #"Detected Type Mismatches" = let
+		    tableWithOnlyPrimitiveTypes = Table.SelectColumns(Source, Table.ColumnsOfType(Source, {type nullable number, type nullable text, type nullable logical, type nullable date, type nullable datetime, type nullable datetimezone, type nullable time, type nullable duration})),
+		    recordTypeFields = Type.RecordFields(Type.TableRow(Value.Type(tableWithOnlyPrimitiveTypes))),
+		    fieldNames = Record.FieldNames(recordTypeFields),
+		    fieldTypes = List.Transform(Record.ToList(recordTypeFields), each [Type]),
+		    pairs = List.Transform(List.Positions(fieldNames), (i) => {fieldNames{i}, (v) => if v = null or Value.Is(v, fieldTypes{i}) then v else error [Message = "The type of the value does not match the type of the column.", Detail = v], fieldTypes{i}})
+		in
+		    Table.TransformColumns(Source, pairs),
+		  #"Added Index" = Table.AddIndexColumn(#"Detected Type Mismatches", "Row Number" ,1),
+		  #"Kept Errors" = Table.SelectRowsWithErrors(#"Added Index", {"WORK_ITEM_ID", "OBJECT_KEY", "WORK_DEFINITION_NUMBER", "MATERIAL_CODE", "TRANSACTION_CODE", "MAINT_ITEM", "DATA_TYPE", "EQUI_NUMBER", "PLNT_SECT_CODE", "PLANNER_GRP_CODE", "SUP_CODE", "PRIOR_CODE", "WORK_CENTER_ID", "SYST_COND", "ACT_TYPE_CODE", "RECALL_DATE", "USER_RECALL", "ACTION_DATE1", "ACTION_DATE2", "ACTION_DATE3", "ACTION_DATE4", "ACTION_DATE5", "AGENT_NAME1", "AGENT_NAME2", "AGENT_NAME3", "AGENT_NAME4", "AGENT_NAME5", "RECALLED_IND", "SAP_USER1", "SAP_USER2", "SAP_USER3", "SAP_USER4", "SAP_USER5", "COMMENT_LEVEL1", "COMMENT_LEVEL2", "COMMENT_LEVEL3", "COMMENT_LEVEL4", "COMMENT_LEVEL5", "EMAIL_ADDRESS1", "EMAIL_ADDRESS2", "EMAIL_ADDRESS3", "EMAIL_ADDRESS4", "EMAIL_ADDRESS5", "CHANGE_DESC", "STATUS_LEVEL1_DESC", "STATUS_LEVEL2_DESC", "STATUS_LEVEL3_DESC", "STATUS_LEVEL4_DESC", "STATUS_LEVEL5_DESC", "CREATED_DATE", "STATUS_LEVEL1", "STATUS_LEVEL2", "STATUS_LEVEL3", "STATUS_LEVEL4", "STATUS_LEVEL5", "MAIN_WORK_CENTER", "PLAN_STAT_DATE", "MI_TITLE", "GROUP_KEY", "GRP_COUNTER", "FREQ", "CONTENT_WAR", "START_OF_CYCLE", "REQ_START_DATE", "OVERVIEW_STATUS "}),
+		  #"Reordered Columns" = Table.ReorderColumns(#"Kept Errors", {"Row Number", "WORK_ITEM_ID", "OBJECT_KEY", "WORK_DEFINITION_NUMBER", "MATERIAL_CODE", "TRANSACTION_CODE", "MAINT_ITEM", "DATA_TYPE", "EQUI_NUMBER", "PLNT_SECT_CODE", "PLANNER_GRP_CODE", "SUP_CODE", "PRIOR_CODE", "WORK_CENTER_ID", "SYST_COND", "ACT_TYPE_CODE", "RECALL_DATE", "USER_RECALL", "ACTION_DATE1", "ACTION_DATE2", "ACTION_DATE3", "ACTION_DATE4", "ACTION_DATE5", "AGENT_NAME1", "AGENT_NAME2", "AGENT_NAME3", "AGENT_NAME4", "AGENT_NAME5", "RECALLED_IND", "SAP_USER1", "SAP_USER2", "SAP_USER3", "SAP_USER4", "SAP_USER5", "COMMENT_LEVEL1", "COMMENT_LEVEL2", "COMMENT_LEVEL3", "COMMENT_LEVEL4", "COMMENT_LEVEL5", "EMAIL_ADDRESS1", "EMAIL_ADDRESS2", "EMAIL_ADDRESS3", "EMAIL_ADDRESS4", "EMAIL_ADDRESS5", "CHANGE_DESC", "STATUS_LEVEL1_DESC", "STATUS_LEVEL2_DESC", "STATUS_LEVEL3_DESC", "STATUS_LEVEL4_DESC", "STATUS_LEVEL5_DESC", "CREATED_DATE", "STATUS_LEVEL1", "STATUS_LEVEL2", "STATUS_LEVEL3", "STATUS_LEVEL4", "STATUS_LEVEL5", "MAIN_WORK_CENTER", "PLAN_STAT_DATE", "MI_TITLE", "GROUP_KEY", "GRP_COUNTER", "FREQ", "CONTENT_WAR", "START_OF_CYCLE", "REQ_START_DATE", "OVERVIEW_STATUS "})
+		in
+		  #"Reordered Columns"
+	lineageTag: 7985d363-6085-44fa-a2ba-daf1bc3f083b
+	queryGroup: 'Query Errors - 6/15/2024 6:09:16 PM'
+
+	annotation PBI_NavigationStepName = Navigation
+

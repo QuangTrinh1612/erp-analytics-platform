@@ -1,0 +1,47 @@
+table 'DIM - MATERIAL GROUP'
+	lineageTag: ada69766-3ce2-43e4-ae89-ba7201e0ae21
+
+	column MATL_GROUP_CODE
+		dataType: string
+		lineageTag: 88b15d8e-fe7b-4a43-b35d-901249ee3a42
+		summarizeBy: none
+		sourceColumn: MATL_GROUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATL_GROUP_DES
+		dataType: string
+		lineageTag: 58bf52c1-a00a-40b0-ab56-ba0e09ea63fd
+		summarizeBy: none
+		sourceColumn: MATL_GROUP_DES
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ca1c8e6c-423b-4483-8283-a6844c37abdb
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: d7a91158-6586-4159-809b-a0b9e5fcd987
+		summarizeBy: count
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - MATERIAL GROUP' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_MATERIAL_GROUP = pvcfcprodsqlpool{[Schema="sil",Item="DIM_MATERIAL_GROUP"]}[Data]
+				in
+				    sil_DIM_MATERIAL_GROUP
+

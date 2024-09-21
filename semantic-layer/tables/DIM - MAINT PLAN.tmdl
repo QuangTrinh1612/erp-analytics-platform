@@ -1,0 +1,172 @@
+table 'DIM - MAINT PLAN'
+	lineageTag: 476744bf-329f-4226-ac17-a52c5ce6da70
+
+	column MAINT_PLAN
+		dataType: string
+		lineageTag: 05ed6111-ded6-4d2a-b557-edfeff560bc7
+		summarizeBy: none
+		sourceColumn: MAINT_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATE_DATE
+		dataType: string
+		lineageTag: e126b248-ee2a-4a34-9789-e29f7920ca05
+		summarizeBy: none
+		sourceColumn: CREATE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATE_PERS
+		dataType: string
+		lineageTag: 77006768-014b-479b-81f3-e04d2f8ed81f
+		summarizeBy: none
+		sourceColumn: CREATE_PERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_DATE
+		dataType: string
+		lineageTag: fb64849a-ec14-4bca-ad00-0ca588ad2c7b
+		summarizeBy: none
+		sourceColumn: CHANGE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_PERS
+		dataType: string
+		lineageTag: b999d9a2-88c4-4011-ac55-c375dbc82202
+		summarizeBy: none
+		sourceColumn: CHANGE_PERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_PLAN_DESC
+		dataType: string
+		lineageTag: 776da572-34c1-4641-8be0-589d0ab473f8
+		summarizeBy: none
+		sourceColumn: MAINT_PLAN_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SCHED_PERIOD
+		dataType: string
+		lineageTag: 983972e4-74d8-44bf-a8a1-1abe978c26de
+		summarizeBy: none
+		sourceColumn: SCHED_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column LATE_SF
+		dataType: string
+		lineageTag: dc0c2eed-0bed-4b05-9cf3-885d2cfcc1a6
+		summarizeBy: none
+		sourceColumn: LATE_SF
+
+		annotation SummarizationSetBy = Automatic
+
+	column EARLY_SF
+		dataType: string
+		lineageTag: ba555349-9961-4ca6-9fa2-05173123c291
+		summarizeBy: none
+		sourceColumn: EARLY_SF
+
+		annotation SummarizationSetBy = Automatic
+
+	column LATE_TOL
+		dataType: string
+		lineageTag: f80a92af-b8c9-4ad4-a4f9-34e511c7b40b
+		summarizeBy: none
+		sourceColumn: LATE_TOL
+
+		annotation SummarizationSetBy = Automatic
+
+	column EARLY_TOL
+		dataType: string
+		lineageTag: 2f074ea4-6d53-490f-9e3e-f2edc3290363
+		summarizeBy: none
+		sourceColumn: EARLY_TOL
+
+		annotation SummarizationSetBy = Automatic
+
+	column CYC_MODIF_FACTOR
+		dataType: double
+		lineageTag: debde079-f1da-4f22-a301-85aca98b4e57
+		summarizeBy: sum
+		sourceColumn: CYC_MODIF_FACTOR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SCHED_IND
+		dataType: string
+		lineageTag: 3b948118-f6b3-4a0b-bd55-8f98ebe19ee4
+		summarizeBy: none
+		sourceColumn: SCHED_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column CALL_HORIZ
+		dataType: string
+		lineageTag: 4f5217e7-c222-498f-88ee-5c11a4d5532e
+		summarizeBy: none
+		sourceColumn: CALL_HORIZ
+
+		annotation SummarizationSetBy = Automatic
+
+	column HORIZ_QUALIFIER
+		dataType: string
+		lineageTag: e8e57836-9202-44cf-b118-599bd19b9387
+		summarizeBy: none
+		sourceColumn: HORIZ_QUALIFIER
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUMBER
+		dataType: string
+		lineageTag: 5be48077-631f-4d8f-aa76-1987cf74029f
+		summarizeBy: none
+		sourceColumn: OBJECT_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SCHED_PERIOD_UNI
+		dataType: string
+		lineageTag: 4d2089f7-a86a-4a71-bdac-bda5bc0fcb22
+		summarizeBy: none
+		sourceColumn: SCHED_PERIOD_UNI
+
+		annotation SummarizationSetBy = Automatic
+
+	column STAT_DATE
+		dataType: string
+		lineageTag: d6371f73-2b27-4821-88c0-bd4fbaa0547c
+		summarizeBy: none
+		sourceColumn: STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FACTO_CAL_KEY
+		dataType: string
+		lineageTag: 61380b4e-90d2-488a-97f6-dd414f567a4f
+		summarizeBy: none
+		sourceColumn: FACTO_CAL_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - MAINT PLAN' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_MAINT_PLAN = pvcfcprodsqlpool{[Schema="sil",Item="DIM_MAINT_PLAN"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_MAINT_PLAN,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

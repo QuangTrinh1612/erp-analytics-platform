@@ -1,0 +1,42 @@
+table 'DIM - EQUIPMENT CAT'
+	lineageTag: 74df4b11-1fa9-4a5e-b2bd-f152daa571db
+
+	column EQUI_CAT_CODE
+		dataType: string
+		lineageTag: 80733fad-50f3-4080-ae4d-147cadbdd993
+		summarizeBy: none
+		sourceColumn: EQUI_CAT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_CAT_REF
+		dataType: string
+		lineageTag: 1ce36e39-7710-4fb6-bad1-60bdd9591c6d
+		summarizeBy: none
+		sourceColumn: EQUI_CAT_REF
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_CAT_DESC
+		dataType: string
+		lineageTag: 2f6ac5ef-712d-454a-a421-f303bfda404e
+		summarizeBy: none
+		sourceColumn: EQUI_CAT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - EQUIPMENT CAT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_EQUIPMENT_CAT = pvcfcprodsqlpool{[Schema="sil",Item="DIM_EQUIPMENT_CAT"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_EQUIPMENT_CAT,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

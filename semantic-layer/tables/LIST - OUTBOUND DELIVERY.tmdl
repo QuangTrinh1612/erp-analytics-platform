@@ -1,0 +1,19 @@
+table 'LIST - OUTBOUND DELIVERY'
+	lineageTag: c6fe6c12-9bfd-4037-9ee0-ddcb9cf0fad7
+
+	column DELIVERY_NO
+		dataType: string
+		lineageTag: ea032c09-8bda-4a32-9306-1f5f98c6c08d
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - DELIVERY STATUS[DELIVERY_NO]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LIST - OUTBOUND DELIVERY' = calculated
+		mode: import
+		source = FILTER(DISTINCT('FACT - DELIVERY STATUS'[DELIVERY_NO]), ISBLANK('FACT - DELIVERY STATUS'[DELIVERY_NO])= FALSE())
+
+	annotation PBI_Id = 11e52e86efe4407a804e7eb1f8468811
+

@@ -1,0 +1,34 @@
+table 'DIM - STATUS NOTI CONVERTED'
+	lineageTag: bb5b69d9-45b0-4330-9463-a4addb3c15e1
+
+	column CONVERTED_NOTI_STATUS
+		dataType: string
+		lineageTag: 67fab41d-9aac-4e21-bd2b-0df8522cf58a
+		summarizeBy: none
+		sourceColumn: CONVERTED_NOTI_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONVERTED_NOTI_STATUS_DESC
+		dataType: string
+		lineageTag: c1c12352-cad5-4ccb-8291-27cd3d2eacde
+		summarizeBy: none
+		sourceColumn: CONVERTED_NOTI_STATUS_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - STATUS NOTI CONVERTED' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_STATUS_NOTI_CONVERTED = pvcfcprodsqlpool{[Schema="sil",Item="DIM_STATUS_NOTI_CONVERTED"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_STATUS_NOTI_CONVERTED,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

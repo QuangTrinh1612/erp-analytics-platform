@@ -1,0 +1,122 @@
+table 'FACT - BOM PRODUCTION RLP'
+	lineageTag: 88b0c91e-b0e1-4126-9190-68dc121f5d90
+
+	column PLAN_PERIOD
+		dataType: string
+		lineageTag: bb2ccd4a-2516-4618-ba2b-6844fb172302
+		summarizeBy: none
+		sourceColumn: PLAN_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 1a798c61-9049-4859-be4f-fdb0569247c2
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOCATION
+		dataType: string
+		lineageTag: 4d260516-6c0f-4ece-8b27-d4f3b5970292
+		summarizeBy: none
+		sourceColumn: STORAGE_LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: 3e302e08-b6ce-4822-bab3-0eaf8abd1d53
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRO_SEMI_CODE
+		dataType: string
+		lineageTag: 7b7dcf06-c716-4fa2-8a82-7c025f4192d8
+		summarizeBy: none
+		sourceColumn: PRO_SEMI_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VERSION
+		dataType: string
+		lineageTag: ea5063f7-99df-4998-86d6-e12c69822b92
+		summarizeBy: none
+		sourceColumn: VERSION
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOM
+		dataType: string
+		lineageTag: 6ed926aa-6b8a-4359-b3ed-a6e263d9cc39
+		summarizeBy: none
+		sourceColumn: BOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DECISION_NO
+		dataType: string
+		lineageTag: d15a5adf-71cf-4239-9fc5-e705d6ac6571
+		summarizeBy: none
+		sourceColumn: DECISION_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DECISION_DATE
+		dataType: string
+		lineageTag: 7031fcdc-aa07-4fa0-b566-968dd63b42b5
+		summarizeBy: none
+		sourceColumn: DECISION_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOM_VALUE
+		dataType: double
+		lineageTag: 9d189aa7-0c9e-40eb-83fe-22bd27376a96
+		summarizeBy: sum
+		sourceColumn: BOM_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QUANTITY_CONVERT
+		dataType: double
+		lineageTag: 7440f813-fa96-4d0a-a986-65362e642def
+		summarizeBy: sum
+		sourceColumn: QUANTITY_CONVERT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SOURCE_TABLE
+		dataType: string
+		lineageTag: 2a56bec6-fc33-4a33-9c24-56a61387e052
+		summarizeBy: none
+		sourceColumn: SOURCE_TABLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 93b75429-0c2f-4e77-b133-0eadcf7df85c
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - BOM PRODUCTION RLP' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_BOM_PRODUCTION_RLP = pvcfcprodsqlpool{[Schema="gld",Item="FACT_BOM_PRODUCTION_RLP"]}[Data]
+				in
+				    gld_FACT_BOM_PRODUCTION_RLP
+

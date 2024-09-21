@@ -1,0 +1,19 @@
+table 'PARAMETER - VERSION TẬP ĐOÀN'
+	lineageTag: f8876204-790e-455b-818b-a10871cc50a8
+
+	column VERSION
+		dataType: string
+		lineageTag: e6257045-7b1f-469f-9487-882cb204854d
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - COST PLANNING[VERSION]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Param: Version Tập đoàn' = calculated
+		mode: import
+		source = DISTINCT('FACT - COST PLANNING'[VERSION])
+
+	annotation PBI_Id = 743411289f3740b1ab0e2f0dd1b8d13d
+

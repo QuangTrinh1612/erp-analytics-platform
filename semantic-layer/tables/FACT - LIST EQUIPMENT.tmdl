@@ -1,0 +1,170 @@
+table 'FACT - LIST EQUIPMENT'
+	lineageTag: 65a58ac9-d1f0-459e-a907-ebb6aad8d6e0
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: 31a76033-d4fa-4403-b68b-03ee56087076
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_CAT_CODE
+		dataType: string
+		lineageTag: 2167db06-7030-4053-a30f-7e7bba21c0b0
+		summarizeBy: none
+		sourceColumn: EQUI_CAT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUMBER
+		dataType: string
+		lineageTag: 7856607f-6913-418c-83d3-e5d63b62d361
+		summarizeBy: none
+		sourceColumn: OBJECT_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER_ID
+		dataType: string
+		lineageTag: 502b19f1-21fa-4dbd-87dd-9dbd5965d061
+		summarizeBy: none
+		sourceColumn: WORK_CENTER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNCT_LOC_CODE
+		dataType: string
+		lineageTag: 6881a090-806c-4524-9c6c-1749194ea7cd
+		summarizeBy: none
+		sourceColumn: FUNCT_LOC_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_PLANT
+		dataType: string
+		lineageTag: 91146186-5df9-400a-9eb6-56416bd8ad66
+		summarizeBy: none
+		sourceColumn: MAINT_PLANT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: 3dce05d4-645f-4499-826e-bdb903e45435
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		lineageTag: 1c0a42bb-c6e7-4904-a319-e2841035505f
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: dd7cece7-f03f-43aa-b3e7-9dcd113ba129
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLAN_PLANT_CODE
+		dataType: string
+		lineageTag: 635693d5-7f00-4e29-9515-357cf436f3b7
+		summarizeBy: none
+		sourceColumn: PLAN_PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: 2f66237a-da12-45f3-80fe-91ca8ff6e05e
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_NAME
+		dataType: string
+		lineageTag: 8ab59a2a-6dbc-4579-8976-39c3481c27c1
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_TEL
+		dataType: string
+		lineageTag: 79c44c51-7a40-4c19-8903-5d0aaf7471dd
+		summarizeBy: none
+		sourceColumn: PLANNER_TEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_EMAIL
+		dataType: string
+		lineageTag: 6540cc18-e653-434c-8839-52ad99c42a3e
+		summarizeBy: none
+		sourceColumn: PLANNER_EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: adc0a1fd-caeb-4680-ad1f-d9093f840754
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_PERS
+		dataType: string
+		lineageTag: 7fa6d016-68a0-4b52-834f-61866eca3199
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_PERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_PERS_TEL
+		dataType: string
+		lineageTag: 70e204a8-7446-4100-912c-b0f14b078b6e
+		summarizeBy: none
+		sourceColumn: PLNT_PERS_TEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: 7d12004b-1fab-4c04-9c66-14efc0c2113a
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_DESC
+		dataType: string
+		lineageTag: 2fb46bcb-657f-475b-a994-a3db6fa83066
+		summarizeBy: none
+		sourceColumn: STATUS_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - LIST EQUIPMENT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_LIST_EQUIPMENT = pvcfcprodsqlpool{[Schema="gld",Item="FACT_LIST_EQUIPMENT"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_LIST_EQUIPMENT,{"W_INSERT_DT"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,88 @@
+table 'FACT - BALANCE SHEET'
+	lineageTag: 703f2975-6090-4d97-83d3-40ee01db5d96
+
+	column FISCAL_YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: c5a90ff8-e425-41eb-ab29-d3abb41f5264
+		summarizeBy: sum
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: int64
+		formatString: 0
+		lineageTag: 3637ac89-8b33-4085-8499-00cd96245c0d
+		summarizeBy: sum
+		sourceColumn: FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: a5aa88d9-ad95-43e7-acd2-619f767e0c8b
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_CODE
+		dataType: string
+		lineageTag: b17fea99-cb5b-48cb-babc-b94a24f3d4ba
+		summarizeBy: none
+		sourceColumn: CURRENCY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_NO
+		dataType: string
+		lineageTag: 1b8f17a8-fc08-4d5a-8ab2-188351e60eb7
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLOSING_BALANCE
+		dataType: double
+		lineageTag: 60c1c209-5fce-4239-8ad4-9511d693e790
+		summarizeBy: sum
+		sourceColumn: CLOSING_BALANCE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BS_ITEM
+		dataType: string
+		lineageTag: fae0c383-61d1-440a-8fe4-d5756c440e3b
+		summarizeBy: none
+		sourceColumn: BS_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_DATE = DATE('FACT - BALANCE SHEET'[FISCAL_YEAR], 'FACT - BALANCE SHEET'[FISCAL_PERIOD], 1)
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 206ab554-4d74-4957-b91e-10c7cb4e3a4d
+		summarizeBy: none
+		isDataTypeInferred
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'FACT - BALANCE SHEET' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_BALANCE_SHEET = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_BALANCE_SHEET"]}[Data]
+				in
+				    gld_VW_FACT_BALANCE_SHEET
+
+	annotation PBI_ResultType = Table
+

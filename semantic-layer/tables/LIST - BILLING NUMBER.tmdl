@@ -1,0 +1,19 @@
+table 'LIST - BILLING NUMBER'
+	lineageTag: 15c14c3e-9462-4bd7-a721-35684ec2cde5
+
+	column BILLING_DOC
+		dataType: string
+		lineageTag: cf63be1d-f9f9-4319-98c1-a8dd29e0cf8e
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - SALE IN ACTUAL[BILLING_DOC]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'List Billing Document' = calculated
+		mode: import
+		source = FILTER(DISTINCT('FACT - SALE IN ACTUAL'[BILLING_DOC]), ISBLANK('FACT - SALE IN ACTUAL'[BILLING_DOC]) = FALSE())
+
+	annotation PBI_Id = 507d244fb5174c5d95ce800a422016a3
+

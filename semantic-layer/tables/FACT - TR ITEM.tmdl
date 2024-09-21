@@ -1,0 +1,183 @@
+table 'FACT - TR ITEM'
+	lineageTag: b945f1ea-ea69-4187-9435-1029c648956b
+
+	measure 'Phát sinh tăng' = CALCULATE( SUM('FACT - TR ITEM'[LOCAL_PAYMENT_AMT]), 'FACT - TR ITEM'[FLOW_CATEGORY] = "Phát sinh tăng")
+		lineageTag: 3c885d80-818e-4f07-9a95-8e243ad90ad3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Phát sinh giảm' = CALCULATE( SUM('FACT - TR ITEM'[LOCAL_PAYMENT_AMT]), 'FACT - TR ITEM'[FLOW_CATEGORY] = "Phát sinh giảm") * -1
+		lineageTag: e5d8dbea-381a-4fd4-8f14-2a5978f6ab0d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lãi phát sinh trong kì' = ```
+			CALCULATE(SUM('FACT - TR ITEM'[INTEREST_AMT]), 'FACT - TR ITEM'[FLOW_CATEGORY] ="Lãi phát sinh") 
+			```
+		lineageTag: 7be35e5d-9ebf-43a2-a5ad-d5358da6f652
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư đầu kì' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    CALCULATE(
+			       SUM('FACT - TR ITEM'[LOCAL_PAYMENT_AMT]),
+			        'DIM - DATE'[Date] < _min_date
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		lineageTag: 75b9e0c3-f7af-4baa-ad33-88c6bcfb869a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư cuối kì' = [Số dư đầu kì] + [Phát sinh tăng] - [Phát sinh giảm]
+		lineageTag: f35c8ab5-581d-4563-b72e-2bf8eccd6163
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: f62fb4c5-c7b9-4cf2-a026-93bbb288a08e
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONTRACT_NO
+		dataType: string
+		lineageTag: c853d065-c871-4864-b629-7857fefa30d3
+		summarizeBy: none
+		sourceColumn: CONTRACT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column FI_TRANSACTION
+		dataType: string
+		lineageTag: 99065fc5-f408-4f6a-a59a-ee83cf4a2752
+		summarizeBy: none
+		sourceColumn: FI_TRANSACTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUSINESS_PARTNER_NO
+		dataType: string
+		lineageTag: 513364bb-8060-422d-822b-1cf2853ee51a
+		summarizeBy: none
+		sourceColumn: BUSINESS_PARTNER_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORG_NAME
+		dataType: string
+		lineageTag: fa8bf275-9ac2-421d-8e8d-3f92e280ddc3
+		summarizeBy: none
+		sourceColumn: ORG_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_TYPE
+		dataType: string
+		lineageTag: 29bdae15-6678-436a-9b94-f282ef1651b8
+		summarizeBy: none
+		sourceColumn: PRODUCT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FLOW_TYPE
+		dataType: string
+		lineageTag: 8df0c599-c953-42a8-b89f-44abb2be598b
+		summarizeBy: none
+		sourceColumn: FLOW_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FLOW_CATEGORY
+		dataType: string
+		lineageTag: 64791029-d303-4af1-a200-4529bec55c46
+		summarizeBy: none
+		sourceColumn: FLOW_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAYMENT_DATE
+		dataType: string
+		lineageTag: 27556866-0053-4d83-8f91-ab71e5b20679
+		summarizeBy: none
+		sourceColumn: PAYMENT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSTING_STATUS
+		dataType: string
+		lineageTag: 19332f32-5721-43bb-afd0-00b4f39d1548
+		summarizeBy: none
+		sourceColumn: POSTING_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCAL_PAYMENT_AMT
+		dataType: double
+		lineageTag: 17eea713-c518-4495-a635-e0f1a7bdd4ca
+		summarizeBy: sum
+		sourceColumn: LOCAL_PAYMENT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column INTEREST_AMT
+		dataType: double
+		lineageTag: 1152bc13-433d-46ef-bc94-3862e3624a45
+		summarizeBy: sum
+		sourceColumn: INTEREST_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAYMENT_CURRENCY
+		dataType: string
+		lineageTag: 7bc2857d-8ab0-426d-895c-38004e64d11f
+		summarizeBy: none
+		sourceColumn: PAYMENT_CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column HOUSE_BANK
+		dataType: string
+		lineageTag: 5c2537d8-60e8-4954-9279-b7f181129ace
+		summarizeBy: none
+		sourceColumn: HOUSE_BANK
+
+		annotation SummarizationSetBy = Automatic
+
+	column FLOW_DIRECTION
+		dataType: string
+		lineageTag: c04740d0-9edb-40a0-8320-04dc28ac3f00
+		summarizeBy: none
+		sourceColumn: FLOW_DIRECTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_ASSIGNMENT
+		dataType: string
+		lineageTag: be757a81-a071-4efc-b4b9-90e2c8305701
+		summarizeBy: none
+		sourceColumn: ACCOUNT_ASSIGNMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - TR ITEM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_FACT_FI_TR_ITEM = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_FI_TR_ITEM"]}[Data]
+				in
+				    VW_FACT_FI_TR_ITEM
+
+	annotation PBI_ResultType = Table
+

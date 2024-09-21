@@ -1,0 +1,217 @@
+table 'AGG - MATERIAL LEDGER V PRICE'
+	lineageTag: f9df5316-8337-47ba-858e-14c8ee972288
+
+	column POSTING_DATE
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 64915d64-12c4-4097-83a6-92b2443bb681
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: 433651c2-c760-450a-9be1-f19608cbd495
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: 537ab3af-b10e-43c4-bd39-2e011b7c88c6
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: 73583301-29f4-4de1-a435-264afc4aa763
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		isHidden
+		lineageTag: 3c178a41-0bf1-4c2a-933b-69a91117b5cd
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 4704dcd6-3e8c-4564-bba1-d6a7c5872f0b
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: 8ce35052-d5e7-435b-b406-1d414e870eb2
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_SLOC_BATCH_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: db88b031-7d2e-4e08-bb04-ed53cbda3caf
+		summarizeBy: none
+		sourceColumn: IS_SLOC_BATCH_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_SPECIAL_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: 24309faa-ca9c-44ea-8f56-29093e7efd1b
+		summarizeBy: none
+		sourceColumn: IS_SPECIAL_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIAL_STOCK
+		dataType: string
+		isHidden
+		lineageTag: 1fcb6468-e790-447c-a91b-24aae48b19d9
+		summarizeBy: none
+		sourceColumn: SPECIAL_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECEIPT_AMT
+		dataType: double
+		lineageTag: c7f29828-041e-4c80-b917-1ed5b4b8ebdd
+		summarizeBy: sum
+		sourceColumn: RECEIPT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_AMT
+		dataType: double
+		lineageTag: 65b3eecb-dc4a-4142-8432-d22555d536e4
+		summarizeBy: sum
+		sourceColumn: ISSUE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_PLANT_KEY = [MATERIAL_CODE] & "-" & [PLANT_CODE]
+		dataType: string
+		lineageTag: 5f21e95f-aea8-494c-b38c-38ecbb705fa6
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_MATERIAL_LEDGER
+		dataType: int64
+		formatString: 0
+		lineageTag: 26db1000-efa8-4dd4-b18a-45cb52dd3c85
+		summarizeBy: sum
+		sourceColumn: IS_MATERIAL_LEDGER
+
+		annotation SummarizationSetBy = Automatic
+
+	column REVERSE_AMT
+		dataType: double
+		lineageTag: b59a1b78-189d-4426-9a8a-b122fa0a8b8e
+		summarizeBy: sum
+		sourceColumn: REVERSE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_REVERSE_AMT
+		dataType: double
+		lineageTag: 91b76038-6acd-4c32-b9a2-5271a46e6889
+		summarizeBy: sum
+		sourceColumn: RECEIPT_REVERSE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_REVERSE_AMT
+		dataType: double
+		lineageTag: f563d94f-175c-47d2-a6e4-fbe372cf6c51
+		summarizeBy: sum
+		sourceColumn: ISSUE_REVERSE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'TCODE VIEW' = ```
+			IF('AGG - MATERIAL LEDGER V PRICE'[IS_MATERIAL_LEDGER] = 1, "MB51",BLANK())
+			
+			```
+		dataType: string
+		isHidden
+		lineageTag: 0ebeb407-28b3-41ac-a101-2bd56df7b044
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECEIPT_REVERSE_REMAIN_AMT
+		dataType: double
+		lineageTag: d2e084d6-361d-4620-bd52-c4e4318cff9a
+		summarizeBy: sum
+		sourceColumn: RECEIPT_REVERSE_REMAIN_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_REVERSE_REMAIN_AMT
+		dataType: double
+		lineageTag: 58ec36cf-b341-4d80-8b09-59c4088f91bb
+		summarizeBy: sum
+		sourceColumn: ISSUE_REVERSE_REMAIN_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVERSE_REMAIN_AMT
+		dataType: double
+		lineageTag: c8bec6de-8842-45ba-8ba9-fb309bb62c7f
+		summarizeBy: sum
+		sourceColumn: REVERSE_REMAIN_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Agg Material Ledger V Price' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_AGG_MATERIAL_LEDGER_V = pvcfcprodsqlpool{[Schema="gld",Item="AGG_MATERIAL_LEDGER_V"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_AGG_MATERIAL_LEDGER_V,{{"POSTING_DATE", type date}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"IS_VALUATED_STOCK"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Exception
+

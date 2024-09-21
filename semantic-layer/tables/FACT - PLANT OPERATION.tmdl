@@ -1,0 +1,214 @@
+table 'FACT - PLANT OPERATION'
+	lineageTag: f6f3b673-6bf7-41dc-aaea-8b0fd3977510
+
+	column FISCAL_DATE
+		dataType: string
+		lineageTag: 20ae4349-cddb-4c3e-9d50-7c937f143aec
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 646dfc0c-3f7e-4732-8c22-235a344a891a
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FACTORY_CODE
+		dataType: string
+		lineageTag: 7512bdd5-4708-4b63-862d-2135ceaef449
+		summarizeBy: none
+		sourceColumn: FACTORY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SOURCE_TABLE
+		dataType: string
+		lineageTag: 48b22447-1e18-4bed-8ac2-0ad6a2e96462
+		summarizeBy: none
+		sourceColumn: SOURCE_TABLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MFR_DOWNTIME
+		dataType: double
+		lineageTag: 01175e2e-4cd5-4b62-aa78-bff7eaab29b3
+		summarizeBy: sum
+		sourceColumn: MFR_DOWNTIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPERATING_TIME
+		dataType: double
+		lineageTag: dc8b0721-c72e-4ea4-a2f9-af047d2f3a9c
+		summarizeBy: sum
+		sourceColumn: OPERATING_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NH3_EXHAUST_GAS
+		dataType: double
+		lineageTag: e3d2607b-d6da-4a99-8c64-834858b88b8d
+		summarizeBy: sum
+		sourceColumn: NH3_EXHAUST_GAS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NH3_WASTEWATER
+		dataType: double
+		lineageTag: c775519c-38c8-4b8b-b1de-8eb2b4b91725
+		summarizeBy: sum
+		sourceColumn: NH3_WASTEWATER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ELEC_CONSUMP
+		dataType: double
+		lineageTag: 67c288f3-36e2-4f32-9b03-f0bbb8310bac
+		summarizeBy: sum
+		sourceColumn: ELEC_CONSUMP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CAPACITY_URE
+		dataType: double
+		lineageTag: e0d2d836-4e0f-410a-aca4-f30f219abd95
+		summarizeBy: sum
+		sourceColumn: CAPACITY_URE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HP_CONSUMP_EXPORT
+		dataType: double
+		lineageTag: c6e804e4-70ab-42ef-bfb8-dcc3782a6cc0
+		summarizeBy: sum
+		sourceColumn: HP_CONSUMP_EXPORT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MLP_CONSUMP_EXPORT
+		dataType: double
+		lineageTag: ccf558b0-dfcb-49cc-aa42-bfed1bd93ec5
+		summarizeBy: sum
+		sourceColumn: MLP_CONSUMP_EXPORT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LP_CONSUMP_EXPORT
+		dataType: double
+		lineageTag: 52d59606-ccdf-4dd2-974a-b401e44287ad
+		summarizeBy: sum
+		sourceColumn: LP_CONSUMP_EXPORT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HP_CONSUMP
+		dataType: double
+		lineageTag: ce8aab94-6f73-4b91-9083-9b49b3eaa608
+		summarizeBy: sum
+		sourceColumn: HP_CONSUMP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LP_CONSUMP
+		dataType: double
+		lineageTag: 33bf6c16-acf0-4ff2-a2c3-c5cf4386c265
+		summarizeBy: sum
+		sourceColumn: LP_CONSUMP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRODUCTION_QUANTITY
+		dataType: double
+		lineageTag: 3677b19c-dbc8-4f66-bc0a-81f05b581931
+		summarizeBy: sum
+		sourceColumn: PRODUCTION_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LHV_CONSUMP
+		dataType: double
+		lineageTag: 1e832b8c-fb5f-4e77-9cb2-470febeca424
+		summarizeBy: sum
+		sourceColumn: LHV_CONSUMP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WATER_CONSUMP
+		dataType: double
+		lineageTag: 41e03112-c7b4-4190-8785-b86de6c198e1
+		summarizeBy: sum
+		sourceColumn: WATER_CONSUMP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MLP_CONSUMP
+		dataType: double
+		lineageTag: 6f016b8d-00b6-4945-9d9e-ebc9e96a2f51
+		summarizeBy: sum
+		sourceColumn: MLP_CONSUMP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UREA_CONSUMP
+		dataType: double
+		lineageTag: ea22a4ad-0f42-4f44-bef1-c9c41d273164
+		summarizeBy: sum
+		sourceColumn: UREA_CONSUMP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0c1cf9a1-d63f-42b0-82a0-c67fed062e57
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - PLANT OPERATION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_PLANT_OPERATION = pvcfcprodsqlpool{[Schema="gld",Item="FACT_PLANT_OPERATION"]}[Data]
+				in
+				    gld_FACT_PLANT_OPERATION
+

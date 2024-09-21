@@ -1,0 +1,96 @@
+table 'FACT - MAINT PLAN STATUS'
+	lineageTag: 7b47c7fb-d7f9-4167-bb1f-e897dabadf39
+
+	column MAINT_PLAN
+		dataType: string
+		lineageTag: 721a83a5-cf07-465e-8c94-eac6bbf7c8bb
+		summarizeBy: none
+		sourceColumn: MAINT_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUMBER
+		dataType: string
+		lineageTag: cbba6709-54eb-4453-bd2b-0e9e359bc045
+		summarizeBy: none
+		sourceColumn: OBJECT_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SYST_STAT
+		dataType: string
+		lineageTag: 13afdca9-6ef2-4446-bdee-ae488aef7627
+		summarizeBy: none
+		sourceColumn: SYST_STAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_NUM
+		dataType: string
+		lineageTag: 81781c5b-983a-404f-a5f1-2b89bbfedd4b
+		summarizeBy: none
+		sourceColumn: CHANGE_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPDATE_USNAME
+		dataType: string
+		lineageTag: 01a007df-a41c-4add-85c4-eaf12f16b33f
+		summarizeBy: none
+		sourceColumn: UPDATE_USNAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPDATE_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 717e76f0-6d42-4271-a176-60cd315191fc
+		summarizeBy: none
+		sourceColumn: UPDATE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column INACT_STATUS
+		dataType: string
+		lineageTag: fc4b0ae7-3d3f-49b9-b169-b7133076d558
+		summarizeBy: none
+		sourceColumn: INACT_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: bad131ac-a6ea-460c-bfea-a402c9dab815
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_STATUS_KEY = 'FACT - MAINT PLAN STATUS'[SYST_STAT] & "-"& 'FACT - MAINT PLAN STATUS'[STATUS]
+		dataType: string
+		lineageTag: c07d5ba1-61a4-4447-a3bd-3e60fdceb9d8
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - MAINT PLAN STATUS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_MAINT_PLAN_STATUS = pvcfcprodsqlpool{[Schema="gld",Item="FACT_MAINT_PLAN_STATUS"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_MAINT_PLAN_STATUS,{"W_INSERT_DT"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"UPDATE_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

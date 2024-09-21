@@ -1,0 +1,39 @@
+table 'PARAMETER - EXCLUDE REVERSE DOCUMENT'
+	lineageTag: f3a0340f-2284-4ba2-b59b-8fe88a7e2e88
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 42313ffc-6471-4045-8c09-980e98f27d75
+		summarizeBy: count
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXCLUDE_REVERSE
+		dataType: string
+		lineageTag: e3b1b299-d3fb-4f3f-9a12-b37410ad94b6
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [EXCLUDE_REVERSE]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'EXCLUDE REVERSE DOCUMENT' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "ID",INTEGER,
+				    "EXCLUDE_REVERSE",STRING,
+				{
+				    {1,"X"},
+				    {0,""}
+				}
+				)
+
+	annotation PBI_Id = 04f900b0763744c4a6dc3a703d2e535c
+

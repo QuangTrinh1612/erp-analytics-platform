@@ -1,0 +1,19 @@
+table 'LIST - CONTRACT NUMBER'
+	lineageTag: eb3f0ca7-68c9-4786-98f1-16dbd86f4992
+
+	column CONTRACT_NUMBER
+		dataType: string
+		lineageTag: 23ea7384-c9a0-4a49-aafe-29a9239c7d99
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - CONTRACT STATUS[CONTRACT_NUMBER]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'List Contract Number' = calculated
+		mode: import
+		source = FILTER(DISTINCT('FACT - CONTRACT STATUS'[CONTRACT_NUMBER]), ISBLANK('FACT - CONTRACT STATUS'[CONTRACT_NUMBER]) = FALSE())
+
+	annotation PBI_Id = be440e1a41494900acd50a9b0fa493d3
+

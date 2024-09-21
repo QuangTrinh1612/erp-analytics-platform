@@ -1,0 +1,54 @@
+table 'Parameter Sản Xuất'
+	lineageTag: f8c0fc90-bd96-44ac-b30c-18fcd71f8808
+
+	column 'Parameter Sản Xuất'
+		dataType: string
+		lineageTag: fc95207f-5a5e-4bfe-93b0-bdca3f91fa9b
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Sản Xuất Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Sản Xuất Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Sản Xuất Fields'
+		dataType: string
+		isHidden
+		lineageTag: 5bb725c7-ab9a-45e4-8120-ca1c9b0cb937
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Sản Xuất Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Sản Xuất Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 45286a3e-650a-43b3-9e61-68ba507ac04e
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter Sản Xuất' = calculated
+		mode: import
+		source =
+				{
+				    ("Plant", NAMEOF('DIM - PLANT'[PLANT_DESCRIPTION]), 0),
+				    ("Dòng Thành Phẩm", NAMEOF('DIM - PRO MEMO'[PROD_MEMO_LV1]), 1)
+				}
+
+	annotation PBI_Id = 0f8bfee09aa54b169d329dde65de68b8
+

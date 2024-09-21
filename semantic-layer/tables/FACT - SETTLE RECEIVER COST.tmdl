@@ -1,0 +1,334 @@
+table 'FACT - SETTLE RECEIVER COST'
+	lineageTag: 2d96cc41-fed9-4644-98ef-198ebba6586f
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 357c6060-754b-4543-9460-88ffb2b70a28
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DESC
+		dataType: string
+		lineageTag: 7ef6a319-2310-4d88-ad1e-8a2862687583
+		summarizeBy: none
+		sourceColumn: ORDER_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: 3c729f2f-01bc-40f4-ab85-76b71637d55e
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_ACT_NUM
+		dataType: string
+		lineageTag: 191a4fed-8ea1-4efe-a8fa-e2f6dae4a1cc
+		summarizeBy: none
+		sourceColumn: OPER_ACT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_TYPE
+		dataType: string
+		lineageTag: a2c3e33d-4520-4da2-8073-3e34df8f5eca
+		summarizeBy: none
+		sourceColumn: ORDER_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACT_TYPE_CODE
+		dataType: string
+		lineageTag: ac127ca9-8760-4508-b4fd-2c8c8cd5b002
+		summarizeBy: none
+		sourceColumn: ACT_TYPE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIN_WORK_CENTER
+		dataType: string
+		lineageTag: 2cbc8021-0f09-4220-b83d-a6bf56adb49f
+		summarizeBy: none
+		sourceColumn: MAIN_WORK_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: f4442857-9376-4d64-a675-7b02b8627d9a
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_CODE
+		dataType: string
+		lineageTag: 1629fcea-9ba7-4069-af83-85c8c0fdaf71
+		summarizeBy: none
+		sourceColumn: SUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_BOM_ITEM
+		dataType: string
+		lineageTag: 9d705bd3-1890-4877-b03a-59741f17f6ff
+		summarizeBy: none
+		sourceColumn: MAINT_BOM_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 729c11ad-061f-489e-b011-e6c33e937a73
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UNIT
+		dataType: string
+		lineageTag: 1ca556de-0be4-4626-89a3-98b61ce7bf64
+		summarizeBy: none
+		sourceColumn: BASE_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELEMENT
+		dataType: string
+		lineageTag: 23409217-a5f3-4320-a63d-3d3714402c2b
+		summarizeBy: none
+		sourceColumn: COST_ELEMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column SETTLE_RULE
+		dataType: string
+		lineageTag: f84a5048-5842-4b66-a831-089e00f6df65
+		summarizeBy: none
+		sourceColumn: SETTLE_RULE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NAME_SETTLE
+		dataType: string
+		lineageTag: 7fec12ed-29f6-4f1c-95e7-bd9d7a7ca2f6
+		summarizeBy: none
+		sourceColumn: NAME_SETTLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: e8b34089-2c28-4add-ac3c-ecd57af95c9a
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column RESERV_NUM
+		dataType: string
+		lineageTag: 1d4f47e7-11fb-431e-a951-5de8402f59fd
+		summarizeBy: none
+		sourceColumn: RESERV_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: f23ecb39-eca6-4330-99f2-cdd15fd63e22
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column DOC_NO
+		dataType: string
+		lineageTag: b2a60ef8-8329-4aa2-8354-627f08a5240d
+		summarizeBy: none
+		sourceColumn: DOC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALUE
+		dataType: double
+		lineageTag: e930ef93-03e3-4e8a-942c-4a927152842a
+		summarizeBy: sum
+		sourceColumn: VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRICE
+		dataType: double
+		lineageTag: 8bc7279a-81a7-4b2e-a3e3-4b0071014558
+		summarizeBy: sum
+		sourceColumn: PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OBJECT_NUMBER2
+		dataType: string
+		lineageTag: 6ec952d8-99fe-436e-9b0c-7098d10a2a4e
+		summarizeBy: none
+		sourceColumn: OBJECT_NUMBER2
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUMBER
+		dataType: string
+		lineageTag: 5966a1a0-42f9-4a74-9622-d8a092f9d8eb
+		summarizeBy: none
+		sourceColumn: OBJECT_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		lineageTag: 43e18c96-92e1-4ea9-8b9c-b667b18adc30
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_SHORT_DESC
+		dataType: string
+		lineageTag: 664fbe39-92a1-4373-8c75-320f525a3d9e
+		summarizeBy: none
+		sourceColumn: OPER_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: bee1c24b-9505-40b9-a487-8d822186d83b
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLAN_STAT_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 0bd284a8-fbe0-45f6-b76d-0b2dbeb44447
+		summarizeBy: none
+		sourceColumn: PLAN_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PLAN_END_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 02382e94-65a9-4cb4-8f0d-b796a40d1e6a
+		summarizeBy: none
+		sourceColumn: PLAN_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column VALID_FROM
+		dataType: string
+		lineageTag: 8fbde5d8-ed0f-4e90-bdf1-8380a857594d
+		summarizeBy: none
+		sourceColumn: VALID_FROM
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_TO
+		dataType: string
+		lineageTag: af56eb86-fc7c-431d-a7b4-15608a888d74
+		summarizeBy: none
+		sourceColumn: VALID_TO
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT
+		dataType: string
+		lineageTag: 3b93cc3e-71c0-4955-97ed-9100e1b67497
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: 9cf036de-a744-41c6-9bb9-a24c21d562b6
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALUATION_CLASS
+		dataType: string
+		lineageTag: 75d4e91d-65da-469d-9ca3-2ec0c1941428
+		summarizeBy: none
+		sourceColumn: VALUATION_CLASS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOCATION
+		dataType: string
+		lineageTag: dfadab29-2d63-4059-b2f2-4a0e0b6d61dc
+		summarizeBy: none
+		sourceColumn: STORAGE_LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXPORT_QUANTITY
+		dataType: double
+		lineageTag: 6123e331-7d15-42b8-9cc0-f5fb3d999841
+		summarizeBy: sum
+		sourceColumn: EXPORT_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_PLANT_KEY = 'FACT - SETTLE RECEIVER COST'[MATERIAL_CODE] &"-"& 'FACT - SETTLE RECEIVER COST'[PLANT_CODE]
+		dataType: string
+		lineageTag: b9eef57c-da7e-4dee-9704-e5e6d580b4d1
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - SETTLE RECEIVER COST' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_SETTLE_RECEIVER_COST = pvcfcprodsqlpool{[Schema="gld",Item="FACT_SETTLE_RECEIVER_COST"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_SETTLE_RECEIVER_COST,{"W_INSERT_DT"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns","00000000","99991231",Replacer.ReplaceText,{"POSTING_DATE"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value",null,"99991231",Replacer.ReplaceValue,{"POSTING_DATE"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value3",null,"99991231",Replacer.ReplaceValue,{"PLAN_END_DATE"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","00000000","99991231",Replacer.ReplaceText,{"PLAN_END_DATE"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value2","00000000","99991231",Replacer.ReplaceText,{"PLAN_STAT_DATE"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4",null,"99991231",Replacer.ReplaceValue,{"PLAN_STAT_DATE"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value5",{{"POSTING_DATE", type date}, {"PLAN_STAT_DATE", type date}, {"PLAN_END_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

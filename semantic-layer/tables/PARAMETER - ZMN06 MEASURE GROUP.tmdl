@@ -1,0 +1,55 @@
+table 'PARAMETER - ZMN06 MEASURE GROUP'
+	lineageTag: 45650a5c-ef78-4618-98ad-d54ea7497a44
+
+	measure Display =
+			
+			SWITCH (
+			    SELECTEDVALUE ( 'PARAMETER - ZMN06 MEASURE GROUP'[Measure group] ),
+			    "Tồn Đầu Kỳ", [Tồn đầu kỳ],
+			    "Đóng Bao", [Nhập đóng bao],
+			    "Sản Xuất", [Nhập từ sản xuất],
+			    "Tổng Xuất", -[Tổng Xuất],
+			    "Tồn Cuối Kỳ", [Tồn cuối kỳ]
+			)
+		formatString: #,0.0
+		lineageTag: 51136cb9-ee6f-4ed1-bc2b-b4a95cd288a8
+
+	column STT
+		dataType: int64
+		formatString: 0
+		lineageTag: 30b028f3-6596-4f8d-b9dc-bc6678033c4e
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measure group'
+		dataType: string
+		lineageTag: ec5c1df8-6776-4b7d-bc44-44416a7b9fbe
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Measure group]
+		sortByColumn: STT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PARAMETER - ZMN06 MEASURE GROUP' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "STT",INTEGER,
+				    "Measure group",STRING,
+				   {
+				    {1,"Tồn Đầu Kỳ"},
+				    {2,"Đóng Bao"},
+				    {3,"Sản Xuất"},
+				    {4,"Tổng Xuất"},
+				    {5,"Tồn Cuối Kỳ"}
+				   }
+				 )
+
+	annotation PBI_Id = 0481407e595f4dc48fe991a7b003bf34
+

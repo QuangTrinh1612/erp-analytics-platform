@@ -1,0 +1,57 @@
+table 'DIM - RLS SALE OFFICE'
+	isHidden
+	lineageTag: 4eda1ed8-34ec-484c-bde8-bbea4143c7cc
+
+	measure Measure = USERPRINCIPALNAME()
+		isHidden
+		lineageTag: 1d84efef-1450-4474-9dfa-2b4a72c8b7d3
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ROLE
+		dataType: string
+		isHidden
+		lineageTag: b8d225b1-527f-4df0-9993-3e5e71c35e61
+		summarizeBy: none
+		sourceColumn: ROLE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_OFFICE
+		dataType: string
+		isHidden
+		lineageTag: 096b8508-f0ad-4314-9b7a-d88444c52ad7
+		summarizeBy: none
+		sourceColumn: SALE_OFFICE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_EMAIL
+		dataType: string
+		isHidden
+		lineageTag: a88b2ade-bd36-4aa5-a2e6-e1f2fa11cbc5
+		summarizeBy: none
+		sourceColumn: USER_EMAIL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - RLS SALE OFFICE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_RLS_SALE_OFFICE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_RLS_SALE_OFFICE"]}[Data]
+				in
+				    gld_VW_DIM_RLS_SALE_OFFICE
+
+	changedProperty = IsHidden
+

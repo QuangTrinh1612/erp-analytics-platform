@@ -1,0 +1,73 @@
+/// Bảng thông tin về trung tâm chi phí giá thành
+table 'DIM - PHONG BAN - CPDV'
+	isHidden
+	lineageTag: f6317ca3-6023-4dfb-9819-6dbe867df032
+
+	column PHONG_BAN
+		dataType: string
+		isHidden
+		lineageTag: 2aad91f6-c6a4-474e-8888-47ec23319b96
+		summarizeBy: none
+		sourceColumn: PHONG_BAN
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER_ELEMENT_KEY
+		dataType: string
+		isHidden
+		lineageTag: 026677c5-b9d2-47d1-8831-8208d0fea021
+		summarizeBy: none
+		sourceColumn: COST_CENTER_ELEMENT_KEY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		isHidden
+		lineageTag: 273b3624-99a8-4dbf-8afa-ea39360c86a3
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELEMENT
+		dataType: string
+		isHidden
+		lineageTag: 88f9b721-ece2-45e2-9bf6-bdea386fd7d0
+		summarizeBy: none
+		sourceColumn: COST_ELEMENT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CPDV
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 580c17e4-044f-4954-8199-05ccd654c812
+		summarizeBy: sum
+		sourceColumn: CPDV
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PHONG BAN - CPDV' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("sg-sea-prod-syn-01.sql.azuresynapse.net", "pvcfcprodsqlpool", [Query="WITH raw1 AS (#(lf)#(tab)SELECT DISTINCT#(lf)#(tab)#(tab)KOSTL AS COST_CENTER,#(lf)#(tab)#(tab)ZBAN AS PHONG_BAN#(lf)#(tab)FROM sri_sap.ZTB_COST_CENTER#(lf)),#(lf)raw2 AS (#(lf)#(tab)SELECT DISTINCT#(lf)        KSTAR AS COST_ELEMENT,#(lf)        ZNOTE2 AS PHONG_BAN#(lf)    FROM#(lf)        sri_sap.ZTB_COST_ELEMENT#(lf)    WHERE#(lf)#(tab)#(tab)ZNOTE1 <> ''#(lf)),#(lf)tckt AS (#(lf)#(tab)SELECT DISTINCT#(lf)#(tab)#(tab)raw1.PHONG_BAN,#(lf)#(tab)#(tab)CONCAT(raw1.COST_CENTER, '-', ce.COST_ELEMENT) AS COST_CENTER_ELEMENT_KEY,#(lf)#(tab)#(tab)raw1.COST_CENTER,#(lf)#(tab)#(tab)ce.COST_ELEMENT,#(lf)#(tab)#(tab)1 AS CPDV#(lf)#(tab)FROM#(lf)#(tab)#(tab)raw1#(lf)#(tab)#(tab)CROSS JOIN gld.VW_DIM_COST_ELEMENT ce#(lf)#(tab)WHERE#(lf)#(tab)#(tab)raw1.PHONG_BAN = 'BAN TCKT'#(lf))#(lf)SELECT DISTINCT#(lf)    raw1.PHONG_BAN,#(lf)#(tab)CONCAT(raw1.COST_CENTER, '-', raw2.COST_ELEMENT) AS COST_CENTER_ELEMENT_KEY,#(lf)#(tab)raw1.COST_CENTER,#(lf)    raw2.COST_ELEMENT,#(lf)#(tab)1 AS CPDV#(lf)FROM#(lf)    raw1#(lf)#(tab)JOIN raw2#(lf)#(tab)#(tab)ON raw1.PHONG_BAN = raw2.PHONG_BAN#(lf)#(tab)#(tab)AND raw1.PHONG_BAN <> 'BAN TCKT'#(lf)UNION ALL#(lf)SELECT * FROM tckt"])
+				in
+				    Source
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,19 @@
+table 'LIST - ORDER NUMBER'
+	lineageTag: d189b5db-0c11-4f66-aee6-de9a0e0476df
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 7056dab2-337f-4454-a030-5b84a94455a9
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - WORK ORDER[ORDER_NUMBER]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LIST - ORDER NUMBER' = calculated
+		mode: import
+		source = DISTINCT('FACT - WORK ORDER'[ORDER_NUMBER])
+
+	annotation PBI_Id = 1e7f50c6143d4c139ce0b8b89b2e4dc8
+

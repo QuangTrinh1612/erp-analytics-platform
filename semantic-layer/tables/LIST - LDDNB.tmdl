@@ -1,0 +1,19 @@
+table 'LIST - LDDNB'
+	lineageTag: 38dd7281-42e9-442f-8999-234ad30fdf26
+
+	column PURCHASE_ORDER
+		dataType: string
+		lineageTag: 11f0bfb9-86fa-4c3c-ade9-ca9110856d99
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - LDDNB STATUS[PURCHASE_ORDER]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'List LDDNB' = calculated
+		mode: import
+		source = FILTER(DISTINCT('FACT - LDDNB STATUS'[PURCHASE_ORDER]), ISBLANK('FACT - LDDNB STATUS'[PURCHASE_ORDER]) = FALSE())
+
+	annotation PBI_Id = b3e5aa89e6344b9f87d3b48e87e9cdab
+

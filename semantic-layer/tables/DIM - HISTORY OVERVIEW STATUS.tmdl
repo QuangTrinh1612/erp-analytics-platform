@@ -1,0 +1,34 @@
+table 'DIM - HISTORY OVERVIEW STATUS'
+	lineageTag: f629bda4-51c0-4781-9e01-d618705025db
+
+	column OVERVIEW_STATUS
+		dataType: string
+		lineageTag: 10336fef-3808-4164-8745-fc6d7fcc1211
+		summarizeBy: none
+		sourceColumn: OVERVIEW_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column OVERVIEW_STATUS_DESC
+		dataType: string
+		lineageTag: 4f8190c5-8908-45d0-9e0e-f1b8679eac16
+		summarizeBy: none
+		sourceColumn: OVERVIEW_STATUS_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - HISTORY OVERVIEW STATUS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_HISTORY_OVERVIEW_STATUS = pvcfcprodsqlpool{[Schema="sil",Item="DIM_HISTORY_OVERVIEW_STATUS"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_HISTORY_OVERVIEW_STATUS,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

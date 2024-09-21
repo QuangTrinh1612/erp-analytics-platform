@@ -1,0 +1,187 @@
+table 'FACT - INVENTORY BALANCE'
+	lineageTag: 28d96bc8-b223-4a75-aa61-f5fac4147ec9
+
+	column DOC_DATE
+		dataType: string
+		isHidden
+		lineageTag: 222a5fd2-eb48-45b4-b433-036ad8f2162e
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 26062de1-36d8-4a24-ab86-2ba546f95a66
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: 6ebca5f3-1c4b-4db7-bf70-b676240a332f
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: b3d66bdc-6cef-4942-9075-62c659c318ac
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: f5719c5c-d2b8-4461-a99d-6fba33300234
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: deeb7006-4909-4183-84aa-6141e774b31f
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_TYPE
+		dataType: string
+		isHidden
+		lineageTag: 42be079b-896b-4a02-bbf2-ee24c154807a
+		summarizeBy: none
+		sourceColumn: MATERIAL_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: bb3f6a6b-65e4-47ba-800a-6ba92567142a
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_SLOC_BATCH_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: f6411d05-ce48-4b8e-8e11-5297ff20e80d
+		summarizeBy: sum
+		sourceColumn: IS_SLOC_BATCH_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_VALUATED_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: f1a4707f-4d9a-4866-9e97-98c3aad8e0f3
+		summarizeBy: sum
+		sourceColumn: IS_VALUATED_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_SPECIAL_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: 9548ff80-b923-401b-834b-f0991bb33b64
+		summarizeBy: sum
+		sourceColumn: IS_SPECIAL_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIAL_STOCK
+		dataType: string
+		isHidden
+		lineageTag: fdbbfbe6-f212-4085-895e-85c9a17a2a9d
+		summarizeBy: none
+		sourceColumn: SPECIAL_STOCK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECEIPT_QTY
+		dataType: double
+		isHidden
+		lineageTag: 93a81d1e-860a-4f70-8b8b-5eeaf941f311
+		summarizeBy: sum
+		sourceColumn: RECEIPT_QTY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_QTY
+		dataType: double
+		isHidden
+		lineageTag: 83296cc0-38a1-4412-9ed5-217fe17a3df5
+		summarizeBy: sum
+		sourceColumn: ISSUE_QTY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_REVERSE_QTY
+		dataType: double
+		lineageTag: 88e23d95-fdd9-4933-a58d-1fcefa986ba0
+		summarizeBy: sum
+		sourceColumn: RECEIPT_REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_REVERSE_QTY
+		dataType: double
+		lineageTag: 2e39c93f-e306-4497-96cf-9fd5be9628f1
+		summarizeBy: sum
+		sourceColumn: ISSUE_REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVERSE_QTY
+		dataType: double
+		lineageTag: f39260b1-d382-499f-a50c-f274cdc0c5e3
+		summarizeBy: sum
+		sourceColumn: REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - INVENTORY BALANCE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_AGG_MATERIAL_LEDGER_QTY = pvcfcprodsqlpool{[Schema="gld",Item="VW_AGG_SLOC_QTY"]}[Data]
+				in
+				    gld_AGG_MATERIAL_LEDGER_QTY
+
+	annotation PBI_ResultType = Table
+

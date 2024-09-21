@@ -1,0 +1,389 @@
+table 'FACT - INVENTORY BALANCE PLANT'
+	lineageTag: 59597f1b-8372-447e-9c34-405fd11bcf39
+
+	column FISCAL_YEAR
+		dataType: string
+		isHidden
+		lineageTag: 5ffce559-2cd3-43b8-bf77-17aecd15bc54
+		summarizeBy: none
+		sourceColumn: FISCAL_YEAR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: string
+		isHidden
+		lineageTag: fc6e8664-7928-4643-ad66-999ffa85c923
+		summarizeBy: none
+		sourceColumn: FISCAL_PERIOD
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: f82e653d-840e-476a-9d61-e13958110ef2
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: 1335d524-2a71-4dc5-b92f-96b899013dac
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: b444b6a6-0b51-407e-a86d-4a6b78ab5622
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPENING_QTY
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: 5af29389-2268-42e2-9f5e-c1322d0f9027
+		summarizeBy: sum
+		sourceColumn: OPENING_QTY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column RECEIPT_QTY
+		dataType: double
+		formatString: 0.000
+		lineageTag: 945371b7-b225-4fe3-a4b9-791a574db162
+		summarizeBy: sum
+		sourceColumn: RECEIPT_QTY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLOSING_QTY
+		dataType: double
+		formatString: 0.000
+		lineageTag: 824d32ad-ac71-49f5-a34c-9962da7b6ca6
+		summarizeBy: sum
+		sourceColumn: CLOSING_QTY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STANDARD_PRICE
+		dataType: double
+		lineageTag: d5777ba1-fc49-4df7-8479-b401d494b42c
+		summarizeBy: sum
+		sourceColumn: STANDARD_PRICE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PERIOD_PRICE
+		dataType: double
+		lineageTag: 5652b85d-07c8-4bd7-984b-18e6c3856ba9
+		summarizeBy: sum
+		sourceColumn: PERIOD_PRICE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COST_EST_NO
+		dataType: string
+		lineageTag: a6cfad03-9e15-4a5a-927d-7d286d0d9577
+		summarizeBy: none
+		sourceColumn: COST_EST_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPENING_PRELIM_VALUE
+		dataType: double
+		formatString: #,#;-#,#;"Zero"
+		lineageTag: 6ba2306e-dfd9-4ee6-933b-c6a8ae8a499c
+		summarizeBy: sum
+		sourceColumn: OPENING_PRELIM_VALUE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column OPENING_PRICE_DIFF
+		dataType: double
+		lineageTag: 733d9bd2-155f-4ad0-a855-db726a53f389
+		summarizeBy: sum
+		sourceColumn: OPENING_PRICE_DIFF
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPENING_FXRATE_DIFF
+		dataType: double
+		lineageTag: 6503eb4e-0815-43b5-bc0d-b61041b8b5d3
+		summarizeBy: sum
+		sourceColumn: OPENING_FXRATE_DIFF
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPENING_ACTUAL_VALUE
+		dataType: double
+		formatString: #,#;-#,#;"Zero"
+		lineageTag: 76156e7f-a601-4e0f-ab15-7477a73f5593
+		summarizeBy: sum
+		sourceColumn: OPENING_ACTUAL_VALUE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column RECEIPT_PRELIM_VALUE
+		dataType: double
+		formatString: #,#;-#,#;"Zero"
+		lineageTag: 12ec85ac-7986-4fd3-8166-59aa60c55584
+		summarizeBy: sum
+		sourceColumn: RECEIPT_PRELIM_VALUE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column RECEIPT_PRICE_DIFF
+		dataType: double
+		lineageTag: 36e25615-8340-47f1-8526-90ab7d3c7052
+		summarizeBy: sum
+		sourceColumn: RECEIPT_PRICE_DIFF
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_FXRATE_DIFF
+		dataType: double
+		lineageTag: 7426315a-a1ab-454f-9391-b222b897f5e8
+		summarizeBy: sum
+		sourceColumn: RECEIPT_FXRATE_DIFF
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_ACTUAL_VALUE
+		dataType: double
+		formatString: #,#;-#,#;"Zero"
+		lineageTag: 7991e8e1-4f21-4101-87f9-1ace687c4c89
+		summarizeBy: sum
+		sourceColumn: RECEIPT_ACTUAL_VALUE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column CONSUMPTION_QTY
+		dataType: double
+		formatString: #,0.000
+		lineageTag: c8ef390a-1c72-4962-b604-bca93b18bd83
+		summarizeBy: sum
+		sourceColumn: CONSUMPTION_QTY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONSUMPTION_PRELIM_VALUE
+		dataType: double
+		formatString: #,#;-#,#;"Zero"
+		lineageTag: d1e69433-2999-4688-b910-1022ff0e84ef
+		summarizeBy: sum
+		sourceColumn: CONSUMPTION_PRELIM_VALUE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column CONSUMPTION_PRICE_DIFF
+		dataType: double
+		lineageTag: e66f7ae1-e541-4a7a-91c3-b39972c1b130
+		summarizeBy: sum
+		sourceColumn: CONSUMPTION_PRICE_DIFF
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CONSUMPTION_FXRATE_DIFF
+		dataType: double
+		lineageTag: 730a73c1-d511-4490-a456-ce68abfd1ccf
+		summarizeBy: sum
+		sourceColumn: CONSUMPTION_FXRATE_DIFF
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CONSUMPTION_ACTUAL_VALUE
+		dataType: double
+		formatString: #,#;-#,#;"Zero"
+		lineageTag: bb6a533e-fa0a-44c8-a5c1-0563453f9009
+		summarizeBy: sum
+		sourceColumn: CONSUMPTION_ACTUAL_VALUE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column CLOSING_PRELIM_VALUE
+		dataType: double
+		formatString: #,#;-#,#;"Zero"
+		lineageTag: 6b518988-0725-4113-986f-b46b75559db1
+		summarizeBy: sum
+		sourceColumn: CLOSING_PRELIM_VALUE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column CLOSING_PRICE_DIFF
+		dataType: double
+		lineageTag: ec0f4a2f-facb-433d-a9b1-0bb25de83683
+		summarizeBy: sum
+		sourceColumn: CLOSING_PRICE_DIFF
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLOSING_FXRATE_DIFF
+		dataType: double
+		lineageTag: ee9950cc-9709-42a0-97ad-968c2d599e99
+		summarizeBy: sum
+		sourceColumn: CLOSING_FXRATE_DIFF
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLOSING_ACTUAL_VALUE
+		dataType: double
+		formatString: #,#;-#,#;"Zero"
+		lineageTag: e47e0e46-0a32-4276-90ee-207fcedefe9d
+		summarizeBy: sum
+		sourceColumn: CLOSING_ACTUAL_VALUE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column DATE = DATE('FACT - INVENTORY BALANCE PLANT'[FISCAL_YEAR],'FACT - INVENTORY BALANCE PLANT'[FISCAL_PERIOD],"01")
+		dataType: dateTime
+		isHidden
+		lineageTag: d30b2ca6-3742-4f7f-86cc-9c903896e44b
+		summarizeBy: none
+		isDataTypeInferred
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Material_PLant_Key = [MATERIAL_CODE] & "-" & [PLANT_CODE]
+		dataType: string
+		isHidden
+		lineageTag: 38dbb3ef-05dd-4ea0-b91b-4ea64e04f78e
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column VAL_AREA
+		dataType: string
+		lineageTag: 4926add6-d287-4e66-9b5e-e965dcc86a59
+		summarizeBy: none
+		sourceColumn: VAL_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCTION_RECEIPT_QTY
+		dataType: double
+		lineageTag: 1c0c4e04-b684-4179-814f-020a0b4531cd
+		summarizeBy: sum
+		sourceColumn: PRODUCTION_RECEIPT_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Fact Inventory Balance Plant' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_VW_FACT_INVENTORY_BALANCE_PLANT = pvcfcprodsqlpool{[Schema="sil",Item="VW_FACT_INVENTORY_BALANCE_PLANT"]}[Data]
+				in
+				    sil_VW_FACT_INVENTORY_BALANCE_PLANT
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

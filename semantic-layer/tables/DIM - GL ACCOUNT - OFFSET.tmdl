@@ -1,0 +1,111 @@
+table 'DIM - GL ACCOUNT - OFFSET'
+	lineageTag: 6059db5c-e8e8-40e5-b5fa-32413582bc5c
+
+	column GL_ACC_NO
+		dataType: string
+		lineageTag: 5a81c8e2-2271-4b38-bdcc-bbcad69f0365
+		summarizeBy: none
+		sourceColumn: GL_ACC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROUP_ACC_NO
+		dataType: string
+		lineageTag: 1ee04964-20e6-4ba5-bfbf-02547e2e359b
+		summarizeBy: none
+		sourceColumn: GROUP_ACC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_BS_ACC
+		dataType: string
+		lineageTag: 00c160c4-b2b1-4682-bf8f-e863f847156b
+		summarizeBy: none
+		sourceColumn: IS_BS_ACC
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_PL_ACC
+		dataType: string
+		lineageTag: 84c4886f-ea2a-4337-aa05-ee1c6aff89e9
+		summarizeBy: none
+		sourceColumn: IS_PL_ACC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHORT_DESC
+		dataType: string
+		lineageTag: 1128a431-e04b-4d42-a854-72fd03055fbf
+		summarizeBy: none
+		sourceColumn: SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column LONG_DESC
+		dataType: string
+		lineageTag: 81d416f6-c052-4914-83e2-51a42ed8286e
+		summarizeBy: none
+		sourceColumn: LONG_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNING_GRP
+		dataType: string
+		lineageTag: 206701ba-fd52-4839-93ac-44424fc154a3
+		summarizeBy: none
+		sourceColumn: PLANNING_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNING_LEVEL
+		dataType: string
+		lineageTag: 1eaaf52c-dd3d-49cd-ac54-9dbc2d4447ad
+		summarizeBy: none
+		sourceColumn: PLANNING_LEVEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_CURRENCY
+		dataType: string
+		lineageTag: 8bff419c-73e9-4417-a204-1bc84a482ef0
+		summarizeBy: none
+		sourceColumn: ACCOUNT_CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column HOUSE_BANK_KEY
+		dataType: string
+		lineageTag: 94367088-587e-43f1-8418-a3647a58cb53
+		summarizeBy: none
+		sourceColumn: HOUSE_BANK_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_ID
+		dataType: string
+		lineageTag: 0b943688-a7bb-4ea8-9b0d-940ade7c7a2c
+		summarizeBy: none
+		sourceColumn: ACCOUNT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_LV1 = LEFT('DIM - GL ACCOUNT - OFFSET'[GL_ACC_NO],3)
+		dataType: string
+		lineageTag: 8893a54d-b45a-4f8e-98bf-4c2ca7b93ec2
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - GL ACCOUNT - OFFSET' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_GL_ACCOUNT = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_GL_ACCOUNT"]}[Data]
+				in
+				    gld_VW_DIM_GL_ACCOUNT
+
+	annotation PBI_ResultType = Table
+

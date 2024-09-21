@@ -1,0 +1,39 @@
+table 'DIM - PURCHASE ORG'
+	lineageTag: 244aefa7-6236-473d-a7f2-87ff2c50f20b
+
+	column PUR_ORG_CODE
+		dataType: string
+		lineageTag: 5ff4c58d-6374-4633-869e-6910fef8e80e
+		summarizeBy: none
+		sourceColumn: PUR_ORG_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: f744bae4-1728-4ced-82bb-81ab06320ae7
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PUR_ORG_DESCRIPTION
+		dataType: string
+		lineageTag: b57fc867-fbeb-4793-a4e4-d6f017be8e56
+		summarizeBy: none
+		sourceColumn: PUR_ORG_DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PURCHASE ORG' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PURCH_ORG = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_PURCH_ORG"]}[Data]
+				in
+				    gld_VW_DIM_PURCH_ORG
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,29 @@
+table 'DIM - WAREHOUSE'
+	lineageTag: ce1aa125-7407-4c53-a953-809ca8129d9b
+
+	column WAREHOUSE_NO
+		dataType: string
+		lineageTag: 9c41722f-c596-4a1e-8808-ec32498e0a45
+		summarizeBy: none
+		sourceColumn: WAREHOUSE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESCRIPTION
+		dataType: string
+		lineageTag: 15ec3fc8-db84-4186-993e-fc1ab281fb6f
+		summarizeBy: none
+		sourceColumn: DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim Warehouse' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_WAREHOUSE_SAP = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_WAREHOUSE_SAP"]}[Data]
+				in
+				    gld_VW_DIM_WAREHOUSE_SAP
+

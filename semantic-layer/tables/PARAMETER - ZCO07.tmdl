@@ -1,0 +1,359 @@
+table 'PARAMETER - ZCO07'
+	lineageTag: c740137c-7313-4730-9e8e-4f991bf4a6ca
+
+	measure 'ZCO07 measures' =
+			SWITCH(
+			    SELECTEDVALUE('PARAMETER - ZCO07'[STT],""),
+			"1.1",SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch", [KH Sản lượng sản xuất Ure quy đổi (ZCO07)],
+			            "Thực hiện",[TH Sản lượng sản xuất Ure quy đổi (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Sản lượng sản xuất Ure quy đổi (ZCO07)],[KH Sản lượng sản xuất Ure quy đổi (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Sản lượng sản xuất Ure quy đổi (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Sản lượng sản xuất Ure quy đổi (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Sản lượng sản xuất Ure quy đổi (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Sản lượng sản xuất Ure quy đổi (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"1.1.1",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Sản lượng sản xuất Ure (ZCO07)] ,
+			            "Thực hiện",[TH Sản lượng sản xuất Ure (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Sản lượng sản xuất Ure (ZCO07)],[KH Sản lượng sản xuất Ure (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Sản lượng sản xuất Ure (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Sản lượng sản xuất Ure (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Sản lượng sản xuất Ure (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Sản lượng sản xuất Ure (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"1.1.2",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Sản lượng sản xuất Amo (ZCO07)] ,
+			            "Thực hiện",[TH Sản lượng sản xuất Amo (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Sản lượng sản xuất Amo (ZCO07)],[KH Sản lượng sản xuất Amo (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Sản lượng sản xuất Amo (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Sản lượng sản xuất Amo (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Sản lượng sản xuất Amo (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Sản lượng sản xuất Amo (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"1.2",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)] ,
+			            "Thực hiện",[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)],[KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"1.2.1",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Sản lượng tiêu thụ Ure (ZCO07)] ,
+			            "Thực hiện",[TH Sản lượng tiêu thụ Ure (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Sản lượng tiêu thụ Ure (ZCO07)],[KH Sản lượng tiêu thụ Ure (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"1.2.2",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch", [KH Sản lượng tiêu thụ Amo (ZCO07)],
+			            "Thực hiện",[TH Sản lượng tiêu thụ Amo (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Sản lượng tiêu thụ Amo (ZCO07)],[KH Sản lượng tiêu thụ Amo (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"2",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Chi phí sản xuất (ZCO07)] / 1000000000,
+			            "Thực hiện",[TH Chi phí sản xuất (ZCO07)]  / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Chi phí sản xuất (ZCO07)],[KH Chi phí sản xuất (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phí sản xuất (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí sản xuất (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phí sản xuất (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phí sản xuất (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"2.1",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Chi phí nguyên nhiên vật liệu (ZCO07)] / 1000000000,
+			            "Thực hiện",[TH Chi phí nguyên nhiên vật liệu (ZCO07)] / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Chi phí nguyên nhiên vật liệu (ZCO07)],[KH Chi phí nguyên nhiên vật liệu (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phí nguyên nhiên vật liệu (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí nguyên nhiên vật liệu (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phí nguyên nhiên vật liệu (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phí nguyên nhiên vật liệu (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"2.2",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Chi phí nhân công trực tiếp (ZCO07)] / 1000000000,
+			            "Thực hiện",[TH Chi phí nhân công trực tiếp (ZCO07)] / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Chi phí nhân công trực tiếp (ZCO07)],[KH Chi phí nhân công trực tiếp (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phí nhân công trực tiếp (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí nhân công trực tiếp (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phí nhân công trực tiếp (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phí nhân công trực tiếp (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"2.3",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Chi phi sản xuất chung (ZCO07)] / 1000000000,
+			            "Thực hiện",[TH Chi phi sản xuất chung (ZCO07)] / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Chi phi sản xuất chung (ZCO07)],[KH Chi phi sản xuất chung (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phi sản xuất chung (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phi sản xuất chung (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phi sản xuất chung (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phi sản xuất chung (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"3",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Chi phí bán hàng (ZCO07)] / 1000000000,
+			            "Thực hiện",[TH Chi phí bán hàng (ZCO07)] / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Chi phí bán hàng (ZCO07)],[KH Chi phí bán hàng (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phí bán hàng (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí bán hàng (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phí bán hàng (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phí bán hàng (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"4",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Chi phí quản lý (ZCO07)] / 1000000000,
+			            "Thực hiện",[TH Chi phí quản lý (ZCO07)] / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Chi phí quản lý (ZCO07)],[KH Chi phí quản lý (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phí quản lý (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí quản lý (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phí quản lý (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phí quản lý (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"5",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Chi phí tài chính (ZCO07)] / 1000000000,
+			            "Thực hiện",[TH Chi phí tài chính (ZCO07)] / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Chi phí tài chính (ZCO07)],[KH Chi phí tài chính (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phí tài chính (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí tài chính (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phí tài chính (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phí tài chính (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"6",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Tổng chi phí (ZCO07)] / 1000000000,
+			            "Thực hiện",[TH Tổng chi phí (ZCO07)] / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Tổng chi phí (ZCO07)],[KH Tổng chi phí (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Tổng chi phí (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Tổng chi phí (ZCO07)],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Tổng chi phí (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Tổng chi phí (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"7",  BLANK(),
+			"7.1",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Giá thành phân xưởng (ZCO07)],
+			            "Thực hiện",[TH Giá thành phân xưởng (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Giá thành phân xưởng (ZCO07)],[KH Giá thành phân xưởng (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Giá thành phân xưởng (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Giá thành phân xưởng (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Giá thành phân xưởng (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Giá thành phân xưởng (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"7.2",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Chi phí bán hàng - giá thành (ZCO07)] ,
+			            "Thực hiện",[TH Chi phí bán hàng - giá thành (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Chi phí bán hàng - giá thành (ZCO07)],[KH Chi phí bán hàng - giá thành (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phí bán hàng - giá thành (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí bán hàng - giá thành (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phí bán hàng - giá thành (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phí bán hàng - giá thành (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"7.3",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Chi phí quản lý - giá thành (ZCO07)] ,
+			            "Thực hiện",[TH Chi phí quản lý - giá thành (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Chi phí quản lý - giá thành (ZCO07)],[KH Chi phí quản lý - giá thành (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phí quản lý - giá thành (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí quản lý - giá thành (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phí quản lý - giá thành (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phí quản lý - giá thành (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"7.4",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Chi phí tài chính - giá thành (ZCO07)] ,
+			            "Thực hiện",[TH Chi phí tài chính - giá thành (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Chi phí tài chính - giá thành (ZCO07)],[KH Chi phí tài chính - giá thành (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phí tài chính - giá thành (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí tài chính - giá thành (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phí tài chính - giá thành (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phí tài chính - giá thành (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"7.5",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Giá thành toàn bộ (ZCO07)],
+			            "Thực hiện",[TH Giá thành toàn bộ (ZCO07)],
+			            "So sánh TH / KH %",DIVIDE([TH Giá thành toàn bộ (ZCO07)],[KH Giá thành toàn bộ (ZCO07)]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Giá thành toàn bộ (ZCO07)],'DIM - DATE'[Date]),
+			            "Thực hiện lũy kế",TOTALYTD([TH Giá thành toàn bộ (ZCO07)],'DIM - DATE'[Date]),
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Giá thành toàn bộ (ZCO07)],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Giá thành toàn bộ (ZCO07)],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"8",  BLANK(),
+			"9",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Doanh thu tài chính] / 1000000000,
+			            "Thực hiện",[TH Doanh thu tài chính] / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Doanh thu tài chính],[KH Doanh thu tài chính]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Doanh thu tài chính],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Doanh thu tài chính],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Doanh thu tài chính],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Doanh thu tài chính],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"10",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH Thu nhập khác] / 1000000000,
+			            "Thực hiện",[TH Thu nhập khác] / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Thu nhập khác],[KH Thu nhập khác]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Thu nhập khác],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Thu nhập khác],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Thu nhập khác],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Thu nhập khác],'DIM - DATE'[Date])
+			                                                ) * 100
+			    ),
+			"11",  SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO07 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch", [KH Chi phí khác] / 1000000000,
+			            "Thực hiện",[TH Chi phí khác] / 1000000000,
+			            "So sánh TH / KH %",DIVIDE([TH Chi phí khác],[KH Chi phí khác]) * 100,
+			            "Kế hoạch lũy kế",TOTALYTD([KH Chi phí khác],'DIM - DATE'[Date]) / 1000000000,
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí khác],'DIM - DATE'[Date]) / 1000000000,
+			            "So sánh TH lũy kế / KH lũy kế %",DIVIDE(
+			                                                TOTALYTD([TH Chi phí khác],'DIM - DATE'[Date]),
+			                                                TOTALYTD([KH Chi phí khác],'DIM - DATE'[Date])
+			                                                ) * 100
+			    )
+			)
+		formatString: #,0.000
+		lineageTag: b7cfae06-b0ea-4ada-bff0-455113a7d04d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Order
+		dataType: int64
+		lineageTag: 1b0cef42-743c-4bb2-8a93-829988106c0d
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Order]
+
+		annotation SummarizationSetBy = Automatic
+
+	column STT
+		dataType: string
+		lineageTag: 2799ad05-1e50-4d2c-8b5a-f00a8d7b33b3
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+		sortByColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nội dung'
+		dataType: string
+		lineageTag: 39060e6c-a0b5-4e74-933b-533f81822928
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Nội dung]
+		sortByColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Đvt
+		dataType: string
+		lineageTag: 65fcf001-3a16-4ff9-b313-baea747f75dc
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Đvt]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source = ```
+				DATATABLE (
+				    "Order", INTEGER,
+				    "STT", STRING,
+				    "Nội dung", STRING,
+				    "Đvt",string,
+				{
+				    {1,"1.1","Sản lượng sản xuất Ure quy đổi","Tấn"},
+				    {2,"1.1.1","Sản lượng sản xuất Ure","Tấn"},
+				    {3,"1.1.2","Sản lượng Amo","Tấn"},
+				    {4,"1.2","Sản lượng tiêu thụ Ure quy đổi","Tấn"},
+				    {5,"1.2.1","Sản lượng tiêu thụ Ure","Tấn"},
+				    {6,"1.2.2","Sản lượng tiêu thụ Amo","Tấn"},
+				    {7,"2","Chi phí sản xuất","Tỷ Đồng"},
+				    {8,"2.1","Chi phí nguyên nhiên vật liệu","Tỷ Đồng"},
+				    {9,"2.2","Chi phí nhân công trực tiếp","Tỷ Đồng"},
+				    {10,"2.3","Chi phí sản xuất chung","Tỷ Đồng"},
+				    {11,"3","Chi phí bán hàng","Tỷ Đồng"},
+				    {12,"4","Chi phí quản lý","Tỷ Đồng"},
+				    {13,"5","Chi phí tài chính","Tỷ Đồng"},
+				    {14,"6","Tổng chi phí","Tỷ Đồng"},
+				    {15,"7","Giá thành đơn vị","Tỷ Đồng"},
+				    {16,"7.1","Giá thành phân xưởng","Đồng/tấn"},
+				    {17,"7.2","Chi phí bán hàng","Đồng/tấn"},
+				    {18,"7.3","Chi phí quản lý","Đồng/tấn"},
+				    {19,"7.4","Chi phí tài chính","Đồng/tấn"},
+				    {20,"7.5","Giá thành toàn bộ","Đồng/tấn"},
+				    {21,"8","Doanh thu","Tỷ Đồng"},
+				    {22,"9","Doanh thu tài chính","Tỷ Đồng"},
+				    {23,"10","Thu nhập khác","Tỷ Đồng"},
+				    {24,"11","Chi phí khác","Tỷ Đồng"}
+				
+				}
+				)
+				
+				```
+

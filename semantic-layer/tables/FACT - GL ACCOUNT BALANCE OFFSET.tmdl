@@ -1,0 +1,112 @@
+table 'FACT - GL ACCOUNT BALANCE OFFSET'
+	lineageTag: 941b1d54-4390-47c0-bd5c-51cb500c6cfa
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 8166b8e3-85ca-4415-adc9-84996213470f
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 0c46c6ed-4d77-4f17-927d-80da7f45c8a6
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_CODE
+		dataType: string
+		lineageTag: 2a33183a-9e4e-4684-a61e-de9a6bcc1299
+		summarizeBy: none
+		sourceColumn: CURRENCY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_CENTRE
+		dataType: string
+		lineageTag: 1e059a87-4f79-4884-b7ff-9e50706049a4
+		summarizeBy: none
+		sourceColumn: PROFIT_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTRE
+		dataType: string
+		lineageTag: f95c1543-f011-41e3-bc7e-ee5f22f02b6a
+		summarizeBy: none
+		sourceColumn: COST_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_NO
+		dataType: string
+		lineageTag: 10014575-4d0e-46e9-9adb-3f9529a53c46
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column OFFSET_GL_ACCT
+		dataType: string
+		lineageTag: 5c0111be-5123-49ed-acf6-3f08973ca010
+		summarizeBy: none
+		sourceColumn: OFFSET_GL_ACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEBIT_AMT
+		dataType: double
+		lineageTag: 9b699c87-32de-4351-b6e5-ff35d957e40c
+		summarizeBy: sum
+		sourceColumn: DEBIT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREDIT_AMT
+		dataType: double
+		lineageTag: 9b025c51-74ad-427c-86df-4e95756f0ec5
+		summarizeBy: sum
+		sourceColumn: CREDIT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IS_REVERSE
+		dataType: int64
+		formatString: 0
+		lineageTag: e97a84f1-805a-4e57-b0a5-82df0472e27b
+		summarizeBy: none
+		sourceColumn: IS_REVERSE
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_REVERSE_SP
+		dataType: int64
+		formatString: 0
+		lineageTag: 732f4c0a-673b-4741-9c4a-22723ebd0292
+		summarizeBy: sum
+		sourceColumn: IS_REVERSE_SP
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - GL ACCOUNT BALANCE OFFSET' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_FACT_GL_ACCOUNT_BALANCE_OFFSET = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_GL_ACCOUNT_BALANCE_OFFSET"]}[Data]
+				in
+				    VW_FACT_GL_ACCOUNT_BALANCE_OFFSET
+
+	annotation PBI_ResultType = Table
+

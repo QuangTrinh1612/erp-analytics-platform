@@ -1,0 +1,796 @@
+table 'Parameter: Cost Component'
+	lineageTag: 744fb136-e759-444e-8f50-61c982958b0a
+
+	measure 'Giá Thành' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Parameter: Cost Component'[STT]),
+			    "A1",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Khí đầu vào"
+			        ),
+			    "A2",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Điện nhận lưới"
+			        ),
+			    "A3",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Chi phí nước ngọt"
+			        ),
+			    "A4",
+			        CALCULATE(
+			            SUMX(
+			                'FACT - PRODUCT COSTING',
+			                [VALUE_COA_CURR] + [PRICE_DIFF]
+			            ),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Hoá chất"
+			        ),
+			    "A5",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Xúc Tác"
+			        ),
+			    "A6",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Dầu mỡ"
+			        ),
+			    "A7",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {"Bao bì đóng bao", "Hàng xá"}
+			        ),
+			    "A8",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Amonia"
+			        ),
+			    "A9",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Urê rời"
+			        ),
+			    "A10",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Urê bao"
+			        ),
+			    "A11",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            FILTER(
+			                'FACT - PRODUCT COSTING',
+			                [TYPE_OF_COST] = "NPK"
+			                && [MATERIAL_GROUP_NAME] = "BTP"
+			                && [COST_ELEMENT] = "6211010012"
+			            )
+			        ),
+			    "A12",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            FILTER(
+			                'FACT - PRODUCT COSTING',
+			                [TYPE_OF_COST] = "NPK"
+			                && [MATERIAL_GROUP_NAME] = "TP NPK"
+			                && [COST_ELEMENT] = "6211010010"
+			            )
+			        ),
+			
+			    "A",
+			        CALCULATE(
+			            SUMX(
+			                'FACT - PRODUCT COSTING',
+			                [VALUE_COA_CURR] + [PRICE_DIFF]
+			            ),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                "Khí đầu vào",
+			                "Điện nhận lưới",
+			                "Chi phí nước ngọt",
+			                "Hoá chất",
+			                "Xúc Tác",
+			                "Dầu mỡ",
+			                "Bao bì đóng bao",
+			                "Hàng xá",
+			                "Amonia",
+			                "Urê rời",
+			                "Urê bao",
+			                "NPK"
+			            }
+			        ),
+			    "B",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {"Chi phí NC T.tiếp"}
+			        ),
+			    "C1",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {"Chi phí NVQL"}
+			        ),
+			    "C2",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {"Chi phí CCDC"}
+			        ),
+			    "C3",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {"Chi phí K.Hao TSCĐ"}
+			        ),
+			    "C4",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {"Chi phí DVMN"}
+			        ),
+			    "C5",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {"Chi phí BDĐK"}
+			        ),
+			    "C6",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {"Chi phí BDTX"}
+			        ),
+			    "C7",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {"Chi phí khác"}
+			        ),
+			    "C",
+			        CALCULATE(
+			            SUM('FACT - PRODUCT COSTING'[VALUE_COA_CURR]),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                "Chi phí NVQL",
+			                "Chi phí CCDC",
+			                "Chi phí K.Hao TSCĐ",
+			                "Chi phí DVMN",
+			                "Chi phí BDĐK",
+			                "Chi phí BDTX",
+			                "Chi phí khác"
+			            }
+			        ),
+			    "D",
+			        CALCULATE(
+			            SUMX(
+			                'FACT - PRODUCT COSTING',
+			                [VALUE_COA_CURR] + [PRICE_DIFF]
+			            ),
+			            'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                "Khí đầu vào",
+			                "Điện nhận lưới",
+			                "Chi phí nước ngọt",
+			                "Hoá chất",
+			                "Xúc Tác",
+			                "Dầu mỡ",
+			                "Bao bì đóng bao",
+			                "Hàng xá",
+			                "Amonia",
+			                "Urê rời",
+			                "Urê bao",
+			                "NPK",
+			                "Chi phí NVQL",
+			                "Chi phí CCDC",
+			                "Chi phí K.Hao TSCĐ",
+			                "Chi phí DVMN",
+			                "Chi phí BDĐK",
+			                "Chi phí BDTX",
+			                "Chi phí khác",
+			                "Chi phí NC T.tiếp"
+			            }
+			        ),
+			    "E",
+			        /*
+			        CALCULATE(
+			            SUM('FACT PRODUCT COSTING'[TOTAL_MANUF_QUANTITY]),
+			            'FACT PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                "Urê rời",
+			                "Urê bao"
+			            }
+			        ),
+			        */
+			        SUMX(
+			            SUMMARIZE(
+			                'FACT - PRODUCT COSTING',
+			                [FISCAL_YEAR],
+			                [FISCAL_PERIOD],
+			                [MATERIAL_CODE],
+			                [TOTAL_MANUF_QUANTITY]
+			            ),
+			            [TOTAL_MANUF_QUANTITY]
+			        ),
+			    "F",
+			        DIVIDE(
+			            CALCULATE(
+			                SUMX(
+			                    'FACT - PRODUCT COSTING',
+			                    [VALUE_COA_CURR] + [PRICE_DIFF]
+			                ),
+			                'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {
+			                    "Khí đầu vào",
+			                    "Điện nhận lưới",
+			                    "Chi phí nước ngọt",
+			                    "Hoá chất",
+			                    "Xúc Tác",
+			                    "Dầu mỡ",
+			                    "Bao bì đóng bao",
+			                    "Hàng xá",
+			                    "Amonia",
+			                    "Urê rời",
+			                    "Urê bao",
+			                    "NPK",
+			                    "Chi phí NVQL",
+			                    "Chi phí CCDC",
+			                    "Chi phí K.Hao TSCĐ",
+			                    "Chi phí DVMN",
+			                    "Chi phí BDĐK",
+			                    "Chi phí BDTX",
+			                    "Chi phí khác",
+			                    "Chi phí NC T.tiếp"
+			                }
+			            ),
+			            SUMX(
+			                SUMMARIZE(
+			                    'FACT - PRODUCT COSTING',
+			                    [FISCAL_YEAR],
+			                    [FISCAL_PERIOD],
+			                    [MATERIAL_CODE],
+			                    [TOTAL_MANUF_QUANTITY]
+			                ),
+			                [TOTAL_MANUF_QUANTITY]
+			            )
+			        )
+			)
+		formatString: #,0
+		lineageTag: 39b48df8-ed6d-4d95-8cae-9f698cc9a562
+
+	measure 'Giá Thành (ZCO06)' = ```
+			
+			SWITCH (
+			    SELECTEDVALUE ( 'Parameter: Cost Component'[STT] ),
+			    "A1",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Khí đầu vào"
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A2",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Điện nhận lưới"
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A3",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Chi phí nước ngọt"
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A4",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Hoá chất"
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A5",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Xúc Tác"
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A6",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Dầu mỡ"
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A7",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN {"Bao bì đóng bao","Hàng xá"}
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A8",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Amonia"
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A9",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Urê rời"
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A10",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] = "Urê bao"
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A11",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    FILTER (
+			                        'FACT - PRODUCT COSTING',
+			                        [TYPE_OF_COST] = "NPK"
+			                            && [MATERIAL_GROUP_NAME] = "BTP"
+			                    )
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A12",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    FILTER (
+			                        'FACT - PRODUCT COSTING',
+			                        [TYPE_OF_COST] = "NPK"
+			                            && [MATERIAL_GROUP_NAME] = "TP NPK"
+			                    )
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "A",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST]
+			                        IN {
+			                            "Khí đầu vào",
+			                            "Điện nhận lưới",
+			                            "Chi phí nước ngọt",
+			                            "Hoá chất",
+			                            "Xúc Tác",
+			                            "Dầu mỡ",
+			                            "Bao bì đóng bao",
+			                            "Hàng xá",
+			                            "Amonia",
+			                            "Urê rời",
+			                            "Urê bao",
+			                            "NPK"
+			                        }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "B",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN { "Chi phí NC T.tiếp" }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "C1",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN { "Chi phí NVQL" }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "C2",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN { "Chi phí CCDC" }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "C3",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN { "Chi phí K.Hao TSCĐ" }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "C4",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN { "Chi phí DVMN" }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "C5",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN { "Chi phí BDĐK" }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "C6",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN { "Chi phí BDTX" }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "C7",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST] IN { "Chi phí khác" }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "C",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST]
+			                        IN {
+			                            "Chi phí NVQL",
+			                            "Chi phí CCDC",
+			                            "Chi phí K.Hao TSCĐ",
+			                            "Chi phí DVMN",
+			                            "Chi phí BDĐK",
+			                            "Chi phí BDTX",
+			                            "Chi phí khác"
+			                        }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "D",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                CALCULATE (
+			                    SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                    'FACT - PRODUCT COSTING'[TYPE_OF_COST]
+			                        IN {
+			                            "Khí đầu vào",
+			                            "Điện nhận lưới",
+			                            "Chi phí nước ngọt",
+			                            "Hoá chất",
+			                            "Xúc Tác",
+			                            "Dầu mỡ",
+			                            "Bao bì đóng bao",
+			                            "Hàng xá",
+			                            "Amonia",
+			                            "Urê rời",
+			                            "Urê bao",
+			                            "NPK",
+			                            "Chi phí NVQL",
+			                            "Chi phí CCDC",
+			                            "Chi phí K.Hao TSCĐ",
+			                            "Chi phí DVMN",
+			                            "Chi phí BDĐK",
+			                            "Chi phí BDTX",
+			                            "Chi phí khác",
+			                            "Chi phí NC T.tiếp"
+			                        }
+			                ),
+			            "Giá thành kế hoạch nội bộ", BLANK (),
+			            "Giá thành kế hoạch tập đoàn", BLANK (),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "E",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                SUMX (
+			                    SUMMARIZE (
+			                        'FACT - PRODUCT COSTING',
+			                        [FISCAL_YEAR],
+			                        [FISCAL_PERIOD],
+			                        [MATERIAL_CODE],
+			                        [TOTAL_MANUF_QUANTITY]
+			                    ),
+			                    [TOTAL_MANUF_QUANTITY]
+			                ),
+			            "Giá thành kế hoạch nội bộ", 
+			            CALCULATE(
+			                SUM('FACT - MANUF PLAN'[QUANTITY]),
+			                FILTER(
+			                    'FACT - MANUF PLAN',
+			                    [VERSION] = SELECTEDVALUE('PARAMETER - QUANTITY VERSION'[VERSION])
+			                )
+			            ),
+			            "Giá thành kế hoạch tập đoàn", 
+			            CALCULATE(
+			                SUM('FACT - MANUF PLAN'[QUANTITY]),
+			                FILTER(
+			                    'FACT - MANUF PLAN',
+			                    [VERSION] = SELECTEDVALUE('PARAMETER - QUANTITY VERSION'[VERSION])
+			                )
+			            ),
+			            "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			            "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			        ),
+			    "F",
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO06 MEASURE GROUP'[Measure group], "" ),
+			            "Giá thành sản xuất",
+			                DIVIDE (
+			                    CALCULATE (
+			                        SUMX('FACT - PRODUCT COSTING', [VALUE_COA_CURR] + [PRICE_DIFF]),
+			                        'FACT - PRODUCT COSTING'[TYPE_OF_COST]
+			                            IN {
+			                                "Khí đầu vào",
+			                                "Điện nhận lưới",
+			                                "Chi phí nước ngọt",
+			                                "Hoá chất",
+			                                "Xúc Tác",
+			                                "Dầu mỡ",
+			                                "Bao bì đóng bao",
+			                                "Hàng xá",
+			                                "Amonia",
+			                                "Urê rời",
+			                                "Urê bao",
+			                                "NPK",
+			                                "Chi phí NVQL",
+			                                "Chi phí CCDC",
+			                                "Chi phí K.Hao TSCĐ",
+			                                "Chi phí DVMN",
+			                                "Chi phí BDĐK",
+			                                "Chi phí BDTX",
+			                                "Chi phí khác",
+			                                "Chi phí NC T.tiếp"
+			                            }
+			                    ),
+			                    SUMX (
+			                        SUMMARIZE (
+			                            'FACT - PRODUCT COSTING',
+			                            [FISCAL_YEAR],
+			                            [FISCAL_PERIOD],
+			                            [MATERIAL_CODE],
+			                            [TOTAL_MANUF_QUANTITY]
+			                        ),
+			                        [TOTAL_MANUF_QUANTITY]
+			                    )
+			                )
+			        ),
+			    "Giá thành kế hoạch nội bộ", BLANK (),
+			    "Giá thành kế hoạch tập đoàn", BLANK (),
+			    "Tỷ lệ % giá thành SX so với nội bộ", BLANK (),
+			    "Tỷ lệ % giá thành SX so với tập đoàn", BLANK ()
+			)
+			```
+		lineageTag: d98ec87f-f3db-4fd7-9a2b-67e76d5d26de
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STT
+		dataType: string
+		lineageTag: 93b6b423-aae9-467f-a98b-7b2e06eb0875
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+		sortByColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nội dung'
+		dataType: string
+		lineageTag: 51aab003-a76c-4ac1-8663-0f17b6a495b6
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Nội dung]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		formatString: 0
+		lineageTag: daf5cf0d-4a33-421d-8704-731c12badb07
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Order]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nội dung (Display)' = If ('Parameter: Cost Component'[Ure] = 1, "Ure",if('Parameter: Cost Component'[NPK] = 1, "NPK",blank()))
+		dataType: string
+		formatString: 0
+		lineageTag: 77ecbc6f-60b7-49e5-9045-a8b18121094b
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ure
+		dataType: int64
+		formatString: 0
+		lineageTag: 44dfd223-2f8c-44d7-b1c6-d56a9aa36bdb
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Ure]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NPK
+		dataType: int64
+		formatString: 0
+		lineageTag: 7696bf5c-1e58-4605-bed1-d361c4261c2b
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [NPK]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter: Cost Component' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Order", INTEGER,
+				    "STT", STRING,
+				    "Nội dung", STRING,
+				    "Ure",INTEGER,
+				    "NPK",INTEGER,
+				    {
+				        {1,"A", "Chi phí nguyên vật liệu",1,1},
+				        {2,"A1", "Khí đầu vào",1,1},
+				        {3,"A2", "Điện nhận lưới",1,1},
+				        {4,"A3", "Chi phí nước ngọt",1,1},
+				        {5,"A4", "Hoá chất",1,1},
+				        {6,"A5", "Xúc Tác",1,1},
+				        {7,"A6", "Dầu mỡ, nguyên liệu khác",1,1},
+				        {8,"A7", "Bao bì đóng bao",1,1},
+				        {9,"A8", "Amonia",1,1},
+				        {10,"A9", "Urê rời",1,1},
+				        {11,"A10", "Ure bao",1,0},
+				        {12,"A11", "SPDD",0,1},
+				        {13,"A12", "BTP",0,1},
+				        {14,"A13", "NPK bao",0,1},
+				        {15,"B", "Chi phí nhân công trực tiếp",1,1},
+				        {16,"C", "Chi phí sản xuất chung",1,1},
+				        {17,"C1", "Chi phí nhân viên",1,1},
+				        {18,"C2", "Chi phí CCDC",1,1},
+				        {19,"C3", "Chi phí khấu hao TSCĐ",1,1},
+				        {20,"C4", "Chi phí dịch vụ mua ngoài",1,1},
+				        {21,"C5", "Chi phí bảo dưỡng định kỳ",1,1},
+				        {22,"C6", "Chi phí bảo dưỡng thường xuyên",1,1},
+				        {23,"C7", "Chi phí khác",1,1},
+				        {24,"D", "Cộng chi phí phân xưởng",1,1},
+				        {25,"E", "Sản lượng sản xuất (Tấn)",1,1},
+				        {26,"F", "Giá thành sản phẩm (đồng/tấn)",1,1}
+				    }
+				)
+
+	annotation PBI_Id = 7ed2746935af42ee9ddafb537f00585a
+

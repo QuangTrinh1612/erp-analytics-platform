@@ -1,0 +1,2175 @@
+table '_WM - Metrícs'
+	lineageTag: b9292b73-97d3-4f83-93e5-19251fbe8644
+
+	/// Formula: var _current = [RECEIPT AMT (V PRICE)]
+	/// var _LY = CALCULATE([RECEIPT AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+	/// return
+	/// (_current-_LY)/_current
+	measure '% Giá trị nhập kho so với năm trước' =
+			var _current = [RECEIPT AMT (V PRICE)]
+			var _LY = CALCULATE([RECEIPT AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+			return
+			(_current-_LY)/_current
+		formatString: #,##0.00 %
+		displayFolder: Tiếng Việt
+		lineageTag: 549a3ac8-762e-4529-a043-0774e273b88e
+
+	/// Formula: var _current = [CLOSING AMT (V PRICE)]
+	/// var _LY = CALCULATE([CLOSING AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+	/// return
+	/// (_current-_LY)/_LY
+	measure '% Giá trị tồn kho cuối kỳ so với năm trước' =
+			var _current = [CLOSING AMT (V PRICE)]
+			var _LY = CALCULATE([CLOSING AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+			return
+			(_current-_LY)/_LY
+		formatString: #,##0.00 %
+		displayFolder: Tiếng Việt
+		lineageTag: c045fb32-7e26-46e1-883d-6253eeaae503
+
+	/// Formula: DIVIDE([CLOSING AMT (V PRICE)],CALCULATE([CLOSING AMT (V PRICE)],ALLSELECTED('DIM - MATERIAL'[PLANNER])))
+	measure '% Giá trị tồn kho cuối kỳ theo Planner' = DIVIDE([CLOSING AMT (V PRICE)],CALCULATE([CLOSING AMT (V PRICE)],ALLSELECTED('DIM - MATERIAL'[PLANNER])))
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Tiếng Việt
+		lineageTag: c0c5e02d-3376-4e90-9e22-a46c8e670226
+
+	/// Formula: var _current = [OPENING AMT (V PRICE)]
+	/// var _LY = CALCULATE([OPENING AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+	/// return
+	/// (_current-_LY)/_current
+	measure '% Giá trị tồn kho đầu kỳ so với năm trước' =
+			var _current = [OPENING AMT (V PRICE)]
+			var _LY = CALCULATE([OPENING AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+			return
+			(_current-_LY)/_current
+		formatString: #,##0.00 %
+		displayFolder: Tiếng Việt
+		lineageTag: ebf93b9b-8af6-46de-9fa8-2adb7eb013cb
+
+	/// Formula: var _current = [ISSUE AMT (V PRICE)]
+	/// var _LY = CALCULATE([ISSUE AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+	/// return
+	/// (_current-_LY)/_current
+	measure '% Giá trị xuất kho so với năm trước' =
+			var _current = [ISSUE AMT (V PRICE)]
+			var _LY = CALCULATE([ISSUE AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+			return
+			(_current-_LY)/_current
+		formatString: #,##0.00 %
+		displayFolder: Tiếng Việt
+		lineageTag: 1613917a-0322-4eaa-a749-28dc92048ce7
+
+	/// Formula: var _measure = 
+	/// SWITCH(
+	///         SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	///         ,"",SUM('AGG - MATERIAL LEDGER V PRICE'[RECEIPT_AMT])
+	///         ,"X",SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT]-[RECEIPT_REVERSE_AMT])
+	///         )
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Giá trị nhập kho' = ```
+			var _measure = 
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",SUM('AGG - MATERIAL LEDGER V PRICE'[RECEIPT_AMT])
+			        ,"X",SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT]-[RECEIPT_REVERSE_AMT])
+			        )
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Tiếng Việt
+		lineageTag: 1f94deb8-1365-454d-af5a-386c71d4dc61
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SWITCH (
+	///     SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+	///     "Sản xuất", CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[RECEIPT_S_AMT_ALLOCATED] ) ),
+	///     CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[RECEIPT_V_AMT_ALLOCATED] ) )
+	/// )
+	measure 'Giá trị nhập kho được phân bổ lại' =
+			SWITCH (
+			    SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+			    "Sản xuất", CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[RECEIPT_S_AMT_ALLOCATED] ) ),
+			    CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[RECEIPT_V_AMT_ALLOCATED] ) )
+			)
+		displayFolder: Tiếng Việt
+		lineageTag: 3734f25a-b79b-4584-bbdd-a7b18c5a74f8
+
+	/// Formula: 
+	/// VAR _min_date = MIN('DIM - DATE'[Date])
+	/// VAR _max_date = MAX('DIM - DATE'[Date])
+	/// var _measure = 
+	/// 
+	/// SWITCH(
+	///         SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	///         ,"",
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]),
+	///             'DIM - DATE'[Date] <= _max_date
+	///         )
+	///         ,"X",
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]- [REVERSE_AMT]),
+	///             'DIM - DATE'[Date] <= _max_date
+	///         )
+	///         +
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[REVERSE_REMAIN_AMT]),
+	///             'DIM - DATE'[Date] >= _max_date
+	///         )
+	/// )
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Giá trị tồn kho cuối kỳ' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			var _measure = 
+			
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]),
+			            'DIM - DATE'[Date] <= _max_date
+			        )
+			        ,"X",
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]- [REVERSE_AMT]),
+			            'DIM - DATE'[Date] <= _max_date
+			        )
+			        +
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[REVERSE_REMAIN_AMT]),
+			            'DIM - DATE'[Date] >= _max_date
+			        )
+			)
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Tiếng Việt
+		lineageTag: 2748d17d-2c31-4995-bea2-455effc4bae5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _max_date = STARTOFMONTH(LASTDATE ('DIM - DATE'[Date] ))
+	/// RETURN
+	///   SWITCH (
+	///         SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+	///         "Sản xuất",
+	///             CALCULATE (
+	///                 SUM ( 'AGG - ALLOCATE SLOC AMT'[CLOSING_S_AMT_ALLOCATED] )
+	///                 ,'AGG - ALLOCATE SLOC AMT'[DATE] = _max_date
+	///             ),
+	///         CALCULATE (
+	///             SUM ( 'AGG - ALLOCATE SLOC AMT'[CLOSING_V_AMT_ALLOCATED] )
+	///             ,'AGG - ALLOCATE SLOC AMT'[DATE] = _max_date
+	///         )
+	///     )
+	/// 
+	measure 'Giá trị tồn kho cuối kỳ được phân bổ lại' = ```
+			
+			VAR _max_date = STARTOFMONTH(LASTDATE ('DIM - DATE'[Date] ))
+			RETURN
+			  SWITCH (
+			        SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+			        "Sản xuất",
+			            CALCULATE (
+			                SUM ( 'AGG - ALLOCATE SLOC AMT'[CLOSING_S_AMT_ALLOCATED] )
+			                ,'AGG - ALLOCATE SLOC AMT'[DATE] = _max_date
+			            ),
+			        CALCULATE (
+			            SUM ( 'AGG - ALLOCATE SLOC AMT'[CLOSING_V_AMT_ALLOCATED] )
+			            ,'AGG - ALLOCATE SLOC AMT'[DATE] = _max_date
+			        )
+			    )
+			
+			```
+		displayFolder: Tiếng Việt
+		lineageTag: 877cc21a-2525-4f52-8ca1-8494035feb87
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _min_date = MIN('DIM - DATE'[Date])
+	/// VAR _max_date = MAX('DIM - DATE'[Date])
+	/// var _measure = 
+	/// SWITCH(
+	///         SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	///         ,"",
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]),
+	///             'DIM - DATE'[Date] < _min_date
+	///         )
+	///         ,"X",
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT] - [REVERSE_AMT]),
+	///             'DIM - DATE'[Date] < _min_date
+	///         )
+	///         +
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[REVERSE_REMAIN_AMT]),
+	///             'DIM - DATE'[Date] >= _min_date
+	///         )
+	///     )
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Giá trị tồn kho đầu kỳ' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			var _measure = 
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]),
+			            'DIM - DATE'[Date] < _min_date
+			        )
+			        ,"X",
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT] - [REVERSE_AMT]),
+			            'DIM - DATE'[Date] < _min_date
+			        )
+			        +
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[REVERSE_REMAIN_AMT]),
+			            'DIM - DATE'[Date] >= _min_date
+			        )
+			    )
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Tiếng Việt
+		lineageTag: d81fb4f4-60ee-47e8-aeb2-f0d1d08180cf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: var _measure = 
+	/// SWITCH(
+	///         SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	///         ,"",SUM('AGG - MATERIAL LEDGER V PRICE'[ISSUE_AMT])
+	///         ,"X",SUMX('AGG - MATERIAL LEDGER V PRICE',[ISSUE_AMT]-[ISSUE_REVERSE_AMT])
+	///         )
+	/// 
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Giá trị xuất kho' = ```
+			var _measure = 
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",SUM('AGG - MATERIAL LEDGER V PRICE'[ISSUE_AMT])
+			        ,"X",SUMX('AGG - MATERIAL LEDGER V PRICE',[ISSUE_AMT]-[ISSUE_REVERSE_AMT])
+			        )
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Tiếng Việt
+		lineageTag: 8d734198-257f-4bab-87c8-f15f7c5f3fb5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SWITCH (
+	///     SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+	///     "Sản xuất", CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[CONSUMPTION_S_AMT_ALLOCATED] ) ),
+	///     CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[CONSUMPTION_V_AMT_ALLOCATED] ) )
+	/// )
+	measure 'Giá trị xuất kho được phân bổ lại' =
+			SWITCH (
+			    SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+			    "Sản xuất", CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[CONSUMPTION_S_AMT_ALLOCATED] ) ),
+			    CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[CONSUMPTION_V_AMT_ALLOCATED] ) )
+			)
+		displayFolder: Tiếng Việt
+		lineageTag: c4e58251-d6e0-4d59-8666-c8c36efb555a
+
+	/// Formula: var _measure = 
+	/// SWITCH(
+	/// SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	/// ,"",
+	///     CALCULATE(
+	///         SUM('AGG - MATERIAL LEDGER QTY'[RECEIPT_QTY])
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+	///     ),
+	/// "X",
+	///     CALCULATE(
+	///         SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY]-[RECEIPT_REVERSE_QTY])
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+	///     )
+	/// )
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Số lượng nhập kho' = ```
+			var _measure = 
+			SWITCH(
+			SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			,"",
+			    CALCULATE(
+			        SUM('AGG - MATERIAL LEDGER QTY'[RECEIPT_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    ),
+			"X",
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY]-[RECEIPT_REVERSE_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    )
+			)
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt
+		lineageTag: 5959a448-1b0d-430a-9ef6-9ba1c776c2b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _max_date = MAX('DIM - DATE'[Date])
+	/// VAR _MEASURE = 
+	///     CALCULATE(
+	///         SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+	///         'DIM - DATE'[Date] <= _max_date,
+	///         'AGG - MATERIAL LEDGER QTY'[BASE_UOM] = "TO"
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] = 1
+	///     )
+	///     
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Số lượng tồn kho (thành phẩm)' = ```
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _MEASURE = 
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] <= _max_date,
+			        'AGG - MATERIAL LEDGER QTY'[BASE_UOM] = "TO"
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] = 1
+			    )
+			    
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		displayFolder: Tiếng Việt
+		lineageTag: 9b453a51-96fe-4488-a39d-217567f86624
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _max_date = MAX('DIM - DATE'[Date])
+	/// VAR _MEASURE = 
+	///     CALCULATE(
+	///         SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+	///         'DIM - DATE'[Date] <= _max_date
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] = 1
+	///     ) 
+	/// /*SWITCH(
+	///         SELECTEDVALUE('EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	///         ,"",
+	///         CALCULATE(
+	///             SUMX('Agg Material Ledger Qty',[RECEIPT_QTY] + [ISSUE_QTY]),
+	///             'Dim Date'[Date] <= _max_date
+	///         )
+	///         ,"X",
+	///         CALCULATE(
+	///             SUMX('Agg Material Ledger Qty',[RECEIPT_QTY] + [ISSUE_QTY]- [REVERSE_AMT]),
+	///             'Dim Date'[Date] <= _max_date
+	///         )
+	///         +
+	///         CALCULATE(
+	///             SUMX('Agg Material Ledger V Price',[REVERSE_REMAIN_AMT]),
+	///             'Dim Date'[Date] >= _max_date
+	///         )
+	/// )*/   
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Số lượng tồn kho cuối kỳ' = ```
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _MEASURE = 
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] <= _max_date
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] = 1
+			    ) 
+			/*SWITCH(
+			        SELECTEDVALUE('EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",
+			        CALCULATE(
+			            SUMX('Agg Material Ledger Qty',[RECEIPT_QTY] + [ISSUE_QTY]),
+			            'Dim Date'[Date] <= _max_date
+			        )
+			        ,"X",
+			        CALCULATE(
+			            SUMX('Agg Material Ledger Qty',[RECEIPT_QTY] + [ISSUE_QTY]- [REVERSE_AMT]),
+			            'Dim Date'[Date] <= _max_date
+			        )
+			        +
+			        CALCULATE(
+			            SUMX('Agg Material Ledger V Price',[REVERSE_REMAIN_AMT]),
+			            'Dim Date'[Date] >= _max_date
+			        )
+			)*/   
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt
+		lineageTag: cb9cfd9e-3137-4389-956b-da425ab1e37a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _min_date = MIN('DIM - DATE'[Date])
+	/// var _MEASURE = 
+	///     CALCULATE(
+	///         SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+	///         'DIM - DATE'[Date] < _min_date
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+	///     )
+	/// 
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Số lượng tồn kho đầu kỳ' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			var _MEASURE = 
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] < _min_date
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    )
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt
+		lineageTag: 1e5c296f-b80c-4e2e-9af4-30c103a5da19
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// var _measure = 
+	/// SWITCH(
+	/// SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	/// ,"",
+	///     CALCULATE(
+	///         SUM('AGG - MATERIAL LEDGER QTY'[ISSUE_QTY])
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+	///     ),
+	/// "X",
+	///     CALCULATE(
+	///         SUMX('AGG - MATERIAL LEDGER QTY',[ISSUE_QTY]-[ISSUE_REVERSE_QTY])
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+	///     )
+	/// )
+	/// 
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Số lượng xuất kho' = ```
+			
+			var _measure = 
+			SWITCH(
+			SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			,"",
+			    CALCULATE(
+			        SUM('AGG - MATERIAL LEDGER QTY'[ISSUE_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    ),
+			"X",
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[ISSUE_QTY]-[ISSUE_REVERSE_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    )
+			)
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt
+		lineageTag: 51d3858b-21ae-486a-855e-7b82369eac7b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _max_date = STARTOFMONTH(LASTDATE ('DIM - DATE'[Date] ))
+	/// RETURN
+	///   SWITCH (
+	///         SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+	///         "Sản xuất",
+	///             CALCULATE (
+	///                 SUM ( 'AGG - ALLOCATE SLOC AMT'[CLOSING_S_AMT_ALLOCATED] )
+	///                 ,'AGG - ALLOCATE SLOC AMT'[DATE] = _max_date
+	///             ),
+	///         CALCULATE (
+	///             SUM ( 'AGG - ALLOCATE SLOC AMT'[CLOSING_V_AMT_ALLOCATED] )
+	///             ,'AGG - ALLOCATE SLOC AMT'[DATE] = _max_date
+	///         )
+	///     )
+	/// 
+	measure 'Closing Amt Allocated (by month)' = ```
+			
+			VAR _max_date = STARTOFMONTH(LASTDATE ('DIM - DATE'[Date] ))
+			RETURN
+			  SWITCH (
+			        SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+			        "Sản xuất",
+			            CALCULATE (
+			                SUM ( 'AGG - ALLOCATE SLOC AMT'[CLOSING_S_AMT_ALLOCATED] )
+			                ,'AGG - ALLOCATE SLOC AMT'[DATE] = _max_date
+			            ),
+			        CALCULATE (
+			            SUM ( 'AGG - ALLOCATE SLOC AMT'[CLOSING_V_AMT_ALLOCATED] )
+			            ,'AGG - ALLOCATE SLOC AMT'[DATE] = _max_date
+			        )
+			    )
+			
+			```
+		displayFolder: Tiếng Anh\Allocated Amount
+		lineageTag: 74dee680-6f3d-4de5-9c5d-dda7a036458d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SWITCH (
+	///     SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+	///     "Sản xuất", CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[CONSUMPTION_S_AMT_ALLOCATED] ) ),
+	///     CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[CONSUMPTION_V_AMT_ALLOCATED] ) )
+	/// )
+	measure 'Issue Amt Allocated (by month)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+			    "Sản xuất", -1 * CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[CONSUMPTION_S_AMT_ALLOCATED] ) ),
+			    CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[CONSUMPTION_V_AMT_ALLOCATED] ) )
+			)
+		displayFolder: Tiếng Anh\Allocated Amount
+		lineageTag: 669a552f-0220-45ad-9348-5d0f24a97220
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SWITCH (
+	///     SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+	///     "Sản xuất", CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[RECEIPT_S_AMT_ALLOCATED] ) ),
+	///     CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[RECEIPT_V_AMT_ALLOCATED] ) )
+	/// )
+	measure 'Receipt Amt Allocated (by month)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'AGG - ALLOCATE SLOC AMT'[PRODUCT_NAME_LV2], "" ),
+			    "Sản xuất", CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[RECEIPT_S_AMT_ALLOCATED] ) ),
+			    CALCULATE ( SUM ( 'AGG - ALLOCATE SLOC AMT'[RECEIPT_V_AMT_ALLOCATED] ) )
+			)
+		displayFolder: Tiếng Anh\Allocated Amount
+		lineageTag: 8f378bfd-0a8f-479c-8ee1-91f44b4d4166
+
+	measure 'CLOSING QTY (SLOC)' = ```
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _MEASURE = 
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] <= _max_date
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] = 1
+			    ) 
+			/*SWITCH(
+			        SELECTEDVALUE('EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",
+			        CALCULATE(
+			            SUMX('Agg Material Ledger Qty',[RECEIPT_QTY] + [ISSUE_QTY]),
+			            'Dim Date'[Date] <= _max_date
+			        )
+			        ,"X",
+			        CALCULATE(
+			            SUMX('Agg Material Ledger Qty',[RECEIPT_QTY] + [ISSUE_QTY]- [REVERSE_AMT]),
+			            'Dim Date'[Date] <= _max_date
+			        )
+			        +
+			        CALCULATE(
+			            SUMX('Agg Material Ledger V Price',[REVERSE_REMAIN_AMT]),
+			            'Dim Date'[Date] >= _max_date
+			        )
+			)*/   
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Quantity
+		lineageTag: ce3ae716-ab40-4995-b882-253e27bfd19c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CLOSING QTY (SLOC) TON' = ```
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _MEASURE = 
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] <= _max_date,
+			        'AGG - MATERIAL LEDGER QTY'[BASE_UOM] = "TO"
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] = 1
+			    )
+			    
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		displayFolder: Tiếng Anh\Quantity
+		lineageTag: ce2da8bf-a196-47c9-8f0f-8535797e89ad
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'ISSUE QTY (SLOC)' = ```
+			
+			var _measure = 
+			SWITCH(
+			SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			,"",
+			    CALCULATE(
+			        SUM('AGG - MATERIAL LEDGER QTY'[ISSUE_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    ),
+			"X",
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[ISSUE_QTY]-[ISSUE_REVERSE_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    )
+			)
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Quantity
+		lineageTag: 72855fa3-d8c7-4aa2-a2d7-b64d680fae70
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'OPENING QTY (SLOC)' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			var _MEASURE = 
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] < _min_date
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    )
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Quantity
+		lineageTag: 8f50b3d6-92da-4b49-ba67-50cf6eb8dc74
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'RECEIPT QTY (SLOC)' = ```
+			var _measure = 
+			SWITCH(
+			SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			,"",
+			    CALCULATE(
+			        SUM('AGG - MATERIAL LEDGER QTY'[RECEIPT_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    ),
+			"X",
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY]-[RECEIPT_REVERSE_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    )
+			)
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Quantity
+		lineageTag: 09fbad67-aad9-45a1-9f9a-b8871588df93
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('AGG - MATERIAL LEDGER SUPPLY'[ISSUE_QTY])
+	measure 'Agg Supply - Total issue qty' = SUM('AGG - MATERIAL LEDGER SUPPLY'[ISSUE_QTY])
+		displayFolder: Tiếng Anh
+		lineageTag: 9282b174-81b9-48da-809b-81928fea2d60
+
+	/// Formula: SUM('AGG - MATERIAL LEDGER SUPPLY'[RECEIPT_QTY])
+	measure 'Agg Supply - Total receipt qty' = SUM('AGG - MATERIAL LEDGER SUPPLY'[RECEIPT_QTY])
+		displayFolder: Tiếng Anh
+		lineageTag: 310a10d7-f570-404b-90af-3f6086895f9b
+
+	measure 'Available Quantity' =
+			VAR _version = MAX('FACT - AVAILABLE INVENTORY WH'[VERSION])
+			var _date = LASTDATE('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - AVAILABLE INVENTORY WH'[QUANTITY])
+			    ,'FACT - AVAILABLE INVENTORY WH'[VERSION] = _version
+			    ,'DIM - DATE'[Date] = _date
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: 00271576-fc89-42d7-baec-8344c333c227
+
+		changedProperty = IsHidden
+
+	measure Compare = [Tồn kho ERP]- [Available Quantity]
+		formatString: 0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: 400a84fb-78b3-41ca-bf7e-8bb56889ad1d
+
+	measure 'Filter Material slicer' = ```
+			
+			    CALCULATE(COUNT('AGG - MATERIAL LEDGER QTY'[DOC_DATE])
+			    ,FILTER('AGG - MATERIAL LEDGER QTY','AGG - MATERIAL LEDGER QTY'[MATERIAL_CODE] = RELATED('DIM - MATERIAL'[MATERIAL_CODE]))
+			    )
+			```
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: 26eaddfd-df12-423c-bc1c-667eac61c02d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Issue Quantity WH' =
+			VAR _version = MAX('FACT - AVAILABLE INVENTORY WH'[VERSION])
+			var _date = LASTDATE('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - AVAILABLE INVENTORY WH'[ISSUE_QTY])
+			    ,FILTER('FACT - AVAILABLE INVENTORY WH',[CHANGED_ON] = _date)
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: ac7bfaf9-a7bf-43cf-9328-34aad932b821
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'KHO 1' =
+			VAR _version = MAX('FACT - AVAILABLE INVENTORY WH'[VERSION])
+			var _date = LASTDATE('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - AVAILABLE INVENTORY WH'[QUANTITY]),
+			    FILTER('FACT - AVAILABLE INVENTORY WH',[CHANGED_ON] = _date),
+			    FILTER('FACT - AVAILABLE INVENTORY WH', [KHO] = "KHO 1"),
+			    'FACT - AVAILABLE INVENTORY WH'[VERSION] = _version
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: 9083781b-d30e-4145-8cbd-026b2266ff02
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'KHO 2' =
+			VAR _version = MAX('FACT - AVAILABLE INVENTORY WH'[VERSION])
+			var _date = LASTDATE('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - AVAILABLE INVENTORY WH'[QUANTITY]),
+			     FILTER('FACT - AVAILABLE INVENTORY WH',[CHANGED_ON] = _date),
+			    FILTER('FACT - AVAILABLE INVENTORY WH', [KHO] = "KHO 2"),
+			    'FACT - AVAILABLE INVENTORY WH'[VERSION] = _version
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: b7198502-737b-4d07-a8cf-fc9c4072c7c3
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'KHO 3' =
+			VAR _version = MAX('FACT - AVAILABLE INVENTORY WH'[VERSION])
+			var _date = LASTDATE('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - AVAILABLE INVENTORY WH'[QUANTITY]),
+			    FILTER('FACT - AVAILABLE INVENTORY WH',[CHANGED_ON] = _date),
+			    FILTER('FACT - AVAILABLE INVENTORY WH', [KHO] = "KHO 3"),
+			    'FACT - AVAILABLE INVENTORY WH'[VERSION] = _version
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: 7f91769c-fab6-4268-b009-661d56001096
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'KHO 4' =
+			VAR _version = MAX('FACT - AVAILABLE INVENTORY WH'[VERSION])
+			var _date = LASTDATE('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - AVAILABLE INVENTORY WH'[QUANTITY]),
+			    FILTER('FACT - AVAILABLE INVENTORY WH',[CHANGED_ON] = _date),
+			    FILTER('FACT - AVAILABLE INVENTORY WH', [KHO] = "KHO 4"),
+			    'FACT - AVAILABLE INVENTORY WH'[VERSION] = _version
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: 2a652430-ad06-456f-975f-dba765aab5fd
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'KHO 5' =
+			VAR _version = MAX('FACT - AVAILABLE INVENTORY WH'[VERSION])
+			var _date = LASTDATE('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - AVAILABLE INVENTORY WH'[QUANTITY]),
+			    FILTER('FACT - AVAILABLE INVENTORY WH',[CHANGED_ON] = _date),
+			    FILTER('FACT - AVAILABLE INVENTORY WH', [KHO] = "KHO 5"),
+			    'FACT - AVAILABLE INVENTORY WH'[VERSION] = _version
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: fde82600-59a6-4383-b103-6e09f355e70c
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure Maxversion = max('FACT - AVAILABLE INVENTORY WH'[VERSION])
+		formatString: 0
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: b7f63449-4016-4229-b53e-944f979c5b7f
+
+	measure 'Opening Quantity WH' = ```
+			VAR _version = MAX('FACT - AVAILABLE INVENTORY WH'[VERSION])
+			var _date = LASTDATE('DIM - DATE'[Date])-1
+			RETURN
+			
+			CALCULATE(
+			    [Available Quantity]
+			    ,FILTER('DIM - DATE',[Date] = _date)
+			)
+			
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: cfd99a9e-062a-4f0d-bb5a-1561212f74fa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Receipt Quantity WH' =
+			VAR _version = MAX('FACT - AVAILABLE INVENTORY WH'[VERSION])
+			var _date = LASTDATE('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - AVAILABLE INVENTORY WH'[RECEIPT_QTY]),
+			    FILTER('FACT - AVAILABLE INVENTORY WH',[CHANGED_ON] = _date)
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: 86c9e16d-53d1-45e6-bd3a-95e902b84f14
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tồn kho ERP' = ```
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _MEASURE = 
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',IF([BASE_UOM] = "KG",([RECEIPT_QTY] + [ISSUE_QTY])/1000,([RECEIPT_QTY] + [ISSUE_QTY]))),
+			        'DIM - DATE'[Date] <= _max_date
+			        ,'AGG - MATERIAL LEDGER QTY'[IS_SLOC_BATCH_STOCK] = 1
+			    )
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM101
+		lineageTag: e1670488-98e4-472f-bdeb-ba262af30a68
+
+	/// Formula: VAR _MAXDATE = MAX('FACT - INVENTORY BALANCE PLANT'[DATE])
+	/// RETURN
+	/// CALCULATE(
+	///     SUM('FACT - INVENTORY BALANCE PLANT'[CLOSING_ACTUAL_VALUE]),
+	///     FILTER('FACT - INVENTORY BALANCE PLANT',[DATE] = _MAXDATE)
+	///     )
+	measure 'Closing Amt Plant (S price)' =
+			VAR _MAXDATE = MAX('FACT - INVENTORY BALANCE PLANT'[DATE])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - INVENTORY BALANCE PLANT'[CLOSING_ACTUAL_VALUE]),
+			    FILTER('FACT - INVENTORY BALANCE PLANT',[DATE] = _MAXDATE)
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Amount by S Price
+		lineageTag: 64cf9238-4f98-41af-9279-4e37a5790595
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Formula: VAR _MAXDATE = MAX('FACT - INVENTORY BALANCE PLANT'[DATE])
+	/// RETURN
+	/// CALCULATE(
+	///     SUM('FACT - INVENTORY BALANCE PLANT'[CLOSING_QTY]),
+	///     FILTER('FACT - INVENTORY BALANCE PLANT',[DATE] = _MAXDATE)
+	///     )
+	measure 'Closing Qty Plant' =
+			VAR _MAXDATE = MAX('FACT - INVENTORY BALANCE PLANT'[DATE])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - INVENTORY BALANCE PLANT'[CLOSING_QTY]),
+			    FILTER('FACT - INVENTORY BALANCE PLANT',[DATE] = _MAXDATE)
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Amount by S Price
+		lineageTag: 22fcb662-af8d-4f9b-9bbf-e5b625e36295
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Formula: 
+	///     SUM('FACT - INVENTORY BALANCE PLANT'[CONSUMPTION_ACTUAL_VALUE])
+	measure 'Consumption Amt (S price)' = ```
+			
+			    SUM('FACT - INVENTORY BALANCE PLANT'[CONSUMPTION_ACTUAL_VALUE])
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Amount by S Price
+		lineageTag: 334940e5-a45b-4289-9ba9-34ba98b54373
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Formula: SUM('FACT - INVENTORY BALANCE PLANT'[CONSUMPTION_QTY])
+	measure 'Consumption Qty' = SUM('FACT - INVENTORY BALANCE PLANT'[CONSUMPTION_QTY])
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Amount by S Price
+		lineageTag: 14dc069b-a185-4863-acdf-20fee7440726
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Formula: VAR _MINDATE = MIN('FACT - INVENTORY BALANCE PLANT'[DATE])
+	/// RETURN
+	/// CALCULATE(
+	///     SUM('FACT - INVENTORY BALANCE PLANT'[OPENING_ACTUAL_VALUE]),
+	///     FILTER('FACT - INVENTORY BALANCE PLANT',[DATE] = _MINDATE)
+	///     )
+	measure 'Opening Amt Plant (S Price)' =
+			VAR _MINDATE = MIN('FACT - INVENTORY BALANCE PLANT'[DATE])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - INVENTORY BALANCE PLANT'[OPENING_ACTUAL_VALUE]),
+			    FILTER('FACT - INVENTORY BALANCE PLANT',[DATE] = _MINDATE)
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Amount by S Price
+		lineageTag: 8aef9ac4-7843-4fd3-ade8-ba7c58f8076c
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Formula: VAR _MINDATE = MIN('FACT - INVENTORY BALANCE PLANT'[DATE])
+	/// RETURN
+	/// CALCULATE(
+	///     SUM('FACT - INVENTORY BALANCE PLANT'[OPENING_QTY]),
+	///     FILTER('FACT - INVENTORY BALANCE PLANT',[DATE] = _MINDATE)
+	///     )
+	measure 'Opening Qty Plant' =
+			VAR _MINDATE = MIN('FACT - INVENTORY BALANCE PLANT'[DATE])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - INVENTORY BALANCE PLANT'[OPENING_QTY]),
+			    FILTER('FACT - INVENTORY BALANCE PLANT',[DATE] = _MINDATE)
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Amount by S Price
+		lineageTag: 1fb9b914-073b-4224-bfb3-390f103120c8
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Formula: SUM('FACT - INVENTORY BALANCE PLANT'[RECEIPT_ACTUAL_VALUE])
+	measure 'Receipt Amt Plant (S price)' = SUM('FACT - INVENTORY BALANCE PLANT'[RECEIPT_ACTUAL_VALUE])
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Amount by S Price
+		lineageTag: ab8272bd-2aee-4cb4-96fb-eb52978255fd
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Formula: SUM('FACT - INVENTORY BALANCE PLANT'[RECEIPT_QTY])
+	measure 'Receipt Qty Plant' = SUM('FACT - INVENTORY BALANCE PLANT'[RECEIPT_QTY])
+		formatString: #,##0.000
+		displayFolder: Tiếng Anh\Amount by S Price
+		lineageTag: 77f3bb8e-8193-4d9d-8d76-33ea5c89a33f
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Formula: 
+	/// CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Nhập đóng bao")
+	///     )
+	measure 'Nhập đóng bao' =
+			
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Nhập đóng bao")
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 55325f3e-6661-4343-b271-d3a0f15526a2
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Nhập khác")
+	///     )
+	measure 'Nhập khác' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Nhập khác")
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 388cff14-ccda-4e27-97af-6367e5230f69
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Nhập kho rời do rách khi bán hàng")
+	///     )
+	measure 'Nhập kho rời do rách bán hàng' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Nhập kho rời do rách khi bán hàng")
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: e29c1f94-5733-498a-97ca-98325fe0891d
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Nhập ngoài nghiệp vụ")
+	///     )
+	measure 'Nhập ngoài nghiệp vụ' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Nhập ngoài nghiệp vụ")
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: ba0d2b9f-f329-4ca5-ba42-b1991e969c28
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Nhập từ sản xuất")
+	///     )
+	measure 'Nhập từ sản xuất' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Nhập từ sản xuất")
+			    )
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: ad490c1f-fa6f-4954-82b3-38494caee9af
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Thực xuất")
+	///     )
+	measure 'Thực xuất KH' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Thực xuất")
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 3af60305-a7fc-433d-872e-37ca96014efd
+
+	/// Formula: 
+	/// VAR _max_date = MAX('DIM - DATE'[Date])
+	/// VAR _MEASURE = 
+	///     CALCULATE(
+	///         SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+	///         'DIM - DATE'[Date] <= _max_date,
+	///         'AGG - MATERIAL LEDGER QTY'[IS_SLOC_BATCH_STOCK] = 1
+	///     )
+	///     
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Tồn cuối kỳ' = ```
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _MEASURE = 
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] <= _max_date,
+			        'AGG - MATERIAL LEDGER QTY'[IS_SLOC_BATCH_STOCK] = 1
+			    )
+			    
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: c8592671-04da-4638-9808-d8f5321cdd44
+
+	/// Formula: 
+	/// VAR _min_date = MIN('DIM - DATE'[Date])
+	/// var _MEASURE = 
+	///     CALCULATE(
+	///         SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+	///         'DIM - DATE'[Date] < _min_date,
+	///         'AGG - MATERIAL LEDGER QTY'[IS_SLOC_BATCH_STOCK] =1
+	///     )
+	/// 
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Tồn đầu kỳ' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			var _MEASURE = 
+			    CALCULATE(
+			        SUMX('AGG - MATERIAL LEDGER QTY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] < _min_date,
+			        'AGG - MATERIAL LEDGER QTY'[IS_SLOC_BATCH_STOCK] =1
+			    )
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 2831a560-9c9e-4958-9783-2130feadb788
+
+	/// Formula: 
+	/// CALCULATE(
+	///     SUM('FACT - ZWM06N'[BUOM_QUANTITY])
+	///     ,FILTER('FACT - ZWM06N','FACT - ZWM06N'[QUANTITY_TYPE] = "Nhập")
+	/// )
+	measure 'Tổng Nhập' =
+			
+			CALCULATE(
+			    SUM('FACT - ZWM06N'[BUOM_QUANTITY])
+			    ,FILTER('FACT - ZWM06N','FACT - ZWM06N'[QUANTITY_TYPE] = "Nhập")
+			)
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 50795552-a341-4182-91c1-c7bba1de7b4a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// CALCULATE(
+	///     SUM('FACT - ZWM06N'[BUOM_QUANTITY])
+	///     ,FILTER('FACT - ZWM06N','FACT - ZWM06N'[QUANTITY_TYPE] = "Xuất")
+	/// )
+	measure 'Tổng Xuất' =
+			
+			CALCULATE(
+			    SUM('FACT - ZWM06N'[BUOM_QUANTITY])
+			    ,FILTER('FACT - ZWM06N','FACT - ZWM06N'[QUANTITY_TYPE] = "Xuất")
+			)
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 6de3019d-65dd-426d-84b8-3f34fd23e5f4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// SUMX(
+	///     'FACT - ZWM06N','FACT - ZWM06N'[BUOM_QUANTITY]/RELATED('DIM - MATERIAL'[BAO_CONVERT])
+	/// )
+	measure 'Total Bao' =
+			
+			SUMX(
+			    'FACT - ZWM06N','FACT - ZWM06N'[BUOM_QUANTITY]/RELATED('DIM - MATERIAL'[BAO_CONVERT])
+			)
+		formatString: 0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 51735592-9056-4e5d-81f1-d4cb78a7531b
+
+	/// Formula: 
+	/// var _total = CALCULATE(SUM('FACT - ZWM06N'[BUOM_QUANTITY]))
+	/// return
+	/// --IF(ISBLANK(_total),0,_total)
+	/// _total
+	measure 'Total Qty (ZWM06N)' =
+			
+			var _total = CALCULATE(SUM('FACT - ZWM06N'[BUOM_QUANTITY]))
+			return
+			--IF(ISBLANK(_total),0,_total)
+			_total
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 71c5de7f-553f-46d2-8a12-b513cf0f9f7a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất khác")
+	///     )
+	measure 'Xuất khác' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất khác")
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 87257508-c16c-4e6d-85e7-ff8a0385f0ee
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất ngoài nghiệp vụ")
+	///     )
+	measure 'Xuất ngoài nghiệp vụ' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất ngoài nghiệp vụ")
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 00cbd0a7-1345-4e00-af81-4a237258f918
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất rách bán hàng")
+	///     )
+	measure 'Xuất rách bán hàng' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất rách bán hàng")
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: dd744dbd-fbc9-43de-a341-b5fea20e7889
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất rách lưu kho")
+	///     )
+	measure 'Xuất rách lưu kho' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất rách lưu kho")
+			    )
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 22ace812-dfed-44ad-bcc9-a8fa58fcd231
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất rách từ đóng bao")
+	///     )
+	measure 'Xuất rách từ đóng bao' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất rách từ đóng bao")
+			    )
+		formatString: #,##0.000
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 94437e79-f42f-4c3d-a6a9-b9517e5f2b87
+
+	/// Formula: CALCULATE(
+	///     [Total Qty (ZWM06N)],
+	///     FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất rách xuất hàng")
+	///     )
+	measure 'Xuất rách xuất hàng' =
+			CALCULATE(
+			    [Total Qty (ZWM06N)],
+			    FILTER('FACT - ZWM06N',[REC_ISS_TYPE]= "Xuất rách xuất hàng")
+			    )
+		displayFolder: Tiếng Việt\ZWM06N
+		lineageTag: 56e1118b-421a-420d-9ab4-8f4c1deec87f
+
+	/// Formula: calculate(sum('FACT - ZWM09H'[REMAIN_GOOD_QTY]))
+	measure 'Còn tốt 100%' = calculate(sum('FACT - ZWM09H'[REMAIN_GOOD_QTY]))
+		displayFolder: Tiếng Việt\ZWM09H
+		lineageTag: 852c97da-45c7-4b36-bc10-0a91cba0d698
+
+	/// Formula: sum('FACT - ZWM09H'[LOST_50_PC])
+	measure 'Kém PC' = sum('FACT - ZWM09H'[LOST_50_PC])
+		displayFolder: Tiếng Việt\ZWM09H
+		lineageTag: 9922e498-4069-4e96-ab86-30fdd8b48c0c
+
+	/// Formula: sum('FACT - ZWM09H'[LOST_100_PC])
+	measure 'Mất PC' = sum('FACT - ZWM09H'[LOST_100_PC])
+		displayFolder: Tiếng Việt\ZWM09H
+		lineageTag: 6ef3534c-b951-4de7-9f01-9997513f6a73
+
+	/// Formula: CALCULATE(SUM('FACT - ZWM09H'[SL_THIEU]))
+	measure 'SL Thiếu' = CALCULATE(SUM('FACT - ZWM09H'[SL_THIEU]))
+		displayFolder: Tiếng Việt\ZWM09H
+		lineageTag: ea8b0e73-a26b-4b5a-9cfb-39aa80fd7457
+
+	/// Formula: CALCULATE(SUM('FACT - ZWM09H'[SL_THUA]))
+	measure 'SL Thừa' = CALCULATE(SUM('FACT - ZWM09H'[SL_THUA]))
+		displayFolder: Tiếng Việt\ZWM09H
+		lineageTag: 4a907f52-290a-4b39-b82c-9e96591f8968
+
+	/// Formula: CALCULATE(SUM('FACT - ZWM09H'[SL_THUCTE]))
+	measure 'SL Thực tế' = CALCULATE(SUM('FACT - ZWM09H'[SL_THUCTE]))
+		displayFolder: Tiếng Việt\ZWM09H
+		lineageTag: a36b21fd-2513-4653-b353-fd6ddf6dcb1c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(SUM('FACT - ZWM09H'[SL_TONKHO]))
+	measure 'SL Tồn kho' = CALCULATE(SUM('FACT - ZWM09H'[SL_TONKHO]))
+		displayFolder: Tiếng Việt\ZWM09H
+		lineageTag: 3aa0f265-b17a-49df-9bf6-cd8ba7d1c8f2
+
+	/// Formula: 
+	/// var _min_date = MIN('DIM - DATE'[Date])
+	/// var _max_date = MAX('DIM - DATE'[Date])
+	/// VAR _closing_qty_dis = DIVIDE([CLOSING QTY (SLOC)], CALCULATE([CLOSING QTY (SLOC)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION])))
+	/// VAR _CLOSING_AMT_ALL = CALCULATE([CLOSING AMT (V PRICE)], ALl('DIM - STORAGE LOCATION'[STORAGE_LOCATION]))
+	/// 
+	/// return
+	/// 
+	/// CALCULATE(_CLOSING_AMT_ALL * _closing_qty_dis)
+	measure 'Closing Amt Allocate (by quantity)' =
+			
+			var _min_date = MIN('DIM - DATE'[Date])
+			var _max_date = MAX('DIM - DATE'[Date])
+			VAR _closing_qty_dis = DIVIDE([CLOSING QTY (SLOC)], CALCULATE([CLOSING QTY (SLOC)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION])))
+			VAR _CLOSING_AMT_ALL = CALCULATE([CLOSING AMT (V PRICE)], ALl('DIM - STORAGE LOCATION'[STORAGE_LOCATION]))
+			
+			return
+			
+			CALCULATE(_CLOSING_AMT_ALL * _closing_qty_dis)
+		isHidden
+		lineageTag: 021d6643-d365-4f1e-840c-aec080898437
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// var _min_date = MIN('DIM - DATE'[Date])
+	/// var _max_date = MAX('DIM - DATE'[Date])
+	/// VAR _issue_qty_dis = DIVIDE([ISSUE QTY (SLOC)], CALCULATE([ISSUE QTY (SLOC)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION])))
+	/// VAR _ISSUE_AMT_ALL = CALCULATE([ISSUE AMT (V PRICE)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION]))
+	/// 
+	/// return
+	/// 
+	/// CALCULATE(_ISSUE_AMT_ALL * _ISSUE_qty_dis)
+	measure 'Issue Amt Allocate (by quantity)' =
+			
+			var _min_date = MIN('DIM - DATE'[Date])
+			var _max_date = MAX('DIM - DATE'[Date])
+			VAR _issue_qty_dis = DIVIDE([ISSUE QTY (SLOC)], CALCULATE([ISSUE QTY (SLOC)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION])))
+			VAR _ISSUE_AMT_ALL = CALCULATE([ISSUE AMT (V PRICE)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION]))
+			
+			return
+			
+			CALCULATE(_ISSUE_AMT_ALL * _ISSUE_qty_dis)
+		isHidden
+		lineageTag: 71e71f7c-5324-43f5-bcf1-ae60bf71a756
+
+	/// Formula: 
+	/// var _min_date = MIN('DIM - DATE'[Date])
+	/// var _max_date = MAX('DIM - DATE'[Date])
+	/// VAR _opening_qty_dis = DIVIDE([OPENING QTY (SLOC)], CALCULATE([OPENING QTY (SLOC)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION])))
+	/// VAR _OPENING_AMT_ALL = CALCULATE([OPENING AMT (V PRICE)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION]))
+	/// 
+	/// return
+	/// 
+	/// CALCULATE(_OPENING_AMT_ALL * _opening_qty_dis)
+	measure 'Opening Amt Allocate (by quantity)' =
+			
+			var _min_date = MIN('DIM - DATE'[Date])
+			var _max_date = MAX('DIM - DATE'[Date])
+			VAR _opening_qty_dis = DIVIDE([OPENING QTY (SLOC)], CALCULATE([OPENING QTY (SLOC)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION])))
+			VAR _OPENING_AMT_ALL = CALCULATE([OPENING AMT (V PRICE)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION]))
+			
+			return
+			
+			CALCULATE(_OPENING_AMT_ALL * _opening_qty_dis)
+		isHidden
+		lineageTag: df6e08b3-0e56-42c1-a1bf-655bbbd09542
+
+	/// Formula: 
+	/// var _min_date = MIN('DIM - DATE'[Date])
+	/// var _max_date = MAX('DIM - DATE'[Date])
+	/// VAR _RECEIPT_qty_dis = DIVIDE([RECEIPT QTY (SLOC)], CALCULATE([RECEIPT QTY (SLOC)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION])))
+	/// VAR _RECEIPT_AMT_ALL = CALCULATE([RECEIPT AMT (V PRICE)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION]))
+	/// return
+	/// CALCULATE(_RECEIPT_AMT_ALL * _RECEIPT_qty_dis)
+	measure 'Reciept Amt Allocate (by quantity)' =
+			
+			var _min_date = MIN('DIM - DATE'[Date])
+			var _max_date = MAX('DIM - DATE'[Date])
+			VAR _RECEIPT_qty_dis = DIVIDE([RECEIPT QTY (SLOC)], CALCULATE([RECEIPT QTY (SLOC)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION])))
+			VAR _RECEIPT_AMT_ALL = CALCULATE([RECEIPT AMT (V PRICE)], ALL('DIM - STORAGE LOCATION'[STORAGE_LOCATION]))
+			return
+			CALCULATE(_RECEIPT_AMT_ALL * _RECEIPT_qty_dis)
+		isHidden
+		lineageTag: ee211e48-10b3-4a59-9028-65f4d1123e5c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: DIVIDE([CLOSING AMT (V PRICE)],CALCULATE([CLOSING AMT (V PRICE)],ALLSELECTED('DIM - MATERIAL'[PLANNER])))
+	measure '% of Total Planner' = DIVIDE([CLOSING AMT (V PRICE)],CALCULATE([CLOSING AMT (V PRICE)],ALLSELECTED('DIM - MATERIAL'[PLANNER])))
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Tiếng Anh\Amount by V Price
+		lineageTag: 32cb9c94-e8b5-404b-90c9-6ed856651a90
+
+	/// Formula: var _current = [CLOSING AMT (V PRICE)]
+	/// var _LY = CALCULATE([CLOSING AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+	/// return
+	/// (_current-_LY)/_LY
+	measure '% vs LY Closing Amt (V Price)' =
+			var _current = [CLOSING AMT (V PRICE)]
+			var _LY = CALCULATE([CLOSING AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+			return
+			(_current-_LY)/_LY
+		formatString: #,##0.00 %
+		displayFolder: Tiếng Anh\Amount by V Price
+		lineageTag: 4eb5f5a8-b753-4de7-8dfd-e0242f302258
+
+	/// Formula: var _current = [ISSUE AMT (V PRICE)]
+	/// var _LY = CALCULATE([ISSUE AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+	/// return
+	/// (_current-_LY)/_current
+	measure '% vs LY Issue Amt (V Price)' =
+			var _current = [ISSUE AMT (V PRICE)]
+			var _LY = CALCULATE([ISSUE AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+			return
+			(_current-_LY)/_current
+		formatString: #,##0.00 %
+		displayFolder: Tiếng Anh\Amount by V Price
+		lineageTag: e3a05df1-c8d9-4db5-ac5f-2885dc993f74
+
+	/// Formula: var _current = [OPENING AMT (V PRICE)]
+	/// var _LY = CALCULATE([OPENING AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+	/// return
+	/// (_current-_LY)/_current
+	measure '% vs LY Opening Amt (V Price)' =
+			var _current = [OPENING AMT (V PRICE)]
+			var _LY = CALCULATE([OPENING AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+			return
+			(_current-_LY)/_current
+		formatString: #,##0.00 %
+		displayFolder: Tiếng Anh\Amount by V Price
+		lineageTag: 37bddf0a-261e-4ef6-8a1b-138e45c1c41d
+
+	/// Formula: var _current = [RECEIPT AMT (V PRICE)]
+	/// var _LY = CALCULATE([RECEIPT AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+	/// return
+	/// (_current-_LY)/_current
+	measure '% vs LY Receipt Amt (V Price)' =
+			var _current = [RECEIPT AMT (V PRICE)]
+			var _LY = CALCULATE([RECEIPT AMT (V PRICE)], DATEADD('DIM - DATE'[Date],-1,YEAR))
+			return
+			(_current-_LY)/_current
+		formatString: #,##0.00 %
+		displayFolder: Tiếng Anh\Amount by V Price
+		lineageTag: dfaf1253-cf04-42f3-8b74-058639e56a15
+
+	/// Formula: 
+	/// VAR _min_date = MIN('DIM - DATE'[Date])
+	/// VAR _max_date = MAX('DIM - DATE'[Date])
+	/// var _measure = 
+	/// 
+	/// SWITCH(
+	///         SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	///         ,"",
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]),
+	///             'DIM - DATE'[Date] <= _max_date
+	///         )
+	///         ,"X",
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]- [REVERSE_AMT]),
+	///             'DIM - DATE'[Date] <= _max_date
+	///         )
+	///         +
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[REVERSE_REMAIN_AMT]),
+	///             'DIM - DATE'[Date] >= _max_date
+	///         )
+	/// )
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'CLOSING AMT (V PRICE)' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			var _measure = 
+			
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]),
+			            'DIM - DATE'[Date] <= _max_date
+			        )
+			        ,"X",
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]- [REVERSE_AMT]),
+			            'DIM - DATE'[Date] <= _max_date
+			        )
+			        +
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[REVERSE_REMAIN_AMT]),
+			            'DIM - DATE'[Date] >= _max_date
+			        )
+			)
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Tiếng Anh\Amount by V Price
+		lineageTag: 67f2b54a-ba24-4f45-b0e6-e890b7bc5a81
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: var _measure = 
+	/// SWITCH(
+	///         SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	///         ,"",SUM('AGG - MATERIAL LEDGER V PRICE'[ISSUE_AMT])
+	///         ,"X",SUMX('AGG - MATERIAL LEDGER V PRICE',[ISSUE_AMT]-[ISSUE_REVERSE_AMT])
+	///         )
+	/// 
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'ISSUE AMT (V PRICE)' = ```
+			var _measure = 
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",SUM('AGG - MATERIAL LEDGER V PRICE'[ISSUE_AMT])
+			        ,"X",SUMX('AGG - MATERIAL LEDGER V PRICE',[ISSUE_AMT]-[ISSUE_REVERSE_AMT])
+			        )
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Tiếng Anh\Amount by V Price
+		lineageTag: 25696404-ce9d-4c75-a257-fe4e98a0a2da
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _min_date = MIN('DIM - DATE'[Date])
+	/// VAR _max_date = MAX('DIM - DATE'[Date])
+	/// var _measure = 
+	/// SWITCH(
+	///         SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	///         ,"",
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]),
+	///             'DIM - DATE'[Date] < _min_date
+	///         )
+	///         ,"X",
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT] - [REVERSE_AMT]),
+	///             'DIM - DATE'[Date] < _min_date
+	///         )
+	///         +
+	///         CALCULATE(
+	///             SUMX('AGG - MATERIAL LEDGER V PRICE',[REVERSE_REMAIN_AMT]),
+	///             'DIM - DATE'[Date] >= _min_date
+	///         )
+	///     )
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'OPENING AMT (V PRICE)' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			var _measure = 
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]),
+			            'DIM - DATE'[Date] < _min_date
+			        )
+			        ,"X",
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT] - [REVERSE_AMT]),
+			            'DIM - DATE'[Date] < _min_date
+			        )
+			        +
+			        CALCULATE(
+			            SUMX('AGG - MATERIAL LEDGER V PRICE',[REVERSE_REMAIN_AMT]),
+			            'DIM - DATE'[Date] >= _min_date
+			        )
+			    )
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Tiếng Anh\Amount by V Price
+		lineageTag: 3851e871-6c49-4685-a764-f31b3a11c17e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: var _measure = 
+	/// SWITCH(
+	///         SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+	///         ,"",SUM('AGG - MATERIAL LEDGER V PRICE'[RECEIPT_AMT])
+	///         ,"X",SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT]-[RECEIPT_REVERSE_AMT])
+	///         )
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'RECEIPT AMT (V PRICE)' = ```
+			var _measure = 
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",SUM('AGG - MATERIAL LEDGER V PRICE'[RECEIPT_AMT])
+			        ,"X",SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT]-[RECEIPT_REVERSE_AMT])
+			        )
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Tiếng Anh\Amount by V Price
+		lineageTag: ca92269b-03b6-4da6-825e-33569dfd6167
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// COUNTROWS(
+	///     SUMMARIZE(
+	///         FILTER(
+	///             SUMMARIZE(
+	///                 'AGG - MATERIAL LEDGER V PRICE',
+	///                 [PLANT_CODE],
+	///                 [MATERIAL_CODE],
+	///                 [STORAGE_LOC],
+	///                 'DIM - MATERIAL PLANT'[VALUATION_CLASS],
+	///                
+	///                 "ISSUE_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[ISSUE_AMT]),
+	///                 "RECEIPT_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[RECEIPT_AMT])
+	///             ),
+	///             NOT(ISBLANK([ISSUE_AMT])) && NOT(ISBLANK([RECEIPT_AMT]))
+	///         ),
+	///         [MATERIAL_CODE]
+	///     )
+	/// )
+	measure 'Số lượng vật tư đang sử dụng' = ```
+			
+			COUNTROWS(
+			    SUMMARIZE(
+			        FILTER(
+			            SUMMARIZE(
+			                'AGG - MATERIAL LEDGER V PRICE',
+			                [PLANT_CODE],
+			                [MATERIAL_CODE],
+			                [STORAGE_LOC],
+			                'DIM - MATERIAL PLANT'[VALUATION_CLASS],
+			               
+			                "ISSUE_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[ISSUE_AMT]),
+			                "RECEIPT_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[RECEIPT_AMT])
+			            ),
+			            NOT(ISBLANK([ISSUE_AMT])) && NOT(ISBLANK([RECEIPT_AMT]))
+			        ),
+			        [MATERIAL_CODE]
+			    )
+			)
+			```
+		formatString: 0
+		displayFolder: Tiếng Việt
+		lineageTag: 7ed39331-5a08-4706-9726-768d332d3c68
+
+	/// Formula: 
+	/// COUNT('DIM - MATERIAL'[MATERIAL_CODE])
+	/// - COUNTROWS(
+	///     SUMMARIZE(
+	///         FILTER(
+	///             SUMMARIZE(
+	///                 'AGG - MATERIAL LEDGER V PRICE',
+	///                 [PLANT_CODE],
+	///                 [MATERIAL_CODE],
+	///                 [STORAGE_LOC],
+	///                 'DIM - MATERIAL PLANT'[VALUATION_CLASS],
+	///                
+	///                 "ISSUE_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[ISSUE_AMT]),
+	///                 "RECEIPT_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[RECEIPT_AMT])
+	///             ),
+	///             NOT(ISBLANK([ISSUE_AMT])) || NOT(ISBLANK([RECEIPT_AMT]))
+	///         ),
+	///         [MATERIAL_CODE]
+	///     )
+	/// )
+	measure 'Số lượng vật tư không có giao dịch' = ```
+			
+			COUNT('DIM - MATERIAL'[MATERIAL_CODE])
+			- COUNTROWS(
+			    SUMMARIZE(
+			        FILTER(
+			            SUMMARIZE(
+			                'AGG - MATERIAL LEDGER V PRICE',
+			                [PLANT_CODE],
+			                [MATERIAL_CODE],
+			                [STORAGE_LOC],
+			                'DIM - MATERIAL PLANT'[VALUATION_CLASS],
+			               
+			                "ISSUE_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[ISSUE_AMT]),
+			                "RECEIPT_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[RECEIPT_AMT])
+			            ),
+			            NOT(ISBLANK([ISSUE_AMT])) || NOT(ISBLANK([RECEIPT_AMT]))
+			        ),
+			        [MATERIAL_CODE]
+			    )
+			)
+			```
+		formatString: 0
+		displayFolder: Tiếng Việt
+		lineageTag: f8aaad52-f523-437b-882f-f097700b3deb
+
+	/// Formula: 
+	/// COUNTROWS(
+	///     SUMMARIZE(
+	///         FILTER(
+	///             SUMMARIZE(
+	///                 'AGG - MATERIAL LEDGER V PRICE',
+	///                 'DIM - DATE'[Date],
+	///                 'DIM - PLANT'[PLANT_CODE],
+	///                 'DIM - MATERIAL'[MATERIAL_CODE],
+	///                 'DIM - STORAGE LOCATION'[STORAGE_LOCATION],
+	///                 'DIM - MATERIAL PLANT'[VALUATION_CLASS],
+	///                
+	///                 "ISSUE_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[ISSUE_AMT]),
+	///                 "RECEIPT_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[RECEIPT_AMT])
+	///             ),
+	///             ISBLANK([ISSUE_AMT]) && NOT(ISBLANK([RECEIPT_AMT]))
+	///         ),
+	///         [MATERIAL_CODE]
+	///     )
+	/// )
+	measure 'Số lượng vật tư nhập nhưng không xuất' = ```
+			
+			COUNTROWS(
+			    SUMMARIZE(
+			        FILTER(
+			            SUMMARIZE(
+			                'AGG - MATERIAL LEDGER V PRICE',
+			                'DIM - DATE'[Date],
+			                'DIM - PLANT'[PLANT_CODE],
+			                'DIM - MATERIAL'[MATERIAL_CODE],
+			                'DIM - STORAGE LOCATION'[STORAGE_LOCATION],
+			                'DIM - MATERIAL PLANT'[VALUATION_CLASS],
+			               
+			                "ISSUE_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[ISSUE_AMT]),
+			                "RECEIPT_AMT", SUM('AGG - MATERIAL LEDGER V PRICE'[RECEIPT_AMT])
+			            ),
+			            ISBLANK([ISSUE_AMT]) && NOT(ISBLANK([RECEIPT_AMT]))
+			        ),
+			        [MATERIAL_CODE]
+			    )
+			)
+			```
+		formatString: 0
+		isHidden
+		displayFolder: Tiếng Việt
+		lineageTag: 907ceb7c-ee19-4c32-b935-5d020da979e4
+
+	/// Formula: 
+	/// VAR _MIN_DATE =
+	///     CALCULATE(
+	///         MIN('DIM - DATE'[Date]),
+	///         ALLSELECTED('DIM - DATE'[Date])
+	///     )
+	///  
+	/// VAR _MAX_DATE =
+	///     CALCULATE(
+	///         MAX('DIM - DATE'[Date]),
+	///         ALLSELECTED('DIM - DATE'[Date])
+	///     )
+	/// RETURN
+	///     SUMX(
+	///         SUMMARIZE(
+	///             FILTER(
+	///                 ALL('AGG - MATERIAL LEDGER SUPPLY'),
+	///                 'AGG - MATERIAL LEDGER SUPPLY'[POSTING_DATE] <= _MAX_DATE
+	///             ),
+	///             [MATERIAL_CODE],
+	///             [STORAGE_LOC],
+	///     
+	///             "ISSUE_AMT",
+	///                 CALCULATE(
+	///                     SUM('AGG - MATERIAL LEDGER SUPPLY'[ISSUE_AMT]),
+	///                     'DIM - DATE'[Date] <= _MAX_DATE
+	///                     && 'DIM - DATE'[Date] >= _MIN_DATE
+	///                 ),
+	///             "RECEIPT_AMT",
+	///                 CALCULATE(
+	///                     SUM('AGG - MATERIAL LEDGER SUPPLY'[RECEIPT_AMT]),
+	///                     'DIM - DATE'[Date] <= _MAX_DATE
+	///                     && 'DIM - DATE'[Date] >= _MIN_DATE,
+	///                     NOT(ISBLANK('AGG - MATERIAL LEDGER SUPPLY'[PO_DOC]))
+	///                 ),
+	///             "CLOSING_STOCK",
+	///                 CALCULATE(
+	///                     SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]),
+	///                     'DIM - DATE'[Date] <= _MAX_DATE
+	///                 )
+	///         ),
+	///         IF(COALESCE([ISSUE_AMT],0) = 0 && COALESCE([RECEIPT_AMT],0) <> 0 ,
+	///             [CLOSING AMT (V PRICE)],
+	///             0
+	///         )
+	///     )
+	measure 'Tồn kho nhập không xuất' = ```
+			
+			VAR _MIN_DATE =
+			    CALCULATE(
+			        MIN('DIM - DATE'[Date]),
+			        ALLSELECTED('DIM - DATE'[Date])
+			    )
+			 
+			VAR _MAX_DATE =
+			    CALCULATE(
+			        MAX('DIM - DATE'[Date]),
+			        ALLSELECTED('DIM - DATE'[Date])
+			    )
+			RETURN
+			    SUMX(
+			        SUMMARIZE(
+			            FILTER(
+			                ALL('AGG - MATERIAL LEDGER SUPPLY'),
+			                'AGG - MATERIAL LEDGER SUPPLY'[POSTING_DATE] <= _MAX_DATE
+			            ),
+			            [MATERIAL_CODE],
+			            [STORAGE_LOC],
+			    
+			            "ISSUE_AMT",
+			                CALCULATE(
+			                    SUM('AGG - MATERIAL LEDGER SUPPLY'[ISSUE_AMT]),
+			                    'DIM - DATE'[Date] <= _MAX_DATE
+			                    && 'DIM - DATE'[Date] >= _MIN_DATE
+			                ),
+			            "RECEIPT_AMT",
+			                CALCULATE(
+			                    SUM('AGG - MATERIAL LEDGER SUPPLY'[RECEIPT_AMT]),
+			                    'DIM - DATE'[Date] <= _MAX_DATE
+			                    && 'DIM - DATE'[Date] >= _MIN_DATE,
+			                    NOT(ISBLANK('AGG - MATERIAL LEDGER SUPPLY'[PO_DOC]))
+			                ),
+			            "CLOSING_STOCK",
+			                CALCULATE(
+			                    SUMX('AGG - MATERIAL LEDGER V PRICE',[RECEIPT_AMT] + [ISSUE_AMT]),
+			                    'DIM - DATE'[Date] <= _MAX_DATE
+			                )
+			        ),
+			        IF(COALESCE([ISSUE_AMT],0) = 0 && COALESCE([RECEIPT_AMT],0) <> 0 ,
+			            [CLOSING AMT (V PRICE)],
+			            0
+			        )
+			    )
+			```
+		isHidden
+		displayFolder: Tiếng Việt
+		lineageTag: 8f22d87f-ede7-47ec-a0af-50b5bc5bd59b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá trị định mức Max' = CALCULATE(SUMX('DIM - MATERIAL PLANT',[MAX_STOCK_LEVEL]*[PRICE]))
+		displayFolder: Tiếng Việt
+		lineageTag: d12a1b14-d6f1-4189-a3e1-dff63a4dc55b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá trị định mức Min' = CALCULATE(SUMX('DIM - MATERIAL PLANT',[MIN_SAFETY_STOCK]*[PRICE]))
+		displayFolder: Tiếng Việt
+		lineageTag: 34f040ff-2b81-4f65-aa65-ed1aec63a9c3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá trị Reorder Point' = CALCULATE(SUMX('DIM - MATERIAL PLANT',[PRICE]*[RE_ORDER_POINT]))
+		displayFolder: Tiếng Việt
+		lineageTag: 195ba8eb-b13c-460b-9543-e27d7aabfe2b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá trị Safety Stock' = CALCULATE(SUMX('DIM - MATERIAL PLANT',[SAFTETY_STOCK]*[PRICE]))
+		displayFolder: Tiếng Việt
+		lineageTag: d3633582-accc-4ba1-9b57-e4fbeed82643
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Consumption Qty (Plant)' = SUM('FACT - INVENTORY BALANCE PLANT'[CONSUMPTION_QTY])
+		displayFolder: Tiếng Anh\Amount by S Price
+		lineageTag: 822cb59a-de6d-4b26-b35f-a94c35645426
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tồn kho vật tư nhập không xuất 1000, không xuất 1901' = ```
+			
+			VAR _MIN_DATE =
+			    CALCULATE(
+			        MIN('DIM - DATE'[Date]),
+			        ALLSELECTED('DIM - DATE'[Date])
+			    )
+			 
+			VAR _MAX_DATE =
+			    CALCULATE(
+			        MAX('DIM - DATE'[Date]),
+			        ALLSELECTED('DIM - DATE'[Date])
+			    )
+			RETURN
+			--CALCULATE(
+			CALCULATE(
+			    [RECEIPT AMT (V PRICE)],
+			    --'Agg Allocate SLOC Amt'[Closing Amt Allocated (by month)],
+			    FILTER(
+			        SUMMARIZE(
+			                CALCULATETABLE( 'AGG - MATERIAL LEDGER SUPPLY', ALL('DIM - STORAGE LOCATION')),
+			                'DIM - MATERIAL'[MATERIAL_CODE],
+			--                'Agg Material Ledger Supply'[POSTING_DATE],
+			--                'Agg Material Ledger Supply'[PLANT_CODE],
+			--                'Agg Material Ledger Supply'[STORAGE_LOC],
+			                "ISSUE_QTY_1000",
+			                    CALCULATE(
+			                        SUM('AGG - MATERIAL LEDGER SUPPLY'[ISSUE_QTY]),
+			                        --'Dim Date'[Date] <= _MAX_DATE
+			                        --&& 'Dim Date'[Date] >= _MIN_DATE,
+			                        'AGG - MATERIAL LEDGER SUPPLY'[PLANT_CODE] = "1000"
+			                        /*Loại trừ phần chuyển kho 1001 sang 1005*/
+			                        ,'AGG - MATERIAL LEDGER SUPPLY'[MOVEMENT_TYPE] <> "311"
+			                    ),
+			                "RECEIPT_QTY_1000",
+			                    CALCULATE(
+			                        SUM('AGG - MATERIAL LEDGER SUPPLY'[RECEIPT_QTY]),
+			                        --'Dim Date'[Date] <= _MAX_DATE
+			                        --&& 'Dim Date'[Date] >= _MIN_DATE,
+			                        --NOT(ISBLANK('Agg Material Ledger Supply'[PO_DOC])),
+			                        'AGG - MATERIAL LEDGER SUPPLY'[IS_PO_DOC] = 1,
+			                        'AGG - MATERIAL LEDGER SUPPLY'[PLANT_CODE] = "1000"
+			                    ),
+			                "ISSUE_QTY_1901",
+			                    CALCULATE(
+			                        SUM('AGG - MATERIAL LEDGER SUPPLY'[ISSUE_QTY]),
+			                        --'Dim Date'[Date] <= _MAX_DATE
+			                       -- && 'Dim Date'[Date] >= _MIN_DATE,
+			                        'AGG - MATERIAL LEDGER SUPPLY'[STORAGE_LOC] = "1901"
+			                    )
+			            ),
+			            (ISBLANK([ISSUE_QTY_1901]) || [ISSUE_QTY_1901] =0)
+			            && (ISBLANK([ISSUE_QTY_1000])  || [ISSUE_QTY_1000] = 0)
+			            && [RECEIPT_QTY_1000] <> 0
+			    )
+			)
+			/*,ALLSELECTED('DIM - DATE'[Date]), 'DIM - DATE'[Date] <=_MAX_DATE)*/
+			```
+		formatString: #,##0
+		displayFolder: Tiếng Việt
+		lineageTag: ff6edafa-9e9d-4ede-b8b0-d085c3fa36ee
+
+	measure 'Tồn kho vật tư nhập không xuất 1000, xuất 1901' = ```
+			
+			VAR _MIN_DATE =
+			    CALCULATE(
+			        MIN('DIM - DATE'[Date]),
+			       -- ALLSELECTED('Dim Date'[Date])
+			       ALLEXCEPT('DIM - DATE','DIM - DATE'[Date])
+			    )
+			 
+			VAR _MAX_DATE =
+			    CALCULATE(
+			        MAX('DIM - DATE'[Date]),
+			        ALLSELECTED('DIM - DATE'[Date])
+			    )
+			
+			RETURN
+			--CALCULATE(
+			CALCULATE(
+			    [RECEIPT AMT (V PRICE)],
+			    --[Closing Amt Allocated (by month)],
+			    FILTER(
+			        SUMMARIZE(
+			                CALCULATETABLE('AGG - MATERIAL LEDGER SUPPLY', ALL('DIM - STORAGE LOCATION')),
+			                'DIM - MATERIAL'[MATERIAL_CODE],
+			--                'Agg Material Ledger Supply'[PLANT_CODE],
+			--                'Agg Material Ledger Supply'[STORAGE_LOC],
+			                "ISSUE_QTY_1000",
+			                    CALCULATE(
+			                        SUM('AGG - MATERIAL LEDGER SUPPLY'[ISSUE_QTY]),
+			                        --'Dim Date'[Date] <= _MAX_DATE
+			                       -- && 'Dim Date'[Date] >= _MIN_DATE,
+			                        'AGG - MATERIAL LEDGER SUPPLY'[PLANT_CODE] = "1000",
+			                        /*Loại trừ phần chuyển kho 1001 sang 1005*/
+			                        'AGG - MATERIAL LEDGER SUPPLY'[MOVEMENT_TYPE] <> "311"
+			                    ),
+			                "RECEIPT_QTY_1000",
+			                    CALCULATE(
+			                        SUM('AGG - MATERIAL LEDGER SUPPLY'[RECEIPT_QTY]),
+			                      --  'Dim Date'[Date] <= _MAX_DATE
+			                       -- && 'Dim Date'[Date] >= _MIN_DATE,
+			                        --NOT(ISBLANK('Agg Material Ledger Supply'[PO_DOC])),
+			                        'AGG - MATERIAL LEDGER SUPPLY'[IS_PO_DOC] = 1,
+			                        'AGG - MATERIAL LEDGER SUPPLY'[PLANT_CODE] = "1000"
+			                    ),
+			                "ISSUE_QTY_1901",
+			                    CALCULATE(
+			                        SUM('AGG - MATERIAL LEDGER SUPPLY'[ISSUE_QTY]),
+			                      --  'Dim Date'[Date] <= _MAX_DATE
+			                      --  && 'Dim Date'[Date] >= _MIN_DATE,
+			                        'AGG - MATERIAL LEDGER SUPPLY'[STORAGE_LOC] = "1901"
+			                    )
+			            ),
+			            [ISSUE_QTY_1901] <> 0 
+			            && (ISBLANK([ISSUE_QTY_1000]) || [ISSUE_QTY_1000] = 0)
+			            && [RECEIPT_QTY_1000] <> 0
+			    )
+			)
+			--,ALLSELECTED('DIM - DATE'[Date]), 'DIM - DATE'[Date] <=_MAX_DATE)
+			```
+		formatString: #,##0
+		displayFolder: Tiếng Việt
+		lineageTag: 21933de0-fdaa-482d-89f8-b9f470b4ff98
+
+	measure 'Tồn kho vật tư nhập không xuất trên plant 1000' = ```
+			
+			VAR _MIN_DATE =
+			    CALCULATE(
+			        MIN('DIM - DATE'[Date]),
+			       -- ALLSELECTED('Dim Date'[Date])
+			       ALLEXCEPT('DIM - DATE','DIM - DATE'[Date])
+			    )
+			 
+			VAR _MAX_DATE =
+			    CALCULATE(
+			        MAX('DIM - DATE'[Date]),
+			        ALLSELECTED('DIM - DATE'[Date])
+			    )
+			RETURN
+			--CALCULATE(
+			CALCULATE(
+			    [RECEIPT AMT (V PRICE)],
+			    --[Closing Amt Allocated (by month)],
+			    FILTER(
+			SUMMARIZE (
+			    'AGG - MATERIAL LEDGER SUPPLY',
+			    'DIM - MATERIAL'[MATERIAL_CODE],
+			    --'Agg Material Ledger Supply'[POSTING_DATE],
+			    --'Agg Material Ledger Supply'[PLANT_CODE],
+			    --'Agg Material Ledger Supply'[STORAGE_LOC],
+			    "ISSUE_QTY",
+			        CALCULATE (
+			            SUM ( 'AGG - MATERIAL LEDGER SUPPLY'[ISSUE_QTY] )
+			            --,'Dim Date'[Date] <= _MAX_DATE --&& 'Dim Date'[Date] >= _MIN_DATE
+			            
+			            ,'AGG - MATERIAL LEDGER SUPPLY'[PLANT_CODE] = "1000"
+			            /*Loại trừ phần chuyển kho 1001 sang 1005*/
+			            ,'AGG - MATERIAL LEDGER SUPPLY'[MOVEMENT_TYPE] <> "311"
+			        ),
+			    "RECEIPT_QTY",
+			        CALCULATE (
+			            SUM ( 'AGG - MATERIAL LEDGER SUPPLY'[RECEIPT_QTY] )
+			            --'Dim Date'[Date] <= _MAX_DATE  --&& 'Dim Date'[Date] >= _MIN_DATE
+			            
+			            ,'AGG - MATERIAL LEDGER SUPPLY'[IS_PO_DOC] = 1
+			            --NOT(ISBLANK('Agg Material Ledger Supply'[PO_DOC]))
+			            ,'AGG - MATERIAL LEDGER SUPPLY'[PLANT_CODE] = "1000"
+			        )
+			),
+			  [RECEIPT_QTY] <> 0 && (ISBLANK([ISSUE_QTY]) || [ISSUE_QTY] = 0)
+			)
+			)
+			--,ALLSELECTED('DIM - DATE'[Date]),'DIM - DATE'[Date]<=_MAX_DATE)
+			
+			```
+		displayFolder: Tiếng Việt
+		lineageTag: f3331607-6378-4d3e-a1c5-d64c8918e41b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tồn kho vật tư nhập không xuất 1000, không xuất 1901 - Còn tồn kho, vẫn phát sinh PO' = ```
+			
+			VAR _MIN_DATE =
+			    CALCULATE(
+			        MIN('DIM - DATE'[Date]),
+			        ALLSELECTED('DIM - DATE'[Date])
+			    )
+			 
+			VAR _MAX_DATE =
+			    CALCULATE(
+			        MAX('DIM - DATE'[Date]),
+			        ALLSELECTED('DIM - DATE'[Date])
+			    )
+			RETURN
+			--CALCULATE(
+			CALCULATE(
+			    [RECEIPT AMT (V PRICE)],
+			    --'Agg Allocate SLOC Amt'[Closing Amt Allocated (by month)],
+			    FILTER(
+			        SUMMARIZE(
+			                'AGG - INVENTORY SLOW MOVING',
+			                'DIM - MATERIAL'[MATERIAL_CODE],
+			--                'Agg Material Ledger Supply'[POSTING_DATE],
+			--                'Agg Material Ledger Supply'[PLANT_CODE],
+			--                'Agg Material Ledger Supply'[STORAGE_LOC],
+			                "ISSUE_QTY_1000",
+			                    CALCULATE(
+			                        SUM('AGG - INVENTORY SLOW MOVING'[TOTAL_ISSUE_QTY]),
+			                        --'Dim Date'[Date] <= _MAX_DATE
+			                        --&& 'Dim Date'[Date] >= _MIN_DATE,
+			                        'AGG - INVENTORY SLOW MOVING'[PLANT_CODE] = "1000"
+			                    ),
+			                "RECEIPT_QTY_1000",
+			                    CALCULATE(
+			                        SUM('AGG - INVENTORY SLOW MOVING'[TOTAL_RECEIPT_QTY]),
+			                        --'Dim Date'[Date] <= _MAX_DATE
+			                        --&& 'Dim Date'[Date] >= _MIN_DATE,
+			                        --NOT(ISBLANK('Agg Material Ledger Supply'[PO_DOC])),
+			                        'AGG - INVENTORY SLOW MOVING'[PO_COUNT] > 0,
+			                        'AGG - INVENTORY SLOW MOVING'[PLANT_CODE] = "1000"
+			                    ),
+			                "ISSUE_QTY_1901",
+			                    CALCULATE(
+			                        SUM('AGG - INVENTORY SLOW MOVING'[TOTAL_ISSUE_QTY]),
+			                        --'Dim Date'[Date] <= _MAX_DATE
+			                       -- && 'Dim Date'[Date] >= _MIN_DATE,
+			                        'AGG - INVENTORY SLOW MOVING'[STORAGE_LOC] = "1901"
+			                    ),
+			                "CLOSING_PRE_PO",
+			                    CALCULATE(
+			                        SUM('AGG - INVENTORY SLOW MOVING'[CLOSING_AMT_PRE_PO]),
+			                        'AGG - INVENTORY SLOW MOVING'[PO_COUNT]>0
+			                    )
+			            ),
+			            ([ISSUE_QTY_1901] = 0 || ISBLANK([ISSUE_QTY_1901]))
+			             && ([ISSUE_QTY_1000] = 0 || ISBLANK([ISSUE_QTY_1000])) 
+			             &&[RECEIPT_QTY_1000] <> 0 
+			             && [CLOSING_PRE_PO] > 0
+			    )
+			)
+			--,ALLSELECTED('DIM - DATE'[Date]), 'DIM - DATE'[Date] <=_MAX_DATE)
+			```
+		displayFolder: Tiếng Việt
+		lineageTag: f1ad15f8-faa2-44e6-8078-5447740c475a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula:
+	/// CALCULATE([Closing Amt Allocated (by month)], DATEADD('DIM - DATE'[Date], -1, MONTH))
+	measure 'Opening Amt Allocated (by month)' = CALCULATE([Closing Amt Allocated (by month)], DATEADD('DIM - DATE'[Date], -1, MONTH))
+		displayFolder: Tiếng Anh\Allocated Amount
+		lineageTag: 70f8d3e6-5d9e-4eb0-9832-17290252cb52
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Measures
+		dataType: string
+		lineageTag: 2e2cf397-afcc-40db-8481-96fa13f2fd95
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Measures]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Measures",String,
+				{
+				    {""}
+				}
+				)
+

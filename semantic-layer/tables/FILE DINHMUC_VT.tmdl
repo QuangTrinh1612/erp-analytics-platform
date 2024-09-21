@@ -1,0 +1,344 @@
+table 'FILE DINHMUC_VT'
+	lineageTag: 64e0632b-32fe-4a28-ab61-09d91a55857b
+
+	measure 'Giá trị định mức Max (excel) ' = sum('FILE DINHMUC_VT'[Giá trị định mức Max])
+		lineageTag: 8c97dd29-8aa0-46cd-8d08-1c992a6533c5
+
+	column STT
+		dataType: string
+		lineageTag: 4c8ff15b-7327-4da3-8108-7d7a1fc76a7b
+		summarizeBy: none
+		sourceColumn: STT
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mã vật tư'
+		dataType: string
+		lineageTag: 1cea118e-27d4-4706-b772-b2d2cba78efa
+		summarizeBy: none
+		sourceColumn: Mã vật tư
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SL min'
+		dataType: double
+		lineageTag: bac9c931-c9bc-4c9c-90a2-ddc376ca5204
+		summarizeBy: sum
+		sourceColumn: SL min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL Safety'
+		dataType: double
+		lineageTag: e45606b4-98c7-480a-82ad-1deba103317b
+		summarizeBy: sum
+		sourceColumn: SL Safety
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL max'
+		dataType: double
+		lineageTag: a79c6cc6-f271-4d09-98f5-9158d59a3d82
+		summarizeBy: sum
+		sourceColumn: SL max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL max dự kiến'
+		dataType: double
+		lineageTag: 8da1e4c0-64ea-4cd1-b03c-7fe271816bb9
+		summarizeBy: sum
+		sourceColumn: SL max dự kiến
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Đơn giá'
+		dataType: double
+		lineageTag: cd6a78f0-1962-449f-871b-59d430831e46
+		summarizeBy: sum
+		sourceColumn: Đơn giá
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Giá trị định mức Min'
+		dataType: double
+		lineageTag: 7d5bc000-be25-4bf1-951b-c6bf839b2dc9
+		summarizeBy: sum
+		sourceColumn: Giá trị định mức Min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Giá trị định mức Max'
+		dataType: double
+		lineageTag: c37b1b3b-6c9c-4620-8bde-2e0153cfdd07
+		summarizeBy: sum
+		sourceColumn: Giá trị định mức Max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Giá trị định mức Max (dự kiến)'
+		dataType: double
+		lineageTag: 775a21a7-3d8b-4a1e-b947-460b6604b6b8
+		summarizeBy: sum
+		sourceColumn: Giá trị định mức Max (dự kiến)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Giá trị Safety stock'
+		dataType: double
+		lineageTag: c49918ba-ecbe-4341-aab6-2cfcc2169d0e
+		summarizeBy: sum
+		sourceColumn: Giá trị Safety stock
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL Tồn kho Safety'
+		dataType: double
+		lineageTag: 67c1aefb-5d67-422f-b3c6-aa72591ef9ae
+		summarizeBy: sum
+		sourceColumn: SL Tồn kho Safety
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL Tồn kho Min'
+		dataType: double
+		lineageTag: 66efdeb3-e437-4ebd-94a8-4ad041441339
+		summarizeBy: sum
+		sourceColumn: SL Tồn kho Min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL Tồn kho Max'
+		dataType: double
+		lineageTag: 6a342023-837a-4aba-a307-2f350831fbdc
+		summarizeBy: sum
+		sourceColumn: SL Tồn kho Max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL Tồn kho Max dự kiến'
+		dataType: double
+		lineageTag: c875e891-21f4-4c8b-b5b2-9ad07e33e572
+		summarizeBy: sum
+		sourceColumn: SL Tồn kho Max dự kiến
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GT Tồn kho Safety'
+		dataType: double
+		lineageTag: 781dda32-4241-4349-81de-a4b4d4dd7d96
+		summarizeBy: sum
+		sourceColumn: GT Tồn kho Safety
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GT Tồn kho Min'
+		dataType: double
+		lineageTag: 0dc16878-0953-48b2-b0c2-a5d37325cb0b
+		summarizeBy: sum
+		sourceColumn: GT Tồn kho Min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GT Tồn kho Max'
+		dataType: double
+		lineageTag: 2378fbe7-20a4-428a-8fb0-29067ba09983
+		summarizeBy: sum
+		sourceColumn: GT Tồn kho Max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GT Tồn kho Max dự kiến'
+		dataType: double
+		lineageTag: f6ebf48d-8986-4b00-b730-661061ebbc53
+		summarizeBy: sum
+		sourceColumn: GT Tồn kho Max dự kiến
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL tồn kho Plant 1000'
+		dataType: double
+		lineageTag: a11c09c9-4397-4a4d-9092-7dced5a515c6
+		summarizeBy: sum
+		sourceColumn: SL tồn kho Plant 1000
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL tồn Kho 1901'
+		dataType: double
+		lineageTag: 6b08cd56-1081-4412-bc64-638abb259c47
+		summarizeBy: sum
+		sourceColumn: SL tồn Kho 1901
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL PR chưa nhập kho'
+		dataType: double
+		lineageTag: 55ab71f2-db72-4336-92ce-be0ec9ca1164
+		summarizeBy: sum
+		sourceColumn: SL PR chưa nhập kho
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Số PR'
+		dataType: double
+		lineageTag: 154c5913-f1ff-4642-94c2-831bee453e5a
+		summarizeBy: sum
+		sourceColumn: Số PR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Mã đơn hàng'
+		dataType: double
+		lineageTag: e4d671b0-6fb3-4551-9286-0c299d1a625e
+		summarizeBy: sum
+		sourceColumn: Mã đơn hàng
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL mua ĐM Min'
+		dataType: double
+		lineageTag: 739677d6-8e70-4f93-86e2-a7c638e18f97
+		summarizeBy: sum
+		sourceColumn: SL mua ĐM Min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL mua ĐM Safety'
+		dataType: double
+		lineageTag: 6736e99f-6014-4f2a-b8ee-33a8104c117d
+		summarizeBy: sum
+		sourceColumn: SL mua ĐM Safety
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL mua ĐM Max'
+		dataType: double
+		lineageTag: 2022128e-b509-4fcf-a0b4-7d6f83fd8664
+		summarizeBy: sum
+		sourceColumn: SL mua ĐM Max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL mua ĐM Max dự kiến'
+		dataType: double
+		lineageTag: 2002634f-a586-4a4c-a268-0404e8fff278
+		summarizeBy: sum
+		sourceColumn: SL mua ĐM Max dự kiến
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Tổng GTVT mua Safety stock'
+		dataType: double
+		lineageTag: f1305d93-465c-4d71-a8ff-bb8f7c036576
+		summarizeBy: sum
+		sourceColumn: Tổng GTVT mua Safety stock
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Tổng GTVT mua ĐM Min'
+		dataType: double
+		lineageTag: 102449e0-09db-4f16-b978-0f824be976b6
+		summarizeBy: sum
+		sourceColumn: Tổng GTVT mua ĐM Min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Tổng GTVT mua ĐM Max'
+		dataType: double
+		lineageTag: 7964cba6-8d31-47e9-b26f-29aa6987c944
+		summarizeBy: sum
+		sourceColumn: Tổng GTVT mua ĐM Max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Tổng GTVT mua ĐM Max dự kiến'
+		dataType: double
+		lineageTag: c5fd11e7-4e59-47e1-ba54-2c5552bcd799
+		summarizeBy: sum
+		sourceColumn: Tổng GTVT mua ĐM Max dự kiến
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Material_plant_key = [Mã vật tư] && "-1000"
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3f979465-7806-4798-b887-36e849bb1281
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FILE DINHMUC_VT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_DINHMUC_VT = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_DINHMUC_VT"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_DINHMUC_VT,{{"SL min", type number}, {"SL Safety", type number}, {"SL max", type number}, {"SL max dự kiến", type number}, {"Giá trị định mức Min", type number}, {"Giá trị định mức Max", type number}, {"Giá trị định mức Max (dự kiến)", type number}, {"Giá trị Safety stock", type number}, {"SL Tồn kho Safety", type number}, {"SL Tồn kho Min", type number}, {"SL Tồn kho Max", type number}, {"SL Tồn kho Max dự kiến", type number}, {"GT Tồn kho Safety", type number}, {"GT Tồn kho Min", type number}, {"GT Tồn kho Max", type number}, {"GT Tồn kho Max dự kiến", type number}, {"SL tồn kho Plant 1000", type number}, {"SL tồn Kho 1901", type number}, {"SL PR chưa nhập kho", type number}, {"Số PR", type number}, {"SL mua ĐM Min", type number}, {"SL mua ĐM Safety", type number}, {"SL mua ĐM Max", type number}, {"SL mua ĐM Max dự kiến", type number}, {"Tổng GTVT mua Safety stock", type number}, {"Tổng GTVT mua ĐM Min", type number}, {"Tổng GTVT mua ĐM Max", type number}, {"Tổng GTVT mua ĐM Max dự kiến", type number}, {"Đơn giá", type number}, {"Mã đơn hàng", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

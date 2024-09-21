@@ -1,0 +1,350 @@
+table 'DIM - COST CENTER & ELEMENT'
+	isHidden
+	lineageTag: 9af350cf-3442-4088-8782-6a2a2d12da51
+
+	column CO_AREA
+		dataType: string
+		isHidden
+		lineageTag: f3223d1d-34b9-4573-bd0f-a7721187f560
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[CO_AREA]
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER_CODE
+		dataType: string
+		isHidden
+		lineageTag: c4f42e73-f2f4-4274-a215-8179676b844f
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[COST_CENTER_CODE]
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_TO
+		dataType: string
+		isHidden
+		lineageTag: a9bafd7f-943b-4976-bb5f-8dbd4713609e
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[VALID_TO]
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_FROM
+		dataType: string
+		isHidden
+		lineageTag: afa084c8-6533-48e0-a2b3-4229ca7ede23
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[VALID_FROM]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_ON
+		dataType: string
+		isHidden
+		lineageTag: 27c8cabe-678d-47ce-a56d-ba19d00055d8
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[CREATED_ON]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_BY
+		dataType: string
+		isHidden
+		lineageTag: c7c3b596-4942-4a2a-898e-fd6b66a46e9d
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[CREATED_BY]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPARTMENT
+		dataType: string
+		isHidden
+		lineageTag: fc70bfb5-f2d5-47f5-87e2-eedd7aadc2bf
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[DEPARTMENT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERSON_RES
+		dataType: string
+		isHidden
+		lineageTag: da67355f-e49f-4e2a-8469-cd8623e529b9
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[PERSON_RES]
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_RES
+		dataType: string
+		isHidden
+		lineageTag: 21d93a87-6daf-4a1c-a574-d40da7829506
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[USER_RES]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_KEY
+		dataType: string
+		isHidden
+		lineageTag: d3880218-847a-408c-9076-04374ad95601
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[CURRENCY_KEY]
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_KEY
+		dataType: string
+		isHidden
+		lineageTag: 0b311d97-f4ce-43cf-bf95-e90daf91823c
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[COUNTRY_KEY]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY
+		dataType: string
+		isHidden
+		lineageTag: b6a782af-5a1a-4f54-89be-a40e2eff5ad7
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[CITY]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISTRICT
+		dataType: string
+		isHidden
+		lineageTag: 9261a2b2-2692-4194-abf0-368f486ae2a8
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[DISTRICT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		isHidden
+		lineageTag: c895563d-057f-4dee-a292-26fe34088f74
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[COMPANY_CODE]
+
+		annotation SummarizationSetBy = Automatic
+
+	column REGION
+		dataType: string
+		isHidden
+		lineageTag: 92f59129-25fb-4829-9a5d-b5e32d32231f
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[REGION]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNC_AREA
+		dataType: string
+		isHidden
+		lineageTag: bac40084-32cf-442e-86a2-ed7f732cbe7d
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[FUNC_AREA]
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUS_AREA
+		dataType: string
+		isHidden
+		lineageTag: 3a80a0c9-745c-4db7-bf53-48ac93342821
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[BUS_AREA]
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER_CAT
+		dataType: string
+		isHidden
+		lineageTag: 981de2d5-c5ac-47fe-aaa8-995db63401bc
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[COST_CENTER_CAT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJ_NUMBER
+		dataType: string
+		isHidden
+		lineageTag: f8145304-2bcb-4ce1-9760-f5997dec5d2a
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[OBJ_NUMBER]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_CENTER_CODE
+		dataType: string
+		isHidden
+		lineageTag: 1125375f-f9b6-4664-a5fb-b61b6aab4bd4
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[PROFIT_CENTER_CODE]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: 0ec66406-5727-4b98-a35e-ca6cd357a315
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[PLANT_CODE]
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHORT_NAME
+		dataType: string
+		isHidden
+		lineageTag: dae5a48a-f349-45fd-9a31-254e15e7281e
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[SHORT_NAME]
+
+		annotation SummarizationSetBy = Automatic
+
+	column LONG_NAME
+		dataType: string
+		isHidden
+		lineageTag: c0c506fd-4de2-49e1-b7a3-2d3b7757db0d
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[LONG_NAME]
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEARCH_TERM
+		dataType: string
+		isHidden
+		lineageTag: 758d7487-5c86-4b64-89f5-2ce15febb89f
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[SEARCH_TERM]
+
+		annotation SummarizationSetBy = Automatic
+
+	column HIERARCHY_AREA
+		dataType: string
+		isHidden
+		lineageTag: 553edaee-2971-45e3-b8a0-12e8462fbdc5
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST CENTRE[HIERARCHY_AREA]
+
+		annotation SummarizationSetBy = Automatic
+
+	column COA
+		dataType: string
+		isHidden
+		lineageTag: b6d4d2df-c9fc-4a23-8c02-ac00c95f099c
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST ELEMENT[COA]
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELEMENT
+		dataType: string
+		isHidden
+		lineageTag: 0baf7815-b71e-4f49-9ee8-9c0d2987f4e4
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST ELEMENT[COST_ELEMENT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CE_NAME
+		dataType: string
+		isHidden
+		lineageTag: e5377894-1a1b-4719-8009-54fa251202ac
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST ELEMENT[CE_NAME]
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_ASSIGN_ZCO14
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7469d3f4-b8e8-42da-a5fb-539c6a151391
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - COST ELEMENT[IS_ASSIGN_ZCO14]
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER_ELEMENT_KEY
+		dataType: string
+		isHidden
+		lineageTag: ec07bac0-acad-4ce6-86cb-36d9294d805e
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [COST_CENTER_ELEMENT_KEY]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - COST CENTER & ELEMENT' = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS(
+				    CROSSJOIN(
+				        'DIM - COST CENTRE',
+				        'DIM - COST ELEMENT'
+				    ),
+				    "COST_CENTER_ELEMENT_KEY",
+				        [COST_CENTER_CODE] & "-" & [COST_ELEMENT]
+				)
+
+	annotation PBI_Id = a43cb8288d184dc9b396afb185d55183
+

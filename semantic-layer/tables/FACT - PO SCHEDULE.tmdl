@@ -1,0 +1,129 @@
+table 'FACT - PO SCHEDULE'
+	lineageTag: 7e27ad34-dcbd-42d6-9120-96fab45404be
+
+	column PURCHASE_ORDER
+		dataType: string
+		lineageTag: 90758715-eeb9-429d-8b52-d1ae7fea6919
+		summarizeBy: none
+		sourceColumn: PURCHASE_ORDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_ITEM
+		dataType: string
+		lineageTag: c4314010-a6f7-4f8c-8710-8d1abc3402f7
+		summarizeBy: none
+		sourceColumn: PURCHASE_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column SCHEDULE_QUANTITY
+		dataType: double
+		lineageTag: a7947528-ef15-47ca-a40f-e6534953d2fa
+		summarizeBy: sum
+		sourceColumn: SCHEDULE_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: cc639991-ae1c-4a44-a19b-e1cde31c507e
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PR_DOC
+		dataType: string
+		lineageTag: ef60e8be-5661-4c19-b617-665cfad3ab5b
+		summarizeBy: none
+		sourceColumn: PR_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_PR_DOC
+		dataType: string
+		lineageTag: e07823e6-c2fa-4b7d-bb2b-ae38c746a599
+		summarizeBy: none
+		sourceColumn: ITEM_PR_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DATE
+		dataType: string
+		lineageTag: 0b0ac59a-2b21-49bd-87fb-2983bebb00ec
+		summarizeBy: none
+		sourceColumn: ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELIVERY_DATE
+		dataType: string
+		lineageTag: f6dce702-27f6-41c3-af7e-8ac72037a95a
+		summarizeBy: none
+		sourceColumn: DELIVERY_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NUMBER
+		dataType: string
+		lineageTag: c0e65dc3-5281-482b-8c95-6a113f81547b
+		summarizeBy: none
+		sourceColumn: BATCH_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PURCHASE_GROUP
+		dataType: string
+		lineageTag: a27d2a7c-260b-4c5e-9792-4750ff1f1b71
+		summarizeBy: none
+		sourceColumn: PURCHASE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_CODE
+		dataType: string
+		lineageTag: b09b15da-b248-4ce9-98cd-54f48bbb748b
+		summarizeBy: none
+		sourceColumn: VENDOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT
+		dataType: string
+		lineageTag: 12ac750c-8564-41cf-884f-a43724dc1a5b
+		summarizeBy: none
+		sourceColumn: UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 50458872-2818-4084-8430-3fad425ce90f
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_PLANT_KEY = [MATERIAL_CODE]&"-"&[PLANT_CODE]
+		dataType: string
+		lineageTag: 06c80239-4b57-4a6e-957f-85983fa7cd5d
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - PO SCHEDULE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PURCH_ORG = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_PO_SCHEDULE_LINE"]}[Data]
+				in
+				    gld_VW_DIM_PURCH_ORG
+
+	annotation PBI_ResultType = Table
+

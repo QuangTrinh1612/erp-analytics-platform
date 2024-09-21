@@ -1,0 +1,42 @@
+table 'DIM - CODE GROUP'
+	lineageTag: 953d451a-6008-4304-b612-57f1325817aa
+
+	column CATALOG_TYPE
+		dataType: string
+		lineageTag: 0c1f0151-f485-4a88-8b35-3b71cd014d38
+		summarizeBy: none
+		sourceColumn: CATALOG_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODE_GROUP
+		dataType: string
+		lineageTag: 100c3924-8ced-48a7-9b54-855cc9b1995f
+		summarizeBy: none
+		sourceColumn: CODE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODE_GROUP_DESC
+		dataType: string
+		lineageTag: a966474b-d234-411d-ab2f-4132380b4c59
+		summarizeBy: none
+		sourceColumn: CODE_GROUP_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - CODE GROUP' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_CODE_GROUP = pvcfcprodsqlpool{[Schema="sil",Item="DIM_CODE_GROUP"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_CODE_GROUP,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

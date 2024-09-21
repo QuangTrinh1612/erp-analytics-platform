@@ -1,0 +1,167 @@
+table 'FACT - CO SPLIT ITEM'
+	lineageTag: 9059ad64-ffec-40db-9d7f-acfb59266d5b
+
+	measure 'CO Loc Amt' =
+			
+			VAR _process_cat =
+			    CALCULATE(
+			        MAX('FACT - CO SPLIT ITEM'[PROCESS_CAT]),
+			        ALLEXCEPT(
+			            'FACT - CO SPLIT ITEM',
+			            'FACT - CO SPLIT ITEM'[FISCAL_DATE],
+			            'FACT - CO SPLIT ITEM'[COST_EST_NO]
+			        )
+			    )
+			RETURN
+			    SUMX(
+			        SUMMARIZE(
+			            FILTER(
+			                'FACT - CO SPLIT ITEM',
+			                'FACT - CO SPLIT ITEM'[COST_CATEGORY] = "Variable"
+			            ),
+			            'FACT - CO SPLIT ITEM'[MATERIAL_CODE],
+			            'FACT - CO SPLIT ITEM'[COST_COMPONENT_STRUCTURE],
+			            "_amt",
+			                SUM('FACT - CO SPLIT ITEM'[LOCAL_AMT])
+			        ),
+			        IF(
+			            [COST_COMPONENT_STRUCTURE] = "T4"
+			            || _process_cat = "BF",
+			            [_amt]
+			        )
+			    )
+		lineageTag: df783e4b-989b-43cb-8755-699448372aca
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FISCAL_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: edba7739-2633-4368-bc98-2cda75fa5fb2
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: f09adaa6-17ca-40ec-b459-7e391ee40503
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 8c1c51dd-275c-47cf-9e20-d5a4c4bd1a28
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_EST_NO
+		dataType: string
+		lineageTag: c0cccc86-9d2a-4165-bb48-4663c046fb7b
+		summarizeBy: none
+		sourceColumn: COST_EST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ALT_PROCESS_NO
+		dataType: string
+		lineageTag: 0881511b-db71-4100-b812-efa8e739e318
+		summarizeBy: none
+		sourceColumn: ALT_PROCESS_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CATEGORY
+		dataType: string
+		lineageTag: 89d82004-b860-4632-9ccf-082ac8b3dbdb
+		summarizeBy: none
+		sourceColumn: CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY
+		dataType: string
+		lineageTag: 897d55a5-2849-4e11-8a8c-7ddae8483331
+		summarizeBy: none
+		sourceColumn: CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CATEGORY
+		dataType: string
+		lineageTag: 8d3d795a-6fac-453c-b09e-c40f436ef726
+		summarizeBy: none
+		sourceColumn: COST_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_COMPONENT
+		dataType: string
+		lineageTag: b59b11ee-5b64-409e-8543-20ce52c078e1
+		summarizeBy: none
+		sourceColumn: COST_COMPONENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_COMPONENT_STRUCTURE
+		dataType: string
+		lineageTag: bbfc4a47-0c96-4c14-9452-37a315a7aafa
+		summarizeBy: none
+		sourceColumn: COST_COMPONENT_STRUCTURE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_DESC
+		dataType: string
+		lineageTag: ebd81e65-9220-42d0-b7e2-b0182b45aee2
+		summarizeBy: none
+		sourceColumn: COST_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCAL_AMT
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 45bdd355-728c-4494-983a-ab37a65a3b98
+		summarizeBy: sum
+		sourceColumn: LOCAL_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROCESS_CAT
+		dataType: string
+		lineageTag: 841475bd-02de-4b12-9365-d96d45dded5c
+		summarizeBy: none
+		sourceColumn: PROCESS_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_DESC_NPK =
+			IF('FACT - CO SPLIT ITEM'[COST_DESC] = "BTP/SPDD NPK", "Ure Bao",
+			                        IF('FACT - CO SPLIT ITEM'[COST_DESC] = "NPK bao", "Xúc Tác",
+			'FACT - CO SPLIT ITEM'[COST_DESC]  ))
+		dataType: string
+		lineageTag: e829357a-10c4-4371-8579-0df382b235c9
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - CO SPLIT ITEM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_FACT_CO_SPLIT_ITEM = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_CO_SPLIT_ITEM"]}[Data]
+				in
+				    VW_FACT_CO_SPLIT_ITEM
+
+	annotation PBI_ResultType = Table
+

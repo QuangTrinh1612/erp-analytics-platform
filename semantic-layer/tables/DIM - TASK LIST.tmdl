@@ -1,0 +1,277 @@
+table 'DIM - TASK LIST'
+	lineageTag: 6dbf3566-5ffa-4b5a-a200-7c1b7399e3db
+
+	column DIM_TASK_LIST_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: f97ef20c-bbe3-448b-afb6-f87320152254
+		summarizeBy: none
+		sourceColumn: DIM_TASK_LIST_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_ITEM
+		dataType: string
+		lineageTag: 84390436-072a-43e0-b618-d89494ce8342
+		summarizeBy: none
+		sourceColumn: MAINT_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column TASK_LIST_TYPE
+		dataType: string
+		lineageTag: 8a1ae917-c350-4508-ad6d-edbce1825f07
+		summarizeBy: none
+		sourceColumn: TASK_LIST_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROUP_KEY
+		dataType: string
+		lineageTag: 312eb71b-1de8-4210-8cf0-3c183ce467cd
+		summarizeBy: none
+		sourceColumn: GROUP_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRP_COUNTER
+		dataType: string
+		lineageTag: 98cd7ae2-0161-46e1-a0df-a72b76bc10a0
+		summarizeBy: none
+		sourceColumn: GRP_COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTER
+		dataType: string
+		lineageTag: a79e5671-ac03-42ef-8d4d-c9be6eaa5f4e
+		summarizeBy: none
+		sourceColumn: COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_FROM
+		dataType: string
+		lineageTag: 7489b36b-853b-4561-8ac9-f9dd66f6cd82
+		summarizeBy: none
+		sourceColumn: VALID_FROM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEL_IND
+		dataType: string
+		lineageTag: 9b6a0026-066e-4627-a771-482c91f93f14
+		summarizeBy: none
+		sourceColumn: DEL_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column INACT_IND
+		dataType: string
+		lineageTag: 7cb88f3b-ffa7-41b8-bb56-18a54aec71ae
+		summarizeBy: none
+		sourceColumn: INACT_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_DATE
+		dataType: string
+		lineageTag: c07694ad-6032-4e06-b517-4c6d20af60f1
+		summarizeBy: none
+		sourceColumn: CREATED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATOR
+		dataType: string
+		lineageTag: fbfd6cbc-4bdc-4b6c-8dce-bc667dc869e0
+		summarizeBy: none
+		sourceColumn: CREATOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column TASK_LIST_STAT
+		dataType: string
+		lineageTag: eb8c7384-3608-4c24-b983-d664e0bea104
+		summarizeBy: none
+		sourceColumn: TASK_LIST_STAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_DATE
+		dataType: string
+		lineageTag: 0a726817-1815-49a7-a208-8d484dfda1a8
+		summarizeBy: none
+		sourceColumn: CHANGE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_PERS
+		dataType: string
+		lineageTag: 23736b42-4e67-44c8-819e-665625ac8194
+		summarizeBy: none
+		sourceColumn: CHANGE_PERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column NODE_NUM
+		dataType: string
+		lineageTag: a1ecdd08-1c32-4b15-b099-81e900417dc0
+		summarizeBy: none
+		sourceColumn: NODE_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_ACT_NUM
+		dataType: string
+		lineageTag: ac6389e6-6a86-404c-a5c4-0b6e40e4c541
+		summarizeBy: none
+		sourceColumn: OPER_ACT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER_ID
+		dataType: string
+		lineageTag: f846635e-f27b-4723-b975-83cc8d7bd97c
+		summarizeBy: none
+		sourceColumn: WORK_CENTER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_SHORT_DESC
+		dataType: string
+		lineageTag: 6bb5b158-160a-4e1a-bf59-c51fc94f8217
+		summarizeBy: none
+		sourceColumn: OPER_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column OUTAGE_CODE
+		dataType: string
+		lineageTag: 84f269ef-073f-49cc-9f7d-f87c98c1bb3a
+		summarizeBy: none
+		sourceColumn: OUTAGE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNED_TIME
+		dataType: double
+		lineageTag: 7f9c7d33-5502-4129-b3b6-7e37446ba923
+		summarizeBy: sum
+		sourceColumn: PLANNED_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FREQUENCY
+		dataType: string
+		lineageTag: f82ae857-b62d-4e9c-8471-42e78de1c4f1
+		summarizeBy: none
+		sourceColumn: FREQUENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SYST_COND
+		dataType: string
+		lineageTag: 5ab95775-78d8-4e10-9531-31c10876c943
+		summarizeBy: none
+		sourceColumn: SYST_COND
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIN_PACK_NUM
+		dataType: string
+		lineageTag: ce00020f-3135-4c90-9895-a9901884c100
+		summarizeBy: none
+		sourceColumn: MAIN_PACK_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_STRA
+		dataType: string
+		lineageTag: 5ab10e1e-7f00-4f98-97be-4847847df89a
+		summarizeBy: none
+		sourceColumn: MAINT_STRA
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERFORM_UNIT
+		dataType: string
+		lineageTag: 8709e8c9-e2f7-4dcd-8428-e18d5bb8e737
+		summarizeBy: none
+		sourceColumn: PERFORM_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_CYCLE
+		dataType: double
+		lineageTag: 913a6990-f856-4a25-be7d-fa22deac0956
+		summarizeBy: sum
+		sourceColumn: BASE_CYCLE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BASE_OFFSET
+		dataType: double
+		lineageTag: c366cccb-c2a2-48a2-ae0a-244c475ec956
+		summarizeBy: sum
+		sourceColumn: BASE_OFFSET
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CYCLE
+		dataType: double
+		lineageTag: 7a2d5b63-5463-440a-a38e-b61bc7f0261d
+		summarizeBy: sum
+		sourceColumn: CYCLE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OFFSET
+		dataType: double
+		lineageTag: e40d5dd7-9754-4cac-bceb-3b7f6f6679e0
+		summarizeBy: sum
+		sourceColumn: OFFSET
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MAINT_CYCLE
+		dataType: string
+		lineageTag: 689ef66a-6e32-4047-8b7f-98f5192f2da3
+		summarizeBy: none
+		sourceColumn: MAINT_CYCLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column HIERARCHY_DESC
+		dataType: string
+		lineageTag: 6bd19c49-c759-4d79-a43f-e4c798e76c84
+		summarizeBy: none
+		sourceColumn: HIERARCHY_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - TASK LIST' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_TASK_LIST = pvcfcprodsqlpool{[Schema="sil",Item="DIM_TASK_LIST"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_TASK_LIST,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

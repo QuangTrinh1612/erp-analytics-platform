@@ -1,0 +1,853 @@
+table '_PP - Metrics'
+	lineageTag: 5703a341-05f1-4eb0-bb46-687ca4aecd6b
+
+	measure '% Sản lượng sản xuất lũy kế năm/Kế hoạch năm' =
+			
+			divide([Sản lượng lũy kế năm],[Sản lượng kế hoạch năm])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Actual Production
+		lineageTag: 12e9ba08-cdca-4cf1-8c43-9f36f24b3ce8
+
+	measure '% Sản lượng sản xuất lũy kế quý/Kế hoạch quý' =
+			
+			divide([Sản lượng lũy kế quý],[Sản lượng kế hoạch quý])
+		displayFolder: Actual Production
+		lineageTag: 4ef474e7-d149-421a-80b2-333df21bb64d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Sản lượng sản xuất lũy kế tháng/Kế hoạch tháng' = divide([Sản lượng lũy kế tháng],[Sản lượng kế hoạch tháng])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Actual Production
+		lineageTag: ab8f103e-b970-4cf0-aad3-ea95e32bbc7d
+
+	measure '% Sản lượng Ure quy đổi lũy kế năm / Kế hoạch năm' = ```
+			
+			 [Sản lượng Ure quy đổi lũy kế năm]/[Sản lượng kế hoạch năm cho Ure quy đổi]
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Actual Production
+		lineageTag: 80049fbc-594a-47f0-8b35-ba55759092c5
+
+	measure '% Sản lượng Ure quy đổi lũy kế quý/ Kế hoạch quý' =
+			
+			[Sản lượng Ure quy đổi lũy kế quý]/[Sản lượng kế hoạch quý cho Ure quy đổi]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Actual Production
+		lineageTag: ed30177f-6af3-4aa5-9c30-37c5c0279917
+
+	measure '% Sản lượng Ure quy đổi lũy kế tháng/ Kế hoạch tháng' =
+			
+			[Sản lượng Ure quy đổi lũy kế tháng]/[Sản lượng kế hoạch tháng cho Ure quy đổi]
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Actual Production
+		lineageTag: 8b3fa78a-0e26-4ac5-9326-52c89c8d7fbf
+
+	measure 'Công suất bình quân năm' = ```
+			
+			
+			VAR quantity = CALCULATE(sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY]) + SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY_M])+SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY_Q]),FILTER('DIM - MATERIAL PP','DIM - MATERIAL PP'[PROD_MEMO]  IN ALLSELECTED('DIM - MATERIAL PP'[PROD_MEMO])))
+			var no_date_ure = CALCULATE([Thời gian hoạt động (ngày)],FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]="URE"))
+			var no_date_amo = CALCULATE([Thời gian hoạt động (ngày)],FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]="AMO"))
+			var no_date_npk = CALCULATE([Thời gian hoạt động (ngày)],FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]="NPK"))
+			
+			 VAR cong_suat = SWITCH (TRUE(), max('DIM - PRO MEMO'[PROD_MEMO_LV1])=  "Ure rời",
+			 DIVIDE(DIVIDE(quantity,no_date_ure),2385),
+			 max('DIM - PRO MEMO'[PROD_MEMO_LV1]) = "NH3",DIVIDE(DIVIDE(quantity,no_date_amo),1350),
+			  max('DIM - PRO MEMO'[PROD_MEMO_LV1]) = "Thành phẩm NPK",DIVIDE(DIVIDE(quantity,no_date_npk),1000),BLANK())  
+			  
+			 RETURN  cong_suat
+			
+			
+			```
+		formatString: 0.000%;-0.000%;0.000%
+		displayFolder: Actual Production
+		lineageTag: 90af7977-d548-4ec6-aafa-52ea2c837830
+
+	measure 'Công suất bình quân năm (tải vận hành bình thường)' = ```
+			
+			AVERAGEX(values('DIM - DATE'[DateKey]), if([Công suất bình quân năm] >= 1, [Công suất bình quân năm],blank()))
+			 
+			```
+		formatString: 0.000%;-0.000%;0.000%
+		displayFolder: Actual Production
+		lineageTag: 8bcf5492-e8ab-4980-93af-f5345b31db01
+
+	measure 'Công suất bình quân ngày' = ```
+			
+			
+			
+			VAR quantity = sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY]) 
+			var no_date_ure = CALCULATE([Thời gian hoạt động (ngày)],FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]="URE"))
+			var no_date_amo = CALCULATE([Thời gian hoạt động (ngày)],FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]="AMO"))
+			var no_date_npk = CALCULATE([Thời gian hoạt động (ngày)],FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]="NPK"))
+			
+			 VAR cong_suat = SWITCH (TRUE(), max('DIM - PRO MEMO'[PROD_MEMO_LV1])=  "Ure rời",
+			 DIVIDE(DIVIDE(quantity,no_date_ure),2385),
+			 max('DIM - PRO MEMO'[PROD_MEMO_LV1]) = "NH3",DIVIDE(DIVIDE(quantity,no_date_amo),1350),
+			  max('DIM - PRO MEMO'[PROD_MEMO_LV1]) = "Thành phẩm NPK",DIVIDE(DIVIDE(quantity,no_date_npk),1000),BLANK())  
+			  
+			 RETURN  cong_suat
+			
+			
+			```
+		formatString: 0.000%;-0.000%;0.000%
+		displayFolder: Actual Production
+		lineageTag: 9ae7f669-6676-4d53-9eb8-c0fd670e0c60
+
+	measure 'Công suất bình quân tháng' = ```
+			
+			
+			VAR quantity = sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY]) + SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY_M])
+			var no_date_ure = CALCULATE([Thời gian hoạt động (ngày)],FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]="URE"))
+			var no_date_amo = CALCULATE([Thời gian hoạt động (ngày)],FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]="AMO"))
+			var no_date_npk = CALCULATE([Thời gian hoạt động (ngày)],FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]="NPK"))
+			
+			 VAR cong_suat = SWITCH (TRUE(), max('DIM - PRO MEMO'[PROD_MEMO_LV1])=  "Ure rời",
+			 DIVIDE(DIVIDE(quantity,no_date_ure),2385),
+			 max('DIM - PRO MEMO'[PROD_MEMO_LV1]) = "NH3",DIVIDE(DIVIDE(quantity,no_date_amo),1350),
+			  max('DIM - PRO MEMO'[PROD_MEMO_LV1]) = "Thành phẩm NPK",DIVIDE(DIVIDE(quantity,no_date_npk),1000),BLANK())  
+			  
+			 RETURN  cong_suat
+			
+			
+			```
+		formatString: 0.000%;-0.000%;0.000%
+		displayFolder: Actual Production
+		lineageTag: 48ceec6a-a54d-489e-8d8e-787941f5919b
+
+	measure 'Lượng điều chỉnh hàng quý' = sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY_Q])
+		displayFolder: Actual Production
+		lineageTag: 0664713f-cb7d-4146-9228-387c9400b77d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lượng điều chỉnh hàng tháng' = sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY_M])
+		displayFolder: Actual Production
+		lineageTag: 7b8354fa-e9be-4f96-8cfc-ec333694b559
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sản lượng lũy kế năm' =
+			
+			VAR SUM_CAL =CALCULATE(SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY]),DATESyTD('DIM - DATE'[Date]))+CALCULATE(SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY_M]),DATESyTD('DIM - DATE'[Date]))
+			+CALCULATE(SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY_Q]),DATESyTD('DIM - DATE'[Date]))
+			RETURN
+			SUM_CAL
+		formatString: #,0
+		displayFolder: Actual Production
+		lineageTag: aa537208-7f84-4003-a29d-b3542185a507
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng lũy kế quý' =
+			
+			VAR SUM_CAL =CALCULATE(SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY]),DATESQTD('DIM - DATE'[Date]))+CALCULATE(SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY_M]),DATESQTD('DIM - DATE'[Date]))
+			+CALCULATE(SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY_Q]),DATESQTD('DIM - DATE'[Date]))
+			RETURN
+			SUM_CAL
+		formatString: #,0
+		displayFolder: Actual Production
+		lineageTag: 3215601d-41d0-4a93-9d71-38cd7352a07f
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng lũy kế tháng' =
+			
+			
+			CALCULATE(sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY])+SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY_M]),DATESMTD('DIM - DATE'[Date]))
+		formatString: #,0
+		displayFolder: Actual Production
+		lineageTag: 93559f27-bced-491b-9b20-b30eacb22311
+
+	measure 'Sản lượng sản xuất theo ngày' = ```
+			
+			 VAR sl_amo = CALCULATE(SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY]),FILTER('DIM - PRO MEMO','DIM - PRO MEMO'[PROD_MEMO_LV1] ="NH3"))
+			VAR sl_ure = CALCULATE(SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY]),FILTER('DIM - PRO MEMO','DIM - PRO MEMO'[PROD_MEMO_LV1] ="Ure rời"))
+			VAR sl_ure_bao = CALCULATE(SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY]),FILTER('DIM - PRO MEMO','DIM - PRO MEMO'[PROD_MEMO_LV1] ="Ure bao"))
+			VAR sl_npk = CALCULATE(SUM('FACT - ACTUAL PRODUCTION'[MANUF_QTY]),FILTER('DIM - PRO MEMO','DIM - PRO MEMO'[PROD_MEMO_LV1] ="Thành phẩm NPK"))
+			return SWITCH (TRUE(), MAX('DIM - FACTORY'[FACTORY_CODE]) = "AMO", sl_amo,
+			MAX('DIM - FACTORY'[FACTORY_CODE])  = "URE",sl_ure,
+			MAX('DIM - FACTORY'[FACTORY_CODE]) = "XSP", sl_ure_bao,
+			MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",sl_npk,sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY]))
+			
+			```
+		formatString: #,0.0
+		displayFolder: Actual Production
+		lineageTag: e59c3087-8c0d-4159-8179-c1d1f0d19e6a
+
+	measure 'Sản lượng sản xuất theo quý/năm' = sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY]) +sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY_M])+sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY_Q])
+		formatString: #,0
+		displayFolder: Actual Production
+		lineageTag: bf38091a-1be8-4e04-a313-f20c6654491e
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng sản xuất theo tháng' = sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY]) +sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY_M])
+		formatString: #,0
+		displayFolder: Actual Production
+		lineageTag: a2d81b4d-86cd-4699-a621-f6f521b5e0d6
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng Ure quy đổi lũy kế năm' =
+			
+			TOTALYTD([Sản lượng Ure quy đổi quý/năm],'DIM - DATE'[Date])
+		displayFolder: Actual Production
+		lineageTag: f0054c01-4881-49fd-b366-9bef1a191029
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sản lượng Ure quy đổi lũy kế quý' = TOTALQTD([Sản lượng Ure quy đổi quý/năm],'DIM - DATE'[Date])
+		displayFolder: Actual Production
+		lineageTag: dc8ba725-75dd-4940-a666-e2321bbc0231
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sản lượng Ure quy đổi lũy kế tháng' =
+			
+			
+			TOTALMTD([Sản lượng Ure quy đổi tháng],'DIM - DATE'[Date])
+		formatString: #,0
+		displayFolder: Actual Production
+		lineageTag: f96dc264-aa55-4a0d-8b21-d9382b74a505
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng Ure quy đổi quý/năm' = ```
+			VAR URE_RTM_RKTM = CALCULATE(sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY]) +sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY_M])+sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY_Q]),'DIM - MATERIAL PP'[PROD_MEMO] IN{ "URR_TM","URR_KTM","URR_PP"},all('DIM - MATERIAL PP'))
+			VAR AMO_NHAP = CALCULATE(SUM('FACT - BOM PRODUCTION RLP'[QUANTITY_CONVERT]),'DIM - MOVEMENT TYPE'[MOVEMENT_TYPE]IN{ "131","132"},'DIM - STORAGE LOCATION'[STORAGE_LOCATION]IN{"1201","1202","1203"},
+			 'FACT - BOM PRODUCTION RLP'[BOM] = "URE_NH3" ,'DIM - MATERIAL PP'[PROD_MEMO] = "AMO",all('DIM - MATERIAL PP'),ALL('FACT - BOM PRODUCTION RLP'[VERSION]),ALL('LIST - PP PLAN VERSION'[VERSION]))
+			
+			VAR AMO_XUAT = CALCULATE(SUM('FACT - BOM PRODUCTION RLP'[QUANTITY_CONVERT]),'DIM - MOVEMENT TYPE'[MOVEMENT_TYPE] IN { "261", "262"},'DIM - STORAGE LOCATION'[STORAGE_LOCATION]IN {"1201", "1202","1203"}
+			, 'FACT - BOM PRODUCTION RLP'[BOM] = "URE_NH3" ,'DIM - MATERIAL PP'[PROD_MEMO] = "AMO",ALL('DIM - MATERIAL PP'),ALL('FACT - BOM PRODUCTION RLP'[VERSION]),ALL('LIST - PP PLAN VERSION'[VERSION]))
+			
+			RETURN 
+			CALCULATE(URE_RTM_RKTM+AMO_NHAP-AMO_XUAT)
+			```
+		formatString: #,0
+		displayFolder: Actual Production
+		lineageTag: a6b5fee6-3770-4e8c-9ab3-9ddde26149b6
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng Ure quy đổi tháng' = ```
+			
+			VAR URE_RTM_RKTM = CALCULATE(sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY]) +sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY_M]),'DIM - MATERIAL PP'[PROD_MEMO] IN{ "URR_TM","URR_KTM","URR_PP"},all('DIM - MATERIAL PP'))
+			VAR AMO_NHAP = CALCULATE(SUM('FACT - BOM PRODUCTION RLP'[QUANTITY_CONVERT]),'DIM - MOVEMENT TYPE'[MOVEMENT_TYPE]IN{ "131","132"},'DIM - STORAGE LOCATION'[STORAGE_LOCATION]IN{"1201","1202","1203"},
+			 'FACT - BOM PRODUCTION RLP'[BOM] = "URE_NH3" ,'DIM - MATERIAL PP'[PROD_MEMO] = "AMO",all('DIM - MATERIAL PP'),ALL('FACT - BOM PRODUCTION RLP'[VERSION]),ALL('LIST - PP PLAN VERSION'[VERSION]))
+			
+			VAR AMO_XUAT = CALCULATE(SUM('FACT - BOM PRODUCTION RLP'[QUANTITY_CONVERT]),'DIM - MOVEMENT TYPE'[MOVEMENT_TYPE] IN { "261", "262"},'DIM - STORAGE LOCATION'[STORAGE_LOCATION]IN {"1201", "1202","1203"}
+			, 'FACT - BOM PRODUCTION RLP'[BOM] = "URE_NH3" ,'DIM - MATERIAL PP'[PROD_MEMO] = "AMO",ALL('DIM - MATERIAL PP'),ALL('FACT - BOM PRODUCTION RLP'[VERSION]),ALL('LIST - PP PLAN VERSION'[VERSION]))
+			
+			RETURN 
+			CALCULATE(URE_RTM_RKTM+AMO_NHAP-AMO_XUAT)
+			```
+		formatString: #,0
+		displayFolder: Actual Production
+		lineageTag: 3354e4d4-7abc-442c-a913-92d545824337
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng Ure quy đổi theo ngày' = ```
+			
+			VAR URE_RTM_RKTM = CALCULATE(sum('FACT - ACTUAL PRODUCTION'[MANUF_QTY]),'DIM - MATERIAL PP'[PROD_MEMO] IN{ "URR_TM","URR_KTM","URR_PP"},all('DIM - MATERIAL PP'))
+			VAR AMO_NHAP = CALCULATE(SUM('FACT - BOM PRODUCTION RLP'[QUANTITY_CONVERT]),'DIM - MOVEMENT TYPE'[MOVEMENT_TYPE]IN{ "131","132"},'DIM - STORAGE LOCATION'[STORAGE_LOCATION]IN{"1201","1202","1203"},
+			 'FACT - BOM PRODUCTION RLP'[BOM] = "URE_NH3" ,'DIM - MATERIAL PP'[PROD_MEMO] = "AMO",all('DIM - MATERIAL PP'),all('LIST - PP PLAN VERSION'))
+			
+			VAR AMO_XUAT = CALCULATE(SUM('FACT - BOM PRODUCTION RLP'[QUANTITY_CONVERT]),'DIM - MOVEMENT TYPE'[MOVEMENT_TYPE] IN { "261", "262"},'DIM - STORAGE LOCATION'[STORAGE_LOCATION]IN {"1201", "1202","1203"}
+			, 'FACT - BOM PRODUCTION RLP'[BOM] = "URE_NH3" ,'DIM - MATERIAL PP'[PROD_MEMO] = "AMO",ALL('DIM - MATERIAL PP'),ALL('FACT - BOM PRODUCTION RLP'[VERSION]),ALL('LIST - PP PLAN VERSION'[VERSION]))
+			
+			RETURN 
+			CALCULATE(URE_RTM_RKTM+AMO_NHAP-AMO_XUAT)
+			```
+		formatString: #,0.0
+		displayFolder: Actual Production
+		lineageTag: 1741749a-c905-48dd-8547-002891d68e4d
+
+	measure 'Định mức tiêu hao ngoài BOM' = SUM('FACT - CONSUMPTION NORM'[VALUE])
+		formatString: 0.000000
+		displayFolder: Others
+		lineageTag: 1b5d041b-8452-492b-a541-5a55c27f5033
+
+	measure 'Đơn giá trung bình' = [Giá trị tiêu thụ NVL thực tế]/[Lượng tiêu thụ NVL thực tế]
+		formatString: #,0.00
+		displayFolder: Material Allocate Consumption
+		lineageTag: 45ce00ce-a302-4039-98e7-fc8274e40450
+
+	measure 'Giá trị NVL tiêu hao thực tế theo định mức' =
+			
+			var don_gia_tb = sum('FACT - MATERIAL ALLOCATION CONSUMPTION'[ACTUAL_CONSUMPTION_VALUE])/ sum('FACT - MATERIAL ALLOCATION CONSUMPTION'[ACTUAL_MATERIAL_CONSUMPTION])
+			return
+			CALCULATE(SUMx(SUMMARIZE('FACT - NORM QUALITY','DIM - MATERIAL PP'[MATERIAL_CODE],'DIM - COMPONENT'[MATERIAL_CODE], "cons_bom", max('FACT - NORM QUALITY'[CONSUMPTION_BOM])),don_gia_tb*[cons_bom]))
+		formatString: #,0.000000
+		displayFolder: Material Allocate Consumption
+		lineageTag: 3a311534-faf2-4eaf-b2ae-040dfc6fabc2
+
+	measure 'Giá trị tiêu hao NVL thực tế' =
+			
+			VAR manuf_actual = CALCULATE([Sản lượng sản xuất theo ngày],FILTER('DIM - MATERIAL PP','DIM - MATERIAL PP'[PROD_MEMO] IN ALLSELECTED('DIM - MATERIAL PP'[PROD_MEMO])))
+			VAR tieu_hao= DIVIDE([Giá trị tiêu thụ NVL thực tế],manuf_actual)
+			return tieu_hao
+		displayFolder: Material Allocate Consumption
+		lineageTag: b0e2341d-acac-445f-8bde-3f93da78e421
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá trị tiêu thụ NVL thực tế' = ```
+			
+			var gtri_tieu_thu = SUM('FACT - MATERIAL ALLOCATION CONSUMPTION'[ACTUAL_CONSUMPTION_VALUE])
+			return
+			SWITCH(TRUE(),
+			gtri_tieu_thu<0, gtri_tieu_thu*(-1),
+			 gtri_tieu_thu)
+			 
+			```
+		displayFolder: Material Allocate Consumption
+		lineageTag: 4153f8a8-9973-499b-abcc-4ae70fb9f160
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lượng tiêu hao năng lượng thực tế' =
+			
+			VAR manuf_actual = CALCULATE([Sản lượng sản xuất theo ngày],FILTER('DIM - MATERIAL PP','DIM - MATERIAL PP'[MATERIAL_CODE] IN ALLSELECTED('DIM - MATERIAL PP'[MATERIAL_CODE])))
+			VAR tieu_hao= CALCULATE(DIVIDE([Lượng tiêu thụ NVL thực tế],[Sản lượng sản xuất theo ngày]), FILTER('DIM - ENERGY',NOT  ISBLANK('DIM - ENERGY'[ENERGY_DES]) ))
+			
+			RETURN  tieu_hao
+		formatString: 0.000
+		displayFolder: Material Allocate Consumption
+		lineageTag: bc22e584-618d-4154-9cd8-4027474b23d6
+
+	measure 'Lượng tiêu hao NVL thực tế' =
+			
+			VAR manuf_actual = CALCULATE([Sản lượng sản xuất theo ngày],FILTER('DIM - MATERIAL PP','DIM - MATERIAL PP'[MATERIAL_CODE] IN ALLSELECTED('DIM - MATERIAL PP'[MATERIAL_CODE])))
+			VAR tieu_hao= CALCULATE(DIVIDE([Lượng tiêu thụ NVL thực tế],manuf_actual),FILTER('DIM - COMPONENT',  NOT ISBLANK('DIM - COMPONENT'[MATERIAL_CODE]) ))
+			return tieu_hao
+		formatString: 0.000000
+		displayFolder: Material Allocate Consumption
+		lineageTag: 7d2a1038-1181-4695-b757-403f83b1f985
+
+	measure 'Lượng tiêu hao NVl thực tế cho NPK' = ```
+			
+			
+			var _table = SUMMARIZE('FACT - ACTUAL PRODUCTION','DIM - MATERIAL PP'[MATERIAL_CODE],"san_xuat", [Sản lượng sản xuất theo tháng])
+			
+			VAR SAN_XUAT=  sumx(filter(_table,[san_xuat]>0),[san_xuat]) 
+			RETURN CALCULATE(DIVIDE([Lượng tiêu thụ NVL thực tế],SAN_XUAT),FILTER('DIM - COMPONENT',  NOT ISBLANK('DIM - COMPONENT'[MATERIAL_CODE]) ))
+			```
+		formatString: 0.000000
+		displayFolder: Material Allocate Consumption
+		lineageTag: 514277e4-fbcb-4876-8fa4-b6fd6a0ed18e
+
+	measure 'Lượng tiêu thụ NVL thực tế' =
+			
+			var tieu_thu =CALCULATE(SUM('FACT - MATERIAL ALLOCATION CONSUMPTION'[ACTUAL_MATERIAL_CONSUMPTION]),CROSSFILTER('FACT - MATERIAL ALLOCATION CONSUMPTION'[DIM_MATERIALS_NPK_CODE],'DIM - MATERIALS NPK'[DIM_MATERIALS_NPK_CODE],Both))
+			
+			return
+			SWITCH(TRUE(),
+			tieu_thu<0&&  max('DIM - MATERIAL PP'[PROD_MEMO]) in {"URR_TM","URR_PP","URR_KTM"}&&max('DIM - COMPONENT'[PROD_MEMO]) in {"H2SO4GR","H2SO4DEMI","H2SO4COOLING","NAOH40","NALCO7208","ELIMINOX","TRIACT1800","NACLO10","NALCO73202","3DT394","HYDREX2330","NALCO1393","HYDREX2869","TRAC109","NALCO7330","CACL2","ACIDCITRIC","HCL32","HCL32RO","HMSI300","KMCT515","KMCT103","Na2S2O5","CHIPE"}, tieu_thu *(-1000),
+			tieu_thu <0&& ( max('DIM - MATERIAL PP'[PROD_MEMO]) in {"URB_BIO50","URB_BIO25","URB_BIO40"}&& max('DIM - COMPONENT'[PROD_MEMO]) ="DMVESINH"),tieu_thu*(-1000),
+			 tieu_thu <0,tieu_thu*(-1),
+			 tieu_thu)
+		formatString: #,0.000
+		displayFolder: Material Allocate Consumption
+		lineageTag: c4003c26-56ac-4de6-86fc-629729be8f46
+
+	measure 'Tiêu hao điện cho 1 tấn Ure bao (KWh/T.Ure bao)' =
+			
+			VAR tieu_hao_nh3= CALCULATE([Lượng tiêu hao NVL thực tế],FILTER('DIM - COMPONENT','DIM - COMPONENT'[PROD_MEMO] ="AMO"),FILTER('DIM - PRO MEMO','DIM - PRO MEMO'[PROD_MEMO_LV1] ="Ure rời"),all('DIM - FACTORY'))
+			var tieu_hao_dien_tho_amo = CALCULATE([Lượng tiêu hao năng lượng thực tế],FILTER('DIM - MATERIAL PP','DIM - MATERIAL PP'[PROD_MEMO] ="AMO"),FILTER('DIM - ENERGY','DIM - ENERGY'[ENERGY_DES] in{"Điện","Điện phụ trợ"}),FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE] ="AMO"))
+			var tieu_hao_dien_ure_tao_hat = CALCULATE([Lượng tiêu hao năng lượng thực tế],FILTER('DIM - MATERIAL PP','DIM - MATERIAL PP'[PROD_MEMO] IN {"URR_TM","URR_KTM","URR_PP"}),FILTER('DIM - ENERGY','DIM - ENERGY'[ENERGY_DES] in{"Điện","Điện phụ trợ"}),FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE] ="URE"))
+			var tieu_hao_dien_SP = CALCULATE([Lượng tiêu hao năng lượng thực tế],FILTER('DIM - PRO MEMO','DIM - PRO MEMO'[PROD_MEMO_LV1] IN{"Ure bao"}),FILTER('DIM - ENERGY','DIM - ENERGY'[ENERGY_DES] ="Điện"),FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE] ="XSP"))
+			
+			RETURN tieu_hao_nh3*tieu_hao_dien_tho_amo+tieu_hao_dien_ure_tao_hat+tieu_hao_dien_SP
+		formatString: 0.000000
+		displayFolder: Material Allocate Consumption
+		lineageTag: 26b0a70b-521a-42b2-ac32-38868e17beb3
+
+	measure 'Tiêu hao điện tổng nhà máy' =
+			
+			VAR dien_san_xuat = CALCULATE([Lượng tiêu thụ NVL thực tế],FILTER('DIM - ENERGY','DIM - ENERGY'[ENERGY_DES] ="Điện"),FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]
+			 in{"AMO","URE","XSP"}), FILTER('DIM - PLANT','DIM - PLANT'[PLANT_CODE] = "1000"))
+			VAR dien_sinh_hoat = CALCULATE(sum('FACT - PLANT OPERATION'[ELEC_CONSUMP]),FILTER('FACT - PLANT OPERATION',NOT 'FACT - PLANT OPERATION'[FACTORY_CODE]  IN {"NPK","URE","XPT","XTH","AMO"}), FILTER('DIM - PLANT','DIM - PLANT'[PLANT_CODE] = "1000"))
+			return divide(dien_san_xuat+dien_sinh_hoat, DATEDIFF( MIN('DIM - DATE'[Date]), max('DIM - DATE'[Date])+1,day))
+		displayFolder: Material Allocate Consumption
+		lineageTag: 575e7bab-e0ef-4877-b616-8da6a7ed99d5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tiêu hao khí LHV cho 1 tấn Ure bao (GJ/T.Ure bao)' = ```
+			
+			VAR tieu_hao_nh3= CALCULATE([Lượng tiêu hao NVL thực tế],FILTER('DIM - COMPONENT','DIM - COMPONENT'[PROD_MEMO] ="AMO"),FILTER('DIM - PRO MEMO','DIM - PRO MEMO'[PROD_MEMO_LV1] ="Ure rời"),all('DIM - FACTORY')) 
+			var TH_KTN = CALCULATE([Lượng tiêu hao năng lượng thực tế],filter('DIM - ENERGY',CONTAINSSTRING([ENERGY_DES],"Khí")),filter('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]="AMO"),
+			FILTER('DIM - MATERIAL PP','DIM - MATERIAL PP'[PROD_MEMO] ="AMO") )
+			
+			return TH_KTN*tieu_hao_nh3
+			```
+		formatString: 0.000000
+		displayFolder: Material Allocate Consumption
+		lineageTag: 03043280-195c-49ba-ad55-8f706a86ae24
+
+	measure 'Tiêu hao khí tổng nhà máy' =
+			
+			VAR khi_amo = CALCULATE([Lượng tiêu thụ NVL thực tế],filter('DIM - ENERGY',CONTAINSSTRING([ENERGY_DES],"Khí")),FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE]
+			 in{"AMO"}), FILTER('DIM - PLANT','DIM - PLANT'[PLANT_CODE] = "1000"))
+			VAR khi_NPK = CALCULATE(sum('FACT - PLANT OPERATION'[LHV_CONSUMP]),FILTER('DIM - FACTORY', 'DIM - FACTORY'[FACTORY_CODE]  = "NPK"), FILTER('DIM - PLANT','DIM - PLANT'[PLANT_CODE] = "1000"))
+			return divide(khi_amo+khi_NPK, DATEDIFF( MIN('DIM - DATE'[Date]), max('DIM - DATE'[Date])+1,day))
+		displayFolder: Material Allocate Consumption
+		lineageTag: 91d7cce6-cbf5-45ce-8b78-68316339c94f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tiêu hao năng lượng tổng nhà máy' = [Tiêu hao điện tổng nhà máy]*8991/1000000+[Tiêu hao khí tổng nhà máy]
+		displayFolder: Material Allocate Consumption
+		lineageTag: 422fbb2a-6341-4ded-b423-eac0adfc93b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tiêu hao nước cho 1 tấn Ure bao (m3/T.Ure bao)' =
+			
+			
+			VAR tieu_hao_nh3= CALCULATE([Lượng tiêu hao NVL thực tế],FILTER('DIM - COMPONENT','DIM - COMPONENT'[PROD_MEMO] ="AMO"),FILTER('DIM - PRO MEMO','DIM - PRO MEMO'[PROD_MEMO_LV1] ="Ure rời"),all('DIM - FACTORY'))
+			var tieu_hao_nuoc_tho_amo = CALCULATE([Lượng tiêu hao năng lượng thực tế],FILTER('DIM - MATERIAL PP','DIM - MATERIAL PP'[PROD_MEMO] ="AMO"),FILTER('DIM - ENERGY','DIM - ENERGY'[ENERGY_DES] ="Nước"),FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE] ="AMO"))
+			
+			var tieu_hao_nuoc_tho_ure_tao_hat = CALCULATE([Lượng tiêu hao năng lượng thực tế],FILTER('DIM - MATERIAL PP','DIM - MATERIAL PP'[PROD_MEMO] IN {"URR_TM","URR_KTM","URR_PP"}),FILTER('DIM - ENERGY','DIM - ENERGY'[ENERGY_DES] ="Nước"),FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE] ="URE"))
+			RETURN tieu_hao_nh3*tieu_hao_nuoc_tho_amo+tieu_hao_nuoc_tho_ure_tao_hat
+		formatString: 0.000000
+		displayFolder: Material Allocate Consumption
+		lineageTag: c3d9f5c9-614a-4aff-8dd2-83b394bd8f5c
+
+	measure 'Tiêu hao nước tổng nhà máy' =
+			
+			VAR nuoc_amo_ure = CALCULATE([Lượng tiêu thụ NVL thực tế],FILTER('DIM - ENERGY','DIM - ENERGY'[ENERGY_DES] ="Nước"),FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE] in{"AMO","URE"}), FILTER('DIM - PLANT','DIM - PLANT'[PLANT_CODE] = "1000"))
+			VAR nuoc_npk = CALCULATE([Tiêu thụ nước ngọt (m3)],FILTER('DIM - FACTORY','DIM - FACTORY'[FACTORY_CODE] ="NPK"), FILTER('DIM - PLANT','DIM - PLANT'[PLANT_CODE] = "1000"))
+			return  divide(nuoc_amo_ure+nuoc_npk, DATEDIFF( MIN('DIM - DATE'[Date]), max('DIM - DATE'[Date])+1,day))
+		displayFolder: Material Allocate Consumption
+		lineageTag: 171eb46d-ab72-4524-bf75-a96952d92280
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tổng tiêu hao năng lượng (GJ/tấn)' = ```
+			
+			VAR MANUF_ACTUAL = CALCULATE([Sản lượng sản xuất theo ngày],FILTER('DIM - MATERIAL PP','DIM - MATERIAL PP'[PROD_MEMO] IN ALLSELECTED('DIM - MATERIAL PP'[PROD_MEMO])))
+			VAR TH_KTN = CALCULATE([Lượng tiêu hao năng lượng thực tế],filter('DIM - ENERGY',CONTAINSSTRING([ENERGY_DES],"Khí")))
+			
+			var TH_dien = CALCULATE([Lượng tiêu hao năng lượng thực tế],filter('DIM - ENERGY','DIM - ENERGY'[ENERGY_DES]="Điện"))
+			var TH_dien_pt = CALCULATE([Lượng tiêu hao năng lượng thực tế],filter('DIM - ENERGY','DIM - ENERGY'[ENERGY_DES]="Điện phụ trợ"))
+			var TH_dien_xsp = CALCULATE([Lượng tiêu hao năng lượng thực tế],filter('FACT - MATERIAL ALLOCATION CONSUMPTION',CONTAINSSTRING([PARTNER_OBJECT],  "ELE001")))
+			var TH_HP = [Tiêu hao hơi HP xuất đi (GJ/tấn)]
+			VAR TH_MLP = [Tiêu hao hơi MLP xuất đi (kg/tấn)]
+			VAR TH_LP = [Tiêu hao hơi LP xuất đi (kg/tấn)]
+			var TH_HP_PT = [Tiêu hao phụ trợ hơi HP (kg/tấn)]
+			VAR TH_LP_PT = [Tiêu hao phụ trợ hơi LP (kg/tấn)]
+			VAR TOTAL_1 = TH_KTN+ TH_dien*8991/1000000+TH_HP+TH_MLP*3066/1000000+TH_LP*2909/1000000+TH_dien_pt*8991/1000000+TH_HP_PT*3145.9/1000000+TH_LP_PT*2909/1000000
+			VAR TOTAL_2 = TH_dien*8991/1000000+TH_HP*31459/10000+TH_dien_pt*8991/1000000+TH_HP_PT*3145.9/1000000+TH_LP_PT*2909/1000000
+			VAR TOTAL_3 = TH_dien*8991/1000000+TH_LP*2909/1000000
+			var TOTAL_4 = TH_KTN + TH_dien*8991 / 1000000+ TH_MLP* 3066 / 1000000 
+			RETURN SWITCH (TRUE(), MAX('DIM - FACTORY'[FACTORY_CODE]) = "AMO", TOTAL_1,
+			MAX('DIM - FACTORY'[FACTORY_CODE])  = "URE",TOTAL_2,
+			MAX('DIM - FACTORY'[FACTORY_CODE]) = "XSP", TOTAL_3,
+			MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",TOTAL_4)
+			```
+		formatString: #,0.000
+		displayFolder: Material Allocate Consumption
+		lineageTag: 1f3bbd6c-772a-466e-83d1-3855288155da
+
+	measure 'Tổng tiêu hao năng lượng cho 1 tấn Ure bao (GJ/T.Ure bao)' = [Tiêu hao điện cho 1 tấn Ure bao (KWh/T.Ure bao)]*8991/1000000+[Tiêu hao khí LHV cho 1 tấn Ure bao (GJ/T.Ure bao)]
+		formatString: 0.000000
+		displayFolder: Material Allocate Consumption
+		lineageTag: c873cbaf-2706-4aac-b80b-5fa01e2f4202
+
+	measure 'Định mức tiêu hao NVL theo BOM' = sum('FACT - NORM QUALITY'[CONSUMPTION_BOM])
+		formatString: 0.000000
+		displayFolder: Others
+		lineageTag: 62a4fd6c-2a7b-4ef5-86a6-1c71da54f089
+
+	measure 'Khối lượng NVL xuất tiêu hao' = SUM('FACT - NPK CONSUMPTION RATE'[COMPO_QTY_CONSUMP])
+		displayFolder: NPK Consumption Rate
+		lineageTag: 854cd192-cc17-4d56-9cfb-1367fc11847a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Line 100%' = SWITCH([Tỷ lệ tiêu hao NVL],BLANK(),BLANK(),1)
+		formatString: 0%;-0%;0%
+		displayFolder: NPK Consumption Rate
+		lineageTag: 506249a4-0c30-4193-b8c6-d82283def3b4
+
+	measure 'Thành phần công bố' = ```
+			
+			
+			  var tpcb = CALCULATE(SUMx(SUMMARIZE('FACT - NPK CONSUMPTION RATE','DIM - MATERIAL PP'[MATERIAL_CODE], "bbb", max('FACT - NPK CONSUMPTION RATE'[PCT])),[Sản lượng sản xuất theo quý/năm]*[bbb]/100))
+			   return switch(true(),max('DIM - NPK COMPONENT'[NPK_COMPO_CODE]) in {"ZN","B"},tpcb*100,tpcb)
+			```
+		displayFolder: NPK Consumption Rate
+		lineageTag: 84cede86-51cd-418d-bb62-a48e8e2437c6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ lệ tiêu hao NVL' =
+			
+			var _table =SUMMARIZE('FACT - NPK CONSUMPTION RATE','DIM - MATERIAL PP'[MATERIAL_CODE], "TPCB", [Thành phần công bố],"KLTH",[Khối lượng NVL xuất tiêu hao])
+			
+			var ty_le = DIVIDE([Khối lượng NVL xuất tiêu hao]*(-10),[Sản lượng sản xuất theo quý/năm])
+			
+			RETURN SWITCH(TRUE(),MAX('DIM - NPK COMPONENT'[NPK_COMPO_CODE]) IN {"CKKL","CKKR"}&& not ISBLANK([Khối lượng NVL xuất tiêu hao]),ty_le*100,
+			NOT MAX('DIM - NPK COMPONENT'[NPK_COMPO_CODE])  IN {"CKKL","CKKR"}&& not ISBLANK([Khối lượng NVL xuất tiêu hao]),FORMAT(DIVIDE([Khối lượng NVL xuất tiêu hao]*(-1),[Thành phần công bố],BLANK()),"#,0.00%"))
+		displayFolder: NPK Consumption Rate
+		lineageTag: ec782c8a-ff29-4e17-8336-6c5ccbcce6c8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Công suất xưởng Ure (%)' = SUM('FACT - PLANT OPERATION'[CAPACITY_URE])
+		displayFolder: Plant Operation
+		lineageTag: 186c5434-ff59-4cd9-a65f-c37fb72eb19b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NH3 trong khí thải (mg/m3)' = ```
+			
+			var _NH3_EXHAUST_GAS = 
+			switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[NH3_EXHAUST_GAS]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[NH3_EXHAUST_GAS]))
+			 RETURN IF(_NH3_EXHAUST_GAS = BLANK(),0,_NH3_EXHAUST_GAS)
+			```
+		displayFolder: Plant Operation
+		lineageTag: 3b76a8c2-79a4-40d9-9c29-a0da9feb7ed2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NH3 trong nước thải (mg/l)' = ```
+			
+			var _NH3_WASTEWATER = 
+			switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[NH3_WASTEWATER]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[NH3_WASTEWATER]))
+			 RETURN IF(_NH3_WASTEWATER = BLANK(),0,_NH3_WASTEWATER)
+			```
+		displayFolder: Plant Operation
+		lineageTag: de19a614-ac66-4470-821d-9c9dc7b371bf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thời gian hoạt động (giờ)' = ```
+			switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[OPERATING_TIME]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[OPERATING_TIME]))
+			
+			```
+		displayFolder: Plant Operation
+		lineageTag: 296391ad-dce8-46dd-8a23-695e39005683
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thời gian hoạt động (ngày)' = ```
+			switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",divide(CALCULATE(SUM('FACT - PLANT OPERATION'[OPERATING_TIME]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),24),
+			SUM('FACT - PLANT OPERATION'[OPERATING_TIME])/24)
+			
+			```
+		displayFolder: Plant Operation
+		lineageTag: 563399c5-2fc2-409e-a03a-05de585778b6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thời gian ngừng sản xuất (giờ)' =
+			
+			switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[MFR_DOWNTIME]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[MFR_DOWNTIME]))
+		displayFolder: Plant Operation
+		lineageTag: 3547e9a8-80a9-43c7-98eb-0d1ea72f9a89
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thời gian ngừng sản xuất (ngày)' =
+			
+			switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",DIVIDE(CALCULATE(SUM('FACT - PLANT OPERATION'[MFR_DOWNTIME]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),24),
+			SUM('FACT - PLANT OPERATION'[MFR_DOWNTIME])/24)
+		displayFolder: Plant Operation
+		lineageTag: 758b000a-8210-4147-be02-ac0464ab69f1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tiêu hao hơi HP xuất đi (GJ/tấn)' =
+			
+			var _HP_CONSUMP_EXPORT = switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[HP_CONSUMP_EXPORT]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[HP_CONSUMP_EXPORT]))
+			RETURN DIVIDE(_HP_CONSUMP_EXPORT,[Sản lượng sản xuất theo ngày])
+		formatString: 0.000000
+		displayFolder: Plant Operation
+		lineageTag: b36ebcff-c652-4970-8f03-20d65ae93293
+
+	measure 'Tiêu hao hơi LP xuất đi (kg/tấn)' =
+			
+			var _LP_CONSUMP_EXPORT = switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[LP_CONSUMP_EXPORT]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[LP_CONSUMP_EXPORT]))
+			RETURN DIVIDE(_LP_CONSUMP_EXPORT,[Sản lượng sản xuất theo ngày])
+		formatString: 0.000000
+		displayFolder: Plant Operation
+		lineageTag: 72f1015a-da2c-4a38-9db2-458a016df046
+
+	measure 'Tiêu hao hơi MLP (kg/tấn)' =
+			
+			var _MLP_CONSUMP = switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[MLP_CONSUMP]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[MLP_CONSUMP]))
+			RETURN DIVIDE(_MLP_CONSUMP,[Sản lượng sản xuất theo ngày])
+		formatString: #,0.000000
+		displayFolder: Plant Operation
+		lineageTag: 464f7c49-622f-4515-b11b-fc22b79aa2e0
+
+	measure 'Tiêu hao hơi MLP xuất đi (kg/tấn)' =
+			
+			var _MLP_CONSUMP_EXPORT = switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[MLP_CONSUMP_EXPORT]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[MLP_CONSUMP_EXPORT]))
+			RETURN DIVIDE(_MLP_CONSUMP_EXPORT,[Sản lượng sản xuất theo ngày])
+		formatString: #,0.000000
+		displayFolder: Plant Operation
+		lineageTag: 54ce4332-103b-40b1-835e-6b7ce52b2871
+
+	measure 'Tiêu hao phụ trợ hơi HP (kg/tấn)' =
+			
+			var _HP_CONSUMP = switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[HP_CONSUMP]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[HP_CONSUMP]))
+			RETURN DIVIDE(_HP_CONSUMP,[Sản lượng sản xuất theo ngày])
+		formatString: #,0.000000
+		displayFolder: Plant Operation
+		lineageTag: c24f95a2-8c9e-49c8-841b-f788010b88b5
+
+	measure 'Tiêu hao phụ trợ hơi LP (kg/tấn)' =
+			
+			var _LP_CONSUMP = switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[LP_CONSUMP]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[LP_CONSUMP]))
+			RETURN DIVIDE(_LP_CONSUMP,[Sản lượng sản xuất theo ngày])
+		formatString: #,0.000000
+		displayFolder: Plant Operation
+		lineageTag: dd1721c5-3f6f-4f31-981a-464d3c99af91
+
+	measure 'Tiêu thụ điện sinh hoạt (Mwh)' =
+			
+			var _ELEC_CONSUMP = switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[ELEC_CONSUMP]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[ELEC_CONSUMP]))
+			
+			return _ELEC_CONSUMP
+		formatString: #,0
+		displayFolder: Plant Operation
+		lineageTag: 5e8a43ed-a535-43ca-87ea-6acd96026103
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Tiêu thụ khí tự nhiên (GJ)' =
+			
+			switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[LHV_CONSUMP]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[LHV_CONSUMP]))
+		formatString: #,0
+		displayFolder: Plant Operation
+		lineageTag: cf12a3c9-1cef-46e4-ae67-cba136c31936
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Tiêu thụ nước ngọt (m3)' = ```
+			
+			switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[WATER_CONSUMP]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[WATER_CONSUMP]))
+			
+			```
+		formatString: #,0
+		displayFolder: Plant Operation
+		lineageTag: 528c6c25-b98d-4317-bcd4-3c9905d06b33
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Tiêu thụ Urê hạt (tấn)' =
+			
+			switch(true(),MAX('DIM - FACTORY'[FACTORY_CODE]) = "NPK",CALCULATE(SUM('FACT - PLANT OPERATION'[UREA_CONSUMP]),FILTER('FACT - PLANT OPERATION','FACT - PLANT OPERATION'[PLANT_CODE]="1100")),
+			SUM('FACT - PLANT OPERATION'[UREA_CONSUMP]))
+		formatString: #,0
+		displayFolder: Plant Operation
+		lineageTag: 5f2578d3-798c-44c5-9e0e-5936f5bf5610
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Giá trị kế hoạch NVL (VND)' = ```
+			
+			var luong_dinh_muc = switch (true(),MAX('FACT - NORM QUALITY'[UOM_COMPO])="TO",[Lượng tiêu thụ theo định mức, kế hoạch sản xuất]*1000000,MAX('FACT - NORM QUALITY'[UOM_COMPO])="KG", [Lượng tiêu thụ theo định mức, kế hoạch sản xuất]*1000,[Lượng tiêu thụ theo định mức, kế hoạch sản xuất])
+			VAR unit_price = switch(TRUE(),max('FACT - PLAN UNIT PRICE'[BASE_UNIT_PRICE]) = "VND/kg",max('FACT - PLAN UNIT PRICE'[UNIT_PRICE_VAT])/1000,max('FACT - PLAN UNIT PRICE'[UNIT_PRICE_VAT]))
+			return
+			CALCULATE(SUMx(SUMMARIZE('FACT - PLAN UNIT PRICE','DIM - COMPONENT'[MATERIAL_CODE], "unit_price", 
+			unit_price),luong_dinh_muc*[unit_price]))
+			 
+			```
+		displayFolder: Production Plan
+		lineageTag: 667a125a-e134-4582-84a4-72f24dc7c167
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lượng tiêu thụ theo định mức, kế hoạch sản xuất' = ```
+			
+			CALCULATE(SUMx(SUMMARIZE('FACT - NORM QUALITY','DIM - MATERIAL PP'[MATERIAL_CODE],'DIM - COMPONENT'[MATERIAL_CODE], "consumption", 
+			max('FACT - NORM QUALITY'[CONSUMPTION_BOM_CONVERT])),SUM('FACT - PRODUCTION PLAN'[QUANTITY])*[consumption]))
+			```
+		displayFolder: Production Plan
+		lineageTag: 4f57e5de-347f-42b6-b875-9de96fc25914
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sản lượng kế hoạch' = SUM('FACT - PRODUCTION PLAN'[QUANTITY])
+		formatString: #,0.00
+		displayFolder: Production Plan
+		lineageTag: f91d24bf-87a7-4296-a849-bea2519349d0
+
+	measure 'Sản lượng kế hoạch năm' =
+			
+			var FIRST_OF_YEAR = STARTOFYEAR('DIM - DATE'[Date])
+			VAR END_OF_YEAR = ENDOFYEAR('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(SUM('FACT - PRODUCTION PLAN'[QUANTITY]),DATESBETWEEN('DIM - DATE'[Date],FIRST_OF_YEAR,END_OF_YEAR))
+		formatString: #,0
+		displayFolder: Production Plan
+		lineageTag: 78b82f63-ba2c-4b0a-b7f3-3cbc756713e0
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng kế hoạch năm cho Ure quy đổi' = ```
+			
+			var FIRST_OF_YEAR = STARTOFYEAR('DIM - DATE'[Date])
+			VAR END_OF_YEAR = ENDOFYEAR('DIM - DATE'[Date])
+			 RETURN 
+			 CALCULATE(CALCULATE(SUM('FACT - BOM PRODUCTION RLP'[QUANTITY_CONVERT]),FILTER('FACT - BOM PRODUCTION RLP','FACT - BOM PRODUCTION RLP'[BOM]= "URE_NH3"&&'FACT - BOM PRODUCTION RLP'[SOURCE_TABLE] = "PBIM")),DATESBETWEEN('DIM - DATE'[Date],FIRST_OF_YEAR,END_OF_YEAR),all('DIM - MATERIAL PP'))
+			```
+		displayFolder: Production Plan
+		lineageTag: b4abe183-b442-499a-bc4c-7a4704312ee6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sản lượng kế hoạch quý' =
+			
+			var FIRST_OF_QUATER = STARTOFQUARTER('DIM - DATE'[Date])
+			VAR END_OF_QUATER = ENDOFQUARTER('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(SUM('FACT - PRODUCTION PLAN'[QUANTITY]),DATESBETWEEN('DIM - DATE'[Date],FIRST_OF_QUATER,END_OF_QUATER))
+		formatString: #,0
+		displayFolder: Production Plan
+		lineageTag: b24453b8-0543-41a6-bad5-d5981353d980
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng kế hoạch quý cho Ure quy đổi' =
+			
+			var FIRST_OF_QUATER = STARTOFQUARTER('DIM - DATE'[Date])
+			VAR END_OF_QUATER = ENDOFQUARTER('DIM - DATE'[Date])
+			 RETURN
+			 CALCULATE(CALCULATE(SUM('FACT - BOM PRODUCTION RLP'[QUANTITY_CONVERT]),FILTER('FACT - BOM PRODUCTION RLP','FACT - BOM PRODUCTION RLP'[BOM]= "URE_NH3"&&'FACT - BOM PRODUCTION RLP'[SOURCE_TABLE] = "PBIM")),DATESBETWEEN('DIM - DATE'[Date],FIRST_OF_QUATER,END_OF_QUATER),all('DIM - MATERIAL PP'))
+		displayFolder: Production Plan
+		lineageTag: 38a049b3-65fa-410d-8679-79cddf5617e2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sản lượng kế hoạch tháng' = ```
+			
+			 var FIRST_OF_MONTH = STARTOFMONTH('DIM - DATE'[Date])
+			VAR END_OF_MONTH = ENDOFMONTH('DIM - DATE'[Date])
+			RETURN
+			CALCULATE(SUM('FACT - PRODUCTION PLAN'[QUANTITY]),DATESBETWEEN('DIM - DATE'[Date],FIRST_OF_MONTH,END_OF_MONTH))
+			```
+		formatString: #,0
+		displayFolder: Production Plan
+		lineageTag: 85f4c3ce-d242-4b05-8619-820bbdadd7ce
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng kế hoạch tháng cho Ure quy đổi' = ```
+			
+			var FIRST_OF_MONTH = STARTOFMONTH('DIM - DATE'[Date])
+			VAR END_OF_MONTH = ENDOFMONTH('DIM - DATE'[Date])
+			 RETURN 
+			 CALCULATE(CALCULATE(SUM('FACT - BOM PRODUCTION RLP'[QUANTITY_CONVERT]),FILTER('FACT - BOM PRODUCTION RLP','FACT - BOM PRODUCTION RLP'[BOM]= "URE_NH3"&&'FACT - BOM PRODUCTION RLP'[SOURCE_TABLE] = "PBIM")),DATESBETWEEN('DIM - DATE'[Date],FIRST_OF_MONTH,END_OF_MONTH),all('DIM - MATERIAL PP'))
+			```
+		formatString: #,0
+		displayFolder: Production Plan
+		lineageTag: dbb4ce50-70cf-42ed-a2b6-ce917390a36b
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sản lượng mua bổ sung' = ```
+			
+			 CALCULATE(sumx(SUMMARIZE('FACT - NORM QUALITY','DIM - MATERIAL PP'[MATERIAL_CODE],'DIM - COMPONENT'[MATERIAL_CODE],"AAA",[Lượng tiêu thụ theo định mức, kế hoạch sản xuất],"BBB",[PP - Sản lượng tồn kho cuối kỳ năm trước]), SWITCH(TRUE(),[AAA] > [BBB] ,[AAA] -[BBB] ,0)))
+			 
+			```
+		displayFolder: Production Plan
+		lineageTag: 6b34ae9b-1c2f-4f95-b0cf-fbe44c7a0c9a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chất lượng sản phẩm thực tế' = AVERAGE('FACT - QUALITY STANDARD'[QUALITY_REALITY])
+		displayFolder: Quality Standard
+		lineageTag: 308a13e1-cac7-4b64-ba49-2458dcce6918
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chất lượng sản phẩm tiêu chuẩn' = AVERAGE('FACT - QUALITY STANDARD'[QUALITY_STANDARD])
+		displayFolder: Quality Standard
+		lineageTag: 5f8a4970-e583-4649-a837-367602532f92
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PP - Sản lượng tồn kho cuối kỳ' = ```
+			VAR _max_date = max('DIM - DATE'[Date])
+			VAR _MEASURE = 
+			    CALCULATE(
+			        SUMX(SUMMARIZE('AGG - MATERIAL LEDGER QTY','DIM - COMPONENT'[MATERIAL_CODE],"AAA",SUM('AGG - MATERIAL LEDGER QTY'[RECEIPT_QTY]) , "BBB", SUM('AGG - MATERIAL LEDGER QTY'[ISSUE_QTY])),[AAA] +[BBB]),
+			                'DIM - DATE'[Date] <= _max_date
+			        ,'AGG - MATERIAL LEDGER QTY'[IS_SLOC_BATCH_STOCK] = 1,'AGG - MATERIAL LEDGER QTY'[MATERIAL_CODE]= MIN('FACT - NORM QUALITY'[MATERIAL_CODE]))
+			    
+			   
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			
+			```
+		displayFolder: Others
+		lineageTag: 4eb7ff1c-200c-435a-be2b-3263403dbc1c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PP - Sản lượng tồn kho cuối kỳ năm trước' = ```
+			
+			VAR _max_date = CALCULATE(MAX('DIM - DATE'[Date]),DATEADD('DIM - DATE'[Date],-1,YEAR))
+			
+			VAR _MEASURE = 
+			   CALCULATE(
+			        SUMX(SUMMARIZE('AGG - MATERIAL LEDGER QTY','DIM - COMPONENT'[MATERIAL_CODE],"AAA",SUM('AGG - MATERIAL LEDGER QTY'[RECEIPT_QTY]) , "BBB", SUM('AGG - MATERIAL LEDGER QTY'[ISSUE_QTY])),[AAA] +[BBB]),
+			                'DIM - DATE'[Date] <= _max_date
+			        ,'AGG - MATERIAL LEDGER QTY'[IS_SLOC_BATCH_STOCK] = 1,'AGG - MATERIAL LEDGER QTY'[MATERIAL_CODE]= MIN('FACT - NORM QUALITY'[MATERIAL_CODE]))
+			    
+			   
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			
+			
+			    
+			   
+			
+			```
+		displayFolder: Others
+		lineageTag: 2c1ad3d4-d6b0-46aa-ac09-c23f14b738ab
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Module
+		dataType: string
+		lineageTag: 6c6c2687-7dbd-417b-b499-40cfc20069ed
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Module]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source = ```
+				DATATABLE (
+				    "Module", STRING, 
+				    { 
+				        {"PP"}
+				    } 
+				)
+				```
+

@@ -1,0 +1,421 @@
+table 'FACT - COPA LINE ITEM'
+	lineageTag: 86febef5-a5ad-4f07-92de-d203b4b93847
+
+	column VERSION
+		dataType: string
+		lineageTag: ddd01818-351b-4df7-880e-efdd75241a78
+		summarizeBy: none
+		sourceColumn: VERSION
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_YEAR
+		dataType: string
+		lineageTag: 228b4f57-05d1-4ecf-aee8-9afa131cce1e
+		summarizeBy: none
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: string
+		lineageTag: e43f9408-df7f-433c-8878-ffcccf0801a9
+		summarizeBy: none
+		sourceColumn: FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 814f2637-fb0d-492b-a4ff-6c82c35a31da
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column RECORD_TYPE
+		dataType: string
+		lineageTag: d65dd2c3-0ccc-4370-9176-0de6a31f06f1
+		summarizeBy: none
+		sourceColumn: RECORD_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: f09c609e-b9b2-47e0-a834-72fe9d3b69f9
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: caf2df68-0574-4d18-96d6-66dc25fe4af9
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_CENTRE
+		dataType: string
+		lineageTag: 207028db-dc36-4751-9c98-b4fbb2a22e65
+		summarizeBy: none
+		sourceColumn: PROFIT_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTRE
+		dataType: string
+		lineageTag: 570d02be-9e47-4a1a-b01e-856e0aecd322
+		summarizeBy: none
+		sourceColumn: COST_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOCUMENT_NO
+		dataType: string
+		lineageTag: 39cf63ae-3f83-40f4-ba0a-f90c09d31698
+		summarizeBy: none
+		sourceColumn: DOCUMENT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELEMENT
+		dataType: string
+		lineageTag: a9389c14-4c17-4fa6-8398-b9908c574435
+		summarizeBy: none
+		sourceColumn: COST_ELEMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVOICE_DATE
+		dataType: string
+		lineageTag: 80881439-ae42-4307-965e-a9c04c5e4443
+		summarizeBy: none
+		sourceColumn: INVOICE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_GROUP
+		dataType: string
+		lineageTag: 3fc6b5a8-4330-43db-b753-45a650c367c0
+		summarizeBy: none
+		sourceColumn: MATERIAL_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: a199733c-41f6-4d2d-a885-b584e30d6f13
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_GROUP
+		dataType: string
+		lineageTag: df1c606c-37a9-42ca-a0b9-7dd62ec6348b
+		summarizeBy: none
+		sourceColumn: CUSTOMER_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_NO
+		dataType: string
+		lineageTag: b6dcadd8-6777-4895-bdf2-7a761fa0fd79
+		summarizeBy: none
+		sourceColumn: CUSTOMER_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_TYPE
+		dataType: string
+		lineageTag: bc6d9bbf-a060-415a-bcad-04a5313d45c3
+		summarizeBy: none
+		sourceColumn: BILLING_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FOREIGN_CURRENCY
+		dataType: string
+		lineageTag: 38fb0680-0dca-4b3c-8ae0-ca6a46399a25
+		summarizeBy: none
+		sourceColumn: FOREIGN_CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXCHANGE_RATE
+		dataType: double
+		lineageTag: e10f2dd6-b6cc-470a-a7a9-203b8566cc7d
+		summarizeBy: sum
+		sourceColumn: EXCHANGE_RATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_ORDER
+		dataType: string
+		lineageTag: 8f27e345-e8ad-4002-8515-f44c420fcf50
+		summarizeBy: none
+		sourceColumn: SALE_ORDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISTRIBUTION_CHANNEL
+		dataType: string
+		lineageTag: 229fd461-4a36-4309-bbbb-8e0d61f816c4
+		summarizeBy: none
+		sourceColumn: DISTRIBUTION_CHANNEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIVISION_NO
+		dataType: string
+		lineageTag: 00163b0f-aa56-426a-9d60-6b0dca89798e
+		summarizeBy: none
+		sourceColumn: DIVISION_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column REF_DOC
+		dataType: string
+		lineageTag: 34d567a9-9505-482e-bb10-bd52d60934c9
+		summarizeBy: none
+		sourceColumn: REF_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column REF_ITEM
+		dataType: string
+		lineageTag: 11861ee0-e1a5-4a3a-af38-4be85a78549a
+		summarizeBy: none
+		sourceColumn: REF_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column CANCELED_DOC
+		dataType: string
+		lineageTag: 11e770cf-3b85-466e-95ba-3ab37ded8ba7
+		summarizeBy: none
+		sourceColumn: CANCELED_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CANCELED_ITEM
+		dataType: string
+		lineageTag: 2985244b-5a20-468e-b76a-c3a25f948298
+		summarizeBy: none
+		sourceColumn: CANCELED_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_EMPLOYEE
+		dataType: string
+		lineageTag: 59bab9b0-389f-4cb5-982f-57123a3fae34
+		summarizeBy: none
+		sourceColumn: SALE_EMPLOYEE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_HIERARCHY
+		dataType: string
+		lineageTag: 7b389f9b-c794-40f8-b3d8-3ab2c715d5bd
+		summarizeBy: none
+		sourceColumn: PRODUCT_HIERARCHY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_OFFICE
+		dataType: string
+		lineageTag: a735b3db-9683-4b84-875c-4b5a5df6d370
+		summarizeBy: none
+		sourceColumn: SALE_OFFICE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_GROUP
+		dataType: string
+		lineageTag: 028b91c7-4131-4e10-a9bf-e5bc3962e783
+		summarizeBy: none
+		sourceColumn: SALE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUOM
+		dataType: string
+		lineageTag: 8ee09ca9-b5d1-4d12-97c9-c199c43a72e4
+		summarizeBy: none
+		sourceColumn: BUOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_QUANTITY
+		dataType: double
+		lineageTag: 6f967c35-eb5f-40ab-8635-de0c4fd9dd75
+		summarizeBy: sum
+		sourceColumn: SALE_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_AMT
+		dataType: double
+		lineageTag: 2e57cdb6-3817-4d06-b9c2-9ba3392f851f
+		summarizeBy: sum
+		sourceColumn: SALE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DISCOUNT_AMT
+		dataType: double
+		lineageTag: 99f0c320-a55a-46e0-9acf-73dd3cac6e7e
+		summarizeBy: sum
+		sourceColumn: DISCOUNT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COGS_AMT
+		dataType: double
+		lineageTag: 026d55ba-ba2d-4135-917d-2c151ff71540
+		summarizeBy: sum
+		sourceColumn: COGS_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FI_INCOME_AMT
+		dataType: double
+		lineageTag: 5501f1c5-2b13-4375-a2de-64b41e8e0032
+		summarizeBy: sum
+		sourceColumn: FI_INCOME_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FI_EXP_AMT
+		dataType: double
+		lineageTag: c8e5027e-886a-44e2-8c89-b4f8d7195473
+		summarizeBy: sum
+		sourceColumn: FI_EXP_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ADMIN_EXP_AMT
+		dataType: double
+		lineageTag: ef9db9a0-44bc-408d-9705-3b7dea9f0dd1
+		summarizeBy: sum
+		sourceColumn: ADMIN_EXP_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_EXP_AMT
+		dataType: double
+		lineageTag: 8c552b20-204f-465e-a55c-0741471e8094
+		summarizeBy: sum
+		sourceColumn: SALE_EXP_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OTHER_INCOME_AMT
+		dataType: double
+		lineageTag: 0d8d008e-4b2a-4128-9f54-a9d9ecc8690f
+		summarizeBy: sum
+		sourceColumn: OTHER_INCOME_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OTHER_EXP_AMT
+		dataType: double
+		lineageTag: 2f3461d2-9876-4e6c-94b0-41b91fdd7bec
+		summarizeBy: sum
+		sourceColumn: OTHER_EXP_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MANUF_EXP_AMT
+		dataType: double
+		lineageTag: 7aaa09bf-b9f9-4ae2-96f1-4a2b38e1ebed
+		summarizeBy: sum
+		sourceColumn: MANUF_EXP_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_LO_VC
+		dataType: double
+		lineageTag: 2a03d54d-570e-49fd-8729-a63618ac0182
+		summarizeBy: sum
+		sourceColumn: CP_LO_VC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_LO_BH
+		dataType: double
+		lineageTag: 0993fc58-2f54-4a73-829c-fee54cd3f020
+		summarizeBy: sum
+		sourceColumn: CP_LO_BH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_LO_KHO
+		dataType: double
+		lineageTag: e5bc7abd-7d97-4141-a23c-02234cfe702a
+		summarizeBy: sum
+		sourceColumn: CP_LO_KHO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_LO_KHAC
+		dataType: double
+		lineageTag: f18cd64a-7ecd-4ec7-a204-a073e9351183
+		summarizeBy: sum
+		sourceColumn: CP_LO_KHAC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - COPA LINE ITEM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_COPA_LINE_ITEM = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_COPA_LINE_ITEM"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_COPA_LINE_ITEM,{{"POSTING_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,298 @@
+table 'FACT - MATERIAL USAGE PLAN'
+	excludeFromModelRefresh
+	lineageTag: f45d8e7c-0b98-4ff7-9c30-1b4453fba032
+
+	column Selection
+		dataType: string
+		lineageTag: 88d733b2-217d-4176-b385-bb7f6c8766a4
+		summarizeBy: none
+		sourceColumn: Selection
+
+		annotation SummarizationSetBy = Automatic
+
+	column STTWO/YC
+		dataType: string
+		lineageTag: df827dc6-0c3b-4352-83fb-bfb1fb57ed33
+		summarizeBy: none
+		sourceColumn: STTWO/YC
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reservation
+		dataType: string
+		lineageTag: ba8509bc-43f5-4008-833f-eac08aa70bf1
+		summarizeBy: none
+		sourceColumn: Reservation
+
+		annotation SummarizationSetBy = Automatic
+
+	column Plant
+		dataType: string
+		lineageTag: ea51ea71-366c-4c76-92cc-7b6a24d8d4b0
+		summarizeBy: none
+		sourceColumn: Plant
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Storage Location'
+		dataType: string
+		lineageTag: 85ba4dea-c350-44b0-9b58-4d39c463c832
+		summarizeBy: none
+		sourceColumn: Storage Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Requirement Date'
+		dataType: string
+		lineageTag: 3c5f2b71-e638-4351-ba70-f2d30f678685
+		summarizeBy: none
+		sourceColumn: Requirement Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Item
+		dataType: string
+		lineageTag: c2a011b2-315c-4991-84f5-d3325d225031
+		summarizeBy: none
+		sourceColumn: Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Material Number'
+		dataType: string
+		lineageTag: e626cdb0-c692-4b05-852b-72499d9e9c63
+		summarizeBy: none
+		sourceColumn: Material Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Số lượng yêu cầu'
+		dataType: string
+		lineageTag: 60b99718-d5e6-4d75-98f3-c151dc39d232
+		summarizeBy: none
+		sourceColumn: Số lượng yêu cầu
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tồn kho 1001'
+		dataType: string
+		lineageTag: efeb2762-3046-4831-8289-3ba9e7cbca2e
+		summarizeBy: none
+		sourceColumn: Tồn kho 1001
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tồn kho 1901'
+		dataType: string
+		lineageTag: f2d85ed5-439f-4eb1-abf7-042568c9b358
+		summarizeBy: none
+		sourceColumn: Tồn kho 1901
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tồn kho chỉ định'
+		dataType: string
+		lineageTag: 3efda27a-dbe7-4632-aa24-889818efd06a
+		summarizeBy: none
+		sourceColumn: Tồn kho chỉ định
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Số lượng đã xuất kho'
+		dataType: string
+		lineageTag: cdf4dcdd-9ddd-4478-96d8-975de791dd52
+		summarizeBy: none
+		sourceColumn: Số lượng đã xuất kho
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit of Measure'
+		dataType: string
+		lineageTag: e7f590f9-1609-4337-8fe2-3c9ba6e4f67b
+		summarizeBy: none
+		sourceColumn: Unit of Measure
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Maint. Activity Type'
+		dataType: string
+		lineageTag: 519cd90e-163b-420f-aa4b-b0878c90a335
+		summarizeBy: none
+		sourceColumn: Maint. Activity Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ngày release WO'
+		dataType: string
+		lineageTag: 60160454-8007-4b3f-b083-c9c00c151f03
+		summarizeBy: none
+		sourceColumn: Ngày release WO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ngày release WO_1'
+		dataType: string
+		lineageTag: 3f84d1c4-6262-488f-b9e6-1d659ce2fe78
+		summarizeBy: none
+		sourceColumn: Ngày release WO_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Basic start date WO'
+		dataType: string
+		lineageTag: 9fea66f6-acea-4a3c-95b9-f1cf108e8e5d
+		summarizeBy: none
+		sourceColumn: Basic start date WO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Basic finish date WO'
+		dataType: string
+		lineageTag: 6c5de059-b6f7-499d-b946-6414ece5a310
+		summarizeBy: none
+		sourceColumn: Basic finish date WO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cost Center'
+		dataType: string
+		lineageTag: f3c1e2af-0ecb-40f7-9e6a-7f8a22e46437
+		summarizeBy: none
+		sourceColumn: Cost Center
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_PLANT_KEY = [Material Number]&"-"&[Plant]
+		dataType: string
+		lineageTag: a86f5905-dbaa-4cdf-9296-fe6c70a62f04
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Short Text'
+		dataType: string
+		lineageTag: 1a67d9f2-601f-417b-84c9-957bf4b4c392
+		summarizeBy: none
+		sourceColumn: Short Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Order'
+		dataType: string
+		lineageTag: edb36fa8-d1e4-4869-8835-996c77baa4ef
+		summarizeBy: none
+		sourceColumn: Work Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Planer
+		dataType: string
+		lineageTag: 069303e6-9b45-4ff2-97fc-c9c4e7a2a0a8
+		summarizeBy: none
+		sourceColumn: Planer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Supervisor
+		dataType: string
+		lineageTag: 303f8670-fd78-4635-95ca-0deee76665e4
+		summarizeBy: none
+		sourceColumn: Supervisor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Bộ phận yêu cầu'
+		dataType: string
+		lineageTag: f3279e13-440f-4d35-8c47-6ff7771c35d7
+		summarizeBy: none
+		sourceColumn: Bộ phận yêu cầu
+
+		annotation SummarizationSetBy = Automatic
+
+	column Equipment
+		dataType: string
+		lineageTag: 88646de8-d795-4559-a76d-50573ae44915
+		summarizeBy: none
+		sourceColumn: Equipment
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Trạng thái item'
+		dataType: string
+		lineageTag: 8c74e033-65be-447b-8c1b-e9d5ad480571
+		summarizeBy: none
+		sourceColumn: Trạng thái item
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cost Center Text'
+		dataType: string
+		lineageTag: d1d6abfa-eb63-45c1-9407-fa818a1c9fc5
+		summarizeBy: none
+		sourceColumn: Cost Center Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column MVT
+		dataType: string
+		lineageTag: c02cbc19-1a5a-43f5-a993-6ebd72781bdb
+		summarizeBy: none
+		sourceColumn: MVT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: string
+		lineageTag: b26a352a-ceb8-4047-a807-98a520a5f312
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: string
+		lineageTag: 3711a35b-2881-40f1-a7c9-b7f701fd8ae6
+		summarizeBy: none
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_SHEET_NAME
+		dataType: string
+		lineageTag: 2c0b052e-032e-4830-a492-3e98cdb29d3a
+		summarizeBy: none
+		sourceColumn: W_SHEET_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BUSINESS_YEAR
+		dataType: string
+		lineageTag: 1504cf16-b7a4-4e7a-9017-d8d4adbc9339
+		summarizeBy: none
+		sourceColumn: W_BUSINESS_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_FILE_NAME
+		dataType: string
+		lineageTag: 7ae74d6f-43b0-4362-b9ea-4ce4559393c8
+		summarizeBy: none
+		sourceColumn: W_FILE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - MATERIAL USAGE PLAN' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sri_manual_FACT_MATERIAL_USAGE_PLAN = pvcfcprodsqlpool{[Schema="sri_manual",Item="FACT_MATERIAL_USAGE_PLAN"]}[Data]
+				in
+				    sri_manual_FACT_MATERIAL_USAGE_PLAN
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

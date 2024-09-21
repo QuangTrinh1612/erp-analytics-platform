@@ -1,0 +1,4810 @@
+table '_FI - Metrics'
+	lineageTag: ecf2385d-0b8b-40cf-a045-d879f5a1697f
+
+	measure 'Chi phí bán hàng' =
+			CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] = "25")
+		displayFolder: _FI Metrics
+		lineageTag: b11776ca-cfb4-4740-ac83-0600d92b16c9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí bán hàng cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Chi phí bán hàng],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: 96167218-4306-4b76-bc1d-747a51d52cb1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí bán hàng So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Chi phí bán hàng kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Chi phí bán hàng kỳ này từ đầu năm],
+			        [Lũy kế Chi phí bán hàng kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: bb2f54e5-3feb-4ee7-8d5e-59ddaecd0a87
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí bán hàng So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Chi phí bán hàng],
+			    [Chi phí bán hàng cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: ea6fcc58-6961-48dd-8d93-21605b2be108
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí khác của doanh nghiệp' =
+			CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] = "32")
+		displayFolder: _FI Metrics
+		lineageTag: 880fa3e9-c392-4822-9659-1a72471dda14
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí khác của doanh nghiệp cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Chi phí khác của doanh nghiệp],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: dfb4c42a-4206-4a3e-80f1-2da3ab460aa8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí khác của doanh nghiệp So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Chi phí khác của doanh nghiệp kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Chi phí khác của doanh nghiệp kỳ này từ đầu năm],
+			        [Lũy kế Chi phí khác của doanh nghiệp kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 48d0414e-b296-4944-b483-1acf4886a746
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí khác của doanh nghiệp So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Chi phí khác của doanh nghiệp],
+			    [Chi phí khác của doanh nghiệp cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: b04ffb64-5fd8-43af-93eb-943de710c438
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí quản lí' =
+			CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] = "26")
+		displayFolder: _FI Metrics
+		lineageTag: 586af6d2-09c7-4fd7-bf29-04734aa22776
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí quản lí cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Chi phí quản lí],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: 5c18ceea-47f2-4102-b5ce-c0e6b2170955
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí quản lí So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Chi phí quản lí kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Chi phí quản lí kỳ này từ đầu năm],
+			        [Lũy kế Chi phí quản lí kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 6af54645-7b18-4ab0-9002-10d1d8b1dd1f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí quản lí So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Chi phí quản lí],
+			    [Chi phí quản lí cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: 1e59b2d6-1009-40d2-87cc-f9ade055827b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí tài chính' =
+			CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11"})
+		displayFolder: _FI Metrics
+		lineageTag: ab360eae-712b-455a-a90d-479514696fca
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí tài chính cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Chi phí tài chính],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: c5b71d75-4516-48ac-89d4-2fd8099e58bf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí tài chính So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Chi phí tài chính kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Chi phí tài chính kỳ này từ đầu năm],
+			        [Lũy kế Chi phí tài chính kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 726017d8-3bce-47e6-8250-b5a661b882ab
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí tài chính So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Chi phí tài chính],
+			    [Chi phí tài chính cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: 87dc861a-34b4-490f-8c38-7ed44d8335a8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí thuế TNDN' =
+			CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] in { "51", "52"})
+		displayFolder: _FI Metrics
+		lineageTag: ea625426-cd12-47e3-b9fb-ff738c5e7877
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí thuế TNDN cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Chi phí thuế TNDN],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: 775743a3-9c14-4cc3-a6cc-f89c387297cc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí thuế TNDN So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Chi phí thuế TNDN kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Chi phí thuế TNDN kỳ này từ đầu năm],
+			        [Lũy kế Chi phí thuế TNDN kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 2dd71985-f8de-4135-b81f-27f4e8ecffdc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí thuế TNDN So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Chi phí thuế TNDN],
+			    [Chi phí thuế TNDN cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: 7e965a58-f641-41e2-a2a0-5e27e6053a1b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu hoạt động tài chính' =
+			CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] ="21")
+		displayFolder: _FI Metrics
+		lineageTag: b60750b5-e8ae-42ae-a4c9-d22d6998fc28
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu hoạt động tài chính cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Doanh thu hoạt động tài chính],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: c1c0d842-e50d-4d64-b779-9dbfe4afe355
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu hoạt động tài chính So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Doanh thu hoạt động tài chính kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Doanh thu hoạt động tài chính kỳ này từ đầu năm],
+			        [Lũy kế Doanh thu hoạt động tài chính kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: ccd7b465-4c13-4791-bf67-28c2e0a4d094
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu hoạt động tài chính So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Doanh thu hoạt động tài chính],
+			    [Doanh thu hoạt động tài chính cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: b598bad0-e0af-472f-8324-0ed0ec9ec7d3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu thuần về bán hàng và CCDV' =
+			-1 * CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02"})
+		displayFolder: _FI Metrics
+		lineageTag: 7fbedbab-2197-48c1-9938-58fe5a3ecfbc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu thuần về bán hàng và CCDV cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Doanh thu thuần về bán hàng và CCDV],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: 5df1f1f3-d8d1-48a9-bfa7-d304b43bd68c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu thuần về bán hàng và CCDV So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Doanh thu thuần về bán hàng và CCDV kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Doanh thu thuần về bán hàng và CCDV kỳ này từ đầu năm],
+			        [Lũy kế Doanh thu thuần về bán hàng và CCDV kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 588fd366-cdb8-48ad-9cea-31e2f178255f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu thuần về bán hàng và CCDV So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Doanh thu thuần về bán hàng và CCDV],
+			    [Doanh thu thuần về bán hàng và CCDV cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: e3fcdf9d-8756-4f08-bcea-80e69f992734
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu về bán hàng và CCDV' =
+			CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] = "01")
+		displayFolder: _FI Metrics
+		lineageTag: 55b5eb9f-b44c-4dce-9d14-621164323494
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu về bán hàng và CCDV cùng kỳ năm ngoái' =
+			
+			CALCULATE (
+			    [Doanh thu về bán hàng và CCDV],
+			    SAMEPERIODLASTYEAR ( 'DIM - DATE'[Date] )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: acd197e4-11c5-4702-9d2b-79fd2296994f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu về bán hàng và CCDV So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Doanh thu về bán hàng và CCDV kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Doanh thu về bán hàng và CCDV kỳ này từ đầu năm],
+			        [Lũy kế Doanh thu về bán hàng và CCDV  kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 2816e18f-af38-4b2f-908f-8775f9f7e35e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu về bán hàng và CCDV So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Doanh thu về bán hàng và CCDV],
+			    [Doanh thu về bán hàng và CCDV cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: fe9ef300-1c30-4522-b1f3-e23bd286e6b4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure EBITDA =
+			
+			VAR _KHAU_HAO_TRONG_KY =  CALCULATE( [Số liệu BS cuối kỳ] , 'DIM - REPORTING LINE BS'[ITEM_NO]IN {"223","226" , "229", "232"})
+			 - CALCULATE( [Số liệu BS đầu kỳ (Metrics)] , 'DIM - REPORTING LINE BS'[ITEM_NO]IN {"223","226" , "229", "232"})
+			
+			RETURN [EBIT] - _KHAU_HAO_TRONG_KY
+		displayFolder: _FI Metrics
+		lineageTag: 0a32711d-d620-4c7a-8367-0c0eb157ef80
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá vốn hàng bán' = ```
+			CALCULATE(SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]), FILTER('FACT - INCOME STATEMENT', [IS_ITEM] = "11"))
+			
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 160b407b-2829-44e0-bbf1-b8183affbe76
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá vốn hàng bán cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Giá vốn hàng bán],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: f9205df0-7a85-4809-879c-321249a914b8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá vốn hàng bán So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Giá vốn hàng bán kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Giá vốn hàng bán kỳ này từ đầu năm],
+			        [Lũy kế Giá vốn hàng bán kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: b783b7ef-5af9-4a71-ae34-5e14435aeee7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá vốn hàng bán So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Giá vốn hàng bán],
+			    [Giá vốn hàng bán cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: 32b0cfcb-4af9-44d6-8bfc-23e8ba82552c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận gộp từ HĐSXKD' =
+			-1 * CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11"})
+		displayFolder: _FI Metrics
+		lineageTag: cc81fa6e-3f11-42f9-939c-f4c269547d91
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận gộp từ HĐSXKD cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Lợi nhuận gộp từ HĐSXKD],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: 96099885-9b48-47f8-92da-11ff9c8f2019
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận gộp từ HĐSXKD So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Lợi nhuận gộp từ HĐSXKD kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Lợi nhuận gộp từ HĐSXKD kỳ này từ đầu năm],
+			        [Lũy kế Lợi nhuận gộp từ HĐSXKD kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 7676d6e6-906a-4a88-b994-89f2d85db8b0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận gộp từ HĐSXKD So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Lợi nhuận gộp từ HĐSXKD],
+			    [Lợi nhuận gộp từ HĐSXKD cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: 4356564b-2367-4385-a27c-1419eff8276a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận hoạt động tài chính' = [Doanh thu hoạt động tài chính] - [Chi phí tài chính]
+		displayFolder: _FI Metrics
+		lineageTag: 35c45ec9-1bc4-4d3e-834a-3d0da8234e93
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận hoạt động tài chính cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Lợi nhuận hoạt động tài chính],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: fbd34dd0-cea5-41f1-80c5-6d1fdfdc6ad3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận hoạt động tài chính So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Lợi nhuận hoạt động tài chính kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Lợi nhuận hoạt động tài chính kỳ này từ đầu năm],
+			        [Lũy kế Lợi nhuận hoạt động tài chính kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: a4246b9a-aec2-4e9d-9b78-6a7850525369
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận hoạt động tài chính So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Lợi nhuận hoạt động tài chính],
+			    [Lợi nhuận hoạt động tài chính cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: 543b6dbc-6fbe-4589-ad81-e5aae1104308
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận sau thuế' =
+			-1 * CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11","21","23","24","25","26","31","32","51","52"})
+		displayFolder: _FI Metrics
+		lineageTag: 084adfa1-77b7-497c-bb37-bd50e7b16e70
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận sau thuế cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Lợi nhuận sau thuế],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: 398d1c24-490f-45bf-ae88-d2be81a7d16e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận sau thuế So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Lợi nhuận sau thuế kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Lợi nhuận sau thuế kỳ này từ đầu năm],
+			        [Lũy kế Lợi nhuận sau thuế kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 70b42090-145b-4c27-8352-9e2a0c703713
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận sau thuế So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Lợi nhuận sau thuế],
+			    [Lợi nhuận sau thuế cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: bc057a08-6d76-46fc-ac18-3c2d1250b76d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận trước thuế' =
+			CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11","21","23","24","25","26","31","32"})
+		displayFolder: _FI Metrics
+		lineageTag: b71464cc-e359-4e1b-92c3-638d284f1f65
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận trước thuế cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Lợi nhuận trước thuế],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: 95b67aee-c5cb-4e16-b984-557b113f7c1f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận trước thuế So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Lợi nhuận trước thuế kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Lợi nhuận trước thuế kỳ này từ đầu năm],
+			        [Lũy kế Lợi nhuận trước thuế kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 55bd04b0-da68-417e-9a51-2b62512a1ed7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận trước thuế So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Lợi nhuận trước thuế],
+			    [Lợi nhuận trước thuế cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: 3dd97a52-5cf0-4f63-ba33-a88310c3c3a4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Chi phí bán hàng kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí bán hàng],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 81f45433-fc70-4fef-b0f2-028a91a1228d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Chi phí bán hàng kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí bán hàng],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 6ac4d274-e4a1-49f2-850c-182b32b0bfac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Chi phí khác của doanh nghiệp kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí khác của doanh nghiệp],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 0b6082dd-6cb0-4b45-83a2-96a9eae2caaf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Chi phí khác của doanh nghiệp kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí khác của doanh nghiệp],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 582a4154-f61e-42ef-b137-60f3ef6b1a3d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Chi phí quản lí kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí quản lí],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 608f57f6-ee22-4007-b3a5-85334c6d08b1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Chi phí quản lí kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí quản lí],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: dceba5b8-1974-414d-9181-c12cd3747617
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Chi phí tài chính kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí tài chính],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 97564691-789d-44df-9cc4-766a5a90f7a4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Chi phí tài chính kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí tài chính],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: bc1be4bf-7f68-4c96-b672-02acb6f117eb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Chi phí thuế TNDN kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí thuế TNDN],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 5441bc44-8de3-4339-b134-95e576d5f23b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Chi phí thuế TNDN kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí thuế TNDN],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 00f48e4c-84f4-42f2-8655-a236e6dcadba
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Doanh thu hoạt động tài chính kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Doanh thu hoạt động tài chính],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: cb367464-0ac2-4a90-ac31-e6ee395d4eb5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Doanh thu hoạt động tài chính kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Doanh thu hoạt động tài chính],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 24c05732-37a0-422b-ba26-fb93c968dfd1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Doanh thu thuần về bán hàng và CCDV kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Doanh thu thuần về bán hàng và CCDV],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: eac37cd5-95a8-4dcd-af1c-d721c72f811c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Doanh thu thuần về bán hàng và CCDV kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Doanh thu thuần về bán hàng và CCDV],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: a2cee79d-cf3a-41d7-b187-a1e80af27c18
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Doanh thu về bán hàng và CCDV  kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Doanh thu về bán hàng và CCDV],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 73968eaa-3a23-4e66-91de-dc7260309e4c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Doanh thu về bán hàng và CCDV kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			   [Doanh thu về bán hàng và CCDV],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: d98cf94d-17df-47f9-a1e1-3f66cdfc095c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Giá vốn hàng bán kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Giá vốn hàng bán],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 077b2f08-8114-471d-b307-5006a35e79cc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Giá vốn hàng bán kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Giá vốn hàng bán],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: ab26cd72-adce-4f5e-925d-b707076cc9a4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Lợi nhuận gộp từ HĐSXKD kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Lợi nhuận gộp từ HĐSXKD],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: c756b8f7-e364-4229-a8f8-3b7074346fce
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Lợi nhuận gộp từ HĐSXKD kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Lợi nhuận gộp từ HĐSXKD],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: d7185151-7ec1-40ba-8470-22ae52280cf0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Lợi nhuận hoạt động tài chính kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Chi phí quản lí],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 68d824c7-a4cd-4cbe-a657-52e9ba3c517b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Lợi nhuận hoạt động tài chính kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Lợi nhuận hoạt động tài chính],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 528fe54b-615e-46ca-91ec-c6285d0c00ab
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Lợi nhuận sau thuế kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Lợi nhuận sau thuế],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: cd651328-29ea-4aa7-aa8a-ceb84613df1b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Lợi nhuận sau thuế kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Lợi nhuận sau thuế],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 778072a6-c8b6-45e5-b585-9d3979bd505f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Lợi nhuận trước thuế kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Lợi nhuận trước thuế],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 369b4740-fd94-4abc-aee2-a9211fca549d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Lợi nhuận trước thuế kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Lợi nhuận trước thuế],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 942ecb90-6718-4cba-96ff-6397fee78f4f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Thu nhập khác của doanh nghiệp kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Thu nhập khác của doanh nghiệp],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: b6d60ae4-670c-4450-93b5-e32ba0013443
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế Thu nhập khác của doanh nghiệp kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Thu nhập khác của doanh nghiệp],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 100bba22-5ba4-4b38-bc3f-9afe1c0199db
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'ROA - Tỷ suất lợi nhuận trên tổng tài sản' = ```
+			
+			//  Var Gross_Profit =  CALCULATE(SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),FILTER('FACT - INCOME STATEMENT','FACT - INCOME STATEMENT'[IS_ITEM] = "01"))
+			 Var Profit_After_Tax = [Lợi nhuận sau thuế]
+			Var BINH_QUAN_TONG_TS  =  [Bình quân tổng tài sản]
+			RETURN 
+			Profit_After_Tax / BINH_QUAN_TONG_TS
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: _FI Metrics
+		lineageTag: d61f6c46-039d-4390-b94b-cd67faf53cf0
+
+	measure 'ROS - Tỷ suất lợi nhuận ròng' = ```
+			
+			//  Var Gross_Profit =  CALCULATE(SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),FILTER('FACT - INCOME STATEMENT','FACT - INCOME STATEMENT'[IS_ITEM] = "01"))
+			 Var Profit_After_Tax = CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11","21","23","24","25","26","31","32","51","52"})
+			Var Net_Sale_Amt =  CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02"})
+			RETURN 
+			Profit_After_Tax/Net_Sale_Amt
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: _FI Metrics
+		lineageTag: c659980b-602b-46aa-bdb6-aa17a9d4c4d8
+
+	measure 'Thu nhập khác của doanh nghiệp' =
+			CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] = "31")
+		displayFolder: _FI Metrics
+		lineageTag: 68116497-f8b6-4908-bc38-7aba8e3e7caf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thu nhập khác của doanh nghiệp cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Thu nhập khác của doanh nghiệp],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: _FI Metrics
+		lineageTag: 2a7cdd91-646a-4193-8ab2-76bee512a45c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thu nhập khác của doanh nghiệp So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế Thu nhập khác của doanh nghiệp kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế Thu nhập khác của doanh nghiệp kỳ này từ đầu năm],
+			        [Lũy kế Thu nhập khác của doanh nghiệp kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 275de117-6945-4c13-9299-fd1242cbf136
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thu nhập khác của doanh nghiệp So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Thu nhập khác của doanh nghiệp],
+			    [Thu nhập khác của doanh nghiệp cùng kỳ năm ngoái]
+			) - 1
+		displayFolder: _FI Metrics
+		lineageTag: bb94b6e3-acb9-495b-9927-aa30cdc4bb58
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Hệ số thanh toán tức thời' = ```
+			
+			VAR _RESULT = DIVIDE(  CALCULATE( [Số liệu BS cuối kỳ] , FILTER('DIM - REPORTING LINE BS',[ITEM_NO]IN {"111"}) ) ,
+			  CALCULATE( [Số liệu BS cuối kỳ] , FILTER('DIM - REPORTING LINE BS',[ITEM_NO]IN {"310"}) )) 
+			
+			RETURN _RESULT
+			```
+		displayFolder: _FI Metrics
+		lineageTag: b8ff125b-38c5-4896-9309-af0a60b5c342
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Khả năng thanh toán ngắn hạn (lần)' = ```
+			
+			 var _ts_ngan_han = CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "100"}))
+			 var _no_ngan_han = CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "310"}))
+			 RETURN DIVIDE( _ts_ngan_han, _no_ngan_han, BLANK())
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 57d80dcf-c97d-4a35-8112-01d7d5a28fa2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số ngày thu tiền bình quân' = 365/[Vòng quay các khoản phải thu]
+		displayFolder: _FI Metrics
+		lineageTag: 37893639-b15d-4193-b5bb-d001bc19ff0a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tài sản dài hạn' = CALCULATE([Số liệu BS Cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO]  = "200"))
+		displayFolder: _FI Metrics
+		lineageTag: 9992950c-5940-4017-a4a4-1b7d926d9158
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tài sản ngắn hạn' =
+			
+			VAR _MAX_DATE = MAX('DIM - DATE'[FirstDayOfMonth])
+			RETURN
+			CALCULATE(
+			    SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			    LEFT('FACT - BALANCE SHEET'[BS_ITEM],1) = "1"
+			    ,FILTER('FACT - BALANCE SHEET', 'FACT - BALANCE SHEET'[FISCAL_DATE] = _MAX_DATE)
+			)
+		formatString: #,0.00
+		displayFolder: _FI Metrics
+		lineageTag: d56ca18d-c98c-4ba3-ac25-cb2aebe0419b
+
+	measure 'Tồn kho cuối kì' = ```
+			CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] = "140") ) 
+			
+			```
+		displayFolder: _FI Metrics
+		lineageTag: b59d7919-7f7a-47df-8163-056b1ec5738b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tồn kho đầu kì' = ```
+			CALCULATE([Số liệu BS đầu kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] = "140") ) 
+			
+			```
+		displayFolder: _FI Metrics
+		lineageTag: dbc70b3e-b8e9-4393-91af-49e2cec47830
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tổng tài sản' =
+			
+			CALCULATE([Số liệu BS Cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO]  = "270"))
+		displayFolder: _FI Metrics
+		lineageTag: b48002f6-d062-4bde-9ff1-a64afcf9a29d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ số nợ' = ```
+			
+			 VAR _TONG_NO = CALCULATE([Số liệu BS Cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO]  = "300"))
+			 RETURN DIVIDE(_TONG_NO, [Tổng tài sản])
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 52b671ae-7bd5-4d78-8516-41a74895d345
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ số tài sản dài hạn' = ```
+			DIVIDE( [Tài sản dài hạn], [Tổng tài sản]) 
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 0b20e5cf-4d12-41c1-a8ca-30b6960ac643
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ số tài sản ngắn hạn' = ```
+			DIVIDE( [Tài sản ngắn hạn], [Tổng tài sản]) 
+			```
+		displayFolder: _FI Metrics
+		lineageTag: f6f30f90-b2c3-4165-80f4-897485c94393
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ số thanh toán nhanh' = ```
+			
+			VAR _SO_DU_NO_NGAN_HAN = CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] = "310"))
+			VAR _TS_TON_KHO = CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] = "100")) - CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] = "140"))
+			RETURN 
+			_TS_TON_KHO/_SO_DU_NO_NGAN_HAN
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 44b58973-efc2-4bf2-a23a-e9cb9e658b23
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ số vốn chủ sở hữu' = ```
+			
+			 VAR _VON_CHU_SO_HUU = CALCULATE([Số liệu BS Cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO]  = "400"))
+			 RETURN DIVIDE(_VON_CHU_SO_HUU, [Tổng tài sản])
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 7e714c48-213c-4b06-b909-64b79ec5ffe8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Vòng quay các khoản phải thu' = ```
+			
+			 VAR _PHAI_THU_BINH_QUAN = ( CALCULATE([Số liệu BS đầu kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "130"}) )+ CALCULATE([Số liệu BS đầu kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "210"}) ) + CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "130"})) + CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "210"})) ) /2
+			RETURN DIVIDE([Doanh thu thuần về bán hàng và CCDV],_PHAI_THU_BINH_QUAN)
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 6592a665-ac91-4ec7-9d09-b9d9e9ab0d19
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Vòng quay các khoản phải trả' = ```
+			
+			VAR _TIEN_MUA_VAT_TU = ([Giá vốn hàng bán] - [Tồn kho đầu kì] + [Tồn kho cuối kì]) / 2 
+			VAR _PHAI_TRA_BINH_QUAN = ( CALCULATE([Số liệu BS đầu kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "311", "331"}) ) + CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{"311", "331"})) ) /2
+			RETURN DIVIDE(_TIEN_MUA_VAT_TU , _PHAI_TRA_BINH_QUAN)
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 2efae715-5ed6-4909-baa9-def02faf460a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Vòng quay hàng tồn kho' = ```
+			VAR _HANG_TON_KHO_DAU_KI = CALCULATE([Số liệu BS đầu kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] = "140") ) 
+			VAR _TON_KHO_CUOI_KY =  CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] = "140"))
+			VAR _HANG_TON_KHO_TRUNG_BINH = (_HANG_TON_KHO_DAU_KI + _TON_KHO_CUOI_KY) /2
+			VAR _GVHB = CALCULATE(SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]), FILTER('FACT - INCOME STATEMENT', [IS_ITEM] = "11"))
+			RETURN   
+			DIVIDE(_GVHB , _HANG_TON_KHO_TRUNG_BINH)
+			```
+		displayFolder: _FI Metrics
+		lineageTag: a1f2a8a5-ca8d-4656-b1cf-8015be270d9a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Vòng quay lưu động vốn' =
+			
+			VAR _DOANH_THU_THUAN = CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02"})
+			VAR _VON_LUU_DONG_BINH_QUAN = CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "100"})) - CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "310"}))
+			RETURN  DIVIDE(_DOANH_THU_THUAN , _VON_LUU_DONG_BINH_QUAN, BLANK())
+		displayFolder: _FI Metrics
+		lineageTag: fd0cd13c-8286-454d-b1ef-86456ad8f1d3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Vòng quay tiền' = ```
+			
+			VAR _SO_NGAY_TON_KHO_BINH_QUAN = 365/[Vòng quay hàng tồn kho]
+			VAR _SO_NGAY_PHAI_TRA_BINH_QUAN = 365/ [Vòng quay các khoản phải trả]
+			VAR _SO_NGAY_PHAI_THU_BINH_QUAN = 365/[Vòng quay các khoản phải thu]
+			RETURN 
+			(_SO_NGAY_TON_KHO_BINH_QUAN + _SO_NGAY_PHAI_THU_BINH_QUAN ) - _SO_NGAY_PHAI_TRA_BINH_QUAN
+			```
+		displayFolder: _FI Metrics
+		lineageTag: ff9a168a-3376-4d99-8e49-d90b0a3531b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Bình quân tổng tài sản' = ```
+			SUMX(VALUES('DIM - DATE'[MonthYear]),(CALCULATE(
+			    [Số liệu BS cuối kỳ], 'DIM - REPORTING LINE BS'[ITEM_NO] = "270"
+			) + CALCULATE(
+			    [Số liệu BS đầu kỳ], 'DIM - REPORTING LINE BS'[ITEM_NO] = "270"
+			)) / 2)
+			
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 9c8c934f-c408-4d57-b016-6ce69735cf8e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'ROE - Tỷ suất lợi nhuận trên vốn chủ sở hữu' = ```
+			var _binh_quan_von =SUMX(VALUES('DIM - DATE'[MonthYear]), (CALCULATE(
+			    [Số liệu BS cuối kỳ], 'DIM - REPORTING LINE BS'[ITEM_NO] = "411A"
+			) + CALCULATE(
+			    [Số liệu BS đầu kỳ], 'DIM - REPORTING LINE BS'[ITEM_NO] = "411A"
+			)) / 2)
+			
+			return 
+			divide([Lợi nhuận sau thuế],[Bình quân vốn chủ sở hữu])
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: _FI Metrics
+		lineageTag: 0dc7ad66-2833-4bcf-995a-d2512b914179
+
+	measure 'Bình quân vốn cố phần phổ thông' = ```
+			(CALCULATE(
+			    [Số liệu BS cuối kỳ], 'DIM - REPORTING LINE BS'[ITEM_NO] = "411A"
+			) + CALCULATE(
+			    [Số liệu BS đầu kỳ], 'DIM - REPORTING LINE BS'[ITEM_NO] = "411A"
+			)) / 2
+			
+			```
+		displayFolder: _FI Metrics
+		lineageTag: e09331da-277a-4c45-8b09-d22018cca716
+
+	measure 'Hệ số biên EBIT' = Divide([EBIT],[Doanh thu thuần về bán hàng và CCDV])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: _FI Metrics
+		lineageTag: d99ab3e0-06b1-4a8a-85a6-7710cfb0cb22
+
+	measure 'Hệ số biên EBITDA' = Divide([EBITDA],[Doanh thu thuần về bán hàng và CCDV])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: _FI Metrics
+		lineageTag: 907135dc-a78a-4d42-90d8-82a4524c5a3d
+
+	measure 'Nợ ngắn hạn' = CALCULATE([Số liệu BS Cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO]  = "310"))
+		displayFolder: _FI Metrics
+		lineageTag: f4ce2200-097f-4407-95b7-5397a1a61b21
+
+	measure 'Số dư tiền' =
+			
+			CALCULATE(
+			    SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			    'FACT - BALANCE SHEET'[BS_ITEM] IN {"111"}
+			)
+		displayFolder: _FI Metrics
+		lineageTag: 838882d4-39d1-4fae-aae6-93108efd9507
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư nợ ngắn hạn' = ```
+			
+			CALCULATE( [Số liệu BS cuối kỳ] , FILTER('DIM - REPORTING LINE BS',[ITEM_NO]IN {"310"}) ) 
+			
+			
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 136ffc82-9581-4eee-a9fd-23f00df1df42
+
+	measure 'Số ngày phải trả bình quân' = 365/[Vòng quay các khoản phải trả]
+		displayFolder: _FI Metrics
+		lineageTag: 80ec0120-5395-42d2-9114-7f3acb1deb5b
+
+	measure 'Vốn lưu động bình quân' = AVERAGEX(VALUES('DIM - DATE'[MonthYear]),CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "100"})) - CALCULATE([Số liệu BS cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO] IN{ "310"})))
+		displayFolder: _FI Metrics
+		lineageTag: b5a5fa49-cdea-4182-a59f-06ef92933bb6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tổng nợ' = CALCULATE([Số liệu BS Cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO]  = "300"))
+		displayFolder: _FI Metrics
+		lineageTag: 1c4e08a8-0aa6-4595-86dc-13557ea67df0
+
+	measure 'Vốn chủ sở hữu' = ```
+			CALCULATE([Số liệu BS Cuối kỳ], FILTER('DIM - REPORTING LINE BS', [ITEM_NO]  = "400"))
+			
+			```
+		displayFolder: _FI Metrics
+		lineageTag: 8c8ae86d-af38-4aa2-935e-e5ed92557b98
+
+	measure 'Khấu hao cùng kỳ' =
+			
+			CALCULATE( [Số liệu BS cuối kỳ] , FILTER('DIM - REPORTING LINE BS',[ITEM_NO]IN {"223","226","229","232"}) )
+		lineageTag: a5187323-6353-40ae-9dfb-cd940c90c3da
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Khấu hao đầu kỳ' =
+			
+			CALCULATE( [Số liệu BS đầu kỳ (Metrics)] , FILTER('DIM - REPORTING LINE BS',[ITEM_NO]IN {"223","226","229","232"}) )
+		lineageTag: 803fa67c-bbe3-423d-bf6f-1882af479c5f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% AP Growth' =
+			
+			[AP Closing Balance] / [AP Opening Balance] - 1
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: AP
+		lineageTag: 4d0694cf-e988-4217-90f9-0c34601637c0
+
+	measure 'AP Closing Balance' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'DIM - DATE'[Date] <= _max_date
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: c6cd1900-e237-460b-8135-77ccbab60626
+
+	measure 'AP Closing Balance (Credit)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - AP LINE ITEM', 'FACT - AP LINE ITEM'[VENDOR_CODE], 'FACT - AP LINE ITEM'[GL_ACCOUNT]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AP_AMT",
+			                [AP Opening Balance (Debit)] - [AP Opening Balance (Credit)] + [AP Phát sinh nợ] - [AP Phát sinh có]
+			        ),
+			        IF([AP_AMT] < 0, [AP_AMT], BLANK())
+			    )
+			RETURN
+			    -1 * _result
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 7a3b4c50-5664-4c7d-9b3c-4af0a38ba578
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AP Closing Balance (Debit)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - AP LINE ITEM', 'FACT - AP LINE ITEM'[VENDOR_CODE], 'FACT - AP LINE ITEM'[GL_ACCOUNT]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AP_AMT",
+			                [AP Opening Balance (Debit)] - [AP Opening Balance (Credit)] + [AP Phát sinh nợ] - [AP Phát sinh có]
+			        ),
+			        IF([AP_AMT] > 0, [AP_AMT], BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 8272620c-6435-4e86-8819-358a444a9d02
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AP Closing Balance (Display)' = -1 * [AP Closing Balance]
+		displayFolder: AP
+		lineageTag: ee2668dd-31e3-4381-9efb-cb5cfa3b6e9f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AP Closing Balance (Ngoại tệ)' =
+			
+			VAR _max_date =
+			    MAX ( 'DIM - DATE'[Date] )
+			VAR _result =
+			    CALCULATE (
+			        SUM ( 'FACT - AP LINE ITEM'[DOC_AMT] ),
+			        'DIM - DATE'[Date] <= _max_date
+			    )
+			RETURN
+			    IF ( _result = 0, BLANK (), _result )
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: a46b6670-6ec8-4890-833e-a64632e63c82
+
+	measure 'AP Opening Balance' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'DIM - DATE'[Date] < _min_date
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: d9618367-d0d9-4654-a7d7-a700eba06b71
+
+	measure 'AP Opening Balance (Credit)' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - AP LINE ITEM', 'FACT - AP LINE ITEM'[VENDOR_CODE], 'FACT - AP LINE ITEM'[GL_ACCOUNT]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AP_AMT",
+			                CALCULATE(
+			                    SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			                    'DIM - DATE'[Date] < _min_date
+			                )
+			        ),
+			        IF([AP_AMT] < 0, [AP_AMT], BLANK())
+			    )
+			RETURN
+			    -1* _result
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 5069b1dd-bea6-4893-8633-b83a0090c1f5
+
+	measure 'AP Opening Balance (Debit)' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - AP LINE ITEM', 'FACT - AP LINE ITEM'[VENDOR_CODE], 'FACT - AP LINE ITEM'[GL_ACCOUNT]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AP_AMT",
+			                CALCULATE(
+			                    SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			                    'DIM - DATE'[Date] < _min_date
+			                )
+			        ),
+			        IF([AP_AMT] > 0, [AP_AMT], BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 1a9a9e75-d5d9-46b5-89bd-8880d8994494
+
+	measure 'AP Opening Balance (Ngoại tệ)' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[DOC_AMT]),
+			        'DIM - DATE'[Date] < _min_date
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 2f91d93a-961f-463d-b97e-c44c9dc26786
+
+	measure 'AP Phát sinh có' =
+			
+			CALCULATE(
+			    -1 * SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			    (
+			        ('FACT - AP LINE ITEM'[DC_INDICATOR] = "Có" && 'FACT - AP LINE ITEM'[IS_NEGATIVE_POSTING] <> "X")
+			        || ('FACT - AP LINE ITEM'[DC_INDICATOR] = "Nợ" && 'FACT - AP LINE ITEM'[IS_NEGATIVE_POSTING] = "X")
+			    )
+			    && 'FACT - AP LINE ITEM'[IS_REVERSE] = ""
+			)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 5d738e0c-f0a6-48ca-9add-1aa6703dcffe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AP Phát sinh có (Ngoại tệ)' =
+			
+			CALCULATE(
+			    -1 * SUM('FACT - AP LINE ITEM'[DOC_AMT]),
+			    ('FACT - AP LINE ITEM'[DC_INDICATOR] = "Có" && 'FACT - AP LINE ITEM'[IS_NEGATIVE_POSTING] <> "X")
+			    || ('FACT - AP LINE ITEM'[DC_INDICATOR] = "Nợ" && 'FACT - AP LINE ITEM'[IS_NEGATIVE_POSTING] = "X")
+			)
+		displayFolder: AP
+		lineageTag: 68e086af-a587-442f-a9d5-5323698cae98
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AP Phát sinh có (ZAP03)' =
+			
+			SUMX(
+			    SUMMARIZE(
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[IS_REVERSE] = ""
+			        ),
+			        [DOC_NO],
+			        "AP_AMT",SUM('FACT - AP LINE ITEM'[LOCAL_AMT])
+			    ),
+			    IF([AP_AMT] < 0, -1 * [AP_AMT], BLANK())
+			)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: a178dd9d-14b0-45db-a366-732b9192765f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AP Phát sinh nợ' =
+			
+			CALCULATE(
+			    SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			    (
+			        ('FACT - AP LINE ITEM'[DC_INDICATOR] = "Nợ" && 'FACT - AP LINE ITEM'[IS_NEGATIVE_POSTING] <> "X")
+			        || ('FACT - AP LINE ITEM'[DC_INDICATOR] = "Có" && 'FACT - AP LINE ITEM'[IS_NEGATIVE_POSTING] = "X")
+			    )
+			    && 'FACT - AP LINE ITEM'[IS_REVERSE] = ""
+			)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 80e10a9f-c53f-482c-8de3-3d1fa0f9ede4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AP Phát sinh nợ (Ngoại tệ)' =
+			
+			CALCULATE(
+			    SUM('FACT - AP LINE ITEM'[DOC_AMT]),
+			    ('FACT - AP LINE ITEM'[DC_INDICATOR] = "Nợ" && 'FACT - AP LINE ITEM'[IS_NEGATIVE_POSTING] <> "X")
+			    || ('FACT - AP LINE ITEM'[DC_INDICATOR] = "Có" && 'FACT - AP LINE ITEM'[IS_NEGATIVE_POSTING] = "X")
+			)
+		displayFolder: AP
+		lineageTag: a0774b9f-30ca-46ee-835c-d5a1dc6d1501
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AP Phát sinh nợ (ZAP03)' =
+			
+			SUMX(
+			    SUMMARIZE(
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[IS_REVERSE] = ""
+			        ),
+			        [DOC_NO],
+			        "AP_AMT",SUM('FACT - AP LINE ITEM'[LOCAL_AMT])
+			    ),
+			    IF([AP_AMT] > 0, [AP_AMT], BLANK())
+			)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 34928390-7a04-459a-8cc8-9716007a08f9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CLOSING AP AMOUNT' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			return
+			CALCULATE(
+			    SUM('FACT - AP BALANCE'[CLOSING_AP]),
+			    FILTER('FACT - AP BALANCE','FACT - AP BALANCE'[POSTING_DATE] = _max_date)
+			)
+		displayFolder: AP
+		lineageTag: 05fb2be6-2ea5-4ec6-b4cc-aab8eafdd31c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'OPENING AP AMOUNT' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			return
+			CALCULATE(
+			    SUM('FACT - AP BALANCE'[OPENING_AP]),
+			    FILTER('FACT - AP BALANCE','FACT - AP BALANCE'[POSTING_DATE] = _min_date)
+			)
+		displayFolder: AP
+		lineageTag: b49ed755-42a7-40a5-b5cb-09bd1cfa0778
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải trả (< 6 tháng)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date = MAX('DIM - DATE'[Date]) - 180
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AP LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[NET_DUE_DATE] > _max_due_date
+			            && 'FACT - AP LINE ITEM'[NET_DUE_DATE] < _max_date
+			            && (
+			                'FACT - AP LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AP LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 5a3a0539-9dbb-46c2-ac51-2a9769b15a7d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải trả (>= 12T và < 24T)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 360
+			VAR _max_due_date2 = MAX('DIM - DATE'[Date]) - 720
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AP LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[NET_DUE_DATE] > _max_due_date2
+			            && 'FACT - AP LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AP LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AP LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: b58d8ec5-90d6-4a5b-b275-25a0e897f456
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải trả (>= 24T và < 36T)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 720
+			VAR _max_due_date2 = MAX('DIM - DATE'[Date]) - 1080
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AP LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[NET_DUE_DATE] > _max_due_date2
+			            && 'FACT - AP LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AP LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AP LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 1abb1310-6d76-4848-b693-3100939f1c2e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải trả (>= 36T)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 1080
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AP LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			                'FACT - AP LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			                && (
+			                    'FACT - AP LINE ITEM'[CLEARING_DATE] > _max_date
+			                    || ISBLANK('FACT - AP LINE ITEM'[CLEARING_DATE])
+			                )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: af630c65-0783-4e0a-8e00-584beef0fefd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải trả (>= 6T và < 12T)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 180
+			VAR _max_due_date2 = MAX('DIM - DATE'[Date]) - 360
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AP LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[NET_DUE_DATE] > _max_due_date2
+			            && 'FACT - AP LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AP LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AP LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 4fe92021-7dbc-411e-9e85-81c3319ae9b4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải trả (1-30 ngày)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date = MAX('DIM - DATE'[Date]) - 30
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AP LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[NET_DUE_DATE] > _max_due_date
+			            && 'FACT - AP LINE ITEM'[NET_DUE_DATE] < _max_date
+			            && (
+			                'FACT - AP LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AP LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: bd5984e2-7bf0-4254-b618-11e51305ebd2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải trả (31-90 ngày)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 31
+			VAR _max_due_date2 = MAX('DIM - DATE'[Date]) - 90
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AP LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[NET_DUE_DATE] > _max_due_date2
+			            && 'FACT - AP LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AP LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AP LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 6bd8f547-b0b0-42e7-8ada-7b0aa8710acf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải trả (91-180 ngày)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 91
+			VAR _max_due_date2 = MAX('DIM - DATE'[Date]) - 180
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AP LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[NET_DUE_DATE] > _max_due_date2
+			            && 'FACT - AP LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AP LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AP LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: 14ff8ea6-be1a-4ac2-99e4-bec37f7c9d94
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải trả (Trong hạn)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AP LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[NET_DUE_DATE] >= _max_date
+			            && (
+			                'FACT - AP LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AP LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AP
+		lineageTag: f7632bf5-5f1f-42ef-99a7-067957ea66e5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ lệ nợ phải trả quá hạn / Tổng nợ' =
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _quahan =
+			      CALCULATE(
+			        SUM('FACT - AP LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AP LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AP LINE ITEM',
+			            'FACT - AP LINE ITEM'[NET_DUE_DATE] < _max_date
+			            && (
+			                'FACT - AP LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AP LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			return
+			divide(_quahan,[AP Closing Balance])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: AP
+		lineageTag: 86992686-092a-408b-b8a3-76095febe71a
+
+	measure '% AR Growth' =
+			
+			[AR Closing Balance (Debit)] / [Số dư nợ đầu kỳ (By Vendor)] - 1
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: AR
+		lineageTag: 3fa95d8d-425d-4bc2-bb9b-24b81286aeb7
+
+	measure 'AR Closing Balance' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'DIM - DATE'[Date] <= _max_date
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), ABS(_result))
+		displayFolder: AR
+		lineageTag: 2de2b9ef-f998-424f-87f3-33fcd739c48c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AR Closing Balance (Credit)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - AR LINE ITEM', 'FACT - AR LINE ITEM'[CUSTOMER_CODE], 'FACT - AR LINE ITEM'[GL_ACCOUNT]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AR_AMT",
+			                [AR Opening Balance (Debit)] - [AR Opening Balance (Credit)] + [AR Phát sinh nợ] - [AR Phát sinh có]
+			        ),
+			        IF([AR_AMT] < 0, [AR_AMT], BLANK())
+			    )
+			RETURN
+			    -1 * _result
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 03891f49-e426-454e-abdd-a459c15be789
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AR Closing Balance (Debit)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - AR LINE ITEM', 'FACT - AR LINE ITEM'[CUSTOMER_CODE], 'FACT - AR LINE ITEM'[GL_ACCOUNT]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AR_AMT",
+			                [AR Opening Balance (Debit)] - [AR Opening Balance (Credit)] + [AR Phát sinh nợ] - [AR Phát sinh có]
+			        ),
+			        IF([AR_AMT] > 0, [AR_AMT], BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: ff1e87fc-95d3-4b69-8a3e-314ec8b4249b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AR Closing Balance (Ngoại tệ)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[DOC_AMT]),
+			        'DIM - DATE'[Date] <= _max_date
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), ABS(_result))
+		formatString: #,0.00
+		displayFolder: AR
+		lineageTag: 19c830d1-8dbd-4df8-9e19-db054de6b34d
+
+	measure 'AR Opening Balance (Credit)' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - AR LINE ITEM', 'FACT - AR LINE ITEM'[CUSTOMER_CODE], 'FACT - AR LINE ITEM'[GL_ACCOUNT]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AR_AMT",
+			                CALCULATE(
+			                    SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			                    'DIM - DATE'[Date] < _min_date
+			                )
+			        ),
+			        IF([AR_AMT] < 0, [AR_AMT], BLANK())
+			    )
+			RETURN
+			    -1 * _result
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: e7fc6312-81c7-4a55-8c60-b3b6edf11e7f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AR Opening Balance (Debit)' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - AR LINE ITEM', 'FACT - AR LINE ITEM'[CUSTOMER_CODE], 'FACT - AR LINE ITEM'[GL_ACCOUNT]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AR_AMT",
+			                CALCULATE(
+			                    SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			                    'DIM - DATE'[Date] < _min_date
+			                )
+			        ),
+			        IF([AR_AMT] > 0, [AR_AMT], BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: c662e006-0b01-4a4f-9b38-858280b8809e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AR Opening Balance (Ngoại tệ)' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[DOC_AMT]),
+			        'DIM - DATE'[Date] < _min_date
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(),ABS( _result))
+		formatString: #,0.00
+		displayFolder: AR
+		lineageTag: 949d5575-4fee-4b4e-a9bf-43b8ce6b7351
+
+	measure 'AR Phát sinh có' =
+			
+			CALCULATE(
+			    -1 * SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			    (
+			        ('FACT - AR LINE ITEM'[DC_INDICATOR] = "Có" && 'FACT - AR LINE ITEM'[IS_NEGATIVE_POSTING] <> "X")
+			        || ('FACT - AR LINE ITEM'[DC_INDICATOR] = "Nợ" && 'FACT - AR LINE ITEM'[IS_NEGATIVE_POSTING] = "X")
+			    )
+			    && 'FACT - AR LINE ITEM'[IS_REVERSE] = ""
+			)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: e617ebc9-7356-4a11-af26-46ecff1d045f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AR Phát sinh có (Ngoại tệ)' =
+			
+			/*
+			CALCULATE(
+			    -1 * SUM('FACT - AR LINE ITEM'[DOC_AMT]),
+			    (
+			        ('FACT - AR LINE ITEM'[DC_INDICATOR] = "Có" && 'FACT - AR LINE ITEM'[IS_NEGATIVE_POSTING] <> "X")
+			        || ('FACT - AR LINE ITEM'[DC_INDICATOR] = "Nợ" && 'FACT - AR LINE ITEM'[IS_NEGATIVE_POSTING] = "X")
+			    )
+			    && 'FACT - AR LINE ITEM'[IS_REVERSE] = ""
+			)
+			*/
+			SUMX(
+			    SUMMARIZE(
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[IS_REVERSE] = ""
+			        ),
+			        [DOC_NO],
+			        "AR_AMT", SUM('FACT - AR LINE ITEM'[DOC_AMT])
+			    ),
+			    IF([AR_AMT] < 0, -1 * [AR_AMT], BLANK())
+			)
+		formatString: #,0.00
+		displayFolder: AR
+		lineageTag: 211c2d13-a7ac-4548-ac02-96f73188015e
+
+	measure 'AR Phát sinh có (ZAR03)' =
+			
+			SUMX(
+			    SUMMARIZE(
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[IS_REVERSE] = ""
+			        ),
+			        [DOC_NO],
+			        "AR_AMT", SUM('FACT - AR LINE ITEM'[LOCAL_AMT])
+			    ),
+			    IF([AR_AMT] < 0, -1 * [AR_AMT], BLANK())
+			)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 7061116e-e879-4cfa-abab-981e559348df
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AR Phát sinh nợ' =
+			
+			CALCULATE(
+			    SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			    (
+			        ('FACT - AR LINE ITEM'[DC_INDICATOR] = "Nợ" && 'FACT - AR LINE ITEM'[IS_NEGATIVE_POSTING] <> "X")
+			        || ('FACT - AR LINE ITEM'[DC_INDICATOR] = "Có" && 'FACT - AR LINE ITEM'[IS_NEGATIVE_POSTING] = "X")
+			    )
+			    && 'FACT - AR LINE ITEM'[IS_REVERSE] = ""
+			)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: d9c71881-8245-4c62-b0dc-b87ecb93a281
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AR Phát sinh nợ (Ngoại tệ)' =
+			
+			/*
+			CALCULATE(
+			    SUM('FACT - AR LINE ITEM'[DOC_AMT]),
+			    (
+			        ('FACT - AR LINE ITEM'[DC_INDICATOR] = "Nợ" && 'FACT - AR LINE ITEM'[IS_NEGATIVE_POSTING] <> "X")
+			        || ('FACT - AR LINE ITEM'[DC_INDICATOR] = "Có" && 'FACT - AR LINE ITEM'[IS_NEGATIVE_POSTING] = "X")
+			    )
+			    && 'FACT - AR LINE ITEM'[IS_REVERSE] = ""
+			)
+			*/
+			SUMX(
+			    SUMMARIZE(
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[IS_REVERSE] = ""
+			        ),
+			        [DOC_NO],
+			        "AR_AMT",SUM('FACT - AR LINE ITEM'[DOC_AMT])
+			    ),
+			    IF([AR_AMT] > 0, [AR_AMT], BLANK())
+			)
+		formatString: #,0.00
+		displayFolder: AR
+		lineageTag: 4ece4f09-d1b2-459d-af2a-e39068f1bb62
+
+	measure 'AR Phát sinh nợ (ZAR03)' =
+			
+			SUMX(
+			    SUMMARIZE(
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[IS_REVERSE] = ""
+			        ),
+			        [DOC_NO],
+			        "AR_AMT",SUM('FACT - AR LINE ITEM'[LOCAL_AMT])
+			    ),
+			    IF([AR_AMT] > 0, [AR_AMT], BLANK())
+			)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 0e6ac964-b328-491c-b679-411be4353231
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CLOSING AR AMOUNT' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			return
+			CALCULATE(
+			    SUM('FACT - AR BALANCE'[CLOSING_AR]),
+			    FILTER('FACT - AR BALANCE','FACT - AR BALANCE'[POSTING_DATE] = _max_date)
+			)
+		displayFolder: AR
+		lineageTag: b7142d40-d6d6-4d55-8445-f2037ae5784b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Dự phóng phải thu khó đòi (>=12T và <24T)' = divide([Số dư phải thu (>= 12T và < 24T)]*50,100)
+		displayFolder: AR
+		lineageTag: e9a178c1-d0c4-4d0d-9f3e-c747fa9c2a56
+
+	measure 'Dự phóng phải thu khó đòi (>=24T và <36T)' = divide([Số dư phải thu (>= 24T và < 36T)]*70,100)
+		displayFolder: AR
+		lineageTag: f05bba6d-00cf-42de-90fd-13de195fe156
+
+	measure 'Dự phóng phải thu khó đòi (>=36T)' = [Số dư phải thu (>= 36T)]
+		displayFolder: AR
+		lineageTag: 665a6f4d-3b33-4bfd-9d79-edf4a3d6b0b8
+
+	measure 'Dự phóng phải thu khó đòi (>=6T và <12T)' = divide([Số dư phải thu (>= 6T và < 12T)]*30,100)
+		displayFolder: AR
+		lineageTag: a3c13688-7e2d-4d63-9543-9a6401799e56
+
+	measure 'OPENING AR AMOUNT' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			return
+			CALCULATE(
+			    SUM('FACT - AR BALANCE'[OPENING_AR]),
+			    FILTER('FACT - AR BALANCE','FACT - AR BALANCE'[POSTING_DATE] = _min_date)
+			)
+		displayFolder: AR
+		lineageTag: 1d7946b5-0eb8-45ce-89f9-c0f0f8040aee
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải thu (< 6 tháng)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date = MAX('DIM - DATE'[Date]) - 180
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AR LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[NET_DUE_DATE] > _max_due_date
+			            && 'FACT - AR LINE ITEM'[NET_DUE_DATE] < _max_date
+			            && (
+			                'FACT - AR LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AR LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 485ef10a-4bc3-4e09-93bf-6f6ce15587f8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải thu (>= 12T và < 24T)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 360
+			VAR _max_due_date2 = MAX('DIM - DATE'[Date]) - 720
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AR LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[NET_DUE_DATE] > _max_due_date2
+			            && 'FACT - AR LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AR LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AR LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 1315cbc9-0367-4aea-8be6-53cc287a7862
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải thu (>= 24T và < 36T)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 720
+			VAR _max_due_date2 = MAX('DIM - DATE'[Date]) - 1080
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AR LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[NET_DUE_DATE] > _max_due_date2
+			            && 'FACT - AR LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AR LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AR LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 15a52a01-2c9d-4e5f-9497-aa25089e9530
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải thu (>= 36T)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 1080
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AR LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AR LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AR LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 48630f35-3d78-47f2-af2e-adb0a269c8ab
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải thu (>= 6T và < 12T)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 180
+			VAR _max_due_date2 = MAX('DIM - DATE'[Date]) - 360
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AR LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[NET_DUE_DATE] > _max_due_date2
+			            && 'FACT - AR LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AR LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AR LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 61f422c3-eb33-4bee-b741-b4874894af69
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải thu (1-30 ngày)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date = MAX('DIM - DATE'[Date]) - 30
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AR LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[NET_DUE_DATE] > _max_due_date
+			            && 'FACT - AR LINE ITEM'[NET_DUE_DATE] < _max_date
+			            && (
+			                'FACT - AR LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AR LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 0f76fb5c-1a86-4634-970f-9a7837be917b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải thu (31-90 ngày)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 31
+			VAR _max_due_date2 = MAX('DIM - DATE'[Date]) - 90
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AR LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[NET_DUE_DATE] > _max_due_date2
+			            && 'FACT - AR LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AR LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AR LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 185116e3-33e1-465b-8a7f-f9153bdb5c88
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải thu (91-180 ngày)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _max_due_date1 = MAX('DIM - DATE'[Date]) - 91
+			VAR _max_due_date2 = MAX('DIM - DATE'[Date]) - 180
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AR LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[NET_DUE_DATE] > _max_due_date2
+			            && 'FACT - AR LINE ITEM'[NET_DUE_DATE] <= _max_due_date1
+			            && (
+			                'FACT - AR LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AR LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: df0c4124-c1fb-4e10-a799-8c5abb83bb9d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư phải thu (Khó đòi)'
+		displayFolder: AR
+		lineageTag: 572036b4-ca2f-4093-addb-7bcdd9f68c23
+
+	measure 'Số dư phải thu (Trong hạn)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AR LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[NET_DUE_DATE] >= _max_date
+			            && (
+			                'FACT - AR LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AR LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			    IF(_result = 0, BLANK(), _result)
+		formatString: #,0
+		displayFolder: AR
+		lineageTag: 3a8b81e8-374b-42cd-bb08-6bce998a8f37
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ lệ nợ phải thu quá hạn / Tổng nợ' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _quahan =
+			    CALCULATE(
+			        SUM('FACT - AR LINE ITEM'[LOCAL_AMT]),
+			        'FACT - AR LINE ITEM'[POSTING_DATE] <= _max_date,
+			        FILTER(
+			            'FACT - AR LINE ITEM',
+			            'FACT - AR LINE ITEM'[NET_DUE_DATE] < _max_date
+			            && (
+			                'FACT - AR LINE ITEM'[CLEARING_DATE] > _max_date
+			                || ISBLANK('FACT - AR LINE ITEM'[CLEARING_DATE])
+			            )
+			        )
+			    )
+			RETURN
+			DIVIDE(_quahan, [AR Closing Balance])
+		formatString: #,##0.00 %
+		displayFolder: AR
+		lineageTag: 67fa45d1-d02a-4962-9be7-7294bb16759d
+
+	measure 'Số liệu BS cuối kỳ' =
+			
+			VAR _MAX_DATE = MAX('DIM - DATE'[FirstDayOfMonth])
+			RETURN
+			CALCULATE(
+			    SWITCH(
+			        SELECTEDVALUE('DIM - REPORTING LINE BS'[ITEM_NO]),
+			        "100",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],1) = "1"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "200",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],1) = "2"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "270",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],1) IN {"1","2"}
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "300",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],1) = "3"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "400",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],1) = "4"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "440",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],1) IN {"3","4"}
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "110",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "11"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "120",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "12"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "130",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "13"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "140",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "14"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "150",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "15"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "210",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "21"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "220",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "22"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "221",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                'FACT - BALANCE SHEET'[BS_ITEM] IN {"222","223"}
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "227",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                'FACT - BALANCE SHEET'[BS_ITEM] IN {"228","229"}
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "230",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "23"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "240",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "24"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "250",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "25"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "260",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) = "26"
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "310",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) IN {"31","32"}
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "330",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) IN {"33","34"}
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "410",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) IN {"41","42"}
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "430",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],2) IN {"43"}
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "411",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],3) IN {"411"}
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        "421",
+			            CALCULATE(
+			                SUM('FACT - BALANCE SHEET'[CLOSING_BALANCE]),
+			                LEFT('FACT - BALANCE SHEET'[BS_ITEM],3) IN {"421"}
+			            ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN]),
+			        CALCULATE(
+			            SUMX(
+			                'FACT - BALANCE SHEET',
+			                'FACT - BALANCE SHEET'[CLOSING_BALANCE]
+			            ),
+			            USERELATIONSHIP(
+			                'DIM - REPORTING LINE BS'[ITEM_NO],
+			                'FACT - BALANCE SHEET'[BS_ITEM]
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN])
+			    ),
+			FILTER('FACT - BALANCE SHEET', 'FACT - BALANCE SHEET'[FISCAL_DATE] = _MAX_DATE))
+		displayFolder: BS
+		lineageTag: 56bc4bee-1ea7-4dde-a52e-3f4e32c992c4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số liệu BS cuối kỳ (Hợp nhất)' =
+			
+			ABS(
+			SWITCH(
+			    SELECTEDVALUE('DIM - REPORTING LINE BS'[ITEM_NO]),
+			    "100",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],1) = "1"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "200",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],1) = "2"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "270",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],1) IN {"1","2"}
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "300",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],1) = "3"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "400",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],1) = "4"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "440",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],1) IN {"3","4"}
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "110",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "11"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "120",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "12"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "130",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "13"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "140",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "14"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "150",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "15"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "210",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "21"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "220",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "22"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "221",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            'FACT - BALANCE SHEET - CS'[BS_ITEM] IN {"222","223"}
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "227",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            'FACT - BALANCE SHEET - CS'[BS_ITEM] IN {"228","229"}
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "230",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "23"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "240",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "24"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "250",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "25"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "260",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) = "26"
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "310",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) IN {"31","32"}
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "330",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) IN {"33","34"}
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "410",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) IN {"41","42"}
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "430",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],2) IN {"43"}
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "411",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],3) IN {"411"}
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    "421",
+			        CALCULATE(
+			            SUM('FACT - BALANCE SHEET - CS'[LOCAL_AMT]),
+			            LEFT('FACT - BALANCE SHEET - CS'[BS_ITEM],3) IN {"421"}
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)]),
+			    CALCULATE(
+			        SUMX(
+			            'FACT - BALANCE SHEET - CS',
+			            'FACT - BALANCE SHEET - CS'[LOCAL_AMT]
+			        ),
+			        USERELATIONSHIP(
+			            'DIM - REPORTING LINE BS'[ITEM_NO],
+			            'FACT - BALANCE SHEET - CS'[BS_ITEM]
+			        )
+			    ) * SELECTEDVALUE('DIM - REPORTING LINE BS'[SIGN (Hide)])
+			)
+			)
+		formatString: #,0
+		displayFolder: BS
+		lineageTag: 113beeff-43de-4092-86ea-68ff33b54be9
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Số liệu BS đầu kỳ' = ```
+			
+			CALCULATE(
+			    [Số liệu BS cuối kỳ],
+			    FILTER(
+			        ALL('DIM - DATE'),
+			        'DIM - DATE'[Year] = (MAX('DIM - DATE'[Year]) - 1) 
+			        && 'DIM - DATE'[Month] = 12
+			    ))
+			```
+		formatString: #,0
+		displayFolder: BS
+		lineageTag: 37121850-9459-4e70-861c-f0be0c2a73ce
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Số liệu BS đầu kỳ (Hợp nhất)' =
+			CALCULATE(
+			    [Số liệu BS cuối kỳ (Hợp nhất)],
+			    FILTER(
+			        ALL('FACT - BALANCE SHEET - CS'[FISCAL_YEAR]),
+			        'FACT - BALANCE SHEET - CS'[FISCAL_YEAR] = (MAX('FACT - BALANCE SHEET - CS'[FISCAL_YEAR]) - 1)
+			    ),
+			    FILTER(
+			        ALL('FACT - BALANCE SHEET - CS'[FISCAL_PERIOD]),
+			        'FACT - BALANCE SHEET - CS'[FISCAL_PERIOD] = 12
+			    )
+			)
+		formatString: #,0
+		displayFolder: BS
+		lineageTag: ca21d353-6382-4183-accd-d4fdff618d46
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Số liệu BS đầu kỳ (Metrics)' =
+			
+			/*VAR _max_date = EOMONTH(MAX('DIM - DATE'[Date]),-2) + 1
+			
+			RETURN
+			CALCULATE(
+			    [Số liệu BS cuối kỳ],
+			    FILTER(
+			        ALL('FACT - BALANCE SHEET'),
+			        'FACT - BALANCE SHEET'[FISCAL_DATE] = _max_date
+			    )
+			)*/
+			/*20240602 - Tam update Opening Balance base on End balance LM*/
+			CALCULATE([Số liệu BS cuối kỳ], DATEADD('DIM - DATE'[Date], -1, MONTH))
+		displayFolder: BS
+		lineageTag: 86eb616c-2326-4f7f-bc01-8ae55d379582
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CASH FLOW AMOUNT' =
+			
+			/*SWITCH(
+			    SELECTEDVALUE('DIM - REPORTING LINE CF'[CF_ITEM]),
+			    "010",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"011","012"}
+			        ),
+			    "020",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"021","022","023","024"}
+			        ),
+			    "030",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"031","032","033","034"}
+			        ),
+			    "040",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"041"}
+			        ),
+			    "050",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"051","052"}
+			        ),
+			    "060",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"062"}
+			        ),
+			    "080",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"011","012","021","022","023","024","031","032","033","034","041","051","052","062"}
+			        ),
+			    "090",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"091","092","093","094","095","096","097","098"}
+			        ),
+			    "100",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"101","102"}
+			        ),
+			    "110",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"111","112","113","114","115","116","117","118","171","172"}
+			        ),
+			    "120",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"121","122"}
+			        ),
+			    "140",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"141"}
+			        ),
+			    "160",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"161","162","163"}
+			        ),
+			    "200",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {
+			                "011","012","021","022","023","024","031","032","033","034","041","051","052","062",
+			                "091","092","093","094","095","096","097","098",
+			                "101","102",
+			                "111","112","113","114","115","116","117","118","171","172",
+			                "121","122",
+			                "141",
+			                "150",
+			                "161","162","163",
+			                "170"
+			            }
+			        ),
+			    "210",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"211"}
+			        ),
+			    "300",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"211","230","240","270"}
+			        ),
+			    "400",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {"310","320","330","340","350","360"}
+			        ),
+			    "610",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {
+			                "611","612"
+			            }
+			        ),
+			    "500",
+			        CALCULATE(
+			            [CF AMOUNT],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE] IN {
+			                "011","012","021","022","023","024","031","032","033","034","041","051","052","062",
+			                "091","092","093","094","095","096","097","098",
+			                "101","102",
+			                "111","112","113","114","115","116","117","118","171","172",
+			                "121","122",
+			                "141",
+			                "150",
+			                "161","162","163",
+			                "170",
+			                "211","230","240","270",
+			                "310","320","330","340","350","360"
+			            }
+			        ),
+			    CALCULATE(
+			        [CF AMOUNT],
+			        USERELATIONSHIP(
+			            'DIM - REPORTING LINE CF'[CF_ITEM],
+			            'FACT - CASH FLOW'[CF_ITEM_CODE]
+			        )
+			    )
+			)*/
+			[CF AMOUNT]
+		formatString: #,0
+		displayFolder: Cash flow
+		lineageTag: a8223add-97e7-4e24-b674-12cbf9dca612
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'CF AMOUNT' = ```
+			SUMX(
+			    'FACT - CASH FLOW',
+			    /*IF(
+			        'FACT - CASH FLOW'[CF_ITEM_CODE] IN {
+			            "011",
+			            "012",
+			            "032",
+			            "033","034",
+			            "041",
+			            "051",
+			            "052",
+			            "062",
+			            "080",
+			            "092","094","096","098",
+			            "102",
+			            "112","114","116","118","172",
+			            "122",
+			            "140",
+			            "211",
+			            "250",
+			            "320",
+			            "350",
+			            "611",
+			            "700"
+			        },
+			        'FACT - CASH FLOW'[LOCAL_AMT] * -1,
+			        'FACT - CASH FLOW'[LOCAL_AMT]
+			    )*/ 
+			    ABS('FACT - CASH FLOW'[LOCAL_AMT])
+			)
+			```
+		displayFolder: Cash flow
+		lineageTag: da16e84e-6153-41bb-be55-3fafa22c2727
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế CF  kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [CASH FLOW AMOUNT],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: Cash flow
+		lineageTag: 3b38ae16-2d88-4331-9f0c-75b741fe223a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế CF kỳ trước từ đầu năm' =
+			
+			CALCULATE(
+			    [Số liệu CF kỳ trước],
+			    FILTER(
+			        ALLSELECTED('DIM - DATE'[Date]),
+			        'DIM - DATE'[Date] >= DATE(MAX('DIM - DATE'[Year]),1,1)
+			    )
+			)
+		displayFolder: Cash flow
+		lineageTag: 6ee4a73d-ea22-4345-969f-c482589cbf66
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số liệu CF kỳ trước' =
+			CALCULATE(
+			    [CASH FLOW AMOUNT],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date]),
+			    ALL('DIM - DATE')
+			    /*
+			    FILTER(
+			        ALL('FACT - CASH FLOW'[FISCAL_YEAR]),
+			        'FACT - CASH FLOW'[FISCAL_YEAR] = (MAX('FACT - CASH FLOW'[FISCAL_YEAR]) - 1)
+			    )
+			    */
+			)
+		displayFolder: Cash flow
+		lineageTag: 1ce342bd-aacd-454b-8b17-b4dfeb3acd95
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá trị còn lại cuối kỳ' =
+			
+			[Nguyên giá cuối kỳ] + [Khấu hao lũy kế cuối kỳ]
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: 029c5590-20ac-4dc3-8fa1-5bb045941ad3
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Giá trị còn lại đầu kỳ' =
+			
+			[Nguyên giá đầu kỳ] + [Khấu hao lũy kế đầu kỳ]
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: b922ad58-b646-4350-bbc6-d87ad99d025b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Khấu hao lũy kế cuối kỳ' =
+			
+			VAR _max_date = MAX('FACT - FIXED ASSET BALANCE'[FISCAL_DATE])
+			RETURN
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [DEPRECIATION_VALUE]
+			    ),
+			    ALL('DIM - DATE'),
+			    'FACT - FIXED ASSET BALANCE'[FISCAL_DATE] = _max_date
+			)
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: 6f363b25-3e63-4f03-9938-097234403f96
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Khấu hao lũy kế cuối kỳ (display)' = ```
+			
+			VAR _max_date = MAX('FACT - FIXED ASSET BALANCE'[FISCAL_DATE])
+			var _measure = 
+			
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [DEPRECIATION_VALUE]
+			    ),
+			    ALL('DIM - DATE'),
+			    'FACT - FIXED ASSET BALANCE'[FISCAL_DATE] = _max_date
+			)
+			
+			return
+			abs(_measure)
+			```
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: 2a58668b-ea56-47d5-88be-840f78535d9c
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Khấu hao lũy kế đầu kỳ' =
+			
+			VAR _min_date = MINX(
+			    'FACT - FIXED ASSET BALANCE',
+			    EOMONTH([FISCAL_DATE],-2) + 1
+			)
+			RETURN
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [DEPRECIATION_VALUE]
+			    ),
+			    ALL('DIM - DATE'),
+			    'FACT - FIXED ASSET BALANCE'[FISCAL_DATE] = _min_date
+			)
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: badb924b-fbce-424a-9ab6-4ae8ff35f531
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Khấu hao lũy kế đầu kỳ (display)' = ```
+			
+			VAR _min_date = MINX(
+			    'FACT - FIXED ASSET BALANCE',
+			    EOMONTH([FISCAL_DATE],-2) + 1
+			)
+			var _measure = 
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [DEPRECIATION_VALUE]
+			    ),
+			    ALL('DIM - DATE'),
+			    'FACT - FIXED ASSET BALANCE'[FISCAL_DATE] = _min_date
+			)
+			
+			RETURN
+			abs(_measure)
+			```
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: 308016d5-9b94-4e7e-a685-77df57b32e55
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Nguyên giá cuối kỳ' =
+			
+			VAR _max_date = MAX('FACT - FIXED ASSET BALANCE'[FISCAL_DATE])
+			VAR _cap_date = MAXX(
+			    'FACT - FIXED ASSET BALANCE',
+			    EOMONTH([FISCAL_DATE],0)
+			)
+			RETURN
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [ASSET_VALUE]
+			    ),
+			    ALL('DIM - DATE'),
+			    'FACT - FIXED ASSET BALANCE'[FISCAL_DATE] = _max_date,
+			    FILTER(
+			        'DIM - FIXED ASSET',
+			        'DIM - FIXED ASSET'[CAPITALIZED_DATE] <= _cap_date
+			    )
+			)
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: ddbaa942-c8d1-4605-9a9f-a80cb33d3d15
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Nguyên giá đầu kỳ' =
+			
+			VAR _min_date = MINX(
+			    'FACT - FIXED ASSET BALANCE',
+			    EOMONTH([FISCAL_DATE],-2) + 1
+			)
+			VAR _cap_date = MAXX(
+			    'FACT - FIXED ASSET BALANCE',
+			    EOMONTH([FISCAL_DATE],0)
+			)
+			RETURN
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [ASSET_VALUE]
+			    ),
+			    ALL('DIM - DATE'),
+			    'FACT - FIXED ASSET BALANCE'[FISCAL_DATE] = _min_date,
+			    FILTER(
+			        'DIM - FIXED ASSET',
+			        'DIM - FIXED ASSET'[CAPITALIZED_DATE] <= _cap_date
+			    )
+			)
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: a8e8a2bc-2f26-468f-9b28-714dd71145d9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Phát sinh giảm nguyên giá' =
+			
+			VAR _cap_date = MAXX(
+			    'FACT - FIXED ASSET BALANCE',
+			    EOMONTH([FISCAL_DATE],0)
+			)
+			RETURN
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'DIM - FIXED ASSET',
+			        'DIM - FIXED ASSET'[CAPITALIZED_DATE] <= _cap_date
+			    )
+			)
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: 2b19f12e-9a15-4e04-9515-2369338bc5ae
+
+	measure 'Phát sinh giảm nguyên giá (display)' = ```
+			
+			VAR _cap_date = MAXX(
+			    'FACT - FIXED ASSET BALANCE',
+			    EOMONTH([FISCAL_DATE],0)
+			)
+			var _measure = 
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [CREDIT_AMT]
+			    ),
+			    FILTER(
+			        'DIM - FIXED ASSET',
+			        'DIM - FIXED ASSET'[CAPITALIZED_DATE] <= _cap_date
+			    )
+			)
+			return 
+			abs(_measure)
+			```
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: 0c781b17-9677-4f9e-8cb0-ce1ca8c299ef
+
+	measure 'Phát sinh tăng nguyên giá' =
+			
+			VAR _cap_date = MAXX(
+			    'FACT - FIXED ASSET BALANCE',
+			    EOMONTH([FISCAL_DATE],0)
+			)
+			RETURN
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [DEBIT_AMT]
+			    ),
+			    FILTER(
+			        'DIM - FIXED ASSET',
+			        'DIM - FIXED ASSET'[CAPITALIZED_DATE] <= _cap_date
+			    )
+			)
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: 0f16f90f-ceb6-4bf8-b8a3-20a128165f5a
+
+	measure 'PS giảm  khấu hao' = ```
+			
+			VAR _cap_date = MAXX(
+			    'FACT - FIXED ASSET BALANCE',
+			    EOMONTH([FISCAL_DATE],0)
+			)
+			RETURN
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [CREDIT_DEPR_AMT]
+			    ),
+			    FILTER(
+			        'DIM - FIXED ASSET',
+			        'DIM - FIXED ASSET'[CAPITALIZED_DATE] <= _cap_date
+			    )
+			)
+			
+			```
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: 010a02e7-80df-49ed-9448-c086fa537ddc
+
+	measure 'PS tăng khấu hao (display)' = ```
+			
+			VAR _cap_date = MAXX(
+			    'FACT - FIXED ASSET BALANCE',
+			    EOMONTH([FISCAL_DATE],0)
+			)
+			var _measure = 
+			CALCULATE(
+			    SUMX(
+			        'FACT - FIXED ASSET BALANCE',
+			        [DEBIT_DEPR_AMT]
+			    ),
+			    FILTER(
+			        'DIM - FIXED ASSET',
+			        'DIM - FIXED ASSET'[CAPITALIZED_DATE] <= _cap_date
+			    )
+			)
+			return 
+			abs(_measure)
+			```
+		formatString: #,##0
+		displayFolder: FA
+		lineageTag: b5543dad-fd20-4da7-906f-72c0d15a29ef
+
+	measure 'Closing Balance - Credit (Offset)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			RETURN
+			SUMX(
+			    ADDCOLUMNS(
+			        SUMMARIZE(
+			            'FACT - GL ACCOUNT BALANCE OFFSET',
+			            'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],
+			            'FACT - GL ACCOUNT BALANCE OFFSET'[OFFSET_GL_ACCT]
+			        ),
+			        "CREDIT_AMT",
+			            CALCULATE(
+			                SUMX(
+			                    'FACT - GL ACCOUNT BALANCE OFFSET',
+			                    [DEBIT_AMT] + [CREDIT_AMT]
+			                ),
+			                'DIM - DATE'[Date] <= _max_date
+			            )
+			    ),
+			    IF(
+			        [CREDIT_AMT] < 0,
+			        [CREDIT_AMT],
+			        BLANK()
+			    )
+			)
+		displayFolder: GL
+		lineageTag: 5bf06ab4-0483-4d2d-9b83-49a16ec97628
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Closing Balance - Debit (Offset)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			RETURN
+			SUMX(
+			    ADDCOLUMNS(
+			        SUMMARIZE(
+			            'FACT - GL ACCOUNT BALANCE OFFSET',
+			            'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],
+			            'FACT - GL ACCOUNT BALANCE OFFSET'[OFFSET_GL_ACCT]
+			        ),
+			        "DEBIT_AMT",
+			            CALCULATE(
+			                SUMX(
+			                    'FACT - GL ACCOUNT BALANCE OFFSET',
+			                    [DEBIT_AMT] + [CREDIT_AMT]
+			                ),
+			                'DIM - DATE'[Date] <= _max_date
+			            )
+			    ),
+			    IF(
+			        [DEBIT_AMT] > 0,
+			        [DEBIT_AMT],
+			        BLANK()
+			    )
+			)
+		displayFolder: GL
+		lineageTag: a718c24e-8461-454f-bbcf-c34baf71254e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Phát sinh có' = ABS( SUM('FACT - GL ACCOUNT BALANCE'[CREDIT_AMT]))
+		displayFolder: GL
+		lineageTag: 9700de7c-6d16-4db5-9f2d-48afb0d497fa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Phát sinh nợ' = ABS( SUM('FACT - GL ACCOUNT BALANCE'[DEBIT_AMT]))
+		displayFolder: GL
+		lineageTag: 21e51552-83b9-4cbe-ba75-ddacbef5010a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số dư có cuối kỳ' =
+			
+			VAR _max_date = EOMONTH(MAX('DIM - DATE'[Date]),-1) + 1
+			RETURN ABS(
+			CALCULATE(
+			    SUM('FACT - GL ACCOUNT BALANCE'[CREDIT_BALANCE]),
+			    'DIM - DATE'[Date] = _max_date
+			))
+		displayFolder: GL
+		lineageTag: 98407cba-40de-4415-a92c-442751569dc0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số dư có cuối kỳ (ZGL06)' =
+			
+			VAR _max_date = EOMONTH(MAX('DIM - DATE'[Date]),-1) + 1
+			VAR _result =
+			    SUMX(
+			        SUMMARIZE(
+			            FILTER(
+			                'FACT - GL ACCOUNT BALANCE',
+			                'FACT - GL ACCOUNT BALANCE'[FISCAL_DATE] = _max_date
+			            ),
+			            'FACT - GL ACCOUNT BALANCE'[GL_ACCOUNT_NO],
+			            "AMT",
+			                SUMX(
+			                    'FACT - GL ACCOUNT BALANCE',
+			                    [DEBIT_BALANCE] + [CREDIT_BALANCE]
+			                )
+			        ),
+			        IF([AMT] < 0, [AMT] * -1, BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 215b966f-bdc2-40e7-97cf-5d8b59065770
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số dư có đầu kỳ' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			RETURN ABS(
+			CALCULATE(
+			    SUM('FACT - GL ACCOUNT BALANCE'[OP_CREDIT_BALANCE]),
+			    'DIM - DATE'[Date] = _min_date
+			))
+		displayFolder: GL
+		lineageTag: e1ebce41-4b8b-4f84-b367-fcd622ab3aa5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số dư có đầu kỳ (ZGL06)' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        SUMMARIZE(
+			            FILTER(
+			                'FACT - GL ACCOUNT BALANCE',
+			                'FACT - GL ACCOUNT BALANCE'[FISCAL_DATE] = _min_date
+			            ),
+			            'FACT - GL ACCOUNT BALANCE'[GL_ACCOUNT_NO],
+			            "AMT",
+			                SUMX(
+			                    'FACT - GL ACCOUNT BALANCE',
+			                    [OP_DEBIT_BALANCE] + [OP_CREDIT_BALANCE]
+			                )
+			        ),
+			        IF([AMT] < 0, [AMT] * -1, BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 59b877b9-ed7c-42e0-ad13-dca28ecacd16
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'GL - Số dư nợ cuối kỳ' =
+			
+			VAR _max_date = EOMONTH(MAX('DIM - DATE'[Date]),-1) + 1
+			RETURN
+			CALCULATE(
+			    SUM('FACT - GL ACCOUNT BALANCE'[DEBIT_BALANCE]),
+			    'DIM - DATE'[Date] = _max_date
+			)
+		displayFolder: GL
+		lineageTag: 1d2a179a-5d12-410c-a2cf-c91110d36e9f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số dư nợ cuối kỳ (ZGL06)' =
+			
+			VAR _max_date = EOMONTH(MAX('DIM - DATE'[Date]),-1) + 1
+			VAR _result =
+			    SUMX(
+			        SUMMARIZE(
+			            FILTER(
+			                'FACT - GL ACCOUNT BALANCE',
+			                'FACT - GL ACCOUNT BALANCE'[FISCAL_YEAR] = YEAR(_max_date)
+			                && 'FACT - GL ACCOUNT BALANCE'[FISCAL_PERIOD] = MONTH(_max_date)
+			            ),
+			            'FACT - GL ACCOUNT BALANCE'[GL_ACCOUNT_NO],
+			            "AMT",
+			                SUMX(
+			                    'FACT - GL ACCOUNT BALANCE',
+			                    [DEBIT_BALANCE] + [CREDIT_BALANCE]
+			                )
+			        ),
+			        IF([AMT] > 0, [AMT], BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: ed9c7078-5e25-477d-a234-a0e1f71a33d9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số dư nợ đầu kỳ' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			RETURN ABS(
+			CALCULATE(
+			    SUM('FACT - GL ACCOUNT BALANCE'[OP_DEBIT_BALANCE]),
+			    'DIM - DATE'[Date] = _min_date
+			))
+		displayFolder: GL
+		lineageTag: a4b52297-6ecb-4453-8920-e8391ebce8bc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số dư nợ đầu kỳ (ZGL06)' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        SUMMARIZE(
+			            FILTER(
+			                'FACT - GL ACCOUNT BALANCE',
+			                'FACT - GL ACCOUNT BALANCE'[FISCAL_DATE] = _min_date
+			            ),
+			            'FACT - GL ACCOUNT BALANCE'[GL_ACCOUNT_NO],
+			            "AMT",
+			                SUMX(
+			                    'FACT - GL ACCOUNT BALANCE',
+			                    [OP_DEBIT_BALANCE] + [OP_CREDIT_BALANCE]
+			                )
+			        ),
+			        IF([AMT] > 0, [AMT], BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 8ed1eeb1-d29f-42c0-9534-c9db710552a9
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'GL - Số phát sinh' =
+			
+			SUM('FACT - GL LINE ITEM'[AMOUNT_VND])
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 76016bf1-a816-409d-b808-c281093153e7
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'GL - Số phát sinh có (Ngoại tệ)' =
+			
+			CALCULATE(
+			    SUM('FACT - GL LINE ITEM'[AMOUNT_FX]),
+			    'FACT - GL LINE ITEM'[DC_INDICATOR] = "Có"
+			)
+		formatString: #,0.00
+		displayFolder: GL
+		lineageTag: 94c5ea22-cfc4-44e3-ba81-7e3021bee262
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số phát sinh có (VND)' =
+			
+			CALCULATE(
+			    SUM('FACT - GL LINE ITEM'[AMOUNT_VND]),
+			    'FACT - GL LINE ITEM'[DC_INDICATOR] = "Có"
+			) * -1
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 3623614e-1f20-41af-b4ab-cb8eb60556ac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số phát sinh nợ (Ngoại tệ)' =
+			
+			CALCULATE(
+			    SUM('FACT - GL LINE ITEM'[AMOUNT_FX]),
+			    'FACT - GL LINE ITEM'[DC_INDICATOR] = "Nợ"
+			)
+		formatString: #,0.00
+		displayFolder: GL
+		lineageTag: d6d4e6f9-c54c-4127-884d-6e7d1877441d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số phát sinh nợ (VND)' =
+			
+			CALCULATE(
+			    SUM('FACT - GL LINE ITEM'[AMOUNT_VND]),
+			    'FACT - GL LINE ITEM'[DC_INDICATOR] = "Nợ"
+			)
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 1890f256-26af-43c3-9be8-c0e2e353bb2d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL - Số phát sinh nợ (ZGL01)' =
+			
+			CALCULATE(
+			    SUM('FACT - GL LINE ITEM'[AMOUNT_VND]),
+			    (
+			        ('FACT - GL LINE ITEM'[DC_INDICATOR] = "Nợ" && 'FACT - GL LINE ITEM'[IS_NEGATIVE_POSTING] <> "X")
+			        || ('FACT - GL LINE ITEM'[DC_INDICATOR] = "Có" && 'FACT - GL LINE ITEM'[IS_NEGATIVE_POSTING] = "X")
+			    )
+			)
+		displayFolder: GL
+		lineageTag: f3b373fa-1423-491c-ab03-9745e88a0fb2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Phát sinh có (Ngoại tệ)' = SUM('FACT - GL LINE ITEM OFFSET'[FX_CREDIT_AMT]) * -1
+		displayFolder: GL
+		lineageTag: 01222ec7-e151-48c4-b528-48f1cb178ad8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Phát sinh có (ZGL07)' = ```
+			SUM('FACT - GL LINE ITEM OFFSET'[CREDIT_AMT])* -1 
+			```
+		displayFolder: GL
+		lineageTag: 540b0571-1720-49c5-a581-9d1057e1773f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Phát sinh nợ (Ngoại tệ)' = SUM('FACT - GL LINE ITEM OFFSET'[FX_DEBIT_AMT])
+		displayFolder: GL
+		lineageTag: 8f5e332c-cfd6-47ba-a71d-f2fcb6a2d309
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Phát sinh nợ (ZGL07)' = SUM('FACT - GL LINE ITEM OFFSET'[DEBIT_AMT])
+		displayFolder: GL
+		lineageTag: 5d5618b9-9a82-44cf-9f16-fe3d6d2c304e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư có cuối kỳ (By Customer)' =
+			
+			/*
+			SUMX(
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			    IF([Số dư đầu kỳ (GL)] > 0, [Số dư đầu kỳ (GL)], BLANK())
+			)
+			*/
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - GL LINE ITEM OFFSET', 'FACT - GL LINE ITEM OFFSET'[CUSTOMER_CODE]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AP_AMT",
+			                CALCULATE(
+			                    SUMX(
+			                        'FACT - GL LINE ITEM OFFSET',
+			                        [DEBIT_AMT] + [CREDIT_AMT]
+			                    ),
+			                    'DIM - DATE'[Date] <= _max_date
+			                )
+			        ),
+			        IF([AP_AMT] < 0, [AP_AMT] *-1, BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 08fa18d8-1bf8-409f-9cd0-d19e82430f0c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư có cuối kỳ (By Vendor)' =
+			
+			/*
+			SUMX(
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			    IF([Số dư đầu kỳ (GL)] > 0, [Số dư đầu kỳ (GL)], BLANK())
+			)
+			*/
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - GL LINE ITEM OFFSET', 'FACT - GL LINE ITEM OFFSET'[VENDOR_CODE], 'FACT - GL LINE ITEM OFFSET'[GL_ACCOUNT_NO]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AP_AMT",
+			                CALCULATE(
+			                    SUMX(
+			                        'FACT - GL LINE ITEM OFFSET',
+			                        [DEBIT_AMT] + [CREDIT_AMT]
+			                    ),
+			                    'DIM - DATE'[Date] <= _max_date
+			                )
+			        ),
+			        IF([AP_AMT] < 0, [AP_AMT], BLANK())
+			    )
+			RETURN
+			    _result * -1
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: c9f7ad75-c572-41d4-833d-331720a6be57
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư có cuối kỳ (By Vendor) (ZGL07)' =
+			
+			/*
+			SUMX(
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			    IF([Số dư đầu kỳ (GL)] > 0, [Số dư đầu kỳ (GL)], BLANK())
+			)
+			*/
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - GL LINE ITEM OFFSET', 'FACT - GL LINE ITEM OFFSET'[VENDOR_CODE]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AP_AMT",
+			                CALCULATE(
+			                    SUMX(
+			                        'FACT - GL LINE ITEM OFFSET',
+			                        [DEBIT_AMT] + [CREDIT_AMT]
+			                    ),
+			                    'DIM - DATE'[Date] <= _max_date
+			                )
+			        ),
+			        IF([AP_AMT] < 0, [AP_AMT], BLANK())
+			    )
+			RETURN
+			    _result * -1
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 62b869e0-55f1-48a5-ad59-3cdafb49af82
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư có đầu kỳ (By Customer)' =
+			
+			/*
+			SUMX(
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			    IF([Số dư đầu kỳ (GL)] < 0, [Số dư đầu kỳ (GL)], BLANK())
+			)
+			*/
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - GL LINE ITEM OFFSET', 'FACT - GL LINE ITEM OFFSET'[CUSTOMER_CODE]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AP_AMT",
+			                CALCULATE(
+			                    SUMX(
+			                        'FACT - GL LINE ITEM OFFSET',
+			                        [DEBIT_AMT] + [CREDIT_AMT]
+			                    ),
+			                    'DIM - DATE'[Date] < _min_date
+			                )
+			        ),
+			        IF([AP_AMT] < 0, [AP_AMT] *-1, BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 42d40c9f-fcc1-40b1-824e-956b88f69c96
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư có đầu kỳ (By Vendor)' =
+			/*
+			
+			SUMX(
+			
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			
+			    IF([Số dư đầu kỳ (GL)] < 0, [Số dư đầu kỳ (GL)], BLANK())
+			
+			)
+			
+			*/
+			VAR _min_date =
+			    MIN ( 'DIM - DATE'[Date] )
+			VAR _result =
+			    SUMX (
+			        ADDCOLUMNS (
+			            CALCULATETABLE (
+			                SUMMARIZE (
+			                    'FACT - GL LINE ITEM OFFSET',
+			                    'FACT - GL LINE ITEM OFFSET'[VENDOR_CODE],
+			                    'FACT - GL LINE ITEM OFFSET'[GL_ACCOUNT_NO]
+			                ),
+			                REMOVEFILTERS ( 'DIM - DATE'[Date] )
+			            ),
+			            "AP_AMT",
+			                CALCULATE (
+			                    SUMX ( 'FACT - GL LINE ITEM OFFSET', [DEBIT_AMT] + [CREDIT_AMT] ),
+			                    'DIM - DATE'[Date] < _min_date
+			                )
+			        ),
+			        IF ( [AP_AMT] < 0, [AP_AMT], BLANK () )
+			    )
+			RETURN
+			    _result * -1
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 2ccf9226-1f43-498c-959c-e25eb160c0c4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư có đầu kỳ (By Vendor) (ZGL07)' =
+			/*
+			
+			SUMX(
+			
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			
+			    IF([Số dư đầu kỳ (GL)] < 0, [Số dư đầu kỳ (GL)], BLANK())
+			
+			)
+			
+			*/
+			VAR _min_date =
+			    MIN ( 'DIM - DATE'[Date] )
+			VAR _result =
+			    SUMX (
+			        ADDCOLUMNS (
+			            CALCULATETABLE (
+			                SUMMARIZE (
+			                    'FACT - GL LINE ITEM OFFSET',
+			                    'FACT - GL LINE ITEM OFFSET'[VENDOR_CODE]
+			                ),
+			                REMOVEFILTERS ( 'DIM - DATE'[Date] )
+			            ),
+			            "AP_AMT",
+			                CALCULATE (
+			                    SUMX ( 'FACT - GL LINE ITEM OFFSET', [DEBIT_AMT] + [CREDIT_AMT] ),
+			                    'DIM - DATE'[Date] < _min_date
+			                )
+			        ),
+			        IF ( [AP_AMT] < 0, [AP_AMT], BLANK () )
+			    )
+			RETURN
+			    _result * -1
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 60b84224-3873-45e4-987c-28155ca0c8e0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư cuối kỳ (GL)' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _RESULT=
+			    CALCULATE(
+			        SUMX(
+			            'FACT - GL LINE ITEM OFFSET',
+			            [DEBIT_AMT] + [CREDIT_AMT]
+			        ),
+			        'DIM - DATE'[Date] <= _max_date
+			    )
+			RETURN
+			IF(_RESULT = 0 , BLANK(), _RESULT)
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: ecdd1377-7124-4bb8-9f5e-49f83e225f84
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư đầu kỳ (GL)' =
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _RESULT =
+			    CALCULATE(
+			        SUMX(
+			            'FACT - GL LINE ITEM OFFSET',
+			            [DEBIT_AMT] + [CREDIT_AMT]
+			        ),
+			        'DIM - DATE'[Date] < _min_date
+			    )
+			RETURN
+			IF(_RESULT = 0 , BLANK(), _RESULT)
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: a70910be-9292-4676-b47e-fdb526a01bc2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư nợ cuối kỳ (By Customer)' =
+			
+			/*
+			SUMX(
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			    IF([Số dư đầu kỳ (GL)] > 0, [Số dư đầu kỳ (GL)], BLANK())
+			)
+			*/
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - GL LINE ITEM OFFSET', 'FACT - GL LINE ITEM OFFSET'[CUSTOMER_CODE]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AP_AMT",
+			                CALCULATE(
+			                    SUMX(
+			                        'FACT - GL LINE ITEM OFFSET',
+			                        [DEBIT_AMT] + [CREDIT_AMT]
+			                    ),
+			                    'DIM - DATE'[Date] <= _max_date
+			                )
+			        ),
+			        IF([AP_AMT] > 0, [AP_AMT], BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 8c28250a-e63c-4e3c-b2cd-808cb1958bb6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư nợ cuối kỳ (By Vendor)' =
+			/*
+			
+			SUMX(
+			
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			
+			    IF([Số dư đầu kỳ (GL)] > 0, [Số dư đầu kỳ (GL)], BLANK())
+			
+			)
+			
+			*/
+			VAR _max_date =
+			    MAX ( 'DIM - DATE'[Date] )
+			VAR _result =
+			    SUMX (
+			        ADDCOLUMNS (
+			            CALCULATETABLE (
+			                SUMMARIZE (
+			                    'FACT - GL LINE ITEM OFFSET',
+			                    'FACT - GL LINE ITEM OFFSET'[VENDOR_CODE],
+			                    'FACT - GL LINE ITEM OFFSET'[GL_ACCOUNT_NO]
+			                ),
+			                REMOVEFILTERS ( 'DIM - DATE'[Date] )
+			            ),
+			            "AP_AMT",
+			                CALCULATE (
+			                    SUMX ( 'FACT - GL LINE ITEM OFFSET', [DEBIT_AMT] + [CREDIT_AMT] ),
+			                    'DIM - DATE'[Date] <= _max_date
+			                )
+			        ),
+			        IF ( [AP_AMT] > 0, [AP_AMT], BLANK () )
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 919f1381-eedb-4f9b-9f6e-6fd21d18c4df
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư nợ cuối kỳ (By Vendor) (ZGL07)' =
+			/*
+			
+			SUMX(
+			
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			
+			    IF([Số dư đầu kỳ (GL)] > 0, [Số dư đầu kỳ (GL)], BLANK())
+			
+			)
+			
+			*/
+			VAR _max_date =
+			    MAX ( 'DIM - DATE'[Date] )
+			VAR _result =
+			    SUMX (
+			        ADDCOLUMNS (
+			            CALCULATETABLE (
+			                SUMMARIZE (
+			                    'FACT - GL LINE ITEM OFFSET',
+			                    'FACT - GL LINE ITEM OFFSET'[VENDOR_CODE]
+			                ),
+			                REMOVEFILTERS ( 'DIM - DATE'[Date] )
+			            ),
+			            "AP_AMT",
+			                CALCULATE (
+			                    SUMX ( 'FACT - GL LINE ITEM OFFSET', [DEBIT_AMT] + [CREDIT_AMT] ),
+			                    'DIM - DATE'[Date] <= _max_date
+			                )
+			        ),
+			        IF ( [AP_AMT] > 0, [AP_AMT], BLANK () )
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: f0887431-8d95-493e-91d7-3cdfe584ac96
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư nợ đầu kỳ (By Customer)' =
+			
+			/*
+			SUMX(
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			    IF([Số dư đầu kỳ (GL)] > 0, [Số dư đầu kỳ (GL)], BLANK())
+			)
+			*/
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _result =
+			    SUMX(
+			        ADDCOLUMNS(
+			            CALCULATETABLE(
+			                SUMMARIZE('FACT - GL LINE ITEM OFFSET', 'FACT - GL LINE ITEM OFFSET'[CUSTOMER_CODE]),
+			                REMOVEFILTERS('DIM - DATE'[Date])
+			            ),
+			            "AP_AMT",
+			                CALCULATE(
+			                    SUMX(
+			                        'FACT - GL LINE ITEM OFFSET',
+			                        [DEBIT_AMT] + [CREDIT_AMT]
+			                    ),
+			                    'DIM - DATE'[Date] < _min_date
+			                )
+			        ),
+			        IF([AP_AMT] > 0, [AP_AMT], BLANK())
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: c87c51aa-d48a-4edb-affc-ed746718acf4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư nợ đầu kỳ (By Vendor)' =
+			/*
+			
+			SUMX(
+			
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			
+			    IF([Số dư đầu kỳ (GL)] > 0, [Số dư đầu kỳ (GL)], BLANK())
+			
+			)
+			
+			*/
+			VAR _min_date =
+			    MIN ( 'DIM - DATE'[Date] )
+			VAR _result =
+			    SUMX (
+			        ADDCOLUMNS (
+			            CALCULATETABLE (
+			                SUMMARIZE (
+			                    'FACT - GL LINE ITEM OFFSET',
+			                    'FACT - GL LINE ITEM OFFSET'[VENDOR_CODE],
+			                    'FACT - GL LINE ITEM OFFSET'[GL_ACCOUNT_NO]
+			                ),
+			                REMOVEFILTERS ( 'DIM - DATE'[Date] )
+			            ),
+			            "AP_AMT",
+			                CALCULATE (
+			                    SUMX ( 'FACT - GL LINE ITEM OFFSET', [DEBIT_AMT] + [CREDIT_AMT] ),
+			                    'DIM - DATE'[Date] < _min_date
+			                )
+			        ),
+			        IF ( [AP_AMT] > 0, [AP_AMT], BLANK () )
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: 55834b3f-b0c4-452c-838a-c25f6bf53626
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư nợ đầu kỳ (By Vendor) (ZGL07)' =
+			/*
+			
+			SUMX(
+			
+			    VALUES('FACT - GL LINE ITEM OFFSET'[OBJECT_ID]),
+			
+			    IF([Số dư đầu kỳ (GL)] > 0, [Số dư đầu kỳ (GL)], BLANK())
+			
+			)
+			
+			*/
+			VAR _min_date =
+			    MIN ( 'DIM - DATE'[Date] )
+			VAR _result =
+			    SUMX (
+			        ADDCOLUMNS (
+			            CALCULATETABLE (
+			                SUMMARIZE (
+			                    'FACT - GL LINE ITEM OFFSET',
+			                    'FACT - GL LINE ITEM OFFSET'[VENDOR_CODE]
+			                ),
+			                REMOVEFILTERS ( 'DIM - DATE'[Date] )
+			            ),
+			            "AP_AMT",
+			                CALCULATE (
+			                    SUMX ( 'FACT - GL LINE ITEM OFFSET', [DEBIT_AMT] + [CREDIT_AMT] ),
+			                    'DIM - DATE'[Date] < _min_date
+			                )
+			        ),
+			        IF ( [AP_AMT] > 0, [AP_AMT], BLANK () )
+			    )
+			RETURN
+			    _result
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: f5cf1301-08d4-4be5-95bb-e62afd438f80
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư thuế cuối kỳ' = [GL - Số dư có cuối kỳ (ZGL06)] - [GL - Số dư nợ cuối kỳ (ZGL06)]
+		displayFolder: GL
+		lineageTag: 8b860cae-d1d0-4fe8-acd4-c601d985c764
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số dư thuế đầu kỳ' = [GL - Số dư có đầu kỳ (ZGL06)] - [GL - Số dư nợ đầu kỳ (ZGL06)]
+		displayFolder: GL
+		lineageTag: 96b0039e-cbc8-4be2-9b26-e9d888bdd079
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số phát sinh (Offset)' =
+			
+			SUMX('FACT - GL LINE ITEM OFFSET', [LOCAL_AMT])
+		formatString: #,0
+		displayFolder: GL
+		lineageTag: c24229cd-bb2f-492a-929b-72f54933505b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số phát sinh (ZCO14)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'FACT - GL LINE ITEM OFFSET'[Nội dung (ZCO14)] ),
+			    "Quỹ tăng thêm",
+			        -1
+			            * CALCULATE (
+			                SUM ( 'FACT - GL LINE ITEM OFFSET'[DEBIT_AMT] )
+			                    + SUM ( 'FACT - GL LINE ITEM OFFSET'[CREDIT_AMT] ),
+			                'FACT - GL LINE ITEM OFFSET'[DESCRIPTION] <> "SDĐKỳ"
+			            ),
+			    "Đã chi từ quỹ", SUM ( 'FACT - GL LINE ITEM OFFSET'[DEBIT_AMT] ),
+			    BLANK ()
+			)
+		displayFolder: GL
+		lineageTag: 34941e01-cf0a-435a-9faa-383b21dd1e61
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số phát sinh có' =
+			
+			VAR _VALUE = SUM('FACT - GL ACCOUNT BALANCE OFFSET'[CREDIT_AMT])
+			RETURN
+			IF(_VALUE = 0, BLANK(), _VALUE * -1)
+		displayFolder: GL
+		lineageTag: d01bbe43-e3a7-43e9-b116-41b3b8572454
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số phát sinh nợ' =
+			
+			VAR _VALUE = SUM('FACT - GL ACCOUNT BALANCE OFFSET'[DEBIT_AMT])
+			RETURN
+			IF(_VALUE = 0, BLANK(), _VALUE)
+		displayFolder: GL
+		lineageTag: 14b12f70-5a88-4e4c-9c1a-cbd3a2cfe42d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số thuế đã nộp' =
+			
+			SUMX(
+			    SUMMARIZE(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],
+			        'FACT - GL ACCOUNT BALANCE OFFSET'[OFFSET_GL_ACCT],
+			        "DEBIT_AMT", SUM('FACT - GL ACCOUNT BALANCE OFFSET'[DEBIT_AMT]),
+			        "CREDIT_AMT", SUM('FACT - GL ACCOUNT BALANCE OFFSET'[CREDIT_AMT])
+			    ),
+			    IF(
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[OFFSET_GL_ACCT],2) = "11",
+			        /*
+			        IF(
+			            [DEBIT_AMT] + [CREDIT_AMT] >= 0,
+			            [DEBIT_AMT] + [CREDIT_AMT],
+			            BLANK()
+			        ),
+			        */
+			        [DEBIT_AMT] + [CREDIT_AMT],
+			        BLANK()
+			    )
+			)
+		displayFolder: GL
+		lineageTag: bde6d36c-5931-41bf-b3f8-acacd879d115
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số thuế phải nộp' =
+			
+			/*
+			SUMX(
+			    SUMMARIZE(
+			        'FACT - GL ACCOUNT BALANCE OFFSET',
+			        'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],
+			        'FACT - GL ACCOUNT BALANCE OFFSET'[OFFSET_GL_ACCT],
+			        "DEBIT_AMT", SUM('FACT - GL ACCOUNT BALANCE OFFSET'[DEBIT_AMT]),
+			        "CREDIT_AMT", SUM('FACT - GL ACCOUNT BALANCE OFFSET'[CREDIT_AMT])
+			    ),
+			    SWITCH(
+			        TRUE(),
+			        'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO] = "3331100000",
+			            BLANK(),
+			        LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO],4) IN {"3335","3338","3333"}
+			        && LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[OFFSET_GL_ACCT],2) <> "11",
+			            /*
+			            IF(
+			                [DEBIT_AMT] + [CREDIT_AMT] < 0,
+			                [DEBIT_AMT] + [CREDIT_AMT],
+			                BLANK()
+			            ),
+			            */
+			            [DEBIT_AMT] + [CREDIT_AMT],
+			        'FACT - GL ACCOUNT BALANCE OFFSET'[GL_ACCOUNT_NO] <> "3335000000"
+			        && NOT(LEFT('FACT - GL ACCOUNT BALANCE OFFSET'[OFFSET_GL_ACCT],3) IN {"621","622","627","632"}),
+			            IF(
+			                [DEBIT_AMT] + [CREDIT_AMT] < 0,
+			                ([DEBIT_AMT] + [CREDIT_AMT]),
+			                BLANK()
+			            ),
+			        BLANK()
+			    )
+			) * -1
+			*/
+			[Số dư thuế cuối kỳ] + [Số thuế đã nộp] - [Số dư thuế đầu kỳ]
+		displayFolder: GL
+		lineageTag: 3fa5f99e-ccf2-49fa-a0f9-5640abb24231
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí bán hàng (CS)' =
+			
+			ABS(
+			TOTALYTD(
+			    CALCULATE(
+			        SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			        LEFT('FACT - INCOME STATEMENT - CS'[GL_ACCOUNT_NO],3) IN {"641"}
+			    ),
+			    'DIM - DATE'[Date]
+			)
+			)
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: 64bf595c-4852-47a2-9bf4-2609087ffc79
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí QLDN (CS)' =
+			
+			ABS(
+			TOTALYTD(
+			    CALCULATE(
+			        SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			        LEFT('FACT - INCOME STATEMENT - CS'[GL_ACCOUNT_NO],3) IN {"642"}
+			    ),
+			    'DIM - DATE'[Date]
+			)
+			)
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: c0849071-a65f-4554-9a0f-42b1634d2959
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Doanh thu, thu nhập (CS)' =
+			ABS(
+			TOTALYTD(
+			    CALCULATE(
+			        SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			        LEFT('FACT - INCOME STATEMENT - CS'[GL_ACCOUNT_NO],1) IN {"5","7"}
+			    ),
+			    'DIM - DATE'[Date]
+			)
+			)
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: 2df8ce71-1991-4ef1-878b-2dd0fbbdbb53
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure EBIT =
+			
+			Var loinhuan_truocthue =  -1 * CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11","21","23","24","25","26","31","32"})
+			Var chiphilaivay = CALCULATE(SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			    FILTER('FACT - INCOME STATEMENT','FACT - INCOME STATEMENT'[IS_ITEM] = "23"))
+			Return
+			loinhuan_truocthue + chiphilaivay
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: 19630c6a-e427-4084-8f89-5a97f31fd90c
+
+	measure 'Giá vốn (CS)' =
+			ABS(
+			TOTALYTD(
+			    CALCULATE(
+			        SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			        LEFT('FACT - INCOME STATEMENT - CS'[GL_ACCOUNT_NO],3) IN {"632","635","811"}
+			    ),
+			    'DIM - DATE'[Date]
+			)
+			)
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: 592984c9-d34d-41bb-84b2-79017da33d6d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Gross Profit Margin - Tỷ suất lợi nhuận gộp' = ```
+			
+			 Var Gross_Profit =  CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11"})
+			 Var Net_Revenue = CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02"})
+			RETURN 
+			Gross_Profit/Net_Revenue
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Income statement
+		lineageTag: 8809f6df-7809-4447-9966-cd8f1ff66422
+
+	measure 'Kế hoạch doanh thu (CS)' = CALCULATE(TOTALYTD([Sale Amount Plan],'DIM - DATE'[Date]), FILTER('FACT - INCOME STATEMENT - CS',[Loại hình] = "Hoạt động sản xuất kinh doanh"))
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: af9811d8-4c62-4d6b-b9f3-c9b7ed609468
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lợi nhuận gộp (CS)' =
+			
+			ABS(
+			TOTALYTD(
+			    SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			    'DIM - DATE'[Date]
+			)
+			)
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: 7a09d854-0a03-4aca-a1b1-47c897dd58a5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế P&L kỳ này từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Số liệu P&L kỳ này],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: 7d15b3bf-858d-48b2-946a-9bd259dbe107
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Lũy kế P&L kỳ này từ đầu năm - CS' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Số liệu P&L kỳ này - CS],
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: Income statement
+		lineageTag: 375722a0-6030-4637-ae1f-f718a0d88c4e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế P&L kỳ trước từ đầu năm' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Số liệu P&L kỳ này],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: bf4b7c58-4d13-4086-b62e-b3bb63d9e880
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Lũy kế P&L kỳ trước từ đầu năm - CS' =
+			
+			VAR _max_period = MAX('DIM - DATE'[Month])
+			RETURN
+			CALCULATE(
+			    [Số liệu P&L kỳ này - CS],
+			    PREVIOUSYEAR('DIM - DATE'[Date]),
+			    FILTER(
+			        ALL('DIM - DATE'[Month]),
+			        'DIM - DATE'[Month] <= _max_period
+			    )
+			)
+		displayFolder: Income statement
+		lineageTag: 81582b59-91c8-4ee9-8ae7-917612014edf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Profit Margin - Tỷ suất lợi nhuận ròng' = ```
+			
+			
+			Var Profit_After_Tax = CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11","21","23","24","25","26","31","32","51","52"})
+			Var Net_Sale_Amt =  CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02"})
+			RETURN 
+			Profit_After_Tax/Net_Sale_Amt
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Income statement
+		lineageTag: f65fdfe9-6edf-46a5-b104-cbd411913c6d
+
+	measure 'Số liệu P&L cùng kỳ năm ngoái' =
+			
+			CALCULATE(
+			    [Số liệu P&L kỳ này],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date])
+			)
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: 63408a15-9ef1-4887-be0f-d957826814f8
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Số liệu P&L cùng kỳ năm ngoái - CS' =
+			
+			CALCULATE(
+			    [Số liệu P&L kỳ này - CS],
+			    SAMEPERIODLASTYEAR('DIM - DATE'[Date])
+			)
+		displayFolder: Income statement
+		lineageTag: 425e50fc-9f24-4309-8cff-98436d646e91
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số liệu P&L kỳ này' =
+			SWITCH(
+			    SELECTEDVALUE('DIM - REPORTING LINE IS'[ITEM_NO]),
+			    "10",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "20",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "22",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"23","24"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "30",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11","21","23","24","25","26"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "40",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"31","32"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "50",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11","21","23","24","25","26","31","32"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "60",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT'[IS_ITEM] IN {"01","02","11","21","23","24","25","26","31","32","51","52"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    SUMX(
+			        'FACT - INCOME STATEMENT',
+			        'FACT - INCOME STATEMENT'[LOCAL_AMT] * RELATED('DIM - REPORTING LINE IS'[SIGN])
+			    )
+			)
+		displayFolder: Income statement
+		lineageTag: 80e17c32-30ea-400d-8c71-0fa82899934b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số liệu P&L kỳ này - CS' =
+			SWITCH(
+			    SELECTEDVALUE('DIM - REPORTING LINE IS'[ITEM_NO]),
+			    "10",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT - CS'[IS_ITEM] IN {"01","02"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT - CS'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "20",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT - CS'[IS_ITEM] IN {"01","02","11"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT - CS'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "22",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT - CS'[IS_ITEM] IN {"23","24"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT - CS'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "30",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT - CS'[IS_ITEM] IN {"01","02","11","21","23","24","25","26"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT - CS'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "40",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT - CS'[IS_ITEM] IN {"31","32"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT - CS'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "50",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT - CS'[IS_ITEM] IN {"01","02","11","21","23","24","25","26","31","32"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT - CS'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    "60",
+			        CALCULATE(
+			            SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			            'FACT - INCOME STATEMENT - CS'[IS_ITEM] IN {"01","02","11","21","23","24","25","26","31","32","51","52"},
+			            CROSSFILTER(
+			                'DIM - REPORTING LINE IS'[ITEM_NO],
+			                'FACT - INCOME STATEMENT - CS'[IS_ITEM],
+			                none
+			            )
+			        ) * SELECTEDVALUE('DIM - REPORTING LINE IS'[SIGN]),
+			    SUMX(
+			        'FACT - INCOME STATEMENT - CS',
+			        'FACT - INCOME STATEMENT - CS'[LOCAL_AMT] * RELATED('DIM - REPORTING LINE IS'[SIGN])
+			    )
+			)
+		displayFolder: Income statement
+		lineageTag: 32faf03e-58cd-42f9-bfba-04ee71ce5f6a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'So sánh với cùng kỳ kỳ trước' =
+			IF(
+			    NOT(ISBLANK([Lũy kế P&L kỳ này từ đầu năm])),
+			    DIVIDE(
+			        [Lũy kế P&L kỳ này từ đầu năm],
+			        [Lũy kế P&L kỳ trước từ đầu năm]
+			    ) - 1
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Income statement
+		lineageTag: d46a8d62-ab33-45bc-bf90-8155603870af
+
+	measure 'So sánh với kỳ trước' =
+			
+			DIVIDE(
+			    [Số liệu P&L kỳ này],
+			    [Số liệu P&L cùng kỳ năm ngoái]
+			) - 1
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Income statement
+		lineageTag: f56df527-9f9c-44c1-a9fd-efbf188d80dc
+
+	measure 'Tổng chi phí (CS)' =
+			
+			ABS(
+			TOTALYTD(
+			    CALCULATE(
+			        SUM('FACT - INCOME STATEMENT - CS'[LOCAL_AMT]),
+			        LEFT('FACT - INCOME STATEMENT - CS'[GL_ACCOUNT_NO],3) IN {"632","635","811","641","642"}
+			    ),
+			    'DIM - DATE'[Date]
+			)
+			)
+		formatString: #,0
+		displayFolder: Income statement
+		lineageTag: bb4a0320-171d-4d56-ab12-85b375380823
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ lệ hoàn thành kế hoạch (CS)' =
+			
+			DIVIDE(
+			    IF(SELECTEDVALUE('FACT - INCOME STATEMENT - CS'[Loại hình]) = "Hoạt động sản xuất kinh doanh",[Doanh thu, thu nhập (CS)]),
+			    [Kế hoạch doanh thu (CS)]
+			)
+		formatString: #,0.00%
+		displayFolder: Income statement
+		lineageTag: 3656d0e5-eb50-4695-ad3a-0ab7b85567b6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số liệu BS cuối kỳ (tỷ)' = [Số liệu BS cuối kỳ] / 10^9
+		formatString: #,0.00
+		isHidden
+		lineageTag: c14304a2-0249-42a2-a2eb-a4bfd3c349e2
+
+	measure 'Số liệu BS đầu kỳ (tỷ)' = [Số liệu BS đầu kỳ] / 10^9
+		formatString: #,0.00
+		isHidden
+		lineageTag: 67aa1f65-25e4-4d03-9e03-c1d83fe8e7be
+
+	measure 'Số liệu P&L cùng kỳ năm ngoái (tỷ)' = [Số liệu P&L cùng kỳ năm ngoái] / 10^9
+		formatString: #,0.00
+		isHidden
+		lineageTag: aefd1199-d4bb-462a-ad98-6ed731258cd2
+
+	measure 'Số liệu P&L kỳ này (tỷ)' = [Số liệu P&L kỳ này] / 10^9
+		formatString: #,0.00
+		isHidden
+		lineageTag: 6c1f5f71-b19a-4df0-b04c-17f0b11910d4
+
+	measure 'Số liệu CF kỳ này (tỷ)' = [CASH FLOW AMOUNT] / 10^9
+		formatString: #,0.00
+		isHidden
+		lineageTag: 37486c87-7003-493c-ab36-60e1d5ef517f
+
+	measure 'Số liệu CF kỳ trước (tỷ)' = [Số liệu CF kỳ trước] / 10^9
+		formatString: #,0.00
+		isHidden
+		lineageTag: f779b25d-9b4f-4a4d-9b32-d865b38df140
+
+	measure 'Bình quân vốn chủ sở hữu' =
+			SUMX(VALUES('DIM - DATE'[MonthYear]), (CALCULATE(
+			    [Số liệu BS cuối kỳ], 'DIM - REPORTING LINE BS'[ITEM_NO] = "411A"
+			) + CALCULATE(
+			    [Số liệu BS đầu kỳ], 'DIM - REPORTING LINE BS'[ITEM_NO] = "411A"
+			)) / 2)
+		displayFolder: _FI Metrics
+		lineageTag: d43e73b8-8f31-4cd9-bde2-e97ba79ae4f9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Module
+		dataType: string
+		lineageTag: ed45c181-c321-4b5a-8ea9-5c1cfef005ac
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Module]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Metrics: CO - Controlling' = calculated
+		mode: import
+		source = ```
+				DATATABLE (
+				    "Module", STRING, 
+				    { 
+				        {"FI"}
+				    } 
+				)
+				```
+
+	annotation PBI_Id = 135fb54c1ba44b449a0584fb15f873f6
+

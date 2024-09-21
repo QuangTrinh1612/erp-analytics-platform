@@ -1,0 +1,233 @@
+table 'FACT - AVAILABLE INVENTORY WH'
+	lineageTag: 985c2703-47d3-4365-8734-e5812d858223
+
+	column VERSION
+		dataType: int64
+		lineageTag: b341c91e-e081-4977-92fd-0b79175ee127
+		summarizeBy: sum
+		sourceColumn: VERSION
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STT
+		dataType: string
+		lineageTag: f7303352-6e08-4122-a6df-a0a57e7c6682
+		summarizeBy: none
+		sourceColumn: STT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column KHO
+		dataType: string
+		lineageTag: b3d7c417-4047-4b9b-aef7-f97dda9f558c
+		summarizeBy: none
+		sourceColumn: KHO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column VITRI
+		dataType: string
+		lineageTag: 188bb257-459d-48b1-9ab3-3decfe3dddf7
+		summarizeBy: none
+		sourceColumn: VITRI
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		lineageTag: 0ec171a8-9bf0-4afc-b327-eab4499d9779
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 2d50f84b-bef8-4d54-9630-8b1c21929463
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUOM
+		dataType: string
+		lineageTag: 4ed8622e-daee-4778-a74b-ef5dd90fe6ef
+		summarizeBy: none
+		sourceColumn: BUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT_TEXT
+		dataType: string
+		lineageTag: ef45d6fd-af61-4342-bcb1-7217f2569b3f
+		summarizeBy: none
+		sourceColumn: UNIT_TEXT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BAO
+		dataType: double
+		lineageTag: 9c20d4a1-90e1-411d-8ae5-7c252a1b0069
+		summarizeBy: sum
+		sourceColumn: BAO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QUANTITY
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: 84b8fa96-b117-4b9a-9fb2-ba3874bc8562
+		summarizeBy: sum
+		sourceColumn: QUANTITY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column QUYCACH
+		dataType: string
+		lineageTag: a8967395-b924-4eb5-afcf-6c3dcc933dac
+		summarizeBy: none
+		sourceColumn: QUYCACH
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH
+		dataType: string
+		lineageTag: dbeeae30-8c4a-4689-9e0d-6250ca67a0f4
+		summarizeBy: none
+		sourceColumn: BATCH
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANUF_DATE
+		dataType: string
+		lineageTag: 5b48dbf0-793b-49c0-aa93-c90d7a4016b3
+		summarizeBy: none
+		sourceColumn: MANUF_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_INACTIVE
+		dataType: string
+		lineageTag: 72c34290-516e-4bf6-9502-e76e4c8d3dd9
+		summarizeBy: none
+		sourceColumn: STATUS_INACTIVE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGED_ON
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: c4167b26-cdb6-4c8f-a76a-282472df32fd
+		summarizeBy: none
+		sourceColumn: CHANGED_ON
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 87f7e77f-305d-45f3-92d7-6cad1d47c8be
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECEIPT_QTY
+		dataType: double
+		lineageTag: e12d972d-9a4e-4279-8cd9-aa474eeecbf2
+		summarizeBy: sum
+		sourceColumn: RECEIPT_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_QTY
+		dataType: double
+		lineageTag: fabb92b3-ba44-4a3f-a061-ae71bec09fdc
+		summarizeBy: sum
+		sourceColumn: ISSUE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Nhóm Tồn Kho' = ```
+			SWITCH(TRUE(),
+			 RELATED('DIM - STORAGE LOCATION'[STORAGE_LOCATION]) IN { "1431","1401"} && RELATED('DIM - MATERIAL'[MATL_TYPE]) IN { "Z00","Z01","Z40"} , "NLSX NPK",
+			RELATED('DIM - STORAGE LOCATION'[STORAGE_LOCATION]) IN { "1202","1422","1298"} && RELATED('DIM - MATERIAL'[MATL_TYPE]) IN { "Z50","Z51","Z61"} , "Thành Phẩm", 
+			RELATED('DIM - STORAGE LOCATION'[STORAGE_LOCATION]) IN { "1201","1421"} && RELATED('DIM - MATERIAL'[MATL_TYPE]) IN { "Z40"}, "BTP / SPDD",
+			IF(RELATED('DIM - PLANT'[PLANT_CODE]) = "1999", VALUE(RELATED('DIM - STORAGE LOCATION'[STORAGE_LOCATION])) < 1999 &&   VALUE(RELATED('DIM - STORAGE LOCATION'[STORAGE_LOCATION])) > 1920), "Khách Hàng Gửi tại NM",
+			RELATED('DIM - PLANT'[PLANT_CODE]) = "1000" && RELATED('DIM - STORAGE LOCATION'[STORAGE_LOCATION]) = "1298", "Hàng Hóa tại Nhà Máy"
+			)
+			
+			```
+		dataType: string
+		lineageTag: 3e81c435-8f08-433f-88f6-498fa2400c7d
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_PLANT_KEY = [MATERIAL_CODE] & "-" & [PLANT_CODE]
+		dataType: string
+		lineageTag: 3ba11889-51ee-4c32-9993-145727be959f
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Available Inventory WH' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_AVAILABLE_INVENTORY_WH = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_AVAILABLE_INVENTORY_WH"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_AVAILABLE_INVENTORY_WH,{{"CHANGED_ON", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,205 @@
+table 'FACT - TAX LINE ITEM'
+	lineageTag: 8583a9cf-cbf9-4c1e-a948-bf7d287fcd90
+
+	measure 'Doanh số chưa có VAT' = -1 * SUM('FACT - TAX LINE ITEM'[BASE_AMT])
+		formatString: #,0.00
+		lineageTag: d09ac6a6-c573-4326-8269-e385cb901a80
+
+	measure 'Thuế GTGT' = -1 * SUM('FACT - TAX LINE ITEM'[TAX_AMT])
+		formatString: #,0
+		lineageTag: 616b87d5-8b47-45a8-b9fd-8637274485d8
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: dca47547-1c08-4f01-92aa-18c4386221c0
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: a442c538-91c4-4928-a626-9a57ebac43f6
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_NO
+		dataType: string
+		lineageTag: 1eb7ed51-bb74-43d2-b16d-ba3059046430
+		summarizeBy: none
+		sourceColumn: DOC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_ITEM
+		dataType: string
+		lineageTag: 8ee43d5a-4353-4927-a018-c0fcf03a0ad1
+		summarizeBy: none
+		sourceColumn: DOC_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_DATE
+		dataType: string
+		lineageTag: a207475c-88ac-4240-92e5-61dc75b489ce
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAX_GROUP_DESC
+		dataType: string
+		lineageTag: 93e8ee71-76c4-45db-9d16-e1b194b6bb5a
+		summarizeBy: none
+		sourceColumn: TAX_GROUP_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAX_CODE
+		dataType: string
+		lineageTag: 3cef035c-8e17-4bd2-8b90-3f459384432d
+		summarizeBy: none
+		sourceColumn: TAX_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column KI_HIEU_SO
+		dataType: string
+		lineageTag: d56854b8-491a-4d96-a593-e6ee256db4da
+		summarizeBy: none
+		sourceColumn: KI_HIEU_SO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SO_HDGT
+		dataType: string
+		lineageTag: d8ab29d0-73af-4fcd-b180-9fe3c8a936f3
+		summarizeBy: none
+		sourceColumn: SO_HDGT
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_CODE
+		dataType: string
+		lineageTag: 9ac26eff-f20c-45ff-9d82-1ff6f78bda13
+		summarizeBy: none
+		sourceColumn: VENDOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_NAME
+		dataType: string
+		lineageTag: 2483e1db-2db9-46fc-833b-aed6a858c924
+		summarizeBy: none
+		sourceColumn: USER_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_AMT
+		dataType: double
+		lineageTag: aeb282bf-e930-44a4-8ba0-94cef47f24ea
+		summarizeBy: sum
+		sourceColumn: BASE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TAX_AMT
+		dataType: double
+		lineageTag: 7fc494be-ceff-44e1-890d-b4516a10beab
+		summarizeBy: sum
+		sourceColumn: TAX_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TAX_RATE
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 554a4808-b668-4801-9a60-9b0bb239a978
+		summarizeBy: sum
+		sourceColumn: TAX_RATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REPORT_TYPE
+		dataType: string
+		lineageTag: 1e54cd3a-18df-4a14-b08d-576aee1d45cc
+		summarizeBy: none
+		sourceColumn: REPORT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_CODE
+		dataType: string
+		lineageTag: ed4bef8a-3644-4502-99a7-25ce0864fa9f
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_NAME
+		dataType: string
+		lineageTag: 8dfdb559-7f91-442c-be8b-50097594f5f8
+		summarizeBy: none
+		sourceColumn: CUSTOMER_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_NAME
+		dataType: string
+		lineageTag: 8a05fd14-6650-4880-86c8-29185bb95c48
+		summarizeBy: none
+		sourceColumn: VENDOR_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column VAT_REG_NO
+		dataType: string
+		lineageTag: 43fa1848-e6ec-4632-99db-1548c963a8b3
+		summarizeBy: none
+		sourceColumn: VAT_REG_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_REVERSE
+		dataType: int64
+		formatString: 0
+		lineageTag: 87b3b356-a1f0-4aa9-85a7-9fbc0b5cf7aa
+		summarizeBy: sum
+		sourceColumn: IS_REVERSE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REVERSE_DOC
+		dataType: string
+		lineageTag: 155faf96-e8d0-4e47-a620-4151a4dedea8
+		summarizeBy: none
+		sourceColumn: REVERSE_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - TAX LINE ITEM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_FACT_TAX_LINE_ITEM = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_TAX_LINE_ITEM"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(VW_FACT_TAX_LINE_ITEM,{{"POSTING_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

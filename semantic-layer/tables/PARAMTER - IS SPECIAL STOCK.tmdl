@@ -1,0 +1,22 @@
+table 'PARAMTER - IS SPECIAL STOCK'
+	isHidden
+	lineageTag: ca8025d3-d307-4f42-afce-c08c8e714253
+
+	column IS_SPECIAL_STOCK
+		dataType: string
+		lineageTag: ad435107-e66e-43a3-bd88-2c79cf828b07
+		summarizeBy: none
+		sourceColumn: IS_SPECIAL_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'IS SPECIAL STOCK' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlSK1YlWMlCKjQUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [IS_SPECIAL_STOCK = _t])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

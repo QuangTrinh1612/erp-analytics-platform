@@ -1,0 +1,235 @@
+table 'FACT - MATERIAL ALLOCATION CONSUMPTION'
+	lineageTag: ddda92c2-e041-4e82-9224-9572ecf2f483
+
+	column FISCAL_DATE
+		dataType: string
+		lineageTag: 92d1e0c3-bcde-4bac-8036-62f0a648e6d4
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 19688ef5-230c-4958-883e-c3fe3382e2d5
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOCATION
+		dataType: string
+		lineageTag: ed76db62-37c1-40d9-804e-8be2cb65bd36
+		summarizeBy: none
+		sourceColumn: STORAGE_LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRO_SEMI_CODE
+		dataType: string
+		lineageTag: 535333b4-9d0c-4d53-85db-62edb5e194a2
+		summarizeBy: none
+		sourceColumn: PRO_SEMI_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 13e1eb38-338c-46bd-81e4-a261c346df85
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: d9f3c466-63a6-4012-ad7a-9ff8a7823c32
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER_CODE
+		dataType: string
+		lineageTag: 010d4fa6-054d-4629-af33-6814bc356834
+		summarizeBy: none
+		sourceColumn: COST_CENTER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELEMENT
+		dataType: string
+		lineageTag: ec09d4f0-ce8d-4dee-8012-fa86f48edd27
+		summarizeBy: none
+		sourceColumn: COST_ELEMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PARTNER_OBJECT
+		dataType: string
+		lineageTag: 5946289f-8f32-4ef8-bd1e-04342971d9fc
+		summarizeBy: none
+		sourceColumn: PARTNER_OBJECT
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UNIT_QTY
+		dataType: string
+		lineageTag: 86d754dc-a2da-4900-88ca-2bd8908342d6
+		summarizeBy: none
+		sourceColumn: BASE_UNIT_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UNIT_VALUE
+		dataType: string
+		lineageTag: 5824c03b-ddf7-42ee-93df-5bbaf8122048
+		summarizeBy: none
+		sourceColumn: BASE_UNIT_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UNIT
+		dataType: string
+		lineageTag: 60eb385d-a960-4887-ab49-7ac9641e97c2
+		summarizeBy: none
+		sourceColumn: BASE_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: 1d95721e-6699-44f1-b6fb-580ba380c20f
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: d614e711-1746-463f-9d4d-5f0fb5447018
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONSUMP_QTY
+		dataType: double
+		lineageTag: 3a4a231d-4f18-4d43-9856-700d81e6451d
+		summarizeBy: sum
+		sourceColumn: CONSUMP_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CONSUMP_VALUE
+		dataType: double
+		lineageTag: def4a0b0-9a41-4278-b1c0-eda58e81fb72
+		summarizeBy: sum
+		sourceColumn: CONSUMP_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ACTUAL_MATERIAL_CONSUMPTION
+		dataType: double
+		lineageTag: b31d5426-98ad-45d9-adea-b5c6509ab257
+		summarizeBy: sum
+		sourceColumn: ACTUAL_MATERIAL_CONSUMPTION
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ACTUAL_CONSUMPTION_VALUE
+		dataType: double
+		lineageTag: f8862048-54c5-40f7-bc21-091c0bf6be1a
+		summarizeBy: sum
+		sourceColumn: ACTUAL_CONSUMPTION_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_PRICE
+		dataType: double
+		lineageTag: 0c3d0980-47c0-4d9b-ba75-5d05370f616a
+		summarizeBy: sum
+		sourceColumn: AVERAGE_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NUMBERDWH
+		dataType: double
+		lineageTag: 0c5b1e5c-2037-4118-b334-c5a1b687ea19
+		summarizeBy: sum
+		sourceColumn: NUMBERDWH
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e84b5c20-3776-4871-b8dd-3bc22d8c1c1c
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column AUTO_FLAG
+		dataType: string
+		lineageTag: f58d617e-3933-4773-b3e1-8b7d37dc6972
+		summarizeBy: none
+		sourceColumn: AUTO_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column FACTORY_CODE
+		dataType: string
+		lineageTag: 5898fb4a-93e9-419c-82d2-cdbcf5f9f882
+		summarizeBy: none
+		sourceColumn: FACTORY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIM_MATERIALS_NPK_CODE
+		dataType: int64
+		formatString: 0
+		lineageTag: e8f9a722-e14b-4b20-8658-b31fec458b6b
+		summarizeBy: none
+		sourceColumn: DIM_MATERIALS_NPK_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ENERGY_CODE
+		dataType: string
+		lineageTag: 9b89e4e7-0671-4b2e-a7b4-0b7aa9be6d81
+		summarizeBy: none
+		sourceColumn: ENERGY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACTUAL_UNIT_CONSUMPTION
+		dataType: string
+		lineageTag: d18603fc-bd86-45c9-aa1e-d61b51e690d7
+		summarizeBy: none
+		sourceColumn: ACTUAL_UNIT_CONSUMPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - MATERIAL ALLOCATION CONSUMPTION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_MATERIAL_ALLOCATION_CONSUMPTION = pvcfcprodsqlpool{[Schema="gld",Item="FACT_MATERIAL_ALLOCATION_CONSUMPTION"]}[Data]
+				in
+				    gld_FACT_MATERIAL_ALLOCATION_CONSUMPTION
+

@@ -1,0 +1,358 @@
+table 'DIM - EQUIPMENT'
+	lineageTag: f235ad45-1406-4b39-9528-e6f8e53cebe2
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: c6d7a4ef-b585-4ec1-af62-3ead1284911f
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_PERS
+		dataType: string
+		lineageTag: 5f9e9dcd-4717-4dbb-8b44-c3babf32a140
+		summarizeBy: none
+		sourceColumn: CHANGE_PERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column AUTHORIZ_GRP
+		dataType: string
+		lineageTag: f8b53fc9-0569-4941-9cd5-33b9d2709aad
+		summarizeBy: none
+		sourceColumn: AUTHORIZ_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_CAT_CODE
+		dataType: string
+		lineageTag: 9ad118ff-9d4f-44a2-8faf-0caa4ceb36c5
+		summarizeBy: none
+		sourceColumn: EQUI_CAT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_TYPE_CODE
+		dataType: string
+		lineageTag: 52c8f259-1b28-407a-a9aa-06113acb92e4
+		summarizeBy: none
+		sourceColumn: EQUI_TYPE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVENTORY_NO
+		dataType: string
+		lineageTag: e6d27a3c-966d-4ebb-976c-9b747bbc7b18
+		summarizeBy: none
+		sourceColumn: INVENTORY_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SIZE_DIM
+		dataType: string
+		lineageTag: 55e43e39-698e-4996-baf4-242bb5c612eb
+		summarizeBy: none
+		sourceColumn: SIZE_DIM
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEIGHT
+		dataType: double
+		lineageTag: a1f449fa-9951-4bf1-8285-389ef8aa519c
+		summarizeBy: sum
+		sourceColumn: WEIGHT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ACQUISTN_DATE
+		dataType: string
+		lineageTag: 0060c497-6f60-468c-916d-cc619c8e56c7
+		summarizeBy: none
+		sourceColumn: ACQUISTN_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACQUISTN_VALUE
+		dataType: double
+		lineageTag: 37fd3037-d019-4d19-9948-04da40792976
+		summarizeBy: sum
+		sourceColumn: ACQUISTN_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CURR_KEY
+		dataType: string
+		lineageTag: 3af27d17-ae68-4651-89ff-794f76b8f4f1
+		summarizeBy: none
+		sourceColumn: CURR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANUFRER_ASSET
+		dataType: string
+		lineageTag: 08d7c3ee-a8e8-4566-a1b5-b815e134b5cc
+		summarizeBy: none
+		sourceColumn: MANUFRER_ASSET
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANUFRER_COUNTRY
+		dataType: string
+		lineageTag: e18e84e1-c75e-4ab9-9a3f-83b8c31b0bb8
+		summarizeBy: none
+		sourceColumn: MANUFRER_COUNTRY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANUFRER_SERI
+		dataType: string
+		lineageTag: 8a68a753-710c-4521-8f2c-7f1193971f0f
+		summarizeBy: none
+		sourceColumn: MANUFRER_SERI
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANUFRER_MODEL
+		dataType: string
+		lineageTag: d09809c5-84cd-4fe1-881b-75d474912a4a
+		summarizeBy: none
+		sourceColumn: MANUFRER_MODEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONSTRUCTION_YEAR
+		dataType: string
+		lineageTag: 5f46aaf1-a7aa-4851-ad5e-a6da3506c45c
+		summarizeBy: none
+		sourceColumn: CONSTRUCTION_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONSTRUCTION_MONTH
+		dataType: string
+		lineageTag: cc769260-b0da-4ba9-99df-d0d26bd8a998
+		summarizeBy: none
+		sourceColumn: CONSTRUCTION_MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_STAT_DATE
+		dataType: string
+		lineageTag: 76e03641-46ec-47aa-8dad-ce465e03a127
+		summarizeBy: none
+		sourceColumn: EQUI_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUMBER
+		dataType: string
+		lineageTag: 6cbd7bad-90ed-4bf4-b72c-c1e38399ed7a
+		summarizeBy: none
+		sourceColumn: OBJECT_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_DESC
+		dataType: string
+		lineageTag: e93487ff-5e47-475a-8fa4-cfdfc9e1d27f
+		summarizeBy: none
+		sourceColumn: EQUI_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column USE_PERIOD
+		dataType: string
+		lineageTag: b024e1d4-4c8d-423c-b9c1-52a3194ed2c9
+		summarizeBy: none
+		sourceColumn: USE_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLAN_PLANT
+		dataType: string
+		lineageTag: dbf6188b-080d-4212-be1f-dfe3037abc95
+		summarizeBy: none
+		sourceColumn: PLAN_PLANT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONSTRUCTION_TYPE
+		dataType: string
+		lineageTag: 656dae80-c801-49dd-9097-39bf47e63211
+		summarizeBy: none
+		sourceColumn: CONSTRUCTION_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PARENT_EQUI_CODE
+		dataType: string
+		lineageTag: 4e0cb067-8fdf-440f-ab31-aa7141014ed0
+		summarizeBy: none
+		sourceColumn: PARENT_EQUI_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PARENT_EQUI_DES
+		dataType: string
+		lineageTag: 09e90b3b-4ab1-4fd5-9cdc-a4129e48f6ed
+		summarizeBy: none
+		sourceColumn: PARENT_EQUI_DES
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: 0e4a2d82-f540-458e-be13-3362da85783e
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER_ID
+		dataType: string
+		lineageTag: f7299dd9-86e7-42f8-988a-0a4ceadec3a2
+		summarizeBy: none
+		sourceColumn: WORK_CENTER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TECH_ID
+		dataType: string
+		lineageTag: 4d689b7c-51a9-4f2d-b36b-5363fb5ff032
+		summarizeBy: none
+		sourceColumn: TECH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC_ACCT_ASSIGN
+		dataType: string
+		lineageTag: 66fdbcd2-6ef9-4921-84a4-fe171f679311
+		summarizeBy: none
+		sourceColumn: LOC_ACCT_ASSIGN
+
+		annotation SummarizationSetBy = Automatic
+
+	column CATALOG_PROFILE
+		dataType: string
+		lineageTag: a76d6760-fba9-4701-bf4d-c98d2cd7136f
+		summarizeBy: none
+		sourceColumn: CATALOG_PROFILE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNCT_LOC_CODE
+		dataType: string
+		lineageTag: e21514c6-75ef-4595-b25c-b536ec26de32
+		summarizeBy: none
+		sourceColumn: FUNCT_LOC_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAG_NAME
+		dataType: string
+		lineageTag: 956b7b15-14fd-4c65-b630-8e694d741f4e
+		summarizeBy: none
+		sourceColumn: TAG_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_PLANT
+		dataType: string
+		lineageTag: 5c77e73c-ca07-4ee9-ad51-808d3d838ddc
+		summarizeBy: none
+		sourceColumn: MAINT_PLANT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC
+		dataType: string
+		lineageTag: ae112f65-8e76-4f06-8e73-e26f6a2dc60b
+		summarizeBy: none
+		sourceColumn: LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ROOM
+		dataType: string
+		lineageTag: a2935d83-1c01-4aa6-8228-9555df58b93d
+		summarizeBy: none
+		sourceColumn: ROOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: 17076c70-1223-4532-8c8d-ba6617b286fd
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_AREA
+		dataType: string
+		lineageTag: 8f25b6de-e4e9-43ee-83fe-5418c4518f45
+		summarizeBy: none
+		sourceColumn: CO_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		lineageTag: ab2b545f-ded6-4b51-9f4d-14d1743da348
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 844cbcf9-2c04-4c0f-b254-425a1e8fb56d
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUSI_AREA
+		dataType: string
+		lineageTag: 67479e9f-1973-48d8-a10b-41ec033675d1
+		summarizeBy: none
+		sourceColumn: BUSI_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column ABC_IND
+		dataType: string
+		lineageTag: 5cacd3af-39db-41dd-a0b5-3a444b316fba
+		summarizeBy: none
+		sourceColumn: ABC_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE
+		dataType: string
+		lineageTag: f8de7211-1cbf-447e-a095-a8b803b78906
+		summarizeBy: none
+		sourceColumn: NOTE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - EQUIPMENT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_EQUIPMENT = pvcfcprodsqlpool{[Schema="sil",Item="DIM_EQUIPMENT"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_EQUIPMENT,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

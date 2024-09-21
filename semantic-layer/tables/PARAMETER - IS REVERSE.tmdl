@@ -1,0 +1,27 @@
+table 'PARAMETER - IS REVERSE'
+	lineageTag: 29f93349-63c8-49c3-9bf1-7042121e1989
+
+	column IS_REVERSE
+		dataType: int64
+		formatString: 0
+		lineageTag: 5bd4228b-d979-4506-8e68-fa0ef7c9ac5c
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [IS_REVERSE]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PARAMETER - IS REVERSE' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "IS_REVERSE",INTEGER,
+				   {
+				    {0},
+				    {1}
+				   }
+				 )
+
+	annotation PBI_Id = d59295b3fdf74ccdaee6af143f12baab
+
