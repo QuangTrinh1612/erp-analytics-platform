@@ -1,0 +1,210 @@
+table 'DIM - COST CENTER'
+	lineageTag: 78661502-630a-48fa-b896-93b9e0d5551a
+
+	column CO_AREA
+		dataType: string
+		lineageTag: 1bc1302e-cd39-4c17-b22a-fbbf3cf38f44
+		summarizeBy: none
+		sourceColumn: CO_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER_CODE
+		dataType: string
+		lineageTag: c583a18f-9b47-49b7-a108-331266048746
+		summarizeBy: none
+		sourceColumn: COST_CENTER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_TO
+		dataType: string
+		lineageTag: 13b468ab-cbdb-4fa0-a0f6-efa3c2c57cb6
+		summarizeBy: none
+		sourceColumn: VALID_TO
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_FROM
+		dataType: string
+		lineageTag: c003c371-2f07-4529-a8d6-0e7efd2c425e
+		summarizeBy: none
+		sourceColumn: VALID_FROM
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_ON
+		dataType: string
+		lineageTag: ce3a9e14-90ba-4c77-a9c0-5eaa447c554c
+		summarizeBy: none
+		sourceColumn: CREATED_ON
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_BY
+		dataType: string
+		lineageTag: a7f098d9-83c8-4f4d-a4da-f0a59d5d0e8e
+		summarizeBy: none
+		sourceColumn: CREATED_BY
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPARTMENT
+		dataType: string
+		lineageTag: db797cea-4251-4730-b003-14d2f537de0d
+		summarizeBy: none
+		sourceColumn: DEPARTMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERSON_RES
+		dataType: string
+		lineageTag: 5757bb62-14a5-42ff-a887-ec176bb41909
+		summarizeBy: none
+		sourceColumn: PERSON_RES
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_RES
+		dataType: string
+		lineageTag: 94f77972-b498-4a03-9cc1-aead4c3e21f8
+		summarizeBy: none
+		sourceColumn: USER_RES
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_KEY
+		dataType: string
+		lineageTag: 9f68d44a-b838-41fc-880d-5240f0ba6304
+		summarizeBy: none
+		sourceColumn: CURRENCY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_KEY
+		dataType: string
+		lineageTag: c9919c9e-1472-4787-ac82-9c48971d81a2
+		summarizeBy: none
+		sourceColumn: COUNTRY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY
+		dataType: string
+		lineageTag: c783e358-5549-48f6-a614-cc0c4a360f66
+		summarizeBy: none
+		sourceColumn: CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISTRICT
+		dataType: string
+		lineageTag: 9d6dc99b-05bd-4809-89e6-afcc6766ea1d
+		summarizeBy: none
+		sourceColumn: DISTRICT
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 8c5625fc-588a-4e06-963b-cd4b6c9f6f24
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REGION
+		dataType: string
+		lineageTag: ac5a97ba-2930-4f48-9538-cc5b6dc912c0
+		summarizeBy: none
+		sourceColumn: REGION
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNC_AREA
+		dataType: string
+		lineageTag: 0b5a73fc-4848-401b-aa67-cc20bd6630b6
+		summarizeBy: none
+		sourceColumn: FUNC_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUS_AREA
+		dataType: string
+		lineageTag: bbfff4e5-fec8-42f5-ae45-d89f452bc88b
+		summarizeBy: none
+		sourceColumn: BUS_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER_CAT
+		dataType: string
+		lineageTag: c622f07f-bf38-48f9-a885-2ca152e15c96
+		summarizeBy: none
+		sourceColumn: COST_CENTER_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJ_NUMBER
+		dataType: string
+		lineageTag: dee99e3d-e069-44be-a549-842d60ba74ff
+		summarizeBy: none
+		sourceColumn: OBJ_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_CENTER_CODE
+		dataType: string
+		lineageTag: ff7cb3ab-a395-4a90-8b50-e5dbefe073eb
+		summarizeBy: none
+		sourceColumn: PROFIT_CENTER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 57fa0624-164d-4c6f-8cc9-81e8914c2902
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHORT_NAME
+		dataType: string
+		lineageTag: a3f7ebc0-3f91-4df2-952e-ce8f4dfddd25
+		summarizeBy: none
+		sourceColumn: SHORT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LONG_NAME
+		dataType: string
+		lineageTag: 9f31ca32-4208-40a3-8927-8f47e0a6d80a
+		summarizeBy: none
+		sourceColumn: LONG_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEARCH_TERM
+		dataType: string
+		lineageTag: 6a9b6ed9-8aae-44f5-a645-c744e811e681
+		summarizeBy: none
+		sourceColumn: SEARCH_TERM
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - COST CENTER' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_COST_CENTER = pvcfcprodsqlpool{[Schema="sil",Item="DIM_COST_CENTER"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_COST_CENTER,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

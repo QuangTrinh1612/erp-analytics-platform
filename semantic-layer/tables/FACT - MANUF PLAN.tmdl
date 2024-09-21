@@ -1,0 +1,98 @@
+table 'FACT - MANUF PLAN'
+	lineageTag: 463c75e4-cd08-46cf-9ad1-213397aab72a
+
+	column PERIOD
+		dataType: string
+		lineageTag: 9020ecbb-68c6-42cc-85f4-eb139f5507a2
+		summarizeBy: none
+		sourceColumn: PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 57ef42f6-3594-426a-ba4b-cf22122f00ea
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: ef9123d9-fdfd-4019-a72e-de840378e6a0
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FINISH_DATE
+		dataType: string
+		lineageTag: b88ba9d6-c0e8-440e-a8e8-7fe0189256a1
+		summarizeBy: none
+		sourceColumn: FINISH_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VERSION
+		dataType: string
+		lineageTag: 772dbc1e-ea78-43e7-9e8c-eb12cf0a9004
+		summarizeBy: none
+		sourceColumn: VERSION
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUOM
+		dataType: string
+		lineageTag: 0c572039-0b7e-4117-857d-bf0890b20e17
+		summarizeBy: none
+		sourceColumn: BUOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQ_TYPE
+		dataType: string
+		lineageTag: 3c4b6f90-7d84-4d2d-a544-4a5809046626
+		summarizeBy: none
+		sourceColumn: REQ_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQ_PLAN_NO
+		dataType: string
+		lineageTag: 156c080b-cfe1-4ab3-9c68-f4a2ad059c15
+		summarizeBy: none
+		sourceColumn: REQ_PLAN_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQ_POINTER
+		dataType: string
+		lineageTag: d16fbe25-ff7f-4a01-bba5-45b66aa5242b
+		summarizeBy: none
+		sourceColumn: REQ_POINTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUANTITY
+		dataType: double
+		lineageTag: f6e693b7-bd32-46e9-8ddf-04d6adebe0f5
+		summarizeBy: sum
+		sourceColumn: QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - MANUF PLAN' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_FACT_MANUF_PLAN = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_MANUF_PLAN"]}[Data]
+				in
+				    VW_FACT_MANUF_PLAN
+
+	annotation PBI_ResultType = Table
+

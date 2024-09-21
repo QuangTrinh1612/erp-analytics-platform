@@ -1,0 +1,244 @@
+table 'FACT - LOYALTY PROGRAM'
+	lineageTag: 3b9fb339-49bd-41ab-a399-504b70d03264
+
+	column RPT_KS_CYCLE_ID
+		dataType: double
+		lineageTag: 7494353d-573a-420c-bc05-a49fa5286433
+		summarizeBy: count
+		sourceColumn: RPT_KS_CYCLE_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column KS_ID
+		dataType: double
+		lineageTag: 68c2cd4e-7950-4a2d-b933-443a12db1029
+		summarizeBy: none
+		sourceColumn: KS_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column KS_LEVEL_ID
+		dataType: double
+		lineageTag: 62850d5e-7b0e-43af-b082-a8a136251755
+		summarizeBy: none
+		sourceColumn: KS_LEVEL_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column KS_LEVEL_CODE
+		dataType: string
+		lineageTag: e91ea616-df29-4666-8a60-066d11525204
+		summarizeBy: none
+		sourceColumn: KS_LEVEL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHOP_ID
+		dataType: double
+		lineageTag: 75c5fe96-ce65-42a2-a149-68d0e0e9d3f5
+		summarizeBy: count
+		sourceColumn: SHOP_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTOMER_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 48b889ed-aa1e-4034-9008-9a9fe44f3e5e
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column KS_CYCLE_REWARD_ID
+		dataType: double
+		lineageTag: c5bac5e8-af3e-48e9-b70b-f70c6b72b3df
+		summarizeBy: count
+		sourceColumn: KS_CYCLE_REWARD_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ACCUMULATION_POINT
+		dataType: double
+		lineageTag: 202ce11b-0b74-411b-b610-1ff3be2370f4
+		summarizeBy: sum
+		sourceColumn: ACCUMULATION_POINT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BONUS_POINT
+		dataType: double
+		lineageTag: 8cd7717b-a595-4d20-9d56-7d5cb83274ab
+		summarizeBy: sum
+		sourceColumn: BONUS_POINT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column KS_LEVEL_NEXT_ID
+		dataType: double
+		lineageTag: 3092a310-b38b-4584-a33b-60c461823706
+		summarizeBy: count
+		sourceColumn: KS_LEVEL_NEXT_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column KS_LEVEL_PREVIOUS_ID
+		dataType: double
+		lineageTag: 4062f627-c046-4931-9f17-ce98ab3f8dba
+		summarizeBy: count
+		sourceColumn: KS_LEVEL_PREVIOUS_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FROM_DATE
+		dataType: string
+		lineageTag: 86ac1667-8599-4029-a9b3-66bc19ed8991
+		summarizeBy: none
+		sourceColumn: FROM_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TO_DATE
+		dataType: string
+		lineageTag: 248c84a0-d67b-423b-b814-507dc1cd3e53
+		summarizeBy: none
+		sourceColumn: TO_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_ORDER_ID
+		dataType: double
+		lineageTag: 49f32033-d72b-4d51-84b0-49452c62b38d
+		summarizeBy: none
+		sourceColumn: SALE_ORDER_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDER_DATE
+		dataType: string
+		lineageTag: 97690484-fe67-432a-a5a0-c223230e9a27
+		summarizeBy: none
+		sourceColumn: ORDER_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_ORDER_DETAIL_ID
+		dataType: double
+		lineageTag: ead851c8-9578-4de7-b340-a825f8598aa3
+		summarizeBy: count
+		sourceColumn: SALE_ORDER_DETAIL_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRODUCT_ID
+		dataType: double
+		lineageTag: 6bb9b113-6ef0-44dc-8cc3-e9201f08cd13
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_QUANTITY
+		dataType: double
+		lineageTag: 7b55788d-1e4b-42cd-9250-1f853bbce135
+		summarizeBy: sum
+		sourceColumn: SALE_QUANTITY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TYPE
+		dataType: double
+		lineageTag: 5ca8518d-bea2-4e68-a8f6-792400f55a12
+		summarizeBy: sum
+		sourceColumn: TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDER_TYPE
+		dataType: string
+		lineageTag: f2c9f326-2629-44d9-a987-ce01bd96a085
+		summarizeBy: none
+		sourceColumn: ORDER_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - LOYALTY PROGRAM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_LOYALTY_PROGRAM = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_LOYALTY_PROGRAM"]}[Data]
+				in
+				    gld_VW_FACT_LOYALTY_PROGRAM
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

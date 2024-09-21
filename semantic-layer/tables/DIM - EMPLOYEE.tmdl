@@ -1,0 +1,45 @@
+table 'DIM - EMPLOYEE'
+	lineageTag: 134f597c-3b0c-422d-aa9e-8c5c26a7c975
+
+	column EMPLOYEE_CODE
+		dataType: string
+		lineageTag: b88ff182-c37f-4311-9e56-9dd27e1c4cab
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_NAME
+		dataType: string
+		lineageTag: 6b4fb18c-d599-4eaf-b782-09dba0ef4972
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_GROUP
+		dataType: string
+		lineageTag: 5ce9c033-d6cb-42a6-8536-9c11582c3c7a
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_SUBGROUP
+		dataType: string
+		lineageTag: 8dd56da2-66dc-4fd2-9a6f-97ed104b5da4
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_SUBGROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - EMPLOYEE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_EMPLOYEE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_EMPLOYEE"]}[Data]
+				in
+				    gld_VW_DIM_EMPLOYEE
+

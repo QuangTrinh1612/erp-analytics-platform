@@ -1,0 +1,103 @@
+table 'FACT - CP ITEM'
+	lineageTag: ec884308-2517-4800-867c-0dd313ab4b67
+
+	measure 'Số lượng cổ phiếu' =
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			RETURN
+			    CALCULATE(
+			        SUM('FACT - CP ITEM'[SLCP]),
+			        ALL('DIM - DATE'[Year]),
+			        'FACT - CP ITEM'[POSTING_DATE] <= _max_date
+			    )
+		lineageTag: 6ca496c0-0a61-43d4-9e74-f3828f2fc9e0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_ID
+		dataType: string
+		lineageTag: a90bcb5e-74a3-4dd1-9ac0-f8d1feb16aff
+		summarizeBy: none
+		sourceColumn: CP_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CP_TYPE
+		dataType: string
+		lineageTag: 78132f98-1a3b-4bca-ad46-ab2ab3b0c773
+		summarizeBy: none
+		sourceColumn: CP_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 4987a291-606c-4556-aa4f-926406f37a8a
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_YEAR
+		dataType: string
+		lineageTag: 0e1645bc-af65-44bc-a6cf-fa72f83b9f8c
+		summarizeBy: none
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 9a5921e5-56d9-407b-8f67-5f2a54338dfb
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CREATE_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 70d68b30-7394-4fbd-8adf-2cec10340266
+		summarizeBy: none
+		sourceColumn: CREATE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MGCP
+		dataType: double
+		lineageTag: 53f418dd-7876-4f6a-b111-145e309006ed
+		summarizeBy: sum
+		sourceColumn: MGCP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SLCP
+		dataType: double
+		lineageTag: c846f0ae-f7f7-43e0-b7b2-1c89bebbea38
+		summarizeBy: sum
+		sourceColumn: SLCP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - CP ITEM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_FACT_CP_ITEM = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_CP_ITEM"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(VW_FACT_CP_ITEM,{{"POSTING_DATE", type date}, {"CREATE_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

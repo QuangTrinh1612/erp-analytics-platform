@@ -1,0 +1,204 @@
+table 'PARAMETER - ZCO05'
+	lineageTag: 5947ec06-6951-4cd4-9d77-b787acb58243
+
+	measure 'ZCO05 measures' = ```
+			SWITCH(
+			    SELECTEDVALUE('PARAMETER - ZCO05'[STT],""),
+			    "1.1", SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			           // "Kế hoạch", [KH năm Sản lượng sản xuất (ZCO05)],
+			           "Kế hoạch",BLANK(),
+			            "Thực hiện",[TH Sản lượng sản xuất (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Sản lượng sản xuất (ZCO05)],'DIM - DATE'[Date])
+			            ),
+			    "1.2",SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			           // "Kế hoạch",[KH Sản lượng tiêu thụ (ZCO05)] ,
+			           "Kế hoạch",BLANK(),
+			            "Thực hiện",[TH Sản lượng tiêu thụ (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Sản lượng tiêu thụ (ZCO05)],'DIM - DATE'[Date])
+			            ),
+			     "2",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch", [KH năm Chi phí sản xuất (ZCO05)],
+			            "Thực hiện",[TH Chi phí sản xuất (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí sản xuất (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			       "2.1",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH năm Chi phí nguyên nhiên vật liệu (ZCO05)],
+			            "Thực hiện",[TH Chi phí nguyên nhiên vật liệu (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí nguyên nhiên vật liệu (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			      "2.2",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch", [KH năm Chi phí nhân công trực tiếp (ZCO05)],
+			            "Thực hiện",[TH Chi phí nhân công trực tiếp (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí nhân công trực tiếp (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			        "2.3",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH năm Chi phí sản xuất chung (ZCO05)] ,
+			            "Thực hiện",[TH Chi phí sản xuất chung (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí sản xuất chung (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			        "3",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch", [KH năm Chi phí bán hàng (ZCO05)],
+			            "Thực hiện",[TH Chi phí bán hàng (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí bán hàng (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			        "4",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH năm Chi phí quản lý (ZCO05)] ,
+			            "Thực hiện",[TH Chi phí quản lý (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí quản lý (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			        "5",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch", [KH năm Chi phí tài chính (ZCO05)],
+			            "Thực hiện",[TH Chi phí tài chính (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí tài chính (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			        "6",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			            "Kế hoạch",[KH năm Tổng chi phí (ZCO05)] ,
+			            "Thực hiện",[TH Tổng chi phí (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Tổng chi phí (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			
+			        "7.1",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			          //  "Kế hoạch",[KH năm Giá thành phân xưởng (ZCO05)] ,
+			          "Kế hoạch",BLANK(),
+			            "Thực hiện",[TH Giá thành phân xưởng (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Giá thành phân xưởng (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			        "7.2",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			           // "Kế hoạch", [KH Chi phí bán hàng - giá thành (ZCO05)],
+			           "Kế hoạch",BLANK(),
+			            "Thực hiện",[TH Chi phí bán hàng - giá thành (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí bán hàng - giá thành (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			        "7.3",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			           // "Kế hoạch",[KH Chi phí quản lý - giá thành (ZCO05)] ,
+			           "Kế hoạch",BLANK(),
+			            "Thực hiện",[TH Chi phí quản lý - giá thành (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí quản lý - giá thành (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000,
+			        
+			        "7.4" ,      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			          //  "Kế hoạch",[KH Chi phí tài chính - giá thành (ZCO05)] ,
+			          "Kế hoạch",BLANK(),
+			            "Thực hiện",[TH Chi phí tài chính - giá thành (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Chi phí tài chính - giá thành (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000, 
+			         "7.5",      
+			        SWITCH(
+			            SELECTEDVALUE('PARAMETER - ZCO05 MEASURE GROUP'[Measure group],""),
+			           // "Kế hoạch",[KH năm Giá thành toàn bộ (ZCO05)] ,
+			           "Kế hoạch",BLANK(),
+			            "Thực hiện",[TH Giá thành toàn bộ (ZCO05)],
+			            "Thực hiện lũy kế",TOTALYTD([TH Giá thành toàn bộ (ZCO05)],'DIM - DATE'[Date])
+			         ) / 1000000
+			 /*   4,SWITCH(
+			            SELECTEDVALUE('Parameter: ZCO05 Measure group'[Measure group],""),
+			            "Kế hoạch", ,
+			            "Thực hiện",,
+			            "Thực hiện lũy kế",TOTALYTD(,'DIM - DATE'[Date])
+			  */
+			)  
+			```
+		formatString: #,0.000
+		lineageTag: 92229294-4a3d-4c37-8bf4-47104e5087c2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Order
+		dataType: int64
+		lineageTag: 59b823a0-2f8f-480f-b435-d349f269acaf
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Order]
+
+		annotation SummarizationSetBy = Automatic
+
+	column STT
+		dataType: string
+		lineageTag: 3277f684-2030-448c-98f5-900014e932d9
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+		sortByColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nội dung'
+		dataType: string
+		lineageTag: f7f96ec3-0211-4d12-be44-666a5268f70a
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Nội dung]
+		sortByColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Đvt
+		dataType: string
+		lineageTag: 53cc3fde-e426-41d5-9b93-744c04d00650
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Đvt]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source = ```
+				DATATABLE (
+				    "Order", INTEGER,
+				    "STT", STRING,
+				    "Nội dung", STRING,
+				    "Đvt",string,
+				{
+				    {1,"1","Sản lượng",""},
+				    {2,"1.1","Sản lượng sản xuất","Tấn"},
+				    {3,"1.2","Sản lượng tiêu thụ","Tấn"},
+				    {4,"2","Chi phí sản xuất",""},
+				    {5,"2.1","Chi phí nguyên nhiên vật liệu","Tr. Đồng"},
+				    {6,"2.2","Chi phí nhân công trực tiếp","Tr. Đồng"},
+				    {7,"2.3","Chi phí sản xuất chung","Tr. Đồng"},
+				    {8,"3","Chi phí bán hàng","Tr. Đồng"},
+				    {9,"4","Chi phí quản lý","Tr. Đồng"},
+				    {10,"5","Chi phí tài chính","Tr. Đồng"},
+				    {11,"6","Tổng Chi phí","Tr. Đồng"},
+				    {12,"7","Giá thành đơn vị",""},
+				    {13,"7.1","Giá thành phân xưởng","Tr. Đồng/tấn"},
+				    {14,"7.2","Chi phí bán hàng","Tr. Đồng/tấn"},
+				    {15,"7.3","Chi phí quản lý","Tr. Đồng/tấn"},
+				    {16,"7.4","Chi phí tài chính","Tr. Đồng/tấn"},
+				    {17,"7.5","Giá thành toàn bộ","Tr. Đồng/tấn"}
+				}
+				)
+				
+				```
+

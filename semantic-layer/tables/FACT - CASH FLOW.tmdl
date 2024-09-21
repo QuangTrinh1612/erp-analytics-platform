@@ -1,0 +1,94 @@
+table 'FACT - CASH FLOW'
+	lineageTag: beef9c37-e6e9-4a16-9a19-ace516c3c377
+
+	column FISCAL_YEAR
+		dataType: string
+		lineageTag: efd3e9bc-5ccf-413f-990f-1a39423970e5
+		summarizeBy: none
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: string
+		lineageTag: 681475b0-0e15-4e8c-a81c-fc74944f6a6f
+		summarizeBy: none
+		sourceColumn: FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column CF_ITEM_CODE
+		dataType: string
+		lineageTag: f126c21d-3319-4c33-8fdf-3ef9c5f79e81
+		summarizeBy: none
+		sourceColumn: CF_ITEM_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 37bd86d0-c375-4a78-b463-abea8c38f3ce
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCAL_AMT
+		dataType: double
+		lineageTag: f370aab7-36b0-43e6-8c8d-2e7cb7ef1906
+		summarizeBy: sum
+		sourceColumn: LOCAL_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FISCAL_DATE = DATE('FACT - CASH FLOW'[FISCAL_YEAR],'FACT - CASH FLOW'[FISCAL_PERIOD],1)
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 76fc8bfd-279a-4925-b2c6-ac4d24767523
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY
+		dataType: string
+		lineageTag: ccec6329-f8d5-4941-ba9e-082f8961dcf9
+		summarizeBy: none
+		sourceColumn: CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMP_AMT
+		dataType: double
+		lineageTag: 4da659af-b589-4b4b-b7f6-00a2a8de5483
+		summarizeBy: sum
+		sourceColumn: COMP_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DATE_GRAIN
+		dataType: string
+		lineageTag: cd1d9647-fc46-466d-8fd1-ec993e851748
+		summarizeBy: none
+		sourceColumn: DATE_GRAIN
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - CASH FLOW' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    FACT_CASH_FLOW = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_CASH_FLOW"]}[Data]
+				in
+				    FACT_CASH_FLOW
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

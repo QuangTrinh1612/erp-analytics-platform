@@ -1,0 +1,2260 @@
+table '_SALES MEASURES'
+	lineageTag: b6f2bcb4-f0dd-4980-8a77-0c86f9a23b43
+
+	/// Formula: DISTINCTCOUNT('Dim Product'[PRODUCT_CODE])
+	measure 'Count Product' = DISTINCTCOUNT('DIM - PRODUCT'[PRODUCT_CODE])
+		formatString: 0
+		displayFolder: Others
+		lineageTag: bde07402-09c2-43d9-a3ae-abf21222ec0d
+
+	/// Formula: 
+	/// VAR __BASELINE_VALUE = [# of Visited Actual]
+	/// VAR __VALUE_TO_COMPARE = 
+	/// CALCULATE(COUNTROWS(DISTINCT('Fact Visit Actual C2'[ACTION_LOG_ID])),ALLSELECTED('Dim Customer C2 DMS'[CUSTOMER_C2_TYPE]) )
+	/// RETURN
+	/// DIVIDE( __BASELINE_VALUE, __VALUE_TO_COMPARE)
+	measure '% Visited Actual' = ```
+			
+			VAR __BASELINE_VALUE = [# of Visited Actual]
+			VAR __VALUE_TO_COMPARE = 
+			CALCULATE(COUNTROWS(DISTINCT('FACT - VISIT ACTUAL C2'[ACTION_LOG_ID])),ALLSELECTED('DIM - CUSTOMER C2 DMS'[CUSTOMER_C2_TYPE]) )
+			RETURN
+			DIVIDE( __BASELINE_VALUE, __VALUE_TO_COMPARE)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Visit Actual
+		lineageTag: 41acf35f-44ec-4211-863b-6ebf9477bfbf
+
+	/// Formula: 
+	/// VAR __BASELINE_VALUE = [# of Vistied Actual Customer C2] 
+	/// VAR __VALUE_TO_COMPARE = 
+	/// CALCULATE(COUNTROWS(DISTINCT('Fact Visit Actual C2'[CUSTOMER_ID])),ALLSELECTED('Dim Customer C2 DMS'[CUSTOMER_C2_TYPE]) )
+	/// RETURN
+	/// DIVIDE( __BASELINE_VALUE, __VALUE_TO_COMPARE)
+	measure '% Visited Actual Customer C2' = ```
+			
+			VAR __BASELINE_VALUE = [# of Vistied Actual Customer C2] 
+			VAR __VALUE_TO_COMPARE = 
+			CALCULATE(COUNTROWS(DISTINCT('FACT - VISIT ACTUAL C2'[CUSTOMER_ID])),ALLSELECTED('DIM - CUSTOMER C2 DMS'[CUSTOMER_C2_TYPE]) )
+			RETURN
+			DIVIDE( __BASELINE_VALUE, __VALUE_TO_COMPARE)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Visit Actual
+		lineageTag: ca7efe71-6c81-4bf9-b523-267cae782815
+
+	/// Formula: DISTINCTCOUNT('Fact Visit Actual C2'[ACTION_LOG_ID])
+	measure '# of Visited Actual' = DISTINCTCOUNT('FACT - VISIT ACTUAL C2'[ACTION_LOG_ID])
+		displayFolder: Visit Actual
+		lineageTag: 7fb76170-c61f-475c-8034-94a7f2d6909b
+
+	/// Formula: DISTINCTCOUNT('Fact Visit Actual C2'[CUSTOMER_ID])
+	measure '# of Vistied Actual Customer C2' = DISTINCTCOUNT('FACT - VISIT ACTUAL C2'[CUSTOMER_ID])
+		displayFolder: Visit Actual
+		lineageTag: 083e8e8d-30a4-4c0f-9c14-69907af0afee
+
+	/// Formula: SUM('Fact Contract Status'[CONTRACT_QTY]) - SUM('Fact Contract Status'[SALE_ORDER_QTY])
+	measure 'Remaining Contract Qty vs SO' = SUM('FACT - CONTRACT STATUS'[CONTRACT_QTY]) - SUM('FACT - CONTRACT STATUS'[SALE_ORDER_QTY])
+		displayFolder: Contract Status
+		lineageTag: e8ae54f4-fffb-4008-ba62-8ad61ec92764
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: [Contract Qty (PLHĐ Bán ký gửi)] - [Sale Order Qty (Of Contract) (PLHĐ Bán ký gửi)]
+	measure 'Remaining Contract Qty vs SO (PLHĐ Bán ký gửi)' = [Contract Qty (PLHĐ Bán ký gửi)] - [Sale Order Qty (Of Contract) (PLHĐ Bán ký gửi)]
+		displayFolder: Contract Status
+		lineageTag: ed71d739-810c-43fa-b2fc-cf4f44396c1f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: [Contract Qty (PLHĐ Xuất ký gửi)] - [Sale Order Qty (Of Contract) (PLHĐ Xuất ký gửi)]
+	measure 'Remaining Contract Qty vs SO (PLHĐ Xuất ký gửi)' = [Contract Qty (PLHĐ Xuất ký gửi)] - [Sale Order Qty (Of Contract) (PLHĐ Xuất ký gửi)]
+		displayFolder: Contract Status
+		lineageTag: 0c6b24f1-9b6c-4d74-8b3f-3785f13d0421
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: [Contract Qty (PLHĐ Bán)] - [Sale Order Qty (Of Contract) (PLHĐ Bán)]
+	measure 'Remaining Contract Qty vs SO (PLHĐ Bán)' = [Contract Qty (PLHĐ Bán)] - [Sale Order Qty (Of Contract) (PLHĐ Bán)]
+		displayFolder: Contract Status
+		lineageTag: b89a01af-0cf3-4f91-9935-9d818f89673e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Order Qty (of Contract)], 'Fact Contract Status'[CONTRACT_TYPE] = "ZQC2")
+	measure 'Sale Order Qty (Of Contract) (PLHĐ Bán ký gửi)' = CALCULATE([Sale Order Qty (of Contract)], 'FACT - CONTRACT STATUS'[CONTRACT_TYPE] = "ZQC2")
+		displayFolder: Contract Status
+		lineageTag: 12ea8b10-3b11-4030-99ef-670dd2b767b7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Order Qty (of Contract)], 'Fact Contract Status'[CONTRACT_TYPE] = "ZQC1")
+	measure 'Sale Order Qty (Of Contract) (PLHĐ Xuất ký gửi)' = CALCULATE([Sale Order Qty (of Contract)], 'FACT - CONTRACT STATUS'[CONTRACT_TYPE] = "ZQC1")
+		displayFolder: Contract Status
+		lineageTag: 3d8c628d-0f45-48ad-a57b-97bf4ffc44ce
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Order Qty (of Contract)], 'Fact Contract Status'[CONTRACT_TYPE] = "ZQC")
+	measure 'Sale Order Qty (Of Contract) (PLHĐ Bán)' = CALCULATE([Sale Order Qty (of Contract)], 'FACT - CONTRACT STATUS'[CONTRACT_TYPE] = "ZQC")
+		displayFolder: Contract Status
+		lineageTag: 7cb195a0-cd2a-46d6-af13-93bf0280427d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// CALCULATE([Remaining Contract Qty vs OD], FILTER('Fact Contract Status', 'Fact Contract Status'[CONTRACT_TYPE] ="ZQC"))
+	measure 'Remaining Contract Qty vs OD (PLHĐ Bán)' =
+			
+			CALCULATE([Remaining Contract Qty vs OD], FILTER('FACT - CONTRACT STATUS', 'FACT - CONTRACT STATUS'[CONTRACT_TYPE] ="ZQC"))
+		displayFolder: Contract Status
+		lineageTag: acd9c8c7-5ca3-42bc-839d-766fd25c1f87
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// CALCULATE([Remaining Contract Qty vs OD], FILTER('Fact Contract Status', 'Fact Contract Status'[CONTRACT_TYPE] ="ZQC2"))
+	measure 'Remaining Contract Qty vs OD (PLHĐ Bán ký gửi)' =
+			
+			CALCULATE([Remaining Contract Qty vs OD], FILTER('FACT - CONTRACT STATUS', 'FACT - CONTRACT STATUS'[CONTRACT_TYPE] ="ZQC2"))
+		displayFolder: Contract Status
+		lineageTag: dca1ce79-aeb5-4d1f-a11f-c64f461a1ef0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE('Fact Contract Status'[Contract Qty], 'Fact Contract Status'[CONTRACT_TYPE] = "ZQC2")
+	measure 'Contract Qty (PLHĐ Bán ký gửi)' = CALCULATE([Contract Qty], 'FACT - CONTRACT STATUS'[CONTRACT_TYPE] = "ZQC2")
+		displayFolder: Contract Status
+		lineageTag: 6f0749b1-d781-4895-8280-cecf5339a80f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE('Fact Contract Status'[Contract Qty], 'Fact Contract Status'[CONTRACT_TYPE] = "ZQC1")
+	measure 'Contract Qty (PLHĐ Xuất ký gửi)' = CALCULATE([Contract Qty], 'FACT - CONTRACT STATUS'[CONTRACT_TYPE] = "ZQC1")
+		displayFolder: Contract Status
+		lineageTag: 6f38f479-89a7-424d-9651-69ee3f18db5a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// CALCULATE([Remaining Contract Qty vs OD], FILTER('Fact Contract Status', 'Fact Contract Status'[CONTRACT_TYPE] ="ZQC1"))
+	measure 'Remaining Contract Qty vs OD (PLHĐ Xuất ký gửi)' =
+			
+			CALCULATE([Remaining Contract Qty vs OD], FILTER('FACT - CONTRACT STATUS', 'FACT - CONTRACT STATUS'[CONTRACT_TYPE] ="ZQC1"))
+		displayFolder: Contract Status
+		lineageTag: f78c7b19-f8b3-4cfe-8c02-73a3acc9a558
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: AVERAGEX(VALUES('Dim Product'[PRODUCT_CODE]), DIVIDE([Contract Amt], [Contract Qty]))
+	measure 'Contract Price' = AVERAGEX(VALUES('DIM - PRODUCT'[PRODUCT_CODE]), DIVIDE([Contract Amt], [Contract Qty]))
+		displayFolder: Contract Status
+		lineageTag: b73c4a4e-67ea-48e8-a1dd-3b210b6e1303
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE('Fact Contract Status'[Contract Qty], 'Fact Contract Status'[CONTRACT_TYPE] = "ZQC")
+	measure 'Contract Qty (PLHĐ Bán)' = CALCULATE([Contract Qty], 'FACT - CONTRACT STATUS'[CONTRACT_TYPE] = "ZQC")
+		displayFolder: Contract Status
+		lineageTag: b72cc782-c144-4958-9c06-eae06b88b862
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Contract Status'[TOTAL])
+	measure 'Contract Amt' = SUM('FACT - CONTRACT STATUS'[TOTAL])
+		formatString: #,##0.00
+		displayFolder: Contract Status
+		lineageTag: dd1dad91-5ba2-4324-9e3d-ee074b5ecbe2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: IF(ISBLANK([Actual Delivery Qty (of Contract)])&& ISBLANK('Fact Contract Status'[Contract Qty]) = FALSE(), 0, DIVIDE([Sale Order Qty (of Contract)],[Contract Qty] , BLANK()))
+	measure '% of Complete Contract Qty' = IF(ISBLANK([Actual Delivery Qty (of Contract)])&& ISBLANK([Contract Qty]) = FALSE(), 0, DIVIDE([Sale Order Qty (of Contract)],[Contract Qty] , BLANK()))
+		formatString: #,##0.0 %
+		displayFolder: Contract Status
+		lineageTag: ecc67414-7882-4e9a-aea1-f2dc26888489
+
+	/// Formula: SUM('Fact Contract Status'[TOTAL_VND])
+	measure 'Contract Amt VND' = SUM('FACT - CONTRACT STATUS'[TOTAL_VND])
+		formatString: #,0.00
+		displayFolder: Contract Status
+		lineageTag: 7763016e-78c2-49e1-b735-b3ab897277a1
+
+	/// Formula: SUM('Fact Contract Status'[TRANSIT_QTY])
+	measure 'Remaining Contract Qty in Transit' = SUM('FACT - CONTRACT STATUS'[TRANSIT_QTY])
+		formatString: #,##0.000
+		isHidden
+		displayFolder: Contract Status
+		lineageTag: fc20cbbb-4aba-4eff-8abc-a1696dcf3ad2
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Contract Status'[RENT_WAREHOUSE_QTY])
+	/// 
+	measure 'Remaining Contract Qty in Rent Warehouse' = ```
+			SUM('FACT - CONTRACT STATUS'[RENT_WAREHOUSE_QTY])
+			
+			```
+		formatString: #,##0.000
+		isHidden
+		displayFolder: Contract Status
+		lineageTag: 7df8d730-fd94-45e3-8094-8b863022874a
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Contract Status'[WAREHOUSE_QTY]) 
+	measure 'Remaining Contract Qty in Warehouse' = ```
+			SUM('FACT - CONTRACT STATUS'[WAREHOUSE_QTY]) 
+			```
+		formatString: #,##0.000
+		isHidden
+		displayFolder: Contract Status
+		lineageTag: 7e06b8ad-8776-49da-b6ac-1a58077646d2
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Contract Status'[CONTRACT_QTY])
+	measure 'Contract Qty' = SUM('FACT - CONTRACT STATUS'[CONTRACT_QTY])
+		formatString: #,##0.000
+		displayFolder: Contract Status
+		lineageTag: e6efd51a-48eb-4532-92c9-c4c9e4a194a8
+
+	/// Formula: DIVIDE(([# of Contract] - [# of Incomplete Contract]), [# of Contract], BLANK())
+	measure '% of Complete Contract' = DIVIDE(([# of Contract] - [# of Incomplete Contract]), [# of Contract], BLANK())
+		formatString: #,##0.0 %
+		displayFolder: Contract Status
+		lineageTag: b9492b7b-40c0-4eda-86c3-9dcf8b1bf915
+
+	/// Formula: CALCULATE(DISTINCTCOUNT('Fact Contract Status'[CONTRACT_NUMBER]), FILTER('Fact Contract Status', [Remaining Contract Qty vs OD] <> 0))
+	measure '# of Incomplete Contract' = CALCULATE(DISTINCTCOUNT('FACT - CONTRACT STATUS'[CONTRACT_NUMBER]), FILTER('FACT - CONTRACT STATUS', [Remaining Contract Qty vs OD] <> 0))
+		displayFolder: Contract Status
+		lineageTag: ab67c7fc-ffe9-458f-860b-5e049fb7f0dc
+
+	/// Formula: DISTINCTCOUNT('Fact Contract Status'[CONTRACT_NUMBER])
+	measure '# of Contract' = DISTINCTCOUNT('FACT - CONTRACT STATUS'[CONTRACT_NUMBER])
+		displayFolder: Contract Status
+		lineageTag: 64a72e6d-2ad8-4aaa-9da5-d08d00e94c5c
+
+	/// Formula: SUM('Fact Contract Status'[CONTRACT_QTY]) - SUM('Fact Contract Status'[DELIVERY_QTY])
+	measure 'Remaining Contract Qty vs OD' = SUM('FACT - CONTRACT STATUS'[CONTRACT_QTY]) - SUM('FACT - CONTRACT STATUS'[DELIVERY_QTY])
+		formatString: #,##0.000
+		displayFolder: Contract Status
+		lineageTag: 70a3100a-3f62-4fa8-b311-67e5952816f0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Contract Status'[ACTUAL_DELIVERY_QTY]) 
+	measure 'Actual Delivery Qty (of Contract)' = ```
+			SUM('FACT - CONTRACT STATUS'[ACTUAL_DELIVERY_QTY]) 
+			```
+		formatString: #,##0.000
+		displayFolder: Contract Status
+		lineageTag: 3c1d2b61-2837-450f-9ee2-89520892adc5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Contract Status'[SALE_ORDER_QTY])
+	measure 'Sale Order Qty (of Contract)' = SUM('FACT - CONTRACT STATUS'[SALE_ORDER_QTY])
+		formatString: #,##0.000
+		displayFolder: Contract Status
+		lineageTag: 40299904-91d8-4bc0-8be7-81cc2c934b28
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(SUM('Fact Contract Status'[CONTRACT_QTY]), USERELATIONSHIP('List Contract Number'[CONTRACT_NUMBER], 'Fact Contract Status'[REF_DOC]), ALLSELECTED('Fact Contract Status'))
+	measure 'Sub Contract Qty' = CALCULATE(SUM('FACT - CONTRACT STATUS'[CONTRACT_QTY]), USERELATIONSHIP('LIST - CONTRACT NUMBER'[CONTRACT_NUMBER], 'FACT - CONTRACT STATUS'[REF_DOC]), ALLSELECTED('FACT - CONTRACT STATUS'))
+		formatString: #,##0.00
+		isHidden
+		displayFolder: Contract Status
+		lineageTag: e7ce3e9d-d6bd-42fb-b27b-5fb392427fbc
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: VAR _MAX_DATE = MAX('Dim Date'[DateKey])
+	/// RETURN
+	/// CALCULATE(SUM('Fact Inventory C1'[CURRENT_STOCK]), FILTER('Fact Inventory C1', 'Fact Inventory C1'[INVENTORY_DATE] = _MAX_DATE))
+	measure 'Current Stock' =
+			VAR _MAX_DATE = MAX('DIM - DATE'[DateKey])
+			RETURN
+			CALCULATE(SUM('FACT - INVENTORY C1'[CURRENT_STOCK]), FILTER('FACT - INVENTORY C1', 'FACT - INVENTORY C1'[INVENTORY_DATE] = _MAX_DATE))
+		formatString: #,0.00
+		displayFolder: Inventory
+		lineageTag: ec2b6611-c0e5-4d35-8a41-3a400d3ab21c
+
+	/// Formula: SUM('Fact Inventory C1'[EXPORT_COMPANY]) + SUM('Fact Inventory C1'[EXPORT_VAN]) + 
+	/// SUM('Fact Inventory C1'[EXPORT_ADJUST]) + SUM('Fact Inventory C1'[EXPORT_TRANFER]) +
+	/// SUM('Fact Inventory C1'[EXPORT_SALE_PRE])
+	measure 'Total Export Qty' = ```
+			SUM('FACT - INVENTORY C1'[EXPORT_COMPANY]) + SUM('FACT - INVENTORY C1'[EXPORT_VAN]) + 
+			SUM('FACT - INVENTORY C1'[EXPORT_ADJUST]) + SUM('FACT - INVENTORY C1'[EXPORT_TRANFER]) +
+			SUM('FACT - INVENTORY C1'[EXPORT_SALE_PRE])
+			```
+		formatString: #,##0
+		displayFolder: Inventory
+		lineageTag: cb17a427-ef55-42aa-a3c5-de620ff10ddf
+
+	/// Formula: SUM('Fact Inventory C1'[IMPORT_COMPANY]) + SUM('Fact Inventory C1'[IMPORT_VAN]) + 
+	/// SUM('Fact Inventory C1'[IMPORT_ADJUST]) + SUM('Fact Inventory C1'[IMPORT_TRANFER_INTERNAL]) +
+	/// SUM('Fact Inventory C1'[IMPORT_TRANFER]) + SUM('Fact Inventory C1'[RETURN_PRO_PRE])
+	measure 'Total Import Qty' = ```
+			SUM('FACT - INVENTORY C1'[IMPORT_COMPANY]) + SUM('FACT - INVENTORY C1'[IMPORT_VAN]) + 
+			SUM('FACT - INVENTORY C1'[IMPORT_ADJUST]) + SUM('FACT - INVENTORY C1'[IMPORT_TRANFER_INTERNAL]) +
+			SUM('FACT - INVENTORY C1'[IMPORT_TRANFER]) + SUM('FACT - INVENTORY C1'[RETURN_PRO_PRE])
+			```
+		formatString: #,##0
+		displayFolder: Inventory
+		lineageTag: 3c37d6fd-25ce-422e-9072-cd1e4c391479
+
+	/// Formula: [Total Transport Cost Actual] + [Total Storage Cost Actual] + [Total Insurance Cost Actual] + [Total Other Logistic Cost Actual]
+	measure 'Total Logistic Cost' = [Total Transport Cost Actual] + [Total Storage Cost Actual] + [Total Insurance Cost Actual] + [Total Other Logistic Cost Actual]
+		displayFolder: Logistic Cost Actual
+		lineageTag: af39f9d3-6723-490d-be58-56bd07973b50
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM(
+	/// 'Fact Logistic Cost Actual'[CP_KHAC])
+	measure 'Total Other Logistic Cost Actual' =
+			SUM(
+			'FACT - LOGISTIC COST ACTUAL'[CP_KHAC])
+		displayFolder: Logistic Cost Actual
+		lineageTag: 80c34ce4-5ea4-4a26-9bca-bf42e1efaf39
+
+	/// Formula: 
+	/// VAR CURRENT_DATE = EOMONTH(TODAY(),0)
+	/// VAR CURRENT_MONTH = CALCULATE([Total Storage Cost Estimate], FILTER('Dim Date', 'Dim Date'[LastDayOfMonth] = CURRENT_DATE))
+	/// VAR LAST_N_MONTH = CALCULATE(SUM('Fact Logistic Cost Actual'[CP_LK]), FILTER('Dim Date', 'Dim Date'[LastDayOfMonth] < CURRENT_DATE))
+	/// RETURN
+	/// CURRENT_MONTH + LAST_N_MONTH
+	measure 'Total Storage Cost Actual' =
+			
+			VAR CURRENT_DATE = EOMONTH(TODAY(),0)
+			VAR CURRENT_MONTH = CALCULATE([Total Storage Cost Estimate], FILTER('DIM - DATE', 'DIM - DATE'[LastDayOfMonth] = CURRENT_DATE))
+			VAR LAST_N_MONTH = CALCULATE(SUM('FACT - LOGISTIC COST ACTUAL'[CP_LK]), FILTER('DIM - DATE', 'DIM - DATE'[LastDayOfMonth] < CURRENT_DATE))
+			RETURN
+			CURRENT_MONTH + LAST_N_MONTH
+		displayFolder: Logistic Cost Actual
+		lineageTag: ce1d14c7-73be-4e69-ad34-e07cd4581602
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR CURRENT_DATE = EOMONTH(TODAY(),0)
+	/// VAR CURRENT_MONTH = CALCULATE([Total Transport Cost Estimate], FILTER('Dim Date', 'Dim Date'[LastDayOfMonth] = CURRENT_DATE))
+	/// VAR LAST_N_MONTH = CALCULATE(SUM('Fact Logistic Cost Actual'[CP_VC]), FILTER('Dim Date', 'Dim Date'[LastDayOfMonth] < CURRENT_DATE))
+	/// RETURN
+	/// CURRENT_MONTH + LAST_N_MONTH
+	measure 'Total Transport Cost Actual' =
+			
+			VAR CURRENT_DATE = EOMONTH(TODAY(),0)
+			VAR CURRENT_MONTH = CALCULATE([Total Transport Cost Estimate], FILTER('DIM - DATE', 'DIM - DATE'[LastDayOfMonth] = CURRENT_DATE))
+			VAR LAST_N_MONTH = CALCULATE(SUM('FACT - LOGISTIC COST ACTUAL'[CP_VC]), FILTER('DIM - DATE', 'DIM - DATE'[LastDayOfMonth] < CURRENT_DATE))
+			RETURN
+			CURRENT_MONTH + LAST_N_MONTH
+		displayFolder: Logistic Cost Actual
+		lineageTag: 1b219cb1-b655-41ea-95bd-7f9ecf99f160
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR CURRENT_DATE = EOMONTH(TODAY(),0)
+	/// VAR CURRENT_MONTH = CALCULATE([Storage Insurance Cost] + [Transport Insurance Cost], FILTER('Dim Date', 'Dim Date'[LastDayOfMonth] = CURRENT_DATE))
+	/// VAR LAST_N_MONTH = CALCULATE(SUM('Fact Logistic Cost Actual'[CP_BH]), FILTER('Dim Date', 'Dim Date'[LastDayOfMonth] < CURRENT_DATE))
+	/// RETURN
+	/// CURRENT_MONTH + LAST_N_MONTH
+	measure 'Total Insurance Cost Actual' =
+			
+			VAR CURRENT_DATE = EOMONTH(TODAY(),0)
+			VAR CURRENT_MONTH = CALCULATE([Storage Insurance Cost] + [Transport Insurance Cost], FILTER('DIM - DATE', 'DIM - DATE'[LastDayOfMonth] = CURRENT_DATE))
+			VAR LAST_N_MONTH = CALCULATE(SUM('FACT - LOGISTIC COST ACTUAL'[CP_BH]), FILTER('DIM - DATE', 'DIM - DATE'[LastDayOfMonth] < CURRENT_DATE))
+			RETURN
+			CURRENT_MONTH + LAST_N_MONTH
+		displayFolder: Logistic Cost Actual
+		lineageTag: 9102b46d-c341-421b-9541-6c4dcbbaadd1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _DAP = CALCULATE(SUM('Fact Logistic Cost Plan'[CP_BHNK])/2 * 10^6, FILTER('Fact Logistic Cost Plan', 'Fact Logistic Cost Plan'[PRODUCT_NAME] = "DAP" && 'Fact Logistic Cost Plan'[PRODUCT_SUBCAT] = "Tự doanh"))
+	/// VAR _NL_NPK = CALCULATE(SUM('Fact Logistic Cost Plan'[CP_BHNK]), FILTER('Fact Logistic Cost Plan', 'Fact Logistic Cost Plan'[PRODUCT_CAT] = "Nguyên liệu NPK"))
+	/// VAR _CL = CALCULATE(SUM('Fact Logistic Cost Plan'[CP_BHNK]) * 10^6, FILTER('Fact Logistic Cost Plan', 'Fact Logistic Cost Plan'[PRODUCT_NAME] <> "DAP" &&  'Fact Logistic Cost Plan'[PRODUCT_CAT] <> "Nguyên liệu NPK"))
+	/// RETURN
+	/// SUM('Fact Logistic Cost Plan'[CP_LHNK]) +  _DAP + _CL + _NL_NPK + SUM('Fact Logistic Cost Plan'[CP_SM_632])
+	measure 'Total Other Logistic Cost Plan' =
+			
+			VAR _DAP = CALCULATE(SUM('FACT - LOGISTIC COST PLAN'[CP_BHNK])/2 * 10^6, FILTER('FACT - LOGISTIC COST PLAN', 'FACT - LOGISTIC COST PLAN'[PRODUCT_NAME] = "DAP" && 'FACT - LOGISTIC COST PLAN'[PRODUCT_SUBCAT] = "Tự doanh"))
+			VAR _NL_NPK = CALCULATE(SUM('FACT - LOGISTIC COST PLAN'[CP_BHNK]), FILTER('FACT - LOGISTIC COST PLAN', 'FACT - LOGISTIC COST PLAN'[PRODUCT_CAT] = "Nguyên liệu NPK"))
+			VAR _CL = CALCULATE(SUM('FACT - LOGISTIC COST PLAN'[CP_BHNK]) * 10^6, FILTER('FACT - LOGISTIC COST PLAN', 'FACT - LOGISTIC COST PLAN'[PRODUCT_NAME] <> "DAP" &&  'FACT - LOGISTIC COST PLAN'[PRODUCT_CAT] <> "Nguyên liệu NPK"))
+			RETURN
+			SUM('FACT - LOGISTIC COST PLAN'[CP_LHNK]) +  _DAP + _CL + _NL_NPK + SUM('FACT - LOGISTIC COST PLAN'[CP_SM_632])
+		displayFolder: Logistic Cost Plan
+		lineageTag: d019150b-f775-4ae2-856a-4bc4e91611d7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _NL_NPK = CALCULATE(SUM('Fact Logistic Cost Plan'[CP_BHVC]), FILTER('Fact Logistic Cost Plan', 'Fact Logistic Cost Plan'[PRODUCT_CAT] = "Nguyên liệu NPK"))
+	/// VAR _CL = CALCULATE(SUM('Fact Logistic Cost Plan'[CP_BHVC])*10^6, FILTER('Fact Logistic Cost Plan', 'Fact Logistic Cost Plan'[PRODUCT_CAT] <> "Nguyên liệu NPK"))
+	/// RETURN
+	///  _NL_NPK + _CL+ SUM('Fact Logistic Cost Plan'[CP_BHLK])*1.1
+	measure 'Total Insurance Cost Plan' =
+			
+			VAR _NL_NPK = CALCULATE(SUM('FACT - LOGISTIC COST PLAN'[CP_BHVC]), FILTER('FACT - LOGISTIC COST PLAN', 'FACT - LOGISTIC COST PLAN'[PRODUCT_CAT] = "Nguyên liệu NPK"))
+			VAR _CL = CALCULATE(SUM('FACT - LOGISTIC COST PLAN'[CP_BHVC])*10^6, FILTER('FACT - LOGISTIC COST PLAN', 'FACT - LOGISTIC COST PLAN'[PRODUCT_CAT] <> "Nguyên liệu NPK"))
+			RETURN
+			 _NL_NPK + _CL+ SUM('FACT - LOGISTIC COST PLAN'[CP_BHLK])*1.1
+		displayFolder: Logistic Cost Plan
+		lineageTag: fa63d023-8c91-481d-87fa-82096f757fdf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Logistic Cost Plan'[CP_LK]) + SUM('Fact Logistic Cost Plan'[CP_SM]) + SUM('Fact Logistic Cost Plan'[CP_XLT])
+	measure 'Total Storage Cost Plan' = SUM('FACT - LOGISTIC COST PLAN'[CP_LK]) + SUM('FACT - LOGISTIC COST PLAN'[CP_SM]) + SUM('FACT - LOGISTIC COST PLAN'[CP_XLT])
+		displayFolder: Logistic Cost Plan
+		lineageTag: 606ad4b2-c7be-4b34-81ea-0f3fe9b97e40
+
+	/// Formula: SUM('Fact Logistic Cost Plan'[CP_VC])
+	measure 'Total Transport Cost Plan' = SUM('FACT - LOGISTIC COST PLAN'[CP_VC])
+		displayFolder: Logistic Cost Plan
+		lineageTag: 84a862c4-ce32-41d1-b866-00d0db35d623
+
+	/// Formula: DISTINCTCOUNT('Fact Loyalty Program'[CUSTOMER_ID])
+	measure '# of Loyalty Customer C2' = DISTINCTCOUNT('FACT - LOYALTY PROGRAM'[CUSTOMER_ID])
+		displayFolder: Others
+		lineageTag: 28a0ae4d-006d-4ff8-8b8a-a9cc01688c8f
+
+		changedProperty = IsHidden
+
+	/// Formula: SUM('Fact Visit Plan C2'[PLAN])
+	measure 'Total Plan' = SUM('FACT - VISIT PLAN C2'[PLAN])
+		displayFolder: Visit Plan C2
+		lineageTag: 4020bc46-e0c0-4156-baed-3c56e8a71909
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Visit Plan C2'[DONE])
+	measure 'Total Done' = SUM('FACT - VISIT PLAN C2'[DONE])
+		displayFolder: Visit Plan C2
+		lineageTag: 9e746d93-3ab8-4303-a456-c8e2e968d4cd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 100
+	measure '% Target KPI' = 100
+		formatString: 0.00
+		displayFolder: Visit Plan C2
+		lineageTag: 0d7f9777-f757-461d-8855-b6523746587a
+
+	/// Formula: CALCULATE(SUM('Fact Visit Plan C2'[DONE_VS_PLAN_KPI]),FILTER('Fact Visit Plan C2','Fact Visit Plan C2'[KPI_SUB_GROUP_ID] = 62))
+	measure '% Completed KPI Kenh' = CALCULATE(SUM('FACT - VISIT PLAN C2'[DONE_VS_PLAN_KPI]),FILTER('FACT - VISIT PLAN C2','FACT - VISIT PLAN C2'[KPI_SUB_GROUP_ID] = 62))
+		formatString: 0.00
+		displayFolder: Visit Plan C2
+		lineageTag: e4786c0b-95f1-4666-b7d4-29ebcbc854ce
+
+	/// Formula: 
+	/// CALCULATE((SUM('Fact Visit Plan C2'[DONE_KPI])/SUM('Fact Visit Plan C2'[PLAN_KPI])),FILTER('Fact Visit Plan C2','Fact Visit Plan C2'[KPI_SUB_GROUP_ID] = 61)
+	/// ) * 100
+	measure '% Completed KPI SP' =
+			
+			CALCULATE((SUM('FACT - VISIT PLAN C2'[DONE_KPI])/SUM('FACT - VISIT PLAN C2'[PLAN_KPI])),FILTER('FACT - VISIT PLAN C2','FACT - VISIT PLAN C2'[KPI_SUB_GROUP_ID] = 61)
+			) * 100
+		formatString: 0.00
+		displayFolder: Visit Plan C2
+		lineageTag: 586dbd94-fbd9-4d5e-b606-e58fdf74150d
+
+	/// Formula: 
+	/// VAR __BASELINE_VALUE = [% Completed KPI Kenh]
+	/// VAR __VALUE_TO_COMPARE = 20/100
+	/// RETURN
+	///     __BASELINE_VALUE * __VALUE_TO_COMPARE
+	/// 
+	measure '% Completed KPI 62' = ```
+			
+			VAR __BASELINE_VALUE = [% Completed KPI Kenh]
+			VAR __VALUE_TO_COMPARE = 20/100
+			RETURN
+			    __BASELINE_VALUE * __VALUE_TO_COMPARE
+			
+			```
+		formatString: 0.00
+		displayFolder: Visit Plan C2
+		lineageTag: 8cb663c5-c2b0-497a-9382-ecb512dd7932
+
+	/// Formula: 
+	/// VAR __BASELINE_VALUE = [% Completed KPI SP]
+	/// VAR __VALUE_TO_COMPARE = 80/100
+	/// RETURN
+	///     __BASELINE_VALUE * __VALUE_TO_COMPARE
+	measure '% Completed KPI 61' =
+			
+			VAR __BASELINE_VALUE = [% Completed KPI SP]
+			VAR __VALUE_TO_COMPARE = 80/100
+			RETURN
+			    __BASELINE_VALUE * __VALUE_TO_COMPARE
+		formatString: 0.00
+		displayFolder: Visit Plan C2
+		lineageTag: 35d55c65-f88a-45de-b01e-745e80308e6e
+
+	/// Formula: [% Completed KPI 61] + [% Completed KPI 62]
+	measure '% Completed KPI' = [% Completed KPI 61] + [% Completed KPI 62]
+		formatString: 0.00
+		displayFolder: Visit Plan C2
+		lineageTag: 333852b4-0ff3-4f27-a147-f30429eacb65
+
+	/// Formula: CALCULATE(IF(ISBLANK(SUM('Fact Visit Plan C2'[PLAN_KPI])),0,SUM('Fact Visit Plan C2'[PLAN_KPI])),'Fact Visit Plan C2'[KPI_CONFIG_ID] = 57)
+	measure '# of Visited Plan Customer C2' = CALCULATE(IF(ISBLANK(SUM('FACT - VISIT PLAN C2'[PLAN_KPI])),0,SUM('FACT - VISIT PLAN C2'[PLAN_KPI])),'FACT - VISIT PLAN C2'[KPI_CONFIG_ID] = 57)
+		displayFolder: Visit Plan C2
+		lineageTag: bfd89a22-b5d1-4869-a37e-b1d086973aab
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM ( 'Fact Sale In Actual'[NET_VALUE] )
+	measure 'Amt Test' = SUM ( 'FACT - SALE IN ACTUAL'[NET_VALUE] )
+		displayFolder: Sales In Actual
+		lineageTag: 1e2b0ec0-6709-41e0-812b-1c4d22bb123f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: AVERAGEX (
+	///     VALUES ( 'Dim Product'[PRODUCT_CODE] ),
+	///     DIVIDE ( [Sale In Amt VND], [Sale In Quantity], BLANK () )
+	/// )
+	measure 'Sale In Price VND' =
+			AVERAGEX (
+			    VALUES ( 'DIM - PRODUCT'[PRODUCT_CODE] ),
+			    DIVIDE ( [Sale In Amt VND], [Sale In Quantity], BLANK () )
+			)
+		displayFolder: Sales In Actual
+		lineageTag: ea34ee0f-39a1-4c7d-9041-c7db8e4eb9b8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR __PREV_MONTH =
+	///     CALCULATE ( [Sale In Amt VND], DATEADD ( 'Dim Date'[Date], -1, MONTH ) )
+	/// RETURN
+	///     DIVIDE ( [Sale In Amt VND] - __PREV_MONTH, __PREV_MONTH )
+	measure 'Sale In Amt VND MoM%' =
+			
+			VAR __PREV_MONTH =
+			    CALCULATE ( [Sale In Amt VND], DATEADD ( 'DIM - DATE'[Date], -1, MONTH ) )
+			RETURN
+			    DIVIDE ( [Sale In Amt VND] - __PREV_MONTH, __PREV_MONTH )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales In Actual
+		lineageTag: c603df3e-4fd3-4dc7-bb76-bced7af4d767
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MonthOverMonth"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: 
+	/// VAR __PREV_MONTH =
+	///     CALCULATE ( [Sale In Amt], DATEADD ( 'Dim Date'[Date], -1, MONTH ) )
+	/// RETURN
+	///     DIVIDE ( [Sale In Amt] - __PREV_MONTH, __PREV_MONTH )
+	measure 'Sale In Amt MoM%' =
+			
+			VAR __PREV_MONTH =
+			    CALCULATE ( [Sale In Amt], DATEADD ( 'DIM - DATE'[Date], -1, MONTH ) )
+			RETURN
+			    DIVIDE ( [Sale In Amt] - __PREV_MONTH, __PREV_MONTH )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales In Actual
+		lineageTag: d8f2d88b-ab18-4bb2-b4ec-df8d56541f5e
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MonthOverMonth"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: CALCULATE ( [Sale In Amt VND], DATEADD ( 'Dim Date'[Date], -1, YEAR ) )
+	measure 'Sale In Amt VND LY' = CALCULATE ( [Sale In Amt VND], DATEADD ( 'DIM - DATE'[Date], -1, YEAR ) )
+		displayFolder: Sales In Actual
+		lineageTag: 6c21473e-34f8-4b20-a20c-1a80ce4a83a9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: AVERAGEX (
+	///     VALUES ( 'Dim Product'[PRODUCT_CODE] ),
+	///     DIVIDE ( [Sale In Amt], [Sale In Quantity], BLANK () )
+	/// )
+	measure 'Sale In Price' =
+			AVERAGEX (
+			    VALUES ( 'DIM - PRODUCT'[PRODUCT_CODE] ),
+			    DIVIDE ( [Sale In Amt], [Sale In Quantity], BLANK () )
+			)
+		displayFolder: Sales In Actual
+		lineageTag: fdf78446-b042-410f-9903-ea57db370a67
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE (
+	///     SUM ( 'Fact Sale In Actual'[NET_VALUE] ),
+	///     FILTER (
+	///         'Fact Sale In Actual',
+	///         NOT ( 'Fact Sale In Actual'[SALE_TYPE]
+	///             IN {
+	///                 "ZOR3",
+	///                 "YOR5",
+	///                 /*"YRE1", "YRE2","YRE3","YRE4","ZRE1","ZRE2",*/
+	///                 --"YCR1",
+	///                 --"ZCR1",
+	///                 "ZCR2"
+	///                 --"YDR1"
+	///                 --"ZDR1"
+	///             } )
+	///             && NOT ( CONTAINSSTRING ( 'Fact Sale In Actual'[PO_NUMBER], "hao h" ) )
+	///                 && NOT ( CONTAINSSTRING ( 'Fact Sale In Actual'[PO_NUMBER], "tổn thất" ) )
+	///                     && 'Fact Sale In Actual'[UOM] = "TO"
+	///                     && 'Fact Sale In Actual'[BILLING_STATUS] = "Completed"
+	///     )
+	/// )
+	/// /*Loai tru Bieu Tang an vat pham, Tang giam cong no, hao hut, ton that*/
+	measure 'Sale In Amt' =
+			CALCULATE (
+			    SUM ( 'FACT - SALE IN ACTUAL'[NET_VALUE] ),
+			    FILTER (
+			        'FACT - SALE IN ACTUAL',
+			        NOT ( 'FACT - SALE IN ACTUAL'[SALE_TYPE]
+			            IN {
+			                "ZOR3",
+			                "YOR5",
+			                /*"YRE1", "YRE2","YRE3","YRE4","ZRE1","ZRE2",*/
+			                --"YCR1",
+			                --"ZCR1",
+			                "ZCR2"
+			                --"YDR1"
+			                --"ZDR1"
+			            } )
+			            && NOT ( CONTAINSSTRING ( 'FACT - SALE IN ACTUAL'[PO_NUMBER], "hao h" ) )
+			                && NOT ( CONTAINSSTRING ( 'FACT - SALE IN ACTUAL'[PO_NUMBER], "tổn thất" ) )
+			                    && 'FACT - SALE IN ACTUAL'[UOM] = "TO"
+			                    && 'FACT - SALE IN ACTUAL'[BILLING_STATUS] = "Completed"
+			    )
+			)
+			/*Loai tru Bieu Tang an vat pham, Tang giam cong no, hao hut, ton that*/
+		formatString: #,##0.00
+		displayFolder: Sales In Actual
+		lineageTag: 1dd7e19f-95ed-4ee1-81a3-fdd999fcc82f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE (
+	///     DISTINCTCOUNT ( 'Fact Sale In Actual'[CANCEL_BILLING] ),
+	///     'Fact Sale In Actual'[CANCEL_BILLING] <> BLANK ()
+	/// )
+	measure '# of Cancel Billing' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'FACT - SALE IN ACTUAL'[CANCEL_BILLING] ),
+			    'FACT - SALE IN ACTUAL'[CANCEL_BILLING] <> BLANK ()
+			)
+		formatString: #,0
+		displayFolder: Sales In Actual
+		lineageTag: 3e249b65-a309-4e55-b8cd-2527049b6b0e
+
+	/// Formula: CALCULATE (
+	///     DISTINCTCOUNT ( 'Fact Sale In Actual'[BILLING_DOC] ),
+	///     FILTER (
+	///         'Fact Sale In Actual',
+	///         NOT ( 'Fact Sale In Actual'[SALE_TYPE]
+	///             IN {
+	///                 "ZOR3",
+	///                 "YOR5",
+	///                 /*"YRE1", "YRE2","YRE3","YRE4","ZRE1","ZRE2",*/
+	///                 "YCR1",
+	///                 "ZCR1",
+	///                 "ZCR2",
+	///                 "YDR1",
+	///                 "ZDR1"
+	///             } )
+	///             && NOT ( CONTAINSSTRING ( 'Fact Sale In Actual'[PO_NUMBER], "hao h" ) )
+	///                 && NOT ( CONTAINSSTRING ( 'Fact Sale In Actual'[PO_NUMBER], "tổn thất" ) )
+	///                     && [UOM] = "TO"
+	///                     && 'Fact Sale In Actual'[BILLING_STATUS] = "Completed"
+	///     )
+	/// )
+	/// /*Loai tru Bieu Tang an vat pham, Tang giam cong no, hao hut, ton that*/
+	measure '# of Billing' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'FACT - SALE IN ACTUAL'[BILLING_DOC] ),
+			    FILTER (
+			        'FACT - SALE IN ACTUAL',
+			        NOT ( 'FACT - SALE IN ACTUAL'[SALE_TYPE]
+			            IN {
+			                "ZOR3",
+			                "YOR5",
+			                /*"YRE1", "YRE2","YRE3","YRE4","ZRE1","ZRE2",*/
+			                "YCR1",
+			                "ZCR1",
+			                "ZCR2",
+			                "YDR1",
+			                "ZDR1"
+			            } )
+			            && NOT ( CONTAINSSTRING ( 'FACT - SALE IN ACTUAL'[PO_NUMBER], "hao h" ) )
+			                && NOT ( CONTAINSSTRING ( 'FACT - SALE IN ACTUAL'[PO_NUMBER], "tổn thất" ) )
+			                    && [UOM] = "TO"
+			                    && 'FACT - SALE IN ACTUAL'[BILLING_STATUS] = "Completed"
+			    )
+			)
+			/*Loai tru Bieu Tang an vat pham, Tang giam cong no, hao hut, ton that*/
+		formatString: #,0
+		displayFolder: Sales In Actual
+		lineageTag: bef720d7-418a-4e81-8f14-4d7fe9d09a22
+
+	/// Formula: CALCULATE (
+	///     SUM ( 'Fact Sale In Actual'[BILLED_QTY] ),
+	///     FILTER (
+	///         'Fact Sale In Actual',
+	///         NOT ( 'Fact Sale In Actual'[SALE_TYPE]
+	///             IN {
+	///                 "ZOR3",
+	///                 "YOR5",
+	///                 /*"YRE1", "YRE2","YRE3","YRE4","ZRE1","ZRE2",*/
+	///                 "YCR1",
+	///                 "ZCR1",
+	///                 "ZCR2",
+	///                 "YDR1",
+	///                 "ZDR1"
+	///             } )
+	///             && NOT ( CONTAINSSTRING ( 'Fact Sale In Actual'[PO_NUMBER], "hao h" ) )
+	///                 && NOT ( CONTAINSSTRING ( 'Fact Sale In Actual'[PO_NUMBER], "tổn thất" ) )
+	///                     && [UOM] = "TO"
+	///                     && 'Fact Sale In Actual'[BILLING_STATUS] = "Completed"
+	///     )
+	/// )
+	/// /*Loai tru Bieu Tang an vat pham, Tang giam cong no, hao hut, ton that*/
+	measure 'Sale In Quantity' =
+			CALCULATE (
+			    SUM ( 'FACT - SALE IN ACTUAL'[BILLED_QTY] ),
+			    FILTER (
+			        'FACT - SALE IN ACTUAL',
+			        NOT ( 'FACT - SALE IN ACTUAL'[SALE_TYPE]
+			            IN {
+			                "ZOR3",
+			                "YOR5",
+			                /*"YRE1", "YRE2","YRE3","YRE4","ZRE1","ZRE2",*/
+			                "YCR1",
+			                "ZCR1",
+			                "ZCR2",
+			                "YDR1",
+			                "ZDR1"
+			            } )
+			            && NOT ( CONTAINSSTRING ( 'FACT - SALE IN ACTUAL'[PO_NUMBER], "hao h" ) )
+			                && NOT ( CONTAINSSTRING ( 'FACT - SALE IN ACTUAL'[PO_NUMBER], "tổn thất" ) )
+			                    && [UOM] = "TO"
+			                    && 'FACT - SALE IN ACTUAL'[BILLING_STATUS] = "Completed"
+			    )
+			)
+			/*Loai tru Bieu Tang an vat pham, Tang giam cong no, hao hut, ton that*/
+		formatString: #,##0.000
+		displayFolder: Sales In Actual
+		lineageTag: b0e166c3-d263-4b2f-a8a9-821188b534be
+
+	/// Formula: CALCULATE (
+	///     SUM ( 'Fact Sale In Actual'[TOTAL_VND] ),
+	///     FILTER (
+	///         'Fact Sale In Actual',
+	///         [BILLING_TYPE] = "ZG3"
+	///             && 'Fact Sale In Actual'[BILLING_STATUS] = "Completed"
+	///     )
+	/// )
+	measure 'Sale In Discount Amt VND' =
+			CALCULATE (
+			    SUM ( 'FACT - SALE IN ACTUAL'[TOTAL_VND] ),
+			    FILTER (
+			        'FACT - SALE IN ACTUAL',
+			        [BILLING_TYPE] = "ZG3"
+			            && 'FACT - SALE IN ACTUAL'[BILLING_STATUS] = "Completed"
+			    )
+			)
+		formatString: #,##0.00
+		displayFolder: Sales In Actual
+		lineageTag: 15707f13-4a22-45e6-b6d0-6a9673392bc3
+
+	/// Formula: CALCULATE (
+	///     SUM ( 'Fact Sale In Actual'[COGS_VND] ),
+	///     FILTER (
+	///         'Fact Sale In Actual',
+	///         NOT ( 'Fact Sale In Actual'[SALE_TYPE]
+	///             IN {
+	///                 "ZOR3",
+	///                 "YOR5",
+	///                 /*"YRE1", "YRE2","YRE3","YRE4","ZRE1","ZRE2",*/
+	///                 "YCR1",
+	///                 "ZCR1",
+	///                 "ZCR2",
+	///                 "YDR1",
+	///                 "ZDR1"
+	///             } )
+	///             && NOT ( CONTAINSSTRING ( 'Fact Sale In Actual'[PO_NUMBER], "hao h" ) )
+	///                 && NOT ( CONTAINSSTRING ( 'Fact Sale In Actual'[PO_NUMBER], "tổn thất" ) )
+	///                     && [UOM] = "TO"
+	///                     && 'Fact Sale In Actual'[BILLING_STATUS] = "Completed"
+	///     )
+	/// )
+	/// /*Loai tru Bieu Tang an vat pham, Tang giam cong no, hao hut, ton that*/
+	measure 'COGS VND' =
+			CALCULATE (
+			    SUM ( 'FACT - SALE IN ACTUAL'[COGS_VND] ),
+			    FILTER (
+			        'FACT - SALE IN ACTUAL',
+			        NOT ( 'FACT - SALE IN ACTUAL'[SALE_TYPE]
+			            IN {
+			                "ZOR3",
+			                "YOR5",
+			                /*"YRE1", "YRE2","YRE3","YRE4","ZRE1","ZRE2",*/
+			                "YCR1",
+			                "ZCR1",
+			                "ZCR2",
+			                "YDR1",
+			                "ZDR1"
+			            } )
+			            && NOT ( CONTAINSSTRING ( 'FACT - SALE IN ACTUAL'[PO_NUMBER], "hao h" ) )
+			                && NOT ( CONTAINSSTRING ( 'FACT - SALE IN ACTUAL'[PO_NUMBER], "tổn thất" ) )
+			                    && [UOM] = "TO"
+			                    && 'FACT - SALE IN ACTUAL'[BILLING_STATUS] = "Completed"
+			    )
+			)
+			/*Loai tru Bieu Tang an vat pham, Tang giam cong no, hao hut, ton that*/
+		formatString: #,0
+		displayFolder: Sales In Actual
+		lineageTag: d11c30bc-2d77-47dc-a081-6ffe093923b2
+
+	/// Formula: CALCULATE (
+	///     SUM ( 'Fact Sale In Actual'[TOTAL_VND] ),
+	///     FILTER (
+	///         'Fact Sale In Actual',
+	///         NOT ( 'Fact Sale In Actual'[SALE_TYPE]
+	///             IN {
+	///                 "ZOR3",
+	///                 "YOR5",
+	///                 /*"YRE1", "YRE2","YRE3","YRE4","ZRE1","ZRE2",*/
+	///                 --"YCR1",
+	///                 --"ZCR1",
+	///                 "ZCR2"
+	///                 --"YDR1",
+	///                 --"ZDR1"
+	///             } )
+	///             && NOT ( CONTAINSSTRING ( 'Fact Sale In Actual'[PO_NUMBER], "hao h" ) )
+	///                 && NOT ( CONTAINSSTRING ( 'Fact Sale In Actual'[PO_NUMBER], "tổn thất" ) )
+	///                     && [UOM] = "TO"
+	///                     && 'Fact Sale In Actual'[BILLING_STATUS] = "Completed"
+	///     )
+	/// )
+	/// /*Loai tru Bieu Tang an vat pham, Tang giam cong no, hao hut, ton that*/
+	measure 'Sale In Amt VND' =
+			CALCULATE (
+			    SUM ( 'FACT - SALE IN ACTUAL'[TOTAL_VND] ),
+			    FILTER (
+			        'FACT - SALE IN ACTUAL',
+			        NOT ( 'FACT - SALE IN ACTUAL'[SALE_TYPE]
+			            IN {
+			                "ZOR3",
+			                "YOR5",
+			                /*"YRE1", "YRE2","YRE3","YRE4","ZRE1","ZRE2",*/
+			                --"YCR1",
+			                --"ZCR1",
+			                "ZCR2"
+			                --"YDR1",
+			                --"ZDR1"
+			            } )
+			            && NOT ( CONTAINSSTRING ( 'FACT - SALE IN ACTUAL'[PO_NUMBER], "hao h" ) )
+			                && NOT ( CONTAINSSTRING ( 'FACT - SALE IN ACTUAL'[PO_NUMBER], "tổn thất" ) )
+			                    && [UOM] = "TO"
+			                    && 'FACT - SALE IN ACTUAL'[BILLING_STATUS] = "Completed"
+			    )
+			)
+			/*Loai tru Bieu Tang an vat pham, Tang giam cong no, hao hut, ton that*/
+		formatString: #,##0.00
+		displayFolder: Sales In Actual
+		lineageTag: 08fd08f4-5f73-4cf1-84c8-9af63450b8dc
+
+	/// Formula: SUM('Fact Sale In Plan'[DISCOUNT_AMOUNT_PLAN])
+	measure 'Discount Amt Plan' = SUM('FACT - SALE IN PLAN'[DISCOUNT_AMOUNT_PLAN])
+		formatString: #,##0.00
+		displayFolder: Sales In Plan
+		lineageTag: d2485e69-8b45-442f-b2bb-49681dfda62f
+
+	/// Formula: SUM('Fact Sale In Plan'[SALE_QUANTITY_PLAN])
+	measure 'Sale In Qty Plan' = SUM('FACT - SALE IN PLAN'[SALE_QUANTITY_PLAN])
+		displayFolder: Sales In Plan
+		lineageTag: f600a5ee-53e6-4c13-8509-293e014565ed
+
+	/// Formula: SUM('Fact Sale In Plan'[SALE_AMOUNT_PLAN])
+	measure 'Sale In Amt Plan' = SUM('FACT - SALE IN PLAN'[SALE_AMOUNT_PLAN])
+		formatString: #,##0.00
+		displayFolder: Sales In Plan
+		lineageTag: fbe8aca7-f5bf-4ee5-9abf-e938a46c52e2
+
+	/// Formula: CALCULATE(AVERAGE('Fact Sale In Plan'[UNIT_PRICE_PLAN]), 'Fact Sale In Plan'[UNIT_PRICE_PLAN] <> 0 || 'Fact Sale In Plan'[UNIT_PRICE_PLAN] <> BLANK())
+	measure 'Avg Unit Price' = CALCULATE(AVERAGE('FACT - SALE IN PLAN'[UNIT_PRICE_PLAN]), 'FACT - SALE IN PLAN'[UNIT_PRICE_PLAN] <> 0 || 'FACT - SALE IN PLAN'[UNIT_PRICE_PLAN] <> BLANK())
+		displayFolder: Sales In Plan
+		lineageTag: 312f7c97-cbbd-4f5a-9c46-ba0abe6a5f25
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Sale Order Status'[TOTAL_VND])
+	measure 'Sale Order Amt VND' = SUM('FACT - SALE ORDER STATUS'[TOTAL_VND])
+		displayFolder: Sales Order Status
+		lineageTag: 29f5e2a4-e4f1-4dfc-a9f1-4ac8161ce3b6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Remaining Sale Order Qty vs OD], FILTER('Fact Sale Order Status', 'Fact Sale Order Status'[SALE_TYPE] IN {"ZOR1", "ZOR2", "ZOR4"}))
+	measure 'Remaining Sale Order Qty vs OD (LXH Bán)' = CALCULATE([Remaining Sale Order Qty vs OD], FILTER('FACT - SALE ORDER STATUS', 'FACT - SALE ORDER STATUS'[SALE_TYPE] IN {"ZOR1", "ZOR2", "ZOR4"}))
+		displayFolder: Sales Order Status
+		lineageTag: 09549f7c-40cd-4421-8826-094fc07dec32
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Remaining Sale Order Qty vs OD], FILTER('Fact Sale Order Status', 'Fact Sale Order Status'[SALE_TYPE] = "ZKE"))
+	measure 'Remaining Sale Order Qty vs OD (LXH Bán ký gửi)' = CALCULATE([Remaining Sale Order Qty vs OD], FILTER('FACT - SALE ORDER STATUS', 'FACT - SALE ORDER STATUS'[SALE_TYPE] = "ZKE"))
+		displayFolder: Sales Order Status
+		lineageTag: 5cd366a8-4b6b-458a-9d43-ee0f6dd9f35f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: AVERAGEX(VALUES('Dim Product'[PRODUCT_CODE]), DIVIDE([Sale Order Amt], [Sale Order Qty], BLANK()))
+	measure 'Sale Order Price' = AVERAGEX(VALUES('DIM - PRODUCT'[PRODUCT_CODE]), DIVIDE([Sale Order Amt], [Sale Order Qty], BLANK()))
+		displayFolder: Sales Order Status
+		lineageTag: aac8e260-e3a6-42bd-9f9a-b737920adbfb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Remaining Sale Order Qty vs OD], FILTER('Fact Sale Order Status', 'Fact Sale Order Status'[SALE_TYPE] = "ZKB"))
+	measure 'Remaining Sale Order Qty vs OD (LXH Xuất ký gửi)' = CALCULATE([Remaining Sale Order Qty vs OD], FILTER('FACT - SALE ORDER STATUS', 'FACT - SALE ORDER STATUS'[SALE_TYPE] = "ZKB"))
+		displayFolder: Sales Order Status
+		lineageTag: 107489f1-33e6-40e2-93f1-95e92572527d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Sale Order Status'[DELIVERY_QTY])
+	measure 'Delivery Qty (of Sale Order)' = SUM('FACT - SALE ORDER STATUS'[DELIVERY_QTY])
+		displayFolder: Sales Order Status
+		lineageTag: 8d0e2cb9-2dfa-4a24-992d-87b19cd8b780
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: DIVIDE([Actual Delivery Qty (of Sale Order)],[Sale Order Qty], BLANK())
+	measure '% of Complete Sale Order Qty' = DIVIDE([Actual Delivery Qty (of Sale Order)],[Sale Order Qty], BLANK())
+		formatString: 0.00 %
+		displayFolder: Sales Order Status
+		lineageTag: f0ee6959-3b92-4b77-bba4-2f21b715aa3a
+
+		changedProperty = IsHidden
+
+	/// Formula: SUM('Fact Sale Order Status'[WAREHOUSE_QTY]) 
+	measure 'Remaining Sale Order Qty in Warehouse' = ```
+			SUM('FACT - SALE ORDER STATUS'[WAREHOUSE_QTY]) 
+			```
+		formatString: #,##0.000
+		displayFolder: Sales Order Status
+		lineageTag: af3b34f7-cffe-4bcb-b523-a557f48ea40c
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Sale Order Status'[TRANSIT_QTY])
+	measure 'Remaining Sale Order Qty in Transit' = SUM('FACT - SALE ORDER STATUS'[TRANSIT_QTY])
+		formatString: #,##0.000
+		displayFolder: Sales Order Status
+		lineageTag: 420e4ea3-1417-4317-9429-0f5664451b6e
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Sale Order Status'[RENT_WAREHOUSE_QTY])
+	/// 
+	measure 'Remaining Sale Order Qty in Rent Warehouse' = ```
+			SUM('FACT - SALE ORDER STATUS'[RENT_WAREHOUSE_QTY])
+			
+			```
+		formatString: #,##0.000
+		displayFolder: Sales Order Status
+		lineageTag: 8237b639-3df2-4ad5-b86c-12677babbe5b
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Sale Order Status'[TOTAL])
+	measure 'Sale Order Amt' = SUM('FACT - SALE ORDER STATUS'[TOTAL])
+		formatString: #,##0.00
+		displayFolder: Sales Order Status
+		lineageTag: c09cdc29-8a75-498c-8b9e-1a4f780beba4
+
+		changedProperty = IsHidden
+
+	/// Formula: DIVIDE(([# of Sale Order] - [# of Incomplete Sale Order]),[# of Sale Order], BLANK())
+	measure '% of Complete Sale Order' = DIVIDE(([# of Sale Order] - [# of Incomplete Sale Order]),[# of Sale Order], BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Order Status
+		lineageTag: df238725-a32c-4d91-91b8-502624c7c8ae
+
+		changedProperty = IsHidden
+
+	/// Formula: CALCULATE(DISTINCTCOUNT('Fact Sale Order Status'[SALE_ORDER_DOC]), FILTER('Fact Sale Order Status', 'Fact Sale Order Status'[Remaining Sale Order Qty vs OD] <> 0))
+	measure '# of Incomplete Sale Order' =
+			CALCULATE(DISTINCTCOUNT('FACT - SALE ORDER STATUS'[SALE_ORDER_DOC]), FILTER('FACT - SALE ORDER STATUS',
+			[Remaining Sale Order Qty vs OD] <> 0))
+		formatString: #,##0
+		displayFolder: Sales Order Status
+		lineageTag: 20178641-b9e6-4696-a71c-a8048b4fb51f
+
+		changedProperty = IsHidden
+
+	/// Formula: DISTINCTCOUNT('Fact Sale Order Status'[SALE_ORDER_DOC])
+	measure '# of Sale Order' = DISTINCTCOUNT('FACT - SALE ORDER STATUS'[SALE_ORDER_DOC])
+		formatString: #,##0
+		displayFolder: Sales Order Status
+		lineageTag: b152d9b1-24b3-445f-b1b0-2630d5b2b17c
+
+		changedProperty = IsHidden
+
+	/// Formula: SUM('Fact Sale Order Status'[ACTUAL_DELIVERY_QTY])
+	/// 
+	measure 'Actual Delivery Qty (of Sale Order)' = ```
+			SUM('FACT - SALE ORDER STATUS'[ACTUAL_DELIVERY_QTY])
+			
+			```
+		formatString: #,##0.000
+		displayFolder: Sales Order Status
+		lineageTag: 23c93fd3-1513-4325-b81f-7d34592ccdd4
+
+		changedProperty = IsHidden
+
+	/// Formula: SUM('Fact Sale Order Status'[SALE_ORDER_QTY]) - SUM('Fact Sale Order Status'[DELIVERY_QTY])
+	measure 'Remaining Sale Order Qty vs OD' = SUM('FACT - SALE ORDER STATUS'[SALE_ORDER_QTY]) - SUM('FACT - SALE ORDER STATUS'[DELIVERY_QTY])
+		formatString: #,##0.000
+		displayFolder: Sales Order Status
+		lineageTag: 4f178186-57db-4486-bcde-6e40ff68835b
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: //
+	/// //VAR _SUB_CONTRACT = CALCULATE(SELECTEDVALUE('Fact Contract Status'[CONTRACT_NUMBER]), USERELATIONSHIP('List Contract Number'[CONTRACT_NUMBER], 'Fact Contract Status'[REF_DOC]))
+	/// //RETURN
+	/// //IF(
+	/// //SELECTEDVALUE('Fact Contract Status'[REF_DOC]) = BLANK(),
+	/// //CALCULATE(SUM('Fact Sale Order Status'[SALE_ORDER_QTY]), CROSSFILTER('Fact Sale Order Status'[CONTRACT_NUMBER],'List Contract Number'[CONTRACT_NUMBER], None ), OR('Fact Sale Order Status'[CONTRACT_NUMBER] = _SUB_CONTRACT, 'Fact Sale Order Status'[CONTRACT_NUMBER]= SELECTEDVALUE('List Contract Number'[CONTRACT_NUMBER]))),
+	/// //CALCULATE(SUM('Fact Sale Order Status'[SALE_ORDER_QTY]), CROSSFILTER('Fact Sale Order Status'[CONTRACT_NUMBER], 'List Contract Number'[CONTRACT_NUMBER],OneWay_RightFiltersLeft)))
+	/// 
+	/// SUM('Fact Sale Order Status'[SALE_ORDER_QTY])
+	measure 'Sale Order Qty' =
+			//
+			//VAR _SUB_CONTRACT = CALCULATE(SELECTEDVALUE('Fact Contract Status'[CONTRACT_NUMBER]), USERELATIONSHIP('List Contract Number'[CONTRACT_NUMBER], 'Fact Contract Status'[REF_DOC]))
+			//RETURN
+			//IF(
+			//SELECTEDVALUE('Fact Contract Status'[REF_DOC]) = BLANK(),
+			//CALCULATE(SUM('Fact Sale Order Status'[SALE_ORDER_QTY]), CROSSFILTER('Fact Sale Order Status'[CONTRACT_NUMBER],'List Contract Number'[CONTRACT_NUMBER], None ), OR('Fact Sale Order Status'[CONTRACT_NUMBER] = _SUB_CONTRACT, 'Fact Sale Order Status'[CONTRACT_NUMBER]= SELECTEDVALUE('List Contract Number'[CONTRACT_NUMBER]))),
+			//CALCULATE(SUM('Fact Sale Order Status'[SALE_ORDER_QTY]), CROSSFILTER('Fact Sale Order Status'[CONTRACT_NUMBER], 'List Contract Number'[CONTRACT_NUMBER],OneWay_RightFiltersLeft)))
+			
+			SUM('FACT - SALE ORDER STATUS'[SALE_ORDER_QTY])
+		formatString: #,##0.000
+		displayFolder: Sales Order Status
+		lineageTag: ef2c7517-2007-4aaa-b4d9-2b70f82b2cd8
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR __PREV_MONTH = CALCULATE([Keyshop Level Qty], DATEADD('Dim Date'[Date], -1, MONTH))
+	/// RETURN
+	/// 	DIVIDE([Keyshop Level Qty] - __PREV_MONTH, __PREV_MONTH)
+	measure 'Keyshop Level Qty MoM%' =
+			
+			VAR __PREV_MONTH = CALCULATE([Keyshop Level Qty], DATEADD('DIM - DATE'[Date], -1, MONTH))
+			RETURN
+				DIVIDE([Keyshop Level Qty] - __PREV_MONTH, __PREV_MONTH)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 3bfd1370-4eab-4ded-9f8d-a8839704ed85
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MonthOverMonth"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: 
+	/// VAR __PREV_QUARTER = CALCULATE([Keyshop Level Qty], DATEADD('Dim Date'[Date], -1, QUARTER))
+	/// RETURN
+	/// 	DIVIDE([Keyshop Level Qty] - __PREV_QUARTER, __PREV_QUARTER)
+	measure 'Keyshop Level Qty QoQ%' =
+			
+			VAR __PREV_QUARTER = CALCULATE([Keyshop Level Qty], DATEADD('DIM - DATE'[Date], -1, QUARTER))
+			RETURN
+				DIVIDE([Keyshop Level Qty] - __PREV_QUARTER, __PREV_QUARTER)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: d58d3374-3cdd-4a2a-81b2-ba230fc42d8c
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "QuarterOverQuarter"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: 
+	/// VAR __PREV_YEAR = CALCULATE([Keyshop Level Qty], DATEADD('Dim Date'[Date], -1, YEAR))
+	/// RETURN
+	/// 	DIVIDE([Keyshop Level Qty] - __PREV_YEAR, __PREV_YEAR)
+	measure 'Keyshop Level Qty YoY%' =
+			
+			VAR __PREV_YEAR = CALCULATE([Keyshop Level Qty], DATEADD('DIM - DATE'[Date], -1, YEAR))
+			RETURN
+				DIVIDE([Keyshop Level Qty] - __PREV_YEAR, __PREV_YEAR)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 62aada95-c13b-486e-b3e2-e97a07d0438d
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "YearOverYear"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: 
+	/// VAR __PREV_YEAR = CALCULATE([# of Keyshop Level Order], DATEADD('Dim Date'[Date], -1, YEAR))
+	/// RETURN
+	/// 	DIVIDE([# of Keyshop Level Order] - __PREV_YEAR, __PREV_YEAR)
+	measure '# of Keyshop Level Order YoY%' =
+			
+			VAR __PREV_YEAR = CALCULATE([# of Keyshop Level Order], DATEADD('DIM - DATE'[Date], -1, YEAR))
+			RETURN
+				DIVIDE([# of Keyshop Level Order] - __PREV_YEAR, __PREV_YEAR)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 322f0736-67b4-46df-b504-0dae68903f04
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "YearOverYear"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: 
+	/// VAR __PREV_MONTH = CALCULATE([# of Keyshop Level Order], DATEADD('Dim Date'[Date], -1, MONTH))
+	/// RETURN
+	/// 	DIVIDE([# of Keyshop Level Order] - __PREV_MONTH, __PREV_MONTH)
+	measure '# of Keyshop Level Order MoM%' =
+			
+			VAR __PREV_MONTH = CALCULATE([# of Keyshop Level Order], DATEADD('DIM - DATE'[Date], -1, MONTH))
+			RETURN
+				DIVIDE([# of Keyshop Level Order] - __PREV_MONTH, __PREV_MONTH)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 4f55ec56-2848-42ce-bc18-cb7a18fff38a
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MonthOverMonth"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: 
+	/// VAR __PREV_QUARTER =
+	/// 	CALCULATE(
+	/// 		[# of Keyshop Level Order],
+	/// 		DATEADD('Dim Date'[Date], -1, QUARTER)
+	/// 	)
+	/// RETURN
+	/// 	DIVIDE([# of Keyshop Level Order] - __PREV_QUARTER, __PREV_QUARTER)
+	measure '# of Keyshop Level Order QoQ%' =
+			
+			VAR __PREV_QUARTER =
+				CALCULATE(
+					[# of Keyshop Level Order],
+					DATEADD('DIM - DATE'[Date], -1, QUARTER)
+				)
+			RETURN
+				DIVIDE([# of Keyshop Level Order] - __PREV_QUARTER, __PREV_QUARTER)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 94f04db4-6d2a-4b63-8628-569899746389
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "QuarterOverQuarter"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: 
+	/// VAR __PREV_QUARTER =
+	/// 	CALCULATE(
+	/// 		[# of Keyshop Level Customer],
+	/// 		DATEADD('Dim Date'[Date], -1, QUARTER)
+	/// 	)
+	/// RETURN
+	/// 	DIVIDE([# of Keyshop Level Customer] - __PREV_QUARTER, __PREV_QUARTER)
+	measure '# of Keyshop Level Customer QoQ%' =
+			
+			VAR __PREV_QUARTER =
+				CALCULATE(
+					[# of Keyshop Level Customer],
+					DATEADD('DIM - DATE'[Date], -1, QUARTER)
+				)
+			RETURN
+				DIVIDE([# of Keyshop Level Customer] - __PREV_QUARTER, __PREV_QUARTER)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 910c28ba-d8dd-4058-ac43-53ec10c83224
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "QuarterOverQuarter"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: 
+	/// VAR __PREV_YEAR =
+	/// 	CALCULATE(
+	/// 		[# of Keyshop Level Customer],
+	/// 		DATEADD('Dim Date'[Date], -1, YEAR)
+	/// 	)
+	/// RETURN
+	/// 	DIVIDE([# of Keyshop Level Customer] - __PREV_YEAR, __PREV_YEAR)
+	measure '# of Keyshop Level Customer YoY%' =
+			
+			VAR __PREV_YEAR =
+				CALCULATE(
+					[# of Keyshop Level Customer],
+					DATEADD('DIM - DATE'[Date], -1, YEAR)
+				)
+			RETURN
+				DIVIDE([# of Keyshop Level Customer] - __PREV_YEAR, __PREV_YEAR)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: ac5ccec4-278e-4e57-9d80-663be23855d3
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "YearOverYear"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: 
+	/// VAR __PREV_MONTH =
+	/// 	CALCULATE(
+	/// 		[# of Keyshop Level Customer],
+	/// 		DATEADD('Dim Date'[Date], -1, MONTH)
+	/// 	)
+	/// RETURN
+	/// 	DIVIDE([# of Keyshop Level Customer] - __PREV_MONTH, __PREV_MONTH)
+	measure '# of Keyshop Level Customer MoM%' =
+			
+			VAR __PREV_MONTH =
+				CALCULATE(
+					[# of Keyshop Level Customer],
+					DATEADD('DIM - DATE'[Date], -1, MONTH)
+				)
+			RETURN
+				DIVIDE([# of Keyshop Level Customer] - __PREV_MONTH, __PREV_MONTH)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 5f606d83-7a92-4083-94dd-ebd3448203cc
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MonthOverMonth"
+				}
+
+		changedProperty = FormatString
+
+	/// Formula: CALCULATE( [% Keyshop Customer vs Active C2], DATEADD('Dim Date'[Date], -1,YEAR))
+	measure '% Keyshop Customer vs Active C2 LY' = CALCULATE( [% Keyshop Customer vs Active C2], DATEADD('DIM - DATE'[Date], -1,YEAR))
+		displayFolder: Sales Out Actual
+		lineageTag: 36b294f2-2904-4774-8ec5-3a10773c4a56
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE( [% Keyshop Customer vs Active C2], DATEADD('Dim Date'[Date], -1,QUARTER))
+	measure '% Keyshop Customer vs Active C2 LQ' = CALCULATE( [% Keyshop Customer vs Active C2], DATEADD('DIM - DATE'[Date], -1,QUARTER))
+		displayFolder: Sales Out Actual
+		lineageTag: 7688f3f3-309a-469e-baa8-5657a8c32f29
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE( [% Keyshop Customer vs Active C2], DATEADD('Dim Date'[Date], -1,MONTH))
+	measure '% Keyshop Customer vs Active C2 LM' = CALCULATE( [% Keyshop Customer vs Active C2], DATEADD('DIM - DATE'[Date], -1,MONTH))
+		displayFolder: Sales Out Actual
+		lineageTag: 811e0229-b2a2-47c6-9f8c-2171e608e937
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: DIVIDE([# of Keyshop Customer] ,[# of Active Customer C2] )
+	measure '% Keyshop Customer vs Active C2' = DIVIDE([# of Keyshop Customer] ,[# of Active Customer C2] )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: fad46b1e-e82b-46b9-900d-cd1f73784688
+
+	/// Formula: CALCULATE([# of Keyshop Level Order], DATEADD('Dim Date'[Date],-1,YEAR))
+	measure '# of Keyshop Level Order LY' = CALCULATE([# of Keyshop Level Order], DATEADD('DIM - DATE'[Date],-1,YEAR))
+		displayFolder: Sales Out Actual
+		lineageTag: 6948a74f-e1c7-46ce-8cbf-7d3cc5ab2a74
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([# of Keyshop Level Order], DATEADD('Dim Date'[Date],-1,QUARTER))
+	measure '# of Keyshop Level Order LQ' = CALCULATE([# of Keyshop Level Order], DATEADD('DIM - DATE'[Date],-1,QUARTER))
+		displayFolder: Sales Out Actual
+		lineageTag: 88f8e242-3441-47e6-8e8f-83e20ed2bc4d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([# of Keyshop Level Order], DATEADD('Dim Date'[Date],-1,MONTH))
+	measure '# of Keyshop Level Order LM' = CALCULATE([# of Keyshop Level Order], DATEADD('DIM - DATE'[Date],-1,MONTH))
+		displayFolder: Sales Out Actual
+		lineageTag: 559a906d-0382-4a2d-ad6f-d29b48eec87b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Keyshop Level Qty], DATEADD('Dim Date'[Date],-1,YEAR))
+	measure 'Keyshop Level Qty LY' = CALCULATE([Keyshop Level Qty], DATEADD('DIM - DATE'[Date],-1,YEAR))
+		displayFolder: Sales Out Actual
+		lineageTag: 889af2c1-26b7-4aa2-90b2-8ee2ab5fdd9d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Keyshop Level Qty], DATEADD('Dim Date'[Date],-1,QUARTER))
+	measure 'Keyshop Level Qty LQ' = CALCULATE([Keyshop Level Qty], DATEADD('DIM - DATE'[Date],-1,QUARTER))
+		displayFolder: Sales Out Actual
+		lineageTag: 9e45c1ba-9cb1-432f-99fe-9c063128b072
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Keyshop Level Qty], DATEADD('Dim Date'[Date],-1,MONTH))
+	measure 'Keyshop Level Qty LM' = CALCULATE([Keyshop Level Qty], DATEADD('DIM - DATE'[Date],-1,MONTH))
+		displayFolder: Sales Out Actual
+		lineageTag: 89ea828b-c896-4bbd-8d6a-0acf21d2c46f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([# of Keyshop Customer], DATEADD('Dim Date'[Date],-1,QUARTER))
+	measure '# of Keyshop Customer LQ' = CALCULATE([# of Keyshop Customer], DATEADD('DIM - DATE'[Date],-1,QUARTER))
+		displayFolder: Sales Out Actual
+		lineageTag: 61febfbf-9158-4f9c-90e1-c1be86e4fc20
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([# of Keyshop Level Customer], DATEADD('Dim Date'[Date],-1,QUARTER))
+	measure '# of Keyshop Level Customer LQ' = CALCULATE([# of Keyshop Level Customer], DATEADD('DIM - DATE'[Date],-1,QUARTER))
+		displayFolder: Sales Out Actual
+		lineageTag: 5ed81bb4-87a0-449c-8173-048710cd2cdf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([# of Keyshop Level Customer], DATEADD('Dim Date'[Date],-1,MONTH))
+	measure '# of Keyshop Level Customer LM' = CALCULATE([# of Keyshop Level Customer], DATEADD('DIM - DATE'[Date],-1,MONTH))
+		displayFolder: Sales Out Actual
+		lineageTag: ef624188-5b0d-4545-9e38-991359405cf3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([# of Keyshop Level Customer], DATEADD('Dim Date'[Date],-1,YEAR))
+	measure '# of Keyshop Level Customer LY' = CALCULATE([# of Keyshop Level Customer], DATEADD('DIM - DATE'[Date],-1,YEAR))
+		displayFolder: Sales Out Actual
+		lineageTag: 6b54a689-92ae-4194-87f7-bbb44118b57b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([# of Keyshop Customer], DATEADD('Dim Date'[Date],-1,YEAR))
+	measure '# of Keyshop Customer LY' = CALCULATE([# of Keyshop Customer], DATEADD('DIM - DATE'[Date],-1,YEAR))
+		displayFolder: Sales Out Actual
+		lineageTag: 2386b2ac-1d40-4b5a-8b9b-4604f6015686
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: DIVIDE([Sale Out Qty Staff (Convert)], [Sale Out Qty Plan (Convert)], BLANK())
+	measure '% Complete Qty Staff' = DIVIDE([Sale Out Qty Staff (Convert)], [Sale Out Qty Plan (Convert)], BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 565d8cd2-f0fd-4256-aabc-8b226a845dd0
+
+	/// Formula: IF('Fact Sale Out Actual'[Sale Out Qty Staff] <> BLANK() ,1)
+	measure '% Complete Other Task' = IF([Sale Out Qty Staff] <> BLANK() ,1)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 4675d6d7-3e49-42df-a9b1-95b3b46b93fc
+
+	/// Formula: [% Complete Qty Staff] * 0.8 + [% Complete Other Task] * 0.2
+	measure '% Complete All Task' = [% Complete Qty Staff] * 0.8 + [% Complete Other Task] * 0.2
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: c231644c-6f96-4a3a-a3cb-05eb7d3685a6
+
+	/// Formula: 
+	/// /*get sale out qty by sub_cat_id that has plan qty*/
+	/// CALCULATE([Sale Out Qty (Convert)], CROSSFILTER('Dim Product DMS'[SUB_CAT_ID], 'Fact Sale Out Plan'[SUB_CAT_ID], Both), FILTER('Dim Product DMS', [Sale Out Qty Plan] <> 0))
+	measure 'Sale Out Qty Staff (Convert)' =
+			
+			/*get sale out qty by sub_cat_id that has plan qty*/
+			CALCULATE([Sale Out Qty (Convert)], CROSSFILTER('DIM - PRODUCT DMS'[SUB_CAT_ID], 'FACT - SALE OUT PLAN'[SUB_CAT_ID], Both), FILTER('DIM - PRODUCT DMS', [Sale Out Qty Plan] <> 0))
+		displayFolder: Sales Out Actual
+		lineageTag: 3607a0b5-e8aa-4545-9821-286827482307
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Staff], FILTER('Dim Product DMS',[SUB_CAT_NAME] = "Ure-ĐCM"))
+	measure 'Sale Out Qty Staff - Ure-ĐCM' = CALCULATE([Sale Out Qty Staff], FILTER('DIM - PRODUCT DMS',[SUB_CAT_NAME] = "Ure-ĐCM"))
+		displayFolder: Sales Out Actual
+		lineageTag: 68931037-f308-42f1-b006-7da4778a5316
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Staff], 'Dim Product DMS'[SUB_CAT_NAME] = "Ure Bio")
+	measure 'Sale Out Qty Staff - Ure Bio' = CALCULATE([Sale Out Qty Staff], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "Ure Bio")
+		displayFolder: Sales Out Actual
+		lineageTag: 2981c7fd-7cd4-4333-9d26-239eb357edd6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Staff], 'Dim Product DMS'[SUB_CAT_NAME] = "SA")
+	measure 'Sale Out Qty Staff - SA' = CALCULATE([Sale Out Qty Staff], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "SA")
+		displayFolder: Sales Out Actual
+		lineageTag: f190f894-4a8c-4422-a9ac-55eb1549aa89
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Staff], 'Dim Product DMS'[SUB_CAT_NAME] = "NPK-ĐCM")
+	measure 'Sale Out Qty Staff - NPK-ĐCM' = CALCULATE([Sale Out Qty Staff], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "NPK-ĐCM")
+		displayFolder: Sales Out Actual
+		lineageTag: c7b59b62-5885-4cb0-a886-514fef3c5193
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Staff], 'Dim Product DMS'[SUB_CAT_NAME] = "NPK Tự Doanh")
+	measure 'Sale Out Qty Staff - NPK Tự doanh' = CALCULATE([Sale Out Qty Staff], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "NPK Tự Doanh")
+		displayFolder: Sales Out Actual
+		lineageTag: 9179d2c0-a5e1-4694-b759-a6da589813c5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Staff], 'Dim Product DMS'[SUB_CAT_NAME] = "N46")
+	measure 'Sale Out Qty Staff - N46' = CALCULATE([Sale Out Qty Staff], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "N46")
+		displayFolder: Sales Out Actual
+		lineageTag: 175bb680-def0-4290-b36a-7e98acfcc0a8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Staff], 'Dim Product DMS'[SUB_CAT_NAME] = "N.Humate")
+	measure 'Sale Out Qty Staff - N.Humate' = CALCULATE([Sale Out Qty Staff], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "N.Humate")
+		displayFolder: Sales Out Actual
+		lineageTag: d367763b-9f99-432c-aac9-0189b5df8371
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Staff], 'Dim Product DMS'[SUB_CAT_NAME] = "KALI")
+	measure 'Sale Out Qty Staff - Kali' = CALCULATE([Sale Out Qty Staff], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "KALI")
+		displayFolder: Sales Out Actual
+		lineageTag: 46f1acbe-f2ca-4899-acfa-d88286049485
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Staff], 'Dim Product DMS'[SUB_CAT_NAME] = "Hữu Cơ")
+	measure 'Sale Out Qty Staff - Hữu cơ' = CALCULATE([Sale Out Qty Staff], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "Hữu Cơ")
+		displayFolder: Sales Out Actual
+		lineageTag: f71003ae-360b-4f6e-b8e6-0fdaf05e5991
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// /*get sale out qty by sub_cat_id that has plan qty*/
+	/// CALCULATE([Sale Out Qty], CROSSFILTER('Dim Product DMS'[SUB_CAT_ID], 'Fact Sale Out Plan'[SUB_CAT_ID], Both), FILTER('Dim Product DMS', [Sale Out Qty Plan] <> 0))
+	measure 'Sale Out Qty Staff' =
+			
+			/*get sale out qty by sub_cat_id that has plan qty*/
+			CALCULATE([Sale Out Qty], CROSSFILTER('DIM - PRODUCT DMS'[SUB_CAT_ID], 'FACT - SALE OUT PLAN'[SUB_CAT_ID], Both), FILTER('DIM - PRODUCT DMS', [Sale Out Qty Plan] <> 0))
+		displayFolder: Sales Out Actual
+		lineageTag: 4fdddf39-148e-4051-b39e-fb57632f02e9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(SUM('Fact Sale Out Actual'[SALE_QUANTITY]), FILTER('Fact Sale Out Actual', 'Fact Sale Out Actual'[TYPE] = 1 && 'Fact Sale Out Actual'[ORDER_TYPE] = "IN"))
+	measure 'Sale Out Qty Test' = CALCULATE(SUM('FACT - SALE OUT ACTUAL'[SALE_QUANTITY]), FILTER('FACT - SALE OUT ACTUAL', 'FACT - SALE OUT ACTUAL'[TYPE] = 1 && 'FACT - SALE OUT ACTUAL'[ORDER_TYPE] = "IN"))
+		displayFolder: Sales Out Actual
+		lineageTag: 4266c2bf-d44d-4566-82af-9ff287484bb6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: DIVIDE([Sale Out Qty (Convert)], [Sale Out Qty Plan (Convert)], BLANK())
+	measure '% Complete Qty' = DIVIDE([Sale Out Qty (Convert)], [Sale Out Qty Plan (Convert)], BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: c696916b-6775-423f-b25d-5d011de5d7cb
+
+	/// Formula: SUM('Fact Sale Out Actual'[QUANTITY_CONVER])
+	measure 'Sale Out Qty (Convert)' = SUM('FACT - SALE OUT ACTUAL'[QUANTITY_CONVER])
+		displayFolder: Sales Out Actual
+		lineageTag: a267b8eb-be57-47bc-bdc2-35993439b319
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: DIVIDE([# of Active Customer C2 YTD], [# of Active Customer C2 LYTD], BLANK())
+	measure '% Active Customer C2 YTD vs LYTD' = DIVIDE([# of Active Customer C2 YTD], [# of Active Customer C2 LYTD], BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 0d2d4552-245a-4361-a2b3-e371310eedf6
+
+	/// Formula: CALCULATE([# of Active Customer C2 YTD],SAMEPERIODLASTYEAR('Dim Date'[Date]))
+	measure '# of Active Customer C2 LYTD' = CALCULATE([# of Active Customer C2 YTD],SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: Sales Out Actual
+		lineageTag: c1a2adbe-bcea-4c65-be94-580418bdb552
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([# of Active Customer C2],DATESYTD('Dim Date'[Date]))
+	measure '# of Active Customer C2 YTD' = CALCULATE([# of Active Customer C2],DATESYTD('DIM - DATE'[Date]))
+		displayFolder: Sales Out Actual
+		lineageTag: b8d8e8e6-2602-4653-bbeb-c7b0c6f5f03c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(DISTINCTCOUNT('Fact Loyalty Program'[SALE_ORDER_ID]),
+	/// FILTER('Fact Loyalty Program','Fact Loyalty Program'[KS_LEVEL_ID] <> BLANK()))
+	measure '# of Keyshop Level Order' =
+			CALCULATE(DISTINCTCOUNT('FACT - LOYALTY PROGRAM'[SALE_ORDER_ID]),
+			FILTER('FACT - LOYALTY PROGRAM','FACT - LOYALTY PROGRAM'[KS_LEVEL_ID] <> BLANK()))
+		displayFolder: Sales Out Actual
+		lineageTag: a6e8fccc-f205-4063-86fb-5efae3673782
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: IF( NOT ISBLANK([# of Keyshop Level Customer]),DIVIDE([# of Keyshop Level Customer],CALCULATE([# of Keyshop Customer], ALLSELECTED('Dim Keyshop Level DMS')), BLANK()))
+	/// 
+	measure '% Keyshop Level Customer' = ```
+			IF( NOT ISBLANK([# of Keyshop Level Customer]),DIVIDE([# of Keyshop Level Customer],CALCULATE([# of Keyshop Customer], ALLSELECTED('DIM - KEYSHOP LEVEL DMS')), BLANK()))
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 47b5012f-5cd7-4af1-bc8a-e9e95e566786
+
+	/// Formula: /*CALCULATE(SUM('Fact Loyalty Program'[SALE_QUANTITY]),FILTER(ALLSELECTED('Fact Loyalty Program'[KS_ID]), [# of Keyshop Level Customer] <> BLANK()))*/
+	/// CALCULATE(SUM('Fact Loyalty Program'[SALE_QUANTITY]), FILTER('Fact Loyalty Program','Fact Loyalty Program'[KS_LEVEL_ID] <> BLANK()))
+	measure 'Keyshop Level Qty' =
+			/*CALCULATE(SUM('Fact Loyalty Program'[SALE_QUANTITY]),FILTER(ALLSELECTED('Fact Loyalty Program'[KS_ID]), [# of Keyshop Level Customer] <> BLANK()))*/
+			CALCULATE(SUM('FACT - LOYALTY PROGRAM'[SALE_QUANTITY]), FILTER('FACT - LOYALTY PROGRAM','FACT - LOYALTY PROGRAM'[KS_LEVEL_ID] <> BLANK()))
+		displayFolder: Sales Out Actual
+		lineageTag: 20710bcc-c192-47c7-9d79-b0d9d79635b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// Var tongsanluong = CALCULATE(SUM('Fact Sale Out Actual'[SALE_QUANTITY]),ALLSELECTED('Dim Keyshop Level DMS'), 'Fact Loyalty Program'[KS_ID] <> BLANK())
+	/// RETURN
+	/// DIVIDE([Keyshop Level Qty],tongsanluong)
+	measure '% Keyshop Level Qty' =
+			
+			Var tongsanluong = CALCULATE(SUM('FACT - SALE OUT ACTUAL'[SALE_QUANTITY]),ALLSELECTED('DIM - KEYSHOP LEVEL DMS'), 'FACT - LOYALTY PROGRAM'[KS_ID] <> BLANK())
+			RETURN
+			DIVIDE([Keyshop Level Qty],tongsanluong)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales Out Actual
+		lineageTag: 3409e513-404d-4b29-a066-76df7c414b87
+
+	/// Formula: CALCULATE(DISTINCTCOUNT('Fact Loyalty Program'[CUSTOMER_ID]),FILTER(ALLSELECTED('Fact Loyalty Program'[KS_ID]), [# of Keyshop Level Customer] <> BLANK()))
+	measure '# of Keyshop Customer' = CALCULATE(DISTINCTCOUNT('FACT - LOYALTY PROGRAM'[CUSTOMER_ID]),FILTER(ALLSELECTED('FACT - LOYALTY PROGRAM'[KS_ID]), [# of Keyshop Level Customer] <> BLANK()))
+		displayFolder: Sales Out Actual
+		lineageTag: 3e8ad295-0dbb-4831-8afc-9bb83ef607e2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(DISTINCTCOUNT('Fact Loyalty Program'[CUSTOMER_ID]),FILTER('Fact Loyalty Program','Fact Loyalty Program'[KS_LEVEL_ID] <> BLANK()))
+	measure '# of Keyshop Level Customer' = CALCULATE(DISTINCTCOUNT('FACT - LOYALTY PROGRAM'[CUSTOMER_ID]),FILTER('FACT - LOYALTY PROGRAM','FACT - LOYALTY PROGRAM'[KS_LEVEL_ID] <> BLANK()))
+		displayFolder: Sales Out Actual
+		lineageTag: 5aa4b739-f2b7-4383-88ee-52e43c7e836e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	///  VAR CurrentFirstOrderDate = SELECTEDVALUE('Fact Sale Out Actual'[First Day Order])
+	///  VAR MonthsAfter = SELECTEDVALUE('Months After'[Value])
+	/// RETURN
+	///  CALCULATE(DIVIDE(
+	///   CALCULATE(
+	///    DISTINCTCOUNT('Fact Sale Out Actual'[CUSTOMER_ID]),
+	///     FILTER(
+	///     'Fact Sale Out Actual',
+	///       EOMONTH([ORDER_DATE_2],0) = EOMONTH(CurrentFirstOrderDate,MonthsAfter)
+	///       )
+	///     ),
+	///   DISTINCTCOUNT('Fact Sale Out Actual'[CUSTOMER_ID]) ), USERELATIONSHIP('Fact Sale Out Actual'[First Day Order], 'Dim Date'[Date]))
+	measure '% Customer C2 Retention Rate (Cohort Chart)' = ```
+			
+			 VAR CurrentFirstOrderDate = SELECTEDVALUE('FACT - SALE OUT ACTUAL'[First Day Order])
+			 VAR MonthsAfter = SELECTEDVALUE('MONTHS AFTER'[Value])
+			RETURN
+			 CALCULATE(DIVIDE(
+			  CALCULATE(
+			   DISTINCTCOUNT('FACT - SALE OUT ACTUAL'[CUSTOMER_ID]),
+			    FILTER(
+			    'FACT - SALE OUT ACTUAL',
+			      EOMONTH([ORDER_DATE_2],0) = EOMONTH(CurrentFirstOrderDate,MonthsAfter)
+			      )
+			    ),
+			  DISTINCTCOUNT('FACT - SALE OUT ACTUAL'[CUSTOMER_ID]) ), USERELATIONSHIP('FACT - SALE OUT ACTUAL'[First Day Order], 'DIM - DATE'[Date]))
+			```
+		formatString: 0%;-0%;0%
+		displayFolder: Sales Out Actual
+		lineageTag: 8b69fb9f-d88c-4d8d-a832-86cafa981f12
+
+	/// Formula: 
+	/// VAR _MAX_DATE = MAX('Dim Date'[Date])
+	/// VAR _MIN_DATE = MIN('Dim Date'[Date])
+	/// RETURN 
+	/// CALCULATE(DISTINCTCOUNT('Fact Sale Out Actual'[CUSTOMER_ID]),FILTER('Dim Customer C2 DMS', 'Dim Customer C2 DMS'[CREATE_DATE] >= _MIN_DATE && 'Dim Customer C2 DMS'[CREATE_DATE] <=_MAX_DATE))
+	measure '# of Customer with First Order' = ```
+			
+			VAR _MAX_DATE = MAX('DIM - DATE'[Date])
+			VAR _MIN_DATE = MIN('DIM - DATE'[Date])
+			RETURN 
+			CALCULATE(DISTINCTCOUNT('FACT - SALE OUT ACTUAL'[CUSTOMER_ID]),FILTER('DIM - CUSTOMER C2 DMS', 'DIM - CUSTOMER C2 DMS'[CREATE_DATE] >= _MIN_DATE && 'DIM - CUSTOMER C2 DMS'[CREATE_DATE] <=_MAX_DATE))
+			```
+		displayFolder: Sales Out Actual
+		lineageTag: 62b5c5aa-8a5a-48c3-93a2-eed80adf60ed
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _MAX_DATE = MAX('Dim Date'[Date])
+	/// VAR _MIN_DATE = MIN('Dim Date'[Date])
+	/// RETURN 
+	/// CALCULATE(DISTINCTCOUNT('Dim Customer C2 DMS'[CUSTOMER_ID]),FILTER('Dim Customer C2 DMS', 'Dim Customer C2 DMS'[CREATE_DATE] >= _MIN_DATE && 'Dim Customer C2 DMS'[CREATE_DATE] <_MAX_DATE))
+	measure '# of New Customer C2' = ```
+			
+			VAR _MAX_DATE = MAX('DIM - DATE'[Date])
+			VAR _MIN_DATE = MIN('DIM - DATE'[Date])
+			RETURN 
+			CALCULATE(DISTINCTCOUNT('DIM - CUSTOMER C2 DMS'[CUSTOMER_ID]),FILTER('DIM - CUSTOMER C2 DMS', 'DIM - CUSTOMER C2 DMS'[CREATE_DATE] >= _MIN_DATE && 'DIM - CUSTOMER C2 DMS'[CREATE_DATE] <_MAX_DATE))
+			```
+		displayFolder: Sales Out Actual
+		lineageTag: f74781c4-5967-4686-b438-1efb71b02d72
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(SUM('Fact Sale Out Actual'[SALE_AMOUNT]),FILTER('Fact Sale Out Actual', 'Fact Sale Out Actual'[TYPE] = 1 && 'Fact Sale Out Actual'[ORDER_TYPE] = "IN"), FILTER('Dim Product DMS', 'Dim Product DMS'[SUB_CAT_NAME] <> "POSM"))
+	measure 'Sale Out Amt' = CALCULATE(SUM('FACT - SALE OUT ACTUAL'[SALE_AMOUNT]),FILTER('FACT - SALE OUT ACTUAL', 'FACT - SALE OUT ACTUAL'[TYPE] = 1 && 'FACT - SALE OUT ACTUAL'[ORDER_TYPE] = "IN"), FILTER('DIM - PRODUCT DMS', 'DIM - PRODUCT DMS'[SUB_CAT_NAME] <> "POSM"))
+		formatString: #,##0.00
+		displayFolder: Sales Out Actual
+		lineageTag: 2a96e5a7-ed97-4225-956a-ad6c6d08495e
+
+		changedProperty = IsHidden
+
+	/// Formula: SUM('Fact Sale Out Actual'[QUANTITY_PROMOTION])
+	measure 'Sale Out Promotion Qty' = SUM('FACT - SALE OUT ACTUAL'[QUANTITY_PROMOTION])
+		formatString: #,##0.000
+		displayFolder: Sales Out Actual
+		lineageTag: f9928447-dedc-4d24-80d6-003ec3eaaa96
+
+		changedProperty = IsHidden
+
+	/// Formula: SUM('Fact Sale Out Actual'[DISCOUNT_AMOUNT])
+	measure 'Sale Out Discount Amt' = SUM('FACT - SALE OUT ACTUAL'[DISCOUNT_AMOUNT])
+		formatString: #,##0.00
+		displayFolder: Sales Out Actual
+		lineageTag: 27ef7edd-60a9-4e49-af9c-984c4cedd832
+
+		changedProperty = IsHidden
+
+	/// Formula: CALCULATE(COUNTROWS(DISTINCT('Fact Sale Out Actual'[CUSTOMER_ID])),'Fact Sale Out Actual'[TYPE]=1,'Fact Sale Out Actual'[ORDER_TYPE]="IN", FILTER('Dim Product DMS', 'Dim Product DMS'[SUB_CAT_NAME] <> "POSM"))
+	measure '# of Active Customer C2' = CALCULATE(COUNTROWS(DISTINCT('FACT - SALE OUT ACTUAL'[CUSTOMER_ID])),'FACT - SALE OUT ACTUAL'[TYPE]=1,'FACT - SALE OUT ACTUAL'[ORDER_TYPE]="IN", FILTER('DIM - PRODUCT DMS', 'DIM - PRODUCT DMS'[SUB_CAT_NAME] <> "POSM"))
+		formatString: #,0
+		displayFolder: Sales Out Actual
+		lineageTag: bb4fd82d-369a-4651-89ac-cc9508bb03ae
+
+	/// Formula: CALCULATE(DISTINCTCOUNT('Fact Sale Out Actual'[SALE_ORDER_ID]), FILTER('Fact Sale Out Actual', 'Fact Sale Out Actual'[TYPE] = 2 && 'Fact Sale Out Actual'[ORDER_TYPE] = "CM"), FILTER('Dim Product DMS', 'Dim Product DMS'[SUB_CAT_NAME] <> "POSM"))
+	measure '# of Return Order' = CALCULATE(DISTINCTCOUNT('FACT - SALE OUT ACTUAL'[SALE_ORDER_ID]), FILTER('FACT - SALE OUT ACTUAL', 'FACT - SALE OUT ACTUAL'[TYPE] = 2 && 'FACT - SALE OUT ACTUAL'[ORDER_TYPE] = "CM"), FILTER('DIM - PRODUCT DMS', 'DIM - PRODUCT DMS'[SUB_CAT_NAME] <> "POSM"))
+		formatString: 0
+		displayFolder: Sales Out Actual
+		lineageTag: b841a9e9-2018-40f5-90c3-1b372e868ee4
+
+	/// Formula: CALCULATE(DISTINCTCOUNT('Fact Sale Out Actual'[SALE_ORDER_ID]), FILTER('Fact Sale Out Actual', 'Fact Sale Out Actual'[TYPE] = 1 && 'Fact Sale Out Actual'[ORDER_TYPE] = "IN"), FILTER('Dim Product DMS', 'Dim Product DMS'[SUB_CAT_NAME] <> "POSM"))
+	measure '# of Sale Out Order' = CALCULATE(DISTINCTCOUNT('FACT - SALE OUT ACTUAL'[SALE_ORDER_ID]), FILTER('FACT - SALE OUT ACTUAL', 'FACT - SALE OUT ACTUAL'[TYPE] = 1 && 'FACT - SALE OUT ACTUAL'[ORDER_TYPE] = "IN"), FILTER('DIM - PRODUCT DMS', 'DIM - PRODUCT DMS'[SUB_CAT_NAME] <> "POSM"))
+		formatString: #,0
+		displayFolder: Sales Out Actual
+		lineageTag: 245d4469-1e46-4392-b7cd-7bcfbefd90f6
+
+	/// Formula: CALCULATE(SUM('Fact Sale Out Actual'[SALE_QUANTITY]), FILTER('Fact Sale Out Actual', 'Fact Sale Out Actual'[TYPE] = 2 && 'Fact Sale Out Actual'[ORDER_TYPE] = "CM"), FILTER('Dim Product DMS', 'Dim Product DMS'[SUB_CAT_NAME] <> "POSM"))
+	measure 'Sale Out Return Qty' = CALCULATE(SUM('FACT - SALE OUT ACTUAL'[SALE_QUANTITY]), FILTER('FACT - SALE OUT ACTUAL', 'FACT - SALE OUT ACTUAL'[TYPE] = 2 && 'FACT - SALE OUT ACTUAL'[ORDER_TYPE] = "CM"), FILTER('DIM - PRODUCT DMS', 'DIM - PRODUCT DMS'[SUB_CAT_NAME] <> "POSM"))
+		formatString: #,##0.000
+		displayFolder: Sales Out Actual
+		lineageTag: 5ad549c0-e8dd-4814-a4a4-6c4a2f767717
+
+		changedProperty = IsHidden
+
+	/// Formula: CALCULATE(SUM('Fact Sale Out Actual'[SALE_QUANTITY]), FILTER('Fact Sale Out Actual', 'Fact Sale Out Actual'[TYPE] = 1 && 'Fact Sale Out Actual'[ORDER_TYPE] = "IN"), FILTER('Dim Product DMS', 'Dim Product DMS'[SUB_CAT_NAME] <> "POSM"))
+	measure 'Sale Out Qty' = CALCULATE(SUM('FACT - SALE OUT ACTUAL'[SALE_QUANTITY]), FILTER('FACT - SALE OUT ACTUAL', 'FACT - SALE OUT ACTUAL'[TYPE] = 1 && 'FACT - SALE OUT ACTUAL'[ORDER_TYPE] = "IN"), FILTER('DIM - PRODUCT DMS', 'DIM - PRODUCT DMS'[SUB_CAT_NAME] <> "POSM"))
+		formatString: #,##0.000
+		displayFolder: Sales Out Actual
+		lineageTag: f654e602-cbd0-4302-a970-2b800db272b9
+
+		changedProperty = IsHidden
+
+	/// Formula: CALCULATE([Sale Out Qty Plan], 'Dim Product DMS'[SUB_CAT_NAME] = "Ure-ĐCM")
+	measure 'Sale Out Qty Plan Staff - Ure-ĐCM' = CALCULATE([Sale Out Qty Plan], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "Ure-ĐCM")
+		displayFolder: Sales Out Plan
+		lineageTag: 9f98974b-707b-45df-a274-5bb7d9abb278
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Plan], 'Dim Product DMS'[SUB_CAT_NAME] = "Ure Bio")
+	measure 'Sale Out Qty Plan Staff - Ure Bio' = CALCULATE([Sale Out Qty Plan], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "Ure Bio")
+		displayFolder: Sales Out Plan
+		lineageTag: f5dd4fd4-6217-46f0-bae0-9a2174795763
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Plan], 'Dim Product DMS'[SUB_CAT_NAME] = "SA")
+	measure 'Sale Out Qty Plan Staff - SA' = CALCULATE([Sale Out Qty Plan], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "SA")
+		displayFolder: Sales Out Plan
+		lineageTag: 0c2b47f1-75e3-408b-8d9d-2abbaa2fad9f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Plan], 'Dim Product DMS'[SUB_CAT_NAME] = "NPK-ĐCM")
+	measure 'Sale Out Qty Plan Staff - NPK-ĐCM' = CALCULATE([Sale Out Qty Plan], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "NPK-ĐCM")
+		displayFolder: Sales Out Plan
+		lineageTag: f5e1ac7e-9fcc-4825-b728-f031a0e5836d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Plan], 'Dim Product DMS'[SUB_CAT_NAME] = "NPK Tự Doanh")
+	measure 'Sale Out Qty Plan Staff - NPK Tự Doanh' = CALCULATE([Sale Out Qty Plan], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "NPK Tự Doanh")
+		displayFolder: Sales Out Plan
+		lineageTag: 172a1595-e034-4ac6-bcc1-c9db314cf4fb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Plan], 'Dim Product DMS'[SUB_CAT_NAME] = "N46")
+	measure 'Sale Out Qty Plan Staff - N46' = CALCULATE([Sale Out Qty Plan], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "N46")
+		displayFolder: Sales Out Plan
+		lineageTag: 82e69d15-1390-443f-83c0-dfd361901837
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Plan], 'Dim Product DMS'[SUB_CAT_NAME] = "N.Humate")
+	measure 'Sale Out Qty Plan Staff - N.Humate' = CALCULATE([Sale Out Qty Plan], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "N.Humate")
+		displayFolder: Sales Out Plan
+		lineageTag: 47e1649b-bf4e-4a3b-be79-c473fa25b025
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Plan], 'Dim Product DMS'[SUB_CAT_NAME] = "KALI")
+	measure 'Sale Out Qty Plan Staff - Kali' = CALCULATE([Sale Out Qty Plan], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "KALI")
+		displayFolder: Sales Out Plan
+		lineageTag: 64a811de-82ce-4b77-82ac-cc46a303de63
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Sale Out Qty Plan], 'Dim Product DMS'[SUB_CAT_NAME] = "Hữu Cơ")
+	measure 'Sale Out Qty Plan Staff - Hữu cơ' = CALCULATE([Sale Out Qty Plan], 'DIM - PRODUCT DMS'[SUB_CAT_NAME] = "Hữu Cơ")
+		displayFolder: Sales Out Plan
+		lineageTag: fe8beb90-47a5-4a4a-8c2e-9d0419664092
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Sale Out Actual'[SALE_QUANTITY])
+	measure 'Sale Out Qty Full' = SUM('FACT - SALE OUT ACTUAL'[SALE_QUANTITY])
+		displayFolder: Sales Out Plan
+		lineageTag: a1ad6c66-9ab6-4ca5-b1c4-c4defe0e611c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Sale Out Plan'[QUANTITY_CONVER])
+	measure 'Sale Out Qty Plan (Convert)' = SUM('FACT - SALE OUT PLAN'[QUANTITY_CONVER])
+		displayFolder: Sales Out Plan
+		lineageTag: e7ae6d52-5a76-4ed0-9c1c-401f881a858f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Sale Out Plan'[QUANTITY])
+	measure 'Sale Out Qty Plan' = SUM('FACT - SALE OUT PLAN'[QUANTITY])
+		formatString: #,##0.00
+		displayFolder: Sales Out Plan
+		lineageTag: b58d37d5-359a-437a-9ff6-1b8e357aeef5
+
+	/// Formula: SUM('Fact Sale Out Plan'[AMOUNT])
+	measure 'Sale Out Amt Plan' = SUM('FACT - SALE OUT PLAN'[AMOUNT])
+		formatString: #,##0.00
+		displayFolder: Sales Out Plan
+		lineageTag: 9d3e0541-2e85-416b-9a73-7dcea35ce7d2
+
+	/// Formula: SUM('Fact Logistic Transport Cost'[TRANSPORT_COST_ACTUAL])
+	measure 'Total Transport Cost Estimate' = SUM('FACT - LOGISTIC TRANSPORT COST'[TRANSPORT_COST_ACTUAL])
+		displayFolder: Transport Cost
+		lineageTag: d30d0cc7-2b1b-4a80-806d-09f21d636ef9
+
+	/// Formula: SUM('Fact Logistic Transport Cost'[ACTUAL_DELIVERY_QTY])
+	measure 'Actual Delivery Qty (of Logistic)' = SUM('FACT - LOGISTIC TRANSPORT COST'[ACTUAL_DELIVERY_QTY])
+		formatString: #,##0.000
+		displayFolder: Transport Cost
+		lineageTag: 75569379-bafc-4037-98b2-8e1d2d3ff995
+
+	/// Formula: SUM('Fact Logistic Transport Cost'[TRANSPORT_INSURANCE_COST])
+	measure 'Transport Insurance Cost' = SUM('FACT - LOGISTIC TRANSPORT COST'[TRANSPORT_INSURANCE_COST])
+		displayFolder: Transport Cost
+		lineageTag: 57e93faf-cebf-4f0e-8707-4f4fe60c366a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: [Sale In Quantity]*11600*1.08
+	measure 'Customs Clearance Costs (VAT)' = [Sale In Quantity]*11600*1.08
+		displayFolder: Transport Cost
+		lineageTag: d2ea8ed6-bda8-4f0c-9712-82aca6349465
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Logistic Transport Cost'[DELIVERY_QTY])
+	measure 'Delivery Qty (of Logistic)' = SUM('FACT - LOGISTIC TRANSPORT COST'[DELIVERY_QTY])
+		displayFolder: Transport Cost
+		lineageTag: e6ebb36a-8722-44cb-acec-fde5d6ebe1ae
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: [Sale In Quantity]*11600
+	measure 'Custom Clearance Cost' = [Sale In Quantity]*11600
+		displayFolder: Transport Cost
+		lineageTag: 0a3f801d-a96c-485d-bfbc-5c44455a3574
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Logistic Storage Cost'[STORAGE_COST]) + [Storage Boc Xep]
+	measure 'Total Storage Cost Estimate' = SUM('FACT - LOGISTIC STORAGE COST'[STORAGE_COST]) + [Storage Boc Xep]
+		displayFolder: Storage Cost
+		lineageTag: 960f71db-6a5e-479c-b494-b888d370cec1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: AVERAGE('Fact Logistic Storage Cost'[STORAGE_UNIT_PRICE])
+	measure 'Storage Unit Price' = AVERAGE('FACT - LOGISTIC STORAGE COST'[STORAGE_UNIT_PRICE])
+		displayFolder: Storage Cost
+		lineageTag: d6229735-e866-40f3-9409-81b8b2ddbf3b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Logistic Storage Cost'[STORAGE_INSURANCE_COST])
+	measure 'Storage Insurance Cost' = SUM('FACT - LOGISTIC STORAGE COST'[STORAGE_INSURANCE_COST])
+		displayFolder: Storage Cost
+		lineageTag: 3582c9b7-e8e8-45f7-b5e5-0c783ba7b518
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Logistic Storage Cost'[CP_BOCXEP_NHAP]) + SUM('Fact Logistic Storage Cost'[CP_BOCXEP_XUAT])
+	measure 'Storage Boc Xep' = SUM('FACT - LOGISTIC STORAGE COST'[CP_BOCXEP_NHAP]) + SUM('FACT - LOGISTIC STORAGE COST'[CP_BOCXEP_XUAT])
+		displayFolder: Storage Cost
+		lineageTag: 9311c547-2df9-4730-b01f-5f125d05060c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: AVERAGE('Fact Logistic Storage Cost'[NHAP_KHO_LON_30KG])
+	measure 'BX Nhập Kho Lớn 30KG' = AVERAGE('FACT - LOGISTIC STORAGE COST'[NHAP_KHO_LON_30KG])
+		formatString: 0
+		displayFolder: Storage Cost
+		lineageTag: b2865070-7e50-421f-a0e1-87ee828b38b0
+
+	/// Formula: AVERAGE('Fact Logistic Storage Cost'[NHAP_KHO_NHO_30KG])
+	measure 'BX Nhập Kho Nhỏ 30KG' = AVERAGE('FACT - LOGISTIC STORAGE COST'[NHAP_KHO_NHO_30KG])
+		formatString: 0
+		displayFolder: Storage Cost
+		lineageTag: 385366df-94b6-44d5-bcb2-a89a65461639
+
+	/// Formula: AVERAGE('Fact Logistic Storage Cost'[XUAT_KHO_LON_30KG])
+	measure 'BX Xuất Kho Lớn 30KG' = AVERAGE('FACT - LOGISTIC STORAGE COST'[XUAT_KHO_LON_30KG])
+		formatString: 0
+		displayFolder: Storage Cost
+		lineageTag: 6aa9dc41-a8e9-4744-bcc8-f3c011440472
+
+	/// Formula: AVERAGE('Fact Logistic Storage Cost'[XUAT_KHO_NHO_30KG])
+	measure 'BX Xuất Kho Nhỏ 30KG' = AVERAGE('FACT - LOGISTIC STORAGE COST'[XUAT_KHO_NHO_30KG])
+		formatString: 0
+		displayFolder: Storage Cost
+		lineageTag: d3b15b27-7492-4a3f-846c-ff1435a20b8f
+
+	/// Formula: SUM('Fact Logistic Storage Cost'[CP_BOCXEP_NHAP]) 
+	measure 'Storage Boc Xep Nhap' = ```
+			SUM('FACT - LOGISTIC STORAGE COST'[CP_BOCXEP_NHAP]) 
+			```
+		displayFolder: Storage Cost
+		lineageTag: cfdc6823-dcd0-4e05-ae96-71c24ba0a2b7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: SUM('Fact Logistic Storage Cost'[CP_BOCXEP_XUAT])
+	measure 'Storage Boc Xep Xuat' = SUM('FACT - LOGISTIC STORAGE COST'[CP_BOCXEP_XUAT])
+		displayFolder: Storage Cost
+		lineageTag: 13f18de8-cfa1-46ce-b6e0-5e50c43e1a93
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: AVERAGE('Fact Logistic Storage Cost'[CONTRACT_PRICE])
+	measure 'Contract Price (Storage)' = AVERAGE('FACT - LOGISTIC STORAGE COST'[CONTRACT_PRICE])
+		displayFolder: Storage Cost
+		lineageTag: c84632ca-9945-4241-9598-bf9a1ef57b7c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(
+	///         SUM('Fact Inventory Balance'[RECEIPT_QTY])
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+	///     )
+	measure 'Receipt Qty' =
+			CALCULATE(
+			        SUM('FACT - INVENTORY BALANCE'[RECEIPT_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    )
+		displayFolder: Inventory
+		lineageTag: 6dcd1249-5ebf-48ab-a6c1-fc028147732e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(
+	///         SUM('Fact Inventory Balance'[ISSUE_QTY])
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+	///     )
+	measure 'Issue Qty' =
+			CALCULATE(
+			        SUM('FACT - INVENTORY BALANCE'[ISSUE_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    )
+		displayFolder: Inventory
+		lineageTag: 4ffac79c-02b1-4c77-b1fb-ceb82192a001
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _min_date = MIN('Dim Date'[Date])
+	/// var _MEASURE = 
+	///     CALCULATE(
+	///         SUMX('Fact Inventory Balance',[RECEIPT_QTY] + [ISSUE_QTY]),
+	///         'Dim Date'[Date] < _min_date
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+	///     )
+	/// 
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Opening Qty' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			var _MEASURE = 
+			    CALCULATE(
+			        SUMX('FACT - INVENTORY BALANCE',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] < _min_date
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    )
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		displayFolder: Inventory
+		lineageTag: e3e05853-0759-414c-bc47-6a6e7a2d3bc5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// VAR _max_date = MAX('Dim Date'[Date])
+	/// VAR _MEASURE = 
+	///     CALCULATE(
+	///         SUMX('Fact Inventory Balance',[RECEIPT_QTY] + [ISSUE_QTY]),
+	///         'Dim Date'[Date] <= _max_date
+	///         --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] = 1
+	///     )
+	///     
+	/// RETURN
+	/// IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+	measure 'Closing Qty' = ```
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _MEASURE = 
+			    CALCULATE(
+			        SUMX('FACT - INVENTORY BALANCE',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] <= _max_date
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] = 1
+			    )
+			    
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,0
+		displayFolder: Inventory
+		lineageTag: 2d643bea-28ed-44df-be1d-83e00e5c96e2
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	/// Formula: 
+	/// SUMX(VALUES('Dim Storage Loc'[STORAGE_CATEGORY]), SWITCH(TRUE(),
+	/// SELECTEDVALUE('Dim Storage Loc'[STORAGE_CATEGORY]) = "Kho Đại Lý",
+	/// [Closing Qty] - [Remaining Contract Qty vs SO (PLHĐ Bán ký gửi)] ,
+	/// SELECTEDVALUE('Dim Storage Loc'[STORAGE_CATEGORY]) IN { "Kho Thuê", "Kho Nhà máy"},
+	/// /*Còn lại đối với kho thuê và kho nhà máy*/
+	/// [Closing Qty] 
+	/// /*tồn PLHĐ */
+	/// - ([Remaining Contract Qty vs SO (PLHĐ Bán)]+ [Remaining Contract Qty vs SO (PLHĐ Xuất ký gửi)])
+	/// /*tồn LDDNB*/
+	/// - [Remaining LDDNB Qty vs OD],
+	/// BLANK()))
+	measure 'Available Stock (PLHĐ)' = ```
+			
+			SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_CATEGORY]), SWITCH(TRUE(),
+			SELECTEDVALUE('DIM - STORAGE LOCATION'[STORAGE_CATEGORY]) = "Kho Đại Lý",
+			[Closing Qty] - [Remaining Contract Qty vs SO (PLHĐ Bán ký gửi)] ,
+			SELECTEDVALUE('DIM - STORAGE LOCATION'[STORAGE_CATEGORY]) IN { "Kho Thuê", "Kho Nhà máy"},
+			/*Còn lại đối với kho thuê và kho nhà máy*/
+			[Closing Qty] 
+			/*tồn PLHĐ */
+			- ([Remaining Contract Qty vs SO (PLHĐ Bán)]+ [Remaining Contract Qty vs SO (PLHĐ Xuất ký gửi)])
+			/*tồn LDDNB*/
+			- [Remaining LDDNB Qty vs OD],
+			BLANK()))
+			```
+		displayFolder: Inventory
+		lineageTag: 9d5518da-2ba7-4028-932d-1c1ffdb63095
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// SUMX(VALUES('Dim Storage Loc'[STORAGE_CATEGORY]), SWITCH(TRUE(),
+	/// SELECTEDVALUE('Dim Storage Loc'[STORAGE_CATEGORY]) = "Kho Đại Lý",
+	///  [Closing Qty] - [Remaining Sale Order Qty vs OD (LXH Bán ký gửi)] ,
+	/// SELECTEDVALUE('Dim Storage Loc'[STORAGE_CATEGORY]) IN { "Kho Thuê", "Kho Nhà máy"},
+	/// /*Còn lại đối với kho thuê và kho nhà máy*/
+	/// [Closing Qty] 
+	/// /*tồn PLHĐ */
+	/// - ([Remaining Sale Order Qty vs OD (LXH Bán)]+ [Remaining Sale Order Qty vs OD (LXH Xuất ký gửi)])
+	/// /*tồn LDDNB*/
+	/// - [Remaining LDDNB Qty vs OD],
+	/// BLANK()))
+	measure 'Available Stock (LXH)' = ```
+			
+			SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_CATEGORY]), SWITCH(TRUE(),
+			SELECTEDVALUE('DIM - STORAGE LOCATION'[STORAGE_CATEGORY]) = "Kho Đại Lý",
+			 [Closing Qty] - [Remaining Sale Order Qty vs OD (LXH Bán ký gửi)] ,
+			SELECTEDVALUE('DIM - STORAGE LOCATION'[STORAGE_CATEGORY]) IN { "Kho Thuê", "Kho Nhà máy"},
+			/*Còn lại đối với kho thuê và kho nhà máy*/
+			[Closing Qty] 
+			/*tồn PLHĐ */
+			- ([Remaining Sale Order Qty vs OD (LXH Bán)]+ [Remaining Sale Order Qty vs OD (LXH Xuất ký gửi)])
+			/*tồn LDDNB*/
+			- [Remaining LDDNB Qty vs OD],
+			BLANK()))
+			```
+		displayFolder: Inventory
+		lineageTag: 8f2b0a02-3ddd-4a33-a6fa-0f85b4d19975
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 
+	/// SUMX(VALUES('Dim Storage Loc'[STORAGE_CATEGORY]), SWITCH(TRUE(),
+	/// SELECTEDVALUE('Dim Storage Loc'[STORAGE_CATEGORY]) = "Kho Đại Lý",
+	///  [Closing Qty] - [Remaining OD Qty vs Actual GI (PXK Bán Ký gửi)] ,
+	/// SELECTEDVALUE('Dim Storage Loc'[STORAGE_CATEGORY]) IN { "Kho Thuê", "Kho Nhà máy"},
+	/// /*Còn lại đối với kho thuê và kho nhà máy*/
+	/// [Closing Qty] 
+	/// /*tồn PLHĐ */
+	/// - ([Remaining OD Qty vs Actual GI (PXK Bán)]+ [Remaining OD Qty vs Actual GI (PXK Xuất Ký gửi)])
+	/// /*tồn LDDNB*/
+	/// - [Remaining OD Qty vs Actual GI (LDDNB)],
+	/// BLANK()))
+	measure 'Available Stock (PXK)' = ```
+			
+			SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_CATEGORY]), SWITCH(TRUE(),
+			SELECTEDVALUE('DIM - STORAGE LOCATION'[STORAGE_CATEGORY]) = "Kho Đại Lý",
+			 [Closing Qty] - [Remaining OD Qty vs Actual GI (PXK Bán Ký gửi)] ,
+			SELECTEDVALUE('DIM - STORAGE LOCATION'[STORAGE_CATEGORY]) IN { "Kho Thuê", "Kho Nhà máy"},
+			/*Còn lại đối với kho thuê và kho nhà máy*/
+			[Closing Qty] 
+			/*tồn PLHĐ */
+			- ([Remaining OD Qty vs Actual GI (PXK Bán)]+ [Remaining OD Qty vs Actual GI (PXK Xuất Ký gửi)])
+			/*tồn LDDNB*/
+			- [Remaining OD Qty vs Actual GI (LDDNB)],
+			BLANK()))
+			```
+		displayFolder: Inventory
+		lineageTag: 8e4c6926-cccb-44cf-931b-8878adff8bf9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(SUM('Fact LDDNB Status'[DOC_QUANTITY]), FILTER('Fact LDDNB Status', 'Fact LDDNB Status'[MATERIAL_TYPE] IN {"Z40", "Z44", "Z50", "Z51", "Z60", "Z61"}))/*filter thanh pham*/
+	measure 'LDDNB Qty' = CALCULATE(SUM('FACT - LDDNB STATUS'[DOC_QUANTITY]), FILTER('FACT - LDDNB STATUS', 'FACT - LDDNB STATUS'[MATERIAL_TYPE] IN {"Z40", "Z44", "Z50", "Z51", "Z60", "Z61"}))/*filter thanh pham*/
+		displayFolder: LDDNB
+		lineageTag: 4b7c3b71-d9f1-456c-84a6-6a5267c9a5a9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(SUM('Fact LDDNB Status'[AC_DELIVERY_QUANTITY]),FILTER('Fact LDDNB Status', 'Fact LDDNB Status'[MATERIAL_TYPE] IN {"Z40", "Z44", "Z50", "Z51", "Z60", "Z61"}))/*filter thanh pham*/
+	measure 'Actual Delivery Qty (of LDDNB)' = CALCULATE(SUM('FACT - LDDNB STATUS'[AC_DELIVERY_QUANTITY]),FILTER('FACT - LDDNB STATUS', 'FACT - LDDNB STATUS'[MATERIAL_TYPE] IN {"Z40", "Z44", "Z50", "Z51", "Z60", "Z61"}))/*filter thanh pham*/
+		displayFolder: LDDNB
+		lineageTag: fb7521f8-8c41-4281-a6e9-60ffc211967d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: 'Fact LDDNB Status'[LDDNB Qty] - [Actual Delivery Qty (of LDDNB)]
+	measure 'Remaining LDDNB Qty vs OD' = [LDDNB Qty] - [Actual Delivery Qty (of LDDNB)]
+		displayFolder: LDDNB
+		lineageTag: b2c39125-77a7-4cf5-a4eb-c26b976226a0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: [Delivery Qty] - [Delivery Actual Qty]
+	measure 'Remaining OD vs Actual GI' = [Delivery Qty] - [Delivery Actual Qty]
+		displayFolder: Delivery Status
+		lineageTag: 62eb1de8-be54-4dba-a03f-473581895fdd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Delivery Qty] - 'Fact Delivery Status'[Delivery Actual Qty], FILTER('Fact Delivery Status', 'Fact Delivery Status'[DELIVERY_TYPE] = "ZNLN"))
+	measure 'Remaining OD Qty vs Actual GI (LDDNB)' = CALCULATE([Delivery Qty] - [Delivery Actual Qty], FILTER('FACT - DELIVERY STATUS', 'FACT - DELIVERY STATUS'[DELIVERY_TYPE] = "ZNLN"))
+		displayFolder: Delivery Status
+		lineageTag: 56b83b70-1d5b-49ca-8bde-bf423271e939
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Delivery Qty] - 'Fact Delivery Status'[Delivery Actual Qty], FILTER('Fact Delivery Status', 'Fact Delivery Status'[DELIVERY_TYPE] IN { "ZLF1", "ZLF2"}))
+	measure 'Remaining OD Qty vs Actual GI (PXK Bán)' = CALCULATE([Delivery Qty] - [Delivery Actual Qty], FILTER('FACT - DELIVERY STATUS', 'FACT - DELIVERY STATUS'[DELIVERY_TYPE] IN { "ZLF1", "ZLF2"}))
+		displayFolder: Delivery Status
+		lineageTag: fc1f2628-3a5c-42a6-9bbf-c6a77ffc9ddd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Delivery Qty] - 'Fact Delivery Status'[Delivery Actual Qty], FILTER('Fact Delivery Status', 'Fact Delivery Status'[DELIVERY_TYPE] = "ZLF5"))
+	measure 'Remaining OD Qty vs Actual GI (PXK Bán Ký gửi)' = CALCULATE([Delivery Qty] - [Delivery Actual Qty], FILTER('FACT - DELIVERY STATUS', 'FACT - DELIVERY STATUS'[DELIVERY_TYPE] = "ZLF5"))
+		displayFolder: Delivery Status
+		lineageTag: 91a90f27-913a-4980-aca3-a9a14210640b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(SUM('Fact Delivery Status'[AC_DELIVERY_QUANTITY]), FILTER('Fact Delivery Status',[MATERIAL_TYPE] IN {"Z40", "Z44", "Z50", "Z51", "Z60", "Z61"}))/*filter thanh pham*/
+	measure 'Delivery Actual Qty' = ```
+			CALCULATE(SUM('FACT - DELIVERY STATUS'[AC_DELIVERY_QUANTITY])
+			                        , FILTER('FACT - DELIVERY STATUS',[MATERIAL_TYPE] IN {"Z40", "Z44", "Z50", "Z51", "Z60", "Z61"})/*filter thanh pham*/
+			                        , FILTER('FACT - DELIVERY STATUS', 'FACT - DELIVERY STATUS'[AC_GI_DATE] <> "00000000")
+			                                )
+			
+			```
+		displayFolder: Delivery Status
+		lineageTag: 323e3446-79cb-4744-bc67-618ba6b15a6d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE(SUM('Fact Delivery Status'[DELIVERY_QUANTITY]), FILTER('Fact Delivery Status', 'Fact Delivery Status'[MATERIAL_TYPE] IN {"Z40", "Z44", "Z50", "Z51", "Z60", "Z61"}))/*filter thanh pham*/
+	measure 'Delivery Qty' = CALCULATE(SUM('FACT - DELIVERY STATUS'[DELIVERY_QUANTITY]), FILTER('FACT - DELIVERY STATUS', 'FACT - DELIVERY STATUS'[MATERIAL_TYPE] IN {"Z40", "Z44", "Z50", "Z51", "Z60", "Z61"}))/*filter thanh pham*/
+		displayFolder: Delivery Status
+		lineageTag: ef3f8a72-6a81-472c-ae99-fec236170d06
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Formula: CALCULATE([Delivery Qty] - 'Fact Delivery Status'[Delivery Actual Qty], FILTER('Fact Delivery Status', 'Fact Delivery Status'[DELIVERY_TYPE] = "ZLF4"))
+	measure 'Remaining OD Qty vs Actual GI (PXK Xuất Ký gửi)' = CALCULATE([Delivery Qty] - [Delivery Actual Qty], FILTER('FACT - DELIVERY STATUS', 'FACT - DELIVERY STATUS'[DELIVERY_TYPE] = "ZLF4"))
+		displayFolder: Delivery Status
+		lineageTag: 27024ead-5523-4ec3-93da-5b2041d4fc07
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Kế hoạch số lần C2 ghé thăm' = ```
+			
+			CALCULATE(
+			    SUM('FACT - VISIT PLAN C2'[PLAN]),
+			FILTER('FACT - VISIT PLAN C2','FACT - VISIT PLAN C2'[KPI_CONFIG_ID] = 59 || 'FACT - VISIT PLAN C2'[KPI_CONFIG_ID] = 61 || 'FACT - VISIT PLAN C2'[KPI_CONFIG_ID] = 63)
+			) 
+			```
+		displayFolder: Visit Plan C2
+		lineageTag: 9447395e-841d-42a9-a1a0-98c7a66cbabf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Kế hoạch số lần C2 ghé thăm 2' = 0
+		displayFolder: Visit Plan C2
+		lineageTag: 2a6cfe1d-5966-4681-b1ab-191247c8b021
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Kế hoạch số lượng KH C2 ghé thăm' = CALCULATE(IF(ISBLANK(SUM('FACT - VISIT PLAN C2'[PLAN_KPI])),0,SUM('FACT - VISIT PLAN C2'[PLAN_KPI])),'FACT - VISIT PLAN C2'[KPI_CONFIG_ID] = 57)
+		displayFolder: Visit Plan C2
+		lineageTag: 55c283ca-7a05-44c0-9861-a1d26f239139
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ lệ số lần ghé thăm KH/ tổng KH' = ```
+			
+			VAR __BASELINE_VALUE = [# of Visited Actual]
+			VAR __VALUE_TO_COMPARE = 
+			CALCULATE(COUNTROWS(DISTINCT('FACT - VISIT ACTUAL C2'[ACTION_LOG_ID])),ALLSELECTED('DIM - CUSTOMER C2 DMS'[CUSTOMER_C2_TYPE]) )
+			RETURN
+			DIVIDE( __BASELINE_VALUE, __VALUE_TO_COMPARE)
+			```
+		displayFolder: Visit Plan C2
+		lineageTag: aa7acc73-15b0-4c0e-8b7d-978d698f195f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Contract Price VND' = AVERAGEX(VALUES('DIM - PRODUCT'[PRODUCT_CODE]), DIVIDE([Contract Amt VND], [Contract Qty]))
+		lineageTag: 4bc72198-ad32-4e59-875e-d8b57b39386d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CHANNEL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 05551378-308f-405c-8087-6ebfd023826b
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - CHANNEL[CHANNEL_CODE]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANNEL_NAME
+		dataType: string
+		isHidden
+		lineageTag: fceef9a0-2b8c-4eb2-ae6a-a0a737e90395
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - CHANNEL[CHANNEL_NAME]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '_SALES MEASURES' = calculated
+		mode: import
+		source = 'DIM - CHANNEL'
+
+	annotation PBI_Id = d863c3fc7a0646ae89cba8ec12356664
+

@@ -1,0 +1,1050 @@
+table '_PROCUREMENT MEASURES'
+	lineageTag: 27695f5b-eb4f-4f52-8ec7-0c305ada2e23
+
+	measure '# of GR (PO Status)' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'FACT - PO STATUS'[PO_DOC] ),
+			    FILTER ( 'FACT - PO STATUS', [GR_QUANTITY] <> BLANK () )
+			)
+		formatString: 0
+		displayFolder: PO Status
+		lineageTag: a4e83b97-06c9-4838-9a4d-c1acee086de2
+
+	measure '# of GR (PR Status)' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'FACT - PR STATUS'[PO_DOC] ),
+			    FILTER ( 'FACT - PR STATUS', [GR_QUANTITY] <> BLANK () )
+			)
+		formatString: 0
+		displayFolder: PR Status
+		lineageTag: 76b8299a-edad-4c63-9ca5-d4440bd2e27e
+
+	measure '# of IR (PO Status)' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'FACT - PO STATUS'[PO_DOC] ),
+			    FILTER ( 'FACT - PO STATUS', [IR_QUANTITY] <> BLANK () )
+			)
+		formatString: 0
+		displayFolder: PO Status
+		lineageTag: e34f3720-4220-4702-b882-c8af10fce7bb
+
+	measure '# of IR (PR Status)' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'FACT - PR STATUS'[PO_DOC] ),
+			    FILTER ( 'FACT - PR STATUS', [IR_QUANTITY] <> BLANK () )
+			)
+		formatString: 0
+		displayFolder: PR Status
+		lineageTag: d7957107-cac9-43ca-ac3a-3bddcf9656ac
+
+	measure '# of Open PO vs GR (PO Status)' = [# of PO (PO Status)] - [# of GR (PO Status)]
+		formatString: 0
+		displayFolder: PO Status
+		lineageTag: 9601de76-fd3a-450d-a39c-2a0f2321b69e
+
+	measure '# of Open PO vs GR (PR Status)' = [# of PO (PR Status)] - [# of GR (PR Status)]
+		formatString: 0
+		displayFolder: PR Status
+		lineageTag: 436b321d-30cb-477b-84c3-48578a8bd7db
+
+	measure '# of Open PR vs PO (PR Status)' = [# of PR (PR Status)] - [# of PO (PR Status)]
+		formatString: 0
+		displayFolder: PR Status
+		lineageTag: 5df91e8d-9eca-4ae6-a4ca-eb338b6e29de
+
+	measure '# of PO' = DISTINCTCOUNT('FACT - PURCHASE ORDER'[PURCHASE_ORDER])
+		formatString: 0
+		displayFolder: Purchase Orrder
+		lineageTag: 64b61ea0-00f2-403a-899e-f753304eb324
+
+	measure '# of PO (PO Status)' = DISTINCTCOUNT('FACT - PO STATUS'[PO_DOC])
+		displayFolder: PO Status
+		lineageTag: 6b3ea431-884a-4a5f-a3af-0f6d4629350e
+
+	measure '# of PO (PR Status)' = DISTINCTCOUNT('FACT - PR STATUS'[PO_DOC])
+		formatString: 0
+		displayFolder: PR Status
+		lineageTag: 99c95f32-6123-4b08-b7db-f3a5d4c26462
+
+	measure '# of PR' = DISTINCTCOUNT('FACT - PURCHASE REQUISITION'[PURCHASE_REQUISITION])
+		formatString: 0
+		displayFolder: Purchase Requisition
+		lineageTag: fd12c3b9-7be9-4d46-bae6-6ce244f3f644
+
+	measure '# of PR (PR Status)' = DISTINCTCOUNT('FACT - PR STATUS'[PR_DOC])
+		formatString: 0
+		displayFolder: PR Status
+		lineageTag: a7402855-3ba8-45c6-908c-1f8c21018184
+
+	measure '% chênh lệch giá qua các lần nhập kho' =
+			
+			VAR _previous_price =
+			    CALCULATE (
+			        [Net Price],
+			        OFFSET (
+			            -1,
+			            SUMMARIZE (
+			                ALLSELECTED ( 'FACT - GOOD RECEIPT' ),
+			                'DIM - DATE'[Date],
+			                'DIM - MATERIAL'[MATERIAL_CODE]
+			            ),
+			            ORDERBY ( 'DIM - DATE'[Date] ),
+			            ,
+			            PARTITIONBY ( 'DIM - MATERIAL'[MATERIAL_CODE] )
+			        )
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( _previous_price ),
+			        BLANK (),
+			        DIVIDE ( [Net Price] - _previous_price, [Net Price] )
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Good Receipt
+		lineageTag: e52b7351-0db4-4007-a1d0-4e81d22ab02c
+
+	measure '% chênh lệch giá qua các năm' =
+			
+			VAR _previous_price =
+			    CALCULATE (
+			        [GR Net Price],
+			        OFFSET (
+			            -1,
+			            SUMMARIZE (
+			                ALLSELECTED ( 'FACT - GOOD RECEIPT' ),
+			                'DIM - DATE'[Year],
+			                'DIM - MATERIAL'[MATERIAL_CODE],
+			                'FACT - GOOD RECEIPT'[POSTING_YEAR]
+			            ),
+			            ORDERBY ( 'DIM - DATE'[Year] ),
+			            ,
+			            PARTITIONBY ( 'DIM - MATERIAL'[MATERIAL_CODE] )
+			        )
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( _previous_price ),
+			        BLANK (),
+			        DIVIDE ( [GR Net Price] - _previous_price, _previous_price )
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Good Receipt
+		lineageTag: 4696c153-d753-4b81-b9e3-54abf824f47b
+
+	measure '% chênh lệch giá trung bình qua các năm' = DIVIDE ( [GR Net Price] - [GR Net Price Prev Year(s)], [GR Net Price Prev Year(s)], BLANK () )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Good Receipt
+		lineageTag: 2f63fbf4-abba-4ef7-92b6-adc042c1e1f5
+
+	measure '% tăng giá vật tư' = IF([AVG Price] = [Min Price for Material (Vendor Level)], BLANK(),DIVIDE( [AVG Price],[Min Price for Material (Vendor Level)],0))
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Purchase Orrder
+		lineageTag: 82fcba27-996c-4013-962d-08c27e6394f9
+
+	measure '% Tồn kho từ GTĐK' = DIVIDE([Tồn kho từ GTĐK], [CLOSING AMT (V PRICE)])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Good Receipt
+		lineageTag: 15737698-a16f-452a-862d-6e41bf2c34d9
+
+	measure '% Tồn kho từ mua mới' = DIVIDE([Tồn kho từ mua mới], [CLOSING AMT (V PRICE)])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Good Receipt
+		lineageTag: 1cf76047-1839-4a0e-aeff-b2e508bb8fae
+
+	measure '% Tồn kho từ tăng giá' = DIVIDE([Tồn kho từ tăng giá], [CLOSING AMT (V PRICE)])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Good Receipt
+		lineageTag: 61169592-0103-4505-974b-1ac145bc71e8
+
+	measure 'AVG Price' = AVERAGE('FACT - PURCHASE ORDER'[NET_PRICE_VND])
+		displayFolder: Purchase Orrder
+		lineageTag: 5804c721-76b8-41d3-8563-c02da2afd119
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PURCHASE - CLOSING AMT (V PRICE)' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			var _measure = 
+			
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",
+			        CALCULATE(
+			            SUMX('Fact - Purchase Inventory Amount',[RECEIPT_AMT] + [ISSUE_AMT]),
+			            'DIM - DATE'[Date] <= _max_date
+			        )
+			        ,"X",
+			        CALCULATE(
+			            SUMX('Fact - Purchase Inventory Amount',[RECEIPT_AMT] + [ISSUE_AMT]- [REVERSE_AMT]),
+			            'DIM - DATE'[Date] <= _max_date
+			        )
+			        +
+			        CALCULATE(
+			            SUMX('Fact - Purchase Inventory Amount',[REVERSE_REMAIN_AMT]),
+			            'DIM - DATE'[Date] >= _max_date
+			        )
+			)
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Inventory
+		lineageTag: 28bac9fc-c14c-40ec-8529-231b42e8f2b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PURCHASE - CLOSING QTY (SLOC)' = ```
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _MEASURE = 
+			    CALCULATE(
+			        SUMX('FACT - PURCHASE INVENTORY QUANTITY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] <= _max_date
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] = 1
+			    )
+			    
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Inventory
+		lineageTag: 3200a517-66a0-4561-847f-a9e3890fd9d9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PURCHASE - CLOSING QTY (SLOC) TON' = ```
+			
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			VAR _MEASURE = 
+			    CALCULATE(
+			        SUMX('FACT - PURCHASE INVENTORY QUANTITY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] <= _max_date,
+			        'FACT - PURCHASE INVENTORY QUANTITY'[BASE_UOM] = "TO"
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] = 1
+			    )
+			    
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		displayFolder: Inventory
+		lineageTag: dab2d77d-53cf-4136-9548-3e0661e39b1b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Delivery Cost' = CALCULATE( SUM('FACT - INVOICE RECEIPT'[NET_AMOUNT_VND]), FILTER('FACT - INVOICE RECEIPT', 'FACT - INVOICE RECEIPT'[UPDATE_DELIVERY_COST] ="X"))
+		formatString: #,0
+		displayFolder: Invoice Receipt
+		lineageTag: 4edd0406-23bd-44f3-9cbb-7a8220ea4e42
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Giá trị vật tư không nhập kho' =
+			SUMX( SUMMARIZE('DIM - MATERIAL', 'DIM - MATERIAL'[MATERIAL_CODE], "AMT", IF([RECEIPT QTY (SLOC)] = BLANK(),  [CLOSING AMT (V PRICE)])
+			), [AMT])
+		displayFolder: Good Receipt
+		lineageTag: cf9e36e0-547b-49a3-95e4-8b47e001d681
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GR Net Price' =
+			DIVIDE([GR Value], [GR Quantity], BLANK())
+			--AVERAGE('Fact - Good Receipt'[NET_PRICE])
+		displayFolder: Good Receipt
+		lineageTag: 88cdbae2-4ea2-48bf-9305-00dae9ea7d20
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GR Net Price LY' = CALCULATE( [GR Net Price], SAMEPERIODLASTYEAR('DIM - DATE'[Date]))
+		displayFolder: Good Receipt
+		lineageTag: 6f6cff83-943d-430f-b444-dad9736051cf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GR Net Price Prev Year(s)' = ```
+			
+			/*Trung bình giá của các năm quá khứ*/
+			CALCULATE(AVERAGEX( 
+			    SUMMARIZE('FACT - GOOD RECEIPT', [MATERIAL_CODE], [POSTING_YEAR], "VALUE", DIVIDE([GR Value], [GR Quantity], BLANK())),
+			    [VALUE]), 'FACT - GOOD RECEIPT'[POSTING_YEAR] < MAX('FACT - GOOD RECEIPT'[POSTING_YEAR]))
+			```
+		displayFolder: Good Receipt
+		lineageTag: d4028227-9be4-4a7b-9855-cab7be59eb4d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GR Quantity' = ```
+			SUM('FACT - GOOD RECEIPT'[GI_ACTUAL_QUANTITY]) 
+			```
+		displayFolder: Good Receipt
+		lineageTag: e3a97048-5f4f-4417-8906-d771a3234509
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GR Quantity (Chi tiết đơn hàng)' = SUM('FACT - ORDER DETAIL'[GR_QUANTITY])
+		displayFolder: Order Detail
+		lineageTag: a9b3788a-76ac-451a-a14f-17bff3a85c3a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GR Quantity (PO Status)' = SUM('FACT - PO STATUS'[GR_QUANTITY])
+		displayFolder: PO Status
+		lineageTag: 953b8965-c3ab-451d-8ba5-ece3fa7df4fa
+
+	measure 'GR Quantity (PR Status)' = SUM('FACT - PR STATUS'[GR_QUANTITY])
+		displayFolder: PR Status
+		lineageTag: 09c93b03-b62f-4a83-b813-4049c6763f8e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GR Value' = SUM('FACT - GOOD RECEIPT'[LOC_AMOUNT])
+		displayFolder: Good Receipt
+		lineageTag: 100b21f1-fbe7-4278-9851-8fe560fe0065
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GR Value (Chi tiết đơn hàng)' = SUM('FACT - ORDER DETAIL'[GR_VALUE])
+		displayFolder: Order Detail
+		lineageTag: 1dd00887-f198-4388-81af-2457e50348bc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GR Value (PO Status)' = SUM('FACT - PO STATUS'[GR_VALUE])
+		displayFolder: PO Status
+		lineageTag: b233f1b7-c51c-479f-bd25-a7042cb11c22
+
+	measure 'GR Value (PR Status)' = SUM('FACT - PR STATUS'[GR_VALUE])
+		displayFolder: PR Status
+		lineageTag: a6cf3e5f-ded2-45fd-bfa0-ca5d7a4465cc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT mua cho 1001' = ```
+			
+			    SUMX (
+			        SUMMARIZE (
+			            'DIM - MATERIAL PLANT',
+			            [MATERIAL_CODE],
+			            "VALUE",
+			                VAR _TONG_KHO_PRPO = CALCULATE([CLOSING AMT (V PRICE)] + [GTVT PR/PO dở dang], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			                VAR _TONG_KHO_PRPO_1001 = SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_LOCATION]), IF('DIM - STORAGE LOCATION'[STORAGE_LOCATION] = "1001",_TONG_KHO_PRPO))
+			                VAR _VALUE = [GTVT sử dụng kế hoạch] - _TONG_KHO_PRPO_1001
+			                RETURN
+			                IF(_VALUE > 0, _VALUE, BLANK())
+			        )
+			        ,
+			        [VALUE]
+			    )
+			```
+		displayFolder: Material Usage Plan
+		lineageTag: e3d5233e-da64-4cb3-b2d4-0a6cfefe992a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT mua cho 1005 (Max)' =
+			
+			SUMX (
+			        SUMMARIZE (
+			            'DIM - MATERIAL PLANT',
+			            [MATERIAL_CODE],
+			            "VALUE",
+			            VAR _TONG_KHO_PRPO = CALCULATE([CLOSING AMT (V PRICE)] + [GTVT PR/PO dở dang], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _VALUE_CONLAI =  _TONG_KHO_PRPO - CALCULATE([GTVT sử dụng kế hoạch], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _DINHMUC_MAX = SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_LOCATION]),IF('DIM - STORAGE LOCATION'[STORAGE_LOCATION] = "1005",SUMX('DIM - MATERIAL PLANT',[MAX_STOCK_LEVEL] * [MOVING_PRICE]), BLANK()))
+			             RETURN
+			            IF(_VALUE_CONLAI > 0 && _DINHMUC_MAX > _VALUE_CONLAI , _DINHMUC_MAX - _VALUE_CONLAI, BLANK())), [VALUE])
+		displayFolder: Material Usage Plan
+		lineageTag: 409df396-087c-4c2d-a356-6210a0318862
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT mua cho 1005 (Min)' =
+			
+			SUMX (
+			        SUMMARIZE (
+			            'DIM - MATERIAL PLANT',
+			            [MATERIAL_CODE],
+			            "VALUE",
+			            VAR _TONG_KHO_PRPO = CALCULATE([CLOSING AMT (V PRICE)] + [GTVT PR/PO dở dang], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _VALUE_CONLAI =  _TONG_KHO_PRPO - CALCULATE([GTVT sử dụng kế hoạch], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _DINHMUC_MIN = SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_LOCATION]),IF('DIM - STORAGE LOCATION'[STORAGE_LOCATION] = "1005",SUMX('DIM - MATERIAL PLANT',[MIN_SAFETY_STOCK] * [MOVING_PRICE]), BLANK()))
+			             RETURN
+			            IF(_VALUE_CONLAI > 0 && _DINHMUC_MIN > _VALUE_CONLAI , _DINHMUC_MIN - _VALUE_CONLAI, BLANK())), [VALUE])
+		displayFolder: Material Usage Plan
+		lineageTag: ff484a23-be40-41c0-875b-f27d1313b921
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT mua cho 1005 (Safety)' =
+			
+			SUMX (
+			        SUMMARIZE (
+			            'DIM - MATERIAL PLANT',
+			            [MATERIAL_CODE],
+			            "VALUE",
+			            VAR _TONG_KHO_PRPO = CALCULATE([CLOSING AMT (V PRICE)] + [GTVT PR/PO dở dang], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _VALUE_CONLAI =  _TONG_KHO_PRPO - CALCULATE([GTVT sử dụng kế hoạch], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _DINHMUC_SAFE = SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_LOCATION]),IF('DIM - STORAGE LOCATION'[STORAGE_LOCATION] = "1005",SUMX('DIM - MATERIAL PLANT',[SAFTETY_STOCK] * [MOVING_PRICE]), BLANK()))
+			             RETURN
+			            IF(_VALUE_CONLAI > 0 && _DINHMUC_SAFE > _VALUE_CONLAI , _DINHMUC_SAFE - _VALUE_CONLAI, BLANK())), [VALUE])
+		displayFolder: Material Usage Plan
+		lineageTag: 1441c51c-f56e-4243-81a2-df1452c1b325
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT PR/PO dở dang' = [Open PR Value vs PO (PR Status)] + [Open PO Value vs GR (PO Status)]
+		displayFolder: Material Usage Plan
+		lineageTag: 8354bae1-de16-4430-b4dd-09588bc58d17
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT sử dụng kế hoạch' = SUMX('FACT - MATERIAL USAGE PLAN',[SLVT sử dụng kế hoạch] * RELATED('DIM - MATERIAL PLANT'[MOVING_PRICE]))
+		displayFolder: Material Usage Plan
+		lineageTag: f476977c-84ee-46f1-a65e-6e564d8cce4d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT tồn kho 1001 dự kiến' = CALCULATE([CLOSING AMT (V PRICE)] + [GTVT mua cho 1001] + [GTVT PR/PO dở dang], FILTER('DIM - STORAGE LOCATION',[STORAGE_LOCATION] <> "1005" && [STORAGE_LOCATION] <> "1901"))
+		displayFolder: Material Usage Plan
+		lineageTag: 34a18c6b-7625-4635-8027-7be3e586f5cc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT tồn kho 1005 dự kiến (Max)' = CALCULATE([CLOSING AMT (V PRICE)] + [GTVT mua cho 1005 (Max)] +[GTVT PR/PO dở dang], FILTER('DIM - STORAGE LOCATION',[STORAGE_LOCATION] = "1005"))
+		displayFolder: Material Usage Plan
+		lineageTag: e4c74ebb-8fae-45c7-b3e8-293b423e92a3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT tồn kho 1005 dự kiến (Min)' = CALCULATE([CLOSING AMT (V PRICE)] + [GTVT mua cho 1005 (Min)] +[GTVT PR/PO dở dang], FILTER('DIM - STORAGE LOCATION',[STORAGE_LOCATION] = "1005"))
+		displayFolder: Material Usage Plan
+		lineageTag: 24208884-c65a-404f-b156-754b480b39c9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT tồn kho 1005 dự kiến (Safety)' = CALCULATE([CLOSING AMT (V PRICE)] + [GTVT mua cho 1005 (Safety)] +[GTVT PR/PO dở dang], FILTER('DIM - STORAGE LOCATION',[STORAGE_LOCATION] = "1005"))
+		displayFolder: Material Usage Plan
+		lineageTag: 4bf0f314-5e53-4d42-8c1e-cf5226250c1b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT tồn kho dự kiến (Max)' = [GTVT tồn kho 1001 dự kiến] + [GTVT tồn kho 1005 dự kiến (Max)]
+		displayFolder: Material Usage Plan
+		lineageTag: 9968f2a9-f54d-4a63-a67b-89001838e64f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT tồn kho dự kiến (Min)' = [GTVT tồn kho 1001 dự kiến] + [GTVT tồn kho 1005 dự kiến (Min)]
+		displayFolder: Material Usage Plan
+		lineageTag: e16920df-de66-4987-aaf7-d3eb0f9efd5f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GTVT tồn kho dự kiến (Safety)' = [GTVT tồn kho 1001 dự kiến] + [GTVT tồn kho 1005 dự kiến (Safety)]
+		displayFolder: Material Usage Plan
+		lineageTag: 84d7e972-5056-45e7-b996-93d1d9922706
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'IR Quantity' =
+			CALCULATE( SUM('FACT - INVOICE RECEIPT'[QUANTITY]), FILTER('FACT - INVOICE RECEIPT', 'FACT - INVOICE RECEIPT'[UPDATE_DELIVERY_COST] =""))
+			 //VAR _TABLE = SUMMARIZE('Fact - Invoice Receipt', 'Dim - Material'[MATERIAL_CODE], 'Fact - Invoice Receipt'[PURCHASE_ORDER], 'Fact - Invoice Receipt'[PURCHASE_ITEM], "QUANTITY", MAX('Fact - Invoice Receipt'[QUANTITY]))
+			// RETURN SUMX(_TABLE, [QUANTITY])
+		displayFolder: Invoice Receipt
+		lineageTag: 5ecbaae1-530d-4b3b-9547-c009a756f09e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'IR Quantity (PO Status)' = SUM('FACT - PO STATUS'[IR_QUANTITY])
+		displayFolder: PO Status
+		lineageTag: 58db0483-9b46-4ade-92af-83d4777a626a
+
+	measure 'IR Quantity (PR Status)' = SUM('FACT - PR STATUS'[IR_QUANTITY])
+		displayFolder: PR Status
+		lineageTag: 1d3bd6d0-9c56-45b8-8e4a-8fe8cb40c0bf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'IR Value' = CALCULATE( SUM('FACT - INVOICE RECEIPT'[NET_AMOUNT_VND]), FILTER('FACT - INVOICE RECEIPT', 'FACT - INVOICE RECEIPT'[UPDATE_DELIVERY_COST] =""))
+		displayFolder: Invoice Receipt
+		lineageTag: 11fb714a-0042-4156-b1ee-f131d7e52d35
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'IR Value (PO Status)' = SUM('FACT - PO STATUS'[IR_VALUE])
+		displayFolder: PO Status
+		lineageTag: ce17b3cf-0391-4cf3-9bbc-16e77b35b5fb
+
+	measure 'IR Value (PR Status)' = SUM('FACT - PR STATUS'[IR_VALUE])
+		displayFolder: PR Status
+		lineageTag: 5bcad125-e8ef-4ac7-a241-768196b0f82d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PUCHASE - ISSUE AMT (V PRICE)' = ```
+			var _measure = 
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",SUM('Fact - Purchase Inventory Amount'[ISSUE_AMT])
+			        ,"X",SUMX('Fact - Purchase Inventory Amount',[ISSUE_AMT]-[ISSUE_REVERSE_AMT])
+			        )
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Inventory
+		lineageTag: db563372-421d-4990-9193-05be25847a3d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PURCHASE - ISSUE QTY (SLOC)' = ```
+			
+			var _measure = 
+			SWITCH(
+			SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			,"",
+			    CALCULATE(
+			        SUM('Fact - Purchase Inventory Quantity'[ISSUE_QTY])
+			   
+			    ),
+			"X",
+			    CALCULATE(
+			        SUMX('Fact - Purchase Inventory Quantity',[ISSUE_QTY]-[ISSUE_REVERSE_QTY])
+			
+			    )
+			)
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Inventory
+		lineageTag: 40934de7-7cef-4412-b622-937a7be7b6d0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Min Price for Material (Vendor Level)' =
+			
+			MINX(ALLSELECTED('FACT - PURCHASE ORDER'[VENDOR_CODE], 'FACT - PURCHASE ORDER'[VENDOR_NAME]),[AVG Price])
+		displayFolder: Purchase Orrder
+		lineageTag: 593bf366-53e7-457d-a9a6-5ce1eb0cd049
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Price' = DIVIDE( [CLOSING AMT (V PRICE)], [CLOSING QTY (SLOC)])
+		displayFolder: Good Receipt
+		lineageTag: 4777b9d0-f0ab-40ff-a58a-f4516c8137b7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PO Quantity (Chi tiết đơn hàng)' = [PO Quantity (Chi tiết đơn hàng)] -   [GR Quantity (Chi tiết đơn hàng)]
+		displayFolder: Order Detail
+		lineageTag: 908cd6e1-bba5-47fc-bc66-e8aedf298114
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PO Quantity vs GR (PO Status)' = [PO Quantity (PO Status)] - [GR Quantity (PO Status)]
+		displayFolder: PO Status
+		lineageTag: a85d8b4e-ccfb-418e-abec-c89ce9e5701d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PO Quantity vs GR (PR Status)' = [PO Quantity (PR Status)] - [GR Quantity (PR Status)]
+		displayFolder: PR Status
+		lineageTag: af29fcc6-aad4-4613-ab4e-e43f19785949
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PO Value (Chi tiết đơn hàng)' = [PO Value (Chi tiết đơn hàng)] -   [GR Value (Chi tiết đơn hàng)]
+		displayFolder: Order Detail
+		lineageTag: 25d3a2a6-4285-44da-9f7d-1cf1e3de898f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PO Value vs GR (PO Status)' =
+			SUM('FACT - PO STATUS'[Open GR (PO Status)])
+			 --[PO Value (PO Status)] - [GR Value (PO Status)]
+		displayFolder: PO Status
+		lineageTag: c9fa24a2-f067-4dc1-b417-3eaab86692bb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PO Value vs GR (PR Status)' =
+			SUM('FACT - PR STATUS'[Open GR (PR Status)])
+			--[PO Value (PR Status)] - [GR Value (PR Status)]
+		displayFolder: PR Status
+		lineageTag: 0713729b-2907-4319-9499-675415bac334
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PR' = [PR Quantity] - SUM('FACT - PURCHASE REQUISITION'[ORDERED_QUANTITY] )
+		displayFolder: Purchase Requisition
+		lineageTag: f8443ff0-df87-4e18-a1ec-d149d08f1a77
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PR Quantity (Chi tiết đơn hàng)' = [PR Quantity (Chi tiết đơn hàng)] -   [PO Quantity (Chi tiết đơn hàng)]
+		displayFolder: Order Detail
+		lineageTag: 838ed7d3-1eab-482c-8ba7-2e4fa60b8833
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PR Quantity vs PO (PR Status)' = [PR Quantity (PR Status)] - [PO Quantity (PR Status)]
+		displayFolder: PR Status
+		lineageTag: 919812be-9a1b-4404-8cef-212083337088
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PR Value (Chi tiết đơn hàng)' = [PR Value (Chi tiết đơn hàng)] -   [PO Value (Chi tiết đơn hàng)]
+		displayFolder: Order Detail
+		lineageTag: d34b71cb-3101-4d99-a7d0-45c47c6230af
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PR Value vs PO (Chi tiết đơn hàng)' = [PR Value (Chi tiết đơn hàng)] - [PO Value (Chi tiết đơn hàng)]
+		displayFolder: Order Detail
+		lineageTag: 89ea90a7-18c2-45a3-8acf-607d6cac1ba8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open PR Value vs PO (PR Status)' = [PR Value (PR Status)] - [PO Value (PR Status)]
+		displayFolder: PR Status
+		lineageTag: 55cbc305-01f2-4ddb-ae59-a0e7f4ae5969
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PURCHASE - OPENING AMT (V PRICE)' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			VAR _max_date = MAX('DIM - DATE'[Date])
+			var _measure = 
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",
+			        CALCULATE(
+			            SUMX('Fact - Purchase Inventory Amount',[RECEIPT_AMT] + [ISSUE_AMT]),
+			            'DIM - DATE'[Date] < _min_date
+			        )
+			        ,"X",
+			        CALCULATE(
+			            SUMX('Fact - Purchase Inventory Amount',[RECEIPT_AMT] + [ISSUE_AMT] - [REVERSE_AMT]),
+			            'DIM - DATE'[Date] < _min_date
+			        )
+			        +
+			        CALCULATE(
+			            SUMX('Fact - Purchase Inventory Amount',[REVERSE_REMAIN_AMT]),
+			            'DIM - DATE'[Date] >= _min_date
+			        )
+			    )
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Inventory
+		lineageTag: 4bad78e6-0940-4d7d-8913-53e7c3acd685
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PURCHASE  - OPENING QTY (SLOC)' = ```
+			
+			VAR _min_date = MIN('DIM - DATE'[Date])
+			var _MEASURE = 
+			    CALCULATE(
+			        SUMX('FACT - PURCHASE INVENTORY QUANTITY',[RECEIPT_QTY] + [ISSUE_QTY]),
+			        'DIM - DATE'[Date] < _min_date
+			    )
+			
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Inventory
+		lineageTag: e36ba21b-1c1e-41de-9cfe-2b70f468faf9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ordered Quantity' = SUM('FACT - PURCHASE REQUISITION'[ORDERED_QUANTITY])
+		displayFolder: Purchase Requisition
+		lineageTag: e289a045-2311-4f75-98bd-fc0f983c705f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PO Quantity' = CALCULATE( SUM('FACT - PURCHASE ORDER'[DOC_QUANTITY]) , 'FACT - PURCHASE ORDER'[RELEASE_STATUS] ="X")
+		displayFolder: Purchase Orrder
+		lineageTag: 077c3216-4be4-4b5c-8682-ccafd5e784de
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PO Quantity (Chi tiết đơn hàng)' = SUM('FACT - ORDER DETAIL'[PO_QUANTITY])
+		displayFolder: Order Detail
+		lineageTag: 0ad26ec1-d41f-4362-908f-b39cd22edf2a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PO Quantity (PO Status)' = SUM('FACT - PO STATUS'[PO_QUANTITY])
+		displayFolder: PO Status
+		lineageTag: 152c999f-d1e2-4f49-a9e6-4ed48280beaa
+
+	measure 'PO Quantity (PR Status)' = SUM('FACT - PR STATUS'[PO_QUANTITY])
+		displayFolder: PR Status
+		lineageTag: 9a9a7ed5-02af-4bee-a039-a7931ced2565
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PO Value' = SUM('FACT - PURCHASE ORDER'[NET_VALUE])
+		displayFolder: Purchase Orrder
+		lineageTag: e979ff43-72e4-4c88-9f4e-e63083b6bfa9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PO Value (Chi tiết đơn hàng)' = SUM('FACT - ORDER DETAIL'[PO_VALUE])
+		displayFolder: Order Detail
+		lineageTag: 72f72b1d-27d3-4815-bb3d-7e576a51c98d
+
+	measure 'PO Value (PO Status)' = SUM('FACT - PO STATUS'[PO_VALUE])
+		displayFolder: PO Status
+		lineageTag: b1e8eb77-1d0c-48fb-a0cb-58542dc3a5e2
+
+	measure 'PO Value (PR Status)' = SUM('FACT - PR STATUS'[PO_VALUE])
+		displayFolder: PR Status
+		lineageTag: 8ae2a8f5-829f-4dc1-a323-53ee7d522e84
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PO Value VND' = SUM('FACT - PURCHASE ORDER'[NET_VALUE_VND])
+		displayFolder: Purchase Orrder
+		lineageTag: 982032d4-ce5f-48f9-99f4-b46436bd976b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PR Quantity' = SUM('FACT - PURCHASE REQUISITION'[QUANTITY])
+		displayFolder: Purchase Requisition
+		lineageTag: 22653dd2-e300-453a-b2b1-171543811a84
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PR Quantity (Chi tiết đơn hàng)' = SUM('FACT - ORDER DETAIL'[PR_QUANTITY])
+		displayFolder: Order Detail
+		lineageTag: ab0dd9da-fb9a-464c-8e2e-f50388957a7d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PR Quantity (PR Status)' = SUMX(SUMMARIZE('FACT - PR STATUS', [PR_DOC], [PR_ITEM], "PR_QTY", AVERAGE('FACT - PR STATUS'[PR_QUANTITY_PLAN])), [PR_QTY])
+		displayFolder: PR Status
+		lineageTag: a2002def-658d-4127-95f5-b87cd8c09fb9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PR Value' = SUM( 'FACT - PURCHASE REQUISITION'[TOTAL_VALUE])
+		displayFolder: Purchase Requisition
+		lineageTag: 74bf5504-5ddb-4784-a2c2-429ebb88d50b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PR Value (Chi tiết đơn hàng)' = SUM('FACT - ORDER DETAIL'[PR_VALUE])
+		displayFolder: Order Detail
+		lineageTag: 9139a9c5-416a-488b-b83a-1ffd2ed6a476
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PR Value (PR Status)' = SUMX(SUMMARIZE('FACT - PR STATUS', [PR_DOC], [PR_ITEM], "PR_QTY", AVERAGE('FACT - PR STATUS'[PR_VALUE_PLAN])), [PR_QTY])
+		displayFolder: PR Status
+		lineageTag: 520b879e-8934-40ff-93c7-b9c54cfb5365
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PURCHASE - RECEIPT AMT (V PRICE)' = ```
+			var _measure = 
+			SWITCH(
+			        SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			        ,"",SUM('Fact - Purchase Inventory Amount'[RECEIPT_AMT])
+			        ,"X",SUMX('Fact - Purchase Inventory Amount',[RECEIPT_AMT]-[RECEIPT_REVERSE_AMT])
+			        )
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0
+		displayFolder: Inventory
+		lineageTag: 708f8fd3-6c7b-4ce0-9860-3c40b85ff31c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'PURCHASE - RECEIPT QTY (SLOC)' = ```
+			var _measure = 
+			SWITCH(
+			SELECTEDVALUE('PARAMETER - EXCLUDE REVERSE DOCUMENT'[EXCLUDE_REVERSE],"")
+			,"",
+			    CALCULATE(
+			        SUM('Fact - Purchase Inventory Quantity'[RECEIPT_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    ),
+			"X",
+			    CALCULATE(
+			        SUMX('Fact - Purchase Inventory Quantity',[RECEIPT_QTY]-[RECEIPT_REVERSE_QTY])
+			        --,'Agg Material Ledger Qty'[IS_SLOC_BATCH_STOCK] =1
+			    )
+			)
+			RETURN
+			IF(ROUND(_MEASURE,3)=0,BLANK(),_MEASURE)
+			```
+		formatString: #,##0.000
+		displayFolder: Inventory
+		lineageTag: 44f1dc05-e68a-42f3-9402-0d9eb0fecc1a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT mua cho 1001' = ```
+			
+			    SUMX (
+			        SUMMARIZE (
+			            'DIM - MATERIAL PLANT',
+			            [MATERIAL_CODE],
+			            "VALUE",
+			                VAR _TONG_KHO_PRPO = CALCULATE([CLOSING QTY (SLOC)] + [SLVT PR/PO dở dang], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			                VAR _TONG_KHO_PRPO_1001 = SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_LOCATION]), IF('DIM - STORAGE LOCATION'[STORAGE_LOCATION] = "1001",_TONG_KHO_PRPO))
+			                VAR _VALUE = [SLVT sử dụng kế hoạch] - _TONG_KHO_PRPO_1001
+			                RETURN
+			                IF(_VALUE > 0, _VALUE, BLANK())
+			        )
+			        ,
+			        [VALUE]
+			    )
+			```
+		displayFolder: Material Usage Plan
+		lineageTag: 938e6bf6-14b5-4343-b336-06e0033862f9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT mua cho 1005 (Max)' =
+			
+			SUMX (
+			        SUMMARIZE (
+			            'DIM - MATERIAL PLANT',
+			            [MATERIAL_CODE],
+			            "VALUE",
+			            VAR _TONG_KHO_PRPO = CALCULATE([CLOSING QTY (SLOC)] + [SLVT PR/PO dở dang], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _VALUE_CONLAI =  _TONG_KHO_PRPO - CALCULATE([SLVT sử dụng kế hoạch], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _DINHMUC_MAX = SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_LOCATION]),IF('DIM - STORAGE LOCATION'[STORAGE_LOCATION] = "1005",SUM('DIM - MATERIAL PLANT'[MAX_STOCK_LEVEL]), BLANK()))
+			             RETURN
+			            IF(_VALUE_CONLAI > 0 && _DINHMUC_MAX > _VALUE_CONLAI , _DINHMUC_MAX - _VALUE_CONLAI, BLANK())), [VALUE])
+		displayFolder: Material Usage Plan
+		lineageTag: 8f065ff9-55ce-4922-983c-38b2926d99d8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT mua cho 1005 (Min)' = ```
+			
+			SUMX (
+			        SUMMARIZE (
+			            'DIM - MATERIAL PLANT',
+			            [MATERIAL_CODE],
+			            "VALUE",
+			            VAR _TONG_KHO_PRPO = CALCULATE([CLOSING QTY (SLOC)] + [SLVT PR/PO dở dang], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _VALUE_CONLAI =  _TONG_KHO_PRPO - CALCULATE([SLVT sử dụng kế hoạch], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _DINHMUC_MIN = SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_LOCATION]),IF('DIM - STORAGE LOCATION'[STORAGE_LOCATION] = "1005",SUM('DIM - MATERIAL PLANT'[MIN_SAFETY_STOCK]), BLANK()))
+			             RETURN
+			            IF(_VALUE_CONLAI > 0 && _DINHMUC_MIN > _VALUE_CONLAI , _DINHMUC_MIN - _VALUE_CONLAI, BLANK())), [VALUE])
+			
+			```
+		displayFolder: Material Usage Plan
+		lineageTag: 97806b93-232c-4ac4-ab54-364122630e96
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT mua cho 1005 (Safety)' =
+			
+			SUMX (
+			        SUMMARIZE (
+			            'DIM - MATERIAL PLANT',
+			            [MATERIAL_CODE],
+			            "VALUE",
+			            VAR _TONG_KHO_PRPO = CALCULATE([CLOSING QTY (SLOC)] + [SLVT PR/PO dở dang], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _VALUE_CONLAI =  _TONG_KHO_PRPO - CALCULATE([SLVT sử dụng kế hoạch], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+			            VAR _DINHMUC_SAFETY = SUMX(VALUES('DIM - STORAGE LOCATION'[STORAGE_LOCATION]),IF('DIM - STORAGE LOCATION'[STORAGE_LOCATION] = "1005",SUM('DIM - MATERIAL PLANT'[SAFTETY_STOCK]), BLANK()))
+			             RETURN
+			            IF(_VALUE_CONLAI > 0 && _DINHMUC_SAFETY > _VALUE_CONLAI , _DINHMUC_SAFETY - _VALUE_CONLAI, BLANK())), [VALUE])
+		displayFolder: Material Usage Plan
+		lineageTag: d1012449-e417-47a0-b6e0-e46b9ac60bf1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT PR/PO dở dang' = [Open PR Quantity vs PO (PR Status)] + [Open PO Quantity vs GR (PO Status)]
+		formatString: #,0
+		displayFolder: Material Usage Plan
+		lineageTag: 9be820b5-453b-42c8-88b8-bdc8833e62fd
+
+	measure 'SLVT sử dụng kế hoạch' = SUM('FACT - MATERIAL USAGE PLAN'[Số lượng yêu cầu]) - SUM('FACT - MATERIAL USAGE PLAN'[Số lượng đã xuất kho])
+		formatString: #,0
+		displayFolder: Material Usage Plan
+		lineageTag: 0d4d5361-f27e-4e31-9c06-1007665999e2
+
+	measure 'SLVT tồn kho 1001 dự kiến' = CALCULATE([CLOSING QTY (SLOC)] + [SLVT mua cho 1001] + [SLVT PR/PO dở dang], FILTER('DIM - STORAGE LOCATION',[STORAGE_LOCATION] <> "1005" && [STORAGE_LOCATION] <> "1901"))
+		displayFolder: Material Usage Plan
+		lineageTag: 05465765-c39a-4e99-9713-7a362d60a7e3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT tồn kho 1005 dự kiến (Max)' = CALCULATE([CLOSING QTY (SLOC)] + [SLVT mua cho 1005 (Max)] +[SLVT PR/PO dở dang], FILTER('DIM - STORAGE LOCATION',[STORAGE_LOCATION] = "1005"))
+		displayFolder: Material Usage Plan
+		lineageTag: 0cbd4710-11cc-4318-939c-bfc181ca728d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT tồn kho 1005 dự kiến (Min)' = CALCULATE([CLOSING QTY (SLOC)] + [SLVT mua cho 1005 (Min)] +[SLVT PR/PO dở dang], FILTER('DIM - STORAGE LOCATION',[STORAGE_LOCATION] = "1005"))
+		displayFolder: Material Usage Plan
+		lineageTag: 8c054243-d3e4-435d-930a-6750ecd34be7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT tồn kho 1005 dự kiến (Safety)' = CALCULATE([CLOSING QTY (SLOC)] + [SLVT mua cho 1005 (Safety)] +[SLVT PR/PO dở dang], FILTER('DIM - STORAGE LOCATION',[STORAGE_LOCATION] = "1005"))
+		displayFolder: Material Usage Plan
+		lineageTag: f3be8255-f6c0-47e0-9ea3-1321ae2f8a2a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT tồn kho dự kiến (Max)' = [SLVT tồn kho 1001 dự kiến] + [SLVT tồn kho 1005 dự kiến (Max)]
+		displayFolder: Material Usage Plan
+		lineageTag: bcc7c244-b671-48fe-a643-3f07a30346d6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT tồn kho dự kiến (Min)' = [SLVT tồn kho 1001 dự kiến] + [SLVT tồn kho 1005 dự kiến (Min)]
+		displayFolder: Material Usage Plan
+		lineageTag: 5c59a531-c9d3-42ad-aac6-b77efc12633b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT tồn kho dự kiến (Safety)' = [SLVT tồn kho 1001 dự kiến] + [SLVT tồn kho 1005 dự kiến (Safety)]
+		displayFolder: Material Usage Plan
+		lineageTag: 149d3934-1152-44ba-a137-df9b8a87bbd0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'SLVT tồn kho và PR/PO dở dang' = CALCULATE([CLOSING QTY (SLOC)] + [SLVT PR/PO dở dang], ALLSELECTED(), VALUES('DIM - MATERIAL PLANT'))
+		displayFolder: Material Usage Plan
+		lineageTag: de894361-9653-4ccf-83a9-62f716e85175
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thời gian từ ngày nhập kho gần nhất' = ```
+			
+			// VAR _MAX_DATE = CALCULATE(MAX('Dim - Date'[Date]),FILTER(RELATEDTABLE('Fact - Purchase Inventory Quantity'),[RECEIPT_QTY] <> BLANK())) 
+			// VAR _CURRENT_DATE = IF([CLOSING QTY (SLOC)] = 0 , BLANK(),MAX('Dim - Date'[Date]))
+			// RETURN
+			// DATEDIFF( _MAX_DATE, _CURRENT_DATE, DAY)
+			VAR _MAX_DATE = CALCULATE(MAX('DIM - DATE'[Date]),FILTER(RELATEDTABLE('FACT - PURCHASE INVENTORY QUANTITY'),[RECEIPT_QTY] <> BLANK()))
+			VAR _CURRENT_DATE = IF([CLOSING QTY (SLOC)] = 0 , BLANK(),MAX('DIM - DATE'[Date]))
+			RETURN
+			SWITCH(SELECTEDVALUE('PARAMETER - YEAR MONTH DAY'[Value], "Day"),
+			    "Day",DATEDIFF( _MAX_DATE, _CURRENT_DATE, DAY),
+			    "Month", DATEDIFF( _MAX_DATE, _CURRENT_DATE, MONTH),
+			    "Year", DATEDIFF( _MAX_DATE, _CURRENT_DATE, YEAR))
+			```
+		formatString: 0
+		displayFolder: Inventory
+		lineageTag: 3baa7f5b-de22-4158-af69-87b36576ab69
+
+	measure 'Thời gian từ ngày xuất kho gần nhất' =
+			
+			// VAR _LAST_ISSUE = CALCULATE(LASTDATE('Dim - Date'[Date]), FILTER(RELATEDTABLE('Fact - Purchase Inventory Quantity'),[ISSUE_QTY] <> BLANK()))
+			// VAR _CURRENT_DATE = MAX('Dim - Date'[Date])
+			// RETURN
+			// DATEDIFF(_LAST_ISSUE, _CURRENT_DATE, DAY)
+			VAR _LAST_ISSUE = CALCULATE(LASTDATE('DIM - DATE'[Date]), FILTER(RELATEDTABLE('FACT - PURCHASE INVENTORY QUANTITY'),[ISSUE_QTY] <> BLANK()))
+			VAR _CURRENT_DATE = MAX('DIM - DATE'[Date])
+			RETURN
+			SWITCH(SELECTEDVALUE('PARAMETER - YEAR MONTH DAY'[Value], "Day"),
+			    "Day",DATEDIFF( _LAST_ISSUE, _CURRENT_DATE, DAY),
+			    "Month", DATEDIFF( _LAST_ISSUE, _CURRENT_DATE, MONTH),
+			    "Year", DATEDIFF( _LAST_ISSUE, _CURRENT_DATE, YEAR))
+		formatString: 0
+		displayFolder: Inventory
+		lineageTag: 7909aa9c-ada1-40da-a284-7b7ecc646a47
+
+	measure 'Tồn kho từ GTĐK' = SUMX( SUMMARIZE('DIM - MATERIAL', 'DIM - MATERIAL'[MATERIAL_CODE], "AMT", IF( [CLOSING AMT (V PRICE)] - [OPENING AMT (V PRICE)] >= 0 , [OPENING AMT (V PRICE)])), [AMT])
+		displayFolder: Good Receipt
+		lineageTag: 881ea893-43b6-427b-8f54-5860aa8c8bf7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tồn kho từ mua mới' = SUMX( SUMMARIZE('DIM - MATERIAL', 'DIM - MATERIAL'[MATERIAL_CODE], "AMT", [CLOSING AMT (V PRICE)] ), [AMT]) - [Tồn kho từ tăng giá] - [Tồn kho từ GTĐK]
+		displayFolder: Good Receipt
+		lineageTag: 22b5b041-3862-4253-aaa3-70384174fadb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tồn kho từ tăng giá' = ```
+			
+			SUMX( SUMMARIZE('DIM - MATERIAL', 'DIM - MATERIAL'[MATERIAL_CODE], "AMT",
+			IF(  [CLOSING AMT (V PRICE)] = [OPENING AMT (V PRICE)]  ,0,
+			IF( [Trung bình giá của các năm trước] >0 && [RECEIPT QTY (SLOC)] > 0 , ([Net Price] - [Trung bình giá của các năm trước]) * [CLOSING QTY (SLOC)],
+			IF(  [CLOSING AMT (V PRICE)] = [OPENING AMT (V PRICE)]  || ISBLANK([RECEIPT QTY (SLOC)]) || ISBLANK([Trung bình giá của các năm trước]) , 0, 
+			IF ([CLOSING QTY (SLOC)] = [OPENING QTY (SLOC)]
+			 --||  ( [CLOSING QTY (SLOC)] > [OPENING QTY (SLOC)] && [Net Price] > [Trung bình giá của các năm trước] && [OPENING AMT (V PRICE)] >0 && [Trung bình giá của các năm trước] >0)
+			 , [CLOSING AMT (V PRICE)] - [OPENING AMT (V PRICE)]))))), [AMT])
+			--IF([OPENING AMT (V PRICE)] >0 && [Trung bình giá của các năm trước] >0, ([Net Price] - [Trung bình giá của các năm trước]) * [CLOSING QTY (SLOC)]))) ), [AMT])
+			--IF([OPENING AMT (V PRICE)] >0 && [Trung bình giá của các năm trước] >0, ([Net Price] - [Trung bình giá của các năm trước]) * [CLOSING QTY (SLOC)])
+			
+			```
+		displayFolder: Good Receipt
+		lineageTag: 004ea449-adb4-4beb-8e4e-d5cf9123eab5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Trung bình giá của các năm trước' = ```
+			CALCULATE(AVERAGEX( 
+			    SUMMARIZE('FACT - GOOD RECEIPT', [MATERIAL_CODE], 'DIM - DATE'[Year], "VALUE", DIVIDE([GR Value], [GR Quantity], BLANK())),
+			    [VALUE]), FILTER(ALL('DIM - DATE'),'DIM - DATE'[Year] < MAX('DIM - DATE'[Year])))
+			```
+		displayFolder: Good Receipt
+		lineageTag: 6179a3b8-f91f-49f3-bb79-ec3194f491dd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Valuation Price' = SUM('FACT - PURCHASE REQUISITION'[VALUATION_PRICE])
+		displayFolder: Purchase Requisition
+		lineageTag: 00ec44e1-16ee-4d1c-b909-7fbf2e24c1b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_GROUP
+		dataType: string
+		isHidden
+		lineageTag: 543e1370-2384-4097-b3cc-9868d679c864
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - PURCHASE MATERIAL GROUP[MATERIAL_GROUP]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_DESCRIPTION
+		dataType: string
+		isHidden
+		lineageTag: 02364c13-0bf0-4191-86b0-895d077c60f9
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - PURCHASE MATERIAL GROUP[MATERIAL_DESCRIPTION]
+
+		annotation SummarizationSetBy = Automatic
+
+	column LONG_MATERIAL_DESCRIPTION
+		dataType: string
+		isHidden
+		lineageTag: 24ec3573-3530-423e-a362-e7ead997b147
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: DIM - PURCHASE MATERIAL GROUP[LONG_MATERIAL_DESCRIPTION]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '_PROCUREMENT MEASURES' = calculated
+		mode: import
+		source = 'DIM - PURCHASE MATERIAL GROUP'
+
+	annotation PBI_Id = ed1f0ea73df640aa93ce3dbfe832f18f
+

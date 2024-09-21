@@ -1,0 +1,30 @@
+table 'DIM - SALE GROUP'
+	isHidden
+	lineageTag: 0dbe1ff0-23bf-4132-a1f6-29bbf9fdb055
+
+	column SALE_GROUP
+		dataType: string
+		lineageTag: 014c6343-3dbe-44e0-92b5-d5e89c9d1f0d
+		summarizeBy: none
+		sourceColumn: SALE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_GROUP_NAME
+		dataType: string
+		lineageTag: dbe6203f-88da-4593-96d5-6b5d9454f5bb
+		summarizeBy: none
+		sourceColumn: SALE_GROUP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - SALE GROUP' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_SALE_GROUP = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_SALE_GROUP"]}[Data]
+				in
+				    gld_VW_DIM_SALE_GROUP
+

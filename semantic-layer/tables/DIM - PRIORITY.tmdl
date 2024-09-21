@@ -1,0 +1,34 @@
+table 'DIM - PRIORITY'
+	lineageTag: 63553189-df8b-436f-b35c-cafb27d7857d
+
+	column PRIOR_CODE
+		dataType: string
+		lineageTag: ef1aaf45-6edd-417b-9cb6-18e5f7d90066
+		summarizeBy: none
+		sourceColumn: PRIOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIOR_DESC
+		dataType: string
+		lineageTag: b76a7cab-c26f-4909-9e6e-e3cab71dea30
+		summarizeBy: none
+		sourceColumn: PRIOR_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PRIORITY' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_PRIORITY = pvcfcprodsqlpool{[Schema="sil",Item="DIM_PRIORITY"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_PRIORITY,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

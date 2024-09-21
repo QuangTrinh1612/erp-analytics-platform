@@ -1,0 +1,152 @@
+table 'DIM - GL ACCOUNT'
+	lineageTag: a8f4196b-7ca4-4756-8be6-bcad90d81118
+
+	column GL_ACC_NO
+		dataType: string
+		lineageTag: 96a9d39b-dae4-478f-b286-3ac638584f36
+		summarizeBy: none
+		sourceColumn: GL_ACC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROUP_ACC_NO
+		dataType: string
+		lineageTag: 9f4983f9-b87e-4f83-9cc3-614f5888b945
+		summarizeBy: none
+		sourceColumn: GROUP_ACC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_BS_ACC
+		dataType: string
+		lineageTag: fff1c344-7d87-4a41-99a7-fba46ac8435a
+		summarizeBy: none
+		sourceColumn: IS_BS_ACC
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_PL_ACC
+		dataType: string
+		lineageTag: 5a3c80af-8dda-4b85-9b76-fc37e2261c11
+		summarizeBy: none
+		sourceColumn: IS_PL_ACC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHORT_DESC
+		dataType: string
+		lineageTag: 989e28db-af54-4f69-97d4-9d1efbf4fbf3
+		summarizeBy: none
+		sourceColumn: SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column LONG_DESC
+		dataType: string
+		lineageTag: 1aed8f55-fc20-456b-8c55-8b246570e640
+		summarizeBy: none
+		sourceColumn: LONG_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNING_GRP
+		dataType: string
+		lineageTag: 5c36cac2-45dd-4292-88bf-68d0fc512d42
+		summarizeBy: none
+		sourceColumn: PLANNING_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNING_LEVEL
+		dataType: string
+		lineageTag: bdb82626-7c1c-4bfc-a199-d82dbe88dca2
+		summarizeBy: none
+		sourceColumn: PLANNING_LEVEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_CURRENCY
+		dataType: string
+		lineageTag: d6fe5256-027f-4f85-a956-02e23a91d3c6
+		summarizeBy: none
+		sourceColumn: ACCOUNT_CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column HOUSE_BANK_KEY
+		dataType: string
+		lineageTag: bb67381f-ca24-43d1-9455-11496c7a3d75
+		summarizeBy: none
+		sourceColumn: HOUSE_BANK_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_ID
+		dataType: string
+		lineageTag: 39408ffc-99dd-42e3-b3c7-c9f085d9565a
+		summarizeBy: none
+		sourceColumn: ACCOUNT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAX_CATEGORY =
+			
+			SWITCH(
+			    TRUE(),
+			    LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],5) = "33311", "Thuế GTGT hàng bán nội địa",
+			    LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],5) = "33312", "Thuế GTGT hàng nhập xuất khẩu",
+			    LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],4) = "3332", "Thuế tiêu thụ đặc biệt",
+			    LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],4) = "3333", "Thuế xuất, nhập khẩu",
+			    LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],4) = "3334", "Thuế thu nhập doanh nghiệp",
+			    LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],4) = "3335", "Thuế TNCN",
+			    LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],4) = "3336", "Thuế tài nguyên",
+			    LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],4) = "3337", "Thuế nhà đất",
+			    LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],4) = "3338" && 'DIM - GL ACCOUNT'[GL_ACC_NO] <> "3338000081", "Các loại thuế khác",
+			    LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],4) = "3339", "Các khoản phí, lệ phí",
+			    'DIM - GL ACCOUNT'[GL_ACC_NO] = "3338000081", "Thuế môn bài"
+			)
+		dataType: string
+		lineageTag: 7d75fb7c-2f15-4aa5-b097-1a7e70b619d4
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_LV1 = LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],3)
+		dataType: string
+		lineageTag: dba30c98-303e-452c-a284-4dd3cf289044
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column FULL_NAME =
+			
+			[GL_ACC_NO] & " - " & [LONG_DESC]
+		dataType: string
+		lineageTag: ffafa1c1-e39e-4c73-a24d-17cae74e572b
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_LV2 = LEFT('DIM - GL ACCOUNT'[GL_ACC_NO],4)
+		dataType: string
+		lineageTag: 455e016c-d3ae-4b02-9695-bb4f6c54d920
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - GL ACCOUNT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_GL_ACCOUNT = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_GL_ACCOUNT"]}[Data]
+				in
+				    gld_VW_DIM_GL_ACCOUNT
+
+	annotation PBI_ResultType = Table
+

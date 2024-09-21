@@ -1,0 +1,206 @@
+table 'AGG - MATERIAL LEDGER QTY'
+	lineageTag: a670899d-b0ad-4348-b03c-db75905b7416
+
+	column DOC_DATE
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: c1e1e9aa-bc8f-4402-8933-50bc043b2b8a
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: d9ab3921-4b17-4eb5-8c1c-28f7e3303d7e
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: ab1c62e9-facf-4912-90c1-0af817cca860
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: b3ae49ab-5f2f-493b-9635-fca9862890c5
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: c8323444-419d-4bfa-8549-b424afd0955b
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: fd142af9-9669-4aa1-bd5b-28a25d48a8c5
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		isHidden
+		lineageTag: 9ea09aba-e9ae-4c29-831b-a76f536759b1
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_SLOC_BATCH_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: 9972c4fb-cbe7-4184-82ed-6d5e2a322a3e
+		summarizeBy: none
+		sourceColumn: IS_SLOC_BATCH_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_SPECIAL_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e2d274a-4a33-407f-9977-95eeb7b5dd0b
+		summarizeBy: none
+		sourceColumn: IS_SPECIAL_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIAL_STOCK
+		dataType: string
+		isHidden
+		lineageTag: f6248bcf-6bf5-4b0e-81e1-75d400adc998
+		summarizeBy: none
+		sourceColumn: SPECIAL_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECEIPT_QTY
+		dataType: double
+		lineageTag: 40d81812-dd95-40ac-a893-72f7e18d86c6
+		summarizeBy: sum
+		sourceColumn: RECEIPT_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_QTY
+		dataType: double
+		lineageTag: be6c58ec-cec1-4066-b99b-bd9482a89803
+		summarizeBy: sum
+		sourceColumn: ISSUE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_PLANT_KEY = [MATERIAL_CODE] & "-" & [PLANT_CODE]
+		dataType: string
+		isHidden
+		lineageTag: 0ea9dd5b-fb42-4233-a1f7-c00b32a518b3
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_TYPE
+		dataType: string
+		lineageTag: 111d4eb8-cfb1-4e4d-b93d-a7683438c5b4
+		summarizeBy: none
+		sourceColumn: MATERIAL_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECEIPT_REVERSE_QTY
+		dataType: double
+		lineageTag: 088f34f4-6cf2-44e3-84d5-d849b45cb753
+		summarizeBy: sum
+		sourceColumn: RECEIPT_REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_REVERSE_QTY
+		dataType: double
+		lineageTag: abdab8d5-d22d-4ed3-9f5f-f926d2987803
+		summarizeBy: sum
+		sourceColumn: ISSUE_REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVERSE_QTY
+		dataType: double
+		lineageTag: 52dba537-94ae-4053-b581-938d46a7b3c7
+		summarizeBy: sum
+		sourceColumn: REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_UNIT_KEY = [MATERIAL_CODE] & "-" & [BASE_UOM]
+		dataType: string
+		isHidden
+		lineageTag: 5dc46a0f-d4f7-4c3c-ac72-799ada7c344b
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nhóm Tồn Kho' = ```
+			SWITCH(TRUE(),
+			RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1431","1401","1003"} && RELATED('Dim - Material'[MATL_TYPE]) IN { "Z00","Z01","Z40", "Z50", "Z60", "Z61"} && not RELATED('Dim - Material Plant'[VALUATION_CLASS]) IN {"V81","V82","V83","V84","V85","V86","V87","V88","V89","V26","V27"}, "NLSX NPK", 
+			RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1003","1301","1302","1303","1304"} && RELATED('Dim - Material Plant'[VALUATION_CLASS]) IN { "V01","V02"}, "Hóa Chất - Xúc Tác",
+			RELATED('Dim - Plant'[PLANT_CODE]) IN {"1000","1100"} && RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1002","1401","1431","1298","1304"} && RELATED('Dim - Material'[MATL_TYPE]) = "Z26", "Bao Bì",
+			RELATED('Dim - Plant'[PLANT_CODE]) IN {"1000","1100"} && RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1002","1401","1431","1304"} && RELATED('Dim - Material'[MATL_TYPE]) = "Z22" && RELATED('Dim - Material Plant'[VALUATION_CLASS]) IN { "V81","V82","V83","V84","V85","V86","V87","V88","V89"}, "Vật Tư Đóng Bao",
+			RELATED('Dim - Plant'[PLANT_CODE]) IN {"1000"} && RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1001","1005","1901","1902","1903","1904","1905","1906","1907"} && RELATED('Dim - Material'[MATL_TYPE]) = "Z00" && RELATED('Dim - Material Plant'[VALUATION_CLASS]) IN { "V00","V05","V06"}, "Vật Tư BDSC" , 
+			RELATED('Dim - Storage Location'[STORAGE_LOCATION])IN { "1001","1308"} && RELATED('Dim - Material'[MATL_TYPE]) = "Z00" && RELATED('Dim - Material Plant'[VALUATION_CLASS]) = "V03", "Vật Tư An Toàn" ,
+			RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1202","1422","1298"} && RELATED('Dim - Material'[MATL_TYPE]) IN { "Z50","Z51","Z61"} , "Thành Phẩm",
+			RELATED('Dim - Storage Location'[STORAGE_LOCATION]) IN { "1201","1421"} && RELATED('Dim - Material'[MATL_TYPE]) IN { "Z40","Z44"}, "BTP / SPDD",
+			IF( RELATED('Dim - Storage Location'[STORAGE_CATEGORY]) = "Kho Nhà Máy", VALUE(RELATED('Dim - Storage Location'[STORAGE_LOCATION])) < 1999 &&   VALUE(RELATED('Dim - Storage Location'[STORAGE_LOCATION])) > 1920), "Khách Hàng Gửi tại NM",
+			RELATED('Dim - Plant'[PLANT_CODE]) = "1000" && RELATED('Dim - Storage Location'[STORAGE_LOCATION]) = "1298", "Hàng Hóa tại Nhà Máy"
+			)
+			
+			```
+		dataType: string
+		lineageTag: 93ebb238-5f7d-4421-baaf-01dd58410ad5
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Agg Material Ledger Qty' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_AGG_MATERIAL_LEDGER_QTY = pvcfcprodsqlpool{[Schema="gld",Item="AGG_MATERIAL_LEDGER_QTY"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_AGG_MATERIAL_LEDGER_QTY,{{"DOC_DATE", type date}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"IS_VALUATED_STOCK"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Exception
+

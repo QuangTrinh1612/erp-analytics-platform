@@ -1,0 +1,21 @@
+table 'LIST - SALES OUT ORDER'
+	lineageTag: 506afc25-636e-42c1-a735-4982d7ff52df
+
+	column SALE_ORDER_ID
+		dataType: double
+		lineageTag: 18066189-c335-4000-8b47-b01d1ad20d05
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - SALE OUT ACTUAL[SALE_ORDER_ID]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'LIST - SALES OUT ORDER' = calculated
+		mode: import
+		source = FILTER(DISTINCT('FACT - SALE OUT ACTUAL'[SALE_ORDER_ID]), ISBLANK('FACT - SALE OUT ACTUAL'[SALE_ORDER_ID]) = FALSE())
+
+	annotation PBI_Id = bb6796dbabc445c1bcdb02e8f72c606d
+

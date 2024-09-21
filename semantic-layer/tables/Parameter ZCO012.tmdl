@@ -1,0 +1,69 @@
+table 'Parameter ZCO012'
+	lineageTag: 4de5da3e-031c-4b67-8293-91e5c523df4c
+
+	measure 'Biến Phí 012' =
+			CALCULATE(
+			    SWITCH(
+			        SELECTEDVALUE('Parameter ZCO012'[Parameter ZCO012 Order]),
+			        4, DIVIDE([Khí đầu vào], [Sản lượng SX]),
+			        3, DIVIDE('_CO - Metrics'[Hoá chất], [Sản lượng SX]),
+			        1, DIVIDE('_CO - Metrics'[Điện nhận lưới], [Sản lượng SX]),
+			        6, DIVIDE('_CO - Metrics'[Bao bì đóng bao], [Sản lượng SX])))
+		lineageTag: 66a4c292-f472-4508-9d8f-e609d6b0f123
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Parameter ZCO012'
+		dataType: string
+		lineageTag: ff2a37ed-59f1-4917-ba72-152d372b37a0
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter ZCO012 Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter ZCO012 Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter ZCO012 Fields'
+		dataType: string
+		isHidden
+		lineageTag: 608f9c2a-a5a5-4474-9d67-9af888d3066c
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter ZCO012 Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter ZCO012 Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 69bb983c-5a3f-4c16-b25b-6f833d83af2e
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter ZCO012' = calculated
+		mode: import
+		source =
+				{
+				    ("Dầu mỡ", NAMEOF('_CO - Metrics'[Dầu mỡ]), 0),
+				    ("Điện nhận lưới", NAMEOF('_CO - Metrics'[Điện nhận lưới]), 1),
+				    ("Hàng Xá", NAMEOF('_CO - Metrics'[Hàng Xá]), 2),
+				    ("Hoá chất", NAMEOF('_CO - Metrics'[Hoá chất]), 3),
+				    ("Khí đầu vào", NAMEOF('_CO - Metrics'[Khí đầu vào]), 4)
+				}
+
+	annotation PBI_Id = b1d4328076d044e881606e59550f5e87
+

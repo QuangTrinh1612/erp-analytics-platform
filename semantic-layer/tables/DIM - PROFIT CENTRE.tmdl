@@ -1,0 +1,103 @@
+table 'DIM - PROFIT CENTRE'
+	lineageTag: dc4ff2fa-1d69-4397-84ca-f87d2360ba5d
+
+	column CO_AREA
+		dataType: string
+		lineageTag: 5271cee4-4e2e-44c6-afe0-f25954081261
+		summarizeBy: none
+		sourceColumn: CO_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_CENTER_CODE
+		dataType: string
+		lineageTag: 028d3a2d-1481-42de-85ff-06aa1a40311b
+		summarizeBy: none
+		sourceColumn: PROFIT_CENTER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_ON
+		dataType: string
+		lineageTag: 6593ccf7-7384-4b08-919b-91c8bdf49d80
+		summarizeBy: none
+		sourceColumn: CREATED_ON
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_BY
+		dataType: string
+		lineageTag: 3032087c-4686-4bce-bea9-f278ab8aabba
+		summarizeBy: none
+		sourceColumn: CREATED_BY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERSON_RES
+		dataType: string
+		lineageTag: 2429e47d-e394-4d10-ace7-bd42e912f503
+		summarizeBy: none
+		sourceColumn: PERSON_RES
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHORT_NAME
+		dataType: string
+		lineageTag: 9ede842c-8817-4d71-8847-f154bd6079d4
+		summarizeBy: none
+		sourceColumn: SHORT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LONG_NAME
+		dataType: string
+		lineageTag: 49e6e952-6ffd-405a-a275-97dd99246f46
+		summarizeBy: none
+		sourceColumn: LONG_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEARCH_TERM
+		dataType: string
+		lineageTag: 1c79496d-4395-4554-bf98-6e1b603cc199
+		summarizeBy: none
+		sourceColumn: SEARCH_TERM
+
+		annotation SummarizationSetBy = Automatic
+
+	column ANALYSIS_PERIOD_FROM
+		dataType: string
+		lineageTag: 414388b5-b899-4d27-af5f-5402ec1662d9
+		summarizeBy: none
+		sourceColumn: ANALYSIS_PERIOD_FROM
+
+		annotation SummarizationSetBy = Automatic
+
+	column ANALYSIS_PERIOD_TO
+		dataType: string
+		lineageTag: d73a7b28-53e9-4500-84cc-1415a67475a1
+		summarizeBy: none
+		sourceColumn: ANALYSIS_PERIOD_TO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_CENTRE_GROUP
+		dataType: string
+		lineageTag: a2180409-8047-4aa3-bed7-41995f1410e9
+		summarizeBy: none
+		sourceColumn: PROFIT_CENTRE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PROFIT CENTRE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PROFIT_CENTER = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_PROFIT_CENTER"]}[Data]
+				in
+				    gld_VW_DIM_PROFIT_CENTER
+
+	annotation PBI_ResultType = Table
+

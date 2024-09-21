@@ -1,0 +1,79 @@
+table 'DIM - WAREHOUSE DMS'
+	lineageTag: 53670db2-3451-47d6-8fe9-9b1a2ab7c2e0
+
+	column WAREHOUSE_ID
+		dataType: double
+		lineageTag: ccb88c19-db43-4ea9-801f-9f3c49de0bae
+		summarizeBy: none
+		sourceColumn: WAREHOUSE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WAREHOUSE_CODE
+		dataType: string
+		lineageTag: 4378a84f-0a5b-43ed-954d-280823308d02
+		summarizeBy: none
+		sourceColumn: WAREHOUSE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHOP_ID
+		dataType: double
+		lineageTag: bc9ed211-8234-4be7-a761-c478b7b81d06
+		summarizeBy: none
+		sourceColumn: SHOP_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WAREHOUSE_NAME
+		dataType: string
+		lineageTag: 3025bfdb-7bae-4e09-98c0-46a7e52cde29
+		summarizeBy: none
+		sourceColumn: WAREHOUSE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column WAREHOUSE_TYPE
+		dataType: double
+		lineageTag: 449a34bc-e8a4-40e1-a3c0-57e8f9f68ddf
+		summarizeBy: none
+		sourceColumn: WAREHOUSE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SEQ
+		dataType: double
+		lineageTag: ed899036-0341-4f5d-8ea8-dc04965cad9d
+		summarizeBy: none
+		sourceColumn: SEQ
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STATUS
+		dataType: double
+		lineageTag: d393af12-dabc-48d3-8c9a-028f9fb37779
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'DIM - WAREHOUSE DMS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_WAREHOUSE_DMS = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_WAREHOUSE_DMS"]}[Data]
+				in
+				    gld_VW_DIM_WAREHOUSE_DMS
+

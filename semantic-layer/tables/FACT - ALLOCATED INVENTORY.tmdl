@@ -1,0 +1,60 @@
+table 'FACT - ALLOCATED INVENTORY'
+	lineageTag: 75eb0be7-9e46-462f-9010-50ea5326fe14
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: f09a2407-9887-4c13-8e2f-38d5427aebd8
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 3ed6bfb4-c0ef-4774-9f7b-35382414dce6
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOCATION
+		dataType: string
+		lineageTag: fb1198e8-a38f-4821-8b14-e7664253b551
+		summarizeBy: none
+		sourceColumn: STORAGE_LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column ALLOCATED_INVENTORY
+		dataType: double
+		lineageTag: 431984f5-d1d4-41ce-b26d-1520c20bcec6
+		summarizeBy: sum
+		sourceColumn: ALLOCATED_INVENTORY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_PLANT_KEY = 'FACT - ALLOCATED INVENTORY'[MATERIAL_CODE] &"-"& 'FACT - ALLOCATED INVENTORY'[PLANT_CODE]
+		dataType: string
+		lineageTag: 168c50c7-c3a4-476f-8ff0-0a42ecdcd827
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - ALLOCATED INVENTORY' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_ALLOCATED_INVENTORY = pvcfcprodsqlpool{[Schema="gld",Item="FACT_ALLOCATED_INVENTORY"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_ALLOCATED_INVENTORY,{"W_INSERT_DT"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,168 @@
+/// Bảng thông tin nhà cung cấp
+table 'DIM -  VENDOR'
+	lineageTag: 63bccb96-9540-41b1-ba42-ead9310dcc4b
+
+	column VENDOR_CODE
+		dataType: string
+		lineageTag: ccec6c48-da8e-4089-bf45-4f05b6b8fe99
+		summarizeBy: none
+		sourceColumn: VENDOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_NAME
+		dataType: string
+		lineageTag: 777f7dd1-6a22-4326-b0f3-fd7ff0f1709b
+		summarizeBy: none
+		sourceColumn: VENDOR_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_ACC_GRP
+		dataType: string
+		lineageTag: 62f13da4-1551-4795-851f-6343b502be42
+		summarizeBy: none
+		sourceColumn: VENDOR_ACC_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY
+		dataType: string
+		lineageTag: eba5f8be-0f3b-4b05-92b1-1311da6fb347
+		summarizeBy: none
+		sourceColumn: CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY
+		dataType: string
+		lineageTag: ec454a8e-7907-41cc-b2c7-61d0c8cef321
+		summarizeBy: none
+		sourceColumn: COUNTRY
+
+		annotation SummarizationSetBy = Automatic
+
+	column INDUSTRY
+		dataType: string
+		lineageTag: 4f47145e-16c8-4d32-9532-9bd45dd6b3d2
+		summarizeBy: none
+		sourceColumn: INDUSTRY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PHONE
+		dataType: string
+		lineageTag: 22c1bf27-ae96-4153-9b5c-21245d44e058
+		summarizeBy: none
+		sourceColumn: PHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STREET
+		dataType: string
+		lineageTag: e3ee473e-ef8d-44ad-a099-cfabd0eff12c
+		summarizeBy: none
+		sourceColumn: STREET
+
+		annotation SummarizationSetBy = Automatic
+
+	column VAT_NO
+		dataType: string
+		lineageTag: e8b10824-c4eb-40f8-8ccf-23e6d2975c68
+		summarizeBy: none
+		sourceColumn: VAT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELETE_FLG
+		dataType: string
+		lineageTag: f14f9afb-7bda-4a9e-8482-e3d8b2889e66
+		summarizeBy: none
+		sourceColumn: DELETE_FLG
+
+		annotation SummarizationSetBy = Automatic
+
+	column BANK_KEY
+		dataType: string
+		lineageTag: fb1114ce-dfc8-4d21-a5d4-7cf1e7ff7e77
+		summarizeBy: none
+		sourceColumn: BANK_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BANK_ACCT_NO
+		dataType: string
+		lineageTag: 2cb9341a-112e-4e41-b92c-f5e3b3156243
+		summarizeBy: none
+		sourceColumn: BANK_ACCT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BACK_ACCT_HOLDER
+		dataType: string
+		lineageTag: bdcc5ba1-8794-4431-bb06-fa59cc029eb4
+		summarizeBy: none
+		sourceColumn: BACK_ACCT_HOLDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEARCH_TERM
+		dataType: string
+		lineageTag: 72fa8140-dff9-4968-80e0-54c6647972f5
+		summarizeBy: none
+		sourceColumn: SEARCH_TERM
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECON_ACCT
+		dataType: string
+		lineageTag: 361e6948-13e2-4167-8a93-c78676ac9399
+		summarizeBy: none
+		sourceColumn: RECON_ACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CASH_MGMT_GRP
+		dataType: string
+		lineageTag: e012db6e-8f5d-4187-b408-2d798b489c9b
+		summarizeBy: none
+		sourceColumn: CASH_MGMT_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_DATE
+		dataType: string
+		lineageTag: 9bd3a7a2-5c4d-4154-a00d-a94eb3ce51a7
+		summarizeBy: none
+		sourceColumn: CREATED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPDATED_DATE
+		dataType: string
+		lineageTag: 6e770404-48c1-4efc-ac09-a6bc199fcbfa
+		summarizeBy: none
+		sourceColumn: UPDATED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_FULL_NAME
+		dataType: string
+		lineageTag: 1abd7892-7cec-481c-b953-19d148e1dbd5
+		summarizeBy: none
+		sourceColumn: VENDOR_FULL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM -  VENDOR' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_VENDOR = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_VENDOR"]}[Data]
+				in
+				    gld_VW_DIM_VENDOR
+
+	annotation PBI_ResultType = Table
+

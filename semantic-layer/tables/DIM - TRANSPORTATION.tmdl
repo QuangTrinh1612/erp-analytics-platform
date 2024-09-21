@@ -1,0 +1,31 @@
+table 'DIM - TRANSPORTATION'
+	lineageTag: 2541f152-2370-40e3-ae8a-509a133428d3
+
+	column TRANSPORT_CODE
+		dataType: string
+		lineageTag: 202fc5d9-1203-4370-ac5a-49dac02759dd
+		summarizeBy: none
+		sourceColumn: TRANSPORT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANSPORT_NAME
+		dataType: string
+		lineageTag: 5d9fe9f8-eb49-4e0e-a714-526a4a088c09
+		summarizeBy: none
+		sourceColumn: TRANSPORT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - TRANSPORTATION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_TRANSPORTATION = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_TRANSPORTATION"]}[Data]
+				in
+				    gld_VW_DIM_TRANSPORTATION
+
+	annotation PBI_ResultType = Table
+

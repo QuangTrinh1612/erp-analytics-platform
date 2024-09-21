@@ -1,0 +1,457 @@
+table 'PARAMETER - ZCO13'
+	lineageTag: 9f1fc67e-7203-4584-b4cf-67bd8e4348c1
+
+	measure 'ZCO13 measures' =
+			SWITCH (
+			    SELECTEDVALUE ( 'PARAMETER - ZCO13'[Order] ),
+			    1,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Sản lượng SX],
+			            3, [Sản lượng SX],
+			            4, BLANK ()
+			        ),
+			    2,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Sản lượng tiêu thụ],
+			            3, [Sản lượng tiêu thụ],
+			            4, BLANK ()
+			        ),
+			    3,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Doanh thu] / 10^6,
+			            3, [Doanh thu] / 10^6,
+			            4, BLANK ()
+			        ),
+			    4,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Giá vốn] / 10^6,
+			            3, [Giá vốn] / 10^6,
+			            4, BLANK ()
+			        ),
+			    5,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Lợi nhuận] / 10^6,
+			            3, [Lợi nhuận] / 10^6,
+			            4, BLANK ()
+			        ),
+			    6,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Giá thành sản xuất - PPC],
+			            3, [Giá thành sản xuất - PPC],
+			            4, BLANK ()
+			        ),
+			    7,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Biến phí (ZCP13)],
+			            3, [Biến phí (ZCP13)],
+			            4, BLANK ()
+			        ),
+			    8,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Hạt nhựa PP],
+			            3, [- Hạt nhựa PP],
+			            4, BLANK ()
+			        ),
+			    9,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Phụ gia tạo sợi],
+			            3, [- Phụ gia tạo sợi],
+			            4, BLANK ()
+			        ),
+			    10,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Hạt nhựa HDPE],
+			            3, [- Hạt nhựa HDPE],
+			            4, BLANK ()
+			        ),
+			    11,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Hạt nhựa LDPE],
+			            3, [- Hạt nhựa LDPE],
+			            4, BLANK ()
+			        ),
+			    12,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Hạt nhựa LLDPE],
+			            3, [- Hạt nhựa LLDPE],
+			            4, BLANK ()
+			        ),
+			    13,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Phụ gia túi lồng],
+			            3, [- Phụ gia túi lồng],
+			            4, BLANK ()
+			        ),
+			    14,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Hạt nhựa PP tráng],
+			            3, [- Hạt nhựa PP tráng],
+			            4, BLANK ()
+			        ),
+			    15,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Vải manh mua ngoài],
+			            3, [- Vải manh mua ngoài],
+			            4, BLANK ()
+			        ),
+			    16,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Vải manh BTP],
+			            3, [- Vải manh BTP],
+			            4, BLANK ()
+			        ),
+			    17,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- NVLC Khác],
+			            3, [- NVLC Khác],
+			            4, BLANK ()
+			        ),
+			    18,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Màng mờ],
+			            3, [- Màng mờ],
+			            4, BLANK ()
+			        ),
+			    19,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Hạt nhựa tái sinh],
+			            3, [- Hạt nhựa tái sinh],
+			            4, BLANK ()
+			        ),
+			    20,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Hạt nhựa PE tráng],
+			            3, [- Hạt nhựa PE tráng],
+			            4, BLANK ()
+			        ),
+			    21,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Phân Ure],
+			            3, [- Phân Ure],
+			            4, BLANK ()
+			        ),
+			    22,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Phụ gia tráng],
+			            3, [- Phụ gia tráng],
+			            4, BLANK ()
+			        ),
+			    23,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Axit Humic],
+			            3, [- Axit Humic],
+			            4, BLANK ()
+			        ),
+			    24,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Chỉ may],
+			            3, [- Chỉ may],
+			            4, BLANK ()
+			        ),
+			    25,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Mực in],
+			            3, [- Mực in],
+			            4, BLANK ()
+			        ),
+			    26,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Dung môi],
+			            3, [- Dung môi],
+			            4, BLANK ()
+			        ),
+			    27,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- NVLP Khác],
+			            3, [- NVLP Khác],
+			            4, BLANK ()
+			        ),
+			    28,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- DAP],
+			            3, [- DAP],
+			            4, BLANK ()
+			        ),
+			    29,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- KCL],
+			            3, [- KCL],
+			            4, BLANK ()
+			        ),
+			    30,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- BTP Phân bón],
+			            3, [- BTP Phân bón],
+			            4, BLANK ()
+			        ),
+			    31,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Chi phí NC T.tiếp],
+			            3, [- Chi phí NC T.tiếp],
+			            4, BLANK ()
+			        ),
+			    32,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- CP Điện, nước],
+			            3, [- CP Điện, nước],
+			            4, BLANK ()
+			        ),
+			    33,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Chi phí NVQL PX],
+			            3, [- Chi phí NVQL PX],
+			            4, BLANK ()
+			        ),
+			    34,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- CP VLBT, CCDC],
+			            3, [- CP VLBT, CCDC],
+			            4, BLANK ()
+			        ),
+			    35,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Phụ gia SX P.Bón],
+			            3, [- Phụ gia SX P.Bón],
+			            4, BLANK ()
+			        ),
+			    36,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Chi phí KH TSCĐ PXSX],
+			            3, [- Chi phí KH TSCĐ PXSX],
+			            4, BLANK ()
+			        ),
+			    37,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Chi phí mua ngoài],
+			            3, [- Chi phí mua ngoài],
+			            4, BLANK ()
+			        ),
+			    38,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [- Chi phí b.tiền khác],
+			            3, [- Chi phí b.tiền khác],
+			            4, BLANK ()
+			        ),
+			    39,
+			        BLANK(),
+			    40,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Định phí (ZCO13)],
+			            3, [Định phí (ZCO13)],
+			            4, BLANK ()
+			        ),
+			    41,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Chi phí bán hàng / bao (2000)],
+			            3, [Chi phí bán hàng / bao (2000)],
+			            4, BLANK ()
+			        ),
+			    42,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Chi phí quản lý / bao (2000)],
+			            3, [Chi phí quản lý / bao (2000)],
+			            4, BLANK ()
+			        ),
+			    43,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Chi phí tài chính / bao (2000)],
+			            3, [Chi phí tài chính / bao (2000)],
+			            4, BLANK ()
+			        ),
+			    44,
+			        SWITCH (
+			            SELECTEDVALUE ( 'PARAMETER - ZCO13 MEASURE GROUP'[STT] ),
+			            1, BLANK (),
+			            2, [Giá thành toàn bộ],
+			            3, [Giá thành toàn bộ],
+			            4, BLANK ()
+			        )
+			)
+		lineageTag: caa9d753-d827-4b1a-a4c5-d9f57279fdb0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Order
+		dataType: int64
+		lineageTag: 782c18b7-9719-44af-8422-2fc66cb2f1c2
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Order]
+
+		annotation SummarizationSetBy = Automatic
+
+	column STT
+		dataType: string
+		lineageTag: 5e215ebd-a8a6-4a60-9182-2293a97226f6
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+		sortByColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nội dung'
+		dataType: string
+		lineageTag: d1f52193-a265-467f-aba1-f4ac22a3bc00
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Nội dung]
+		sortByColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Đvt
+		dataType: string
+		lineageTag: c2f7178d-3d8c-4b61-bed7-0d538f683a36
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Đvt]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source = ```
+				DATATABLE (
+				    "Order", INTEGER,
+				    "STT", STRING,
+				    "Nội dung", STRING,
+				    "Đvt",string,
+				    {
+				{1,"1","Sản lượng SX","Bao"},
+				{2,"2","Sản lượng tiêu thụ","Bao"},
+				{3,"3","Doanh thu","Tr đồng"},
+				{4,"4","Giá vốn","Tr đồng"},
+				{5,"5","Lợi nhuận","Tr đồng"},
+				{6,"6","Giá thành sản xuất ( 6 = 6.1 + 6.2 )",""},
+				{7,"6.1","Biến phí","Đồng/bao"},
+				{8,"","Hạt nhựa PP","Đồng/bao"},
+				{9,"","Phụ gia tạo sợi","Đồng/bao"},
+				{10,"","Hạt nhựa HDPE","Đồng/bao"},
+				{11,"","Hạt nhựa LDPE","Đồng/bao"},
+				{12,"","Hạt nhựa LLDPE","Đồng/bao"},
+				{13,"","Phụ gia túi lồng","Đồng/bao"},
+				{14,"","Hạt nhựa PP tráng","Đồng/bao"},
+				{15,"","Vải manh mua ngoài","Đồng/bao"},
+				{16,"","Vải manh BTP","Đồng/bao"},
+				{17,"","NVLC Khác","Đồng/bao"},
+				{18,"","Màng mờ","Đồng/bao"},
+				{19,"","Hạt nhựa tái sinh","Đồng/bao"},
+				{20,"","Hạt nhựa PE tráng","Đồng/bao"},
+				{21,"","Phân Ure","Đồng/bao"},
+				{22,"","Phụ gia tráng","Đồng/bao"},
+				{23,"","Axit Humic","Đồng/bao"},
+				{24,"","Chỉ may","Đồng/bao"},
+				{25,"","Mực in","Đồng/bao"},
+				{26,"","Dung môi","Đồng/bao"},
+				{27,"","NVLP Khác","Đồng/bao"},
+				{28,"","DAP","Đồng/bao"},
+				{29,"","KCL","Đồng/bao"},
+				{30,"","BTP Phân bón","Đồng/bao"},
+				{31,"","Chi phí NC T.tiếp","Đồng/bao"},
+				{32,"","CP Điện, nước","Đồng/bao"},
+				{33,"","Chi phí NVQL PX","Đồng/bao"},
+				{34,"","CP VLBT, CCDC","Đồng/bao"},
+				{35,"","Phụ gia SX P.Bón","Đồng/bao"},
+				{36,"","Chi phí KH TSCĐ PXSX","Đồng/bao"},
+				{37,"","Chi phí mua ngoài","Đồng/bao"},
+				{38,"","Chi phí b.tiền khác","Đồng/bao"},
+				{39,"","Variance","Đồng/bao"},
+				{40,"6.2","Định phí","Đồng/bao"},
+				{41,"7","Chi phí bán hàng","Đồng/bao"},
+				{42,"8","Chi phí quản lý","Đồng/bao"},
+				{43,"9","Chi phí tài chính","Đồng/bao"},
+				{44,"10","Giá thành toàn bộ","Đồng/bao"}
+				}
+				)
+				
+				```
+

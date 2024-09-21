@@ -1,0 +1,36 @@
+table 'PARAMETER - ZCO05 MEASURE GROUP'
+	lineageTag: 101c93a9-a9f3-4898-b343-5793711421c0
+
+	column STT
+		dataType: int64
+		lineageTag: 71063613-1ca3-47dd-83da-20b2c5aa3902
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measure group'
+		dataType: string
+		lineageTag: 3c96a981-b97c-4deb-8f78-1a551e1e7a70
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Measure group]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "STT",INTEGER,
+				    "Measure group",STRING,
+				   {
+				    {1,"Kế hoạch"},
+				    {2,"Thực hiện"},
+				    {3,"Thực hiện lũy kế"}
+				   }
+				 )
+

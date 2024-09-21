@@ -1,0 +1,63 @@
+table 'PARAMETER - INVENTORY DIMENSION (ROW)'
+	lineageTag: fe74b736-d03e-4636-9093-6f3d6ae58fba
+
+	column 'Parameter: Balance Stock Dimension'
+		dataType: string
+		lineageTag: 5ac99d8a-1e98-405c-a846-bdd8c6a6be0b
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter: Balance Stock Dimension Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter: Balance Stock Dimension Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: Balance Stock Dimension Fields'
+		dataType: string
+		isHidden
+		lineageTag: 00e02e95-052b-46d3-83c0-f6c0b42d5ed3
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter: Balance Stock Dimension Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: Balance Stock Dimension Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7ff43700-ad4a-43f1-9d58-618c9977602a
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter: Balance Stock Dimension (Row)' = calculated
+		mode: import
+		source =
+				{
+				    ("YEAR", NAMEOF('DIM - DATE'[Year]), 0),
+				    ("MATERIAL_CODE", NAMEOF('DIM - MATERIAL'[MATERIAL_CODE]), 1),
+				    ("PLANT_CODE", NAMEOF('DIM - PLANT'[PLANT_CODE]), 2),
+				    ("STORAGE_LOCATION", NAMEOF('DIM - STORAGE LOCATION'[STORAGE_LOCATION]), 3),
+				    ("VALUATION_CLASS", NAMEOF('DIM - MATERIAL PLANT'[VALUATION_CLASS]), 4),
+				    ("DATE",NAMEOF('DIM - DATE'[Date]),5),
+				    ("PLANNER",NAMEOF('DIM - MATERIAL'[PLANNER]),6),
+				    ("EQUIPMENT_TYPE",NAMEOF('DIM - MATERIAL'[EQUIP_TYPE]),7),
+				    ("SUPPLY_TYPE",NAMEOF('DIM - MATERIAL'[SUPPLY_TYPE]),8),
+				    ("Year-Month",NAMEOF('DIM - DATE'[MonthYear]),9),
+				    ("Quarter",NAMEOF('DIM - DATE'[Quarter]),10)
+				}
+
+	annotation PBI_Id = 61162a6a5d1e430081e77f4cff4b5d98
+

@@ -1,0 +1,211 @@
+table 'FACT - NORM QUALITY'
+	lineageTag: d018c30a-e931-45cb-abdd-cb8632faf5d3
+
+	column VALID_FROM
+		dataType: string
+		lineageTag: d9378ea6-46ad-450d-a6ad-31d51f6c2a51
+		summarizeBy: none
+		sourceColumn: VALID_FROM
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_TO
+		dataType: string
+		lineageTag: 68742f08-6d6b-4a98-b0a5-29e54b5da16a
+		summarizeBy: none
+		sourceColumn: VALID_TO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: e1a1414e-94cb-4ed9-a923-bbf454cfcbce
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOM_USAGE
+		dataType: string
+		lineageTag: 1818e0be-4661-4eac-a39e-aa97f457e7af
+		summarizeBy: none
+		sourceColumn: BOM_USAGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRO_SEMI_CODE
+		dataType: string
+		lineageTag: 0b7b9a81-d2e6-44ee-8383-729f994561b8
+		summarizeBy: none
+		sourceColumn: PRO_SEMI_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ALTERN_BOM
+		dataType: string
+		lineageTag: 676c6d92-4825-4f4c-a86b-3c7225149dbd
+		summarizeBy: none
+		sourceColumn: ALTERN_BOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOM_NUMBER
+		dataType: string
+		lineageTag: ff6f6ce8-d262-48d2-a74c-18706e3faa61
+		summarizeBy: none
+		sourceColumn: BOM_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOM_CATEGORY
+		dataType: string
+		lineageTag: 6d386c52-c1eb-4428-bdce-c7d049c1ef86
+		summarizeBy: none
+		sourceColumn: BOM_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_NODE
+		dataType: string
+		lineageTag: f7212eaa-ac1c-42d5-9437-54b94a2be42f
+		summarizeBy: none
+		sourceColumn: ITEM_NODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOM_STATUS
+		dataType: string
+		lineageTag: 3bd6fd09-528b-46ab-8b6b-cb6b39bb9f76
+		summarizeBy: none
+		sourceColumn: BOM_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOM_BOM
+		dataType: string
+		lineageTag: 148479cb-f43f-46c9-894e-f913db28570b
+		summarizeBy: none
+		sourceColumn: UOM_BOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOM_ITEM_NUMBER
+		dataType: string
+		lineageTag: 77dc1246-dbdd-4260-93e3-c25ff3c1d7fa
+		summarizeBy: none
+		sourceColumn: BOM_ITEM_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 2a9a07bb-4810-4fcf-bfb3-e63770dae0f4
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOM_COMPO
+		dataType: string
+		lineageTag: 3e017165-36b8-42dd-9125-7b396897a694
+		summarizeBy: none
+		sourceColumn: UOM_COMPO
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOM_CONVERT
+		dataType: string
+		lineageTag: 326aa9fa-a0e6-436f-9f2c-5ccaa373fed4
+		summarizeBy: none
+		sourceColumn: UOM_CONVERT
+
+		annotation SummarizationSetBy = Automatic
+
+	column TEMP_CONVERT
+		dataType: double
+		lineageTag: 2ea8a906-ff38-4565-ade2-a4b9dfdddcc9
+		summarizeBy: sum
+		sourceColumn: TEMP_CONVERT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BASE_QTY
+		dataType: double
+		lineageTag: 458c64a4-f0a1-4f96-8644-fe7c2f3fe956
+		summarizeBy: sum
+		sourceColumn: BASE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPO_QTY
+		dataType: double
+		lineageTag: 9342179f-9061-46ef-94fe-87c84a74b599
+		summarizeBy: sum
+		sourceColumn: COMPO_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPO_QTY_CONVERT
+		dataType: double
+		lineageTag: 8f7f4d87-b1f3-4da7-928a-e806de7133ba
+		summarizeBy: sum
+		sourceColumn: COMPO_QTY_CONVERT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 46611c4c-36a4-412c-8c34-96342c1ab481
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONSUMPTION_BOM
+		dataType: double
+		lineageTag: be7c58a8-0968-4be0-83a9-9b11825cf96e
+		summarizeBy: sum
+		sourceColumn: CONSUMPTION_BOM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CONSUMPTION_BOM_CONVERT
+		dataType: double
+		lineageTag: 5e636fda-10e4-46b5-87a9-3d617d8c68f4
+		summarizeBy: sum
+		sourceColumn: CONSUMPTION_BOM_CONVERT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'max Valid' = IF([ALTERN_BOM] = CALCULATE(MAX('FACT - NORM QUALITY'[ALTERN_BOM]),'FACT - NORM QUALITY'[ALTERN_BOM] <> "99",ALLEXCEPT('FACT - NORM QUALITY', 'FACT - NORM QUALITY'[PRO_SEMI_CODE])),1,0)
+		dataType: int64
+		formatString: 0
+		lineageTag: f8cad152-49e3-461b-acc0-87b50ee1cce0
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - NORM QUALITY' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_NORM_QUALITY = pvcfcprodsqlpool{[Schema="gld",Item="FACT_NORM_QUALITY"]}[Data]
+				in
+				    gld_FACT_NORM_QUALITY
+

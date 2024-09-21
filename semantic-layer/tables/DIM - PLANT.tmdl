@@ -1,0 +1,85 @@
+table 'DIM - PLANT'
+	lineageTag: 7004fc89-ec89-4bcf-af3e-3b6e4a3f2329
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 1a195be1-5205-4e87-abfc-7d358ebb16c4
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_DESCRIPTION
+		dataType: string
+		lineageTag: 5bda4691-9729-4db9-9883-724ff4317a80
+		summarizeBy: none
+		sourceColumn: PLANT_DESCRIPTION
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column VAL_AREA
+		dataType: string
+		lineageTag: 901c934e-7049-499e-a176-ce9ffdd526b7
+		summarizeBy: none
+		sourceColumn: VAL_AREA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_PLANT
+		dataType: string
+		lineageTag: 73c4429a-11ce-40b2-8200-60e0be9cf0f6
+		summarizeBy: none
+		sourceColumn: CUSTOMER_PLANT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY
+		dataType: string
+		lineageTag: 2abf7b13-27e2-401b-be81-8d061f5fccd7
+		summarizeBy: none
+		sourceColumn: CITY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALES_ORG_CODE
+		dataType: string
+		lineageTag: 8bdae0b1-a6f2-4004-816b-a19ddb7780b5
+		summarizeBy: none
+		sourceColumn: SALES_ORG_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_KEY
+		dataType: string
+		lineageTag: 99e37be6-052d-4749-81c1-fa951ba49a9b
+		summarizeBy: none
+		sourceColumn: COUNTRY_KEY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim Plant' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PLANT = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_PLANT"]}[Data]
+				in
+				    gld_VW_DIM_PLANT
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,55 @@
+table 'Parameter: Show GL Account - IS'
+	lineageTag: 93cb072f-ba4d-410d-884d-496792b1cd13
+
+	column 'Parameter: Show GL Account - IS'
+		dataType: string
+		lineageTag: c8b8db0e-3f7a-47b0-aa90-4eca39f0f8a2
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter: Show GL Account - IS Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter: Show GL Account - IS Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: Show GL Account - IS Fields'
+		dataType: string
+		isHidden
+		lineageTag: 1e1f2a05-ceb7-4117-9649-6b54b2f56c36
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter: Show GL Account - IS Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: Show GL Account - IS Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 52f74296-fd5b-4cf0-9743-6dd1890e38ba
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter: Show GL Account - IS' = calculated
+		mode: import
+		source =
+				{
+				    ("IS Item No", NAMEOF('DIM - REPORTING LINE IS'[ITEM_NO]),0),
+				    ("GL Account", NAMEOF('DIM - GL ACCOUNT'[GL_ACC_NO]), 1),
+				    ("GL Account Name", NAMEOF('DIM - GL ACCOUNT'[LONG_DESC]), 2)
+				}
+
+	annotation PBI_Id = 6ff2eb3440204ceda0e9b9101fa0171d
+

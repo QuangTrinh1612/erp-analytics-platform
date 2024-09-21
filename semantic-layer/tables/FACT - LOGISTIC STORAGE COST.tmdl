@@ -1,0 +1,188 @@
+table 'FACT - LOGISTIC STORAGE COST'
+	lineageTag: 2d9917b8-9783-4454-b8cc-3b815fb8ff5a
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: 988d3702-9c85-4814-80d6-c9edb03350cf
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_COST_TYPE
+		dataType: int64
+		formatString: 0
+		lineageTag: a74d12ce-eb06-4769-92b5-5fb12a9b8a18
+		summarizeBy: sum
+		sourceColumn: STORAGE_COST_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_UNIT_PRICE
+		dataType: double
+		lineageTag: 63744300-c38e-4524-8b72-612e1dc0bf2e
+		summarizeBy: sum
+		sourceColumn: STORAGE_UNIT_PRICE
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STORAGE_COST
+		dataType: double
+		isHidden
+		lineageTag: cd8d7a49-3b12-417c-bfee-72dacb66b8f0
+		summarizeBy: sum
+		sourceColumn: STORAGE_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column INVENTORY_DATE
+		dataType: string
+		isHidden
+		lineageTag: 818148a9-1b09-4be2-92be-ee4c5ffcb58d
+		summarizeBy: none
+		sourceColumn: INVENTORY_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_COST_TYPE_NAME
+		dataType: string
+		lineageTag: fd3364fb-b925-44aa-b485-3cebf6b2ca9b
+		summarizeBy: none
+		sourceColumn: STORAGE_COST_TYPE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: d2bf18bd-b11d-43cd-8e88-7bdf36606530
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_INSURANCE_COST
+		dataType: double
+		isHidden
+		lineageTag: cfdecde3-6bf1-44e9-83b0-6a38fdd6156c
+		summarizeBy: sum
+		sourceColumn: STORAGE_INSURANCE_COST
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BAO_CONVERT
+		dataType: double
+		formatString: 0
+		lineageTag: ccb112f2-32b6-49d2-9bc1-327bec2dbc5c
+		summarizeBy: sum
+		sourceColumn: BAO_CONVERT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CP_BOCXEP_NHAP
+		dataType: double
+		lineageTag: 2253fd5a-69c2-4e02-a1d0-b94cabaaf86f
+		summarizeBy: sum
+		sourceColumn: CP_BOCXEP_NHAP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CP_BOCXEP_XUAT
+		dataType: double
+		lineageTag: 4e5f7ab2-ff9a-4b6b-8d2f-6ce43b2be38d
+		summarizeBy: sum
+		sourceColumn: CP_BOCXEP_XUAT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CONTRACT_PRICE
+		dataType: double
+		lineageTag: 245c796d-5abc-4cae-b43b-557236efcbb7
+		summarizeBy: sum
+		sourceColumn: CONTRACT_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NHAP_KHO_LON_30KG
+		dataType: int64
+		formatString: 0
+		lineageTag: 5bba673f-e94f-4526-b103-b08120a444d5
+		summarizeBy: sum
+		sourceColumn: NHAP_KHO_LON_30KG
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column NHAP_KHO_NHO_30KG
+		dataType: int64
+		formatString: 0
+		lineageTag: 81a4a0cd-f9fa-48da-927a-86212f13eb2a
+		summarizeBy: sum
+		sourceColumn: NHAP_KHO_NHO_30KG
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column XUAT_KHO_LON_30KG
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ca0be30-e52d-4e50-ad28-d1149e239d79
+		summarizeBy: sum
+		sourceColumn: XUAT_KHO_LON_30KG
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column XUAT_KHO_NHO_30KG
+		dataType: int64
+		formatString: 0
+		lineageTag: 5181db5c-4b3a-4dbc-94d4-15acf4bec2f5
+		summarizeBy: sum
+		sourceColumn: XUAT_KHO_NHO_30KG
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column CP_SANG_MAN
+		dataType: double
+		lineageTag: bc15c802-d31c-4776-bc9d-6eb56423466a
+		summarizeBy: sum
+		sourceColumn: CP_SANG_MAN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - LOGISTIC STORAGE COST' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_LOGISTICS_STORAGE_COST = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_LOGISTICS_STORAGE_COST"]}[Data]
+				in
+				    gld_VW_FACT_LOGISTICS_STORAGE_COST
+
+	annotation PBI_ResultType = Exception
+

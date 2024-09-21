@@ -1,0 +1,762 @@
+table 'FACT - WORK ORDER'
+	lineageTag: c6983f11-7692-42d8-8842-ef359741690c
+
+	column DIM_TASK_LIST_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ccc468a-5e37-4c2f-96ae-3fbd85411689
+		summarizeBy: count
+		sourceColumn: DIM_TASK_LIST_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 6176fda7-1a0d-4da0-910d-e2cd974345ce
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUMBER2
+		dataType: string
+		lineageTag: df4a34bb-9c28-4305-b9fd-ed1079eeb77a
+		summarizeBy: none
+		sourceColumn: OBJECT_NUMBER2
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACT_TYPE_CODE
+		dataType: string
+		lineageTag: 581c6a09-225b-4edc-9ca1-36bc3b5c3c1d
+		summarizeBy: none
+		sourceColumn: ACT_TYPE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER_ID
+		dataType: string
+		lineageTag: c2634861-51a5-449d-a463-4b34f2174206
+		summarizeBy: none
+		sourceColumn: WORK_CENTER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_PLAN
+		dataType: string
+		lineageTag: 1d15d61c-275b-488b-bd6b-7cf46b500f3d
+		summarizeBy: none
+		sourceColumn: MAINT_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_ITEM
+		dataType: string
+		lineageTag: c1192a13-7629-4485-ae12-f007d0dd876c
+		summarizeBy: none
+		sourceColumn: MAINT_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: 0080c80e-6a04-4f24-a7e6-e75524a19be6
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIOR_CODE
+		dataType: string
+		lineageTag: 42e6d64d-a1a0-4fa0-b116-c9f1140627db
+		summarizeBy: none
+		sourceColumn: PRIOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJ_TYPE
+		dataType: string
+		lineageTag: dcd4f387-c892-4c7a-a507-7519f5715a6b
+		summarizeBy: none
+		sourceColumn: OBJ_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTIF_NUM
+		dataType: string
+		lineageTag: 081c1633-cf79-4ef5-b537-0057d14961d8
+		summarizeBy: none
+		sourceColumn: NOTIF_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRP_KEY
+		dataType: string
+		lineageTag: 9988c9b3-c8ba-4c8d-91df-02e930b080f6
+		summarizeBy: none
+		sourceColumn: GRP_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRP_COUNTER
+		dataType: string
+		lineageTag: fe80429e-a8ef-469f-b452-65658b267810
+		summarizeBy: none
+		sourceColumn: GRP_COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column RESERV_NUM
+		dataType: string
+		lineageTag: f4c14b5b-2745-4453-bb4a-f3cb6fce5039
+		summarizeBy: none
+		sourceColumn: RESERV_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLAN_STAT_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 6fc26bf9-e7ce-4233-9f2c-8208db83aa2b
+		summarizeBy: none
+		sourceColumn: PLAN_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PLAN_END_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 2c09232a-ee62-4f44-9da2-8b26b1c759f6
+		summarizeBy: none
+		sourceColumn: PLAN_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column ACTUAL_STAT_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 073170f9-5194-4ce1-bf72-fa7e46808be2
+		summarizeBy: none
+		sourceColumn: ACTUAL_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column ACTUAL_END_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 1329fb20-496a-4002-99be-3b9c6f2b6eef
+		summarizeBy: none
+		sourceColumn: ACTUAL_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PLAN_REL_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: a3cb13a2-62df-42a6-9c38-6e61cf5598cf
+		summarizeBy: none
+		sourceColumn: PLAN_REL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PLAN_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: e88d923c-77c0-473d-8d4b-0346becc4e31
+		summarizeBy: none
+		sourceColumn: PLAN_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column OPER_ACT_NUM
+		dataType: string
+		lineageTag: db301192-696a-4b54-be78-aa1431b3594a
+		summarizeBy: none
+		sourceColumn: OPER_ACT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column SYST_COND
+		dataType: string
+		lineageTag: 5bda7618-c099-45d1-b094-3eebbf197869
+		summarizeBy: none
+		sourceColumn: SYST_COND
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_ZSCDX
+		dataType: int64
+		formatString: 0
+		lineageTag: b7cfaf51-1072-4844-90ef-ee23295a5bb4
+		summarizeBy: none
+		sourceColumn: STATUS_ZSCDX
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_ZBDDK
+		dataType: int64
+		formatString: 0
+		lineageTag: df0da40b-e8e1-466e-8cff-37e08d7ae675
+		summarizeBy: none
+		sourceColumn: STATUS_ZBDDK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELETE_IND
+		dataType: string
+		lineageTag: 667ed895-581e-4c66-80f0-ed31be08c3ee
+		summarizeBy: none
+		sourceColumn: DELETE_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column OUTAGE_CODE
+		dataType: string
+		lineageTag: a058441c-7fec-4084-ad03-fb1410983d35
+		summarizeBy: none
+		sourceColumn: OUTAGE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_PLANNED_PERFORMERS
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f9b4fe8-dcb9-449a-97b3-6c12d6e8b183
+		summarizeBy: sum
+		sourceColumn: TOTAL_PLANNED_PERFORMERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_CONFIRM
+		dataType: int64
+		formatString: 0
+		lineageTag: d85e2693-0ef1-4841-bff8-fe72e6223512
+		summarizeBy: sum
+		sourceColumn: TOTAL_CONFIRM
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONFIRMATION_NUM
+		dataType: string
+		lineageTag: 9e61e7bc-aa13-4aeb-8752-1f45031ef0d7
+		summarizeBy: none
+		sourceColumn: CONFIRMATION_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column USR_00
+		dataType: string
+		lineageTag: dd0be936-1536-408c-8dc3-b6110cf84ec6
+		summarizeBy: none
+		sourceColumn: USR_00
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERMIT_DOC_NO
+		dataType: string
+		lineageTag: b69995fc-ba25-46aa-8a34-46a5382a40cd
+		summarizeBy: none
+		sourceColumn: PERMIT_DOC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column RUN_DOC_NO
+		dataType: string
+		lineageTag: cc973926-9e03-41b0-9686-6c1185e42043
+		summarizeBy: none
+		sourceColumn: RUN_DOC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_PLANNED_TIME
+		dataType: double
+		lineageTag: b0d7e4e4-5d35-4383-baea-2ccbc60861f7
+		summarizeBy: sum
+		sourceColumn: TOTAL_PLANNED_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EARL_STAT_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 2c4f6861-d854-4028-ae9d-bd76be61a10d
+		summarizeBy: none
+		sourceColumn: EARL_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column LATE_STAT_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 9dfef39c-017b-4a7f-a15c-a867c4e7f474
+		summarizeBy: none
+		sourceColumn: LATE_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column ORDER_DESC
+		dataType: string
+		lineageTag: f5e96503-291a-457f-98c4-7235f915f368
+		summarizeBy: none
+		sourceColumn: ORDER_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUM
+		dataType: string
+		lineageTag: 134667a0-f969-4dd7-ace0-72b598b40b62
+		summarizeBy: none
+		sourceColumn: OBJECT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIN_WORK_CENTER
+		dataType: string
+		lineageTag: eb08a489-4bc0-4273-9b02-698bb754aa5c
+		summarizeBy: none
+		sourceColumn: MAIN_WORK_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_TYPE
+		dataType: string
+		lineageTag: 503fb82d-b13e-43a5-87e8-8257796eed68
+		summarizeBy: none
+		sourceColumn: ORDER_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column HIERARCHY_ID
+		dataType: string
+		lineageTag: 0877f8fb-734f-49b7-8964-f8e312b440e1
+		summarizeBy: none
+		sourceColumn: HIERARCHY_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_PROGRESS_IND
+		dataType: string
+		lineageTag: 5b1a0deb-89d3-4e24-a82e-939139b8761a
+		summarizeBy: none
+		sourceColumn: WORK_PROGRESS_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_REPORT
+		dataType: string
+		lineageTag: 804501c7-0a91-4415-bd0d-9ed0fdf43a6d
+		summarizeBy: none
+		sourceColumn: MAINT_REPORT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: 6d34888a-efe8-49ca-a115-b080e7977d39
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ACTUAL_TIME
+		dataType: double
+		lineageTag: e3cac061-4f21-4b75-bb25-b26f5776fc19
+		summarizeBy: sum
+		sourceColumn: TOTAL_ACTUAL_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WORK_UNIT
+		dataType: string
+		lineageTag: b09d8c23-ef52-4db1-aa23-ac0810d45667
+		summarizeBy: none
+		sourceColumn: WORK_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_ACTUAL_PERFORMERS
+		dataType: int64
+		formatString: 0
+		lineageTag: a3d7e6ef-1f9a-4bcc-83e7-495f8f43029c
+		summarizeBy: sum
+		sourceColumn: TOTAL_ACTUAL_PERFORMERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_CODE
+		dataType: string
+		lineageTag: 63c6c091-5e93-438e-92af-2f19020a6a7b
+		summarizeBy: none
+		sourceColumn: SUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACTUAL_REL_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: fd1643c6-090d-4999-9e5a-5992e6e90540
+		summarizeBy: none
+		sourceColumn: ACTUAL_REL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: f84a04fd-4589-4aad-b72c-031aa9266881
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		lineageTag: c7c11bde-964b-4b00-9d3f-fff470c7de14
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROB_CAUSE
+		dataType: string
+		lineageTag: be5d2323-29fc-4fb5-928e-2177ddfcd9a0
+		summarizeBy: none
+		sourceColumn: PROB_CAUSE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ABNORMAL_NOTE
+		dataType: string
+		lineageTag: 490b6876-76ab-4e7a-ab78-0e6b10e085ca
+		summarizeBy: none
+		sourceColumn: ABNORMAL_NOTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONDITION
+		dataType: string
+		lineageTag: 9526ebfa-16b5-4874-bc51-7dfe7870cc4e
+		summarizeBy: none
+		sourceColumn: CONDITION
+
+		annotation SummarizationSetBy = Automatic
+
+	column IMPROVED_COMMENT
+		dataType: string
+		lineageTag: 7e94c437-4ac2-4a93-ad79-41c3f8e918bd
+		summarizeBy: none
+		sourceColumn: IMPROVED_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACTUAL_IMPLEMENT
+		dataType: string
+		lineageTag: 308f78be-5ddc-46a1-9bc5-0e75c08b3b6d
+		summarizeBy: none
+		sourceColumn: ACTUAL_IMPLEMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCEPTANCE_DATE
+		dataType: string
+		lineageTag: f13e0680-e07e-4517-89fb-477623125f06
+		summarizeBy: none
+		sourceColumn: ACCEPTANCE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_CAUSE
+		dataType: string
+		lineageTag: 3cd2de3a-6f56-49dd-97ce-94b14ac44a2d
+		summarizeBy: none
+		sourceColumn: CHANGE_CAUSE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_USER_STATUS
+		dataType: string
+		lineageTag: e5c729d1-65b5-4a6a-8bd0-0e95fd8de28b
+		summarizeBy: none
+		sourceColumn: ORDER_USER_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_SYSTEM_STATUS
+		dataType: string
+		lineageTag: f2064ba4-2218-4f27-a6d8-ca718326177b
+		summarizeBy: none
+		sourceColumn: ORDER_SYSTEM_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_SYSTEM_STATUS_ALL
+		dataType: string
+		lineageTag: 9f4467fe-cb18-4fd3-a19d-a1120ae70420
+		summarizeBy: none
+		sourceColumn: ORDER_SYSTEM_STATUS_ALL
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNCT_LOC_CODE
+		dataType: string
+		lineageTag: e0d7920d-8e2f-48fa-a463-b101edbe4e8e
+		summarizeBy: none
+		sourceColumn: FUNCT_LOC_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SYSTEM_STATUS_EXCHANGE
+		dataType: string
+		lineageTag: 5d448fda-9f5b-4d22-bd2c-f7c494bdf208
+		summarizeBy: none
+		sourceColumn: SYSTEM_STATUS_EXCHANGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_STATUS_EXCHANGE
+		dataType: string
+		lineageTag: 6e431c99-974e-47dd-ab96-99446c2fea28
+		summarizeBy: none
+		sourceColumn: USER_STATUS_EXCHANGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_SHORT_DESC
+		dataType: string
+		lineageTag: 170bcf56-9650-4efc-8238-6878867cc80a
+		summarizeBy: none
+		sourceColumn: OPER_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ROUTE_NUMBER
+		dataType: string
+		lineageTag: 38b17f93-8da4-4681-adc0-112d1ac24e7b
+		summarizeBy: none
+		sourceColumn: ROUTE_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTER
+		dataType: string
+		lineageTag: 19c13979-5aa0-468b-abd6-a93ee9fe03a7
+		summarizeBy: none
+		sourceColumn: COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_DESC
+		dataType: string
+		lineageTag: 50d0f516-2e7b-4519-ae04-3b154c5ce31e
+		summarizeBy: none
+		sourceColumn: STATUS_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTIF_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 653c9dc6-8f5b-476b-a4d4-11f383f5af2e
+		summarizeBy: none
+		sourceColumn: NOTIF_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column NOTIF_TYPE
+		dataType: string
+		lineageTag: 436f8500-2f3e-494d-88d4-e1eca4128898
+		summarizeBy: none
+		sourceColumn: NOTIF_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISSUE_NAME
+		dataType: string
+		lineageTag: f19de5a3-1854-4eb3-9e4b-56eab2c8f048
+		summarizeBy: none
+		sourceColumn: ISSUE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERMIT_STATUS
+		dataType: string
+		lineageTag: fc330232-57d2-48cc-becb-e3684f13c2f7
+		summarizeBy: none
+		sourceColumn: PERMIT_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLS_DVCQ
+		dataType: string
+		lineageTag: 59ed75a5-dcd9-4cb2-a1da-ebb982b9a4ab
+		summarizeBy: none
+		sourceColumn: CLS_DVCQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLS_DVTH
+		dataType: string
+		lineageTag: 6c78af00-6f2d-4a61-8121-138e3b464ee5
+		summarizeBy: none
+		sourceColumn: CLS_DVTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLS_PKTBD
+		dataType: string
+		lineageTag: e454f766-4c0b-4bad-89d0-059d611c2ae9
+		summarizeBy: none
+		sourceColumn: CLS_PKTBD
+
+		annotation SummarizationSetBy = Automatic
+
+	column HUY_DVCQ
+		dataType: string
+		lineageTag: 1c225681-6cfe-4ded-aeaa-730c31388c1d
+		summarizeBy: none
+		sourceColumn: HUY_DVCQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column HUY_PKTBD
+		dataType: string
+		lineageTag: c57ed01e-e9b9-4604-a57f-2d903aa29a4a
+		summarizeBy: none
+		sourceColumn: HUY_PKTBD
+
+		annotation SummarizationSetBy = Automatic
+
+	column HUY_PLANER
+		dataType: string
+		lineageTag: ae639ef4-8081-4d17-b372-7e3c9937ab49
+		summarizeBy: none
+		sourceColumn: HUY_PLANER
+
+		annotation SummarizationSetBy = Automatic
+
+	column HUY_SUPER
+		dataType: string
+		lineageTag: b91180eb-b38e-42fb-b8e2-5c0bd2b8c9fa
+		summarizeBy: none
+		sourceColumn: HUY_SUPER
+
+		annotation SummarizationSetBy = Automatic
+
+	column REL_DVCQ
+		dataType: string
+		lineageTag: 2239d3ae-1b89-425a-bf56-b5c255139eac
+		summarizeBy: none
+		sourceColumn: REL_DVCQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column REL_DVTH
+		dataType: string
+		lineageTag: fa701aa9-4910-42f7-a349-d0f557f123c4
+		summarizeBy: none
+		sourceColumn: REL_DVTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column REL_PKTBD
+		dataType: string
+		lineageTag: 6c451b95-6985-4847-b38f-d567207a93b9
+		summarizeBy: none
+		sourceColumn: REL_PKTBD
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAHD_CODE
+		dataType: string
+		lineageTag: 25105ccb-6923-4de2-8941-d0a5a19f68e0
+		summarizeBy: none
+		sourceColumn: PAHD_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REL_PLANER
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d41a91c-be57-44ba-ba46-920062daa5b8
+		summarizeBy: sum
+		sourceColumn: REL_PLANER
+
+		annotation SummarizationSetBy = Automatic
+
+	column REL_SUPER
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ca9473a-9d0e-4c31-bb7a-018d884fb44f
+		summarizeBy: sum
+		sourceColumn: REL_SUPER
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - WORK ORDER' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_WORK_ORDER = pvcfcprodsqlpool{[Schema="gld",Item="FACT_WORK_ORDER"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_WORK_ORDER,{"W_INSERT_DT"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns","00000000","99991231",Replacer.ReplaceText,{"PLAN_STAT_DATE"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","00000000","99991231",Replacer.ReplaceText,{"PLAN_END_DATE"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","00000000","99991231",Replacer.ReplaceText,{"ACTUAL_STAT_DATE"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","00000000","99991231",Replacer.ReplaceText,{"ACTUAL_END_DATE"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","00000000","99991231",Replacer.ReplaceText,{"PLAN_REL_DATE"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4","00000000","99991231",Replacer.ReplaceText,{"PLAN_DATE"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","00000000","99991231",Replacer.ReplaceText,{"EARL_STAT_DATE"}),
+				    #"Replaced Value7" = Table.ReplaceValue(#"Replaced Value6","00000000","99991231",Replacer.ReplaceText,{"LATE_STAT_DATE"}),
+				    #"Replaced Value8" = Table.ReplaceValue(#"Replaced Value7","00000000","99991231",Replacer.ReplaceText,{"ACTUAL_REL_DATE"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value8",{{"PLAN_STAT_DATE", type date}, {"PLAN_END_DATE", type date}, {"ACTUAL_STAT_DATE", type date}, {"ACTUAL_END_DATE", type date}, {"PLAN_REL_DATE", type date}, {"PLAN_DATE", type date}, {"EARL_STAT_DATE", type date}, {"LATE_STAT_DATE", type date}, {"NOTIF_DATE", type date}, {"ACTUAL_REL_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

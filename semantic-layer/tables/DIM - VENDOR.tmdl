@@ -1,0 +1,165 @@
+table 'DIM - VENDOR'
+	lineageTag: df898fe3-f644-4131-bb18-be87285cc881
+
+	column VENDOR_CODE
+		dataType: string
+		lineageTag: ec7cf8b9-6a6e-4fb1-8c14-9808f7a4ab01
+		summarizeBy: none
+		sourceColumn: VENDOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_NAME
+		dataType: string
+		lineageTag: 50b97cf3-4db3-46eb-af2b-557943cdc145
+		summarizeBy: none
+		sourceColumn: VENDOR_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_ACC_GRP
+		dataType: string
+		lineageTag: e7a72ba4-2ddc-4b1f-b481-dbc95e03de88
+		summarizeBy: none
+		sourceColumn: VENDOR_ACC_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY
+		dataType: string
+		lineageTag: 6b5c222a-6a6f-4df2-b787-2fcf286ceca5
+		summarizeBy: none
+		sourceColumn: CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY
+		dataType: string
+		lineageTag: 0d718b7d-7295-447e-93ed-752b89fc4ae7
+		summarizeBy: none
+		sourceColumn: COUNTRY
+
+		annotation SummarizationSetBy = Automatic
+
+	column INDUSTRY
+		dataType: string
+		lineageTag: ab9aa5c9-d423-4acf-ac41-049f342066aa
+		summarizeBy: none
+		sourceColumn: INDUSTRY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PHONE
+		dataType: string
+		lineageTag: 968db8d1-933d-4f53-a993-4f1f016f1ca5
+		summarizeBy: none
+		sourceColumn: PHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STREET
+		dataType: string
+		lineageTag: bec2be11-b59b-4a76-8faf-c2bac7c93539
+		summarizeBy: none
+		sourceColumn: STREET
+
+		annotation SummarizationSetBy = Automatic
+
+	column VAT_NO
+		dataType: string
+		lineageTag: 29ef3b1e-0ecd-4c49-8377-76826ac01db3
+		summarizeBy: none
+		sourceColumn: VAT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELETE_FLG
+		dataType: string
+		lineageTag: 1a48ac25-bd34-4ce3-824d-5f11c00d97aa
+		summarizeBy: none
+		sourceColumn: DELETE_FLG
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_FULL_NAME
+		dataType: string
+		lineageTag: df2ae4e3-f817-49c6-abba-60dd2ca5fed8
+		summarizeBy: none
+		sourceColumn: VENDOR_FULL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column BANK_KEY
+		dataType: string
+		lineageTag: ebfb4027-53f0-4850-8636-c3135e7ec85c
+		summarizeBy: none
+		sourceColumn: BANK_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BANK_ACCT_NO
+		dataType: string
+		lineageTag: aecbb01c-a896-448e-a6b7-9f7c3d43a274
+		summarizeBy: none
+		sourceColumn: BANK_ACCT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BACK_ACCT_HOLDER
+		dataType: string
+		lineageTag: 5fc8cbc1-d09b-46e3-a08e-922a3c306dc1
+		summarizeBy: none
+		sourceColumn: BACK_ACCT_HOLDER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEARCH_TERM
+		dataType: string
+		lineageTag: 4c6bb5af-1c91-42ee-8a13-52f21a74c763
+		summarizeBy: none
+		sourceColumn: SEARCH_TERM
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECON_ACCT
+		dataType: string
+		lineageTag: 51f0a8e3-0d9b-495c-935d-f708de735a3a
+		summarizeBy: none
+		sourceColumn: RECON_ACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CASH_MGMT_GRP
+		dataType: string
+		lineageTag: 911b478c-f8fa-454e-93f5-116671fa70fc
+		summarizeBy: none
+		sourceColumn: CASH_MGMT_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_DATE
+		dataType: string
+		lineageTag: 85d4f688-f5e4-415b-bb9f-9b792c660e51
+		summarizeBy: none
+		sourceColumn: CREATED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPDATED_DATE
+		dataType: string
+		lineageTag: e396e43c-c68a-446a-b88b-32c3296cfe3a
+		summarizeBy: none
+		sourceColumn: UPDATED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - VENDOR' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_VENDOR = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_VENDOR"]}[Data]
+				in
+				    gld_VW_DIM_VENDOR
+

@@ -1,0 +1,268 @@
+/// Bảng thông tin về trung tâm chi phí giá thành
+table 'DIM - COST CENTRE'
+	lineageTag: 914c3198-85bc-45eb-9b8f-11b543e141c8
+
+	column CO_AREA
+		dataType: string
+		lineageTag: 84ced6ae-f818-4cc8-a0a9-634400b58019
+		summarizeBy: none
+		sourceColumn: CO_AREA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER_CODE
+		dataType: string
+		lineageTag: 9ff412bd-0036-44db-ba1d-cf9bcfdf420f
+		summarizeBy: none
+		sourceColumn: COST_CENTER_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_TO
+		dataType: string
+		lineageTag: 01a6d376-ac76-4fb6-ab8b-4928921611b6
+		summarizeBy: none
+		sourceColumn: VALID_TO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALID_FROM
+		dataType: string
+		lineageTag: e8c51373-71e0-4b93-b52b-217fa42504fb
+		summarizeBy: none
+		sourceColumn: VALID_FROM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_ON
+		dataType: string
+		lineageTag: 0d77cc81-29b0-47c3-892e-ca2d62838594
+		summarizeBy: none
+		sourceColumn: CREATED_ON
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_BY
+		dataType: string
+		lineageTag: 80c10437-b7ca-44af-a647-a1d592fa2951
+		summarizeBy: none
+		sourceColumn: CREATED_BY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPARTMENT
+		dataType: string
+		lineageTag: 10afebbb-b2e3-49c8-84bd-2d5fa7abc04a
+		summarizeBy: none
+		sourceColumn: DEPARTMENT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERSON_RES
+		dataType: string
+		lineageTag: 1b7ccfc2-4663-4e64-98cc-03e8e19be10a
+		summarizeBy: none
+		sourceColumn: PERSON_RES
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_RES
+		dataType: string
+		lineageTag: 49813e8c-7971-4954-9848-93b318f43c37
+		summarizeBy: none
+		sourceColumn: USER_RES
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_KEY
+		dataType: string
+		lineageTag: 29456d7a-f2fa-4286-95b6-8335682c7f23
+		summarizeBy: none
+		sourceColumn: CURRENCY_KEY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_KEY
+		dataType: string
+		lineageTag: 22590af6-1a14-4684-929f-6e54b421cb11
+		summarizeBy: none
+		sourceColumn: COUNTRY_KEY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY
+		dataType: string
+		lineageTag: 959cdc1f-adb8-43f1-a7e3-e41b93c485f2
+		summarizeBy: none
+		sourceColumn: CITY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISTRICT
+		dataType: string
+		lineageTag: 8aea17c4-dedc-4dcb-95f0-a7156cac7263
+		summarizeBy: none
+		sourceColumn: DISTRICT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 79274bad-c336-4a60-9f2f-825547f9dc7a
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column REGION
+		dataType: string
+		lineageTag: 7e3374e1-5672-4f1e-ad07-b32d18255036
+		summarizeBy: none
+		sourceColumn: REGION
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNC_AREA
+		dataType: string
+		lineageTag: a593784d-2dce-4fe5-a72e-5d77d3460792
+		summarizeBy: none
+		sourceColumn: FUNC_AREA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUS_AREA
+		dataType: string
+		lineageTag: 26605258-58b5-4a0c-af51-52fb0d42b489
+		summarizeBy: none
+		sourceColumn: BUS_AREA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER_CAT
+		dataType: string
+		lineageTag: c3590558-8399-4fec-b56c-45aad09b9ef4
+		summarizeBy: none
+		sourceColumn: COST_CENTER_CAT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJ_NUMBER
+		dataType: string
+		lineageTag: 5ea1444c-8bec-4f45-aed5-787b3325be9b
+		summarizeBy: none
+		sourceColumn: OBJ_NUMBER
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_CENTER_CODE
+		dataType: string
+		lineageTag: fd15632c-21d4-48c0-ad9e-084724d39e9b
+		summarizeBy: none
+		sourceColumn: PROFIT_CENTER_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: a4e4a47d-745d-47df-b752-a64eef8c733f
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHORT_NAME
+		dataType: string
+		lineageTag: 4cc09e50-c32b-4b11-8e6d-2ce5f70ed2ff
+		summarizeBy: none
+		sourceColumn: SHORT_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LONG_NAME
+		dataType: string
+		lineageTag: 8b535949-64c8-4163-b9bc-19a970db4822
+		summarizeBy: none
+		sourceColumn: LONG_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEARCH_TERM
+		dataType: string
+		lineageTag: e8272898-ed9f-4196-9be0-69b6e4c4721c
+		summarizeBy: none
+		sourceColumn: SEARCH_TERM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HIERARCHY_AREA
+		dataType: string
+		lineageTag: 06d8d9c0-dbfd-4036-8221-ea4a7c5db60d
+		summarizeBy: none
+		sourceColumn: HIERARCHY_AREA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - COST CENTRE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_COST_CENTER = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_COST_CENTER"]}[Data]
+				in
+				    gld_VW_DIM_COST_CENTER
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

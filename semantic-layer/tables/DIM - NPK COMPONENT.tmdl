@@ -1,0 +1,47 @@
+table 'DIM - NPK COMPONENT'
+	lineageTag: c3540bc7-669e-4477-84c5-d628b4f2e7fd
+
+	column NPK_COMPO_CODE
+		dataType: string
+		lineageTag: 8ce43acc-d0c0-4cf6-ae11-5de561488c17
+		summarizeBy: none
+		sourceColumn: NPK_COMPO_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NPK_COMPO_NAME
+		dataType: string
+		lineageTag: 7144ff3a-ca38-4b52-859c-ac8ca630394e
+		summarizeBy: none
+		sourceColumn: NPK_COMPO_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c65febd4-f381-4b55-80f4-5b37c5bddce5
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: a5ddd9cc-c7e7-4d5c-87a0-efd18a716205
+		summarizeBy: none
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - NPK COMPONENT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_NPK_COMPONENT = pvcfcprodsqlpool{[Schema="sil",Item="DIM_NPK_COMPONENT"]}[Data]
+				in
+				    sil_DIM_NPK_COMPONENT
+

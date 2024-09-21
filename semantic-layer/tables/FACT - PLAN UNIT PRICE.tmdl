@@ -1,0 +1,91 @@
+table 'FACT - PLAN UNIT PRICE'
+	lineageTag: ab337341-b8d8-4067-9fe8-ed02cb6d96f3
+
+	column YEAR
+		dataType: string
+		lineageTag: 4df8ba3d-91af-4813-a249-e9d0f6f217ba
+		summarizeBy: none
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 5dfb76de-af9c-48f1-b275-6bda1f95f0b3
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UNIT
+		dataType: string
+		lineageTag: 3b7c51d6-f24a-470e-b789-49599e262ba8
+		summarizeBy: none
+		sourceColumn: BASE_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UNIT_PRICE
+		dataType: string
+		lineageTag: 5c8f4c16-c2ee-4f35-8d25-88e974b7ad67
+		summarizeBy: none
+		sourceColumn: BASE_UNIT_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT_PRICE
+		dataType: double
+		lineageTag: bd09b224-35f8-4722-9cc8-f3a444960995
+		summarizeBy: sum
+		sourceColumn: UNIT_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UNIT_PRICE_VAT
+		dataType: double
+		lineageTag: b6d87e29-980a-44e2-8eac-7a9f162f21d4
+		summarizeBy: sum
+		sourceColumn: UNIT_PRICE_VAT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VAT
+		dataType: string
+		lineageTag: 4ab39117-8f97-4cf4-a29b-02845d2872b4
+		summarizeBy: none
+		sourceColumn: VAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 333aac49-2e3d-450c-8134-06ee4e87c3a1
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: e8ffe727-7fbc-428a-8c9e-441c92881021
+		summarizeBy: count
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - PLAN UNIT PRICE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_PLAN_UNIT_PRICE = pvcfcprodsqlpool{[Schema="gld",Item="FACT_PLAN_UNIT_PRICE"]}[Data]
+				in
+				    gld_FACT_PLAN_UNIT_PRICE
+

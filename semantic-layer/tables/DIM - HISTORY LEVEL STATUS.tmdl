@@ -1,0 +1,34 @@
+table 'DIM - HISTORY LEVEL STATUS'
+	lineageTag: ea25b5b9-a826-4b5c-9500-fb784d1be8e2
+
+	column STATUS_LEVEL
+		dataType: string
+		lineageTag: d6e16f51-33e9-4e96-829f-7e13bbff97e0
+		summarizeBy: none
+		sourceColumn: STATUS_LEVEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_LEVEL_DESC
+		dataType: string
+		lineageTag: 496c48de-af47-48de-aeea-3a14cfb48897
+		summarizeBy: none
+		sourceColumn: STATUS_LEVEL_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - HISTORY LEVEL STATUS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_HISTORY_LEVEL_STATUS = pvcfcprodsqlpool{[Schema="sil",Item="DIM_HISTORY_LEVEL_STATUS"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_HISTORY_LEVEL_STATUS,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

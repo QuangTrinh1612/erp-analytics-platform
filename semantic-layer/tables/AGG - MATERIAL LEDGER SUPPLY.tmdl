@@ -1,0 +1,251 @@
+table 'AGG - MATERIAL LEDGER SUPPLY'
+	lineageTag: 7c4f9be4-b5db-498d-8382-ff668874d2db
+
+	column POSTING_DATE
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: d518ccf8-10a1-44c9-b3cb-69d438785737
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: 7a203b64-8854-4d76-b8bb-fead22b950c6
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: c3de644a-14ab-4418-96ac-f737dc45222f
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: f2aa79df-8f2d-40cc-b273-1555aa8709a1
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: 8df2f1a0-c575-4614-a8a0-40f734b72367
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PO_DOC
+		dataType: string
+		lineageTag: 54523e9d-816e-407f-a1ec-de19c3e8163b
+		summarizeBy: none
+		sourceColumn: PO_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER
+		dataType: string
+		lineageTag: f1ac1f22-ae0b-456f-9136-869d47167ab6
+		summarizeBy: none
+		sourceColumn: PLANNER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPPLY_TYPE
+		dataType: string
+		lineageTag: 0b589ef4-2c3f-44ab-b548-59795f3ad030
+		summarizeBy: none
+		sourceColumn: SUPPLY_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUIP_TYPE
+		dataType: string
+		lineageTag: 9e1740dd-156d-44fc-a590-6c40a27145a6
+		summarizeBy: none
+		sourceColumn: EQUIP_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIALIZE
+		dataType: string
+		lineageTag: 91d6f418-1f3a-4d06-9be0-c9299276889f
+		summarizeBy: none
+		sourceColumn: SPECIALIZE
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECEIPT_AMT
+		dataType: double
+		lineageTag: c6d967bf-1cf9-4cdd-8efd-d5fb52161fc8
+		summarizeBy: sum
+		sourceColumn: RECEIPT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_AMT
+		dataType: double
+		lineageTag: 8ca2a172-0ef0-4a9b-b740-d44db09e83a4
+		summarizeBy: sum
+		sourceColumn: ISSUE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_REVERSE_AMT
+		dataType: double
+		lineageTag: 5416d103-f8a1-44d0-808e-1356c55ec165
+		summarizeBy: sum
+		sourceColumn: RECEIPT_REVERSE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_REVERSE_AMT
+		dataType: double
+		lineageTag: 312ea489-9108-4f43-bb9e-7505fe494662
+		summarizeBy: sum
+		sourceColumn: ISSUE_REVERSE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVERSE_AMT
+		dataType: double
+		lineageTag: 7eef226b-405d-48fb-bc7f-fe53f5dc7509
+		summarizeBy: sum
+		sourceColumn: REVERSE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_REVERSE_REMAIN_AMT
+		dataType: double
+		lineageTag: 93fb71fd-3271-45d9-a988-b82815d655f9
+		summarizeBy: sum
+		sourceColumn: RECEIPT_REVERSE_REMAIN_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_REVERSE_REMAIN_AMT
+		dataType: double
+		lineageTag: 49990941-1d3d-4622-b602-9cdb2d38d1f3
+		summarizeBy: sum
+		sourceColumn: ISSUE_REVERSE_REMAIN_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVERSE_REMAIN_AMT
+		dataType: double
+		lineageTag: a6090058-118e-4b4d-b5b6-25d9075b9a98
+		summarizeBy: sum
+		sourceColumn: REVERSE_REMAIN_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_QTY
+		dataType: double
+		lineageTag: 1f1835d8-de18-427c-b4c7-528d1ced5589
+		summarizeBy: sum
+		sourceColumn: RECEIPT_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_QTY
+		dataType: double
+		lineageTag: c6604513-3f0f-4e24-9acc-2eecb9756018
+		summarizeBy: sum
+		sourceColumn: ISSUE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_REVERSE_QTY
+		dataType: double
+		lineageTag: a230d610-5de0-4620-9031-15f9a5d1a291
+		summarizeBy: sum
+		sourceColumn: RECEIPT_REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_REVERSE_QTY
+		dataType: double
+		lineageTag: 7ed5f5e1-e67a-48d0-895f-058029008f51
+		summarizeBy: sum
+		sourceColumn: ISSUE_REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVERSE_QTY
+		dataType: double
+		lineageTag: 9d28d59a-c539-4651-9ab0-c0457b4ec3ea
+		summarizeBy: sum
+		sourceColumn: REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IS_SLOC_BATCH_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: e835d8e9-bfe5-4c39-b353-7a89d29b0a3e
+		summarizeBy: sum
+		sourceColumn: IS_SLOC_BATCH_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_PO_DOC
+		dataType: int64
+		formatString: 0
+		lineageTag: 18defe0c-6371-4889-b4cd-bb8e99fff7c4
+		summarizeBy: sum
+		sourceColumn: IS_PO_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Agg Material Ledger Supply' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_AGG_MATERIAL_LEDGER_SUPPLY = pvcfcprodsqlpool{[Schema="gld",Item="VW_AGG_MATERIAL_LEDGER_SUPPLY"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_AGG_MATERIAL_LEDGER_SUPPLY,{{"POSTING_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

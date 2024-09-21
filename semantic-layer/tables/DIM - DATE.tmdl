@@ -1,0 +1,350 @@
+table 'DIM - DATE'
+	lineageTag: 4e40f873-6333-4407-aa67-0e70ee8a99fa
+	dataCategory: Time
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 77b871a4-ee2d-460b-9283-b9ed281cf793
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: yyyy-mm-dd
+		lineageTag: b29c7909-c485-4b1e-bad0-6ebe8a1b478f
+		summarizeBy: none
+		sourceColumn: Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+		annotation TabularEditor_MarkAsDateKey = 1
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: a15c8b54-3f5a-44d3-ad54-424881dd6856
+		summarizeBy: sum
+		sourceColumn: Day
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DaySuffix
+		dataType: string
+		lineageTag: 8e130d5b-1d38-4de7-9d7b-bd786772c93c
+		summarizeBy: none
+		sourceColumn: DaySuffix
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weekday
+		dataType: int64
+		formatString: 0
+		lineageTag: 82d2d468-ed51-401d-b2ae-43891ba76cb1
+		summarizeBy: sum
+		sourceColumn: Weekday
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekDayName
+		dataType: string
+		lineageTag: dcc11d41-03e7-462b-9b64-4dcf8a71df73
+		summarizeBy: none
+		sourceColumn: WeekDayName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOWInMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: ab36cc53-c0e6-4fa4-bac5-138cb59a72a9
+		summarizeBy: sum
+		sourceColumn: DOWInMonth
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 4af28107-3bc5-4e82-b1bc-a09f09be23ff
+		summarizeBy: sum
+		sourceColumn: DayOfYear
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekOfMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: d2778c9a-f281-4036-89cd-27c005928219
+		summarizeBy: sum
+		sourceColumn: WeekOfMonth
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 5789b277-109c-4239-8d25-f9a494dc67ff
+		summarizeBy: sum
+		sourceColumn: WeekOfYear
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISOWeekOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: a7887a46-efe9-4328-bac7-3ccd220f5642
+		summarizeBy: sum
+		sourceColumn: ISOWeekOfYear
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 1da88294-7973-4e7d-9755-31c45bbda166
+		summarizeBy: sum
+		sourceColumn: Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 4632e111-ca02-4301-a9cb-23954b880156
+		summarizeBy: none
+		sourceColumn: MonthName
+		sortByColumn: Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 80964bb6-d3f1-44bd-8616-7d65c70bd49d
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterName
+		dataType: string
+		lineageTag: 00eb6bed-d59e-4950-8183-f6d1e66bbc37
+		summarizeBy: none
+		sourceColumn: QuarterName
+		sortByColumn: Quarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 772892a3-752e-402b-81ef-9ae4bc98042a
+		summarizeBy: sum
+		sourceColumn: Year
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MMYYYY
+		dataType: string
+		lineageTag: f3bf717c-d666-4260-be26-ce563143a8b2
+		summarizeBy: none
+		sourceColumn: MMYYYY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYear
+		dataType: string
+		lineageTag: 8760fbcf-323e-438b-b435-262855bc9048
+		summarizeBy: none
+		sourceColumn: MonthYear
+		sortByColumn: FirstDayOfMonth
+
+		changedProperty = IsHidden
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDayOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1efbefb8-b234-49fc-ae5f-928d0c8882e8
+		summarizeBy: none
+		sourceColumn: FirstDayOfMonth
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2e73d5c3-e590-48e9-b6c3-b116e958b1ab
+		summarizeBy: none
+		sourceColumn: LastDayOfMonth
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfQuarter
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: af6b2921-211a-4234-988a-edb62f0c39eb
+		summarizeBy: none
+		sourceColumn: FirstDayOfQuarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfQuarter
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 364c3fd5-100b-4079-9bce-9e64f4b750cc
+		summarizeBy: none
+		sourceColumn: LastDayOfQuarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfYear
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f4727012-4ba1-4097-8381-3ee5532fb06a
+		summarizeBy: none
+		sourceColumn: FirstDayOfYear
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LastDayOfYear
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c9390728-7913-48db-bc41-af5b2f769bc1
+		summarizeBy: none
+		sourceColumn: LastDayOfYear
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfNextMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: df6a872d-3bbe-4bf0-8fce-dbd577427ce2
+		summarizeBy: none
+		sourceColumn: FirstDayOfNextMonth
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDayOfNextYear
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5d2af389-5fc0-45b6-a574-c7edf1489eec
+		summarizeBy: none
+		sourceColumn: FirstDayOfNextYear
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Monthshortname
+		dataType: string
+		lineageTag: 238d2a5f-932a-4bc9-bea0-f10da4b88d9c
+		summarizeBy: none
+		sourceColumn: Monthshortname
+		sortByColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quartershortname
+		dataType: string
+		lineageTag: 3dc1b75d-8fec-4dac-a89d-12b17cf0fcdb
+		summarizeBy: none
+		sourceColumn: Quartershortname
+		sortByColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current Flg' = IF('DIM - DATE'[Date] < TODAY(), "Y", "N")
+		dataType: string
+		lineageTag: 6a84b0e4-7bc6-4129-9f0d-f447201f6818
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim Date' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_DATE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_DATE"]}[Data]
+				in
+				    gld_VW_DIM_DATE
+
+	annotation PBI_ResultType = Table
+

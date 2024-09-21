@@ -1,0 +1,50 @@
+table 'FACT - NOTIFICATION STATUS'
+	lineageTag: a93f1e39-321a-42e5-a611-cb7aac1bcbb9
+
+	column OBJECT_NUM
+		dataType: string
+		lineageTag: 03455c29-b5ac-45cd-931d-54e34817f0b6
+		summarizeBy: none
+		sourceColumn: OBJECT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column INACT_STAT
+		dataType: string
+		lineageTag: 73dbf19e-cc4e-4db6-aead-46f933da47bc
+		summarizeBy: none
+		sourceColumn: INACT_STAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: f38f4891-7f65-41e8-870b-0f7a2cc75b72
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_DESC
+		dataType: string
+		lineageTag: e60ef007-3279-45c3-bd68-62bd01d3763b
+		summarizeBy: none
+		sourceColumn: STATUS_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - NOTIFICATION STATUS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_NOTIFICATION_STATUS = pvcfcprodsqlpool{[Schema="gld",Item="FACT_NOTIFICATION_STATUS"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_NOTIFICATION_STATUS,{"W_INSERT_DT"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

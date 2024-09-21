@@ -1,0 +1,140 @@
+table 'FACT - VISIT ACTUAL C2'
+	lineageTag: fa62fc71-cb24-450f-a7d3-8d33e131d492
+
+	column ACTION_LOG_ID
+		dataType: double
+		isHidden
+		lineageTag: 5e66f39d-f7db-4e6f-9a43-8351027178bd
+		summarizeBy: count
+		sourceColumn: ACTION_LOG_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STAFF_ID
+		dataType: double
+		isHidden
+		lineageTag: bdf1d08d-21f3-4ea9-aae8-b836b4ddf5d9
+		summarizeBy: none
+		sourceColumn: STAFF_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTOMER_ID
+		dataType: int64
+		isHidden
+		lineageTag: 1afd1a3a-7ae2-4ce5-a4d8-f57895a3e1a7
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OBJECT_TYPE
+		dataType: double
+		lineageTag: cf6636c8-d4f0-4f24-bdc9-976a580e71d8
+		summarizeBy: sum
+		sourceColumn: OBJECT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column START_TIME
+		dataType: string
+		isHidden
+		lineageTag: 7f4f22f8-7a1c-44c2-a272-6306aad2b8a8
+		summarizeBy: none
+		sourceColumn: START_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+	column END_TIME
+		dataType: string
+		isHidden
+		lineageTag: 52535332-39f3-4c7e-a66d-42e0c0afdb2d
+		summarizeBy: none
+		sourceColumn: END_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+	column ROUTING_ID
+		dataType: double
+		isHidden
+		lineageTag: b520c8e8-5c7c-434c-a66b-973874fa20d4
+		summarizeBy: count
+		sourceColumn: ROUTING_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DISTANCE
+		dataType: double
+		lineageTag: dcfa47a1-d038-4a7e-9dc2-863bc132eef8
+		summarizeBy: sum
+		sourceColumn: DISTANCE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STAFF_CODE
+		dataType: string
+		isHidden
+		lineageTag: 0b135236-8612-4eb9-b112-768ef8df5943
+		summarizeBy: none
+		sourceColumn: STAFF_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: double
+		lineageTag: 6bfe7bba-18f8-44b4-b77e-0c819c9b31a1
+		summarizeBy: sum
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTOMER_CODE
+		dataType: string
+		isHidden
+		lineageTag: e804345e-e364-463e-8f27-2ff6b465da62
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUB_REGION_ID
+		dataType: double
+		isHidden
+		lineageTag: 35247e33-83ef-470f-bce8-186ab79073d7
+		summarizeBy: none
+		sourceColumn: SUB_REGION_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - VISIT ACTUAL C2' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_ACTUAL_VISIT_C2 = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_VISIT_ACTUAL_C2"]}[Data]
+				in
+				    gld_VW_FACT_ACTUAL_VISIT_C2
+
+	annotation PBI_ResultType = Table
+

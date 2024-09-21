@@ -1,0 +1,54 @@
+table 'Parameter - Time'
+	lineageTag: 7b4d1454-e545-40b8-aa13-f206efcca532
+
+	column 'Parameter - Time'
+		dataType: string
+		lineageTag: 73d63301-41d0-4241-ac20-c78c48c16eed
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter - Time Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter - Time Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter - Time Fields'
+		dataType: string
+		isHidden
+		lineageTag: 5d224f05-ec67-403b-a27e-56a571a7b997
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter - Time Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter - Time Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d267bd4d-ce8c-40fe-86cc-2b707557366b
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter - Time' = calculated
+		mode: import
+		source =
+				{
+				    ("Năm", NAMEOF('DIM - DATE'[Year]), 0),
+				    ("Tháng-Năm", NAMEOF('DIM - DATE'[MonthYear]), 1)
+				}
+
+	annotation PBI_Id = f930dd2d081f4a94af57f7e23c818973
+

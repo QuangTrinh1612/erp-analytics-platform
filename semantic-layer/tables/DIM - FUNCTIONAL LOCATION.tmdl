@@ -1,0 +1,42 @@
+table 'DIM - FUNCTIONAL LOCATION'
+	lineageTag: a6229bd9-51de-4769-9c46-5e2d71ce8b8a
+
+	column FUNCT_LOC_CODE
+		dataType: string
+		lineageTag: ca70ce02-7156-453f-8299-f5986a2792ec
+		summarizeBy: none
+		sourceColumn: FUNCT_LOC_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNCT_LOC_DESC
+		dataType: string
+		lineageTag: 129555c0-8744-430b-9971-47988ccb7612
+		summarizeBy: none
+		sourceColumn: FUNCT_LOC_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column LANG_INDICATOR
+		dataType: string
+		lineageTag: e027e7aa-e61c-4654-9006-21088e2b7db2
+		summarizeBy: none
+		sourceColumn: LANG_INDICATOR
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - FUNCTIONAL LOCATION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_FUNCTIONAL_LOCATION = pvcfcprodsqlpool{[Schema="sil",Item="DIM_FUNCTIONAL_LOCATION"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_FUNCTIONAL_LOCATION,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,95 @@
+table 'DIM - KEYSHOP DMS'
+	lineageTag: fb02cc62-2b6b-4e05-b7b0-66d9882c6f53
+
+	column KS_ID
+		dataType: double
+		lineageTag: ee78094f-ad18-467d-81eb-591612fd8017
+		summarizeBy: none
+		sourceColumn: KS_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column KS_CODE
+		dataType: string
+		lineageTag: febdcb81-05b9-4504-a90f-48772bb59634
+		summarizeBy: none
+		sourceColumn: KS_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NAME
+		dataType: string
+		lineageTag: 816048bd-4e4f-40f6-8854-6445928b32a4
+		summarizeBy: none
+		sourceColumn: NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESCRIPTION
+		dataType: string
+		lineageTag: f0b9922d-68c2-4be3-beae-228998495ab2
+		summarizeBy: none
+		sourceColumn: DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROGRAM_TYPE
+		dataType: double
+		lineageTag: 1aff1543-8144-43e1-b99b-b57e62fadec8
+		summarizeBy: none
+		sourceColumn: PROGRAM_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ACCUMULATION_MEASURE
+		dataType: double
+		lineageTag: 49d379ac-dfa0-4173-b6b7-9a0e5413c503
+		summarizeBy: none
+		sourceColumn: ACCUMULATION_MEASURE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column POINT_FACTOR
+		dataType: double
+		lineageTag: 1fc4658b-993e-4b10-8311-3e03f5c3f293
+		summarizeBy: none
+		sourceColumn: POINT_FACTOR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STATUS
+		dataType: double
+		lineageTag: 307ee694-a4b8-4fe9-9003-5b941e521619
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NAME_TEXT
+		dataType: string
+		lineageTag: d1841593-85e7-48e9-bb37-b3b9e002d30f
+		summarizeBy: none
+		sourceColumn: NAME_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - KEYSHOP DMS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_KEYSHOP_DMS = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_KEYSHOP_DMS"]}[Data]
+				in
+				    gld_VW_DIM_KEYSHOP_DMS
+

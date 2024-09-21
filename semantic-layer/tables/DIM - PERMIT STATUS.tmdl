@@ -1,0 +1,34 @@
+table 'DIM - PERMIT STATUS'
+	lineageTag: a3116ec1-fffc-400c-98f8-ec47c5e77a46
+
+	column PERMIT_STATUS
+		dataType: string
+		lineageTag: 5dcce92a-1670-4046-afa1-a88be138b10e
+		summarizeBy: none
+		sourceColumn: PERMIT_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERMIT_STATUS_DESC
+		dataType: string
+		lineageTag: b2945fd4-7abc-47e1-b646-82272902f8e8
+		summarizeBy: none
+		sourceColumn: PERMIT_STATUS_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PERMIT STATUS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_PERMIT_STATUS = pvcfcprodsqlpool{[Schema="sil",Item="DIM_PERMIT_STATUS"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_PERMIT_STATUS,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,109 @@
+table 'FACT - AR BALANCE'
+	lineageTag: 848a48aa-c939-446b-aa99-fdf0aeaac83f
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 88e47794-846b-4a3a-b9e3-924de1eac3ec
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 109fe795-1066-49dd-b702-132276f29a73
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT
+		dataType: string
+		lineageTag: b2b2274c-6f54-4668-a870-bb7edf0d1a9f
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_CODE
+		dataType: string
+		lineageTag: 28a9a390-7a43-4ab8-b929-eb2828eae5df
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_CODE
+		dataType: string
+		lineageTag: c1638c9f-3048-4680-8d6b-952265e8fff3
+		summarizeBy: none
+		sourceColumn: CURRENCY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column AR_BUCKET
+		dataType: int64
+		formatString: 0
+		lineageTag: 92b8bf23-f80b-4157-a75f-043eae10d4b9
+		summarizeBy: sum
+		sourceColumn: AR_BUCKET
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPENING_AR
+		dataType: double
+		lineageTag: 1cc0c8a0-60c7-4c65-a200-f16d25e55ec2
+		summarizeBy: sum
+		sourceColumn: OPENING_AR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DEBIT_AR
+		dataType: double
+		lineageTag: 5c7012ea-cd69-441f-8ab5-fd7382a6cd59
+		summarizeBy: sum
+		sourceColumn: DEBIT_AR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREDIT_AR
+		dataType: double
+		lineageTag: bfd0ae6e-0174-416d-a3a9-d3ef09495f11
+		summarizeBy: sum
+		sourceColumn: CREDIT_AR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLOSING_AR
+		dataType: double
+		lineageTag: a1320097-12d5-48e8-9f1d-c376c9e3ea4a
+		summarizeBy: sum
+		sourceColumn: CLOSING_AR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - AR BALANCE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_AR_BALANCE = pvcfcprodsqlpool{[Schema="gld",Item="FACT_AR_BALANCE"]}[Data]
+				in
+				    gld_FACT_AR_BALANCE
+
+	annotation PBI_ResultType = Table
+

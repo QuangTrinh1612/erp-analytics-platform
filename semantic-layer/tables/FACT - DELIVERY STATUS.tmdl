@@ -1,0 +1,465 @@
+table 'FACT - DELIVERY STATUS'
+	lineageTag: 9fcfd131-58e9-4b33-8e99-3a2f69a14b06
+
+	column DOC_DATE
+		dataType: string
+		isHidden
+		lineageTag: db7e8f77-815f-45a6-b0ad-06c22478d1b5
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AC_GI_DATE
+		dataType: string
+		isHidden
+		lineageTag: f1601496-1579-46b2-80ce-d3835bdf405d
+		summarizeBy: none
+		sourceColumn: AC_GI_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELIVERY_NO
+		dataType: string
+		isHidden
+		lineageTag: 65fbadab-9a33-465b-a050-3a896da1ad07
+		summarizeBy: none
+		sourceColumn: DELIVERY_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELIVERY_ITEM
+		dataType: string
+		isHidden
+		lineageTag: ca5bd86a-b361-4cb3-a97e-18c6afb743da
+		summarizeBy: none
+		sourceColumn: DELIVERY_ITEM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_CAT
+		dataType: string
+		lineageTag: 76547921-6455-4c16-939e-e7a741be0825
+		summarizeBy: none
+		sourceColumn: ITEM_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELIVERY_TYPE
+		dataType: string
+		lineageTag: 1c986242-e7fe-44f3-b936-16f0f5837f5a
+		summarizeBy: none
+		sourceColumn: DELIVERY_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 67c83407-c58e-4cae-8943-54cbfa539af6
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_TYPE
+		dataType: string
+		isHidden
+		lineageTag: 16e915c1-4107-4446-9e61-87da7755f537
+		summarizeBy: none
+		sourceColumn: MATERIAL_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT
+		dataType: string
+		lineageTag: ad1fb113-6ed5-46d5-9ba7-b35465576a9b
+		summarizeBy: none
+		sourceColumn: PLANT
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: db5697d0-0657-4e98-abb8-587424400ab5
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_OFFICE
+		dataType: string
+		isHidden
+		lineageTag: 9c052dc1-5dea-4ce2-8b6b-5f977ffac987
+		summarizeBy: none
+		sourceColumn: SALE_OFFICE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_GROUP
+		dataType: string
+		isHidden
+		lineageTag: ffc3db27-1375-445b-a252-a48ccfd4f58f
+		summarizeBy: none
+		sourceColumn: SALE_GROUP
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANNEL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 5f08a2f8-87c1-421d-8dad-a8645f068268
+		summarizeBy: none
+		sourceColumn: CHANNEL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIVISION_CODE
+		dataType: string
+		isHidden
+		lineageTag: cab5665c-b55c-4c26-b859-eac5f11a292f
+		summarizeBy: none
+		sourceColumn: DIVISION_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_CODE
+		dataType: string
+		isHidden
+		lineageTag: a77a9ab2-ced8-4304-8868-bbf3fac6ab1e
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH
+		dataType: string
+		lineageTag: 55ff370a-e492-4d68-8a73-bf6793f6bffd
+		summarizeBy: none
+		sourceColumn: BATCH
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPPING_POINT
+		dataType: string
+		lineageTag: ebf33807-b74f-46a7-a737-16a471159c03
+		summarizeBy: none
+		sourceColumn: SHIPPING_POINT
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOM
+		dataType: string
+		lineageTag: 1087454a-123c-42c2-aed9-8546e54b0fe2
+		summarizeBy: none
+		sourceColumn: UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELIVERY_QUANTITY
+		dataType: double
+		isHidden
+		lineageTag: 3171edeb-e566-44ee-8c94-e4b4bf8b1c47
+		summarizeBy: sum
+		sourceColumn: DELIVERY_QUANTITY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AC_DELIVERY_QUANTITY
+		dataType: double
+		isHidden
+		lineageTag: 80976225-5320-4540-b0d5-cdf93487e353
+		summarizeBy: sum
+		sourceColumn: AC_DELIVERY_QUANTITY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REF_DOC
+		dataType: string
+		isHidden
+		lineageTag: 4cf71aef-b581-480a-b0d1-93f3d1985bec
+		summarizeBy: none
+		sourceColumn: REF_DOC
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column REF_ITEM
+		dataType: string
+		isHidden
+		lineageTag: 24bb1f1a-0928-4fa5-a1ef-7d05e51f3113
+		summarizeBy: none
+		sourceColumn: REF_ITEM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONTRACT_NUMBER
+		dataType: string
+		isHidden
+		lineageTag: ef0abefa-4438-46e2-a8e0-46573595152a
+		summarizeBy: none
+		sourceColumn: CONTRACT_NUMBER
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONTRACT_ITEM
+		dataType: string
+		isHidden
+		lineageTag: 3dbab499-cdd5-4b87-b0e3-57f0a7afa774
+		summarizeBy: none
+		sourceColumn: CONTRACT_ITEM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PL_GI_DATE
+		dataType: string
+		lineageTag: 6edf529e-fad5-4c53-b9f6-7b5c1154df78
+		summarizeBy: none
+		sourceColumn: PL_GI_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOADING_DATE
+		dataType: string
+		lineageTag: 4ae967a5-3972-427c-b0c6-6b5dfadbde10
+		summarizeBy: none
+		sourceColumn: LOADING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANS_PLAN_DATE
+		dataType: string
+		lineageTag: 768535d2-5fbb-42a7-ba8d-897eb7f5fbd7
+		summarizeBy: none
+		sourceColumn: TRANS_PLAN_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELIVERY_DATE
+		dataType: string
+		isHidden
+		lineageTag: ac35b2c7-f9a9-40a4-ab2b-6f93c1391034
+		summarizeBy: none
+		sourceColumn: DELIVERY_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PICKING_DATE
+		dataType: string
+		lineageTag: be1a61b4-e379-46d1-96a2-58cab68a5647
+		summarizeBy: none
+		sourceColumn: PICKING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SO_HIEU_TAU
+		dataType: string
+		lineageTag: 387f52d9-6c03-468e-b7ed-1294a2fcb90f
+		summarizeBy: none
+		sourceColumn: SO_HIEU_TAU
+
+		annotation SummarizationSetBy = Automatic
+
+	column KHO_GNHH
+		dataType: string
+		lineageTag: 56b47920-3398-4495-867e-e3e257b9b11b
+		summarizeBy: none
+		sourceColumn: KHO_GNHH
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_GNHH
+		dataType: string
+		lineageTag: 552c9b9a-fd13-4292-9a3c-53c12f078fb6
+		summarizeBy: none
+		sourceColumn: DC_GNHH
+
+		annotation SummarizationSetBy = Automatic
+
+	column NGUOI_NHAN
+		dataType: string
+		lineageTag: de295ca1-51b9-408b-87fa-c917111eebd8
+		summarizeBy: none
+		sourceColumn: NGUOI_NHAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column CMND/GPLX
+		dataType: string
+		lineageTag: 660480dd-38a3-454e-8609-aed007e02cf9
+		summarizeBy: none
+		sourceColumn: CMND/GPLX
+
+		annotation SummarizationSetBy = Automatic
+
+	column NGAYCAP_CMND
+		dataType: string
+		lineageTag: cfaf72e1-0c51-4e18-9b27-4829dbd102aa
+		summarizeBy: none
+		sourceColumn: NGAYCAP_CMND
+
+		annotation SummarizationSetBy = Automatic
+
+	column SO_UY_QUYEN
+		dataType: string
+		lineageTag: c90f9715-3081-44ec-9947-4177bc176303
+		summarizeBy: none
+		sourceColumn: SO_UY_QUYEN
+
+		annotation SummarizationSetBy = Automatic
+
+	column SO_GIOI_THIEU
+		dataType: string
+		lineageTag: 9de5d1fa-b599-43a4-ae55-f0d41759218e
+		summarizeBy: none
+		sourceColumn: SO_GIOI_THIEU
+
+		annotation SummarizationSetBy = Automatic
+
+	column SO_HOP_DONG
+		dataType: string
+		lineageTag: 34831c9b-3e44-43ea-9352-2fefb81f2ab0
+		summarizeBy: none
+		sourceColumn: SO_HOP_DONG
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHO_VE
+		dataType: string
+		lineageTag: 9b9fa81c-8b2c-41d7-92dd-ca21303c9b83
+		summarizeBy: none
+		sourceColumn: CHO_VE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAI_DIEN_BEN_GIAO
+		dataType: string
+		lineageTag: 09b3b489-9099-4848-b6f8-b51edee4302a
+		summarizeBy: none
+		sourceColumn: DAI_DIEN_BEN_GIAO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHUC_VU
+		dataType: string
+		lineageTag: 19d70148-9066-4a5e-97c8-f9d2da24361c
+		summarizeBy: none
+		sourceColumn: CHUC_VU
+
+		annotation SummarizationSetBy = Automatic
+
+	column MO_TA_LENH
+		dataType: string
+		lineageTag: 0b60f98c-eb76-4698-a2f6-da2d55d30090
+		summarizeBy: none
+		sourceColumn: MO_TA_LENH
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOADING_GRP
+		dataType: string
+		lineageTag: df43b89e-c24d-469b-b315-26ce8fc02a97
+		summarizeBy: none
+		sourceColumn: LOADING_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANS_GRP
+		dataType: string
+		lineageTag: fee4f5de-d2db-4381-8d49-e14c87d033fb
+		summarizeBy: none
+		sourceColumn: TRANS_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		isHidden
+		lineageTag: bd4c6828-18a4-4110-b2b2-37907de53d6b
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIFT
+		dataType: string
+		lineageTag: 1477aef5-746b-4047-9e63-6b42eb8e2499
+		summarizeBy: none
+		sourceColumn: SHIFT
+
+		annotation SummarizationSetBy = Automatic
+
+	column LINE
+		dataType: string
+		lineageTag: 8ded5ca4-72b8-4217-9a6c-3eb4f130b65c
+		summarizeBy: none
+		sourceColumn: LINE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SO_BAO_RACH_VO
+		dataType: double
+		lineageTag: 4371a907-8851-4020-927a-546d02a59345
+		summarizeBy: sum
+		sourceColumn: SO_BAO_RACH_VO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - DELIVERY STATUS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_DELIVERY_STATUS = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_DELIVERY_STATUS"]}[Data]
+				in
+				    gld_VW_FACT_DELIVERY_STATUS
+
+	annotation PBI_ResultType = Table
+

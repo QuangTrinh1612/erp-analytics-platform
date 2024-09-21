@@ -1,0 +1,29 @@
+table 'DIM - STORAGE TYPE'
+	lineageTag: 9a77f1f6-6292-466a-9aed-8f9b737bf8c9
+
+	column STORAGE_TYPE
+		dataType: string
+		lineageTag: d0cfb825-33ad-4672-94e8-6d8f54637348
+		summarizeBy: none
+		sourceColumn: STORAGE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESCRIPTION
+		dataType: string
+		lineageTag: 3e09e92a-986e-4637-8dcc-22d13994f8a7
+		summarizeBy: none
+		sourceColumn: DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim Storage Type' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_STORAGE_TYPE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_STORAGE_TYPE"]}[Data]
+				in
+				    gld_VW_DIM_STORAGE_TYPE
+

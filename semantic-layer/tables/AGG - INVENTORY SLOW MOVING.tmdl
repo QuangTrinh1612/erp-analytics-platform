@@ -1,0 +1,145 @@
+table 'AGG - INVENTORY SLOW MOVING'
+	lineageTag: 5075652d-2ee9-457a-bf4c-f1864e7701bb
+
+	column SNAPSHOT_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f64843ea-c8c8-477c-9e42-ee23d4c927c6
+		summarizeBy: none
+		sourceColumn: SNAPSHOT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DATE_GRAIN
+		dataType: string
+		lineageTag: b3ae37b8-633c-415d-9917-6389acc2773e
+		summarizeBy: none
+		sourceColumn: DATE_GRAIN
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: b9f4d543-d820-47bb-a93b-6bb05db7b2e9
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		lineageTag: eb96227d-46f3-4864-879f-8e2653dff079
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 16e1acde-6f9c-446c-b136-286398a80dc0
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_RECEIPT_QTY
+		dataType: double
+		lineageTag: 71d9e32f-6636-44e6-bc79-37130c05dd3c
+		summarizeBy: sum
+		sourceColumn: TOTAL_RECEIPT_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ISSUE_QTY
+		dataType: double
+		lineageTag: c8778da4-cdeb-4ac2-a15d-8c77b10a9c9d
+		summarizeBy: sum
+		sourceColumn: TOTAL_ISSUE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_RECEIPT_AMT
+		dataType: double
+		lineageTag: 6ae89b51-04b4-4fd2-b679-dad393bf8a67
+		summarizeBy: sum
+		sourceColumn: TOTAL_RECEIPT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ISSUE_AMT
+		dataType: double
+		lineageTag: 273cb2ec-6446-4f21-852d-621ad2a0cddf
+		summarizeBy: sum
+		sourceColumn: TOTAL_ISSUE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PO_COUNT
+		dataType: int64
+		formatString: 0
+		lineageTag: 685e32ac-ba2f-45e7-9e85-a6223fefe173
+		summarizeBy: sum
+		sourceColumn: PO_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLOSING_AMT_PRE_PO
+		dataType: double
+		lineageTag: afefce6a-6b15-4f28-9b34-7bb9702f20a4
+		summarizeBy: sum
+		sourceColumn: CLOSING_AMT_PRE_PO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLOSING_AMT_POST_PO
+		dataType: double
+		lineageTag: f1fb3ff7-06b7-4f7e-a787-819a22d64b09
+		summarizeBy: sum
+		sourceColumn: CLOSING_AMT_POST_PO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLOSING_QTY_PRE_PO
+		dataType: double
+		lineageTag: 174119a1-d216-4a39-bb0a-3d73aa830e72
+		summarizeBy: sum
+		sourceColumn: CLOSING_QTY_PRE_PO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLOSING_QTY_POST_PO
+		dataType: double
+		lineageTag: 524b5f95-4b3d-4694-818b-b2d04b3c383d
+		summarizeBy: sum
+		sourceColumn: CLOSING_QTY_POST_PO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'AGG - INVENTORY SLOW MOVING' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_AGG_INVENTORY_SLOW_MOVING = pvcfcprodsqlpool{[Schema="gld",Item="AGG_INVENTORY_SLOW_MOVING"]}[Data]
+				in
+				    gld_AGG_INVENTORY_SLOW_MOVING
+

@@ -1,0 +1,34 @@
+table 'DIM - OPERATE CONDITION'
+	lineageTag: 64615b06-a5c9-429a-96c6-1b66809eeca8
+
+	column SYST_COND
+		dataType: string
+		lineageTag: a4e6cdf8-a4ca-47fa-970e-0529b210a7c2
+		summarizeBy: none
+		sourceColumn: SYST_COND
+
+		annotation SummarizationSetBy = Automatic
+
+	column COND_DES
+		dataType: string
+		lineageTag: e0afa702-4ac9-426f-824c-b99a65d955ba
+		summarizeBy: none
+		sourceColumn: COND_DES
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - OPERATE CONDITION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_OPERATE_CONDITION = pvcfcprodsqlpool{[Schema="sil",Item="DIM_OPERATE_CONDITION"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_OPERATE_CONDITION,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

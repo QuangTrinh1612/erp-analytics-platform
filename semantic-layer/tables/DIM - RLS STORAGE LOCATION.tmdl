@@ -1,0 +1,49 @@
+table 'DIM - RLS STORAGE LOCATION'
+	isHidden
+	lineageTag: ca6167a7-d8b5-4cb7-9529-54aa5e619eca
+
+	column ROLE
+		dataType: string
+		isHidden
+		lineageTag: ac142d40-a878-429c-80bd-3a71f61d144c
+		summarizeBy: none
+		sourceColumn: ROLE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOCATION
+		dataType: string
+		isHidden
+		lineageTag: 5ae9f1eb-a8eb-4811-be1f-3d596e8ca668
+		summarizeBy: none
+		sourceColumn: STORAGE_LOCATION
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_EMAIL
+		dataType: string
+		isHidden
+		lineageTag: 1b80c34b-f644-4a20-a52b-8f36466515cd
+		summarizeBy: none
+		sourceColumn: USER_EMAIL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim RLS Storage Location' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_RLS_STORAGE_LOCATION = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_RLS_STORAGE_LOCATION"]}[Data]
+				in
+				    gld_VW_DIM_RLS_STORAGE_LOCATION
+
+	changedProperty = IsHidden
+

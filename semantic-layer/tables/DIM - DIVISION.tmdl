@@ -1,0 +1,29 @@
+table 'DIM - DIVISION'
+	lineageTag: a2d52aaf-bf6c-4e60-932d-237a98d53823
+
+	column DIVISION_CODE
+		dataType: string
+		lineageTag: 874734ba-15bd-486b-b306-e660846a3bf5
+		summarizeBy: none
+		sourceColumn: DIVISION_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIVISION_NAME
+		dataType: string
+		lineageTag: 1230b8a2-8e62-405e-ad68-4701f26bf91b
+		summarizeBy: none
+		sourceColumn: DIVISION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - DIVISION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_DIVISION = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_DIVISION"]}[Data]
+				in
+				    gld_VW_DIM_DIVISION
+

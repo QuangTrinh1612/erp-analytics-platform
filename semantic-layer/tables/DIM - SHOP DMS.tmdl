@@ -1,0 +1,165 @@
+table 'DIM - SHOP DMS'
+	lineageTag: f4b2fc88-5c4a-4485-b1ab-a64c74736876
+
+	column SHOP_ID
+		dataType: double
+		lineageTag: de278c9d-db89-4f81-8bb7-27078474d114
+		summarizeBy: none
+		sourceColumn: SHOP_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHOP_CODE
+		dataType: string
+		lineageTag: 0f56273d-85b2-4d5e-a3b6-da96636e8a4f
+		summarizeBy: none
+		sourceColumn: SHOP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHOP_NAME
+		dataType: string
+		lineageTag: 6d906674-6d73-4f87-bf45-836a69d3b1b6
+		summarizeBy: none
+		sourceColumn: SHOP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHOP_STATUS
+		dataType: double
+		lineageTag: cb218b33-2db0-4889-ae94-ba4a98f271a5
+		summarizeBy: sum
+		sourceColumn: SHOP_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REGION_CODE
+		dataType: string
+		lineageTag: 58ef61cd-ba5e-48c3-b48a-188b5d68fe0b
+		summarizeBy: none
+		sourceColumn: REGION_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REGION_NAME
+		dataType: string
+		lineageTag: 00de322f-e48f-4db0-bbc4-0982e42792ea
+		summarizeBy: none
+		sourceColumn: REGION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANNEL_CODE
+		dataType: string
+		lineageTag: 034b0eaa-31b7-47bd-ac11-eea9de08eed9
+		summarizeBy: none
+		sourceColumn: CHANNEL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANNEL_NAME
+		dataType: string
+		lineageTag: 68130aab-1014-4d4b-9085-2a1919c7127a
+		summarizeBy: none
+		sourceColumn: CHANNEL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column HO_CODE
+		dataType: string
+		lineageTag: 4961c98e-dcd4-47d4-9065-5c1c4211ef95
+		summarizeBy: none
+		sourceColumn: HO_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column HO_NAME
+		dataType: string
+		lineageTag: 9c0f4b57-e63d-4503-b2e8-00e277fcbd2a
+		summarizeBy: none
+		sourceColumn: HO_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMUNE_NAME
+		dataType: string
+		lineageTag: 2cccbbda-4851-49bf-83f0-e5747aa73311
+		summarizeBy: none
+		sourceColumn: COMMUNE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISTRICT_NAME
+		dataType: string
+		lineageTag: 716f87b5-9694-42be-9e0d-320a0fe9a6af
+		summarizeBy: none
+		sourceColumn: DISTRICT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROVINCE_CODE
+		dataType: string
+		lineageTag: 2503b998-10cc-4d78-9f59-140cf11f8d0d
+		summarizeBy: none
+		sourceColumn: PROVINCE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROVINCE_NAME
+		dataType: string
+		lineageTag: 593c0e17-dc8c-4251-89a8-73f02f6969e3
+		summarizeBy: none
+		sourceColumn: PROVINCE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUB_REGION_CODE
+		dataType: string
+		lineageTag: e0eb3871-bd25-4227-858e-765ca2fb13d5
+		summarizeBy: none
+		sourceColumn: SUB_REGION_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUB_REGION_NAME
+		dataType: string
+		lineageTag: 21d2ebaf-6d18-4f58-95a2-f1449d2e0edd
+		summarizeBy: none
+		sourceColumn: SUB_REGION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUB_REGION_ID
+		dataType: double
+		lineageTag: 0eab41d8-90c8-4b0b-8b21-c8fe8f0ba14e
+		summarizeBy: none
+		sourceColumn: SUB_REGION_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REGION_ID
+		dataType: double
+		lineageTag: 4095a46e-4089-4489-b29b-54b4d8f3d6fd
+		summarizeBy: count
+		sourceColumn: REGION_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'DIM - SHOP DMS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_SHOP_DMS = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_SHOP_DMS"]}[Data]
+				in
+				    gld_VW_DIM_SHOP_DMS
+

@@ -1,0 +1,58 @@
+table 'DIM - PLANNER GRP'
+	lineageTag: 73888e9f-79ba-4f63-84be-ffab0210b4ef
+
+	column PLAN_PLANT_CODE
+		dataType: string
+		lineageTag: d8b5ef8f-f177-461f-a728-f29c2b56a605
+		summarizeBy: none
+		sourceColumn: PLAN_PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: 2334b459-4fc9-47ef-925f-21b196fc9751
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_NAME
+		dataType: string
+		lineageTag: 94f20c94-4aae-415b-b2da-934c7d5dcb43
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_TEL
+		dataType: string
+		lineageTag: e6c5bf02-72f3-4ea5-a53e-5b7aede785c2
+		summarizeBy: none
+		sourceColumn: PLANNER_TEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_EMAIL
+		dataType: string
+		lineageTag: 14f32b63-eef5-4e78-bb5b-c959d678e998
+		summarizeBy: none
+		sourceColumn: PLANNER_EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PLANNER GRP' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_PLANNER_GRP = pvcfcprodsqlpool{[Schema="sil",Item="DIM_PLANNER_GRP"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_PLANNER_GRP,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,47 @@
+table 'DIM - FACTORY'
+	lineageTag: e84ec539-e84c-4de5-ad41-58da2c286409
+
+	column FACTORY_CODE
+		dataType: string
+		lineageTag: fd047b15-f46e-4756-865e-be628eff9209
+		summarizeBy: none
+		sourceColumn: FACTORY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FACTORY_NAME
+		dataType: string
+		lineageTag: 2a08808a-5957-40de-b3ca-83467f43f93d
+		summarizeBy: none
+		sourceColumn: FACTORY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ef018b54-83df-4640-acd4-a937822aad5b
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a3e58f5-fd65-45ae-a7f1-2f1cce3165a6
+		summarizeBy: none
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - FACTORY' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_FACTORY = pvcfcprodsqlpool{[Schema="sil",Item="DIM_FACTORY"]}[Data]
+				in
+				    sil_DIM_FACTORY
+

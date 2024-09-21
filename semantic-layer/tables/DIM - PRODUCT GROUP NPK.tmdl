@@ -1,0 +1,104 @@
+table 'DIM - PRODUCT GROUP NPK'
+	lineageTag: 7fc04598-ec1a-42c9-9851-0331f38057f9
+
+	column DIM_PRODUCT_GROUP_NPK_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: cae83c89-c57b-45a3-a82a-a6db5c53cc1e
+		summarizeBy: count
+		sourceColumn: DIM_PRODUCT_GROUP_NPK_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 10ef6a90-0ec1-4a95-a190-cf3fe9546d5c
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRO_SEMI_CODE
+		dataType: string
+		lineageTag: 34f8abd7-0e55-4774-b409-92a5d5e0185c
+		summarizeBy: none
+		sourceColumn: PRO_SEMI_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: 89ec5861-f0f4-493b-8ac2-721d89bf4641
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: a9370de3-ebe8-445f-a1c4-c46e588f145a
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_GROUP
+		dataType: string
+		lineageTag: 40fd5d28-29a1-457b-bb5d-0ce447bcf731
+		summarizeBy: none
+		sourceColumn: PRODUCT_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE_1
+		dataType: string
+		lineageTag: 16a3641a-0a66-47e1-97d8-54473791d0eb
+		summarizeBy: none
+		sourceColumn: NOTE_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE_2
+		dataType: string
+		lineageTag: 3b149f4a-0b6d-42c5-925d-2f71a9b631c1
+		summarizeBy: none
+		sourceColumn: NOTE_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE_3
+		dataType: string
+		lineageTag: 355c88ea-e633-4c92-9afd-eac981b47eb9
+		summarizeBy: none
+		sourceColumn: NOTE_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 007f38c4-2186-4b76-871c-658118f0a63a
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 7dfb0405-4447-48c1-bc02-9d83bddb2299
+		summarizeBy: count
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PRODUCT GROUP NPK' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_PRODUCT_GROUP_NPK = pvcfcprodsqlpool{[Schema="sil",Item="DIM_PRODUCT_GROUP_NPK"]}[Data]
+				in
+				    sil_DIM_PRODUCT_GROUP_NPK
+

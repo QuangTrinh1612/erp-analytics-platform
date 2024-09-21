@@ -1,0 +1,34 @@
+table 'DIM - NOTIFICATION TYPE'
+	lineageTag: e6cb9c23-9e93-4b57-9fb5-274c7c8fcc32
+
+	column NOTIF_TYPE
+		dataType: string
+		lineageTag: 05e4b87c-0815-4333-85e8-ef9f5ea20c19
+		summarizeBy: none
+		sourceColumn: NOTIF_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTIF_TYPE_DESC
+		dataType: string
+		lineageTag: 66130136-58c5-425a-bd31-7114c34ddbbe
+		summarizeBy: none
+		sourceColumn: NOTIF_TYPE_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - NOTIFICATION TYPE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_NOTIFICATION_TYPE = pvcfcprodsqlpool{[Schema="sil",Item="DIM_NOTIFICATION_TYPE"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_NOTIFICATION_TYPE,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

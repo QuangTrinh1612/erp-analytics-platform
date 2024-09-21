@@ -1,0 +1,126 @@
+table 'FACT - FA LINE ITEM'
+	lineageTag: d3eb14fd-ab4b-4fc5-90ca-db7b767ee407
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 4eb8d1f0-36d7-425c-955a-d5b6cb8c543b
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 60b4e267-c321-4582-8c51-59fcc05a6a17
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column DOC_NO
+		dataType: string
+		lineageTag: 8de97059-7b4d-4781-8cc1-6d6079d70d06
+		summarizeBy: none
+		sourceColumn: DOC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSET_NO
+		dataType: string
+		lineageTag: 182315f8-80b5-47d9-ab34-3349cbd06fe4
+		summarizeBy: none
+		sourceColumn: ASSET_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSET_SUB_NO
+		dataType: string
+		lineageTag: 941ebfc1-abfc-4881-bc09-c155a0709dc5
+		summarizeBy: none
+		sourceColumn: ASSET_SUB_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPRECIATION_AREA
+		dataType: string
+		lineageTag: 321032a9-2f40-49a4-a8fc-e5c84ed744c3
+		summarizeBy: none
+		sourceColumn: DEPRECIATION_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSET_DC_AMT
+		dataType: double
+		lineageTag: 1fbf8daf-c097-41d8-8332-f21ae2a607f3
+		summarizeBy: sum
+		sourceColumn: ASSET_DC_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ASSET_VALUE
+		dataType: double
+		lineageTag: 073a3425-8985-4d29-837c-0541370cb907
+		summarizeBy: sum
+		sourceColumn: ASSET_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DEPR_AMT
+		dataType: double
+		lineageTag: 2457a343-1ee3-4a73-ad45-3bca1b21a129
+		summarizeBy: sum
+		sourceColumn: DEPR_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ASCUMM_DEPR
+		dataType: double
+		lineageTag: c200fd09-56d3-49f8-8c13-d1a8bebab345
+		summarizeBy: sum
+		sourceColumn: ASCUMM_DEPR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DESCRIPTION
+		dataType: string
+		lineageTag: c279d99e-5866-4c30-9413-dc708a4e6b72
+		summarizeBy: none
+		sourceColumn: DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column FA_KEY
+		dataType: string
+		lineageTag: 48c33682-791b-4fda-8baa-b637557bff05
+		summarizeBy: none
+		sourceColumn: FA_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - FA LINE ITEM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_FACT_FA_LINE_ITEM = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_FA_LINE_ITEM"]}[Data],
+				    #"Added Custom" = Table.AddColumn(VW_FACT_FA_LINE_ITEM, "FA_KEY", each [ASSET_NO] & "-" & [ASSET_SUB_NO] & "-" & [COMPANY_CODE]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"FA_KEY", type text}, {"POSTING_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

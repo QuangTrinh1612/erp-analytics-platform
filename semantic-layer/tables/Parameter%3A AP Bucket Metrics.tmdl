@@ -1,0 +1,61 @@
+table 'Parameter: AP Bucket Metrics'
+	lineageTag: 7c095a28-79ae-4c9a-9d98-6550543532da
+
+	column 'Parameter: AP Bucket Metrics'
+		dataType: string
+		lineageTag: 2d8a2fc3-a078-4b57-a262-4f94a727b2dd
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter: AP Bucket Metrics Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter: AP Bucket Metrics Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: AP Bucket Metrics Fields'
+		dataType: string
+		isHidden
+		lineageTag: 82fb6899-78f7-4229-97ad-1883b892ce52
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter: AP Bucket Metrics Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: AP Bucket Metrics Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 98b322c9-497f-40ac-8fdb-09781941b8a6
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter: AP Bucket Metrics' = calculated
+		mode: import
+		source =
+				{
+				    ("Số dư phải trả (Trong hạn)", NAMEOF('_FI - Metrics'[Số dư phải trả (Trong hạn)]), 0),
+				    ("Số dư phải trả (1-30 ngày)", NAMEOF('_FI - Metrics'[Số dư phải trả (1-30 ngày)]), 1),
+				    ("Số dư phải trả (31-90 ngày)", NAMEOF('_FI - Metrics'[Số dư phải trả (31-90 ngày)]), 2),
+				    ("Số dư phải trả (91-180 ngày)", NAMEOF('_FI - Metrics'[Số dư phải trả (91-180 ngày)]), 3),
+				    ("Số dư phải trả (< 6 tháng)", NAMEOF('_FI - Metrics'[Số dư phải trả (< 6 tháng)]), 4),
+				    ("Số dư phải trả (>= 6T và < 12T)", NAMEOF('_FI - Metrics'[Số dư phải trả (>= 6T và < 12T)]), 5),
+				    ("Số dư phải trả (>= 12T và < 24T)", NAMEOF('_FI - Metrics'[Số dư phải trả (>= 12T và < 24T)]), 6),
+				    ("Số dư phải trả (>= 24T và < 36T)", NAMEOF('_FI - Metrics'[Số dư phải trả (>= 24T và < 36T)]), 7),
+				    ("Số dư phải trả (>= 36T)", NAMEOF('_FI - Metrics'[Số dư phải trả (>= 36T)]), 8)
+				}
+
+	annotation PBI_Id = 2d5bdbed050947718ae6d7f49bf40fee
+

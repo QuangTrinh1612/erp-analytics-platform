@@ -1,0 +1,73 @@
+table 'DIM - REPORTING LINE CF'
+	lineageTag: c58a9646-7d48-4535-8743-fab181a40df6
+
+	column DESC_VN
+		dataType: string
+		lineageTag: 32225b53-c0fe-422c-8a33-7a5086674380
+		summarizeBy: none
+		sourceColumn: DESC_VN
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_BOLD
+		dataType: string
+		lineageTag: cbbb537e-9cfd-417d-a5a7-5d2f22b47e5d
+		summarizeBy: none
+		sourceColumn: IS_BOLD
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_ITALIC
+		dataType: string
+		lineageTag: 174dde88-ea9c-4ffe-aa8f-f4f6f9acf560
+		summarizeBy: none
+		sourceColumn: IS_ITALIC
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_HIDDEN
+		dataType: string
+		lineageTag: 143b6612-48b3-46e1-9d0b-c642b4f7eb89
+		summarizeBy: none
+		sourceColumn: IS_HIDDEN
+
+		annotation SummarizationSetBy = Automatic
+
+	column OUTPUT_SIGN
+		dataType: int64
+		formatString: 0
+		lineageTag: bd9c753f-6e15-4166-92b3-854b3b2b018d
+		summarizeBy: none
+		sourceColumn: OUTPUT_SIGN
+
+		annotation SummarizationSetBy = Automatic
+
+	column CF_ITEM
+		dataType: string
+		lineageTag: 7ecb7f91-76c6-43cd-8b22-eb8fd066d8f9
+		summarizeBy: none
+		sourceColumn: CF_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column SIGN
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c1adc6f-4fd7-4cd6-bf7f-633c71e924ca
+		summarizeBy: none
+		sourceColumn: SIGN
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - REPORTING LINE CF' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_DIM_REPORTING_LINE_CF = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_REPORTING_LINE_CF"]}[Data]
+				in
+				    VW_DIM_REPORTING_LINE_CF
+
+	annotation PBI_ResultType = Table
+

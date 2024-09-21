@@ -1,0 +1,173 @@
+table 'FACT - MAINT TASK LIST'
+	lineageTag: 9f944871-9995-4173-a867-99f7c68c5434
+
+	column TASK_LIST_TYPE
+		dataType: string
+		lineageTag: 09e09bd7-62cf-4f27-b56e-985ceefde698
+		summarizeBy: none
+		sourceColumn: TASK_LIST_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROUP_KEY
+		dataType: string
+		lineageTag: 9d029e34-263e-4077-85d6-36da91b8c57e
+		summarizeBy: none
+		sourceColumn: GROUP_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRP_COUNTER
+		dataType: string
+		lineageTag: 6feb3fd5-944d-434f-8c74-e8baececf639
+		summarizeBy: none
+		sourceColumn: GRP_COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTER
+		dataType: string
+		lineageTag: f07b3c33-e8ad-4f52-889d-ae9b25160627
+		summarizeBy: none
+		sourceColumn: COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIM_TASK_LIST_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e811dd8-fdf8-4f1b-8640-a23abf1bff72
+		summarizeBy: none
+		sourceColumn: DIM_TASK_LIST_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_ACT_NUM
+		dataType: string
+		lineageTag: acc52923-cd60-45a6-acf7-c391c68b7713
+		summarizeBy: none
+		sourceColumn: OPER_ACT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column TASK_LIST_STAT
+		dataType: string
+		lineageTag: 8c41412d-ad9d-4d08-82d6-119fda72a7b1
+		summarizeBy: none
+		sourceColumn: TASK_LIST_STAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_SHORT_DESC
+		dataType: string
+		lineageTag: 56426f53-519d-4a41-a3b7-5f566d4a8499
+		summarizeBy: none
+		sourceColumn: OPER_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER_ID
+		dataType: string
+		lineageTag: f4582107-0970-4604-b494-5b074540cab2
+		summarizeBy: none
+		sourceColumn: WORK_CENTER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_ITEM
+		dataType: string
+		lineageTag: 3b4a3786-32f0-4d80-86b8-9b5b2615f79d
+		summarizeBy: none
+		sourceColumn: MAINT_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_CODE
+		dataType: string
+		lineageTag: 065bb199-e6cf-4545-b588-00d65552739a
+		summarizeBy: none
+		sourceColumn: SUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUMBER
+		dataType: string
+		lineageTag: 0b4f83c8-be10-4ea8-ad61-648903561041
+		summarizeBy: none
+		sourceColumn: OBJECT_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: 1b482e7a-f977-4382-9bbb-219b34093b9e
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_PLAN
+		dataType: string
+		lineageTag: 328b4e93-0b8a-4ab9-95d9-785f66b2225a
+		summarizeBy: none
+		sourceColumn: MAINT_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: 495f24f2-a18e-4716-b5a0-6200c07e42e7
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNED_TIME
+		dataType: double
+		lineageTag: 7ee8df8f-7a2b-41a4-82c3-dbd5958d359e
+		summarizeBy: sum
+		sourceColumn: PLANNED_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SYST_COND
+		dataType: string
+		lineageTag: ef6926a3-7831-4750-bc25-95034493a808
+		summarizeBy: none
+		sourceColumn: SYST_COND
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: 0a34f7b0-0d2d-4084-a518-4ce580e4a051
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: ca2b8aa4-05f8-4c85-8e0f-29af5cf30d41
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - MAINT TASK LIST' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_MAINT_TASK_LIST = pvcfcprodsqlpool{[Schema="gld",Item="FACT_MAINT_TASK_LIST"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_MAINT_TASK_LIST,{"W_INSERT_DT"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,55 @@
+table 'DIM - ENERGY'
+	lineageTag: bdc9db50-9c4e-4571-ae77-5c366a4fadbf
+
+	column ENERGY_CODE
+		dataType: string
+		lineageTag: 09d46736-cb0f-4299-9346-75953f8743cb
+		summarizeBy: none
+		sourceColumn: ENERGY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ENERGY_DES
+		dataType: string
+		lineageTag: 2ae303b6-f006-429e-9174-079406520de8
+		summarizeBy: none
+		sourceColumn: ENERGY_DES
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOM
+		dataType: string
+		lineageTag: c2e7bedb-a683-45c9-a31d-24656b9ee783
+		summarizeBy: none
+		sourceColumn: UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d39a7b6c-fe9b-441e-8a65-e86e7897ee6d
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 06bb14b4-1ec3-4ebf-b9e3-9041a8f5e0fd
+		summarizeBy: none
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - ENERGY' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_ENERGY = pvcfcprodsqlpool{[Schema="sil",Item="DIM_ENERGY"]}[Data]
+				in
+				    sil_DIM_ENERGY
+

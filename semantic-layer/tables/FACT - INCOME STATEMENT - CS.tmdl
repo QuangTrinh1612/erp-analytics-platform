@@ -1,0 +1,101 @@
+table 'FACT - INCOME STATEMENT - CS'
+	lineageTag: 3e5cbb72-0795-475c-9c0b-a55b8a2ab83d
+
+	column FISCAL_YEAR
+		dataType: string
+		lineageTag: 75e1b4c0-8a1f-4912-8fdf-8dfa08475de4
+		summarizeBy: none
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: int64
+		formatString: 0
+		lineageTag: 23e1137d-1509-4e26-8132-d280b6d6432f
+		summarizeBy: sum
+		sourceColumn: FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: int64
+		formatString: 0
+		lineageTag: 65d07daf-cc6e-47e1-88c7-3cfc7b16857e
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_CODE
+		dataType: string
+		lineageTag: aae38269-fe13-471a-a9c3-2f89755e82c4
+		summarizeBy: none
+		sourceColumn: CURRENCY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_NO
+		dataType: string
+		lineageTag: 4c729daa-24c4-405a-b831-04943ff4e45e
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_ITEM
+		dataType: string
+		lineageTag: f98e451a-6f97-4f9f-8d58-dbfeee11246d
+		summarizeBy: none
+		sourceColumn: IS_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCAL_AMT
+		dataType: double
+		lineageTag: a9144cbe-8482-4c34-9f4d-f9f668481f87
+		summarizeBy: sum
+		sourceColumn: LOCAL_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FISCAL_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2bc3ca89-17f6-4358-8f30-5d900956434c
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Loại hình' =
+			
+			SWITCH(
+			    TRUE(),
+			    LEFT([GL_ACCOUNT_NO],3) IN {"511","521","632","641","642"}, "Hoạt động sản xuất kinh doanh",
+			    LEFT([GL_ACCOUNT_NO],3) IN {"515","635"}, "Hoạt động tài chính",
+			    LEFT([GL_ACCOUNT_NO],3) IN {"711","811"}, "Hoạt động khác"
+			)
+		dataType: string
+		lineageTag: 2863e29f-aac7-4993-9dfd-bc6144777580
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - INCOME STATEMENT - CS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_INCOME_STATEMENT = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_INCOME_STATEMENT_CS"]}[Data]
+				in
+				    gld_VW_FACT_INCOME_STATEMENT
+
+	annotation PBI_ResultType = Table
+

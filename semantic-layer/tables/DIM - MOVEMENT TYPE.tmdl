@@ -1,0 +1,45 @@
+table 'DIM - MOVEMENT TYPE'
+	lineageTag: d3a90241-94a7-415c-a7de-4dbc8e5def94
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: 0588dfa1-bbcf-40c0-9d48-7c685cb6e4c0
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEBIT_CREDIT
+		dataType: string
+		lineageTag: 91007cc9-2b28-4c2e-bcda-aaf865769a3a
+		summarizeBy: none
+		sourceColumn: DEBIT_CREDIT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESCRIPTION
+		dataType: string
+		lineageTag: 5bf69dc3-365b-45ac-a35b-8b195cd10a26
+		summarizeBy: none
+		sourceColumn: DESCRIPTION
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim Movement Type' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_MOVEMENT_TYPE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_MOVEMENT_TYPE"]}[Data]
+				in
+				    gld_VW_DIM_MOVEMENT_TYPE
+
+	annotation PBI_ResultType = Table
+

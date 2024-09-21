@@ -1,0 +1,169 @@
+table 'DIM - SEMI PRODUCT NPK'
+	lineageTag: 4f22d9e0-7a7a-49db-84a3-bd85fa88971c
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: a082b0ef-6d47-4ec3-8eba-be1876169be1
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRO_SEMI_CODE
+		dataType: string
+		lineageTag: e1bae1cd-9112-41cc-829d-81d9de14443d
+		summarizeBy: none
+		sourceColumn: PRO_SEMI_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: 2f1cda03-ca2c-4f88-8d6b-75799cb47ff5
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PCT_N
+		dataType: double
+		lineageTag: 357f3002-8865-4a2d-9c88-9b0984815186
+		summarizeBy: sum
+		sourceColumn: PCT_N
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_P2O5
+		dataType: double
+		lineageTag: aab6a27f-57e5-4294-aec7-029d43b40df3
+		summarizeBy: sum
+		sourceColumn: PCT_P2O5
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_K2O
+		dataType: double
+		lineageTag: 4fb2bc13-2617-4e94-8e8c-9c961bb000b4
+		summarizeBy: sum
+		sourceColumn: PCT_K2O
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_S
+		dataType: double
+		lineageTag: a370d1d7-a8d6-4a4d-ad4d-bdc5f0748dfb
+		summarizeBy: sum
+		sourceColumn: PCT_S
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_ZN
+		dataType: double
+		lineageTag: 9feffe09-53c6-4b2c-bb00-ace115236abf
+		summarizeBy: sum
+		sourceColumn: PCT_ZN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_B
+		dataType: double
+		lineageTag: 5f434d83-c7fb-4033-a602-160b283df6fe
+		summarizeBy: sum
+		sourceColumn: PCT_B
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_CA
+		dataType: double
+		lineageTag: ef1741b8-8cef-4e68-a805-9321c3520feb
+		summarizeBy: sum
+		sourceColumn: PCT_CA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_MG
+		dataType: double
+		lineageTag: bd54bdb5-d788-48c2-ab71-8ecbfb834b4f
+		summarizeBy: sum
+		sourceColumn: PCT_MG
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_DRY
+		dataType: double
+		lineageTag: 1e34eb84-7d37-4dfd-8402-5aa4e0211c00
+		summarizeBy: sum
+		sourceColumn: PCT_DRY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NOTE_1
+		dataType: string
+		lineageTag: 5c960b43-ac60-4583-8354-b9c85c6aae59
+		summarizeBy: none
+		sourceColumn: NOTE_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE_2
+		dataType: string
+		lineageTag: a1cc437c-0575-4e89-8f57-8bcfd15c849e
+		summarizeBy: none
+		sourceColumn: NOTE_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE_3
+		dataType: string
+		lineageTag: 8c4c3dcf-343f-484e-9c28-b407a3777794
+		summarizeBy: none
+		sourceColumn: NOTE_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9cd8fa48-6d3c-4d80-9aab-afe01332b610
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 7797f9e9-a260-428f-a8ec-4bc7a80e04e6
+		summarizeBy: count
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - SEMI PRODUCT NPK' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_SEMI_PRODUCT_NPK = pvcfcprodsqlpool{[Schema="sil",Item="DIM_SEMI_PRODUCT_NPK"]}[Data]
+				in
+				    sil_DIM_SEMI_PRODUCT_NPK
+

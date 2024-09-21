@@ -1,0 +1,610 @@
+table 'FACT - HISTORY APPROVAL'
+	lineageTag: df18d7bc-caae-4fd5-9b0a-83c17d6acc51
+
+	column WORK_ITEM_ID
+		dataType: string
+		lineageTag: 806665f4-199a-4273-9bbf-50d134180d37
+		summarizeBy: none
+		sourceColumn: WORK_ITEM_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_KEY
+		dataType: string
+		lineageTag: 0622ef91-fdcb-4f95-be70-52be81952e8c
+		summarizeBy: none
+		sourceColumn: OBJECT_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_DEFINITION_NUMBER
+		dataType: string
+		lineageTag: cf1ecc2c-2e24-44c0-a080-0d8b74f4b092
+		summarizeBy: none
+		sourceColumn: WORK_DEFINITION_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: a3431329-5ce7-4ae5-941c-47b838b93070
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANSACTION_CODE
+		dataType: string
+		lineageTag: b41eb9ea-7a4f-4ab7-866c-93d5d54d9ed1
+		summarizeBy: none
+		sourceColumn: TRANSACTION_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_ITEM
+		dataType: string
+		lineageTag: a0637dc7-4e9f-4e0a-a191-6f9904a2be0e
+		summarizeBy: none
+		sourceColumn: MAINT_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATA_TYPE
+		dataType: string
+		lineageTag: a829942e-d316-43e3-bda2-fddd745bcb43
+		summarizeBy: none
+		sourceColumn: DATA_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: 2491c9ed-1d27-40ff-89d9-50d67f105ff4
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: fa6d66b5-c011-4665-8c86-32ab6dd227c0
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: 00d6e95d-a646-44ab-8aad-c7ec9b62dece
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_CODE
+		dataType: string
+		lineageTag: 31324454-0232-4665-b0d0-874c9a1b5fe1
+		summarizeBy: none
+		sourceColumn: SUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIOR_CODE
+		dataType: string
+		lineageTag: 829c9b87-3767-458c-a7f0-9cedead1a5f3
+		summarizeBy: none
+		sourceColumn: PRIOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER_ID
+		dataType: string
+		lineageTag: 51b88680-e78c-4c92-82ba-d9ad58731736
+		summarizeBy: none
+		sourceColumn: WORK_CENTER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SYST_COND
+		dataType: string
+		lineageTag: 3ecd7891-20a9-4a38-b6d4-169e733fd4ed
+		summarizeBy: none
+		sourceColumn: SYST_COND
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACT_TYPE_CODE
+		dataType: string
+		lineageTag: 737bedc1-64d9-4432-bcf8-9b3da2ec545d
+		summarizeBy: none
+		sourceColumn: ACT_TYPE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECALL_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: dad2dbe1-edaa-46f5-a55e-e7334fb3cfc4
+		summarizeBy: none
+		sourceColumn: RECALL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column USER_RECALL
+		dataType: string
+		lineageTag: 320ca06c-7660-43cc-958b-9c49ff6c29ab
+		summarizeBy: none
+		sourceColumn: USER_RECALL
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACTION_DATE1
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 547e52e6-ce7a-4f0f-9431-babd16b39df6
+		summarizeBy: none
+		sourceColumn: ACTION_DATE1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column ACTION_DATE2
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: b428b02b-bf77-42d6-9d93-9b5a1b2ab269
+		summarizeBy: none
+		sourceColumn: ACTION_DATE2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column ACTION_DATE3
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 6a9ddb6a-d6e4-42a6-acb6-9ecdd2c76b8c
+		summarizeBy: none
+		sourceColumn: ACTION_DATE3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column ACTION_DATE4
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: c3c58db7-8e49-4014-9de5-5512cc2028d5
+		summarizeBy: none
+		sourceColumn: ACTION_DATE4
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column ACTION_DATE5
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: ce7f0099-5797-45e4-95cd-3aeae7c74031
+		summarizeBy: none
+		sourceColumn: ACTION_DATE5
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column AGENT_NAME1
+		dataType: string
+		lineageTag: 899a7ea5-df23-4e8a-b1d7-d5ce410cd0e6
+		summarizeBy: none
+		sourceColumn: AGENT_NAME1
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_NAME2
+		dataType: string
+		lineageTag: 04bc7cb7-bd2a-4c5b-a352-0c3c8f8265b6
+		summarizeBy: none
+		sourceColumn: AGENT_NAME2
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_NAME3
+		dataType: string
+		lineageTag: c96f54c1-d50e-4ccd-8e99-ae62f1349bea
+		summarizeBy: none
+		sourceColumn: AGENT_NAME3
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_NAME4
+		dataType: string
+		lineageTag: b17ad762-93b0-4eff-af68-aafa1e103727
+		summarizeBy: none
+		sourceColumn: AGENT_NAME4
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_NAME5
+		dataType: string
+		lineageTag: 36845127-37ce-41f0-9534-034ac9f3fbac
+		summarizeBy: none
+		sourceColumn: AGENT_NAME5
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECALLED_IND
+		dataType: string
+		lineageTag: b0b349a9-1984-4d0e-b418-4282fa1a8b4c
+		summarizeBy: none
+		sourceColumn: RECALLED_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column SAP_USER1
+		dataType: string
+		lineageTag: 6c4f4a94-725c-40dc-983a-eccca3ed4f9a
+		summarizeBy: none
+		sourceColumn: SAP_USER1
+
+		annotation SummarizationSetBy = Automatic
+
+	column SAP_USER2
+		dataType: string
+		lineageTag: c07fd119-ef95-4b3b-86ac-808bfadffbda
+		summarizeBy: none
+		sourceColumn: SAP_USER2
+
+		annotation SummarizationSetBy = Automatic
+
+	column SAP_USER3
+		dataType: string
+		lineageTag: 4c7314dc-e151-4273-8c98-2fdb654fe76b
+		summarizeBy: none
+		sourceColumn: SAP_USER3
+
+		annotation SummarizationSetBy = Automatic
+
+	column SAP_USER4
+		dataType: string
+		lineageTag: 4ecd4a73-7d63-4d00-bf6a-32ea9a74a9a0
+		summarizeBy: none
+		sourceColumn: SAP_USER4
+
+		annotation SummarizationSetBy = Automatic
+
+	column SAP_USER5
+		dataType: string
+		lineageTag: f05f4f89-e1fd-4b8a-a8c4-3a32d6e35bfe
+		summarizeBy: none
+		sourceColumn: SAP_USER5
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMENT_LEVEL1
+		dataType: string
+		lineageTag: ff6dc065-bb96-43e4-9e54-eec87825dfd3
+		summarizeBy: none
+		sourceColumn: COMMENT_LEVEL1
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMENT_LEVEL2
+		dataType: string
+		lineageTag: 75945305-d776-45be-9e2c-251e44f80133
+		summarizeBy: none
+		sourceColumn: COMMENT_LEVEL2
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMENT_LEVEL3
+		dataType: string
+		lineageTag: 22ebd9d6-b313-4de0-b77b-75838b5e15e0
+		summarizeBy: none
+		sourceColumn: COMMENT_LEVEL3
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMENT_LEVEL4
+		dataType: string
+		lineageTag: 26213a43-fb82-4b89-96d1-3753e8131527
+		summarizeBy: none
+		sourceColumn: COMMENT_LEVEL4
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMENT_LEVEL5
+		dataType: string
+		lineageTag: 02f4f8d5-9559-4668-9a8d-208dfad5ae39
+		summarizeBy: none
+		sourceColumn: COMMENT_LEVEL5
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMAIL_ADDRESS1
+		dataType: string
+		lineageTag: 187f6f81-e63a-4568-936b-c8fe3b5e06a5
+		summarizeBy: none
+		sourceColumn: EMAIL_ADDRESS1
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMAIL_ADDRESS2
+		dataType: string
+		lineageTag: 35ec0170-3744-4384-8bc0-42cc1d2e98d1
+		summarizeBy: none
+		sourceColumn: EMAIL_ADDRESS2
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMAIL_ADDRESS3
+		dataType: string
+		lineageTag: f06edd60-6298-4379-9fc8-222a9edc0362
+		summarizeBy: none
+		sourceColumn: EMAIL_ADDRESS3
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMAIL_ADDRESS4
+		dataType: string
+		lineageTag: 0d66899e-2ff5-43e6-b257-ca8f8a10be73
+		summarizeBy: none
+		sourceColumn: EMAIL_ADDRESS4
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMAIL_ADDRESS5
+		dataType: string
+		lineageTag: c6be5a8d-2fb7-4cbd-a239-3cd75d96ee93
+		summarizeBy: none
+		sourceColumn: EMAIL_ADDRESS5
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHANGE_DESC
+		dataType: string
+		lineageTag: a3c5851c-54b5-49c4-8d56-1c094a2a03c9
+		summarizeBy: none
+		sourceColumn: CHANGE_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_LEVEL1_DESC
+		dataType: string
+		lineageTag: 5a1ac16c-4132-49ea-ad2d-1e7b75504fe9
+		summarizeBy: none
+		sourceColumn: STATUS_LEVEL1_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_LEVEL2_DESC
+		dataType: string
+		lineageTag: 10162887-de43-4a98-9130-8af1646090ad
+		summarizeBy: none
+		sourceColumn: STATUS_LEVEL2_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_LEVEL3_DESC
+		dataType: string
+		lineageTag: 62c3c5e9-de29-42a4-9db8-1e53e44464c7
+		summarizeBy: none
+		sourceColumn: STATUS_LEVEL3_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_LEVEL4_DESC
+		dataType: string
+		lineageTag: 3be16350-8cf1-462a-b273-2661a612e95f
+		summarizeBy: none
+		sourceColumn: STATUS_LEVEL4_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_LEVEL5_DESC
+		dataType: string
+		lineageTag: 640b0060-135f-4b2a-b38a-39060d08a75c
+		summarizeBy: none
+		sourceColumn: STATUS_LEVEL5_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATED_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 563b757c-1b5a-43ce-96f5-14ba7dfc5743
+		summarizeBy: none
+		sourceColumn: CREATED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column STATUS_LEVEL1
+		dataType: int64
+		formatString: 0
+		lineageTag: 399a75bd-2f6d-494f-a19e-48cb1b4a5f9f
+		summarizeBy: sum
+		sourceColumn: STATUS_LEVEL1
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_LEVEL2
+		dataType: int64
+		formatString: 0
+		lineageTag: 92f32583-5199-42d5-b8ff-d75d889d10cb
+		summarizeBy: sum
+		sourceColumn: STATUS_LEVEL2
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_LEVEL3
+		dataType: int64
+		formatString: 0
+		lineageTag: dd07b60c-b21c-4fb3-9361-f5fc19212ed0
+		summarizeBy: sum
+		sourceColumn: STATUS_LEVEL3
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_LEVEL4
+		dataType: int64
+		formatString: 0
+		lineageTag: e7ef7906-32be-49e0-b9f6-9c51622663d1
+		summarizeBy: sum
+		sourceColumn: STATUS_LEVEL4
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS_LEVEL5
+		dataType: int64
+		formatString: 0
+		lineageTag: be0c6b06-29b9-412a-b3ee-d2eba7f7448a
+		summarizeBy: sum
+		sourceColumn: STATUS_LEVEL5
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIN_WORK_CENTER
+		dataType: string
+		lineageTag: db399b5f-8215-4995-b128-60624bb6972f
+		summarizeBy: none
+		sourceColumn: MAIN_WORK_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLAN_STAT_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 265e2483-97a6-4759-ad8e-041d35368328
+		summarizeBy: none
+		sourceColumn: PLAN_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column MI_TITLE
+		dataType: string
+		lineageTag: f11c075c-d62b-4a51-baae-949c475ac2bb
+		summarizeBy: none
+		sourceColumn: MI_TITLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROUP_KEY
+		dataType: string
+		lineageTag: ef70f080-2e0c-4cc6-9e76-ebeb388f2486
+		summarizeBy: none
+		sourceColumn: GROUP_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRP_COUNTER
+		dataType: string
+		lineageTag: cb745634-8ba0-4981-a1ac-64cca0a099d4
+		summarizeBy: none
+		sourceColumn: GRP_COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column FREQ
+		dataType: string
+		lineageTag: 4d60b1b9-78ec-473e-8cfc-6af83c2f175f
+		summarizeBy: none
+		sourceColumn: FREQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONTENT_WAR
+		dataType: string
+		lineageTag: 765df944-d62b-4d4d-a373-c67fd638e2f9
+		summarizeBy: none
+		sourceColumn: CONTENT_WAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column START_OF_CYCLE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 712638ae-9b78-4413-a0b7-fbcfa71f8867
+		summarizeBy: none
+		sourceColumn: START_OF_CYCLE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column REQ_START_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 9844d425-9b4e-4c5a-850d-baa938185062
+		summarizeBy: none
+		sourceColumn: REQ_START_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'OVERVIEW_STATUS '
+		dataType: int64
+		formatString: 0
+		lineageTag: d6991238-41aa-4ea0-848d-e5aa189be876
+		summarizeBy: none
+		sourceColumn: "OVERVIEW_STATUS "
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - HISTORY APPROVAL' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_HISTORY_APPROVAL = pvcfcprodsqlpool{[Schema="gld",Item="FACT_HISTORY_APPROVAL"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_HISTORY_APPROVAL,{"W_INSERT_DT"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns","00000000"," ",Replacer.ReplaceText,{"RECALL_DATE"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value",{{"RECALL_DATE", type date}}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Changed Type","00000000"," ",Replacer.ReplaceText,{"ACTION_DATE1"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value1",{{"ACTION_DATE1", type date}}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Changed Type1","00000000"," ",Replacer.ReplaceText,{"ACTION_DATE2"}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Replaced Value2",{{"ACTION_DATE2", type date}}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Changed Type2","00000000"," ",Replacer.ReplaceText,{"ACTION_DATE3"}),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Replaced Value3",{{"ACTION_DATE3", type date}}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Changed Type3","00000000"," ",Replacer.ReplaceText,{"ACTION_DATE4"}),
+				    #"Changed Type4" = Table.TransformColumnTypes(#"Replaced Value4",{{"ACTION_DATE4", type date}}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Changed Type4","00000000"," ",Replacer.ReplaceText,{"ACTION_DATE5"}),
+				    #"Changed Type5" = Table.TransformColumnTypes(#"Replaced Value5",{{"ACTION_DATE5", type date}}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Changed Type5","00000000","99991231",Replacer.ReplaceText,{"CREATED_DATE"}),
+				    #"Changed Type6" = Table.TransformColumnTypes(#"Replaced Value6",{{"CREATED_DATE", type date}, {"START_OF_CYCLE", type date}}),
+				    #"Replaced Value7" = Table.ReplaceValue(#"Changed Type6","00000000"," ",Replacer.ReplaceText,{"REQ_START_DATE"}),
+				    #"Changed Type7" = Table.TransformColumnTypes(#"Replaced Value7",{{"REQ_START_DATE", type date}, {"PLAN_STAT_DATE", type date}})
+				in
+				    #"Changed Type7"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

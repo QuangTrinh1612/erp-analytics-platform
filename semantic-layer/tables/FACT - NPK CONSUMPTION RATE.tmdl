@@ -1,0 +1,90 @@
+table 'FACT - NPK CONSUMPTION RATE'
+	lineageTag: 4ab03c19-2c14-4a17-9c1f-b992b139b2f2
+
+	column FISCAL_DATE
+		dataType: string
+		lineageTag: 7d8de065-612b-49fa-afe3-934b761ccb43
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: abd7b9f9-8af1-4db5-bac3-bdb87bc2ae8f
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOCATION
+		dataType: string
+		lineageTag: 5b4fdcf5-f6e8-4d56-92ee-4c52568a4548
+		summarizeBy: none
+		sourceColumn: STORAGE_LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRO_SEMI_CODE
+		dataType: string
+		lineageTag: a764bcb3-1fc1-4683-95de-81a3c22d0681
+		summarizeBy: none
+		sourceColumn: PRO_SEMI_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 711e4a63-cda6-4deb-9c71-2ed11a01dceb
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column NPK_COMPO_CODE
+		dataType: string
+		lineageTag: 6ff60424-5e1a-496b-abe6-dde438f2a28b
+		summarizeBy: none
+		sourceColumn: NPK_COMPO_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PCT
+		dataType: double
+		lineageTag: 212042e4-9221-482c-ab13-6f24bb2780a3
+		summarizeBy: sum
+		sourceColumn: PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPO_QTY_CONSUMP
+		dataType: double
+		lineageTag: 20e967be-f2d4-4967-bb96-b1481303f2e4
+		summarizeBy: sum
+		sourceColumn: COMPO_QTY_CONSUMP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b2a9e40a-635f-4eae-ad1e-a689d9e3305e
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - NPK CONSUMPTION RATE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_NPK_CONSUMPTION_RATE = pvcfcprodsqlpool{[Schema="gld",Item="FACT_NPK_CONSUMPTION_RATE"]}[Data]
+				in
+				    gld_FACT_NPK_CONSUMPTION_RATE
+

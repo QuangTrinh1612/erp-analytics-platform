@@ -1,0 +1,35 @@
+table 'Parameter: Báo cáo Ure & NPK'
+	lineageTag: a61bf64d-d3b2-4163-a261-171ae58a2fc3
+
+	column STT
+		dataType: int64
+		lineageTag: 1708d2de-6f75-4533-9d12-71db42c0eaa1
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Loại báo cáo'
+		dataType: string
+		lineageTag: 3f767383-6900-425f-8b0c-776d08541dca
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Loại báo cáo]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "STT",INTEGER,
+				    "Loại báo cáo",STRING,
+				   {
+				    {1,"Ure"},
+				    {2,"NPK"}
+				   }
+				 )
+

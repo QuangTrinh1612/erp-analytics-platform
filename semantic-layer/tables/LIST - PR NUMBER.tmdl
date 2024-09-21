@@ -1,0 +1,19 @@
+table 'LIST - PR NUMBER'
+	lineageTag: 083a7d61-4b41-4ae3-9f0b-b4c67ba70f8a
+
+	column PURCHASE_REQUISITION
+		dataType: string
+		lineageTag: b71a0c88-f7a4-480c-89f8-0b8dbe8af000
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - PURCHASE REQUISITION[PURCHASE_REQUISITION]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LIST - PR NUMBER' = calculated
+		mode: import
+		source = VALUES('FACT - PURCHASE REQUISITION'[PURCHASE_REQUISITION])
+
+	annotation PBI_Id = 686aeb378cb1481094a679e488f50014
+

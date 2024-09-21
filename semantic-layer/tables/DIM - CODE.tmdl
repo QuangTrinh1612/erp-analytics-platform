@@ -1,0 +1,58 @@
+table 'DIM - CODE'
+	lineageTag: 27c578f1-6833-479e-bef0-bbfc691e19e2
+
+	column CATALOG_TYPE
+		dataType: string
+		lineageTag: 705f731b-3fec-43b5-a749-4c893279fd9e
+		summarizeBy: none
+		sourceColumn: CATALOG_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODE_GROUP
+		dataType: string
+		lineageTag: 8617e858-e489-4640-bbd6-c638b344f990
+		summarizeBy: none
+		sourceColumn: CODE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODE
+		dataType: string
+		lineageTag: d131b4fc-28b6-4c56-ac00-d64ce63121b4
+		summarizeBy: none
+		sourceColumn: CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODE_DESC
+		dataType: string
+		lineageTag: 544a9baa-9408-452c-bb07-28e6e227ed9a
+		summarizeBy: none
+		sourceColumn: CODE_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAUSE_CODE_KEY = 'DIM - CODE'[CODE] &"-"& 'DIM - CODE'[CODE_GROUP] &"-"& 'DIM - CODE'[CATALOG_TYPE]
+		dataType: string
+		lineageTag: 3a479c04-3da1-4c87-91a8-59f024a18a35
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - CODE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_CODE = pvcfcprodsqlpool{[Schema="sil",Item="DIM_CODE"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_CODE,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

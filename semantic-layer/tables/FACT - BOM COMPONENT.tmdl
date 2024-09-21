@@ -1,0 +1,164 @@
+table 'FACT - BOM COMPONENT'
+	lineageTag: 86f29f2e-21e8-4a85-9af3-b7272216ae16
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: 3ef2e9c4-7ca2-4973-b132-eec68433f6fc
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 1ef17580-0880-420a-8ef2-8ea8c02d7066
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOM_USAGE
+		dataType: string
+		lineageTag: 99963de3-265d-4987-a5e0-2a26cf2a4043
+		summarizeBy: none
+		sourceColumn: BOM_USAGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_BOM
+		dataType: string
+		lineageTag: d8f2ffdc-69cb-4cbe-ad61-3fb2ae3dc15d
+		summarizeBy: none
+		sourceColumn: MAINT_BOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column ALTER_BOM
+		dataType: string
+		lineageTag: 44f1fb1d-9304-4978-b41e-08657c3fb8fa
+		summarizeBy: none
+		sourceColumn: ALTER_BOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 378ab9bc-7d72-44aa-a152-00c5ab13e241
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_BOM_ITEM
+		dataType: string
+		lineageTag: 8f199f0d-f365-4abf-a5ed-0a488c1e5188
+		summarizeBy: none
+		sourceColumn: MAINT_BOM_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTER_COUNTER
+		dataType: string
+		lineageTag: 76b44a4c-8e43-4b8d-b639-b8b61b09fe7b
+		summarizeBy: none
+		sourceColumn: INTER_COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_BOM_CAT
+		dataType: string
+		lineageTag: e61a1c85-1726-4e9c-bdc1-b251532c1291
+		summarizeBy: none
+		sourceColumn: MAINT_BOM_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPO_QUANTITY
+		dataType: double
+		lineageTag: a91f05ac-3885-4e24-a339-3001ce394460
+		summarizeBy: sum
+		sourceColumn: COMPO_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPO_UOM
+		dataType: string
+		lineageTag: 9698c492-6922-48f1-acca-b7eead6a76fd
+		summarizeBy: none
+		sourceColumn: COMPO_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOM_ITEM_NUM
+		dataType: string
+		lineageTag: ac2ae9d6-3686-42e7-bdc3-fec4f64eadba
+		summarizeBy: none
+		sourceColumn: BOM_ITEM_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PART_NUMBER
+		dataType: string
+		lineageTag: 28e8a478-063c-4c43-a613-921775290460
+		summarizeBy: none
+		sourceColumn: PART_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: 97dd4822-fcce-4648-bc0d-1de506d1d28e
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: 349fbb24-aea2-4c66-9640-8edb9a6f4f29
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANUFACTOR
+		dataType: string
+		lineageTag: bf34ad6d-4e3d-49cf-98c7-48ac9cd35bd9
+		summarizeBy: none
+		sourceColumn: MANUFACTOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNCT_LOC_CODE
+		dataType: string
+		lineageTag: 2b589523-ca1e-4024-a277-cf6d4988eaeb
+		summarizeBy: none
+		sourceColumn: FUNCT_LOC_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_PLANT_KEY = 'FACT - BOM COMPONENT'[MATERIAL_CODE] &"-"& 'FACT - BOM COMPONENT'[PLANT_CODE]
+		dataType: string
+		lineageTag: e37d4476-c4c9-48f6-a661-09ba52214b54
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - BOM COMPONENT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_BOM_COMPONENT = pvcfcprodsqlpool{[Schema="gld",Item="FACT_BOM_COMPONENT"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_BOM_COMPONENT,{"W_INSERT_DT"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

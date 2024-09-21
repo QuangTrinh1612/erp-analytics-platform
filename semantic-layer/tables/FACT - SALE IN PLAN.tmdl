@@ -1,0 +1,145 @@
+table 'FACT - SALE IN PLAN'
+	lineageTag: 2dfa4342-7800-48a1-8047-819ec9c8dcde
+
+	column RECORD_TYPE
+		dataType: string
+		lineageTag: c95ab26e-19d2-4212-86da-11d4b0553734
+		summarizeBy: none
+		sourceColumn: RECORD_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VERSION
+		dataType: string
+		lineageTag: 127f8932-e17d-46cc-a8ac-4b9d6793af15
+		summarizeBy: none
+		sourceColumn: VERSION
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY
+		dataType: string
+		lineageTag: 92452310-76ea-4823-93ff-1a822a103be9
+		summarizeBy: none
+		sourceColumn: CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		isHidden
+		lineageTag: 19f419e9-f419-4be4-8215-0110ebde3282
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOM
+		dataType: string
+		lineageTag: 309c6457-7252-4044-a83f-75840dd74848
+		summarizeBy: none
+		sourceColumn: UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_QUANTITY_PLAN
+		dataType: double
+		isHidden
+		lineageTag: b5f96ef8-8863-42ba-bff0-809b0d938ddb
+		summarizeBy: sum
+		sourceColumn: SALE_QUANTITY_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_AMOUNT_PLAN
+		dataType: double
+		isHidden
+		lineageTag: 95d57271-7e34-466d-9335-1e20f2361cb1
+		summarizeBy: sum
+		sourceColumn: SALE_AMOUNT_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DISCOUNT_AMOUNT_PLAN
+		dataType: double
+		isHidden
+		lineageTag: 23f67945-ca86-46cb-a104-50166d3b32b1
+		summarizeBy: sum
+		sourceColumn: DISCOUNT_AMOUNT_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PLAN_DATE
+		dataType: string
+		isHidden
+		lineageTag: d11a1e45-c886-4a52-a285-d61c5f0a4a55
+		summarizeBy: none
+		sourceColumn: PLAN_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_OFFICE
+		dataType: string
+		isHidden
+		lineageTag: 618a3dc0-2ec8-40ec-9331-c7d9632951d0
+		summarizeBy: none
+		sourceColumn: SALE_OFFICE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE_LV1
+		dataType: string
+		isHidden
+		lineageTag: a6a8f255-c405-4ff7-9d3f-b3832aeeff1a
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE_LV1
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE_LV2
+		dataType: string
+		isHidden
+		lineageTag: 6d1800a5-4af5-42a7-98bf-f735715ea642
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE_LV2
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE_LV3
+		dataType: string
+		isHidden
+		lineageTag: d0717355-f1cd-4f3d-94ec-69bef5b331d0
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE_LV3
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT_PRICE_PLAN
+		dataType: double
+		isHidden
+		lineageTag: 3af2a9b6-c0e7-48ef-a587-94680ba2ecbc
+		summarizeBy: sum
+		sourceColumn: UNIT_PRICE_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - SALE IN PLAN' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_SALE_IN_PLAN = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_SALE_IN_PLAN"]}[Data]
+				in
+				    gld_VW_FACT_SALE_IN_PLAN
+
+	annotation PBI_ResultType = Table
+

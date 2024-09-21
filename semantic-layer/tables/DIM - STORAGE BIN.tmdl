@@ -1,0 +1,21 @@
+table 'DIM - STORAGE BIN'
+	lineageTag: 2d168f9e-a9d0-414d-81f3-065206ce3119
+
+	column STORAGE_BIN
+		dataType: string
+		lineageTag: 59128b88-6dca-43f2-9312-f10976dacdde
+		summarizeBy: none
+		sourceColumn: STORAGE_BIN
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim Storage Bin' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_STORAGE_BIN = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_STORAGE_BIN"]}[Data]
+				in
+				    gld_VW_DIM_STORAGE_BIN
+

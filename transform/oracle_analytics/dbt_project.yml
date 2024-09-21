@@ -8,9 +8,10 @@ model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
 seed-paths: ["seeds"]
-macro-paths: ["macros"]
+macro-paths: ["macros", "docs"]
 snapshot-paths: ["snapshots"]
 docs-paths: ["docs"]
+asset-paths: ["assets"]
 
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
@@ -26,7 +27,11 @@ models:
   oracle_analytics:
     staging:
       +materialized: ephemeral
+      +docs:
+        node_color: "#cd7f32"
     intermediate:
       +materialized: table
+      +docs:
+        node_color: "#ffd700"
       procurement:
         +schema: procurement

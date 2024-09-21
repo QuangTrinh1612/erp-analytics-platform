@@ -1,0 +1,148 @@
+table 'FACT - BREAKDOWN STATISTICS'
+	lineageTag: 9bccdeac-00a7-4d17-8584-2fdc8d7b0801
+
+	column STATS_SOURCE
+		dataType: string
+		lineageTag: 991489ea-0c04-4979-99fc-a158b49ba5ba
+		summarizeBy: none
+		sourceColumn: STATS_SOURCE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VERSION
+		dataType: string
+		lineageTag: 66055f69-e289-4634-9990-de7981b172da
+		summarizeBy: none
+		sourceColumn: VERSION
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH
+		dataType: string
+		lineageTag: 1a35361e-cd94-467c-a3dc-b90fcbd269bc
+		summarizeBy: none
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1a241dc0-7b03-4bfb-9072-456f990e80c2
+		summarizeBy: none
+		sourceColumn: DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column WEEK
+		dataType: string
+		lineageTag: 503656cf-1ef6-4a12-a675-ed62f7e55347
+		summarizeBy: none
+		sourceColumn: WEEK
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERIOD
+		dataType: string
+		lineageTag: dfc8cff7-55e4-427d-b489-40b388fde73d
+		summarizeBy: none
+		sourceColumn: PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJ_CLASSS
+		dataType: string
+		lineageTag: e710cccf-0b53-46ff-9bd0-fd9f0809c392
+		summarizeBy: none
+		sourceColumn: OBJ_CLASSS
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNCT_LOC_CODE
+		dataType: string
+		lineageTag: e0b2405b-c561-462a-92d2-6f1b365b305d
+		summarizeBy: none
+		sourceColumn: FUNCT_LOC_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: 832da32f-8da4-4460-b44e-974622d8adc5
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_YEAR
+		dataType: string
+		lineageTag: bca39670-4621-4a9d-acff-ebe8c80a3e49
+		summarizeBy: none
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column POINTER
+		dataType: string
+		lineageTag: 64fedbaf-19dd-4ce3-8482-f13e52ea824a
+		summarizeBy: none
+		sourceColumn: POINTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT
+		dataType: string
+		lineageTag: 74f714f6-ce44-4b8f-b383-b72b7bef2a58
+		summarizeBy: none
+		sourceColumn: UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACTUAL_BREAKDOWN
+		dataType: double
+		lineageTag: 36a93d31-821f-48af-9f3f-59edbb0dbe2a
+		summarizeBy: sum
+		sourceColumn: ACTUAL_BREAKDOWN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TIME_TO_REPAIR
+		dataType: double
+		lineageTag: 60baa38a-fa73-44c8-92c9-9afcfc372b11
+		summarizeBy: sum
+		sourceColumn: TIME_TO_REPAIR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TIME_BETWEEN_REPAIR
+		dataType: double
+		lineageTag: 59c47642-2792-47e4-a3a1-a36728a3857e
+		summarizeBy: sum
+		sourceColumn: TIME_BETWEEN_REPAIR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - BREAKDOWN STATISTICS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_BREAKDOWN_STATISTICS = pvcfcprodsqlpool{[Schema="gld",Item="FACT_BREAKDOWN_STATISTICS"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_BREAKDOWN_STATISTICS,{"W_INSERT_DT"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

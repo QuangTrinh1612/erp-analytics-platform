@@ -1,0 +1,188 @@
+table 'DIM - PRODUCT DMS'
+	lineageTag: f173b85e-a292-438f-9d14-3c96321cf54b
+
+	column PRODUCT_ID
+		dataType: double
+		lineageTag: 23b95593-2908-4eaf-887c-e814dfc1169a
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRODUCT_CODE
+		dataType: string
+		lineageTag: 09866da8-9987-43bf-90b3-f189c8451c06
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_NAME
+		dataType: string
+		lineageTag: 3eab111c-fd16-48f0-aa49-5b6b68c1e085
+		summarizeBy: none
+		sourceColumn: PRODUCT_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHORT_NAME
+		dataType: string
+		lineageTag: 98ed1efc-59a8-4bfc-8574-d5de9bdf5280
+		summarizeBy: none
+		sourceColumn: SHORT_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOM1
+		dataType: string
+		lineageTag: b587c874-4644-4920-aa5c-f171a551a346
+		summarizeBy: none
+		sourceColumn: UOM1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UOM2
+		dataType: string
+		lineageTag: f3f80acc-d70b-4aef-870a-dbc9307daa35
+		summarizeBy: none
+		sourceColumn: UOM2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONVFACT
+		dataType: double
+		lineageTag: 2ca0e558-9de7-4013-8b2f-a65faffeac36
+		summarizeBy: sum
+		sourceColumn: CONVFACT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CAT_ID
+		dataType: double
+		lineageTag: 68ff262d-b335-4df4-8b7d-c1a6efd392a2
+		summarizeBy: count
+		sourceColumn: CAT_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SUB_CAT_ID
+		dataType: double
+		lineageTag: ca7975cb-99fc-49cf-9571-8163e65984f4
+		summarizeBy: none
+		sourceColumn: SUB_CAT_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GROSS_WEIGHT
+		dataType: double
+		lineageTag: 543c3759-5427-41ea-82b7-cedc94d02344
+		summarizeBy: sum
+		sourceColumn: GROSS_WEIGHT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_WEIGHT
+		dataType: double
+		lineageTag: ddd19c2b-75ac-450a-b2ce-9c4ea31e2f29
+		summarizeBy: sum
+		sourceColumn: NET_WEIGHT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STATUS
+		dataType: double
+		lineageTag: b3c7706a-5c9a-4370-bf17-082df95ac7ac
+		summarizeBy: sum
+		sourceColumn: STATUS
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SUB_CAT_NAME
+		dataType: string
+		lineageTag: f97223f6-2438-43eb-b564-014bbb4cb4dc
+		summarizeBy: none
+		sourceColumn: SUB_CAT_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAT_NAME
+		dataType: string
+		lineageTag: c453ab87-2de9-4a97-8960-83a5c7457781
+		summarizeBy: none
+		sourceColumn: CAT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUB_CAT_CONVER_RATE =
+			SWITCH('DIM - PRODUCT DMS'[SUB_CAT_ID],
+			                        37,1, --Ure-DCM
+			                        53,6,--N46
+			                        45,8, --NPK Tu Doanh
+			                        56,6, --Bio
+			                        58,8, --Huu co
+			                        55,8, --NPK DCM
+			                        52,2, --Kali
+			                        51,2, --DAP
+			                        27,6, --N.Humate
+			                        62,2, --SA
+			                        1)
+		dataType: int64
+		formatString: 0
+		lineageTag: 93d9de1e-ffd6-4924-bbe9-2ab722aa4542
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PRODUCT DMS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PRODUCT_DMS = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_PRODUCT_DMS"]}[Data]
+				in
+				    gld_VW_DIM_PRODUCT_DMS
+
+	changedProperty = IsHidden
+

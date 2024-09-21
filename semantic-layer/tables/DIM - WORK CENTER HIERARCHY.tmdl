@@ -1,0 +1,42 @@
+table 'DIM - WORK CENTER HIERARCHY'
+	lineageTag: 4437a307-e1ce-4e8c-ac72-9af8a00b21c2
+
+	column HIERARCHY_ID
+		dataType: string
+		lineageTag: 9164cdb8-d14b-4d69-b902-f3f091908877
+		summarizeBy: none
+		sourceColumn: HIERARCHY_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column HIERARCHY_NAME
+		dataType: string
+		lineageTag: e236470b-553d-47fd-b0be-a504a0aea291
+		summarizeBy: none
+		sourceColumn: HIERARCHY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER_ID
+		dataType: string
+		lineageTag: 48d49765-1c8c-4120-ad74-977e861ad545
+		summarizeBy: none
+		sourceColumn: WORK_CENTER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - WORK CENTER HIERARCHY' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_WORK_CENTER_HIERARCHY = pvcfcprodsqlpool{[Schema="sil",Item="DIM_WORK_CENTER_HIERARCHY"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_WORK_CENTER_HIERARCHY,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,1134 @@
+table 'PARAMETER - ZCO09'
+	lineageTag: fe4a621a-c3ef-472b-9947-436605b72616
+
+	measure 'KH tháng - Đơn giá 1 tấn SP (ZCO09)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'PARAMETER - ZCO09'[STT] ),
+			    "A", BLANK(),
+			    "A1", BLANK(),
+			    "A2", BLANK(),
+			    "B", BLANK(),
+			    "B1", BLANK(),
+			    "B2", BLANK(),
+			    "C", BLANK() ,
+			    "C1", DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]),
+			    "C2", DIVIDE([KH Doanh thu Amo (ZCO09)],[KH Sản lượng tiêu thụ Amo (ZCO09)]),
+			    "D", [KH Đơn giá -  Biến phí],
+			    "D1", [KH Đơn giá -  Khí đầu vào],
+			    "D2", [KH Đơn giá -  Điện nhận lưới],
+			    "D3", [KH Đơn giá -  Chi phí nước ngọt],
+			    "D4", [KH Đơn giá -  Hóa chất],
+			    "D5", [KH Đơn giá -  Chi phí bao bì],
+			    "E", DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]) - (
+			[KH Đơn giá -  Khí đầu vào]
+			+[KH Đơn giá -  Điện nhận lưới]
+			+[KH Đơn giá -  Chi phí nước ngọt]
+			+[KH Đơn giá -  Hóa chất]
+			+[KH Đơn giá -  Chi phí bao bì]),
+			    "F", BLANK(),
+			    "F1", BLANK(),
+			    "F2", BLANK(),
+			    "F3", BLANK(),
+			    "F4", BLANK(),
+			    "F5", BLANK(),
+			    "F6", BLANK(),
+			    "G", BLANK(),
+			    "H", BLANK()
+			)
+		formatString: #,0
+		lineageTag: 22e5cf37-b8bf-4409-ab2e-f8aa8d31b2ba
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'KH tháng - % ' =
+			SWITCH (
+			    SELECTEDVALUE ( 'PARAMETER - ZCO09'[STT] ),
+			    "A", BLANK(),
+			    "A1", BLANK(),
+			    "A2", BLANK(),
+			    "B", BLANK(),
+			    "B1", BLANK(),
+			    "B2", BLANK(),
+			    "C", BLANK() ,
+			    "C1", 1,
+			    "C2",BLANK(),
+			    "D", divide([KH Đơn giá -  Khí đầu vào],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+divide([KH Đơn giá -  Điện nhận lưới],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+divide([KH Đơn giá -  Chi phí nước ngọt],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+divide([KH Đơn giá -  Hóa chất],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+divide([KH Đơn giá -  Chi phí bao bì],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "D1", divide([KH Đơn giá -  Khí đầu vào],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "D2", divide([KH Đơn giá -  Điện nhận lưới],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "D3", divide([KH Đơn giá -  Chi phí nước ngọt],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "D4", divide([KH Đơn giá -  Hóa chất],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "D5", divide([KH Đơn giá -  Chi phí bao bì],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "E", 1 - (
+			(divide([KH Đơn giá -  Khí đầu vào],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)])))
+			+divide([KH Đơn giá -  Điện nhận lưới],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+divide([KH Đơn giá -  Chi phí nước ngọt],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+divide([KH Đơn giá -  Hóa chất],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+divide([KH Đơn giá -  Chi phí bao bì],DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))
+			),
+			    "F", BLANK(),
+			    "F1", BLANK(),
+			    "F2", BLANK(),
+			    "F3", BLANK(),
+			    "F4", BLANK(),
+			    "F5", BLANK(),
+			    "F6", BLANK(),
+			    "G", BLANK(),
+			    "H", BLANK()
+			)
+		formatString: #,##0.00 %
+		lineageTag: 8e86fb72-1c27-4a3a-a699-06fe00c634da
+
+	measure 'KH tháng - Giá trị (ZCO09)' = ```
+			
+			SWITCH (
+			    SELECTEDVALUE ( 'PARAMETER - ZCO09'[STT] ),
+			    "A", [KH Sản lượng sản xuất Ure quy đổi (ZCO07)],
+			    "A1", [KH Sản lượng sản xuất Ure (ZCO07)],
+			    "A2", [KH Sản lượng sản xuất Amo (ZCO07)],
+			    "B", [KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)],
+			    "B1", [KH Sản lượng tiêu thụ Ure (ZCO07)],
+			    "B2", [KH Sản lượng tiêu thụ Amo (ZCO07)],
+			    "C", [KH Doanh thu Ure (ZCO09)] + [KH Doanh thu Amo (ZCO09)],
+			    "C1", [KH Doanh thu Ure (ZCO09)],
+			    "C2", [KH Doanh thu Amo (ZCO09)],
+			    "D", ([KH Đơn giá -  Khí đầu vào]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Điện nhận lưới]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Chi phí nước ngọt]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Hóa chất]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Chi phí bao bì]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			    "D1",([KH Đơn giá -  Khí đầu vào]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			    "D2", ([KH Đơn giá -  Điện nhận lưới]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			    "D3", ([KH Đơn giá -  Chi phí nước ngọt]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			    "D4", ([KH Đơn giá -  Hóa chất]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			    "D5", ([KH Đơn giá -  Chi phí bao bì]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			    "E", [KH Doanh thu Ure (ZCO09)] - (
+			([KH Đơn giá -  Khí đầu vào]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Điện nhận lưới]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Chi phí nước ngọt]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Hóa chất]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Chi phí bao bì]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			),
+			    "F", [KH Định phí]/1000000000,
+			    "F1", [KH định phí xúc tác]/1000000000,
+			    "F2", [KH định phí nhân công trực tiếp]/1000000000,
+			    "F3", [KH Chi phi sản xuất chung (ZCO07)]/1000000000,
+			    "F4", [KH Chi phí quản lý (ZCO07)]/1000000000,
+			    "F5", [KH Chi phí bán hàng (ZCO07)]/1000000000,
+			    "F6", [KH Chi phí tài chính (ZCO07)]/1000000000,
+			    "G", [KH Định phí]/1000000000,
+			    "H", /*DIVIDE(
+			        [KH Định phí],
+			        - DIVIDE([KH Đơn giá -  Biến phí]*[KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)],[KH Sản lượng tiêu thụ Ure quy đổi (ZCO07)]) */
+			        DIVIDE(
+			            [KH Định phí],
+			            ((DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]) - [KH Đơn giá -  Biến phí]))
+			    )
+			)
+			
+			```
+		formatString: #,0.000
+		lineageTag: f3c29d8f-bd52-49c1-9573-8d3e757b8416
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế KH - Đơn giá 1 tấn SP (ZCO09)' =
+			
+			TOTALYTD(
+			    [KH tháng - Đơn giá 1 tấn SP (ZCO09)],
+			    'DIM - DATE'[Date]
+			)
+		lineageTag: c78bce78-6831-489c-a61f-91140a8a121a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế KH - %' =
+			
+			TOTALYTD(
+			    [KH tháng - % ],
+			    'DIM - DATE'[Date]
+			)
+		formatString: #,##0.00 %
+		lineageTag: d65bd12a-69bb-416b-b587-ee09cae49af1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế KH - Giá trị (ZCO09)' =
+			
+			TOTALYTD(
+			    [KH tháng - Giá trị (ZCO09)],
+			    'DIM - DATE'[Date]
+			)
+		lineageTag: 79516a8a-5bc1-4e4c-961a-6b7b9ab34021
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế TH tháng - %' =
+			TOTALYTD(
+			    [Thực hiện tháng - %],
+			    'DIM - DATE'[Date]
+			    )
+		formatString: #,##0.00 %
+		lineageTag: bfbd0004-d583-45d4-bdb9-6fadb97fda44
+
+	measure 'Lũy kế TH tháng - Đơn giá 1 tấn SP (ZCO09)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'PARAMETER - ZCO09'[STT] ),
+			    "A", BLANK(),
+			    "A1", BLANK(),
+			    "A2", BLANK(),
+			    "B", BLANK(),
+			    "B1", BLANK(),
+			    "B2", BLANK(),
+			    "C", BLANK(),
+			    "C1",
+			    DIVIDE(
+			        TOTALYTD([TH Doanh thu Ure (ZCO09)], 'DIM - DATE'[Date]),
+			        TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO07)], 'DIM - DATE'[Date])
+			    ),
+			    "C2",
+			    DIVIDE(
+			        TOTALYTD([TH Doanh thu Amo (ZCO09)],'DIM - DATE'[Date]),
+			        TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])
+			    ),
+			    "D",TOTALYTD([TH Đơn giá -  Biến phí],'DIM - DATE'[Date]),
+			    "D1", TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date]),
+			    "D2", TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date]),
+			    "D3", TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date]),
+			    "D4", TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date]),
+			    "D5", TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date]),
+			    "E", DIVIDE(
+			        TOTALYTD([TH Doanh thu Ure (ZCO09)], 'DIM - DATE'[Date]),
+			        TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO07)], 'DIM - DATE'[Date])
+			    )
+			    -TOTALYTD([TH Đơn giá -  Biến phí],'DIM - DATE'[Date])
+			    ,
+			    "F", BLANK(),
+			    "F1", BLANK(),
+			    "F2", BLANK(),
+			    "F3", BLANK(),
+			    "F4", BLANK(),
+			    "F5", BLANK(),
+			    "F6", BLANK(),
+			    "G", BLANK(),
+			    "H", BLANK()
+			)
+		lineageTag: 389c333e-847a-40c4-8fe0-ac613f51f952
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lũy kế TH tháng - Giá trị (ZCO09)' =
+			TOTALYTD(
+			    [Thực hiện tháng - Giá trị (ZCO09)],
+			    'DIM - DATE'[Date]
+			)
+		formatString: #,0.000
+		lineageTag: 4f844144-8ab0-4607-83ed-6571e4e876a7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thực hiện tháng - %' =
+			SWITCH (
+			    SELECTEDVALUE ( 'PARAMETER - ZCO09'[STT] ),
+			    "A", BLANK(),
+			    "A1", BLANK(),
+			    "A2", BLANK(),
+			    "B", BLANK(),
+			    "B1", BLANK(),
+			    "B2", BLANK(),
+			    "C", BLANK() ,
+			    "C1", 1,
+			    "C2",BLANK(),
+			    "D", divide([TH Đơn giá -  Khí đầu vào],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+ divide([TH Đơn giá -  Điện nhận lưới],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+ divide([TH Đơn giá -  Chi phí nước ngọt],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+ divide([TH Đơn giá -  Hóa chất],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+ divide([TH Đơn giá -  Chi phí bao bì],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "D1", divide([TH Đơn giá -  Khí đầu vào],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "D2", divide([TH Đơn giá -  Điện nhận lưới],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "D3", divide([TH Đơn giá -  Chi phí nước ngọt],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "D4", divide([TH Đơn giá -  Hóa chất],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "D5", divide([TH Đơn giá -  Chi phí bao bì],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)])),
+			    "E", 1 - (
+			divide([TH Đơn giá -  Khí đầu vào],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+ divide([TH Đơn giá -  Điện nhận lưới],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+ divide([TH Đơn giá -  Chi phí nước ngọt],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+ divide([TH Đơn giá -  Hóa chất],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))
+			+ divide([TH Đơn giá -  Chi phí bao bì],DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))
+			),
+			    "F", BLANK(),
+			    "F1", BLANK(),
+			    "F2", BLANK(),
+			    "F3", BLANK(),
+			    "F4", BLANK(),
+			    "F5", BLANK(),
+			    "F6", BLANK(),
+			    "G", BLANK(),
+			    "H", BLANK()
+			)
+		formatString: #,##0.00 %
+		lineageTag: e9a80415-a4ba-4ad3-8260-47a97cb133e6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thực hiện tháng - Đơn giá 1 tấn SP (ZCO09)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'PARAMETER - ZCO09'[STT] ),
+			    "A", BLANK(),
+			    "A1", BLANK(),
+			    "A2", BLANK(),
+			    "B", BLANK(),
+			    "B1", BLANK(),
+			    "B2", BLANK(),
+			    "C", BLANK(),
+			    "C1", DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO07)]),
+			    "C2", DIVIDE([TH Doanh thu Amo (ZCO09)],[TH Sản lượng tiêu thụ Amo (ZCO07)]),
+			    "D", [TH Đơn giá -  Biến phí],
+			    "D1", [TH Đơn giá -  Khí đầu vào],
+			    "D2", [TH Đơn giá -  Điện nhận lưới],
+			    "D3", [TH Đơn giá -  Chi phí nước ngọt],
+			    "D4", [TH Đơn giá -  Hóa chất],
+			    "D5", [TH Đơn giá -  Chi phí bao bì],
+			    "E", DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO07)]) - [TH Đơn giá -  Biến phí],
+			    "F", BLANK(),
+			    "F1", BLANK(),
+			    "F2", BLANK(),
+			    "F3", BLANK(),
+			    "F4", BLANK(),
+			    "F5", BLANK(),
+			    "F6", BLANK(),
+			    "G", BLANK(),
+			    "H", BLANK()
+			)
+		formatString: #,0
+		lineageTag: d399a383-fdf4-4705-a728-660d32cdad1a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Thực hiện tháng - Giá trị (ZCO09)' =
+			SWITCH (
+			    SELECTEDVALUE ( 'PARAMETER - ZCO09'[STT] ),
+			    "A", [TH Sản lượng sản xuất Ure quy đổi (ZCO07)],
+			    "A1", [TH Sản lượng sản xuất Ure (ZCO07)],
+			    "A2", [TH Sản lượng sản xuất Amo (ZCO07)],
+			    "B", [TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)],
+			    "B1", [TH Sản lượng tiêu thụ Ure (ZCO07)],
+			    "B2", [TH Sản lượng tiêu thụ Amo (ZCO07)],
+			    "C", ([TH Doanh thu Ure (ZCO09)] + [TH Doanh thu Amo (ZCO09)])/1000000000,
+			    "C1", [TH Doanh thu Ure (ZCO09)]/1000000000,
+			    "C2", [TH Doanh thu Amo (ZCO09)]/1000000000,
+			    "D", [TH Đơn giá -  Biến phí]*[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)]/1000000000,
+			    "D1", ([TH Đơn giá -  Khí đầu vào]*[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])/1000000000,
+			    "D2", ([TH Đơn giá -  Điện nhận lưới]*[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])/1000000000,
+			    "D3", ([TH Đơn giá -  Chi phí nước ngọt]*[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])/1000000000,
+			    "D4", ([TH Đơn giá -  Hóa chất]*[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])/1000000000,
+			    "D5", ([TH Đơn giá -  Chi phí bao bì]*[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])/1000000000,
+			    "E", ([TH Doanh thu Ure (ZCO09)] + [TH Doanh thu Amo (ZCO09)] - [TH Đơn giá -  Biến phí]*[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])/1000000000,
+			    "F", [TH Định phí]/1000000000,
+			    "F1", [TH định phí xúc tác]/1000000000,
+			    "F2", [TH định phí nhân công trực tiếp]/1000000000,
+			    "F3", [TH định phí chi phí sản xuất chung]/1000000000,
+			    "F4", [TH định phí chi phí quản lý]/1000000000,
+			    "F5", [TH định phí chi phí bán hàng]/1000000000,
+			    "F6", [TH định phí chi phí tài chính]/1000000000,
+			    "G", ([TH Doanh thu Ure (ZCO09)] + [TH Doanh thu Amo (ZCO09)] - [TH Đơn giá -  Biến phí]*[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)] - [TH Định phí])/1000000000,
+			    "H", /*DIVIDE(
+			        [TH Định phí],
+			        DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO07)])
+			        - DIVIDE([TH Đơn giá -  Biến phí]*[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)],[TH Sản lượng tiêu thụ Ure quy đổi (ZCO07)])
+			    )*/
+			    DIVIDE(
+			            [TH Định phí],
+			            ((DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]) - [TH Đơn giá -  Biến phí]))
+			    )
+			)
+		formatString: #,0.000
+		lineageTag: b1503870-1ef6-45fe-bfed-48968852a7b4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'ZCO09  measures' = ```
+			SWITCH(
+			    SELECTEDVALUE('PARAMETER - ZCO09'[Order]),
+			3,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH Sản lượng sản xuất Ure (ZCO09)] + [KH Sản lượng sản xuất Amo (ZCO09)]/0.573 ,
+			"B",blank(),
+			"C",blank(),
+			"D",[TH Sản lượng sản xuất Ure (ZCO09)] + [TH Sản lượng sản xuất Amo (ZCO09)]/0.573,
+			"E",blank(),
+			"F",blank(),
+			"G",TOTALYTD([KH Sản lượng sản xuất Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng sản xuất Amo (ZCO09)],'DIM - DATE'[Date])/0.573,
+			"H",blank(),
+			"I",blank(),
+			"K",TOTALYTD([TH Sản lượng sản xuất Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng sản xuất Amo (ZCO09)],'DIM - DATE'[Date])/0.573,
+			"L",blank(),
+			"M",blank()
+			),
+			4,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH Sản lượng sản xuất Ure (ZCO09)],
+			"B",blank(),
+			"C",blank(),
+			"D",[TH Sản lượng sản xuất Ure (ZCO09)],
+			"E",blank(),
+			"F",blank(),
+			"G",TOTALYTD([KH Sản lượng sản xuất Ure (ZCO09)],'DIM - DATE'[Date]),
+			"H",blank(),
+			"I",blank(),
+			"K",TOTALYTD([TH Sản lượng sản xuất Ure (ZCO09)],'DIM - DATE'[Date]),
+			"L",blank(),
+			"M",blank()
+			),
+			5,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH Sản lượng sản xuất Amo (ZCO09)],
+			"B",blank(),
+			"C",blank(),
+			"D",[TH Sản lượng sản xuất Amo (ZCO09)],
+			"E",blank(),
+			"F",blank(),
+			"G",TOTALYTD([KH Sản lượng sản xuất Amo (ZCO09)],'DIM - DATE'[Date]),
+			"H",blank(),
+			"I",blank(),
+			"K",TOTALYTD([TH Sản lượng sản xuất Amo (ZCO09)],'DIM - DATE'[Date]),
+			"L",blank(),
+			"M",blank()
+			),
+			6,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573 ,
+			"B",blank(),
+			"C",blank(),
+			"D",[TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573,
+			"E",blank(),
+			"F",blank(),
+			"G",TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573,
+			"H",blank(),
+			"I",blank(),
+			"K",TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573,
+			"L",blank(),
+			"M",blank()
+			),
+			7,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH Sản lượng tiêu thụ Ure (ZCO09)],
+			"B",blank(),
+			"C",blank(),
+			"D",[TH Sản lượng tiêu thụ Ure (ZCO09)],
+			"E",blank(),
+			"F",blank(),
+			"G",TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]),
+			"H",blank(),
+			"I",blank(),
+			"K",TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]),
+			"L",blank(),
+			"M",blank()
+			),
+			8,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH Sản lượng tiêu thụ Amo (ZCO09)],
+			"B",blank(),
+			"C",blank(),
+			"D",[TH Sản lượng tiêu thụ Amo (ZCO09)],
+			"E",blank(),
+			"F",blank(),
+			"G",TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date]),
+			"H",blank(),
+			"I",blank(),
+			"K",TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date]),
+			"L",blank(),
+			"M",blank()
+			),
+			9,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH Doanh thu Ure (ZCO09)] + [KH Doanh thu Amo (ZCO09)],
+			"B",blank(),
+			"C",blank(),
+			"D",[TH Doanh thu Ure (ZCO09)] + [TH Doanh thu Amo (ZCO09)],
+			"E",blank(),
+			"F",blank(),
+			"G",TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Doanh thu Amo (ZCO09)],'DIM - DATE'[Date]),
+			"H",blank(),
+			"I",blank(),
+			"K",TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Doanh thu Amo (ZCO09)],'DIM - DATE'[Date]),
+			"L",blank(),
+			"M",blank()
+			),
+			10,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH Doanh thu Ure (ZCO09)],
+			"B",DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]),
+			"C",1,
+			"D",[TH Doanh thu Ure (ZCO09)],
+			"E",DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]),
+			"F",1,
+			"G",TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),
+			"H",DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])),
+			"I",1,
+			"K",TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),
+			"L",DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])),
+			"M",1
+			),
+			11,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH Doanh thu Amo (ZCO09)],
+			"B",DIVIDE([KH Doanh thu Amo (ZCO09)],[KH Sản lượng tiêu thụ Amo (ZCO09)]),
+			"C",BLANK(),
+			"D",[TH Doanh thu Amo (ZCO09)],
+			"E",DIVIDE([TH Doanh thu Amo (ZCO09)],[TH Sản lượng tiêu thụ Amo (ZCO09)]),
+			"F",BLANK(),
+			"G",TOTALYTD([KH Doanh thu Amo (ZCO09)],'DIM - DATE'[Date]),
+			"H",DIVIDE(TOTALYTD([KH Doanh thu Amo (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])),
+			"I",BLANK(),
+			"K",TOTALYTD([TH Doanh thu Amo (ZCO09)],'DIM - DATE'[Date]),
+			"L",DIVIDE(TOTALYTD([TH Doanh thu Amo (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])),
+			"M",BLANK()
+			),
+			
+			12,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",
+			([KH Đơn giá -  Khí đầu vào]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Điện nhận lưới]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Chi phí nước ngọt]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Hóa chất]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Chi phí bao bì]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			,
+			"B",
+			[KH Đơn giá -  Khí đầu vào]
+			+[KH Đơn giá -  Điện nhận lưới]
+			+[KH Đơn giá -  Chi phí nước ngọt]
+			+[KH Đơn giá -  Hóa chất]
+			+[KH Đơn giá -  Chi phí bao bì]
+			,
+			"C",
+			([KH Đơn giá -  Khí đầu vào]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([KH Đơn giá -  Điện nhận lưới]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([KH Đơn giá -  Chi phí nước ngọt]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([KH Đơn giá -  Hóa chất]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([KH Đơn giá -  Chi phí bao bì]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			,
+			"D",
+			([TH Đơn giá -  Khí đầu vào]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Điện nhận lưới]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Chi phí nước ngọt]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Hóa chất]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Chi phí bao bì]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			,
+			"E",
+			[TH Đơn giá -  Khí đầu vào]
+			+[TH Đơn giá -  Điện nhận lưới]
+			+[TH Đơn giá -  Chi phí nước ngọt]
+			+[TH Đơn giá -  Hóa chất]
+			+[TH Đơn giá -  Chi phí bao bì]
+			,
+			"F",
+			([TH Đơn giá -  Khí đầu vào]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([TH Đơn giá -  Điện nhận lưới]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([TH Đơn giá -  Chi phí nước ngọt]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([TH Đơn giá -  Hóa chất]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([TH Đơn giá -  Chi phí bao bì]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			,
+			"G",
+			(TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			,
+			"H",
+			TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])
+			,
+			"I",
+			(TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			,
+			"K",
+			(TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			,
+			"L",
+			TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])
+			,
+			"M",
+			(TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			),
+			
+			13,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",([KH Đơn giá -  Khí đầu vào]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			"B",[KH Đơn giá -  Khí đầu vào],
+			"C",([KH Đơn giá -  Khí đầu vào]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100,
+			"D",([TH Đơn giá -  Khí đầu vào]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			"E",[TH Đơn giá -  Khí đầu vào],
+			"F",([TH Đơn giá -  Khí đầu vào]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100,
+			"G",(TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000,
+			"H",TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date]),
+			"I",(TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100,
+			"K",(TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000,
+			"L",TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date]),
+			"M",(TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			),
+			14,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",([KH Đơn giá -  Điện nhận lưới]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			"B",[KH Đơn giá -  Điện nhận lưới],
+			"C",([KH Đơn giá -  Điện nhận lưới]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100,
+			"D",([TH Đơn giá -  Điện nhận lưới]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			"E",[TH Đơn giá -  Điện nhận lưới],
+			"F",([TH Đơn giá -  Điện nhận lưới]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100,
+			"G",(TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000,
+			"H",TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date]),
+			"I",(TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100,
+			"K",(TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000,
+			"L",TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date]),
+			"M",(TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			),
+			15,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",([KH Đơn giá -  Chi phí nước ngọt]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			"B",[KH Đơn giá -  Chi phí nước ngọt],
+			"C",([KH Đơn giá -  Chi phí nước ngọt]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100,
+			"D",([TH Đơn giá -  Chi phí nước ngọt]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			"E",[TH Đơn giá -  Chi phí nước ngọt],
+			"F",([TH Đơn giá -  Chi phí nước ngọt]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100,
+			"G",(TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000,
+			"H",TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date]),
+			"I",(TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100,
+			"K",(TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000,
+			"L",TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date]),
+			"M",(TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			),
+			16,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",([KH Đơn giá -  Hóa chất]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			"B",[KH Đơn giá -  Hóa chất],
+			"C",([KH Đơn giá -  Hóa chất]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100,
+			"D",([TH Đơn giá -  Hóa chất]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			"E",[TH Đơn giá -  Hóa chất],
+			"F",([TH Đơn giá -  Hóa chất]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100,
+			"G",(TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000,
+			"H",TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date]),
+			"I",(TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100,
+			"K",(TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000,
+			"L",TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date]),
+			"M",(TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			),
+			17,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",([KH Đơn giá -  Chi phí bao bì]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			"B",[KH Đơn giá -  Chi phí bao bì],
+			"C",([KH Đơn giá -  Chi phí bao bì]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100,
+			"D",([TH Đơn giá -  Chi phí bao bì]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000,
+			"E",[TH Đơn giá -  Chi phí bao bì],
+			"F",([TH Đơn giá -  Chi phí bao bì]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100,
+			"G",(TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000,
+			"H",TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date]),
+			"I",(TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100,
+			"K",(TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000,
+			"L",TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date]),
+			"M",(TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			),
+			18,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH Doanh thu Ure (ZCO09)] - (
+			([KH Đơn giá -  Khí đầu vào]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Điện nhận lưới]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Chi phí nước ngọt]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Hóa chất]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Chi phí bao bì]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			),
+			"B",DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]) - (
+			[KH Đơn giá -  Khí đầu vào]
+			+[KH Đơn giá -  Điện nhận lưới]
+			+[KH Đơn giá -  Chi phí nước ngọt]
+			+[KH Đơn giá -  Hóa chất]
+			+[KH Đơn giá -  Chi phí bao bì]
+			),
+			"C",1 - (
+			([KH Đơn giá -  Khí đầu vào]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([KH Đơn giá -  Điện nhận lưới]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([KH Đơn giá -  Chi phí nước ngọt]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([KH Đơn giá -  Hóa chất]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([KH Đơn giá -  Chi phí bao bì]/DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			),
+			"D",[TH Doanh thu Ure (ZCO09)] - (
+			([TH Đơn giá -  Khí đầu vào]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Điện nhận lưới]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Chi phí nước ngọt]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Hóa chất]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Chi phí bao bì]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			),
+			"E",DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]) - (
+			[TH Đơn giá -  Khí đầu vào]
+			+[TH Đơn giá -  Điện nhận lưới]
+			+[TH Đơn giá -  Chi phí nước ngọt]
+			+[TH Đơn giá -  Hóa chất]
+			+[TH Đơn giá -  Chi phí bao bì]
+			),
+			"F",1 - (
+			([TH Đơn giá -  Khí đầu vào]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([TH Đơn giá -  Điện nhận lưới]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([TH Đơn giá -  Chi phí nước ngọt]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([TH Đơn giá -  Hóa chất]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			+([TH Đơn giá -  Chi phí bao bì]/DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]))*100
+			),
+			"G",TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]) - (
+			(TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			),
+			"H",DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])) - (
+			TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])
+			),
+			"I",1-(
+			(TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			),
+			"K",TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]) - (
+			(TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			),
+			"L",DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])) - (
+			TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])
+			),
+			"M",1-(
+			(TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			+(TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])/DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])))*100
+			)
+			),
+			19,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",
+			[KH định phí xúc tác]
+			+[KH định phí nhân công trực tiếp]
+			+[KH định phí chi phí tài chính]
+			+[KH định phí chi phí sản xuất chung]
+			+[KH định phí chi phí quản lý]
+			+[KH định phí chi phí bán hàng]
+			,
+			"B",Blank(),
+			"C",Blank(),
+			"D",
+			[TH định phí xúc tác]
+			+[TH định phí nhân công trực tiếp]
+			+[TH định phí chi phí tài chính]
+			+[TH định phí chi phí sản xuất chung]
+			+[TH định phí chi phí quản lý]
+			+[TH định phí chi phí bán hàng]
+			,
+			"E",Blank(),
+			"F",Blank(),
+			"G",
+			TOTALYTD([KH định phí xúc tác],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí nhân công trực tiếp],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí tài chính],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí sản xuất chung],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí quản lý],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí bán hàng],'DIM - DATE'[Date])
+			,
+			"H",Blank(),
+			"I",Blank(),
+			"K",
+			TOTALYTD([TH định phí xúc tác],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí nhân công trực tiếp],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí tài chính],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí sản xuất chung],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí quản lý],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí bán hàng],'DIM - DATE'[Date])
+			,
+			"L",Blank(),
+			"M",Blank()
+			),
+			
+			20,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH định phí xúc tác],
+			"B",Blank(),
+			"C",Blank(),
+			"D",[TH định phí xúc tác],
+			"E",Blank(),
+			"F",Blank(),
+			"G",TOTALYTD([KH định phí xúc tác],'DIM - DATE'[Date]),
+			"H",Blank(),
+			"I",Blank(),
+			"K",TOTALYTD([TH định phí xúc tác],'DIM - DATE'[Date]),
+			"L",Blank(),
+			"M",Blank()
+			),
+			21,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH định phí nhân công trực tiếp],
+			"B",Blank(),
+			"C",Blank(),
+			"D",[TH định phí nhân công trực tiếp],
+			"E",Blank(),
+			"F",Blank(),
+			"G",TOTALYTD([KH định phí nhân công trực tiếp],'DIM - DATE'[Date]),
+			"H",Blank(),
+			"I",Blank(),
+			"K",TOTALYTD([TH định phí nhân công trực tiếp],'DIM - DATE'[Date]),
+			"L",Blank(),
+			"M",Blank()
+			),
+			22,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH định phí chi phí sản xuất chung],
+			"B",Blank(),
+			"C",Blank(),
+			"D",[TH định phí chi phí sản xuất chung],
+			"E",Blank(),
+			"F",Blank(),
+			"G",TOTALYTD([KH định phí chi phí sản xuất chung],'DIM - DATE'[Date]),
+			"H",Blank(),
+			"I",Blank(),
+			"K",TOTALYTD([TH định phí chi phí sản xuất chung],'DIM - DATE'[Date]),
+			"L",Blank(),
+			"M",Blank()
+			),
+			23,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH định phí chi phí quản lý],
+			"B",Blank(),
+			"C",Blank(),
+			"D",[TH định phí chi phí quản lý],
+			"E",Blank(),
+			"F",Blank(),
+			"G",TOTALYTD([KH định phí chi phí quản lý],'DIM - DATE'[Date]),
+			"H",Blank(),
+			"I",Blank(),
+			"K",TOTALYTD([TH định phí chi phí quản lý],'DIM - DATE'[Date]),
+			"L",Blank(),
+			"M",Blank()
+			),
+			24,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH định phí chi phí bán hàng],
+			"B",Blank(),
+			"C",Blank(),
+			"D",[TH định phí chi phí bán hàng],
+			"E",Blank(),
+			"F",Blank(),
+			"G",TOTALYTD([KH định phí chi phí bán hàng],'DIM - DATE'[Date]),
+			"H",Blank(),
+			"I",Blank(),
+			"K",TOTALYTD([TH định phí chi phí bán hàng],'DIM - DATE'[Date]),
+			"L",Blank(),
+			"M",Blank()
+			),
+			25,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",[KH định phí chi phí tài chính],
+			"B",Blank(),
+			"C",Blank(),
+			"D",[TH định phí chi phí tài chính],
+			"E",Blank(),
+			"F",Blank(),
+			"G",TOTALYTD([KH định phí chi phí tài chính],'DIM - DATE'[Date]),
+			"H",Blank(),
+			"I",Blank(),
+			"K",TOTALYTD([TH định phí chi phí tài chính],'DIM - DATE'[Date]),
+			"L",Blank(),
+			"M",Blank()
+			),
+			26,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",
+			[KH Doanh thu Ure (ZCO09)] - (
+			([KH Đơn giá -  Khí đầu vào]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Điện nhận lưới]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Chi phí nước ngọt]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Hóa chất]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([KH Đơn giá -  Chi phí bao bì]*([KH Sản lượng tiêu thụ Ure (ZCO09)] + [KH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			)
+			-
+			([KH định phí xúc tác]
+			+[KH định phí nhân công trực tiếp]
+			+[KH định phí chi phí tài chính]
+			+[KH định phí chi phí sản xuất chung]
+			+[KH định phí chi phí quản lý]
+			+[KH định phí chi phí bán hàng]
+			)
+			,
+			"B",Blank(),
+			"C",Blank(),
+			"D",
+			[TH Doanh thu Ure (ZCO09)] - (
+			([TH Đơn giá -  Khí đầu vào]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Điện nhận lưới]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Chi phí nước ngọt]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Hóa chất]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			+ ([TH Đơn giá -  Chi phí bao bì]*([TH Sản lượng tiêu thụ Ure (ZCO09)] + [TH Sản lượng tiêu thụ Amo (ZCO09)]/0.573))/1000000000
+			)
+			-
+			([TH định phí xúc tác]
+			+[TH định phí nhân công trực tiếp]
+			+[TH định phí chi phí tài chính]
+			+[TH định phí chi phí sản xuất chung]
+			+[TH định phí chi phí quản lý]
+			+[TH định phí chi phí bán hàng]
+			)
+			,
+			"E",Blank(),
+			"F",Blank(),
+			"G",
+			TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]) - (
+			(TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])*(TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([KH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			)
+			-
+			(TOTALYTD([KH định phí xúc tác],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí nhân công trực tiếp],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí tài chính],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí sản xuất chung],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí quản lý],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí bán hàng],'DIM - DATE'[Date])
+			)
+			,
+			"H",Blank(),
+			"I",Blank(),
+			"K",
+			TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]) - (
+			(TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			+ (TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date])*(TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date]) + TOTALYTD([TH Sản lượng tiêu thụ Amo (ZCO09)],'DIM - DATE'[Date])/0.573))/1000000000
+			)
+			-
+			(TOTALYTD([TH định phí xúc tác],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí nhân công trực tiếp],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí tài chính],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí sản xuất chung],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí quản lý],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí bán hàng],'DIM - DATE'[Date])
+			)
+			,
+			"L",Blank(),
+			"M",Blank()
+			),
+			27,SWITCH(
+			SELECTEDVALUE('PARAMETER - ZCO09 MEASURE GROUP'[STT]),
+			"A",
+			([KH định phí xúc tác]
+			+[KH định phí nhân công trực tiếp]
+			+[KH định phí chi phí tài chính]
+			+[KH định phí chi phí sản xuất chung]
+			+[KH định phí chi phí quản lý]
+			+[KH định phí chi phí bán hàng]
+			)
+			/
+			(DIVIDE([KH Doanh thu Ure (ZCO09)],[KH Sản lượng tiêu thụ Ure (ZCO09)]) 
+			- ([KH Đơn giá -  Khí đầu vào]
+			+[KH Đơn giá -  Điện nhận lưới]
+			+[KH Đơn giá -  Chi phí nước ngọt]
+			+[KH Đơn giá -  Hóa chất]
+			+[KH Đơn giá -  Chi phí bao bì])
+			)
+			,
+			"B",Blank(),
+			"C",Blank(),
+			"D",
+			([TH định phí xúc tác]
+			+[TH định phí nhân công trực tiếp]
+			+[TH định phí chi phí tài chính]
+			+[TH định phí chi phí sản xuất chung]
+			+[TH định phí chi phí quản lý]
+			+[TH định phí chi phí bán hàng]
+			)
+			/
+			(DIVIDE([TH Doanh thu Ure (ZCO09)],[TH Sản lượng tiêu thụ Ure (ZCO09)]) 
+			- ([TH Đơn giá -  Khí đầu vào]
+			+[TH Đơn giá -  Điện nhận lưới]
+			+[TH Đơn giá -  Chi phí nước ngọt]
+			+[TH Đơn giá -  Hóa chất]
+			+[TH Đơn giá -  Chi phí bao bì])
+			)
+			,
+			"E",Blank(),
+			"F",Blank(),
+			"G",
+			(TOTALYTD([KH định phí xúc tác],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí nhân công trực tiếp],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí tài chính],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí sản xuất chung],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí quản lý],'DIM - DATE'[Date])
+			+TOTALYTD([KH định phí chi phí bán hàng],'DIM - DATE'[Date])
+			)
+			/
+			(DIVIDE(TOTALYTD([KH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([KH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])) 
+			- (TOTALYTD([KH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Hóa chất],'DIM - DATE'[Date])
+			+TOTALYTD([KH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date]))
+			)
+			,
+			"H",Blank(),
+			"I",Blank(),
+			"K",
+			(TOTALYTD([TH định phí xúc tác],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí nhân công trực tiếp],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí tài chính],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí sản xuất chung],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí quản lý],'DIM - DATE'[Date])
+			+TOTALYTD([TH định phí chi phí bán hàng],'DIM - DATE'[Date])
+			)
+			/
+			(DIVIDE(TOTALYTD([TH Doanh thu Ure (ZCO09)],'DIM - DATE'[Date]),TOTALYTD([TH Sản lượng tiêu thụ Ure (ZCO09)],'DIM - DATE'[Date])) 
+			- (TOTALYTD([TH Đơn giá -  Khí đầu vào],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Điện nhận lưới],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Chi phí nước ngọt],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Hóa chất],'DIM - DATE'[Date])
+			+TOTALYTD([TH Đơn giá -  Chi phí bao bì],'DIM - DATE'[Date]))
+			)
+			
+			,
+			"L",Blank(),
+			"M",Blank()
+			) 
+			)
+			
+			```
+		lineageTag: a73341ff-dfc8-4c32-bf04-b77b3f7d73d3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Order
+		dataType: int64
+		formatString: 0
+		lineageTag: e19e24b3-23af-43e1-8588-b12347e48837
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Order]
+
+		annotation SummarizationSetBy = Automatic
+
+	column STT
+		dataType: string
+		lineageTag: a2377d29-5d41-44f5-9434-276f63dc49ae
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+		sortByColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nội dung'
+		dataType: string
+		lineageTag: b8beaee2-40b3-4c12-a955-e7a58f162005
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Nội dung]
+		sortByColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Đvt
+		dataType: string
+		lineageTag: df829c64-1ff2-401b-aa56-24874ebb1518
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Đvt]
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_HIGHLIGHT
+		dataType: int64
+		formatString: 0
+		lineageTag: 92936964-e64f-4ab7-b66b-c52b7622d641
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [IS_HIGHLIGHT]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source = ```
+				DATATABLE (
+				    "Order", INTEGER,
+				    "STT", STRING,
+				    "Nội dung", STRING,
+				    "Đvt",string,
+				    "IS_HIGHLIGHT", INTEGER,
+				{
+				{3,"A","SẢN LƯỢNG SẢN XUẤT","Tấn",1},
+				{4,"A1","Ure","Tấn",0},
+				{5,"A2","NH3","Tấn",0},
+				{6,"B","SẢN LƯỢNG TIÊU THỤ","Tấn",1},
+				{7,"B1","Ure","Tấn",0},
+				{8,"B2","NH3","Tấn",0},
+				{9,"C","DOANH THU","Tỷ đồng",1},
+				{10,"C1","Ure","Tỷ đồng",0},
+				{11,"C2","NH3","Tỷ đồng",0},
+				{12,"D","BIẾN PHÍ","Tỷ Đồng",1},
+				{13,"D1","Khí đầu vào","Tỷ Đồng",0},
+				{14,"D2","Điện nhận lưới","Tỷ Đồng",0},
+				{15,"D3","Chi phí nước ngọt","Tỷ Đồng",0},
+				{16,"D4","Hóa chất","Tỷ Đồng",0},
+				{17,"D5","Chi phí bao bì","Tỷ Đồng",0},
+				{18,"E","SỐ DƯ ĐẢM PHÍ","Tỷ Đồng",1},
+				{19,"F","ĐỊNH PHÍ","Tỷ Đồng",1},
+				{20,"F1","Xúc tác","Tỷ Đồng",0},
+				{21,"F2","Nhân công trực tiếp","Tỷ Đồng",0},
+				{22,"F3","Chi phí sản xuất chung","Tỷ Đồng",0},
+				{23,"F4","Chi phí quản lý","Tỷ Đồng",0},
+				{24,"F5","Chi phí bán hàng","Tỷ Đồng",0},
+				{25,"F6","Chi phí tài chính","Tỷ Đồng",0},
+				{26,"G","LỢI NHUẬN","Tỷ Đồng",1},
+				{27,"H","ĐIỂM HOÀ VỐN","Đồng/tấn",1}
+				}
+				)
+				
+				```
+

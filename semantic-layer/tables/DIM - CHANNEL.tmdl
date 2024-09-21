@@ -1,0 +1,29 @@
+table 'DIM - CHANNEL'
+	lineageTag: a3a69bf7-d484-433f-8b61-94c1948a0e6e
+
+	column CHANNEL_CODE
+		dataType: string
+		lineageTag: 27d6f280-3891-4fc3-998f-0d509b7a6672
+		summarizeBy: distinctCount
+		sourceColumn: CHANNEL_CODE
+
+		annotation SummarizationSetBy = User
+
+	column CHANNEL_NAME
+		dataType: string
+		lineageTag: e3e1eef7-7ecb-4d4e-92fe-712de3bccc49
+		summarizeBy: none
+		sourceColumn: CHANNEL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - CHANNEL' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_DIST_CHANNEL = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_DIST_CHANNEL"]}[Data]
+				in
+				    gld_VW_DIM_DIST_CHANNEL
+
