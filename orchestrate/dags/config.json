@@ -1,0 +1,43 @@
+{
+    "business_date": "2023-01-31",
+    "batch_id": 2,
+    "source_system": "CORE24",
+    "src_tgt_map": [
+        {
+            "src_file_name_prefix": "CORE24-DE-CUSTOMER-",
+            "tgt_table": "CUSTOMER_DE"
+        },
+        {
+            "src_file_name_prefix": "CORE24-DE-CUSTOMER-ROLE-",
+            "tgt_table": "CUSTOMER_ROLE_DE"
+        },
+        {
+            "src_file_name_prefix": "CORE24-DE-ACCOUNT-LOAN-",
+            "tgt_table": "ACCOUNT_LOAN_DE"
+        },
+        {
+            "src_file_name_prefix": "CORE24-DE-ACCOUNT-STATUS-LOAN-",
+            "tgt_table": "ACCOUNT_STATUS_LOAN_DE"
+        },
+        {
+            "src_file_name_prefix": "CORE24-DE-ACCOUNT-BALANCE-SAV-",
+            "tgt_table": "ACCOUNT_BALANCE_SAV_DE"
+        },
+        {
+            "src_file_name_prefix": "CORE24-DE-COL-ARREARS-LOAN-",
+            "tgt_table": "COL_ARREARS_LOAN_DE"
+        },
+        {
+            "src_file_name_prefix": "CORE24-DE-ACCOUNT-INTEREST-SAV-",
+            "tgt_table": "ACCOUNT_INTEREST_SAV_DE"
+        },
+        {
+            "src_file_name_prefix": "CORE24-DE-ACCOUNT-SAV-",
+            "tgt_table": "ACCOUNT_SAV_DE"
+        },
+        {
+            "src_file_name_prefix": "CORE24-DE-ACCOUNT-INTEREST-LOAN-",
+            "tgt_table": "ACCOUNT_INTEREST_LOAN_DE"
+        }
+    ]
+}
