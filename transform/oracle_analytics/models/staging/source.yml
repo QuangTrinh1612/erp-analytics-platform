@@ -30,10 +30,10 @@ sources:
         identifier: fscmtopmodelam_finextractam_glbiccextractam_journalheaderextractpvo
       
       - name: Journal_Batch_PVO
-        identifier: fscmtopmodelam_finextractam_glbiccextractam_journallineextractpvo
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journalbatchextractpvo
       
       - name: Journal_Line_PVO
-        identifier: fscmtopmodelam_finextractam_glbiccextractam_journalbatchextractpvo
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journallineextractpvo
 
       - name: Ledger_PVO
         identifier: fscmtopmodelam_finextractam_glbiccextractam_ledgerextractpvo
@@ -46,3 +46,18 @@ sources:
       
       - name: Journal_Category_PVO
         identifier: fscmtopmodelam_finextractam_glbiccextractam_journalcategoryextractpvo
+
+      - name: XLA_AE_Header_PVO
+        identifier: fscmtopmodelam_finextractam_xlabiccextractam_subledgerjournalheaderextractpvo
+
+      - name: XLA_AE_Line_PVO
+        identifier: fscmtopmodelam_finextractam_xlabiccextractam_subledgerjournallineextractpvo
+
+      - name: XLA_Event_PVO
+        identifier: fscmtopmodelam_finextractam_xlabiccextractam_subledgerjournaleventextractpvo
+      
+      - name: XLA_Transaction_Entity_PVO
+        identifier: fscmtopmodelam_finextractam_xlabiccextractam_subledgerjournaltransactionentityextractpvo
+      
+      - name: GL_Import_Reference_PVO
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journalimportreferenceextractpvo
