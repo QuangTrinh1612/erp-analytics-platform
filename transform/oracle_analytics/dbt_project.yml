@@ -18,7 +18,7 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 vars:
-  catalog: 'dev_catalog'
+  catalog: 'uat_catalog'
   fusion_schema: 'brz_fusion'
 
 models:
@@ -35,3 +35,5 @@ models:
         node_color: "#ffd700"
       procurement:
         +schema: procurement
+      finance:
+        +schema: finance

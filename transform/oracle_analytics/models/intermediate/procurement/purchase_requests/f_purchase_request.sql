@@ -16,8 +16,8 @@ prd AS (
 ),
 final AS (
     SELECT
-        -- Primary Key
-        prh.requisition_header_id || '-' || prl.requisition_line_id AS Purchase_Request_Id,
+        -- Surrogate Key
+        {{ dbt_utils.generate_surrogate_key(['prh.requisition_header_id', 'prl.requisition_line_id']) }} AS Purchase_Request_Id,
         
         -- Requisition Header Information
         prh.requisition_header_id AS requisition_header_id,
@@ -67,5 +67,5 @@ final AS (
 )
 SELECT * FROM final
 {% if is_incremental() %}
-WHERE last_update_date > (SELECT MAX(last_update_date) from {{ this }})
+WHERE last_update_date > (SELECT COALESCE(MAX(last_update_date), '1970-01-01') from {{ this }})
 {% endif %}
