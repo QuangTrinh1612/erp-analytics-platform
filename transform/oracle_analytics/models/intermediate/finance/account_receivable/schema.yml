@@ -1,7 +1,7 @@
 version: 2
 models:
   - name: f_ar_line_item
-    description: {{ doc('f_ar_line_item') }}
+    description: '{{ doc("f_ar_line_item") }}'
     columns:
       - name: AR_Line_Item_Id
         description: A unique identifier for each line item in the Accounts Receivable
