@@ -37,3 +37,12 @@ models:
         +schema: procurement
       finance:
         +schema: finance
+
+        # Temp Ignore
+        account_payable:
+          +enabled: false
+        fixed_asset:
+          +enabled: false
+        account_receivable:
+          d_customer:
+            +enabled: false

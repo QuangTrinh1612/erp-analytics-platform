@@ -5,6 +5,9 @@ sources:
     database: '{{ var("catalog") }}'
     schema: '{{ var("fusion_schema") }}'
     tables:
+
+      # Procurement
+
       - name: Purchasing_Document_Header_PVO
         identifier: fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentheaderextractpvo
 
@@ -22,6 +25,8 @@ sources:
       
       - name: Requisition_Distribution_PVO
         identifier: fscmtopmodelam_prcextractam_porbiccextractam_requisitiondistributionextractpvo
+
+      # Finance
 
       - name: Code_Combination_PVO
         identifier: fscmtopmodelam_finextractam_glbiccextractam_codecombinationextractpvo
@@ -61,3 +66,15 @@ sources:
       
       - name: GL_Import_Reference_PVO
         identifier: fscmtopmodelam_finextractam_glbiccextractam_journalimportreferenceextractpvo
+
+      - name: RA_Customer_Trx_Header_PVO
+        identifier: fscmtopmodelam_finextractam_arbiccextractam_transactionheaderextractpvo
+
+      - name: RA_Customer_Trx_Line_PVO
+        identifier: fscmtopmodelam_finextractam_arbiccextractam_transactionlineextractpvo
+
+      - name: RA_Customer_Trx_Dist_PVO
+        identifier: fscmtopmodelam_finextractam_arbiccextractam_transactiondistributionextractpvo
+
+      - name: HZ_Customer_Account_PVO
+        identifier: fscmtopmodelam_partiesanalyticsam_customeraccount
