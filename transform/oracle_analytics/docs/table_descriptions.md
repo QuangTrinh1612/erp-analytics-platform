@@ -29,3 +29,20 @@ The `f_purchase_order` table is a fact table in the data warehouse designed to s
 - **Procurement Trends**: Identify trends in procurement activities, such as frequently ordered items or peak procurement periods.
 
 {% enddocs %}
+
+{% docs f_ar_line_item %}
+The 'f_ar_line_item' model is a comprehensive representation of
+Accounts Receivable (AR) line items. It is derived from multiple sources
+including customer transaction lines, headers, and distributions. The
+model includes a wide range of fields capturing various aspects of AR
+transactions such as transaction IDs, numbers, dates, classes, document
+types, currency codes, exchange rates, flags for prepayment, unpaid and
+on-hold status, total amounts, customer IDs, site IDs, line numbers,
+types, descriptions, quantities ordered, credited, invoiced, unit prices,
+sales order details, inventory item IDs, credit memo IDs, revenue amounts,
+remaining due amounts, tax rates, unit of measure codes, last update
+dates, and distribution items. The model also includes a unique identifier
+for each AR line item and a timestamp indicating the time of data
+ingestion. This model is particularly useful for financial analysis,
+reporting, and auditing purposes.
+{% enddocs %}
