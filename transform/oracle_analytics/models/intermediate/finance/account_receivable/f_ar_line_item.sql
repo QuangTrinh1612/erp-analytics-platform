@@ -1,109 +1,85 @@
-{{ config(
-    materialized='incremental',
-    unique_key='ar_line_item_id'
-) }}
-
-WITH ar_lines AS (
-    SELECT 
-        trx_line.customer_trx_line_id AS ar_line_item_id,
-        trx_line.customer_trx_id,
-        trx_line.line_number,
-        trx_line.inventory_item_id,
-        trx_line.quantity_ordered,
-        trx_line.quantity_invoiced,
-        trx_line.unit_selling_price,
-        trx_line.extended_amount,
-        trx_line.tax_amount,
-        trx_line.accounting_rule_id,
-        trx_line.line_type,
-        trx_line.creation_date AS line_creation_date,
-        trx_line.last_update_date AS line_last_update_date,
-        trx_line.currency_code,
-        trx_line.account_class,
-        trx_line.gl_date,
-        trx_line.gl_code_combination_id,
-        trx_line.description AS line_description
-    FROM 
-        {{ source('oracle_fusion_finance', 'RA_CUSTOMER_TRX_LINES_ALL') }} trx_line
+{{  
+    config(
+        materialized='incremental',
+        unique_key='AR_Line_Item_Id',
+        incremental_strategy='merge'
+    )
+}}
+WITH ar_line AS (
+    SELECT * FROM {{ ref('ra_customer_trx_line') }}
 ),
-
-ar_transactions AS (
-    SELECT 
-        trx.customer_trx_id,
-        trx.trx_number AS invoice_number,
-        trx.trx_date AS invoice_date,
-        trx.currency_code,
-        trx.bill_to_customer_id,
-        trx.bill_to_site_use_id,
-        trx.ship_to_customer_id,
-        trx.ship_to_site_use_id,
-        trx.transaction_type_id,
-        trx.creation_date AS trx_creation_date,
-        trx.last_update_date AS trx_last_update_date,
-        trx.trx_type_name AS transaction_type
-    FROM 
-        {{ source('oracle_fusion_finance', 'RA_CUSTOMER_TRX_ALL') }} trx
+ar_header AS (
+    SELECT * FROM {{ ref('ra_customer_trx_header') }}
 ),
-
-customers AS (
-    SELECT 
-        cust_acct.cust_account_id,
-        cust_acct.party_id,
-        cust_acct.account_number,
-        cust_acct.account_name,
-        cust_acct.creation_date AS customer_creation_date,
-        cust_acct.last_update_date AS customer_last_update_date
-    FROM 
-        {{ source('oracle_fusion_finance', 'HZ_CUST_ACCOUNTS') }} cust_acct
-),
-
-gl_codes AS (
-    SELECT 
-        gl_code_combination_id,
-        code_combination AS gl_code_combination,
-        segment1 || '.' || segment2 || '.' || segment3 || '.' || segment4 || '.' || segment5 AS gl_account
-    FROM 
-        {{ source('oracle_fusion_finance', 'GL_CODE_COMBINATIONS') }}
+ar_distribution AS (
+    SELECT
+        customer_trx_line_id,
+        CAST(
+            COLLECT_LIST(
+                TO_JSON(
+                    STRUCT(
+                        cust_trx_line_gl_dist_id,
+                        code_combination_id,
+                        account_class,
+                        gl_date,
+                        gl_posted_date,
+                        amount,
+                        percent
+                    )
+                )
+            ) AS STRING
+        ) AS distribution_items
+    FROM {{ ref('ra_customer_trx_distribution') }}
+    GROUP BY ALL
 )
+SELECT
+    -- Surrogate Key
+    {{ dbt_utils.generate_surrogate_key(['hdr.customer_trx_id', 'line.customer_trx_line_id']) }} AS AR_Line_Item_Id,
 
-SELECT 
-    ar_lines.ar_line_item_id,
-    ar_lines.customer_trx_id,
-    ar_lines.line_number,
-    ar_lines.inventory_item_id,
-    ar_lines.quantity_ordered,
-    ar_lines.quantity_invoiced,
-    ar_lines.unit_selling_price,
-    ar_lines.extended_amount,
-    ar_lines.tax_amount,
-    ar_lines.line_creation_date,
-    ar_lines.line_last_update_date,
-    ar_lines.currency_code,
-    ar_lines.account_class,
-    ar_lines.gl_date,
-    ar_lines.line_description,
-    ar_lines.gl_code_combination_id,
-    gl.gl_account AS gl_account_code,
-    ar_transactions.invoice_number,
-    ar_transactions.invoice_date,
-    ar_transactions.transaction_type,
-    ar_transactions.trx_creation_date,
-    ar_transactions.trx_last_update_date,
-    ar_transactions.bill_to_customer_id,
-    ar_transactions.ship_to_customer_id,
-    cust.account_number AS customer_account_number,
-    cust.account_name AS customer_name,
-    cust.customer_creation_date,
-    cust.customer_last_update_date
-FROM 
-    ar_lines
-LEFT JOIN 
-    ar_transactions ON ar_lines.customer_trx_id = ar_transactions.customer_trx_id
-LEFT JOIN 
-    customers cust ON ar_transactions.bill_to_customer_id = cust.cust_account_id
-LEFT JOIN 
-    gl_codes gl ON ar_lines.gl_code_combination_id = gl.gl_code_combination_id
+    hdr.customer_trx_id,
+    hdr.trx_number,
+    hdr.trx_date,
+    hdr.trx_class,
+    hdr.source_document_type,
+    hdr.document_sub_type,
+    hdr.invoice_currency_code,
+    hdr.exchange_rate,
+    hdr.prepayment_flag,
+    hdr.br_unpaid_flag,
+    hdr.br_on_hold_flag,
+    hdr.br_amount AS total_amount,
+
+    hdr.bill_to_customer_id AS customer_id,
+    hdr.bill_to_site_use_id AS customer_site_id,
+    hdr.bill_to_customer_id || '-' || hdr.bill_to_site_use_id AS customer_site_key,
+
+    line.customer_trx_line_id,
+    line.line_number,
+    line.line_type,
+    line.description AS line_description,
+    line.quantity_ordered,
+    line.quantity_credited,
+    line.quantity_invoiced,
+    line.unit_standard_price,
+    line.unit_selling_price,
+    line.sales_order,
+    line.sales_order_line,
+    line.sales_order_date,
+    line.inventory_item_id,
+    line.previous_customer_trx_id as credit_memo_trx_id,
+    line.previous_customer_trx_line_id as credit_memo_trx_line_id,
+    line.revenue_amount,
+    line.amount_due_remaining,
+    line.tax_rate,
+    line.uom_code,
+
+    dist.distribution_items, -- JSON string of distribution items for each line,
+    NOW() AS _etl_ingestion_time
+
+FROM ar_header hdr
+JOIN ar_line line ON hdr.customer_trx_id = line.customer_trx_id
+LEFT JOIN ar_distribution dist ON line.customer_trx_line_id = dist.customer_trx_line_id
 
 {% if is_incremental() %}
-WHERE ar_lines.line_last_update_date > (SELECT MAX(line_last_update_date) FROM {{ this }})
+WHERE l.last_update_date > (SELECT COALESCE(MAX(line_last_update_date), '1970-01-01') FROM {{ this }})
 {% endif %}

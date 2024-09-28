@@ -7,7 +7,16 @@ This dbt project focuses on modeling data extracted from Oracle ERP, specificall
 
 ---
 
-## Models Breakdown
+## Finance Models Breakdown
+
+### 1. **Source Tables**
+- `AP_INVOICES_ALL`: Contains invoice headers.
+- `AP_INVOICE_LINES_ALL`: Contains line-level details for each invoice.
+- `AP_INVOICE_DISTRIBUTIONS_ALL`: Contains distribution details for the invoices. This will be represented as a JSON string.
+- `AP_INVOICE_PAYMENTS_ALL`: Contains payment details associated with the invoices.
+- `AR_PAYMENT_SCHEDULES_ALL`: Contains payment schedule information, including due dates and status.
+
+## Procurement Models Breakdown
 
 ### 1. **stg_purchase_orders**
 **Description:**  
