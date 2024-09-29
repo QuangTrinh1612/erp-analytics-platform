@@ -12,10 +12,10 @@ pol AS (
     SELECT * FROM {{ ref("purchase_order_line") }}
 ),
 final AS (
-    SELECT 
-        -- Primary Key
-        poh.po_header_id || '-' || pol.po_line_id AS Purchase_Order_Id,
-        
+    SELECT
+        -- Surrogate Key
+        {{ dbt_utils.generate_surrogate_key(['poh.po_header_id', 'pol.po_line_id']) }} AS Purchase_Order_Id,
+
         -- Purchase Order Header Information
         poh.po_header_id AS po_header_id,
         poh.segment1 AS po_number, -- Purchase Order Number
@@ -60,5 +60,5 @@ final AS (
 )
 SELECT * FROM final
 {% if is_incremental() %}
-WHERE last_update_date > (SELECT MAX(last_update_date) from {{ this }})
+WHERE last_update_date > (SELECT COALESCE(MAX(last_update_date), '1970-01-01') from {{ this }})
 {% endif %}

@@ -5,6 +5,9 @@ sources:
     database: '{{ var("catalog") }}'
     schema: '{{ var("fusion_schema") }}'
     tables:
+
+      # Procurement
+
       - name: Purchasing_Document_Header_PVO
         identifier: fscmtopmodelam_prcextractam_pobiccextractam_purchasingdocumentheaderextractpvo
 
@@ -23,6 +26,8 @@ sources:
       - name: Requisition_Distribution_PVO
         identifier: fscmtopmodelam_prcextractam_porbiccextractam_requisitiondistributionextractpvo
 
+      # Finance
+
       - name: Code_Combination_PVO
         identifier: fscmtopmodelam_finextractam_glbiccextractam_codecombinationextractpvo
 
@@ -30,10 +35,10 @@ sources:
         identifier: fscmtopmodelam_finextractam_glbiccextractam_journalheaderextractpvo
       
       - name: Journal_Batch_PVO
-        identifier: fscmtopmodelam_finextractam_glbiccextractam_journallineextractpvo
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journalbatchextractpvo
       
       - name: Journal_Line_PVO
-        identifier: fscmtopmodelam_finextractam_glbiccextractam_journalbatchextractpvo
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journallineextractpvo
 
       - name: Ledger_PVO
         identifier: fscmtopmodelam_finextractam_glbiccextractam_ledgerextractpvo
@@ -46,3 +51,30 @@ sources:
       
       - name: Journal_Category_PVO
         identifier: fscmtopmodelam_finextractam_glbiccextractam_journalcategoryextractpvo
+
+      - name: XLA_AE_Header_PVO
+        identifier: fscmtopmodelam_finextractam_xlabiccextractam_subledgerjournalheaderextractpvo
+
+      - name: XLA_AE_Line_PVO
+        identifier: fscmtopmodelam_finextractam_xlabiccextractam_subledgerjournallineextractpvo
+
+      - name: XLA_Event_PVO
+        identifier: fscmtopmodelam_finextractam_xlabiccextractam_subledgerjournaleventextractpvo
+      
+      - name: XLA_Transaction_Entity_PVO
+        identifier: fscmtopmodelam_finextractam_xlabiccextractam_subledgerjournaltransactionentityextractpvo
+      
+      - name: GL_Import_Reference_PVO
+        identifier: fscmtopmodelam_finextractam_glbiccextractam_journalimportreferenceextractpvo
+
+      - name: RA_Customer_Trx_Header_PVO
+        identifier: fscmtopmodelam_finextractam_arbiccextractam_transactionheaderextractpvo
+
+      - name: RA_Customer_Trx_Line_PVO
+        identifier: fscmtopmodelam_finextractam_arbiccextractam_transactionlineextractpvo
+
+      - name: RA_Customer_Trx_Dist_PVO
+        identifier: fscmtopmodelam_finextractam_arbiccextractam_transactiondistributionextractpvo
+
+      - name: HZ_Customer_Account_PVO
+        identifier: fscmtopmodelam_partiesanalyticsam_customeraccount

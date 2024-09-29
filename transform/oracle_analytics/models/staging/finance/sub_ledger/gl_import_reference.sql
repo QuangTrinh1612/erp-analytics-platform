@@ -1,0 +1,26 @@
+SELECT
+    GlImportReferencesJeHeaderId AS JE_HEADER_ID,
+    GlImportReferencesReference8 AS REFERENCE_8,
+    GlImportReferencesReference1 AS REFERENCE_1,
+    GlImportReferencesReference10 AS REFERENCE_10,
+    GlImportReferencesLastUpdateLogin AS LAST_UPDATE_LOGIN,
+    GlImportReferencesCreatedBy AS CREATED_BY,
+    GlImportReferencesGlSlLinkTable AS GL_SL_LINK_TABLE,
+    GlImportReferencesReference2 AS REFERENCE_2,
+    GlImportReferencesReference3 AS REFERENCE_3,
+    GlImportReferencesReference6 AS REFERENCE_6,
+    GlImportReferencesJeBatchId AS JE_BATCH_ID,
+    GlImportReferencesReference4 AS REFERENCE_4,
+    GlImportReferencesReference7 AS REFERENCE_7,
+    GlImportReferencesSubledgerDocSequenceId AS SUBLEDGER_DOC_SEQUENCE_ID,
+    GlImportReferencesGlSlLinkId AS GL_SL_LINK_ID,
+    GlImportReferencesObjectVersionNumber AS OBJECT_VERSION_NUMBER,
+    GlImportReferencesLastUpdatedBy AS LAST_UPDATED_BY,
+    GlImportReferencesCreationDate AS CREATION_DATE,
+    GlImportReferencesJeLineNum AS JE_LINE_NUM,
+    GlImportReferencesSubledgerDocSequenceValue AS SUBLEDGER_DOC_SEQUENCE_VALUE,
+    GlImportReferencesReference9 AS REFERENCE_9,
+    GlImportReferencesReference5 AS REFERENCE_5,
+    GlImportReferencesLastUpdateDate AS LAST_UPDATE_DATE
+FROM
+    {{ source('Fusion', 'GL_Import_Reference_PVO') }}
