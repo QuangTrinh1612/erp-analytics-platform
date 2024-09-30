@@ -43,6 +43,3 @@ models:
           +enabled: false
         fixed_asset:
           +enabled: false
-        account_receivable:
-          d_customer:
-            +enabled: false

@@ -78,3 +78,12 @@ sources:
 
       - name: HZ_Customer_Account_PVO
         identifier: fscmtopmodelam_partiesanalyticsam_customeraccount
+
+      - name: Customer_PVO
+        identifier: fscmtopmodelam_partiesanalyticsam_customer
+      
+      - name: Customer_Account_PVO
+        identifier: fscmtopmodelam_partiesanalyticsam_customeraccount
+
+      - name: Customer_Account_Site_Use_PVO
+        identifier: fscmtopmodelam_partiesanalyticsam_custaccountsiteuse
