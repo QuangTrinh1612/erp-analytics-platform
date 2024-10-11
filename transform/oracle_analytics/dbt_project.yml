@@ -41,9 +41,9 @@ models:
       finance:
         +schema: finance
 
-        # Temp Ignore
         account_payable:
-          +enabled: false
+          f_ap_line_item:
+            +enabled: false
         fixed_asset:
           +enabled: false
 
