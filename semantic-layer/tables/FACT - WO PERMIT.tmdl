@@ -1,0 +1,148 @@
+table 'FACT - WO PERMIT'
+	lineageTag: c0eb0130-e344-4772-b6de-850f3fd8666c
+
+	column OBJECT_NUM
+		dataType: string
+		lineageTag: 130fbd76-753a-401c-afa9-ba65e8d71959
+		summarizeBy: none
+		sourceColumn: OBJECT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 007e41e3-6fe8-4776-91d5-dd19f24b8806
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISSUE_NAME
+		dataType: string
+		lineageTag: bfa3058e-16b1-43f4-b3c7-0b2546d233d4
+		summarizeBy: none
+		sourceColumn: ISSUE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PERMIT_STATUS
+		dataType: string
+		lineageTag: c5c6f2ca-0998-45da-ba04-0f47771d4064
+		summarizeBy: none
+		sourceColumn: PERMIT_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLS_DVCQ
+		dataType: string
+		lineageTag: e17ec7ff-c223-4524-8566-757902b100ad
+		summarizeBy: none
+		sourceColumn: CLS_DVCQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLS_DVTH
+		dataType: string
+		lineageTag: 7b77056b-c59a-4014-87b7-e146d3d3c9ab
+		summarizeBy: none
+		sourceColumn: CLS_DVTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column CLS_PKTBD
+		dataType: string
+		lineageTag: 80aae70c-1953-43f5-998b-30be4c2caa61
+		summarizeBy: none
+		sourceColumn: CLS_PKTBD
+
+		annotation SummarizationSetBy = Automatic
+
+	column HUY_DVCQ
+		dataType: string
+		lineageTag: 4d950796-d386-4e19-8f4c-7f3783723be9
+		summarizeBy: none
+		sourceColumn: HUY_DVCQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column HUY_PKTBD
+		dataType: string
+		lineageTag: 7f4dc5a5-d86b-41a9-9663-6553f71354a4
+		summarizeBy: none
+		sourceColumn: HUY_PKTBD
+
+		annotation SummarizationSetBy = Automatic
+
+	column HUY_PLANER
+		dataType: string
+		lineageTag: f253a585-5056-47c9-8155-a8dd925ae053
+		summarizeBy: none
+		sourceColumn: HUY_PLANER
+
+		annotation SummarizationSetBy = Automatic
+
+	column HUY_SUPER
+		dataType: string
+		lineageTag: 55d11f21-aec4-4b8d-8d24-a7daa970f04e
+		summarizeBy: none
+		sourceColumn: HUY_SUPER
+
+		annotation SummarizationSetBy = Automatic
+
+	column REL_DVCQ
+		dataType: string
+		lineageTag: 8436670a-6d7f-4b5e-ad4c-fc75d941c4a9
+		summarizeBy: none
+		sourceColumn: REL_DVCQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column REL_DVTH
+		dataType: string
+		lineageTag: d4932c09-133a-4cc8-9e45-5ff086cb4440
+		summarizeBy: none
+		sourceColumn: REL_DVTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column REL_PKTBD
+		dataType: string
+		lineageTag: acab9245-ad20-44ad-93ac-62e890f5d9a5
+		summarizeBy: none
+		sourceColumn: REL_PKTBD
+
+		annotation SummarizationSetBy = Automatic
+
+	column REL_PLANER
+		dataType: int64
+		formatString: 0
+		lineageTag: d81938cb-e491-49bd-9be7-4ae225f8a9a8
+		summarizeBy: sum
+		sourceColumn: REL_PLANER
+
+		annotation SummarizationSetBy = Automatic
+
+	column REL_SUPER
+		dataType: int64
+		formatString: 0
+		lineageTag: 0877cb64-0fa9-40b2-a541-8ae23969651f
+		summarizeBy: sum
+		sourceColumn: REL_SUPER
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - WO PERMIT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_WO_PERMIT = pvcfcprodsqlpool{[Schema="gld",Item="FACT_WO_PERMIT"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_WO_PERMIT,{"W_INSERT_DT"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

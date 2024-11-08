@@ -1,0 +1,74 @@
+table 'DIM - REPORTING LINE IS'
+	lineageTag: 0df0d203-909c-455c-9682-53dc1fcacb59
+
+	column ITEM_NO
+		dataType: string
+		lineageTag: dcd178ed-1447-408f-8d88-1b550199fd71
+		summarizeBy: none
+		sourceColumn: ITEM_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESC_VN
+		dataType: string
+		lineageTag: f00fe835-0db8-4d4f-8caa-4afdb41e587f
+		summarizeBy: none
+		sourceColumn: DESC_VN
+		sortByColumn: ITEM_NO
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESC_EN
+		dataType: string
+		lineageTag: d39e6a9e-90e8-4a03-9d2d-9d527171888b
+		summarizeBy: none
+		sourceColumn: DESC_EN
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE
+		dataType: string
+		lineageTag: f0723425-a44e-4f44-a6a7-5dd13cd84ef1
+		summarizeBy: none
+		sourceColumn: NOTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOLD
+		dataType: string
+		lineageTag: adbacc2a-bdaf-4945-9301-cad3e2aeb3be
+		summarizeBy: none
+		sourceColumn: BOLD
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITALIC
+		dataType: string
+		lineageTag: 592ce45c-4040-4474-a4aa-d15781863e95
+		summarizeBy: none
+		sourceColumn: ITALIC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SIGN
+		dataType: int64
+		formatString: 0
+		lineageTag: c144c46c-53af-4179-a89d-b6b69a024232
+		summarizeBy: sum
+		sourceColumn: SIGN
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - REPORTING LINE IS' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("lVVNa9tAEP0rQ052U5mVFNlJwIemadpAcCGYUkhzUOS1tcTeVbUrN6H00FMPPeWQQ+klJoRCS6CQW0TJQSH/Q/+ks/qwHdsJBPwhpNn3Zt68Ge3tLRFz6fmSWYNN4XIflB/BQTLi4CdnvAfD5Ay8CC+89PoigE4af/d8GKbxRX5olw4pjyh0QzEA6fYpiC70hOhIcHkHglAMmWSC69uShkPmUYkn323XLAf/3+MXP4a5tP8cM7Hw2qrBy2TkwaEv0utzDj2GfwNQYRr/gU6ZYx64SzuRpxBeAuMQ5rkU8PUcWqeZgZsEL+3pMvGbXv/iupqv0zX7yZX7eOEI06KqJHxS8VAxSZOYBrGqRaKNOR1M3ZGVGrxmyUhTnpSZ6STzR2+YVCJkntsHT0g1IZai3ymAV2cUsLQCTg120vicAdfVX6K+afwjmNPg0fIRY+sJJVehYpGmSQzTrOb53C/X0uXWpzujWz9ScHuCuWEOKjlj4PnJJffzyHuu6zLuco+hEiKgoavtUAiwNhagZNIGa6DBfAYB4s0gP/AEKltjCnoUUC6xppzCJrMa25oN2qHAvG9Pkqv1CWQ/QdmH7jFGfIgIsRqGVumTzzx/HfpYPJpY0ZBiO0uaMfqEQI/N6lSik6blD14VR6ErwqxDCzD0bKxNYXyMslHrJ/+KCeM9n6XxtyCP24gk41RKGLjc7dEB5Y9lmGliklmfldOm9BzPNPiQIWfO/NkmTYvAMnrGBAMsq4q/FcvBO1a9+qWA1tOHXusyJXMTHJQpurgPhkwxFCCHWkYgA2EMBFkuIOYsaGc7EPdZG93HfUw4wAWEa6i4/Vb5NMT2eGJwv+TyvDaWaU1JOj5tlacfVmwlU8yeVWwMYZcQZcmVFdK0TcO2Fs6Tk8Hhkmin8Smqu9OCw/T6BpTQVlHh3d80/unlDbkpQ4XSA9RFCmoo92hC5SAVWV4hi6ky3ZzpuclQod3abEHmodycfhkXhaG2z8Z2+xFBnEzO+kOwItFmRQexImwaDQLch4HgtDOPW8+UacwKLd2oJFCT/s9Ngj74oosTami+sUB10nSI4ZiGs7gdjYwUJ3NHz793N4KDbNpUmPzmuF/jUywRX3I3URG34UrmTXYBLlPpu3hZeXYfv4DPWrBWwMvoePLGXISPgZusHynaAeqGDO0BuDVzBlzU8xT7/wE=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [ITEM_NO = _t, DESC_VN = _t, DESC_EN = _t, NOTE = _t, BOLD = _t, ITALIC = _t, SIGN = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"SIGN", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,168 @@
+table 'FACT - GL ACCOUNT BALANCE'
+	lineageTag: 3c072886-60e8-460f-ba04-a7741c7c6723
+
+	column FISCAL_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dc4e1c36-3e81-4a07-b466-5dd5ff0bdc0f
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FISCAL_YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 23053773-3c75-4db9-9c6f-ffa96a06d0d6
+		summarizeBy: sum
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: int64
+		formatString: 0
+		lineageTag: 406da931-bb8f-4ba5-88ec-42c899a694d6
+		summarizeBy: sum
+		sourceColumn: FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: be651085-86da-4e0a-9db1-65eee57bb2dc
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_CODE
+		dataType: string
+		lineageTag: 5ee99905-a936-4bd8-b330-65c5caf91287
+		summarizeBy: none
+		sourceColumn: CURRENCY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_NO
+		dataType: string
+		lineageTag: 31587b91-d3b4-4626-9bd3-7e5a0e5a28ca
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_NAME
+		dataType: string
+		lineageTag: d248e134-f177-4160-b0cf-b8450b2571a6
+		summarizeBy: none
+		sourceColumn: ACCOUNT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TYPE_OF_COST
+		dataType: string
+		lineageTag: b69d096c-5a26-4b68-9537-aa33f68b9699
+		summarizeBy: none
+		sourceColumn: TYPE_OF_COST
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEBIT_AMT
+		dataType: double
+		lineageTag: 2f573601-34b4-45db-957e-7b282df3a118
+		summarizeBy: sum
+		sourceColumn: DEBIT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREDIT_AMT
+		dataType: double
+		lineageTag: 1e0e6bf1-ebb0-4660-92e6-b19b24a0e29a
+		summarizeBy: sum
+		sourceColumn: CREDIT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DEBIT_BALANCE
+		dataType: double
+		lineageTag: 5c2e237f-fe93-4ac1-8cf6-0e89369cdeed
+		summarizeBy: sum
+		sourceColumn: DEBIT_BALANCE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREDIT_BALANCE
+		dataType: double
+		lineageTag: 29d4f0c9-c7ba-4d9d-8648-f607c0210fa0
+		summarizeBy: sum
+		sourceColumn: CREDIT_BALANCE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OP_DEBIT_BALANCE
+		dataType: double
+		lineageTag: d89aba3a-005a-499f-bdbc-14a7655c6c1b
+		summarizeBy: sum
+		sourceColumn: OP_DEBIT_BALANCE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OP_CREDIT_BALANCE
+		dataType: double
+		lineageTag: 59007af4-6c7f-4bc9-aca5-181c532bd6ef
+		summarizeBy: sum
+		sourceColumn: OP_CREDIT_BALANCE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PROFIT_CENTRE
+		dataType: string
+		lineageTag: 392137ba-5853-46b7-8a45-d09d48f8d884
+		summarizeBy: none
+		sourceColumn: PROFIT_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTRE
+		dataType: string
+		lineageTag: 0bd04c2e-3832-4230-80b8-36be4b1be65b
+		summarizeBy: none
+		sourceColumn: COST_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TYPE_OF_COST_ZCO10
+		dataType: string
+		lineageTag: 17fdcb7b-a159-4a31-bbd1-bcbdcd547fc9
+		summarizeBy: none
+		sourceColumn: TYPE_OF_COST_ZCO10
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - GL ACCOUNT BALANCE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				 	VW_FACT_GL_ACCOUNT_BALANCE = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_GL_ACCOUNT_BALANCE"]}[Data]
+				in
+				    VW_FACT_GL_ACCOUNT_BALANCE
+
+	annotation PBI_ResultType = Table
+

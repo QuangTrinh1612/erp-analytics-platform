@@ -1,0 +1,96 @@
+table 'FACT - CONSUMPTION NORM'
+	lineageTag: 6a971a49-92fc-4182-aec9-90e0b951ed91
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: e4eca910-7c3b-4769-88dd-e8df96582c90
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_GROUP
+		dataType: string
+		lineageTag: 0fd01f1b-4d89-40fe-ad7d-1ce33d162e3e
+		summarizeBy: none
+		sourceColumn: PRODUCT_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 9c5c7069-7421-4a64-89c1-d26b714c7671
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DECISION_NO
+		dataType: string
+		lineageTag: 33db98b2-9cf3-4e99-9e49-294a4a626bdc
+		summarizeBy: none
+		sourceColumn: DECISION_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column METRIC_CODE
+		dataType: string
+		lineageTag: a23d5e87-d585-4566-b471-56737f85e809
+		summarizeBy: none
+		sourceColumn: METRIC_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column METRIC
+		dataType: string
+		lineageTag: 646faa30-44e8-46ed-bd4b-5ac90eb8a077
+		summarizeBy: none
+		sourceColumn: METRIC
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: 58d171d7-b115-463d-b579-a7e9721af8b8
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALUE
+		dataType: double
+		lineageTag: 80e41b33-fe83-40f0-a5f8-bb894ab2b8b4
+		summarizeBy: sum
+		sourceColumn: VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DECISION_DATE
+		dataType: string
+		lineageTag: 87711808-935a-46cf-97c7-66a831455796
+		summarizeBy: none
+		sourceColumn: DECISION_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 44a03a59-f9b2-4c52-8bdb-1b1d595d9392
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - CONSUMPTION NORM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_CONSUMPTION_NORM = pvcfcprodsqlpool{[Schema="gld",Item="FACT_CONSUMPTION_NORM"]}[Data]
+				in
+				    gld_FACT_CONSUMPTION_NORM
+

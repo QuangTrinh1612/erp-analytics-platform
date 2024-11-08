@@ -1,0 +1,49 @@
+table 'DIM - RLS SALE ORG'
+	isHidden
+	lineageTag: 43986fda-d916-4089-932b-8bfe72b09a7d
+
+	column ROLE
+		dataType: string
+		isHidden
+		lineageTag: b4aa00ad-c459-4c7f-ac83-ffe244a0ee79
+		summarizeBy: none
+		sourceColumn: ROLE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_ORG
+		dataType: string
+		isHidden
+		lineageTag: 7de7950c-ddb6-4774-a618-af5c3196d73d
+		summarizeBy: none
+		sourceColumn: SALE_ORG
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_EMAIL
+		dataType: string
+		isHidden
+		lineageTag: d963bfa5-523f-4e6a-8c61-7815bd2e631c
+		summarizeBy: none
+		sourceColumn: USER_EMAIL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - RLS SALE ORG' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_RLS_SALE_ORGANIZATION = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_RLS_SALE_ORGANIZATION"]}[Data]
+				in
+				    gld_VW_DIM_RLS_SALE_ORGANIZATION
+
+	changedProperty = IsHidden
+

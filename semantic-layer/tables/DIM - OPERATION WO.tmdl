@@ -1,0 +1,50 @@
+table 'DIM - OPERATION WO'
+	lineageTag: ba04b51a-0402-4c1b-af68-656be0560040
+
+	column ROUTE_NUMBER
+		dataType: string
+		lineageTag: 5b0ee8f3-03fd-4100-8f7d-4f3ddfcad41e
+		summarizeBy: none
+		sourceColumn: ROUTE_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTER
+		dataType: string
+		lineageTag: 434bd607-9e8e-44d1-b3a3-14dc3d8ed430
+		summarizeBy: none
+		sourceColumn: COUNTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_ACT_NUM
+		dataType: string
+		lineageTag: 0e84d87a-0ddd-462b-896b-a26297cb6da9
+		summarizeBy: none
+		sourceColumn: OPER_ACT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_SHORT_DESC
+		dataType: string
+		lineageTag: 4891b3e0-8347-4c89-a943-fb05398ab087
+		summarizeBy: none
+		sourceColumn: OPER_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - OPERATION WO' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_OPERATION_WO = pvcfcprodsqlpool{[Schema="sil",Item="DIM_OPERATION_WO"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_OPERATION_WO,{"W_INSERT_D", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

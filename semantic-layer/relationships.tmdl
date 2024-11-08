@@ -1,0 +1,2820 @@
+relationship cc4970f9-a0f9-4b45-821d-d58b79b154f2
+	fromColumn: 'FACT - INVENTORY MOVEMENT'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 4c1b5855-9e75-4999-9913-825ce8fa5146
+	fromColumn: 'FACT - STORAGE BIN'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 75fb3b63-106b-4454-8c9d-6f238bbb19ab
+	fromColumn: 'FACT - STORAGE BIN'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship ab46fb1a-f6c3-4c39-9bd2-a76b5cefe423
+	fromColumn: 'FACT - STORAGE BIN'.STORAGE_LOCATION
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship abcf8dac-ba14-4777-bbf2-b647485d8c5e
+	fromColumn: 'FACT - INVENTORY MOVEMENT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship bc317dd0-946c-4fa2-a7b3-83ca50b15ed3
+	fromColumn: 'FACT - INVENTORY MOVEMENT'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 59ff716f-fe7a-4afb-99b5-3f50877b9bc7
+	fromColumn: 'FACT - TRANSFER ORDER'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 3fb62839-f4bb-4967-b823-88ad00d06b4b
+	fromColumn: 'FACT - TRANSFER ORDER'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 8c937da2-d386-486e-9137-ae6f8f36c68b
+	fromColumn: 'FACT - TRANSFER ORDER'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 9b38d4b4-ac96-4751-a17c-249c0d42a5cb
+	fromColumn: 'FACT - INVENTORY MOVEMENT'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 63e22ed1-b061-40da-968f-02c64da7f10c
+	fromColumn: 'FACT - INVENTORY BALANCE PLANT'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 75cc0e7f-b5ea-4bf2-8d86-bb187a0c8404
+	fromColumn: 'FACT - AVAILABLE INVENTORY WH'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship d18e8f80-7d92-4945-b114-5cec91412f41
+	fromColumn: 'FACT - AVAILABLE INVENTORY WH'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship bcdfb22c-f085-4577-9e53-8e96a9376bd6
+	fromColumn: 'FACT - INVENTORY MOVEMENT'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 0124c36d-a0b4-43dd-b783-e4c0835166e7
+	fromColumn: 'FACT - STORAGE BIN'.GR_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 2ef94093-fbe1-4295-8cde-a6ea4bb80822
+	fromColumn: 'FACT - TRANSFER ORDER'.CREATE_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 1af7ea88-1e54-4dfd-80e1-62818f378dc7
+	fromColumn: 'FACT - INVENTORY BALANCE PLANT'.DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 0503aeb0-50fb-4d10-9040-b71ed30c5ecf
+	fromColumn: 'FACT - AVAILABLE INVENTORY WH'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship d86015a9-54eb-4a64-a57e-89efd96e0d35
+	fromColumn: 'FACT - INVENTORY BALANCE PLANT'.Material_PLant_Key
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 57448d10-3021-43b0-9684-aeb8d8cfd95b
+	fromColumn: 'FACT - AVAILABLE INVENTORY WH'.CHANGED_ON
+	toColumn: 'DIM - DATE'.Date
+
+relationship c81a0241-acf6-49c9-b8ad-c4642554a12f
+	fromColumn: 'FACT - ZWM06N'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 8ba529b7-d2d9-4cf3-b695-2c59b70e34c3
+	fromColumn: 'FACT - ZWM06N'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 44452da0-1214-4228-950c-5054d1ccbe81
+	fromColumn: 'FACT - ZWM06N'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 1d3a24c0-b222-4d57-a0be-8bba016d1b3a
+	fromColumn: 'FACT - ZWM06N'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 5a4d3b98-f849-4b44-a0fb-4490151d6a34
+	fromColumn: 'FACT - ZWM06N'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 0ea960ca-15e0-4f3c-a492-4b570815aaf3
+	fromColumn: 'AGG - MATERIAL LEDGER V PRICE'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship a1f6dbea-9a8b-4ac5-8841-e14e9f31d652
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 52eeb518-1c1d-4627-aa44-6723a1fe0ed3
+	fromColumn: 'AGG - MATERIAL LEDGER V PRICE'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 19db5a9c-8434-4c9b-a5d7-ffed9ed45352
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 581eeddf-245f-44f7-9fd7-d17096ee4904
+	fromColumn: 'AGG - MATERIAL LEDGER V PRICE'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 0b64e7b7-0a5e-4a88-b410-eaa70861a7d1
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship a2e651ea-2696-4d0f-b286-1755485c4bda
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.DOC_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship afed47a3-bc87-40d7-b535-532499baad5f
+	fromColumn: 'AGG - MATERIAL LEDGER V PRICE'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 0c22d1ad-f659-482d-9d5d-c89d661cfd83
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship b3c0d240-1eb9-4300-810a-fbe32ff5db76
+	fromColumn: 'AGG - MATERIAL LEDGER V PRICE'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship ad7ed34d-0800-4b04-87d9-cb1ed25af692
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.IS_SLOC_BATCH_STOCK
+	toColumn: 'PARAMTER - IS SLOC BATCH STOCK'.IS_SLOC_BATCH_STOCK
+
+relationship 93be3811-c1ae-4e0a-ac44-354d238b7e1a
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.IS_SPECIAL_STOCK
+	toColumn: 'PARAMTER - IS SPECIAL STOCK'.IS_SPECIAL_STOCK
+
+relationship 2804a3e2-0519-46c6-b1c2-51a30b712559
+	fromColumn: 'AGG - MATERIAL LEDGER V PRICE'.IS_SLOC_BATCH_STOCK
+	toColumn: 'PARAMTER - IS SLOC BATCH STOCK'.IS_SLOC_BATCH_STOCK
+
+relationship 93707f03-3f51-4d9a-89e5-2b5535e9b37b
+	fromColumn: 'AGG - MATERIAL LEDGER V PRICE'.IS_SPECIAL_STOCK
+	toColumn: 'PARAMTER - IS SPECIAL STOCK'.IS_SPECIAL_STOCK
+
+relationship d1659b8c-6606-48b9-8631-7c1c4630e898
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 7c8de1e1-963c-4b5e-9567-b838db91466b
+	fromColumn: 'AGG - MATERIAL LEDGER V PRICE'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 07dd13d4-f7dc-443b-b829-0106fb4e386b
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.BATCH_NO
+	toColumn: 'DIM - BATCH NO'.BATCH_NO
+
+relationship 3526f257-3561-4669-80ff-607a0402d777
+	fromColumn: 'AGG - MATERIAL LEDGER V PRICE'.BATCH_NO
+	toColumn: 'DIM - BATCH NO'.BATCH_NO
+
+relationship 9f3bc0e3-fc79-4ad7-86a6-808c95cb00b0
+	fromColumn: 'FACT - SHELF LIFE LIST'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 60483182-6ec6-4d47-89e8-50a53bbb0ae6
+	fromColumn: 'FACT - SHELF LIFE LIST'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship f906812f-4486-49a3-ae45-050de5b2d99c
+	fromColumn: 'FACT - SHELF LIFE LIST'.BATCH_NO
+	toColumn: 'DIM - BATCH NO'.BATCH_NO
+
+relationship 166e3fe0-d894-4c7a-b533-0a3b93b2e924
+	fromColumn: 'FACT - SHELF LIFE LIST'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 905d1f9f-1a0f-4de1-8e3c-837e945e6204
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.MATERIAL_UNIT_KEY
+	toColumn: 'DIM - UOM'.MATERIAL_UNIT_KEY
+
+relationship 0f7d4405-dac2-40fc-b340-5f9b3aadba01
+	fromColumn: 'FACT - ZWM09H'.BATCH
+	toColumn: 'DIM - BATCH NO'.BATCH_NO
+
+relationship e65955b7-9697-4155-b368-621ae9e9d58e
+	fromColumn: 'FACT - ZWM09H'.DOC_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 6fc0a937-f304-4a73-8558-1df0230d3da6
+	fromColumn: 'FACT - ZWM09H'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 31e78edd-1cc0-458c-9baf-0c137a11b50b
+	fromColumn: 'FACT - ZWM09H'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 07291ad6-efd5-437f-a2b7-03a82fdbcc85
+	fromColumn: 'FACT - ZWM09H'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 213f2e3d-a8a1-4077-af56-d5b7d11bd7a7
+	fromColumn: 'FACT - STORAGE BIN'.STORAGE_TYPE
+	toColumn: 'DIM - STORAGE TYPE'.STORAGE_TYPE
+
+relationship ecbcad78-efbe-4def-9b46-b959bbd2cc6f
+	fromColumn: 'FACT - ZWM09H'.STORAGE_TYPE
+	toColumn: 'DIM - STORAGE TYPE'.STORAGE_TYPE
+
+relationship 56821ece-41c7-4f1b-8a1a-35c71a09cd07
+	fromColumn: 'FACT - STORAGE BIN'.STORAGE_BIN
+	toColumn: 'DIM - STORAGE BIN'.STORAGE_BIN
+
+relationship 1ea31a03-3c06-4e13-9522-a2a5874bd9f0
+	fromColumn: 'FACT - ZWM09H'.STORAGE_BIN
+	toColumn: 'DIM - STORAGE BIN'.STORAGE_BIN
+
+relationship 26acb4d8-5632-4ad7-a886-7a459a41c89a
+	fromColumn: 'FACT - TRANSFER ORDER'.WAREHOUSE_NO
+	toColumn: 'DIM - WAREHOUSE'.WAREHOUSE_NO
+
+relationship b137ef32-3900-4a3b-81c3-7f11f618e233
+	fromColumn: 'FACT - ZWM09H'.WAREHOUSE_NO
+	toColumn: 'DIM - WAREHOUSE'.WAREHOUSE_NO
+
+relationship 3244a257-5fb8-46d6-ac62-69c5141e2172
+	fromColumn: 'FACT - TRANSFER ORDER'.SRC_S_BIN
+	toColumn: 'DIM - STORAGE BIN'.STORAGE_BIN
+
+relationship 8a7bf588-474f-466f-b537-073c98d539bb
+	fromColumn: 'FACT - TRANSFER ORDER'.SRC_S_TYPE
+	toColumn: 'DIM - STORAGE TYPE'.STORAGE_TYPE
+
+relationship a69b818e-d01a-4522-a828-b081672b7304
+	fromColumn: 'AGG - ALLOCATE SLOC AMT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 9467f995-741e-42df-90a4-26619295d567
+	fromColumn: 'AGG - ALLOCATE SLOC AMT'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship f0fa3eed-3564-480e-a5aa-9190d699291e
+	fromColumn: 'AGG - ALLOCATE SLOC AMT'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 9009d6c1-e7b1-4e57-b6a5-d1e43bcf380f
+	fromColumn: 'AGG - MATERIAL LEDGER SUPPLY'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 2707b65b-4dcf-4ec7-9668-ef709b6810fa
+	fromColumn: 'AGG - MATERIAL LEDGER SUPPLY'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 043f4b59-8f18-4c02-8ad7-1b1738258286
+	fromColumn: 'AGG - MATERIAL LEDGER SUPPLY'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship c8b89111-6a6d-4326-9c03-c49e8fa320db
+	fromColumn: 'AGG - MATERIAL LEDGER SUPPLY'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 29a21db4-f2c9-4fbc-a3a1-90b6900a3182
+	fromColumn: 'AGG - MATERIAL LEDGER SUPPLY'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 3f6a8b23-a9d2-4b9e-b7c8-43fca00de00b
+	fromColumn: 'AGG - ALLOCATE SLOC AMT'.DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 85e8c454-6c5e-47f8-b862-b7a775cc7a59
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'FILE GIAITRINH_VT'.Material
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship d39c941b-8ff7-42c5-a211-ba930a381bd5
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'FILE DINHMUC_VT'.'Mã vật tư'
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship c53dc9d9-7e24-4c55-b540-55ae7c46b383
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'FILE KHSD_VT'.'Mã vật tư'
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 03f5fcee-1328-40f1-a8d0-c0299db4fed0
+	fromColumn: 'DIM - RLS PLANT'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 8b42f857-8fb3-40ec-9be6-a1bc5ce78d5c
+	fromColumn: 'DIM - RLS STORAGE LOCATION'.STORAGE_LOCATION
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 4c9ff894-5932-440b-9d71-74350320e151
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'DIM - COST CENTER & ELEMENT'.COST_CENTER_ELEMENT_KEY
+	toColumn: 'DIM - PHONG BAN - CPDV'.COST_CENTER_ELEMENT_KEY
+
+relationship d06119b0-cca5-4e9c-9a0e-fdb3a5a23c31
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'DIM - PHONG BAN - DMQL'.COST_ELEMENT
+	toColumn: 'DIM - COST ELEMENT'.COST_ELEMENT
+
+relationship a83fe491-114f-455d-9bf4-99dfeebe026c
+	fromColumn: 'FACT - AP BALANCE'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship a752ab13-59d5-4a10-8ec3-c99545cdbcad
+	fromColumn: 'FACT - AP BALANCE'.GL_ACCOUNT
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship 56990cd9-6ceb-41a4-85e7-982fa715b4c2
+	fromColumn: 'FACT - AP BALANCE'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 1f1c6d14-922b-4263-86d3-c3bc8f0c22e9
+	fromColumn: 'FACT - AP BALANCE'.VENDOR_CODE
+	toColumn: 'DIM -  VENDOR'.VENDOR_CODE
+
+relationship a9821a91-dc72-4ab0-bd50-3b315154769c
+	fromColumn: 'FACT - AP LINE ITEM'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship eb0f5d5d-f785-4de0-87fc-736089a09cf2
+	fromColumn: 'FACT - AP LINE ITEM'.GL_ACCOUNT
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship f050155f-9e7b-4775-9ea0-a6cafb9e5eed
+	fromColumn: 'FACT - AP LINE ITEM'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 08a5e16a-2fa0-4a45-9734-5978be479b80
+	fromColumn: 'FACT - AP LINE ITEM'.VENDOR_CODE
+	toColumn: 'DIM -  VENDOR'.VENDOR_CODE
+
+relationship e9f88ce9-ce79-4d54-ba96-b8ec3ded122c
+	fromColumn: 'FACT - AR BALANCE'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 50be905a-5db5-4731-9431-32f8c2c91cd9
+	fromColumn: 'FACT - AR BALANCE'.CUSTOMER_CODE
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship 925340f1-b528-400f-ba62-b0efe7704c1d
+	fromColumn: 'FACT - AR BALANCE'.GL_ACCOUNT
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship 837be527-10af-4ec6-90ee-261c6a15b8fc
+	fromColumn: 'FACT - AR BALANCE'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 14256bee-ecd1-4c5e-b7b3-5f9d928899f7
+	fromColumn: 'FACT - AR LINE ITEM'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 6434818d-03a4-4b87-952e-8961ae798ea3
+	fromColumn: 'FACT - AR LINE ITEM'.CUSTOMER_CODE
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship 1046c786-6b8e-4555-ae24-afda0e1c4fc7
+	fromColumn: 'FACT - AR LINE ITEM'.GL_ACCOUNT
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship 79f2daa1-7390-4aa3-b8e5-1219727beb32
+	fromColumn: 'FACT - AR LINE ITEM'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 37eb6730-a3cc-4579-804a-42a3e8a637d9
+	isActive: false
+	fromColumn: 'FACT - BALANCE SHEET - CS'.BS_ITEM
+	toColumn: 'DIM - REPORTING LINE BS'.ITEM_NO
+
+relationship 6c165362-2e14-461d-90a7-3a8a291a4ce8
+	fromColumn: 'FACT - BALANCE SHEET - CS'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 90e7696e-7bb4-44d0-abba-82678e7c57bc
+	fromColumn: 'FACT - BALANCE SHEET - CS'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 0610924f-e1b2-45e7-ac50-cfec8a65ad7e
+	fromColumn: 'FACT - BALANCE SHEET - CS'.GL_ACCOUNT_NO
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship 1d19bf90-9b3d-4ccf-98b3-fd5cfab19e6d
+	isActive: false
+	fromColumn: 'FACT - BALANCE SHEET'.BS_ITEM
+	toColumn: 'DIM - REPORTING LINE BS'.ITEM_NO
+
+relationship 1882539e-dc9b-45c3-a839-dd0b633aeffe
+	fromColumn: 'FACT - BALANCE SHEET'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 739872a9-becf-4484-a2d5-8a686f13d362
+	fromColumn: 'FACT - BALANCE SHEET'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 4a430d2d-ffce-4a28-9946-678296d1b110
+	fromColumn: 'FACT - BALANCE SHEET'.GL_ACCOUNT_NO
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship b2a06e9b-0c15-4b06-a611-95b18cf1873e
+	fromColumn: 'FACT - CASH FLOW'.CF_ITEM_CODE
+	toColumn: 'DIM - REPORTING LINE CF'.CF_ITEM
+
+relationship 80d042e8-6f3b-475c-9ce0-9e796da78ae8
+	fromColumn: 'FACT - CASH FLOW'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship bd784304-3d61-45dc-b795-d4c28f21645c
+	fromColumn: 'FACT - CASH FLOW'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 23199d7a-31e2-405d-aef1-5a8160bc601e
+	fromColumn: 'FACT - CO LINE ITEM'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship b93fb0ab-067a-4dc0-ba33-41c2c55fd0d9
+	toCardinality: many
+	fromColumn: 'FACT - CO LINE ITEM'.COST_ELEMENT
+	toColumn: 'DIM - COST COMPONENT'.COST_ELEMENT_FROM
+
+relationship a45a220e-a14d-4c08-b40f-1ee8e9ba63a4
+	fromColumn: 'FACT - CO LINE ITEM'.COST_ELEMENT
+	toColumn: 'DIM - COST ELEMENT'.COST_ELEMENT
+
+relationship 79a93cb3-dddf-4ca8-95d1-c5eea2990f38
+	fromColumn: 'FACT - CO LINE ITEM'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship ab016f1e-700e-4a8e-8394-311b3ec12fb6
+	fromColumn: 'FACT - CO LINE ITEM'.PRODUCTION_MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship f79ea3ca-e327-415a-9661-df5d66411707
+	fromColumn: 'FACT - CO PHONG BAN'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 9e80c4dc-bebc-4a32-b9b9-5afd4a19ef5e
+	fromColumn: 'FACT - CO PHONG BAN'.COST_CENTER
+	toColumn: 'DIM - COST CENTRE'.COST_CENTER_CODE
+
+relationship 2a0f47d3-3a50-4fc1-8bc0-1bd092e48f29
+	fromColumn: 'FACT - CO PHONG BAN'.COST_CENTER_ELEMENT_KEY
+	toColumn: 'DIM - COST CENTER & ELEMENT'.COST_CENTER_ELEMENT_KEY
+
+relationship 2a26c8bd-39df-47b8-8910-e14262cb8375
+	toCardinality: many
+	fromColumn: 'FACT - CO PHONG BAN'.COST_ELEMENT
+	toColumn: 'DIM - COST COMPONENT'.COST_ELEMENT_FROM
+
+relationship 88ca24fd-4021-4237-946a-76b1f3b69d81
+	fromColumn: 'FACT - CO PHONG BAN'.COST_ELEMENT
+	toColumn: 'DIM - COST ELEMENT'.COST_ELEMENT
+
+relationship c2230489-2f7a-41c2-babd-8c80e5b5e0f3
+	fromColumn: 'FACT - CO PHONG BAN'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 4b50d711-eba7-4e65-bf2c-6c9c67af7f77
+	toCardinality: many
+	fromColumn: 'FACT - CO SPLIT ITEM'.COST_COMPONENT
+	toColumn: 'DIM - COST COMPONENT'.COST_COMPONENT
+
+relationship 4270fa16-4057-4ebc-bdbd-909f819d831d
+	fromColumn: 'FACT - CO SPLIT ITEM'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 5ae58534-7678-49a3-a6b9-cb93d0f17411
+	fromColumn: 'FACT - CO SPLIT ITEM'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 66c56628-3dcd-4f02-a805-a510ccc72521
+	fromColumn: 'FACT - COPA LINE ITEM'.COST_CENTRE
+	toColumn: 'DIM - COST CENTRE'.COST_CENTER_CODE
+
+relationship e3790cd9-0662-453c-a562-b704d1119e18
+	fromColumn: 'FACT - COPA LINE ITEM'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship ab19af8c-735b-49c0-bfda-4d1c50cbd9c7
+	fromColumn: 'FACT - COPA LINE ITEM'.PROFIT_CENTRE
+	toColumn: 'DIM - PROFIT CENTRE'.PROFIT_CENTER_CODE
+
+relationship 2f3aa0a4-bfac-42b0-8d17-4567cd3ec397
+	fromColumn: 'FACT - COPA PLAN ITEM'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship bfb1bd9a-27df-4c91-808e-d14a1d62d3f3
+	fromColumn: 'FACT - COPA PLAN ITEM'.PROFIT_CENTRE
+	toColumn: 'DIM - PROFIT CENTRE'.PROFIT_CENTER_CODE
+
+relationship 530ce605-c0d2-4af8-a6c3-af7b8cf77c0f
+	fromColumn: 'FACT - COST PLANNING'.COST_CENTER
+	toColumn: 'DIM - COST CENTRE'.COST_CENTER_CODE
+
+relationship 69cf014b-0a8a-4dc4-9075-0d189f3c14ff
+	fromColumn: 'FACT - COST PLANNING'.COST_CENTER_ELEMENT_KEY
+	toColumn: 'DIM - COST CENTER & ELEMENT'.COST_CENTER_ELEMENT_KEY
+
+relationship 01f03c7d-4bd9-4923-8c84-5a1f99e27514
+	fromColumn: 'FACT - COST PLANNING'.COST_ELEMENT
+	toColumn: 'DIM - COST ELEMENT'.COST_ELEMENT
+
+relationship 09e17a51-d862-4a37-aa83-3ca954d92eb5
+	fromColumn: 'FACT - COST PLANNING'.COST_ELEMENT
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship a4821123-2331-449c-adc8-3a2bae9c37e0
+	fromColumn: 'FACT - COST PLANNING'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 08bd8724-2cec-4be7-a1f1-b32c12494b43
+	fromColumn: 'FACT - COST PLANNING'.TYPE_OF_COST
+	toColumn: 'DIM - COST TYPE'.TYPE_OF_COST
+
+relationship 3a42a2ae-d6a2-498c-a1c0-7fdae2f9839a
+	fromColumn: 'FACT - COST PLANNING'.TYPE_OF_COST_ZCO10
+	toColumn: 'DIM - COST TYPE ZCO10'.TYPE_OF_COST_ZCO10
+
+relationship a145b23b-4664-42b3-9e0b-f9f28677d140
+	fromColumn: 'FACT - CP ITEM'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship f834882a-f602-4059-b6a6-2325d52554f0
+	fromColumn: 'FACT - CP ITEM'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 02a9bbdc-c272-4006-8047-d73df72e7e5c
+	fromColumn: 'FACT - FA LINE ITEM'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 88fa931e-5bb5-49e0-ad70-164971f36fc8
+	fromColumn: 'FACT - FA LINE ITEM'.FA_KEY
+	toColumn: 'DIM - FIXED ASSET'.FA_KEY
+
+relationship 0df2c5c1-5638-44c2-9f39-64ed82ab95d9
+	fromColumn: 'FACT - FA LINE ITEM'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 231fa722-fcbc-4b50-b782-1f605517b799
+	fromColumn: 'FACT - FIXED ASSET BALANCE'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 2ff5b404-f8af-434b-9c69-bdda63fa7e57
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'FACT - FIXED ASSET BALANCE'.FA_KEY
+	toColumn: 'DIM - FIXED ASSET'.FA_KEY
+
+relationship aa69cb53-7753-44cd-8289-c28926516e3a
+	fromColumn: 'FACT - FIXED ASSET BALANCE'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 826c590b-7d14-4bef-ad71-b7c282386c6d
+	fromColumn: 'FACT - GL ACCOUNT BALANCE OFFSET'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship e591fbb8-a021-40ff-ba65-971a96bca68f
+	fromColumn: 'FACT - GL ACCOUNT BALANCE OFFSET'.GL_ACCOUNT_NO
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship a2b5c667-eb29-4588-998a-dca3a846cc04
+	fromColumn: 'FACT - GL ACCOUNT BALANCE OFFSET'.OFFSET_GL_ACCT
+	toColumn: 'DIM - GL ACCOUNT - OFFSET'.GL_ACC_NO
+
+relationship c913eb23-a03c-4308-9644-e9332dd0e4bb
+	fromColumn: 'FACT - GL ACCOUNT BALANCE OFFSET'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship e93cc1b8-3d26-4e67-92f6-cdbd4e5694a6
+	fromColumn: 'FACT - GL ACCOUNT BALANCE'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 733cf1f4-442b-4514-b8de-ef9d992cde5b
+	fromColumn: 'FACT - GL ACCOUNT BALANCE'.COST_CENTRE
+	toColumn: 'DIM - COST CENTRE'.COST_CENTER_CODE
+
+relationship 4dfc13a2-1ba5-4450-b49b-b79f7e53d2b8
+	fromColumn: 'FACT - GL ACCOUNT BALANCE'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship a15e5e50-7465-4e50-a0e6-951ba1c609d0
+	fromColumn: 'FACT - GL ACCOUNT BALANCE'.GL_ACCOUNT_NO
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship f91824b6-9eb1-430f-b8ee-b4a15dc08d06
+	fromColumn: 'FACT - GL ACCOUNT BALANCE'.PROFIT_CENTRE
+	toColumn: 'DIM - PROFIT CENTRE'.PROFIT_CENTER_CODE
+
+relationship ad98c264-8e01-4956-8898-d80da0579e78
+	fromColumn: 'FACT - GL ACCOUNT BALANCE'.TYPE_OF_COST
+	toColumn: 'DIM - COST TYPE'.TYPE_OF_COST
+
+relationship 36f9b91c-138b-4369-8bbb-1c2a07f8388c
+	fromColumn: 'FACT - GL ACCOUNT BALANCE'.TYPE_OF_COST_ZCO10
+	toColumn: 'DIM - COST TYPE ZCO10'.TYPE_OF_COST_ZCO10
+
+relationship 137480b8-2e4e-4617-9d6e-e079c2fe0d99
+	fromColumn: 'FACT - GL LINE ITEM OFFSET'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 6173fb35-2d30-4a0f-8b45-7df77ac353ae
+	fromColumn: 'FACT - GL LINE ITEM OFFSET'.COST_CENTRE
+	toColumn: 'DIM - COST CENTRE'.COST_CENTER_CODE
+
+relationship a1c95741-91f7-435a-91c7-38c3a1a57c72
+	fromColumn: 'FACT - GL LINE ITEM OFFSET'.CUSTOMER_CODE
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship 71edfadb-96b1-4d73-a2ff-ee1d2f9fa3bd
+	fromColumn: 'FACT - GL LINE ITEM OFFSET'.GL_ACCOUNT_NO
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship a91516e1-dbff-4a3c-b2b3-1972011fef00
+	fromColumn: 'FACT - GL LINE ITEM OFFSET'.'Nội dung (ZCO14)'
+	toColumn: 'DIM - NOI DUNG ZCO14'.'Nội dung (ZCO14)'
+
+relationship 916f61f4-9e2a-4b67-917a-982455411912
+	fromColumn: 'FACT - GL LINE ITEM OFFSET'.OFFSET_GL_ACCT
+	toColumn: 'DIM - GL ACCOUNT - OFFSET'.GL_ACC_NO
+
+relationship 7047dbb9-dfc5-4028-b581-30852aaad63d
+	fromColumn: 'FACT - GL LINE ITEM OFFSET'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship c0f0a6b1-15d5-40bb-8e48-c42b2fa76be2
+	fromColumn: 'FACT - GL LINE ITEM OFFSET'.PROFIT_CENTRE
+	toColumn: 'DIM - PROFIT CENTRE'.PROFIT_CENTER_CODE
+
+relationship 566c8273-fb17-4e58-9ef3-5138a8d0257e
+	fromColumn: 'FACT - GL LINE ITEM OFFSET'.VENDOR_CODE
+	toColumn: 'DIM -  VENDOR'.VENDOR_CODE
+
+relationship 14d920b4-0d65-458f-b50e-134c3c0183eb
+	fromColumn: 'FACT - GL LINE ITEM'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship dde41f87-9c63-4a62-b975-ddd66fe7a014
+	fromColumn: 'FACT - GL LINE ITEM'.COST_CENTRE
+	toColumn: 'DIM - COST CENTRE'.COST_CENTER_CODE
+
+relationship f1cc994d-1183-4304-bf69-303c911e4e92
+	fromColumn: 'FACT - GL LINE ITEM'.CUSTOMER_CODE
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship eca53973-9dae-459d-8c32-7fc200177e7a
+	fromColumn: 'FACT - GL LINE ITEM'.GL_ACCOUNT_NO
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship 2a5f88ce-112e-4444-8c60-f22916b8f14d
+	fromColumn: 'FACT - GL LINE ITEM'.IS_ITEM
+	toColumn: 'DIM - REPORTING LINE IS'.ITEM_NO
+
+relationship 9da980c2-91cb-42aa-8127-415838ba2ee8
+	fromColumn: 'FACT - GL LINE ITEM'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship f70cb346-fd3a-4100-87de-a089a972c3c5
+	fromColumn: 'FACT - GL LINE ITEM'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 7babc82c-5b77-4834-96d3-7227944fee1e
+	fromColumn: 'FACT - GL LINE ITEM'.PROFIT_CENTRE
+	toColumn: 'DIM - PROFIT CENTRE'.PROFIT_CENTER_CODE
+
+relationship f3b1a540-6947-454d-8dde-00d90f8f7e57
+	fromColumn: 'FACT - GL LINE ITEM'.VENDOR_CODE
+	toColumn: 'DIM -  VENDOR'.VENDOR_CODE
+
+relationship 7791b817-390d-4838-a0b4-ad1498581431
+	fromColumn: 'FACT - INCOME STATEMENT - CS'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship e6e71ac4-5329-4f64-84d7-211c9b5a63af
+	fromColumn: 'FACT - INCOME STATEMENT - CS'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship a87ed229-e821-4be2-95bc-539d35f50aaf
+	fromColumn: 'FACT - INCOME STATEMENT - CS'.GL_ACCOUNT_NO
+	toColumn: 'DIM - GL ACCOUNT - CS'.GL_ACC_NO
+
+relationship fe14ee3f-6762-4299-8909-03579785a511
+	fromColumn: 'FACT - INCOME STATEMENT - CS'.IS_ITEM
+	toColumn: 'DIM - REPORTING LINE IS'.ITEM_NO
+
+relationship 6e170c0a-c2a5-4df5-a259-176c0a701b0b
+	fromColumn: 'FACT - INCOME STATEMENT'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 2eb6072c-b542-495c-8df6-3936efe88919
+	fromColumn: 'FACT - INCOME STATEMENT'.COST_CENTRE
+	toColumn: 'DIM - COST CENTRE'.COST_CENTER_CODE
+
+relationship a724f207-bf36-4d38-ae73-ed3f13fb7eeb
+	fromColumn: 'FACT - INCOME STATEMENT'.GL_ACCOUNT_NO
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship 3ce4cc9f-60c3-4793-a439-e479aca33f4e
+	fromColumn: 'FACT - INCOME STATEMENT'.IS_ITEM
+	toColumn: 'DIM - REPORTING LINE IS'.ITEM_NO
+
+relationship 36356fde-1739-4761-a426-5e8e0d0246eb
+	isActive: false
+	fromColumn: 'FACT - INCOME STATEMENT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 13bdd7b0-5c58-4299-b90a-09932a23e6c4
+	fromColumn: 'FACT - INCOME STATEMENT'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 27106191-471b-476a-b2f7-ea1f116481cb
+	fromColumn: 'FACT - INCOME STATEMENT'.PROFIT_CENTRE
+	toColumn: 'DIM - PROFIT CENTRE'.PROFIT_CENTER_CODE
+
+relationship 1da2c823-f5ff-4d00-a2c7-e5417e3ee056
+	fromColumn: 'FACT - INVENTORY BALANCE PLANT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship c98d447a-0ce3-4efd-9209-9894127b6439
+	fromColumn: 'FACT - MANUF PLAN'.FINISH_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship d7dedfe9-c3d6-4765-bcbe-4d2258a0ac1c
+	fromColumn: 'FACT - MANUF PLAN'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 689a3ae6-9644-4c27-af32-4622fb21161a
+	fromColumn: 'FACT - MANUF PLAN'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship dde15e90-700c-4b2d-a6ff-4eeba7951c3d
+	fromColumn: 'FACT - PRODUCT COSTING'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 78f2304e-7cb9-4d4f-8b84-545392c829be
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'FACT - PRODUCT COSTING'.COST_ELEMENT
+	toColumn: 'DIM - COST COMPONENT'.COST_ELEMENT_FROM
+
+relationship 244c6658-11a0-4eeb-9156-4fe764ae992c
+	fromColumn: 'FACT - PRODUCT COSTING'.COST_ELEMENT
+	toColumn: 'DIM - COST ELEMENT'.COST_ELEMENT
+
+relationship 37f9bf63-d09e-4542-a823-0b89e60b2184
+	fromColumn: 'FACT - PRODUCT COSTING'.DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 8393b362-15fc-40ed-ba4f-4a3abe42f558
+	fromColumn: 'FACT - PRODUCT COSTING'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 2c34e5c7-8295-4a7f-8327-64a1a45cb79d
+	fromColumn: 'FACT - PRODUCT COSTING'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 20ac5e4e-e7e2-4692-a820-01644df3e66a
+	fromColumn: 'FACT - TAX LINE ITEM'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship cb2d0936-ffe7-4361-8641-4c81ea89eef1
+	fromColumn: 'FACT - TAX LINE ITEM'.CUSTOMER_CODE
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship e6e46520-1459-4d1d-a604-87adede6c4fa
+	fromColumn: 'FACT - TAX LINE ITEM'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 72d3ac32-28c2-49df-b12f-8afcd869af76
+	fromColumn: 'FACT - TAX LINE ITEM'.VENDOR_CODE
+	toColumn: 'DIM -  VENDOR'.VENDOR_CODE
+
+relationship 36919943-f4e3-43cc-a6f3-0df8c1d06165
+	fromColumn: 'FACT - TR ITEM'.ACCOUNT_ASSIGNMENT
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship baaf0e75-328d-40a1-aec7-f1266330b75e
+	fromColumn: 'FACT - TR ITEM'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship b24206a2-5bb2-46c2-9297-6236b3e62b15
+	fromColumn: 'FACT - TR ITEM'.PAYMENT_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 54e8e175-4cdf-41a0-a89e-6d0b65414d91
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'DIM - PURCHASE ORG'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship d2a37c19-5872-475f-bcc2-805b001a6c9f
+	fromColumn: 'DIM - RLS COMPANY'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship de53f80a-9a63-4f7a-80f5-7e3232cc07b6
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'DIM - SHOP DMS'.SHOP_ID
+	toColumn: 'DIM - WAREHOUSE DMS'.SHOP_ID
+
+relationship cd77a94c-d5d3-4352-a7be-5c395bce3f7e
+	fromColumn: 'DIM - STORAGE LOCATION'.SALE_OFFICE_NAME
+	toColumn: 'DIM - SALE OFFICE'.SALE_OFFICE_NAME
+
+relationship 9d28cfdc-1913-4ce2-aaa5-3193ac2493bd
+	fromColumn: 'FACT - CONTRACT STATUS'.CHANNEL_CODE
+	toColumn: 'DIM - CHANNEL'.CHANNEL_CODE
+
+relationship ec147959-8c8f-4837-9daf-d7245853a5b1
+	fromColumn: 'FACT - CONTRACT STATUS'.CONTRACT_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 45940e5a-cce7-4511-bb86-4daf06006603
+	fromColumn: 'FACT - CONTRACT STATUS'.CONTRACT_NUMBER
+	toColumn: 'LIST - CONTRACT NUMBER'.CONTRACT_NUMBER
+
+relationship a35ef5e7-a174-460e-a70f-608cd0543377
+	fromColumn: 'FACT - CONTRACT STATUS'.CUSTOMER_CODE
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship ad1c5253-c602-48f1-a77d-035d297cd1a1
+	fromColumn: 'FACT - CONTRACT STATUS'.CUSTOMER_GROUP
+	toColumn: 'DIM - CUSTOMER GROUP'.CUSTOMER_GROUP
+
+relationship 77dd95c6-769a-4505-9677-dca82295e791
+	fromColumn: 'FACT - CONTRACT STATUS'.DIVISION_CODE
+	toColumn: 'DIM - DIVISION'.DIVISION_CODE
+
+relationship 1b2ba251-0944-4243-9718-69cab9ac06f6
+	fromColumn: 'FACT - CONTRACT STATUS'.EMPLOYEE_CODE
+	toColumn: 'DIM - EMPLOYEE'.EMPLOYEE_CODE
+
+relationship 2719a0bd-7f6d-4d0d-b672-26671cb11d71
+	fromColumn: 'FACT - CONTRACT STATUS'.PRICE_LIST
+	toColumn: 'DIM - PRICE LIST TYPE'.PRICE_LIST
+
+relationship 14b00835-f8ed-44af-bd40-fc350684ae38
+	fromColumn: 'FACT - CONTRACT STATUS'.PRODUCT_CODE
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship a9a27faa-5bdc-46ad-b194-44a8a9589131
+	isActive: false
+	fromColumn: 'FACT - CONTRACT STATUS'.REF_DOC
+	toColumn: 'LIST - CONTRACT NUMBER'.CONTRACT_NUMBER
+
+relationship 3416cc11-15de-4bcf-8640-8fd9acc0b53e
+	fromColumn: 'FACT - CONTRACT STATUS'.SALE_GROUP
+	toColumn: 'DIM - REGION'.SALE_GRP_CODE
+
+relationship 6a9af293-c019-488b-989f-de8acdbdda38
+	fromColumn: 'FACT - CONTRACT STATUS'.SALE_ORG
+	toColumn: 'DIM - SALE ORGANIZATION'.SALE_ORG
+
+relationship 4a51ed85-c6c4-49ff-a1a4-46f9c1eb89b0
+	fromColumn: 'FACT - CONTRACT STATUS'.VALID_TO
+	toColumn: 'DIM - SECONDARY DATE'.DateKey
+
+relationship d2120e53-123b-4308-be5f-f54c7562ea48
+	isActive: false
+	fromColumn: 'FACT - DELIVERY STATUS'.AC_GI_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 74d0f9ba-bb99-40ae-85db-a57dddbf7cf4
+	fromColumn: 'FACT - DELIVERY STATUS'.CHANNEL_CODE
+	toColumn: 'DIM - CHANNEL'.CHANNEL_CODE
+
+relationship 2fbb6bfa-3bac-40ff-8c4e-dbc0fca87d11
+	fromColumn: 'FACT - DELIVERY STATUS'.CONTRACT_NUMBER
+	toColumn: 'LIST - CONTRACT NUMBER'.CONTRACT_NUMBER
+
+relationship f2431529-02cf-42b9-81ad-d767417ad276
+	fromColumn: 'FACT - DELIVERY STATUS'.CUSTOMER_CODE
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship cafd26fb-fe2a-40da-84a4-6a7b5c12a251
+	fromColumn: 'FACT - DELIVERY STATUS'.DIVISION_CODE
+	toColumn: 'DIM - DIVISION'.DIVISION_CODE
+
+relationship b2a9ee8f-bd43-4d63-98d7-e010733e5aaa
+	fromColumn: 'FACT - DELIVERY STATUS'.DOC_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship ffa8ae6d-8cd3-41d9-a123-6eae7b212f5d
+	fromColumn: 'FACT - DELIVERY STATUS'.MATERIAL_CODE
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship 73ffcfd3-c649-4704-9344-4887dd8c46ad
+	fromColumn: 'FACT - DELIVERY STATUS'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 22ddf71e-49ec-4d2d-84a3-5c0fec33d5c5
+	fromColumn: 'FACT - DELIVERY STATUS'.REF_DOC
+	toColumn: 'LIST - SALE ORDER'.SALE_ORDER_DOC
+
+relationship 60d52df7-63dc-48a1-a00f-3fe4f54cb8f9
+	fromColumn: 'FACT - DELIVERY STATUS'.REF_DOC
+	toColumn: 'LIST - LDDNB'.PURCHASE_ORDER
+
+relationship 86dca0ad-4da6-4069-9932-90dc1a5ad070
+	fromColumn: 'FACT - DELIVERY STATUS'.SALE_GROUP
+	toColumn: 'DIM - REGION'.SALE_GRP_CODE
+
+relationship f2f719e3-eaee-46fa-aa1f-6c3fbde8ab22
+	fromColumn: 'FACT - GOOD RECEIPT'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship ad434328-917d-4218-9611-ce6a56c7738d
+	fromColumn: 'FACT - GOOD RECEIPT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 61fefbd8-0766-40c1-ac8c-97bf37ab4a9a
+	fromColumn: 'FACT - GOOD RECEIPT'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 99670fa8-7235-4240-b294-5ee10ab5df39
+	fromColumn: 'FACT - GOOD RECEIPT'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship b3ffaeac-e96f-4167-bbf1-040c01613488
+	fromColumn: 'FACT - GOOD RECEIPT'.PURCHASE_GROUP
+	toColumn: 'DIM - PURCHASE GROUP'.PURCHASE_GROUP
+
+relationship a52e76ac-a1c2-4ea7-b285-4194e6fe5233
+	fromColumn: 'FACT - GOOD RECEIPT'.PURCHASE_ORDER
+	toColumn: 'LIST - PO NUMBER'.PURCHASE_ORDER
+
+relationship db970317-9607-495e-94f4-2a45368b6ec5
+	fromColumn: 'FACT - GOOD RECEIPT'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 9c208105-bae5-403f-aa90-4d9d31d9d2f3
+	fromColumn: 'FACT - GOOD RECEIPT'.VENDOR_CODE
+	toColumn: 'DIM - VENDOR'.VENDOR_CODE
+
+relationship 31d82743-6d89-4570-bb5a-d87a93c64171
+	fromColumn: 'FACT - INVENTORY BALANCE'.DOC_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship e8073df0-dd14-42a3-86b4-105fdd5ba808
+	fromColumn: 'FACT - INVENTORY BALANCE'.MATERIAL_CODE
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship 0e9e9b3d-792c-4e9a-b19c-96e78a006bb5
+	fromColumn: 'FACT - INVENTORY BALANCE'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship c22f69a6-13ab-49a6-a8dc-dd6adb87481c
+	fromColumn: 'FACT - INVENTORY BALANCE'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 484a3f0a-4380-472c-9d99-562439d4b927
+	fromColumn: 'FACT - INVENTORY C1'.INVENTORY_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship bd4804b2-4ccf-4ba0-95e5-60aa70bc4b3b
+	fromColumn: 'FACT - INVENTORY C1'.PRODUCT_CODE_SAP
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship 7fefb4a4-98ca-462a-b1cf-c31a194c5172
+	fromColumn: 'FACT - INVENTORY C1'.PRODUCT_ID
+	toColumn: 'DIM - PRODUCT DMS'.PRODUCT_ID
+
+relationship 9fbed715-bcda-4aa0-86b7-6d61d7618d11
+	fromColumn: 'FACT - INVENTORY C1'.SHOP_C1_CODE
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship dc1d91cc-fa1f-4a35-8a2f-804f6a7896ad
+	fromColumn: 'FACT - INVENTORY C1'.WAREHOUSE_ID
+	toColumn: 'DIM - WAREHOUSE DMS'.WAREHOUSE_ID
+
+relationship 33605f0c-4ffc-41bf-9589-787e7b58d02e
+	isActive: false
+	fromColumn: 'FACT - INVOICE RECEIPT'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 1dc747be-afd0-427d-863d-3351a778ea95
+	fromColumn: 'FACT - INVOICE RECEIPT'.GL_ACCOUNT_NO
+	toColumn: 'DIM - GL ACCOUNT'.GL_ACC_NO
+
+relationship d3c617a4-1408-46cb-a25a-8e6829b36de8
+	fromColumn: 'FACT - INVOICE RECEIPT'.INVOICE_PARTY
+	toColumn: 'DIM - VENDOR'.VENDOR_CODE
+
+relationship 264e5260-e4eb-42cd-9cb0-4507432a5e5b
+	fromColumn: 'FACT - INVOICE RECEIPT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 1b0521f0-e3bd-46e2-8e26-f36c60cbcae1
+	fromColumn: 'FACT - INVOICE RECEIPT'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 04898c61-a910-48ef-809c-5b3cc890e9ba
+	fromColumn: 'FACT - INVOICE RECEIPT'.POSTING_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 31a64227-9f3f-4b26-8fc2-6b2d328842d5
+	fromColumn: 'FACT - INVOICE RECEIPT'.PURCHASE_ORDER
+	toColumn: 'LIST - PO NUMBER'.PURCHASE_ORDER
+
+relationship b94f6c18-d32d-4f01-8074-2bdd45f61e28
+	fromColumn: 'FACT - LDDNB STATUS'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 2b76cc3b-83b4-4876-81f9-bf6a5f3c2372
+	fromColumn: 'FACT - LDDNB STATUS'.DOC_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 3b4b6d13-732e-47f4-b47e-928e268b0290
+	fromColumn: 'FACT - LDDNB STATUS'.MATERIAL_CODE
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship e9e6dde8-4d26-4aca-ac92-81fc517c3011
+	fromColumn: 'FACT - LDDNB STATUS'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 4eb34027-d9ce-47ab-8249-044deccdd8b5
+	isActive: false
+	fromColumn: 'FACT - LOGISTIC COST ACTUAL'.DOC_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 7c15e8bc-869b-4f09-9703-493f7beea0a5
+	fromColumn: 'FACT - LOGISTIC COST ACTUAL'.POSTING_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 6690818e-6dec-4e4a-8495-bc101aeb8824
+	fromColumn: 'FACT - LOGISTIC COST ACTUAL'.VENDOR_CODE
+	toColumn: 'DIM - VENDOR'.VENDOR_CODE
+
+relationship 3f54bb03-bfb9-4632-963e-acf8d43b13a2
+	fromColumn: 'FACT - LOGISTIC COST PLAN'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 24992cc5-631e-4747-9cb8-71f59d9fb347
+	fromColumn: 'FACT - LOGISTIC STORAGE COST'.INVENTORY_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 086ca7f4-3b2b-4cb7-8d68-fcaddddd2ee0
+	fromColumn: 'FACT - LOGISTIC STORAGE COST'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 5d2c19f2-152b-4cfc-a72a-ae5d2c30e402
+	fromColumn: 'FACT - LOGISTIC STORAGE COST'.MATERIAL_CODE
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship 4fde9bba-1c34-4e7c-a53b-ddb8854f478e
+	fromColumn: 'FACT - LOGISTIC TRANSPORT COST'.ACTUAL_GI_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 67fb6080-f6a5-44f8-b401-8b5eb94072f2
+	isActive: false
+	fromColumn: 'FACT - LOGISTIC TRANSPORT COST'.PO_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship aa0432bb-b12e-4af1-85d5-102bee9f2d30
+	fromColumn: 'FACT - LOGISTIC TRANSPORT COST'.PRODUCT_CODE
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship 0cb1849c-18ab-45ea-b0ca-383b6e159644
+	fromColumn: 'FACT - LOGISTIC TRANSPORT COST'.TRANSPORT_ID
+	toColumn: 'DIM - TRANSPORTATION'.TRANSPORT_CODE
+
+relationship 7f0fbd48-c128-467f-b996-291ecdedf2ea
+	fromColumn: 'FACT - LOGISTIC TRANSPORT COST'.VENDOR_CODE
+	toColumn: 'DIM - VENDOR'.VENDOR_CODE
+
+relationship 7a7692c6-61f4-4b27-bfa8-a8c6f2109af3
+	fromColumn: 'FACT - LOYALTY PROGRAM'.CUSTOMER_ID
+	toColumn: 'DIM - CUSTOMER C2 DMS'.CUSTOMER_ID
+
+relationship a12bce7d-09d3-461c-90a2-5cf562aeefb7
+	fromColumn: 'FACT - LOYALTY PROGRAM'.KS_ID
+	toColumn: 'DIM - KEYSHOP DMS'.KS_ID
+
+relationship da1fb6e5-4ec3-4ef4-9e63-28f81ac0f77d
+	fromColumn: 'FACT - LOYALTY PROGRAM'.KS_LEVEL_ID
+	toColumn: 'DIM - KEYSHOP LEVEL DMS'.KS_LEVEL_ID
+
+relationship 785feb05-6748-6f2f-80ea-7d3951bb0591
+	fromColumn: 'FACT - LOYALTY PROGRAM'.ORDER_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship b2446773-b339-4f26-a030-7564faa6dcdd
+	fromColumn: 'FACT - LOYALTY PROGRAM'.PRODUCT_ID
+	toColumn: 'DIM - PRODUCT DMS'.PRODUCT_ID
+
+relationship 3f6b04e2-7953-48f4-870a-b0a1b4149d80
+	fromColumn: 'FACT - LOYALTY PROGRAM'.SALE_ORDER_ID
+	toColumn: 'LIST - SALES OUT ORDER'.SALE_ORDER_ID
+
+relationship 615afa88-b502-4c90-a5e8-9b2786cdcb66
+	fromColumn: 'FACT - ORDER DETAIL'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship ad1e7517-cfd2-4868-9fc5-0d303819b904
+	fromColumn: 'FACT - ORDER DETAIL'.'Số PR'
+	toColumn: 'LIST - PR NUMBER'.PURCHASE_REQUISITION
+
+relationship 727b9d57-ee16-450c-85b3-9d6eb596f809
+	fromColumn: 'FACT - PO SCHEDULE'.DELIVERY_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship ea674fce-9491-4d13-9f5e-fa437882ad73
+	fromColumn: 'FACT - PO SCHEDULE'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 6ac006ae-3f32-41d8-adf7-7da7bc6daddf
+	fromColumn: 'FACT - PO SCHEDULE'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship fe0d0432-421d-4871-87f8-aa87b25e108e
+	fromColumn: 'FACT - PO SCHEDULE'.PURCHASE_GROUP
+	toColumn: 'DIM - PURCHASE GROUP'.PURCHASE_GROUP
+
+relationship 6cb47220-49e9-4cd8-966d-0a08b138906d
+	fromColumn: 'FACT - PO SCHEDULE'.VENDOR_CODE
+	toColumn: 'DIM - VENDOR'.VENDOR_CODE
+
+relationship f547859d-9ba2-41ce-9bd0-e558083afdec
+	fromColumn: 'FACT - PO STATUS'.DOC_TYPE
+	toColumn: 'DIM - PURCHASE DOCUMENT TYPE'.DOC_TYPE
+
+relationship 52b7cd66-d29b-4dc3-9479-2c8cad69949f
+	fromColumn: 'FACT - PO STATUS'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 5d4af4ed-44ce-42c7-a256-746ac9342d4e
+	fromColumn: 'FACT - PO STATUS'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 01956f89-5222-45a4-ac42-4f51b60ed10f
+	fromColumn: 'FACT - PO STATUS'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship c39886aa-1e83-4a8a-b349-b6fb89412f38
+	fromColumn: 'FACT - PO STATUS'.PO_DOC_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 0d0282f3-fe1e-4fb7-8006-03fc7d5903ea
+	fromColumn: 'FACT - PO STATUS'.PURCHASE_GROUP
+	toColumn: 'DIM - PURCHASE GROUP'.PURCHASE_GROUP
+
+relationship 4fb565b7-dd0d-4e78-b9b1-141a389c6516
+	fromColumn: 'FACT - PO STATUS'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship f56086c3-cbc2-4bfb-8b42-1234b83bfb65
+	fromColumn: 'FACT - PO STATUS'.VENDOR_CODE
+	toColumn: 'DIM - VENDOR'.VENDOR_CODE
+
+relationship 859ed8ba-01ea-4af2-98bf-709501427ebe
+	fromColumn: 'FACT - PR STATUS'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship a89a635e-f6ec-4b4b-9c75-d988fd7ede91
+	fromColumn: 'FACT - PR STATUS'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 06b1a77b-b321-4201-976f-67219a0348c4
+	fromColumn: 'FACT - PR STATUS'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 1fdf52dd-7eec-4ca8-aefe-4db9b37579f3
+	fromColumn: 'FACT - PR STATUS'.PR_DOC_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 59580a40-9011-45ad-a288-ca102864a9ee
+	fromColumn: 'FACT - PR STATUS'.PR_DOC_TYPE
+	toColumn: 'DIM - PURCHASE DOCUMENT TYPE'.DOC_TYPE
+
+relationship d1a490e7-68e1-434c-b1a1-467b6d28d868
+	fromColumn: 'FACT - PR STATUS'.PURCHASE_GROUP_CODE
+	toColumn: 'DIM - PURCHASE GROUP'.PURCHASE_GROUP
+
+relationship 3eb66c73-7733-4507-b970-3b74545d9b54
+	fromColumn: 'FACT - PR STATUS'.STORAGE_LOCATION
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship e744604b-8998-48b6-9b49-d4466265b17a
+	fromColumn: 'FACT - PURCHASE INVENTORY AMOUNT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship a95aa55c-7c36-47ff-a0eb-6a3d4a6ae54f
+	fromColumn: 'FACT - PURCHASE INVENTORY AMOUNT'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 9a0b466e-5015-499b-8804-c00058c099cd
+	fromColumn: 'FACT - PURCHASE INVENTORY AMOUNT'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 61b9ae62-4258-480f-b961-c05763c05b50
+	fromColumn: 'FACT - PURCHASE INVENTORY AMOUNT'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 8ba38cc8-0788-437d-8321-f036c65f4bcc
+	fromColumn: 'FACT - PURCHASE INVENTORY AMOUNT'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 086a841f-41fb-4459-847c-bb0ec6c3a11b
+	fromColumn: 'FACT - PURCHASE INVENTORY AMOUNT'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 3fa92212-a833-4de9-9f26-bc875e11f0b2
+	fromColumn: 'FACT - PURCHASE INVENTORY QUANTITY'.DOC_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 3a51ed82-4260-4619-a76f-2d4f39306180
+	fromColumn: 'FACT - PURCHASE INVENTORY QUANTITY'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 82d676b5-d6c0-4f0e-98e6-48ff3053a2e1
+	fromColumn: 'FACT - PURCHASE INVENTORY QUANTITY'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 8283137d-f328-4281-a7c0-374ee37830ef
+	fromColumn: 'FACT - PURCHASE INVENTORY QUANTITY'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 8557ecd6-e88d-431d-ac97-c4ba2641e314
+	fromColumn: 'FACT - PURCHASE INVENTORY QUANTITY'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 7ec27452-eb6c-4e35-989a-edcead1b2ffa
+	fromColumn: 'FACT - PURCHASE INVENTORY QUANTITY'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 2d68dd7d-2b58-42d1-ae41-b1fb5c0d7ad6
+	fromColumn: 'FACT - PURCHASE ORDER'.DOC_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship a0cb481d-e2ad-440d-9bac-6c02bccb55fe
+	fromColumn: 'FACT - PURCHASE ORDER'.DOC_TYPE
+	toColumn: 'DIM - PURCHASE DOCUMENT TYPE'.DOC_TYPE
+
+relationship 2f34fd6d-1f63-4210-bec9-099b5568fb81
+	fromColumn: 'FACT - PURCHASE ORDER'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 94d341f3-ce6b-44f9-be57-9a820cac0161
+	fromColumn: 'FACT - PURCHASE ORDER'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 02882f62-2b7c-46fe-aead-45c84f21337f
+	fromColumn: 'FACT - PURCHASE ORDER'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship de84e401-20f3-4d9e-9dfe-76b965a514e5
+	fromColumn: 'FACT - PURCHASE ORDER'.PR_DOC
+	toColumn: 'LIST - PR NUMBER'.PURCHASE_REQUISITION
+
+relationship 5e9c7868-6c53-420e-b19e-aa2a87f5dfc0
+	fromColumn: 'FACT - PURCHASE ORDER'.PURCHASE_GROUP
+	toColumn: 'DIM - PURCHASE GROUP'.PURCHASE_GROUP
+
+relationship 8464dea6-a1b9-4b2e-9c18-8c79e469e85d
+	fromColumn: 'FACT - PURCHASE ORDER'.PURCHASE_ORDER
+	toColumn: 'LIST - PO NUMBER'.PURCHASE_ORDER
+
+relationship 72358a7b-9715-4fcd-b2c3-11b4d4f05615
+	fromColumn: 'FACT - PURCHASE ORDER'.PURCHASE_ORG
+	toColumn: 'DIM - PURCHASE ORG'.PUR_ORG_CODE
+
+relationship cea38755-93cd-4466-8b06-c00d76558cde
+	fromColumn: 'FACT - PURCHASE ORDER'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 11c023c5-b46f-450e-b68f-cd3dc76ab6c1
+	fromColumn: 'FACT - PURCHASE ORDER'.VENDOR_CODE
+	toColumn: 'DIM - VENDOR'.VENDOR_CODE
+
+relationship 2fd613a7-4915-41b9-be2e-9defed400aeb
+	fromColumn: 'FACT - PURCHASE REQUISITION'.DOCUMENT_TYPE_CODE
+	toColumn: 'DIM - PURCHASE DOCUMENT TYPE'.DOC_TYPE
+
+relationship 4d112214-dc67-4a60-bd07-8f411634fd3b
+	fromColumn: 'FACT - PURCHASE REQUISITION'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship b9f76a78-7016-4ffc-9120-c952f183ce63
+	fromColumn: 'FACT - PURCHASE REQUISITION'.MATERIAL_GROUP_CODE
+	toColumn: 'DIM - PURCHASE MATERIAL GROUP'.MATERIAL_GROUP
+
+relationship 98fe1759-759d-442a-9486-d3a53cc2237c
+	fromColumn: 'FACT - PURCHASE REQUISITION'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship fd660b4a-b3e5-4855-b3e0-27b696201ed4
+	fromColumn: 'FACT - PURCHASE REQUISITION'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship d9151df4-cfb6-4d4d-927a-7461145312ee
+	fromColumn: 'FACT - PURCHASE REQUISITION'.PURCHASE_GROUP_CODE
+	toColumn: 'DIM - PURCHASE GROUP'.PURCHASE_GROUP
+
+relationship ffb51cca-9c4c-457a-85a4-a9c9b12fbe04
+	fromColumn: 'FACT - PURCHASE REQUISITION'.PURCHASE_ORG
+	toColumn: 'DIM - PURCHASE ORG'.PUR_ORG_CODE
+
+relationship 88e2f61e-da5c-4395-8adb-a9c53b90c246
+	fromColumn: 'FACT - PURCHASE REQUISITION'.PURCHASE_REQUISITION
+	toColumn: 'LIST - PR NUMBER'.PURCHASE_REQUISITION
+
+relationship 388ffcf6-bf8a-4419-b029-c1eda4b120b2
+	fromColumn: 'FACT - PURCHASE REQUISITION'.REQUISITION_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 1e140ced-f527-40d7-a50f-f7cfa52c89bc
+	fromColumn: 'FACT - PURCHASE REQUISITION'.STORAGE_LOCATION
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 7482e7a8-1b90-487e-847a-bae3d19afa66
+	isActive: false
+	fromColumn: 'FACT - SALE IN ACTUAL'.ACTUAL_GI_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship e4a23444-1337-4ad6-9bee-48ea45c6a9d4
+	fromColumn: 'FACT - SALE IN ACTUAL'.BILLING_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 33a6065d-7743-4fc6-91f3-109991349a0e
+	fromColumn: 'FACT - SALE IN ACTUAL'.BILLING_DOC
+	toColumn: 'LIST - BILLING NUMBER'.BILLING_DOC
+
+relationship 055a2fa8-2bee-4130-9f11-68f3e72c1097
+	fromColumn: 'FACT - SALE IN ACTUAL'.CHANNEL_CODE
+	toColumn: 'DIM - CHANNEL'.CHANNEL_CODE
+
+relationship 7acca207-3c44-4e46-850b-86d1ece5f8ea
+	fromColumn: 'FACT - SALE IN ACTUAL'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship e2fe412d-dc64-44e2-97b3-d8d54c2ef4b4
+	fromColumn: 'FACT - SALE IN ACTUAL'.CONTRACT_NUMBER
+	toColumn: 'LIST - CONTRACT NUMBER'.CONTRACT_NUMBER
+
+relationship 33fdf147-59bd-4eee-803d-d4d43ed6ddde
+	fromColumn: 'FACT - SALE IN ACTUAL'.CUSTOMER_CODE
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship e4613cd9-7ae7-44f3-8e49-71b5e68086eb
+	fromColumn: 'FACT - SALE IN ACTUAL'.CUSTOMER_GROUP_CODE
+	toColumn: 'DIM - CUSTOMER GROUP'.CUSTOMER_GROUP
+
+relationship f46908ed-cd0d-4b94-8168-95b8cc26857f
+	fromColumn: 'FACT - SALE IN ACTUAL'.DIVISION_CODE
+	toColumn: 'DIM - DIVISION'.DIVISION_CODE
+
+relationship 4e4cca63-a1e6-4451-907c-6f66b9fb1ca0
+	fromColumn: 'FACT - SALE IN ACTUAL'.PRICE_LIST
+	toColumn: 'DIM - PRICE LIST TYPE'.PRICE_LIST
+
+relationship c1671bc7-3bab-45ba-93ee-21de04edf23c
+	fromColumn: 'FACT - SALE IN ACTUAL'.PRODUCT_CODE
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship a20fa830-d3e7-437a-b814-54ffbdbc63e6
+	fromColumn: 'FACT - SALE IN ACTUAL'.SALE_GROUP
+	toColumn: 'DIM - REGION'.SALE_GRP_CODE
+
+relationship 9c8f0cd0-6a23-467d-8b92-dcddf832b895
+	fromColumn: 'FACT - SALE IN ACTUAL'.SALE_ORDER_DOC
+	toColumn: 'LIST - SALE ORDER'.SALE_ORDER_DOC
+
+relationship a937be65-095b-40f1-99c7-8ccb8fd1d01f
+	fromColumn: 'FACT - SALE IN ACTUAL'.SALE_ORG
+	toColumn: 'DIM - SALE ORGANIZATION'.SALE_ORG
+
+relationship ce70da32-6172-43f2-93fe-360cedb5c8ce
+	fromColumn: 'FACT - SALE IN PLAN'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship cc7bbaaf-00bd-44c0-b008-bf6f4959fbab
+	fromColumn: 'FACT - SALE IN PLAN'.PLAN_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 32881277-f255-4cf6-a2d8-081304f2cec6
+	toCardinality: many
+	fromColumn: 'FACT - SALE IN PLAN'.PRODUCT_CODE_LV3
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE_LV3
+
+relationship bff470c5-cdcd-4ca0-b266-68183f293be2
+	toCardinality: many
+	fromColumn: 'FACT - SALE IN PLAN'.SALE_OFFICE
+	toColumn: 'DIM - REGION'.SALE_OFF_CODE
+
+relationship e029ef49-c848-4e2e-bcde-eabc658dbd64
+	fromColumn: 'FACT - SALE ORDER STATUS'.CHANNEL_CODE
+	toColumn: 'DIM - CHANNEL'.CHANNEL_CODE
+
+relationship 24218b5e-471f-4320-aa0f-b2df8201d49f
+	fromColumn: 'FACT - SALE ORDER STATUS'.CONTRACT_NUMBER
+	toColumn: 'LIST - CONTRACT NUMBER'.CONTRACT_NUMBER
+
+relationship 179209e5-24b8-4f67-8109-68f814e33bb1
+	fromColumn: 'FACT - SALE ORDER STATUS'.CUSTOMER_CODE
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship 502c65b3-1bef-4640-9e64-9ccb24d13e92
+	fromColumn: 'FACT - SALE ORDER STATUS'.CUSTOMER_GROUP
+	toColumn: 'DIM - CUSTOMER GROUP'.CUSTOMER_GROUP
+
+relationship f4a71cd1-6d8a-474b-8e24-01e271eeb849
+	fromColumn: 'FACT - SALE ORDER STATUS'.DIVISION_CODE
+	toColumn: 'DIM - DIVISION'.DIVISION_CODE
+
+relationship 01a7a62c-855c-42ce-8b18-463ea4e7d898
+	fromColumn: 'FACT - SALE ORDER STATUS'.EMPLOYEE_CODE
+	toColumn: 'DIM - EMPLOYEE'.EMPLOYEE_CODE
+
+relationship 6ea6adde-703d-4366-a8b1-28110e13f860
+	fromColumn: 'FACT - SALE ORDER STATUS'.PRICE_LIST
+	toColumn: 'DIM - PRICE LIST TYPE'.PRICE_LIST
+
+relationship 232b7004-5d9c-49a4-a1f4-6e5c0dee589c
+	fromColumn: 'FACT - SALE ORDER STATUS'.PRODUCT_CODE
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship 046f9f29-148c-432d-8420-13f4f9b1e18e
+	fromColumn: 'FACT - SALE ORDER STATUS'.SALE_GROUP
+	toColumn: 'DIM - REGION'.SALE_GRP_CODE
+
+relationship 25d10e0d-5188-413a-a8e9-25a0bfb02695
+	fromColumn: 'FACT - SALE ORDER STATUS'.SALE_ORDER_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 35fb840e-e725-4ff0-b21f-d31692dc9648
+	fromColumn: 'FACT - SALE ORDER STATUS'.SALE_ORDER_DOC
+	toColumn: 'LIST - SALE ORDER'.SALE_ORDER_DOC
+
+relationship cd1534cd-b897-41ba-b03d-8db45185d9b5
+	fromColumn: 'FACT - SALE ORDER STATUS'.SALE_ORG
+	toColumn: 'DIM - SALE ORGANIZATION'.SALE_ORG
+
+relationship b2d9b09a-8ade-4d4c-87b7-bb4efd0cfbb9
+	fromColumn: 'FACT - SALE ORDER STATUS'.VALID_TO
+	toColumn: 'DIM - SECONDARY DATE'.DateKey
+
+relationship 8d587b2b-b016-4bea-be46-950f668a3440
+	fromColumn: 'FACT - SALE OUT ACTUAL'.CUSTOMER_ID
+	toColumn: 'DIM - CUSTOMER C2 DMS'.CUSTOMER_ID
+
+relationship 013002d3-fec4-417e-9079-f4d155a074da
+	isActive: false
+	fromColumn: 'FACT - SALE OUT ACTUAL'.'First Day Order'
+	toColumn: 'DIM - DATE'.Date
+
+relationship 0943174c-d5ee-4d54-842f-fe8db28254b6
+	fromColumn: 'FACT - SALE OUT ACTUAL'.ORDER_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 8a00d45c-52d2-4461-a7de-163d26345482
+	fromColumn: 'FACT - SALE OUT ACTUAL'.PRODUCT_CODE_SAP
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship 6ab97c9f-4493-4be7-9922-31d5748730b1
+	fromColumn: 'FACT - SALE OUT ACTUAL'.PRODUCT_ID
+	toColumn: 'DIM - PRODUCT DMS'.PRODUCT_ID
+
+relationship 55ace468-3825-4839-8ffa-4c474edf5951
+	fromColumn: 'FACT - SALE OUT ACTUAL'.SALE_ORDER_ID
+	toColumn: 'LIST - SALES OUT ORDER'.SALE_ORDER_ID
+
+relationship 91323576-fecd-4d6c-8d2c-b4a12b26a587
+	fromColumn: 'FACT - SALE OUT ACTUAL'.SHOP_C1_SAP
+	toColumn: 'DIM - CUSTOMER'.CUSTOMER_CODE
+
+relationship 8c696e63-bb57-46b6-a20e-c92cc93ca2db
+	fromColumn: 'FACT - SALE OUT ACTUAL'.SHOP_ID
+	toColumn: 'DIM - SHOP DMS'.SHOP_ID
+
+relationship 11db8739-8cbf-4aa5-a611-7b8a5ad9043e
+	fromColumn: 'FACT - SALE OUT ACTUAL'.STAFF_ID
+	toColumn: 'DIM - STAFF DMS'.STAFF_ID
+
+relationship 5e833e63-4022-417e-9f6f-0699a961955f
+	fromColumn: 'FACT - SALE OUT PLAN'.CYCLE_ID
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 1e64c346-ba79-4f8d-9964-dbbdd1e3e51c
+	fromColumn: 'FACT - SALE OUT PLAN'.OBJECT_ID
+	toColumn: 'DIM - STAFF DMS'.STAFF_ID
+
+relationship 7c148523-64cc-4950-a0d8-921cc879de27
+	toCardinality: many
+	fromColumn: 'FACT - SALE OUT PLAN'.SUB_CAT_ID
+	toColumn: 'DIM - PRODUCT DMS'.SUB_CAT_ID
+
+relationship 71ddc0d6-83d0-41aa-bd60-c8db9c859635
+	toCardinality: many
+	fromColumn: 'FACT - SALE OUT PLAN'.SUB_REGION_ID
+	toColumn: 'DIM - SHOP DMS'.SUB_REGION_ID
+
+relationship 6bbb35f0-5324-412c-87ed-d2c5380d612b
+	fromColumn: 'FACT - VISIT ACTUAL C2'.CUSTOMER_ID
+	toColumn: 'DIM - CUSTOMER C2 DMS'.CUSTOMER_ID
+
+relationship 86caba2c-ead0-4a46-9c67-da398d015aa2
+	fromColumn: 'FACT - VISIT ACTUAL C2'.STAFF_ID
+	toColumn: 'DIM - STAFF DMS'.STAFF_ID
+
+relationship eb8c6880-fc89-4dca-862f-df43a9d5f4e0
+	fromColumn: 'FACT - VISIT ACTUAL C2'.START_TIME
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship db3365a4-1f07-455a-b84b-91b2562e1c5d
+	toCardinality: many
+	fromColumn: 'FACT - VISIT ACTUAL C2'.SUB_REGION_ID
+	toColumn: 'DIM - SHOP DMS'.SUB_REGION_ID
+
+relationship 1f8d57f5-4927-4b1a-9c8d-96a4ff002336
+	fromColumn: 'FACT - VISIT PLAN C2'.CYCLE_ID
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 60f6c6b0-0706-4cd3-807c-5e95d277f767
+	fromColumn: 'FACT - VISIT PLAN C2'.STAFF_ID
+	toColumn: 'DIM - STAFF DMS'.STAFF_ID
+
+relationship b8d7f560-fd3a-4ff7-a356-41dd04c04e0f
+	toCardinality: many
+	fromColumn: 'FACT - VISIT PLAN C2'.SUB_REGION_ID
+	toColumn: 'DIM - SHOP DMS'.SUB_REGION_ID
+
+relationship 62b43a75-19fd-44f1-bf29-41e0fc725a47
+	fromColumn: 'FACT - GOOD RECEIPT'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship f1b11596-d59b-4912-80fe-2cbdea9f46b3
+	fromColumn: 'FACT - LOGISTIC COST ACTUAL'.COMPANY_CODE
+	toColumn: 'DIM - COMPANY'.COMPANY_CODE
+
+relationship 4c7e99b4-43c5-411e-83f8-95122f85b3d1
+	fromColumn: 'FACT - SALE ORDER STATUS'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 61684fb7-9220-4264-a714-b7168645a901
+	fromColumn: 'FACT - SALE IN ACTUAL'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship c08c05bc-79bd-4be4-872d-d70775a6b977
+	fromColumn: 'FACT - LOGISTIC TRANSPORT COST'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 296010cf-c94e-46e5-92c7-9ce48eef3279
+	fromColumn: 'FACT - LOGISTIC STORAGE COST'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 21b6210a-51dc-4f4d-beca-b00406f0c09e
+	fromColumn: 'FACT - DELIVERY STATUS'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 3fa287ce-af65-47e1-b4e7-870db3ffbe39
+	fromColumn: 'FACT - CONTRACT STATUS'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 7835fb94-4003-423b-aa33-dad6a4634f53
+	fromColumn: 'FACT - INVENTORY BALANCE'.STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 51a57873-e7c4-40bc-8f67-0ea87fe579c4
+	isActive: false
+	fromColumn: 'FACT - NORM QUALITY'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 81b1a553-870a-4187-83b7-3eb1ef3c75c7
+	fromColumn: 'FACT - ACTUAL PRODUCTION'.BATCH_NO
+	toColumn: 'DIM - BATCH NO'.BATCH_NO
+
+relationship d22a300e-2de4-4b49-894f-e0eadf93c2c4
+	fromColumn: 'FACT - QUALITY STANDARD'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship d1fa0fcf-962d-46d5-a4be-a8dfb98baeb5
+	fromColumn: 'FACT - CONSUMPTION NORM'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship ba83f4c8-b4b0-4a41-a9b0-260b2418db09
+	isActive: false
+	fromColumn: 'DIM - PRODUCT GROUP NPK'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship f54daa60-7410-4b7b-b76f-98e8ed3e5922
+	fromColumn: 'DIM - SEMI PRODUCT NPK'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship fad80728-451b-45cb-b8cb-ed47950e890b
+	isActive: false
+	fromColumn: 'DIM - MATERIALS NPK'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 89138dcf-5179-4319-a3f3-6c47d5adc476
+	fromColumn: 'FACT - NPK CONSUMPTION RATE'.STORAGE_LOCATION
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 538a17fa-5ff7-4448-9f8a-053b9ea361a7
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.BATCH_NO
+	toColumn: 'DIM - BATCH NO'.BATCH_NO
+
+relationship c4b818c6-40d1-4889-9647-380e469879c8
+	isActive: false
+	fromColumn: 'DIM - PRODUCT GROUP NPK'.BATCH_NO
+	toColumn: 'DIM - BATCH NO'.BATCH_NO
+
+relationship 990ae729-9013-45c3-8ef5-e50117266e7e
+	fromColumn: 'DIM - SEMI PRODUCT NPK'.BATCH_NO
+	toColumn: 'DIM - BATCH NO'.BATCH_NO
+
+relationship 8fd5d00b-d8a8-427d-99f5-77b43d11bb55
+	isActive: false
+	fromColumn: 'DIM - MATERIALS NPK'.BATCH_NO
+	toColumn: 'DIM - BATCH NO'.BATCH_NO
+
+relationship 2a16a339-6347-4440-b1d4-d70780f46cb8
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.COST_ELEMENT
+	toColumn: 'DIM - COST ELEMENT'.COST_ELEMENT
+
+relationship 35d4af80-0b3b-402e-8fd3-292be421b7cb
+	isActive: false
+	fromColumn: 'FACT - NPK CONSUMPTION RATE'.PRO_SEMI_CODE
+	toColumn: 'DIM - PRODUCT GROUP NPK'.PRO_SEMI_CODE
+
+relationship b4586230-31f5-4f43-8e1f-e6e698fb0b2c
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.DIM_MATERIALS_NPK_CODE
+	toColumn: 'DIM - MATERIALS NPK'.DIM_MATERIALS_NPK_CODE
+
+relationship 866a3338-7947-4315-b831-c44330bc619b
+	isActive: false
+	fromColumn: 'FACT - STORAGE BIN'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 14fa6165-6bde-4df1-92f9-c787a67968e8
+	isActive: false
+	fromColumn: 'FACT - TRANSFER ORDER'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 41618009-73a1-40b1-9aa8-b9c007456f10
+	isActive: false
+	fromColumn: 'FACT - ZWM06N'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 62ec154f-c798-4aa8-bf01-2c39c3b60173
+	isActive: false
+	fromColumn: 'FACT - SHELF LIFE LIST'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 6b975faa-0db5-430b-b85f-bc6548e70de1
+	fromColumn: 'FACT - CO SPLIT ITEM'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship f92860f5-b1e4-4fde-9c73-210d94c261b2
+	isActive: false
+	fromColumn: 'FACT - PRODUCT COSTING'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 2b4309b3-2bc0-4334-8b74-b71e577f5994
+	fromColumn: 'FACT - INVENTORY BALANCE'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 5f7e44eb-f55c-40b0-8259-b5ea4e9a8098
+	fromColumn: 'FACT - LDDNB STATUS'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship e3ea713c-be8e-46ca-bd09-2f6780ea041d
+	isActive: false
+	fromColumn: 'FACT - PURCHASE INVENTORY AMOUNT'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship edfd54e3-1e5f-4712-923c-c6256b0ed536
+	isActive: false
+	fromColumn: 'FACT - PURCHASE INVENTORY QUANTITY'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 1556b4ca-f59c-4da1-baec-a1f64d7206d0
+	isActive: false
+	fromColumn: 'FACT - QUALITY STANDARD'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship f63d2cc7-8075-4e51-b002-918f61b54646
+	isActive: false
+	fromColumn: 'FACT - CONSUMPTION NORM'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 1d1dca90-8d78-48ac-a394-4d0072dca9d9
+	isActive: false
+	fromColumn: 'FACT - STORAGE BIN'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 94eb23b2-5f52-4415-835f-6bba21477689
+	isActive: false
+	fromColumn: 'FACT - TRANSFER ORDER'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 594bf77d-b9d5-4235-93c6-0092835583ad
+	isActive: false
+	fromColumn: 'FACT - ZWM06N'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship e0346476-eaaa-4651-9a82-a163a80c8770
+	isActive: false
+	fromColumn: 'FACT - SHELF LIFE LIST'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 43cec73d-674a-440d-8221-3640bd0fdf53
+	fromColumn: 'FACT - CO SPLIT ITEM'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 53040a48-5139-44e0-bb84-b82d9ec0d365
+	isActive: false
+	fromColumn: 'FACT - PRODUCT COSTING'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 9dd997ad-d920-407d-8b32-da84c1f6f69d
+	isActive: false
+	fromColumn: 'FACT - PURCHASE INVENTORY AMOUNT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship d9a2c8e5-2e95-4366-bd2e-a485abdacba6
+	isActive: false
+	fromColumn: 'FACT - PURCHASE INVENTORY QUANTITY'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship af1b61fa-2288-4ded-9913-445fd6dacc64
+	isActive: false
+	fromColumn: 'FACT - NORM QUALITY'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 87060fae-696f-4c15-a2d6-d84b06240784
+	isActive: false
+	fromColumn: 'FACT - CONSUMPTION NORM'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 2cf9a595-03f3-45e3-beb5-4c5bbf84a704
+	fromColumn: 'AGG - MATERIAL LEDGER QTY'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship af4c35d3-343f-426a-9d91-664ba62b46a0
+	fromColumn: 'DIM - MATERIAL PP'.MATL_GROUP
+	toColumn: 'DIM - MATERIAL GROUP'.MATL_GROUP_CODE
+
+relationship 858fbd2b-82f1-423a-a431-2f063761d586
+	fromColumn: 'DIM - MATERIAL PP'.PROD_MEMO
+	toColumn: 'DIM - PRO MEMO'.PROD_MEMO
+
+relationship 4c9d85af-9106-4646-98bf-271556e6354d
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'DIM - MATERIALS NPK'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 94a3503b-8d04-49c3-aa63-ace9d5c4eb61
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'DIM - PRODUCT GROUP NPK'.PRO_SEMI_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 8a36c7d9-83f5-4009-aa50-e98d89deec99
+	fromColumn: 'DIM - SEMI PRODUCT NPK'.PRO_SEMI_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 83c11f74-4124-467f-8f51-f681e2eac809
+	fromColumn: 'FACT - ACTUAL PRODUCTION'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship bca94484-124d-4f00-a7af-312ee1349bbd
+	fromColumn: 'FACT - ACTUAL PRODUCTION'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 33d5a170-2fc4-450d-8ecf-388014516547
+	fromColumn: 'FACT - ACTUAL PRODUCTION'.PRO_SEMI_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship e1d3810b-971e-4faf-b6ce-025eb9040c70
+	fromColumn: 'FACT - ACTUAL PRODUCTION'.STORAGE_LOCATION
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 89ca178e-17e5-4fe9-a725-744357027105
+	fromColumn: 'FACT - BOM PRODUCTION RLP'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship ea967b8d-8411-43a5-a4db-e73e064ff639
+	fromColumn: 'FACT - BOM PRODUCTION RLP'.PLAN_PERIOD
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 37482a05-732e-4d54-9215-00794290462c
+	fromColumn: 'FACT - BOM PRODUCTION RLP'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 563e53bd-48d0-4a06-9ae4-ce01b95435be
+	fromColumn: 'FACT - BOM PRODUCTION RLP'.PRO_SEMI_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship a923564b-a0f1-43f9-b28b-4c6b4f9d81be
+	fromColumn: 'FACT - BOM PRODUCTION RLP'.STORAGE_LOCATION
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 1893ed3a-6e45-49d6-b643-b2c7c14c219e
+	fromColumn: 'FACT - CONSUMPTION NORM'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 2b91e36d-ab53-40ff-bb86-59d0cc12fcde
+	toCardinality: many
+	fromColumn: 'FACT - CONSUMPTION NORM'.PRODUCT_GROUP
+	toColumn: 'DIM - PRODUCT GROUP NPK'.PRODUCT_GROUP
+
+relationship c8f2cf04-a960-34de-306f-dd20bdcdfd10
+	toCardinality: many
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.ACTUAL_UNIT_CONSUMPTION
+	toColumn: 'DIM - BASE UOM'.BASE_UNIT
+
+relationship 57463094-c039-4def-96a3-17d85829438e
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.ENERGY_CODE
+	toColumn: 'DIM - ENERGY'.ENERGY_CODE
+
+relationship cc9bbe27-8b43-4bba-a057-78a75e02e01f
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.FACTORY_CODE
+	toColumn: 'DIM - FACTORY'.FACTORY_CODE
+
+relationship 702fd07a-4a14-4926-87c7-2a33a2f1bd93
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship adc9db9d-e718-4c15-a9c7-add3655880fc
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship b446b436-3e55-4e1d-925a-fdc7fc284e4a
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship cd5236d7-30ed-494f-b2f1-b20c177da217
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship d981fba3-91f8-4c99-a9f3-53acd242c81d
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.PRO_SEMI_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 58ae1e7a-743e-4bf1-bd6e-08f5b7c0d431
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.STORAGE_LOCATION
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 0ad0acf9-acdf-4cd0-a8b8-ced00da209eb
+	fromColumn: 'FACT - NORM QUALITY'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship dd044f70-5e5d-4176-99c9-378dc9950d47
+	fromColumn: 'FACT - NORM QUALITY'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 6a606d8b-83bc-4eed-b7ec-ae255c332fc0
+	fromColumn: 'FACT - NORM QUALITY'.PRO_SEMI_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship e45d0c7a-4ff8-425d-aafa-c9ed0cb9f255
+	toCardinality: many
+	fromColumn: 'FACT - NORM QUALITY'.UOM_CONVERT
+	toColumn: 'DIM - BASE UOM'.BASE_UNIT
+
+relationship 88d02165-f0b9-46e0-969a-a0da03912935
+	fromColumn: 'FACT - NPK CONSUMPTION RATE'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 8b308bda-ee78-493a-959f-21cdc2952d35
+	fromColumn: 'FACT - NPK CONSUMPTION RATE'.NPK_COMPO_CODE
+	toColumn: 'DIM - NPK COMPONENT'.NPK_COMPO_CODE
+
+relationship 839ef75d-df2f-4304-b2d7-8089667834aa
+	fromColumn: 'FACT - NPK CONSUMPTION RATE'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 96d759c4-a160-4b21-94cd-44bb4d7d15fa
+	fromColumn: 'FACT - NPK CONSUMPTION RATE'.PRO_SEMI_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship a1199f05-8de4-43d9-b0f7-8674c5861350
+	toCardinality: many
+	fromColumn: 'FACT - PLAN UNIT PRICE'.BASE_UNIT
+	toColumn: 'DIM - BASE UOM'.BASE_UNIT
+
+relationship 197bcf56-641a-4c03-af92-42623314f437
+	fromColumn: 'FACT - PLAN UNIT PRICE'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 1dad9d77-ecc8-490f-82d1-3e86ee697615
+	fromColumn: 'FACT - PLANT OPERATION'.FACTORY_CODE
+	toColumn: 'DIM - FACTORY'.FACTORY_CODE
+
+relationship ca9e5e18-a0a5-4cd1-8499-a54be51e3b67
+	fromColumn: 'FACT - PLANT OPERATION'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship baaf6796-be45-410c-860f-b32a3f3fef1c
+	fromColumn: 'FACT - PLANT OPERATION'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 297bf5a7-e2c8-4b1a-a8fb-482af4956e0a
+	toCardinality: many
+	fromColumn: 'FACT - PRODUCTION PLAN'.BASE_UNIT
+	toColumn: 'DIM - BASE UOM'.BASE_UNIT
+
+relationship 089fd8ba-64d1-4e50-a843-a856fecfda4d
+	fromColumn: 'FACT - PRODUCTION PLAN'.PLAN_PERIOD
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship b8d9711e-9750-42c5-8b52-47d0eda30de0
+	fromColumn: 'FACT - PRODUCTION PLAN'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 1b468785-b47d-4bfc-aa9b-25490d3eb161
+	fromColumn: 'FACT - PRODUCTION PLAN'.PRO_SEMI_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship fda50ed9-e1a7-4353-a602-d5937e9e4c23
+	fromColumn: 'FACT - PRODUCTION PLAN'.VERSION
+	toColumn: 'LIST - PP PLAN VERSION'.VERSION
+
+relationship 42d09898-894a-4dc2-acff-c4e6c73b7848
+	fromColumn: 'FACT - QUALITY STANDARD'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship 182122bb-5fa8-4d41-82ac-c664680d4055
+	fromColumn: 'FACT - QUALITY STANDARD'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship c9d9fc99-e539-4d5a-88db-0e85abe31f95
+	fromColumn: 'FACT - QUALITY STANDARD'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship 646656a7-bbc8-4761-af71-c38c17026bb1
+	fromColumn: 'FACT - ACTUAL PRODUCTION'.FISCAL_DATE
+	toColumn: 'DIM - DATE'.DateKey
+
+relationship e9a691b9-9b73-49f8-9a75-b008c64fa98d
+	fromColumn: 'FACT - BOM PRODUCTION RLP'.VERSION
+	toColumn: 'LIST - PP PLAN VERSION'.VERSION
+
+relationship 45fcfb12-7a1f-49b9-8adf-8ed2a9f5eb47
+	fromColumn: 'DIM - FIXED ASSET'.COST_CENRE
+	toColumn: 'DIM - COST CENTRE'.COST_CENTER_CODE
+
+relationship 526f2c35-2636-4647-ba1c-43ae4f05d049
+	isActive: false
+	fromColumn: 'FACT - MATERIAL ALLOCATION CONSUMPTION'.PRO_SEMI_CODE
+	toColumn: 'DIM - PRODUCT GROUP NPK'.PRO_SEMI_CODE
+
+relationship d1a0e64c-9e08-48ed-8714-d27a3d1c057c
+	fromColumn: 'FACT - LDDNB STATUS'.ISSUE_STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship cc330f6b-f916-4e72-8cfb-7a035eac21a7
+	fromColumn: 'FACT - GL LINE ITEM OFFSET'.IS_REVERSE
+	toColumn: 'PARAMETER - IS REVERSE'.IS_REVERSE
+
+relationship e57400bc-408e-43e9-9644-64729ce71dcb
+	fromColumn: 'FACT - GL ACCOUNT BALANCE OFFSET'.IS_REVERSE
+	toColumn: 'PARAMETER - IS REVERSE'.IS_REVERSE
+
+relationship be1ee7de-f484-4bad-9adf-2efdb3e1a3f7
+	fromColumn: 'AGG - INVENTORY SLOW MOVING'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship ba8d314b-d6c7-4fee-afd7-d1bbdfb3f9a8
+	fromColumn: 'AGG - INVENTORY SLOW MOVING'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 164f74d8-e206-4928-8f51-e1adaa6510d5
+	fromColumn: 'AGG - INVENTORY SLOW MOVING'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship ca9d9ce2-2259-4722-83b8-48e60b371680
+	fromColumn: 'AGG - INVENTORY SLOW MOVING'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship a12aa81f-5381-476f-9436-9b81b6f3d0b2
+	fromColumn: 'FACT - MATERIAL USAGE PLAN'.'Material Number'
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship c941a39c-62ed-4327-bb3a-d8e6a3c7a27a
+	fromColumn: 'FACT - MATERIAL USAGE PLAN'.'Basic start date WO'
+	toColumn: 'DIM - DATE'.Date
+
+relationship 588a27d9-78ff-4d70-b672-5c823bb76b2f
+	fromColumn: 'FACT - MATERIAL USAGE PLAN'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 113f505f-f9ac-468a-ae95-21a953c95e0c
+	fromColumn: 'FACT - MATERIAL USAGE PLAN'.Plant
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship dd49507d-051e-496a-b01b-047a06998b58
+	fromColumn: 'FACT - MATERIAL USAGE PLAN'.'Storage Location'
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 2bef9b05-6c0d-4b01-92aa-28b25f1b01a7
+	fromColumn: 'AGG - ALLOCATE SLOC AMT'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 2d406db6-8b06-40f3-bb12-23c491529cab
+	fromColumn: 'FACT - COPA LINE ITEM'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 0bfcadb3-9a81-492e-9aec-88992a363bfa
+	fromColumn: 'FACT - LOGISTIC TRANSPORT COST'.PRODUCT_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 3a45b332-a9ac-4a6c-80c2-3d100db6ace2
+	fromColumn: 'FACT - AVAILABLE INVENTORY WH'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship f49e8d3b-c89b-4f1f-a2b7-38a28c22925f
+	fromColumn: 'FACT - COPA LINE ITEM'.MATERIAL_CODE
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship 17f1297e-670b-44e3-aa03-f990a8703ef1
+	fromColumn: 'FACT - CO SPLIT ITEM'.MATERIAL_CODE
+	toColumn: 'DIM - PRODUCT'.PRODUCT_CODE
+
+relationship aa06d191-f459-4779-8d7d-54dfafbfe0c0
+	fromColumn: 'FACT - INVENTORY BALANCE PLANT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship e59a7991-fe69-4ef0-aa7f-b8b1ce41607f
+	fromColumn: 'FACT - AVAILABLE INVENTORY WH'.MATERIAL_CODE
+	toColumn: 'DIM - COMPONENT'.MATERIAL_CODE
+
+relationship 358221e2-64c9-41f1-bdf5-3743a4a57119
+	fromColumn: 'FACT - AVAILABLE INVENTORY WH'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL PP'.MATERIAL_CODE
+
+relationship 7051220e-eed3-18a4-8c00-869b999cdf6a
+	fromColumn: 'FACT - CO SPLIT ITEM'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship e16aeda5-d2f4-d6bf-8fe1-9e08150f6074
+	fromColumn: 'FACT - MATERIAL RESERVATION'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship eaada748-3985-79b2-b12c-24be7ea9ff4b
+	fromColumn: 'FACT - ALLOCATED INVENTORY'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship c70f9454-f049-31b8-821a-75c526cfe05e
+	fromColumn: 'FACT - ALLOCATED INVENTORY'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 2b208e9b-11d9-ebb1-988b-04d341ad0314
+	fromColumn: 'FACT - MATERIAL RESERVATION'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 1baa991a-9be9-6ab1-8df7-241079efce25
+	fromColumn: 'DIM - EQUIPMENT'.EQUI_TYPE_CODE
+	toColumn: 'DIM - EQUI TYPE'.EQUI_TYPE_CODE
+
+relationship bf688557-f0bf-95ad-7231-2058ab32b162
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'DIM - WORK CENTER HIERARCHY'.WORK_CENTER_ID
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER_ID
+
+relationship 5fadd45d-8833-007b-d04f-75e23605be20
+	fromColumn: 'FACT - ALLOCATED INVENTORY'.STORAGE_LOCATION
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 678d8286-2413-f7e1-48f2-c219510b6047
+	toCardinality: many
+	fromColumn: 'FACT - BOM COMPONENT'.COMPO_UOM
+	toColumn: 'DIM - BASE UOM'.BASE_UNIT
+
+relationship f9ad242e-7c75-0c75-0d1b-b383eab7048e
+	fromColumn: 'FACT - BOM COMPONENT'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship c8e164b0-391b-d814-89a8-77a138db3293
+	fromColumn: 'FACT - BOM COMPONENT'.FUNCT_LOC_CODE
+	toColumn: 'DIM - FUNCTIONAL LOCATION'.FUNCT_LOC_CODE
+
+relationship f2d4c72d-e657-a075-1f81-e912ecff2719
+	fromColumn: 'FACT - BOM COMPONENT'.MANUFACTOR
+	toColumn: 'DIM - VENDOR'.VENDOR_CODE
+
+relationship 073d45ba-e101-f211-34cc-5f27abcfd0a8
+	fromColumn: 'FACT - BOM COMPONENT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship f32c80db-f252-16f4-e3a2-e0920d3cf157
+	fromColumn: 'FACT - BOM COMPONENT'.MATERIAL_CODE
+	toColumn: 'DIM - MAINT TEXT'.TEXT_ID
+
+relationship 13544796-aa17-d70b-7956-037d0f634ca9
+	fromColumn: 'FACT - BOM COMPONENT'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship 36bcbbb5-c601-42f4-6108-bd0f62f87a82
+	fromColumn: 'FACT - BOM COMPONENT'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship 811d8e7f-83f9-2659-aaf3-b44f311bcc1b
+	fromColumn: 'FACT - BOM COMPONENT'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship 4d9a108a-4ee1-2074-1b5b-61f55c36317f
+	fromColumn: 'FACT - EQUI FM NOTI'.CAUSE_CODE_KEY
+	toColumn: 'DIM - CODE'.CAUSE_CODE_KEY
+
+relationship c1233eb0-577d-a084-4bf7-d0202b75ce8b
+	fromColumn: 'FACT - EQUI FM NOTI'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship 83145756-25cb-ff2c-9aa0-e640ef7a4795
+	fromColumn: 'FACT - EQUI FM NOTI'.NOTIF_DATE
+	toColumn: 'DIM - SECONDARY DATE'.DateKey
+
+relationship c4797565-491b-c70c-bd82-46eb19784328
+	fromColumn: 'FACT - EQUI FM NOTI'.NOTIF_TYPE
+	toColumn: 'DIM - NOTIFICATION TYPE'.NOTIF_TYPE
+
+relationship 6b2848a7-4dcd-6437-5396-bc60c637bcf8
+	fromColumn: 'FACT - EQUI FM NOTI'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship fb626a5b-281f-894c-135f-0ad30122ed25
+	fromColumn: 'FACT - EQUI FM NOTI'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship 3cbbe69f-ee0b-8d9d-8711-5120364f1a34
+	fromColumn: 'FACT - EQUI FM NOTI'.PRIOR_CODE
+	toColumn: 'DIM - PRIORITY'.PRIOR_CODE
+
+relationship 9a63a626-1a6a-82fa-99af-c439fcd03ead
+	fromColumn: 'FACT - EQUI FM NOTI'.SUP_CODE
+	toColumn: 'DIM - SUPERVISOR'.SUP_CODE
+
+relationship ab381333-1c90-fd3c-9c2b-1f1d9d151154
+	fromColumn: 'FACT - EQUI FM NOTI'.WORK_CENTER
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER_ID
+
+relationship 188c9d8d-d55d-31cb-feae-52f10d3ec0c8
+	fromColumn: 'FACT - HISTORY APPROVAL'.DATA_TYPE
+	toColumn: 'DIM - HISTORY DATA TYPE'.DATA_TYPE
+
+relationship b5958ba4-04f1-0396-963e-3f8cd2c21bbd
+	fromColumn: 'FACT - HISTORY APPROVAL'.MAINT_ITEM
+	toColumn: 'DIM - MAINT ITEM'.MAINT_ITEM
+
+relationship 50eec188-567f-2b1e-146e-e497dee879a6
+	fromColumn: 'FACT - HISTORY APPROVAL'.'OVERVIEW_STATUS '
+	toColumn: 'DIM - HISTORY OVERVIEW STATUS'.OVERVIEW_STATUS
+
+relationship c4e3fb08-9008-fafa-4491-1e72e913bdf8
+	fromColumn: 'FACT - HISTORY APPROVAL'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship b71278e6-4dc1-eb65-65e9-2911df414ff0
+	fromColumn: 'FACT - HISTORY APPROVAL'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship d272218f-9e53-5be9-81ed-9bc7563fc3ad
+	fromColumn: 'FACT - HISTORY APPROVAL'.PRIOR_CODE
+	toColumn: 'DIM - PRIORITY'.PRIOR_CODE
+
+relationship 2c28184b-da8d-04c9-207e-a35d1c9f5cd6
+	fromColumn: 'FACT - HISTORY APPROVAL'.SUP_CODE
+	toColumn: 'DIM - SUPERVISOR'.SUP_CODE
+
+relationship f9991e31-e2b2-eb42-f571-258ae6c5bd60
+	fromColumn: 'FACT - HISTORY APPROVAL'.SYST_COND
+	toColumn: 'DIM - OPERATE CONDITION'.SYST_COND
+
+relationship a02a8bd5-e9bb-84eb-1c13-b516d30be063
+	fromColumn: 'FACT - HISTORY APPROVAL'.WORK_CENTER_ID
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER_ID
+
+relationship 8afcf92c-e03c-969d-f2c6-f5a94932571b
+	fromColumn: 'FACT - HISTORY APPROVAL DETAIL'.DATA_TYPE
+	toColumn: 'DIM - HISTORY DATA TYPE'.DATA_TYPE
+
+relationship 1431d7d5-d7af-684f-8eed-56f7cb8f0a7a
+	fromColumn: 'FACT - HISTORY APPROVAL DETAIL'.MAINT_ITEM
+	toColumn: 'DIM - MAINT ITEM'.MAINT_ITEM
+
+relationship 577325b0-adca-8823-25e9-c56a04f1f097
+	fromColumn: 'FACT - HISTORY APPROVAL DETAIL'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship aa552d13-08a6-5899-3427-2e70c3b2e556
+	fromColumn: 'FACT - HISTORY APPROVAL DETAIL'.OVERVIEW_STATUS
+	toColumn: 'DIM - HISTORY OVERVIEW STATUS'.OVERVIEW_STATUS
+
+relationship 7301d1bb-aeb2-52c1-f1f0-d5a6a1ee00d6
+	fromColumn: 'FACT - HISTORY APPROVAL DETAIL'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship 21683f59-d9f6-3645-c0ad-83cc3b585f27
+	fromColumn: 'FACT - HISTORY APPROVAL DETAIL'.STATUS_LEVEL
+	toColumn: 'DIM - HISTORY LEVEL STATUS'.STATUS_LEVEL
+
+relationship 65a65cf1-4a84-aa44-66ad-a574893e09f1
+	fromColumn: 'FACT - HISTORY APPROVAL DETAIL'.SUP_CODE
+	toColumn: 'DIM - SUPERVISOR'.SUP_CODE
+
+relationship 42aeb803-78b4-c142-cf54-f6417c7d31eb
+	fromColumn: 'FACT - HISTORY APPROVAL DETAIL'.WORK_CENTER_ID
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER_ID
+
+relationship e9623e32-e30e-d993-4930-8f2066e74bb6
+	fromColumn: 'FACT - LIST EQUIPMENT'.COST_CENTER
+	toColumn: 'DIM - COST CENTER'.COST_CENTER_CODE
+
+relationship b301a9cb-a5f2-6db1-df03-111000bb5d42
+	fromColumn: 'FACT - LIST EQUIPMENT'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship 9b6bb37d-afc3-0624-3569-445829af7a71
+	fromColumn: 'FACT - LIST EQUIPMENT'.EQUI_NUMBER
+	toColumn: 'DIM - MAINT TEXT'.TEXT_ID
+
+relationship f85d9138-5dbc-d92b-03b7-aa91670d3413
+	fromColumn: 'FACT - LIST EQUIPMENT'.FUNCT_LOC_CODE
+	toColumn: 'DIM - FUNCTIONAL LOCATION'.FUNCT_LOC_CODE
+
+relationship 68e8957f-28c7-09b8-a445-2a9c09bf7810
+	fromColumn: 'FACT - LIST EQUIPMENT'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship fbeaff88-ed62-e373-5072-43897e866b0b
+	fromColumn: 'FACT - LIST EQUIPMENT'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship 8d1b48ea-4a32-b39e-ec0b-35549d426c51
+	fromColumn: 'FACT - LIST EQUIPMENT'.WORK_CENTER_ID
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER_ID
+
+relationship 189f1951-5de7-ccf3-e1dd-360a80f1a5ad
+	fromColumn: 'FACT - MAINT PLAN STATUS'.MAINT_PLAN
+	toColumn: 'DIM - MAINT PLAN'.MAINT_PLAN
+
+relationship b00284d0-2361-167d-fc77-96c93db7b251
+	toCardinality: many
+	fromColumn: 'FACT - MAINT PLAN STATUS'.MAINT_PLAN
+	toColumn: 'DIM - MAINT ITEM'.MAINT_PLAN
+
+relationship 4811d293-9cd8-f4e4-eccb-b090fea0ea46
+	fromColumn: 'FACT - MAINT PLAN STATUS'.OBJECT_STATUS_KEY
+	toColumn: 'DIM - MAINT STATUS'.OBJECT_STATUS_KEY
+
+relationship ee55bccd-44e9-deb7-7caf-7716a2fe19f7
+	fromColumn: 'FACT - MAINT PLAN STATUS'.UPDATE_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 1981d131-682c-7aeb-7bc0-e77df7bdcd5c
+	fromColumn: 'FACT - MAINT TASK LIST'.DIM_TASK_LIST_ID
+	toColumn: 'DIM - TASK LIST'.DIM_TASK_LIST_ID
+
+relationship 5dc0119a-4788-e0e2-59fe-fcb539520d80
+	fromColumn: 'FACT - MAINT TASK LIST'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship b19abf68-2963-5d3b-5aa5-e1df2fdb2847
+	fromColumn: 'FACT - MAINT TASK LIST'.MAINT_ITEM
+	toColumn: 'DIM - MAINT ITEM'.MAINT_ITEM
+
+relationship 62ba8793-5f64-0925-8ea0-f269dac72952
+	fromColumn: 'FACT - MAINT TASK LIST'.MAINT_PLAN
+	toColumn: 'DIM - MAINT PLAN'.MAINT_PLAN
+
+relationship 4277af4f-6dc9-e3bc-d890-2571649e5196
+	fromColumn: 'FACT - MAINT TASK LIST'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship 9e55cd34-58f3-c3d7-097b-e6369277e16f
+	fromColumn: 'FACT - MAINT TASK LIST'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship 76838c89-4b7b-587f-2d8e-eb87cde4e77f
+	fromColumn: 'FACT - MAINT TASK LIST'.SUP_CODE
+	toColumn: 'DIM - SUPERVISOR'.SUP_CODE
+
+relationship dce768cd-c1f0-7bb4-bd26-e4411fc485f2
+	fromColumn: 'FACT - MAINT TASK LIST'.SYST_COND
+	toColumn: 'DIM - OPERATE CONDITION'.SYST_COND
+
+relationship dd89a9bb-f1b8-986f-230c-786c97135396
+	fromColumn: 'FACT - MAINT TASK LIST'.WORK_CENTER_ID
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER_ID
+
+relationship 10c64f9e-ea9a-0acb-dfd9-51d007e993e8
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.ACT_TYPE_DESC
+	toColumn: 'DIM - MAINT ACT TYPE'.ACT_TYPE_DESC
+
+relationship 7f4a387d-680f-acc2-6576-a91133159c6a
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship c69acad3-b8e5-bc67-c2b5-de88040a666a
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 50acbd5e-d2cf-f810-a9f8-5eeafc1d2a78
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.MATERIAL_PLANT_KEY
+	toColumn: 'DIM - MATERIAL PLANT'.MATERIAL_PLANT_KEY
+
+relationship da246bd5-1c8a-bfbb-4305-d813c116e1d3
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.ORDER_TYPE
+	toColumn: 'DIM - ORDER TYPE'.ORDER_TYPE
+
+relationship ac9f617f-2f4a-fdfc-4be9-3838c09f55c4
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.PLAN_END_DATE
+	toColumn: 'DIM - SECONDARY DATE'.Date
+
+relationship 0158e171-e3a6-d25e-a2f5-a79bfae4db03
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.PLAN_STAT_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship c2e4eae7-bb13-30c0-8ce0-419241cf6d3a
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.PLANNER_NAME
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_NAME
+
+relationship ddbbc2f6-a942-0b08-d16f-8ef2a6dba98b
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.PLNT_SECT_PERS
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_PERS
+
+relationship 59b7cc16-c050-37d5-f4e7-9e691b078926
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.STORAGE_LOCATION
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 230545f2-1466-8173-9fe7-7f3b9b97a12b
+	toCardinality: many
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.SUP_NAME
+	toColumn: 'DIM - SUPERVISOR'.SUP_NAME
+
+relationship fae6cc51-d5e1-f3ac-d3b9-282bcb0415d4
+	fromColumn: 'FACT - MATERIAL RESERVATION'.ACT_TYPE_CODE
+	toColumn: 'DIM - MAINT ACT TYPE'.ACT_TYPE_CODE
+
+relationship 7c57b3dd-bf4b-e83b-55a5-b3178b83d6ac
+	toCardinality: many
+	fromColumn: 'FACT - MATERIAL RESERVATION'.BASE_UNIT
+	toColumn: 'DIM - BASE UOM'.BASE_UNIT
+
+relationship 64b9a2a9-8e63-4418-8ea5-a698171b2cfe
+	fromColumn: 'FACT - MATERIAL RESERVATION'.COST_CENTER
+	toColumn: 'DIM - COST CENTER'.COST_CENTER_CODE
+
+relationship a752da8e-49a2-54fa-9d0c-2161525e4e77
+	fromColumn: 'FACT - MATERIAL RESERVATION'.COST_ELEMENT
+	toColumn: 'DIM - COST ELEMENT'.COST_ELEMENT
+
+relationship b4dfd155-0eec-fdbc-64d1-28798e628779
+	fromColumn: 'FACT - MATERIAL RESERVATION'.DIM_TASK_LIST_ID
+	toColumn: 'DIM - TASK LIST'.DIM_TASK_LIST_ID
+
+relationship 7d3668aa-8c9b-1faf-70f5-9076e57bcaa7
+	fromColumn: 'FACT - MATERIAL RESERVATION'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship 9f4850a4-7962-4185-6a6b-7570e1a137d5
+	fromColumn: 'FACT - MATERIAL RESERVATION'.ISSUE_STORAGE_LOC
+	toColumn: 'DIM - STORAGE LOCATION'.STORAGE_LOCATION
+
+relationship 84ec0b5d-be5f-c6aa-a5bf-34cb792bf33d
+	fromColumn: 'FACT - MATERIAL RESERVATION'.MAIN_WORK_CENTER
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER
+
+relationship 301ec1ad-a388-196d-c737-f0b8c43719f5
+	fromColumn: 'FACT - MATERIAL RESERVATION'.MAINT_ITEM
+	toColumn: 'DIM - MAINT ITEM'.MAINT_ITEM
+
+relationship 6d13ac06-480e-e929-250c-83367a326a95
+	fromColumn: 'FACT - MATERIAL RESERVATION'.MANUFACTOR
+	toColumn: 'DIM -  VENDOR'.VENDOR_CODE
+
+relationship c387796f-5305-bbe7-2cb0-c48b96d81740
+	fromColumn: 'FACT - MATERIAL RESERVATION'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 51a3f9fa-f774-d0d8-afc6-6e258ad14049
+	fromColumn: 'FACT - MATERIAL RESERVATION'.ORDER_TYPE
+	toColumn: 'DIM - ORDER TYPE'.ORDER_TYPE
+
+relationship b89d5237-e6b4-fba2-00bd-3202bff109a0
+	fromColumn: 'FACT - MATERIAL RESERVATION'.PLAN_END_DATE
+	toColumn: 'DIM - SECONDARY DATE'.Date
+
+relationship b9e3fe48-fd73-d8ae-3486-de44b8cca5f3
+	fromColumn: 'FACT - MATERIAL RESERVATION'.PLAN_STAT_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship cee3ffc6-a7f0-44e3-b0f5-e02680cace9d
+	fromColumn: 'FACT - MATERIAL RESERVATION'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship 9a875909-c5d2-7e56-7f66-5048628be012
+	fromColumn: 'FACT - MATERIAL RESERVATION'.PLANT_CODE
+	toColumn: 'DIM - PLANT'.PLANT_CODE
+
+relationship df435ae4-01e0-9555-524b-8528fe028f59
+	fromColumn: 'FACT - MATERIAL RESERVATION'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship 399751c9-cc7e-9af1-a386-1651a93edaa9
+	fromColumn: 'FACT - MATERIAL RESERVATION'.SUP_CODE
+	toColumn: 'DIM - SUPERVISOR'.SUP_CODE
+
+relationship 5a304d4c-e0da-80b8-6112-4198bac12da5
+	fromColumn: 'FACT - MATERIAL RESERVATION'.SYST_COND
+	toColumn: 'DIM - OPERATE CONDITION'.SYST_COND
+
+relationship d9b29994-d79e-1a16-4cfd-d9871249af7e
+	fromColumn: 'FACT - MATERIAL RESERVATION'.SYSTEM_STATUS_EXCHANGE
+	toColumn: 'DIM - SYSTEM STATUS EXCHANGE'.SYSTEM_STATUS_EXCHANGE
+
+relationship c73cf328-e8f1-7b14-8fe4-b64c5fbb9eb2
+	fromColumn: 'FACT - MP ESTIMATED COST'.ACT_TYPE_CODE
+	toColumn: 'DIM - MAINT ACT TYPE'.ACT_TYPE_CODE
+
+relationship 36c56921-e7c0-92af-41b0-e66bac839572
+	fromColumn: 'FACT - MP ESTIMATED COST'.DIM_TASK_LIST_ID
+	toColumn: 'DIM - TASK LIST'.DIM_TASK_LIST_ID
+
+relationship f259825c-f946-c67b-4f4c-e5102d3c0f0d
+	fromColumn: 'FACT - MP ESTIMATED COST'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship a0c4f1aa-c2e4-57d8-78fa-5a07ab8617ae
+	fromColumn: 'FACT - MP ESTIMATED COST'.FUNCT_LOC_CODE
+	toColumn: 'DIM - FUNCTIONAL LOCATION'.FUNCT_LOC_CODE
+
+relationship 78548501-22f5-b326-02ee-837ff57105dc
+	fromColumn: 'FACT - MP ESTIMATED COST'.MAINT_ITEM
+	toColumn: 'DIM - MAINT ITEM'.MAINT_ITEM
+
+relationship 762c1d01-aa0a-93e5-9e9a-e944ac99d3df
+	fromColumn: 'FACT - MP ESTIMATED COST'.MAINT_PLAN
+	toColumn: 'DIM - MAINT PLAN'.MAINT_PLAN
+
+relationship b91bfa04-3263-f3a4-ba67-e04e2f0552f4
+	fromColumn: 'FACT - MP ESTIMATED COST'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship 8eb3b053-bec9-812d-e84d-ff8c60b9b2f3
+	fromColumn: 'FACT - MP ESTIMATED COST'.ORDER_TYPE
+	toColumn: 'DIM - ORDER TYPE'.ORDER_TYPE
+
+relationship affa2e11-5e2e-81b7-5c24-b0282b61aebd
+	fromColumn: 'FACT - MP ESTIMATED COST'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship d5f2129a-f79e-4471-f7c9-74d7dd3de094
+	fromColumn: 'FACT - MP ESTIMATED COST'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship 0b2b1c93-b8f2-7185-475a-b6e8d2bb0cfd
+	fromColumn: 'FACT - MP ESTIMATED COST'.SUP_CODE_KEY
+	toColumn: 'DIM - SUPERVISOR'.SUP_CODE
+
+relationship 3e329a5b-6f4d-5a3e-d09c-77f7acf1f922
+	fromColumn: 'FACT - MP ESTIMATED COST'.SYST_COND
+	toColumn: 'DIM - OPERATE CONDITION'.SYST_COND
+
+relationship de05abb1-1423-ab46-82bd-dcc393db6307
+	fromColumn: 'FACT - MP ESTIMATED COST'.SYSTEM_STATUS_EXCHANGE
+	toColumn: 'DIM - SYSTEM STATUS EXCHANGE'.SYSTEM_STATUS_EXCHANGE
+
+relationship 572a8af2-bfb7-fb7f-d54b-d23949c4d713
+	fromColumn: 'FACT - MP ESTIMATED COST'.WORK_CENTER
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER_ID
+
+relationship 53e32dd1-23d0-965d-8b33-d634fbe54d93
+	fromColumn: 'FACT - NOTIFICATION'.CONVERTED_NOTI_STATUS
+	toColumn: 'DIM - STATUS NOTI CONVERTED'.CONVERTED_NOTI_STATUS
+
+relationship 241ac5f2-3a9f-58b2-13be-7247840c23d9
+	fromColumn: 'FACT - NOTIFICATION'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship 886a6d40-f9b3-adce-3254-6aa64e98bea3
+	fromColumn: 'FACT - NOTIFICATION'.NOTIF_DATE
+	toColumn: 'DIM - SECONDARY DATE'.Date
+
+relationship 7f5dd608-4977-c513-47ac-4fbbebb89e20
+	fromColumn: 'FACT - NOTIFICATION'.NOTIF_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 2bc6dbb5-b993-de5f-a6b0-b64e5d0d9e62
+	fromColumn: 'FACT - NOTIFICATION'.NOTIF_NUM
+	toColumn: 'DIM - MAINT TEXT'.TEXT_ID
+
+relationship 619d534f-2284-d998-8620-cf0b0019050d
+	fromColumn: 'FACT - NOTIFICATION'.NOTIF_TYPE
+	toColumn: 'DIM - NOTIFICATION TYPE'.NOTIF_TYPE
+
+relationship 559b30b4-0ebc-4fa3-1133-354a8e12c7c3
+	fromColumn: 'FACT - NOTIFICATION'.ORDER_NUMBER
+	toColumn: 'DIM - PM INFORMATION'.TEXT_ID
+
+relationship 2c669f06-0681-f3ad-3faf-04fd98a214b2
+	fromColumn: 'FACT - NOTIFICATION'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship 7558236e-f006-cccf-2e26-ad66d417ea71
+	fromColumn: 'FACT - NOTIFICATION'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship 91ffc444-5f52-f4c3-d81d-c5b1fbc954ef
+	fromColumn: 'FACT - NOTIFICATION'.PRIOR_CODE
+	toColumn: 'DIM - PRIORITY'.PRIOR_CODE
+
+relationship eae174b7-234a-105e-f133-842439ddf3d3
+	fromColumn: 'FACT - NOTIFICATION'.SUP_CODE
+	toColumn: 'DIM - SUPERVISOR'.SUP_CODE
+
+relationship 853ece8b-1eed-34ec-ea3b-8deebfa9ce46
+	fromColumn: 'FACT - NOTIFICATION'.WORK_CENTER
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER_ID
+
+relationship 8a90255d-82ce-8505-3400-2d39f9385b44
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.ACT_TYPE_CODE
+	toColumn: 'DIM - MAINT ACT TYPE'.ACT_TYPE_CODE
+
+relationship 0aa06642-c434-d82e-c8b6-2486dc3dd0e6
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.COST_CENTER
+	toColumn: 'DIM - COST CENTER'.COST_CENTER_CODE
+
+relationship f51ebcba-0c6e-0ba9-0fe7-14c5aa90db27
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship d543ad65-da79-29bb-a9a9-7c4d056a712f
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.FUNCT_LOC_CODE
+	toColumn: 'DIM - FUNCTIONAL LOCATION'.FUNCT_LOC_CODE
+
+relationship 9035305c-3588-1b53-7685-d75519091702
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.MAINT_ITEM
+	toColumn: 'DIM - MAINT ITEM'.MAINT_ITEM
+
+relationship b616c489-1664-67bf-12d9-0d2ec968e99f
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.MAINT_PLAN
+	toColumn: 'DIM - MAINT PLAN'.MAINT_PLAN
+
+relationship 849d215d-0e8f-a83d-fdc6-b13b2701d5c2
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.MATERIAL_NUMBER
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship e62b4e1f-e522-b934-d402-bcfb0288ba88
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.ORDER_TYPE
+	toColumn: 'DIM - ORDER TYPE'.ORDER_TYPE
+
+relationship 1475e140-60b1-03e8-c006-829872ad2139
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.PLANNER_GRP
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship c9f19993-d2ec-2221-383d-8df7813ba3a9
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship 1026f92a-6d46-6627-0074-4f9e11dc6643
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.SCHE_START_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 6852799a-0169-531c-a9ca-8689c5fbff32
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.SUP_CODE
+	toColumn: 'DIM - SUPERVISOR'.SUP_CODE
+
+relationship d2471426-294b-437d-e26d-ee35d024d06d
+	fromColumn: 'FACT - EQUI FM NOTI'.ORDER_NUMBER
+	toColumn: 'LIST - ORDER NUMBER'.ORDER_NUMBER
+
+relationship 1cd661f8-c96c-2ee0-5fed-ebacaa66ec86
+	fromColumn: 'FACT - MATERIAL CONFIRM WO'.ORDER_NUMBER
+	toColumn: 'LIST - ORDER NUMBER'.ORDER_NUMBER
+
+relationship bf161326-5054-27d8-1722-be6d43254583
+	fromColumn: 'FACT - MATERIAL RESERVATION'.ORDER_NUMBER
+	toColumn: 'LIST - ORDER NUMBER'.ORDER_NUMBER
+
+relationship de375a6e-3912-867c-875e-a9dc87d23c78
+	fromColumn: 'FACT - MP ESTIMATED COST'.ORDER_NUMBER
+	toColumn: 'LIST - ORDER NUMBER'.ORDER_NUMBER
+
+relationship 592f5ae7-979a-d127-4702-e54dcf115bd1
+	fromColumn: 'FACT - NOTIFICATION'.ORDER_NUMBER
+	toColumn: 'LIST - ORDER NUMBER'.ORDER_NUMBER
+
+relationship 6f8577f8-efd9-406b-2f42-f80f6dad9560
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.ORDER_NUMBER
+	toColumn: 'LIST - ORDER NUMBER'.ORDER_NUMBER
+
+relationship 2ad58419-4580-3566-8b21-4dd09cc451aa
+	fromColumn: 'FACT - EQUI FM NOTI'.NOTIF_NUM
+	toColumn: 'LIST - NOTIFICATION NUMBER'.NOTIF_NUM
+
+relationship dfaddf8a-7d26-638e-f15f-693a87bd7856
+	fromColumn: 'FACT - NOTIFICATION'.NOTIF_NUM
+	toColumn: 'LIST - NOTIFICATION NUMBER'.NOTIF_NUM
+
+relationship 04dad697-124c-5e61-a6b5-8041f4993344
+	fromColumn: 'FACT - MP ESTIMATED COST'.START_DATE
+	toColumn: 'LIST - SCHEDULED START DATE'.SCHE_START_DATE
+
+relationship 7e9aafdb-7c2c-ccba-24ec-7066a595d254
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.SCHE_START_DATE
+	toColumn: 'LIST - SCHEDULED START DATE'.SCHE_START_DATE
+
+relationship 470d173d-9ae4-ce08-52ca-699c1dcf6d8a
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.SYST_COND
+	toColumn: 'DIM - OPERATE CONDITION'.SYST_COND
+
+relationship b02caf62-1fb6-bdb1-d857-47c66daa4af0
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.SYSTEM_STATUS_EXCHANGE
+	toColumn: 'DIM - SYSTEM STATUS EXCHANGE'.SYSTEM_STATUS_EXCHANGE
+
+relationship b00ce565-6071-710f-693c-42d19ebade09
+	fromColumn: 'FACT - SCHEDULING OVERVIEW LIST'.WORK_CENTER
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER
+
+relationship 96478e93-ca31-96ba-239a-5cf95a62db36
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.ACT_TYPE_CODE
+	toColumn: 'DIM - MAINT ACT TYPE'.ACT_TYPE_CODE
+
+relationship 4e0d6ebf-033f-812d-0fbc-df13967a1287
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.COST_ELEMENT
+	toColumn: 'DIM - COST ELEMENT'.COST_ELEMENT
+
+relationship 301481af-b16b-9356-249a-e3a407e0ecae
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship 0e778685-90dc-be55-0786-7b2178e2f9d7
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.MAIN_WORK_CENTER
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER
+
+relationship 9ad7360b-b785-84aa-3d92-09a1d65d87a6
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship a6fda988-7456-983c-681b-075cb737aae6
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.MOVEMENT_TYPE
+	toColumn: 'DIM - MOVEMENT TYPE'.MOVEMENT_TYPE
+
+relationship 83dd9666-aa48-1fa3-afa7-f2b0f7d04e7a
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.ORDER_NUMBER
+	toColumn: 'LIST - ORDER NUMBER'.ORDER_NUMBER
+
+relationship 10152b5e-77ca-a752-ae3d-2bfdbdd8b355
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.ORDER_TYPE
+	toColumn: 'DIM - ORDER TYPE'.ORDER_TYPE
+
+relationship 7196e221-307f-da22-20bd-5c45576fb026
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship 7d95668b-c40b-77e7-2b0f-789a21385a07
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship db5d7839-11bc-6362-5676-c8097177f043
+	fromColumn: 'FACT - SETTLE RECEIVER COST'.POSTING_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship bbe575a4-22ec-a560-d888-3a24a5746bd3
+	fromColumn: 'FACT - TASK COMPONENT'.DIM_TASK_LIST_ID
+	toColumn: 'DIM - TASK LIST'.DIM_TASK_LIST_ID
+
+relationship 24cfd00c-11d1-3246-e56e-fc9a05d775d9
+	fromColumn: 'FACT - TASK COMPONENT'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship 47b30f90-0a13-3d7b-874a-43b282212339
+	fromColumn: 'FACT - TASK COMPONENT'.MAINT_ITEM
+	toColumn: 'DIM - MAINT ITEM'.MAINT_ITEM
+
+relationship 490b5264-ff19-55fc-7dfd-cde313e1c4a7
+	fromColumn: 'FACT - TASK COMPONENT'.MATERIAL_CODE
+	toColumn: 'DIM - MATERIAL'.MATERIAL_CODE
+
+relationship d48f6fc5-7ac4-d3d1-c59a-ded4d42c2fd8
+	fromColumn: 'FACT - TASK COMPONENT'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship f05d2f2e-c963-ae07-fec3-6db11f6f4174
+	fromColumn: 'FACT - TASK COMPONENT'.SUP_CODE
+	toColumn: 'DIM - SUPERVISOR'.SUP_CODE
+
+relationship 5d2f97f7-b3fd-b3e3-05b8-ebc072f48ef4
+	fromColumn: 'FACT - TASK COMPONENT'.SYST_COND
+	toColumn: 'DIM - OPERATE CONDITION'.SYST_COND
+
+relationship 30f543bf-4ed9-31b2-871f-dbf847fee514
+	fromColumn: 'FACT - TASK COMPONENT'.WORK_CENTER
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER_ID
+
+relationship 237c38fd-4eea-b2e7-3c2c-3c4595b3c69e
+	fromColumn: 'FACT - WO CONFIRMATION'.ORDER_NUMBER
+	toColumn: 'LIST - ORDER NUMBER'.ORDER_NUMBER
+
+relationship b77d1111-46a0-e3a9-10a9-0da588ec8b15
+	fromColumn: 'FACT - WO PERMIT'.ORDER_NUMBER
+	toColumn: 'LIST - ORDER NUMBER'.ORDER_NUMBER
+
+relationship 8dccae8f-4265-d2b3-7bec-a225f8b0e99e
+	fromColumn: 'FACT - WORK ORDER'.ACT_TYPE_CODE
+	toColumn: 'DIM - MAINT ACT TYPE'.ACT_TYPE_CODE
+
+relationship a29d251d-d4c4-f6ac-b1c2-081ef9b864e7
+	fromColumn: 'FACT - WORK ORDER'.COST_CENTER
+	toColumn: 'DIM - COST CENTER'.COST_CENTER_CODE
+
+relationship 925087dc-c623-9a1e-3dad-8bbd8d4f01f1
+	fromColumn: 'FACT - WORK ORDER'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship 9e89a398-d59b-2e25-fc36-c04e1c3d406d
+	fromColumn: 'FACT - WORK ORDER'.FUNCT_LOC_CODE
+	toColumn: 'DIM - FUNCTIONAL LOCATION'.FUNCT_LOC_CODE
+
+relationship 52e5c263-9a27-0567-66d9-116876c035cc
+	fromColumn: 'FACT - WORK ORDER'.MAINT_PLAN
+	toColumn: 'DIM - MAINT PLAN'.MAINT_PLAN
+
+relationship 291d6c83-0984-94a9-3b3d-89b2957f937a
+	fromColumn: 'FACT - WORK ORDER'.NOTIF_DATE
+	toColumn: 'DIM - SECONDARY DATE'.Date
+
+relationship 4a066a8f-9b59-3381-9b9f-f8edd7c48dba
+	fromColumn: 'FACT - WORK ORDER'.NOTIF_NUM
+	toColumn: 'LIST - NOTIFICATION NUMBER'.NOTIF_NUM
+
+relationship 0411e525-7a22-74a0-ab3b-95d1e8096a75
+	fromColumn: 'FACT - WORK ORDER'.NOTIF_TYPE
+	toColumn: 'DIM - NOTIFICATION TYPE'.NOTIF_TYPE
+
+relationship 19a77498-f982-89eb-7f85-bf7cfc5a9c86
+	fromColumn: 'FACT - WORK ORDER'.ORDER_NUMBER
+	toColumn: 'LIST - ORDER NUMBER'.ORDER_NUMBER
+
+relationship c2ffa1b3-1652-7f05-7368-d7468733ad9c
+	fromColumn: 'FACT - WORK ORDER'.ORDER_NUMBER
+	toColumn: 'DIM - PM INFORMATION'.TEXT_ID
+
+relationship 8f582715-875b-1cdc-39c1-65b3ce3f1e02
+	fromColumn: 'FACT - WORK ORDER'.ORDER_TYPE
+	toColumn: 'DIM - ORDER TYPE'.ORDER_TYPE
+
+relationship 41e6d382-86ee-3726-27d9-4ce574f633f7
+	fromColumn: 'FACT - WORK ORDER'.OUTAGE_CODE
+	toColumn: 'DIM - OUTAGE'.OUTAGE_CODE
+
+relationship 32ee4274-50f3-2d4e-a75c-e2d04726b799
+	fromColumn: 'FACT - WORK ORDER'.PERMIT_STATUS
+	toColumn: 'DIM - PERMIT STATUS'.PERMIT_STATUS
+
+relationship 440e6d81-f610-ce96-edd1-554c26a19714
+	fromColumn: 'FACT - WORK ORDER'.PLAN_STAT_DATE
+	toColumn: 'DIM - DATE'.Date
+
+relationship 70b1fbe4-e0bc-fb5f-8059-072de98a3116
+	fromColumn: 'FACT - WORK ORDER'.PLANNER_GRP_CODE
+	toColumn: 'DIM - PLANNER GRP'.PLANNER_GRP_CODE
+
+relationship 71e5a5ea-d305-efd4-c89a-4998bf038be8
+	fromColumn: 'FACT - WORK ORDER'.PLNT_SECT_CODE
+	toColumn: 'DIM - PLANT SECTION'.PLNT_SECT_CODE
+
+relationship 64581127-f618-877e-bea0-4e3a217ae01d
+	fromColumn: 'FACT - WORK ORDER'.PRIOR_CODE
+	toColumn: 'DIM - PRIORITY'.PRIOR_CODE
+
+relationship 656d35f3-c64b-2106-1ecb-c35f63665c58
+	fromColumn: 'FACT - WORK ORDER'.STATUS_ZBDDK
+	toColumn: 'DIM - STATUS ZBDDK'.STATUS_ZBDDK
+
+relationship 17ef7614-73f7-dfec-4cd9-f3daadf56d85
+	fromColumn: 'FACT - WORK ORDER'.STATUS_ZSCDX
+	toColumn: 'DIM - STATUS ZSCDX'.STATUS_ZSCDX
+
+relationship a4a767a1-39a3-bfd3-465c-cb71de9ef445
+	fromColumn: 'FACT - WORK ORDER'.SUP_CODE
+	toColumn: 'DIM - SUPERVISOR'.SUP_CODE
+
+relationship 0bf92949-f913-276a-018f-e1afcb94c314
+	fromColumn: 'FACT - WORK ORDER'.SYST_COND
+	toColumn: 'DIM - OPERATE CONDITION'.SYST_COND
+
+relationship b42e4273-16e5-5c7f-5761-6c8fca54334c
+	fromColumn: 'FACT - WORK ORDER'.SYSTEM_STATUS_EXCHANGE
+	toColumn: 'DIM - SYSTEM STATUS EXCHANGE'.SYSTEM_STATUS_EXCHANGE
+
+relationship 2a521875-a4fc-ccf6-d59f-2fa8ae405474
+	fromColumn: 'FACT - WORK ORDER'.USER_STATUS_EXCHANGE
+	toColumn: 'DIM - USER STATUS EXCHANGE'.USER_STATUS_EXCHANGE
+
+relationship fdf900e5-2d23-6a62-bc9b-28d75d99286b
+	fromColumn: 'FACT - WORK ORDER'.WORK_CENTER_ID
+	toColumn: 'DIM - WORK CENTER'.WORK_CENTER_ID
+
+relationship a30a8320-794f-e148-1581-cdb7ec8d3ac8
+	fromColumn: 'FACT - BREAKDOWN STATISTICS DETAILS'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship 17882807-ee21-b6a3-2eec-407bf7b0174b
+	fromColumn: 'FACT - BREAKDOWN STATISTICS'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+
+relationship 21e7a67d-bb7b-01e5-080f-5d7bbb0f53da
+	fromColumn: 'FACT - HISTORY APPROVAL'.EQUI_NUMBER
+	toColumn: 'DIM - EQUIPMENT'.EQUI_NUMBER
+

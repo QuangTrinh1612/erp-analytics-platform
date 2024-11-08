@@ -1,0 +1,241 @@
+table 'FACT - VISIT PLAN C2'
+	lineageTag: 78af1f34-9fa3-4e70-9190-3783a92881fb
+
+	column RPT_KPI_CYCLE_ID
+		dataType: double
+		lineageTag: 2b4189bc-bb23-4b57-b022-380209887567
+		summarizeBy: count
+		sourceColumn: RPT_KPI_CYCLE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CYCLE_ID
+		dataType: double
+		lineageTag: b52ca0f6-7d17-4082-be4b-dc228c30be38
+		summarizeBy: none
+		sourceColumn: CYCLE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STAFF_ID
+		dataType: double
+		lineageTag: 831426a8-04b6-4bdb-9d7b-b6a9f46c0939
+		summarizeBy: none
+		sourceColumn: STAFF_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STAFF_NAME
+		dataType: string
+		lineageTag: a2e4cc9a-295a-49d8-a465-bc852220721a
+		summarizeBy: none
+		sourceColumn: STAFF_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column STAFF_CODE
+		dataType: string
+		lineageTag: 939c561c-d4be-41e7-9b48-4115f879f2b9
+		summarizeBy: none
+		sourceColumn: STAFF_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column KPI_CONFIG_ID
+		dataType: double
+		lineageTag: 29d0af28-8fdf-414d-81db-4f4c9bd9d0cc
+		summarizeBy: count
+		sourceColumn: KPI_CONFIG_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column KPI_CODE
+		dataType: string
+		lineageTag: 0f72ab84-6594-464b-b0e3-5f78fbf88899
+		summarizeBy: none
+		sourceColumn: KPI_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column KPI_NAME
+		dataType: string
+		lineageTag: 0463f7a9-fd6b-4026-80fd-665219adc934
+		summarizeBy: none
+		sourceColumn: KPI_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column KPI_NAME_TEXT
+		dataType: string
+		lineageTag: 3cd2167a-860c-447c-a12b-5112a7a13edf
+		summarizeBy: none
+		sourceColumn: KPI_NAME_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column KPI_SUB_GROUP_ID
+		dataType: double
+		lineageTag: 2a1b4b60-7e8f-4f66-9dac-624b02479b81
+		summarizeBy: count
+		sourceColumn: KPI_SUB_GROUP_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column KPI_SUB_GROUP_CODE
+		dataType: string
+		lineageTag: eacb5c95-8c6b-4697-8805-c8c78d654e06
+		summarizeBy: none
+		sourceColumn: KPI_SUB_GROUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column KPI_SUB_GROUP_NAME
+		dataType: string
+		lineageTag: d76480a7-11c7-4ac4-8efc-0be2a3f1261f
+		summarizeBy: none
+		sourceColumn: KPI_SUB_GROUP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column KPI_SUB_GROUP_STATUS
+		dataType: double
+		lineageTag: d4fe455e-a9b8-4692-9900-b917aa432811
+		summarizeBy: sum
+		sourceColumn: KPI_SUB_GROUP_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PLAN
+		dataType: double
+		lineageTag: 321ce090-31f8-48e9-b6fb-f1e08b83b8a7
+		summarizeBy: sum
+		sourceColumn: PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PLAN_KPI
+		dataType: double
+		lineageTag: 5b4186c0-d738-4645-918c-5bfc834a8bae
+		summarizeBy: sum
+		sourceColumn: PLAN_KPI
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DONE
+		dataType: double
+		lineageTag: a8b9d2f1-3aad-464d-98af-e168bc505892
+		summarizeBy: sum
+		sourceColumn: DONE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DONE_KPI
+		dataType: double
+		lineageTag: 67f1c890-4518-496b-9c4b-aa8cc72200cc
+		summarizeBy: sum
+		sourceColumn: DONE_KPI
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DONE_VS_PLAN
+		dataType: double
+		lineageTag: cdd18b23-e649-40a5-9f08-da6511ffd858
+		summarizeBy: sum
+		sourceColumn: DONE_VS_PLAN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DONE_VS_PLAN_KPI
+		dataType: double
+		lineageTag: babc3210-c8c1-437c-b579-05a197c0a164
+		summarizeBy: sum
+		sourceColumn: DONE_VS_PLAN_KPI
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DONE_IR
+		dataType: double
+		lineageTag: 04ce5f0a-0e17-4a6f-84e1-db5dd0ccbb95
+		summarizeBy: sum
+		sourceColumn: DONE_IR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DONE_OR
+		dataType: double
+		lineageTag: f353390c-a9f7-46b8-a1c3-f1067a4e50f3
+		summarizeBy: sum
+		sourceColumn: DONE_OR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SCORE
+		dataType: double
+		lineageTag: 92ec5f98-9af3-4eb1-87d0-bc20f22c9c28
+		summarizeBy: sum
+		sourceColumn: SCORE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WEIGHTED
+		dataType: double
+		lineageTag: 7eb876be-c13c-42fa-b987-5ed8541eff5d
+		summarizeBy: sum
+		sourceColumn: WEIGHTED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SUB_REGION_ID
+		dataType: double
+		lineageTag: 1b035aa6-ac6f-40de-9e2f-9ed1a6957c47
+		summarizeBy: none
+		sourceColumn: SUB_REGION_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - VISIT PLAN C2' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_PLAN_VISIT_C2 = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_VISIT_PLAN_C2"]}[Data]
+				in
+				    gld_VW_FACT_PLAN_VISIT_C2
+
+	annotation PBI_ResultType = Table
+

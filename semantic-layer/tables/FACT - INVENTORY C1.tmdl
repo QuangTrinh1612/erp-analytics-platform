@@ -1,0 +1,343 @@
+table 'FACT - INVENTORY C1'
+	lineageTag: 1fe243be-26cb-4583-9375-6e914d505f79
+
+	column SHOP_ID
+		dataType: double
+		isHidden
+		lineageTag: 22c025c9-882a-4b0e-85ce-cd68c63ea44a
+		summarizeBy: count
+		sourceColumn: SHOP_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRODUCT_ID
+		dataType: double
+		isHidden
+		lineageTag: d43e644f-0e5c-4f8c-9d6e-b85d9bc88c89
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WAREHOUSE_ID
+		dataType: double
+		isHidden
+		lineageTag: bfa5d84f-bedd-4c1c-85cb-29427e45a96a
+		summarizeBy: none
+		sourceColumn: WAREHOUSE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WAREHOUSE_TYPE
+		dataType: double
+		isHidden
+		lineageTag: 541789bc-7e99-4375-a526-5f8e610b8650
+		summarizeBy: sum
+		sourceColumn: WAREHOUSE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OPEN_STOCK
+		dataType: double
+		isHidden
+		lineageTag: e0547966-ff39-4daa-bac7-202caf691e3a
+		summarizeBy: sum
+		sourceColumn: OPEN_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CURRENT_STOCK
+		dataType: double
+		isHidden
+		lineageTag: b58db3bd-a14e-4992-97b9-0f4a9dff8753
+		summarizeBy: sum
+		sourceColumn: CURRENT_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IMPORT_TOTAL
+		dataType: double
+		isHidden
+		lineageTag: b816d013-41e8-4ac8-9113-1ada420192ff
+		summarizeBy: sum
+		sourceColumn: IMPORT_TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IMPORT_COMPANY
+		dataType: double
+		isHidden
+		lineageTag: 2572e8f1-1fae-42ae-a293-41b7312b8565
+		summarizeBy: sum
+		sourceColumn: IMPORT_COMPANY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IMPORT_VAN
+		dataType: double
+		isHidden
+		lineageTag: 5db7efbe-7d38-4a96-b9fc-5a8ebc469417
+		summarizeBy: sum
+		sourceColumn: IMPORT_VAN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IMPORT_ADJUST
+		dataType: double
+		isHidden
+		lineageTag: 52473865-3ac4-4826-9b39-3c0e822fc171
+		summarizeBy: sum
+		sourceColumn: IMPORT_ADJUST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IMPORT_TRANFER
+		dataType: double
+		isHidden
+		lineageTag: 23f4eba4-ad89-46b6-8445-4ec963594ddf
+		summarizeBy: sum
+		sourceColumn: IMPORT_TRANFER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IMPORT_TRANFER_INTERNAL
+		dataType: double
+		isHidden
+		lineageTag: 280a26fe-fc48-4686-b889-c7cbba7c9139
+		summarizeBy: sum
+		sourceColumn: IMPORT_TRANFER_INTERNAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EXPORT_TOTAL
+		dataType: double
+		isHidden
+		lineageTag: b0e8b77e-1bc4-4010-9dd0-0d3bbbf9f8cc
+		summarizeBy: sum
+		sourceColumn: EXPORT_TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EXPORT_TRANFER
+		dataType: double
+		isHidden
+		lineageTag: ef43788c-fa0e-4db6-a58a-561c281eaa31
+		summarizeBy: sum
+		sourceColumn: EXPORT_TRANFER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EXPORT_TRANFER_INTERNAL
+		dataType: double
+		isHidden
+		lineageTag: f8218978-a5ba-472e-a0b3-b709c9755064
+		summarizeBy: sum
+		sourceColumn: EXPORT_TRANFER_INTERNAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EXPORT_COMPANY
+		dataType: double
+		isHidden
+		lineageTag: a77325b1-59db-40f9-b197-eaeca7340d66
+		summarizeBy: sum
+		sourceColumn: EXPORT_COMPANY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EXPORT_VAN
+		dataType: double
+		isHidden
+		lineageTag: f5c3055b-b6ac-4eaf-ae37-d88c7d9988a9
+		summarizeBy: sum
+		sourceColumn: EXPORT_VAN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EXPORT_ADJUST
+		dataType: double
+		isHidden
+		lineageTag: 1623ff2e-e970-43fb-a4d8-b2f8ca3f7048
+		summarizeBy: sum
+		sourceColumn: EXPORT_ADJUST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EXPORT_SALE_PRE
+		dataType: double
+		isHidden
+		lineageTag: 32473f19-05b5-4a6d-ade5-b3a0315ef7fb
+		summarizeBy: sum
+		sourceColumn: EXPORT_SALE_PRE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RETURN_PRE
+		dataType: double
+		isHidden
+		lineageTag: 1b21eb4a-6070-4ca6-87fc-132ebe149274
+		summarizeBy: sum
+		sourceColumn: RETURN_PRE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RETURN_PRO_PRE
+		dataType: double
+		isHidden
+		lineageTag: b44ecc0d-a33c-4b02-a43e-7a3555e638fc
+		summarizeBy: sum
+		sourceColumn: RETURN_PRO_PRE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_PRE
+		dataType: double
+		isHidden
+		lineageTag: 9752803c-8a42-4b5e-83d0-8e6b50016533
+		summarizeBy: sum
+		sourceColumn: SALE_PRE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_PRO_PRE
+		dataType: double
+		isHidden
+		lineageTag: 1b9bcb53-790a-4cdd-aa0f-be94d7dd6989
+		summarizeBy: sum
+		sourceColumn: SALE_PRO_PRE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_PRO_D_PRE
+		dataType: double
+		isHidden
+		lineageTag: 19de999e-bc65-40f3-afe9-f36302f6a76e
+		summarizeBy: sum
+		sourceColumn: SALE_PRO_D_PRE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column INVENTORY
+		dataType: double
+		isHidden
+		lineageTag: 8bf146a4-9e9c-4e41-b7c3-3f700a7b3f27
+		summarizeBy: sum
+		sourceColumn: INVENTORY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column INC_PRODUCT_RECALL
+		dataType: double
+		isHidden
+		lineageTag: 54a42a3b-6d60-479f-baea-a60bb18c7540
+		summarizeBy: sum
+		sourceColumn: INC_PRODUCT_RECALL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DEC_PRODUCT_RECALL
+		dataType: double
+		isHidden
+		lineageTag: 4de62c8f-f3cf-437e-8364-b69ec4ff17fa
+		summarizeBy: sum
+		sourceColumn: DEC_PRODUCT_RECALL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column INVENTORY_DATE
+		dataType: string
+		isHidden
+		lineageTag: 920b6c02-0353-418b-98d8-7b54fec0b0a3
+		summarizeBy: none
+		sourceColumn: INVENTORY_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHOP_C1_CODE
+		dataType: string
+		isHidden
+		lineageTag: e34a38fd-0d60-4dc3-a66e-7f56268206e7
+		summarizeBy: none
+		sourceColumn: SHOP_C1_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE_SAP
+		dataType: string
+		isHidden
+		lineageTag: 09ac8b6e-2677-4f9d-a25a-7fd22e44aed4
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE_SAP
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - INVENTORY C1' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_INVENTORY_C1 = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_INVENTORY_C1"]}[Data]
+				in
+				    gld_VW_FACT_INVENTORY_C1
+
+	annotation PBI_ResultType = Table
+

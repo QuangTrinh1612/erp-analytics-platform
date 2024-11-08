@@ -1,0 +1,202 @@
+table 'DIM - FIXED ASSET'
+	lineageTag: 16c9909f-8895-4c3e-8def-4813fa6dc1c3
+
+	column FA_KEY
+		dataType: string
+		lineageTag: 259f6f5a-27e3-4cf3-bb4c-9fc00d4d6eb3
+		summarizeBy: none
+		sourceColumn: FA_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 19d90652-da49-40fb-9431-92d101d7de1b
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSET_NO
+		dataType: string
+		lineageTag: 361840be-717b-4046-ba27-d23e69de002e
+		summarizeBy: none
+		sourceColumn: ASSET_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSET_SUB_NO
+		dataType: string
+		lineageTag: ac4297d9-9355-40b9-9a63-390498b6f106
+		summarizeBy: none
+		sourceColumn: ASSET_SUB_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSET_DESC
+		dataType: string
+		lineageTag: 7043d739-d023-4910-895d-19e7bbf2d3df
+		summarizeBy: none
+		sourceColumn: ASSET_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSET_CLASS
+		dataType: string
+		lineageTag: bb0aa5fb-7895-445d-9824-8079bf41dd77
+		summarizeBy: none
+		sourceColumn: ASSET_CLASS
+
+		annotation SummarizationSetBy = Automatic
+
+	column AC_SHORT_DESC
+		dataType: string
+		lineageTag: 9c65ad57-cb9e-4d67-ba7e-ebe325831fd6
+		summarizeBy: none
+		sourceColumn: AC_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column AC_LONG_DESC
+		dataType: string
+		lineageTag: afcd1eea-81c0-402a-b3ab-9b434400be16
+		summarizeBy: none
+		sourceColumn: AC_LONG_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SERIAL_NO
+		dataType: string
+		lineageTag: e5e3deaa-c24b-4e73-a371-3c8c6565e01e
+		summarizeBy: none
+		sourceColumn: SERIAL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVENTORY_NO
+		dataType: string
+		lineageTag: 9d178a49-fa09-4030-9c25-89aea03c8dc4
+		summarizeBy: none
+		sourceColumn: INVENTORY_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAPITALIZED_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dc298662-7912-452d-bbed-a1f2f63204c3
+		summarizeBy: none
+		sourceColumn: CAPITALIZED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FIRST_ACQ_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e9c827ad-4cfd-4392-9285-645688f28259
+		summarizeBy: none
+		sourceColumn: FIRST_ACQ_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ACQ_YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 06cbc17d-7c41-4365-b0db-d7758285ef3e
+		summarizeBy: sum
+		sourceColumn: ACQ_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACQ_PERIOD
+		dataType: int64
+		formatString: 0
+		lineageTag: cd4bbe0c-a246-4d35-ac61-3fcb5ae6bdbc
+		summarizeBy: sum
+		sourceColumn: ACQ_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUANTITY
+		dataType: int64
+		lineageTag: 10fe2460-4b0b-4bc2-89c8-bcccfbbc0d9b
+		summarizeBy: sum
+		sourceColumn: QUANTITY
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BUOM
+		dataType: string
+		lineageTag: ae1c9ea4-1255-4005-af78-906fffbd5c95
+		summarizeBy: none
+		sourceColumn: BUOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENRE
+		dataType: string
+		lineageTag: da2f4f2c-5467-43ef-90a4-c31329898bd5
+		summarizeBy: none
+		sourceColumn: COST_CENRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCATION
+		dataType: string
+		lineageTag: 89fad63c-6966-46f9-a831-301865dec6ab
+		summarizeBy: none
+		sourceColumn: LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPRECIATION_AREA
+		dataType: string
+		lineageTag: 8e00d499-023b-42f8-b770-5eb02b9a6b70
+		summarizeBy: none
+		sourceColumn: DEPRECIATION_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPRECIATION_KEY
+		dataType: string
+		lineageTag: b6bfcdd9-9b36-426a-b35d-660008ed7590
+		summarizeBy: none
+		sourceColumn: DEPRECIATION_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column USE_LIFE_PERIOD
+		dataType: int64
+		formatString: 0
+		lineageTag: e4a35dbe-a963-48cc-ab31-f8ebc05e95cc
+		summarizeBy: sum
+		sourceColumn: USE_LIFE_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPR_START
+		dataType: string
+		lineageTag: e7eaa1c8-4c50-454b-9b87-494ab5b42c28
+		summarizeBy: none
+		sourceColumn: DEPR_START
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - FIXED ASSET' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_DIM_FIXED_ASSET = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_FIXED_ASSET"]}[Data]
+				in
+				    VW_DIM_FIXED_ASSET
+

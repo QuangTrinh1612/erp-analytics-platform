@@ -1,0 +1,49 @@
+table 'DIM - RLS MATERIAL TYPE'
+	isHidden
+	lineageTag: 8333a44e-f07b-4c06-9d85-5e3ee93f4e31
+
+	column ROLE
+		dataType: string
+		isHidden
+		lineageTag: bbb23717-2fd2-47be-9c15-2fe3d1d96f38
+		summarizeBy: none
+		sourceColumn: ROLE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_TYPE
+		dataType: string
+		isHidden
+		lineageTag: 28c1123f-da06-445c-9ad6-d51623de5203
+		summarizeBy: none
+		sourceColumn: MATERIAL_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_EMAIL
+		dataType: string
+		isHidden
+		lineageTag: 25edd5d9-8060-4d62-9942-7de9f123cd3a
+		summarizeBy: none
+		sourceColumn: USER_EMAIL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim RLS Material Type' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_RLS_MATERIAL_TYPE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_RLS_MATERIAL_TYPE"]}[Data]
+				in
+				    gld_VW_DIM_RLS_MATERIAL_TYPE
+
+	changedProperty = IsHidden
+

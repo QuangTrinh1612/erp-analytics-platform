@@ -1,0 +1,71 @@
+table 'DIM - GL ACCOUNT - CS'
+	lineageTag: db761326-8bcb-4f2f-b3e9-6abaf3a5aed0
+
+	column GL_ACC_NO
+		dataType: string
+		lineageTag: f6d47080-3950-4fbc-b516-6563286430bf
+		summarizeBy: none
+		sourceColumn: GL_ACC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROUP_ACC_NO
+		dataType: string
+		lineageTag: 60c0f241-e79e-4870-84f5-879678777f16
+		summarizeBy: none
+		sourceColumn: GROUP_ACC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_BS_ACC
+		dataType: string
+		lineageTag: 142d2af4-f06a-4ff2-9819-103276f90b44
+		summarizeBy: none
+		sourceColumn: IS_BS_ACC
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_PL_ACC
+		dataType: string
+		lineageTag: ec49830b-ca45-4acd-b8d9-103c8030fe8a
+		summarizeBy: none
+		sourceColumn: IS_PL_ACC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHORT_DESC
+		dataType: string
+		lineageTag: 6fa8a7f5-011d-4c54-996f-2c2e7d9e0bea
+		summarizeBy: none
+		sourceColumn: SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column LONG_DESC
+		dataType: string
+		lineageTag: 7560a246-3599-4b6f-a1eb-5b814ed9965d
+		summarizeBy: none
+		sourceColumn: LONG_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_LV1 = LEFT('DIM - GL ACCOUNT - CS'[GL_ACC_NO],3)
+		dataType: string
+		lineageTag: 9454d752-1613-48d2-8ce4-deddbd5d8a31
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - GL ACCOUNT - CS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_GL_ACCOUNT = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_GL_ACCOUNT_CS"]}[Data]
+				in
+				    gld_VW_DIM_GL_ACCOUNT
+
+	annotation PBI_ResultType = Table
+

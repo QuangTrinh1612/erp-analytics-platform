@@ -1,0 +1,75 @@
+table 'FACT - PHYSICAL STORAGE CAPACITY'
+	lineageTag: a49e1aca-af2d-4e65-87ea-cd19ba4731de
+
+	column PHY_STORAGE_TYPE
+		dataType: string
+		lineageTag: 3989efff-a706-45dc-a8d0-ad2a056cc74a
+		summarizeBy: none
+		sourceColumn: PHY_STORAGE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PHY_STORAGE_TYPE_TEXT
+		dataType: string
+		lineageTag: e1d66e47-c51f-4d9b-b99e-a82a4119cdbd
+		summarizeBy: none
+		sourceColumn: PHY_STORAGE_TYPE_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column KHO_VL_TEXT
+		dataType: string
+		lineageTag: 5712b95a-6a98-4b84-9d48-00512a6afddf
+		summarizeBy: none
+		sourceColumn: KHO_VL_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ĐVT
+		dataType: string
+		lineageTag: 95ed8ac2-98ad-41b1-8d5d-44a9cc97c71d
+		summarizeBy: none
+		sourceColumn: ĐVT
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Chất pallet 2 lớp thấp'
+		dataType: double
+		lineageTag: 8fae6a9f-3f29-4460-81a2-0129b7579696
+		summarizeBy: sum
+		sourceColumn: Chất pallet 2 lớp thấp
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Chất pallet 3 lớp thường'
+		dataType: double
+		lineageTag: e63b5cb1-5302-4d5d-8ece-ad4a6abd9dc6
+		summarizeBy: sum
+		sourceColumn: Chất pallet 3 lớp thường
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Lưu trữ hỗn hợp Sling, bốc nền, đạm rời cao'
+		dataType: double
+		lineageTag: 638b2e59-a6a1-41c8-b369-481b9e714b27
+		summarizeBy: sum
+		sourceColumn: Lưu trữ hỗn hợp Sling, bốc nền, đạm rời cao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - PHYSICAL STORAGE CAPACITY' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_vw_FACT_PHYSICAL_STORAGE_CAPACITY = pvcfcprodsqlpool{[Schema="gld",Item="vw_FACT_PHYSICAL_STORAGE_CAPACITY"]}[Data]
+				in
+				    gld_vw_FACT_PHYSICAL_STORAGE_CAPACITY
+

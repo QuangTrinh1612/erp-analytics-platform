@@ -1,0 +1,31 @@
+table 'DIM - SALE ORGANIZATION'
+	lineageTag: 93a193c8-8f7f-4ffa-8e98-54ef5be6a69c
+
+	column SALE_ORG
+		dataType: string
+		lineageTag: daae1af5-41a2-4d8e-bfd9-52316de88d65
+		summarizeBy: none
+		sourceColumn: SALE_ORG
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_ORG_NAME
+		dataType: string
+		lineageTag: 44fc0d61-659a-497b-9f39-492960aab04a
+		summarizeBy: none
+		sourceColumn: SALE_ORG_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - SALE ORGANIZATION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_SALE_ORGANIZATION = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_SALE_ORGANIZATION"]}[Data]
+				in
+				    gld_VW_DIM_SALE_ORGANIZATION
+
+	annotation PBI_ResultType = Table
+

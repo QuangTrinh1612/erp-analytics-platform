@@ -1,0 +1,305 @@
+table 'FACT - GL LINE ITEM OFFSET'
+	lineageTag: e741fc99-4410-4f60-9c23-47c0e7e9e3bc
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 38d69508-76e8-4aa3-88ab-1635430a2213
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column DOCUMENT_NO
+		dataType: string
+		lineageTag: eefae9ca-5632-4735-985e-78308e21eee9
+		summarizeBy: none
+		sourceColumn: DOCUMENT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVOICE_NO
+		dataType: string
+		lineageTag: 1dd22d17-c821-4b6c-947f-3b3dd5add623
+		summarizeBy: none
+		sourceColumn: INVOICE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: 3bc6fcb6-39d5-4e99-921a-ed12d0091bdb
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_CODE
+		dataType: string
+		lineageTag: 521ab4d2-6768-4d4a-bccb-295a702c1df1
+		summarizeBy: none
+		sourceColumn: CURRENCY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROFIT_CENTRE
+		dataType: string
+		lineageTag: 268e986d-7fe2-4380-ac1c-58262d4edbf6
+		summarizeBy: none
+		sourceColumn: PROFIT_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTRE
+		dataType: string
+		lineageTag: 3178a4f2-e984-4627-a715-337709bde181
+		summarizeBy: none
+		sourceColumn: COST_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESCRIPTION
+		dataType: string
+		lineageTag: 3b9a41aa-40be-4023-8fe2-c829351c0a69
+		summarizeBy: none
+		sourceColumn: DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT_NO
+		dataType: string
+		lineageTag: 2ea25efb-0fa8-4e6d-a8b8-52d230762ae6
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column OFFSET_GL_ACCT
+		dataType: string
+		lineageTag: 67487ff8-061a-49da-ad85-dff5a63d2997
+		summarizeBy: none
+		sourceColumn: OFFSET_GL_ACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_ITEM
+		dataType: string
+		lineageTag: d81b235f-5a18-4537-ad72-c5f9a89931ac
+		summarizeBy: none
+		sourceColumn: DOC_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column OFFSET_DOC_ITEM
+		dataType: string
+		lineageTag: 17ceae92-3ae6-42a6-9bda-bdf1204b3b8b
+		summarizeBy: none
+		sourceColumn: OFFSET_DOC_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEBIT_AMT
+		dataType: double
+		lineageTag: cc912be4-3143-4104-9528-2c138ece0c87
+		summarizeBy: sum
+		sourceColumn: DEBIT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREDIT_AMT
+		dataType: double
+		lineageTag: 8fa0f6af-e5ae-4230-81d9-f83a3738dd2f
+		summarizeBy: sum
+		sourceColumn: CREDIT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IS_REVERSE
+		dataType: int64
+		formatString: 0
+		lineageTag: 20fabc84-5c81-4aef-a37f-dc9c9211b5a5
+		summarizeBy: none
+		sourceColumn: IS_REVERSE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FX_AMT
+		dataType: double
+		lineageTag: 4f3ebcd8-1261-4bfc-8148-ad901759ceba
+		summarizeBy: sum
+		sourceColumn: FX_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FX_RATE
+		dataType: double
+		lineageTag: d45c458e-6d33-45f0-a32a-11f505004d10
+		summarizeBy: sum
+		sourceColumn: FX_RATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DOC_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 59da5ff1-cd71-414a-a588-345ac3148cea
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column OBJECT_ID
+		dataType: string
+		lineageTag: 5798d274-9646-428d-af24-38eb84574121
+		summarizeBy: none
+		sourceColumn: OBJECT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NAME
+		dataType: string
+		lineageTag: 1aee3486-18ec-4529-a864-e649d6ed3053
+		summarizeBy: none
+		sourceColumn: OBJECT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_NEGATIVE_POSTING
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e5698b3-bc13-457f-aa2c-7101decf0d35
+		summarizeBy: sum
+		sourceColumn: IS_NEGATIVE_POSTING
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_TYPE
+		dataType: string
+		lineageTag: da33ce1d-aa78-4892-a0be-6d1853a0ee6b
+		summarizeBy: none
+		sourceColumn: ACCOUNT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_CODE
+		dataType: string
+		lineageTag: f62faae4-2d8e-4b72-affc-398b187d0592
+		summarizeBy: none
+		sourceColumn: VENDOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_CODE
+		dataType: string
+		lineageTag: 8cc9bb4c-9b6b-4683-9897-05448f776f0c
+		summarizeBy: none
+		sourceColumn: CUSTOMER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOC_TYPE
+		dataType: string
+		lineageTag: 4d885c0e-bce6-400e-9ed1-3476dd0c980a
+		summarizeBy: none
+		sourceColumn: DOC_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_NAME
+		dataType: string
+		lineageTag: d294109c-9b07-43c3-8d06-2c944f937994
+		summarizeBy: none
+		sourceColumn: VENDOR_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_NAME
+		dataType: string
+		lineageTag: 787368a3-68e3-414e-93f1-f87f5721afd4
+		summarizeBy: none
+		sourceColumn: CUSTOMER_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCAL_AMT
+		dataType: double
+		lineageTag: 3c178508-797f-432b-ad4c-08ba19a0b533
+		summarizeBy: sum
+		sourceColumn: LOCAL_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IS_REVERSE_SP
+		dataType: int64
+		formatString: 0
+		lineageTag: d5a25e9d-c75a-4828-9575-21e4e743397a
+		summarizeBy: sum
+		sourceColumn: IS_REVERSE_SP
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nội dung (ZCO14)' =
+			
+			SWITCH(TRUE(),
+			        [LOCAL_AMT] <> BLANK()&& [OFFSET_GL_ACCT] = "6428000402"&& [GL_ACCOUNT_NO] = "3561000000", "Quỹ tăng thêm",
+			        'FACT - GL LINE ITEM OFFSET'[DESCRIPTION] = "SDĐKỳ" && [GL_ACCOUNT_NO] = "3561000000","Quỹ tăng thêm",
+			        ([DEBIT_AMT] <> BLANK() || [LOCAL_AMT] <> BLANK()) && LEFT([GL_ACCOUNT_NO],4) = "3561", "Đã chi từ quỹ",
+			        BLANK())
+		dataType: string
+		lineageTag: f457c7bb-408c-4dfa-9e5b-3f50b5cb08c9
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column FX_DEBIT_AMT
+		dataType: double
+		lineageTag: eb188245-90c5-4745-8430-8a299c59f415
+		summarizeBy: sum
+		sourceColumn: FX_DEBIT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FX_CREDIT_AMT
+		dataType: double
+		lineageTag: 1f836571-cc2c-4ba1-b6f2-dace1d23e953
+		summarizeBy: sum
+		sourceColumn: FX_CREDIT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - GL LINE ITEM OFFSET' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_FACT_GL_LINE_ITEM_OFFSET = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_GL_LINE_ITEM_OFFSET"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(VW_FACT_GL_LINE_ITEM_OFFSET,{{"POSTING_DATE", type date}, {"DOC_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Exception
+

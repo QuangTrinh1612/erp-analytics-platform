@@ -1,0 +1,125 @@
+table 'PARAMETER - SALE MEASURES'
+	lineageTag: 2a858c93-3e64-4589-8e63-22c08385b443
+
+	measure 'Display sales format' = ```
+			
+			var metrics = SWITCH (
+			    SELECTEDVALUE ( 'PARAMETER - SALE MEASURES'[Parameter Order] ),
+			    1, [Contract Qty], 
+			    3, [Contract Amt VND],
+			    8, [Sale In Quantity],
+			    9, [Sale In Amt VND]
+			)
+			RETURN 
+			metrics
+			```
+		lineageTag: 69897a60-6965-4f48-bb8c-bc3577137d9e
+
+		formatStringDefinition =
+				SWITCH(TRUE(),
+				
+				[Display sales format] < 1000000, "#,#",
+				[Display sales format] < 1000000000, "#,,.0M",
+				[Display sales format] < 1000000000000, "#,,,.0bn",
+				[Display sales format] >= 1000000000000, "#,,,,.0T")
+
+	column Parameter
+		dataType: string
+		lineageTag: a45a50c9-c122-4682-b9b8-a77f2f81fc78
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		dataType: string
+		isHidden
+		lineageTag: 9e47ee81-5c16-40cc-8ac2-9099605edab0
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"PARAMETER - SALE MEASURES","TableItemName":"Parameter Fields (groups)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column 'Parameter Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 02e0f69f-01d9-4f8b-8b9a-2d35888740d2
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields (groups)' =
+			SWITCH(
+				TRUE,
+				ISBLANK('PARAMETER - SALE MEASURES'[Parameter Fields]),
+				"(Blank)",
+				'PARAMETER - SALE MEASURES'[Parameter Fields] IN {"'_SALES MEASURES'[Sale In Quantity]",
+					"'_SALES MEASURES'[Sale In Amt VND]"},
+				"Hóa Đơn",
+				'PARAMETER - SALE MEASURES'[Parameter Fields] IN {"'_SALES MEASURES'[Contract Qty]",
+					"'_SALES MEASURES'[Contract Amt]",
+					"'_SALES MEASURES'[Contract Amt VND]"},
+				"PLHĐ",
+				'PARAMETER - SALE MEASURES'[Parameter Fields]
+			)
+		dataType: string
+		lineageTag: f7f8875b-be84-4674-bc0f-a120d23d4d99
+		summarizeBy: none
+		isDataTypeInferred
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "PARAMETER - SALE MEASURES"
+				          }
+				        },
+				        "Property": "Parameter Fields"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"p","Entity":"PARAMETER - SALE MEASURES"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"Parameter Fields"}}],"GroupItems":[{"DisplayName":"(Blank)","BlankDefaultPlaceholder":true},{"DisplayName":"Hóa Đơn","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"Parameter Fields"}}],"Values":[[{"Literal":{"Value":"'''_SALES MEASURES''[Sale In Quantity]'"}}],[{"Literal":{"Value":"'''_SALES MEASURES''[Sale In Amt VND]'"}}]]}}},{"DisplayName":"PLHĐ","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"Parameter Fields"}}],"Values":[[{"Literal":{"Value":"'''_SALES MEASURES''[Contract Qty]'"}}],[{"Literal":{"Value":"'''_SALES MEASURES''[Contract Amt]'"}}],[{"Literal":{"Value":"'''_SALES MEASURES''[Contract Amt VND]'"}}]]}}}]}
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parameter = calculated
+		mode: import
+		source =
+				{
+				    ("Sản Lượng", NAMEOF([Contract Qty]), 1),
+				    ("Doanh Thu", NAMEOF([Contract Amt]), 2),
+				    ("Doanh Thu VND", NAMEOF([Contract Amt VND]), 3),
+				    ("Sale Order Qty", NAMEOF([Sale Order Qty]), 4),
+				    ("Sale Order Amt", NAMEOF([Sale Order Amt]), 5),
+				    ("Sale Order Amt VND", NAMEOF([Sale Order Amt VND]), 6),
+				    ("# of Billing", NAMEOF([# of Billing]), 7),
+				    ("Sản Lượng", NAMEOF([Sale In Quantity]), 8),
+				    ("Doanh Thu VND", NAMEOF([Sale In Amt VND]), 9)
+				}
+
+	annotation PBI_Id = c1ee451181134017b863841a0eb04ab3
+

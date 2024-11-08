@@ -1,0 +1,198 @@
+table 'DIM - MATERIALS NPK'
+	lineageTag: 3568c650-02a2-4990-bf72-fabcf0545f0f
+
+	column DIM_MATERIALS_NPK_CODE
+		dataType: int64
+		formatString: 0
+		lineageTag: 6e5220f9-6294-42c8-a590-be97db4afa71
+		summarizeBy: none
+		sourceColumn: DIM_MATERIALS_NPK_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 5d5fe6b4-9a9b-46c2-87ab-67a431bf4dc4
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: f6cd4811-fe51-4093-ace3-c05f6db20f67
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: 4142b39c-0726-4b62-a51a-91908eca7c85
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PCT_N
+		dataType: double
+		lineageTag: be87c5c6-8bac-4dac-bfcf-7b06098553e5
+		summarizeBy: none
+		sourceColumn: PCT_N
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_P2O5
+		dataType: double
+		lineageTag: 9160b04e-1f83-4970-a792-a1101de7d753
+		summarizeBy: none
+		sourceColumn: PCT_P2O5
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_K2O
+		dataType: double
+		lineageTag: 8a4c1e22-bf81-4a25-957a-2b3e8d242669
+		summarizeBy: none
+		sourceColumn: PCT_K2O
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_S
+		dataType: double
+		lineageTag: e2af61c3-3a3e-40a6-8faf-1bc93aebd9d7
+		summarizeBy: none
+		sourceColumn: PCT_S
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_ZN
+		dataType: double
+		lineageTag: 95bf3107-ae38-4a2d-bb89-cb1c57a47fee
+		summarizeBy: none
+		sourceColumn: PCT_ZN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_B
+		dataType: double
+		lineageTag: 2a533786-3df9-4e00-9713-dbe4d2e0ff81
+		summarizeBy: none
+		sourceColumn: PCT_B
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_CA
+		dataType: double
+		lineageTag: 29644d0f-6e85-4367-9702-c039ef80aa5e
+		summarizeBy: none
+		sourceColumn: PCT_CA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_MG
+		dataType: double
+		lineageTag: 02162d2a-3a5b-4349-bf65-86fc7ba27a4b
+		summarizeBy: none
+		sourceColumn: PCT_MG
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_DRY
+		dataType: double
+		lineageTag: be76cc53-ee65-41e8-bb93-3b9bd11caa20
+		summarizeBy: none
+		sourceColumn: PCT_DRY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_CKKL_MAT
+		dataType: double
+		lineageTag: f105e066-9de0-4515-bc2e-3c59b5ab989e
+		summarizeBy: none
+		sourceColumn: PCT_CKKL_MAT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PCT_CKKR_MAT
+		dataType: double
+		lineageTag: af8f84cd-7cc4-4d9e-8b32-0ce589236435
+		summarizeBy: none
+		sourceColumn: PCT_CKKR_MAT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NOTE_1
+		dataType: string
+		lineageTag: 693fea7d-2c6e-4ab3-8a5b-6e9c459cb9a9
+		summarizeBy: none
+		sourceColumn: NOTE_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE_2
+		dataType: string
+		lineageTag: d430e4d6-3dd3-4520-a4b3-2dca497b22bc
+		summarizeBy: none
+		sourceColumn: NOTE_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE_3
+		dataType: string
+		lineageTag: 90a63fb0-b422-44ae-b096-1a3a72bae3e8
+		summarizeBy: none
+		sourceColumn: NOTE_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 76b36720-d078-4782-b86c-2e7b523cbaf8
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 78239bf8-9387-4ace-988f-03da5d09e9e8
+		summarizeBy: none
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - MATERIALS NPK' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_MATERIALS_NPK = pvcfcprodsqlpool{[Schema="sil",Item="DIM_MATERIALS_NPK"]}[Data]
+				in
+				    sil_DIM_MATERIALS_NPK
+

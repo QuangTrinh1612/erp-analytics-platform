@@ -1,0 +1,83 @@
+table 'PARAMETER - AVAILABLE STOCK'
+	lineageTag: 54392cd5-f021-4199-9846-0ddbe4d4431d
+
+	column Parameter
+		dataType: string
+		lineageTag: a118a02e-a7bb-40ab-98af-fedefed62bbe
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		dataType: string
+		isHidden
+		lineageTag: 3b2ed546-6f98-4ae2-9b29-502aa3947d4b
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b1f68dd7-187f-47da-8050-738b2bdf8089
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value4
+		dataType: string
+		lineageTag: 28d5a027-e2a1-48c5-8d1e-b73187b4b7af
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parameter = calculated
+		mode: import
+		source =
+				{
+				    /*PLHĐ*/
+				    ("Tồn kho khả dụng (PLHĐ)", NAMEOF([Available Stock (PLHĐ)]), 0, "PLHĐ"),
+				    ("Tồn kho", NAMEOF([Closing Qty]), 1, "PLHĐ"),
+				    ("Tồn PLHĐ Bán", NAMEOF([Remaining Contract Qty vs SO (PLHĐ Bán)]), 2, "PLHĐ"),
+				    ("Tồn PLHĐ Xuất ký gửi", NAMEOF([Remaining Contract Qty vs SO (PLHĐ Xuất ký gửi)]), 3, "PLHĐ"),
+				    ("Tồn PLHĐ Bán ký gửi", NAMEOF([Remaining Contract Qty vs SO (PLHĐ Bán ký gửi)]), 4, "PLHĐ"),
+				    ("Tồn LDDNB", NAMEOF([Remaining LDDNB Qty vs OD]), 5, "PLHĐ"),
+				    /*LXH*/
+				    ("Tồn kho khả dụng (LXH)", NAMEOF([Available Stock (LXH)]), 6, "LXH"),
+				    ("Tồn kho", NAMEOF([Closing Qty]), 7, "LXH"),
+				    ("Tồn LXH Bán", NAMEOF([Remaining Sale Order Qty vs OD (LXH Bán)]), 8, "LXH"),
+				    ("Tồn LXH Xuất ký gửi", NAMEOF([Remaining Sale Order Qty vs OD (LXH Xuất ký gửi)]), 9, "LXH"),
+				    ("Tồn LXH Bán ký gửi", NAMEOF([Remaining Sale Order Qty vs OD (LXH Bán ký gửi)]), 10, "LXH"),
+				    ("Tồn LDDNB", NAMEOF([Remaining LDDNB Qty vs OD]), 11, "LXH"),
+				    /*PXK*/
+				    ("Tồn kho khả dụng (PXK)", NAMEOF([Available Stock (PXK)]), 12, "PXK"),
+				    ("Tồn kho", NAMEOF([Closing Qty]), 13, "PXK"),
+				    ("Tồn PXK Bán", NAMEOF([Remaining OD Qty vs Actual GI (PXK Bán)]), 14, "PXK"),
+				    ("Tồn PXK Xuất ký gửi", NAMEOF([Remaining OD Qty vs Actual GI (PXK Xuất Ký gửi)]), 15, "PXK"),
+				    ("Tồn PXK Bán ký gửi", NAMEOF([Remaining OD Qty vs Actual GI (PXK Bán Ký gửi)]), 16, "PXK"),
+				    ("Tồn PXK LDDNB", NAMEOF([Remaining OD Qty vs Actual GI (LDDNB)]), 17, "PXK")
+				}
+
+	annotation PBI_Id = c1ee451181134017b863841a0eb04ab3
+

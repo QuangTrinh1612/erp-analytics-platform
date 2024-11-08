@@ -1,0 +1,30 @@
+table 'DIM - SALE OFFICE'
+	isHidden
+	lineageTag: bf7bf754-3923-470d-8eb9-b944f96ec7c1
+
+	column SALE_OFFICE_CODE
+		dataType: string
+		lineageTag: a9980452-199d-4c7f-a4a6-0b8477409ecc
+		summarizeBy: none
+		sourceColumn: SALE_OFFICE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_OFFICE_NAME
+		dataType: string
+		lineageTag: ec4ac41f-b03a-4692-8e53-0413c94a40de
+		summarizeBy: none
+		sourceColumn: SALE_OFFICE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - SALE OFFICE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_SALE_OFFICE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_SALE_OFFICE"]}[Data]
+				in
+				    gld_VW_DIM_SALE_OFFICE
+

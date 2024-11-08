@@ -1,0 +1,82 @@
+table 'DIM - WORK CENTER'
+	lineageTag: b1fadcce-423f-41e5-8fdc-280e77e6998f
+
+	column WORK_CENTER_ID
+		dataType: string
+		lineageTag: d0acd453-d6f3-490d-ab91-a4d70c3b45fe
+		summarizeBy: none
+		sourceColumn: WORK_CENTER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column STAT_DATE
+		dataType: string
+		lineageTag: 35e59038-3bf8-4ce6-bf8a-303fde8f1e05
+		summarizeBy: none
+		sourceColumn: STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column END_DATE
+		dataType: string
+		lineageTag: 68e825bc-6b01-4108-aa0c-b1c4cb4cbfd8
+		summarizeBy: none
+		sourceColumn: END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER
+		dataType: string
+		lineageTag: c5ff6033-3980-4fd3-bd4c-589469865b15
+		summarizeBy: none
+		sourceColumn: WORK_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 83225db1-abbd-4656-aedf-dde6ecc315f2
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column WCRT_CAT
+		dataType: string
+		lineageTag: 74ae5364-dc54-4396-977b-7b1b0c88c9b9
+		summarizeBy: none
+		sourceColumn: WCRT_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEL_FLAG
+		dataType: string
+		lineageTag: 8833532c-3ce5-4b9a-a5cd-ec193c54e110
+		summarizeBy: none
+		sourceColumn: DEL_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column WORK_CENTER_NAME
+		dataType: string
+		lineageTag: 8badafa5-c9c4-4e09-9ce0-692659713841
+		summarizeBy: none
+		sourceColumn: WORK_CENTER_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - WORK CENTER' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_WORK_CENTER = pvcfcprodsqlpool{[Schema="sil",Item="DIM_WORK_CENTER"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_WORK_CENTER,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

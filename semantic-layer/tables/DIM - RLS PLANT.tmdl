@@ -1,0 +1,49 @@
+table 'DIM - RLS PLANT'
+	isHidden
+	lineageTag: 83607ea6-0dc6-43e9-9711-ca226da16958
+
+	column ROLE
+		dataType: string
+		isHidden
+		lineageTag: 4e6cfa90-905f-4697-8c40-9aa9dab629f0
+		summarizeBy: none
+		sourceColumn: ROLE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: 8ef24a44-b0bd-4075-93ff-3e4067d44c76
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_EMAIL
+		dataType: string
+		isHidden
+		lineageTag: b25b4b94-b2cf-4fd0-b8d5-40fba791ba09
+		summarizeBy: none
+		sourceColumn: USER_EMAIL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim RLS Plant' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_RLS_PLANT = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_RLS_PLANT"]}[Data]
+				in
+				    gld_VW_DIM_RLS_PLANT
+
+	changedProperty = IsHidden
+

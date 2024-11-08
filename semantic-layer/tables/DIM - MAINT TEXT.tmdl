@@ -1,0 +1,66 @@
+table 'DIM - MAINT TEXT'
+	lineageTag: 2d766e9c-434c-434f-bbab-c95fed844fa8
+
+	column TEXT_ID
+		dataType: string
+		lineageTag: 2832c073-e067-4079-9ad4-2bfdf95a8d9b
+		summarizeBy: none
+		sourceColumn: TEXT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQUEST_TEXT
+		dataType: string
+		lineageTag: 479c8cf8-f660-47d6-843d-b976bc105f1f
+		summarizeBy: none
+		sourceColumn: REQUEST_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PUR_ORDER_TEXT
+		dataType: string
+		lineageTag: f9c93756-cd3e-47b5-8ceb-3f406616e6d0
+		summarizeBy: none
+		sourceColumn: PUR_ORDER_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_LONG_TEXT
+		dataType: string
+		lineageTag: 9ad67f75-2883-45da-b028-6aadf6a4c45c
+		summarizeBy: none
+		sourceColumn: EQUI_LONG_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CANCEL_REASON
+		dataType: string
+		lineageTag: 0506eec6-24a3-422d-b7aa-b8f8ad40552d
+		summarizeBy: none
+		sourceColumn: CANCEL_REASON
+
+		annotation SummarizationSetBy = Automatic
+
+	column SURVEY_RESULT
+		dataType: string
+		lineageTag: ecb18ae5-4e70-4219-99de-68f5793b548c
+		summarizeBy: none
+		sourceColumn: SURVEY_RESULT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - MAINT TEXT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_MAINT_TEXT = pvcfcprodsqlpool{[Schema="sil",Item="DIM_MAINT_TEXT"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_MAINT_TEXT,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

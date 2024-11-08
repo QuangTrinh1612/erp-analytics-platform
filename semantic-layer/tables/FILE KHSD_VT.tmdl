@@ -1,0 +1,310 @@
+table 'FILE KHSD_VT'
+	lineageTag: 42303016-b3ee-49da-a6a8-427fa6f9504b
+
+	column STT
+		dataType: string
+		lineageTag: 541e80ef-d6d1-4406-9c93-345943c95c74
+		summarizeBy: none
+		sourceColumn: STT
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mã vật tư'
+		dataType: string
+		lineageTag: 3a9000d6-a095-4851-b296-7ccb485aed97
+		summarizeBy: none
+		sourceColumn: Mã vật tư
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Kế hoạch sử dụng 2023'
+		dataType: double
+		lineageTag: b32a8242-2fb8-446b-97dd-bf3fc0f7dcf5
+		summarizeBy: sum
+		sourceColumn: Kế hoạch sử dụng 2023
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Kế hoạch sử dụng 2024'
+		dataType: double
+		lineageTag: b6780502-9717-44c4-a440-3bf57d39c0d3
+		summarizeBy: sum
+		sourceColumn: Kế hoạch sử dụng 2024
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Kế hoạch sử dụng 2025'
+		dataType: double
+		lineageTag: ef5dbb8f-1847-462c-a886-b4b944ef457b
+		summarizeBy: sum
+		sourceColumn: Kế hoạch sử dụng 2025
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Kế hoạch sử dụng 2026'
+		dataType: double
+		lineageTag: 1d5f181c-2428-429b-b93a-124adc86190f
+		summarizeBy: sum
+		sourceColumn: Kế hoạch sử dụng 2026
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Kế hoạch sử dụng 2027'
+		dataType: double
+		lineageTag: 96faf0a9-40bc-4cd6-922e-a02f49ddde9d
+		summarizeBy: sum
+		sourceColumn: Kế hoạch sử dụng 2027
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Kế hoạch sử dụng 2028'
+		dataType: double
+		lineageTag: d9800ab7-686a-4134-81df-f0308ebf5392
+		summarizeBy: sum
+		sourceColumn: Kế hoạch sử dụng 2028
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Kế hoạch sử dụng 2029'
+		dataType: double
+		lineageTag: b1c13719-9496-4867-9abe-dbf722e133c3
+		summarizeBy: sum
+		sourceColumn: Kế hoạch sử dụng 2029
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Kế hoạch sử dụng 2030'
+		dataType: double
+		lineageTag: 8454851c-bd4b-476c-bfa5-43d92c4efcd8
+		summarizeBy: sum
+		sourceColumn: Kế hoạch sử dụng 2030
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SL đề xuất thanh lý'
+		dataType: double
+		lineageTag: 5dd3ed07-5d70-4037-98e2-753478236d40
+		summarizeBy: sum
+		sourceColumn: SL đề xuất thanh lý
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2023 (TK-ĐM)'
+		dataType: double
+		lineageTag: 5e8ba95e-9ab5-4f47-ac47-c35f91896b34
+		summarizeBy: sum
+		sourceColumn: SLSD 2023 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2024 (TK-ĐM)'
+		dataType: double
+		lineageTag: 8e1ce7dc-a89c-4a56-8c0f-cfdd5afce5ee
+		summarizeBy: sum
+		sourceColumn: SLSD 2024 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2025 (TK-ĐM)'
+		dataType: double
+		lineageTag: 53edea7f-7725-4d40-85fb-584dbee8fa5d
+		summarizeBy: sum
+		sourceColumn: SLSD 2025 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2026 (TK-ĐM)'
+		dataType: double
+		lineageTag: 4069d1be-227f-423d-be1c-f69a1f66aedd
+		summarizeBy: sum
+		sourceColumn: SLSD 2026 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2027 (TK-ĐM)'
+		dataType: double
+		lineageTag: 2784536b-2fe6-4faa-86a0-39e1282e5e18
+		summarizeBy: sum
+		sourceColumn: SLSD 2027 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2028 (TK-ĐM)'
+		dataType: double
+		lineageTag: 086e6121-058f-4d32-b773-a5c5d49db13c
+		summarizeBy: sum
+		sourceColumn: SLSD 2028 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2029 (TK-ĐM)'
+		dataType: double
+		lineageTag: 7ec4121c-1b18-4fa9-afa1-46c921e25639
+		summarizeBy: sum
+		sourceColumn: SLSD 2029 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SLSD 2030 (TK-ĐM)'
+		dataType: double
+		lineageTag: 323290b4-41e9-47d0-9a58-fc8785e20b8d
+		summarizeBy: sum
+		sourceColumn: SLSD 2030 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2023 (TK-ĐM)'
+		dataType: double
+		lineageTag: 2bebc27a-3573-4828-b7cd-b9145b04c5c7
+		summarizeBy: sum
+		sourceColumn: GTSD 2023 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2024 (TK-ĐM)'
+		dataType: double
+		lineageTag: fb6dcf31-4090-4824-8239-241aaa449df1
+		summarizeBy: sum
+		sourceColumn: GTSD 2024 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2025 (TK-ĐM)'
+		dataType: double
+		lineageTag: 7977e554-72fa-4aba-8218-bbe97b3525d1
+		summarizeBy: sum
+		sourceColumn: GTSD 2025 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2026 (TK-ĐM)'
+		dataType: double
+		lineageTag: 069e02b5-0314-47da-b84a-0fecd7a68731
+		summarizeBy: sum
+		sourceColumn: GTSD 2026 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2027 (TK-ĐM)'
+		dataType: double
+		lineageTag: 14f627be-ef79-4d52-b249-0765760a6040
+		summarizeBy: sum
+		sourceColumn: GTSD 2027 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2028 (TK-ĐM)'
+		dataType: double
+		lineageTag: 2782fbb0-ddce-4310-93d8-35b34e2f0514
+		summarizeBy: sum
+		sourceColumn: GTSD 2028 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2029 (TK-ĐM)'
+		dataType: double
+		lineageTag: 5a1e867d-7194-424f-bc05-eb64259321c7
+		summarizeBy: sum
+		sourceColumn: GTSD 2029 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTSD 2030 (TK-ĐM)'
+		dataType: double
+		lineageTag: 202f538c-06bd-42f6-8f81-8ad8e3564f87
+		summarizeBy: sum
+		sourceColumn: GTSD 2030 (TK-ĐM)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTĐX thanh lý'
+		dataType: double
+		lineageTag: 1812910e-678e-46af-b46c-fbe3d5330ca5
+		summarizeBy: sum
+		sourceColumn: GTĐX thanh lý
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GTTK còn lại'
+		dataType: double
+		lineageTag: f740990e-129c-493a-8bb3-fc9e79353ce1
+		summarizeBy: sum
+		sourceColumn: GTTK còn lại
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Material_plant_key = 'FILE KHSD_VT'[Mã vật tư]&&"-1000"
+		dataType: boolean
+		lineageTag: 08b67899-f231-4638-a335-529330b1ac1e
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FILE KHSD_VT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_KHSD_VT = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_KHSD_VT"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_KHSD_VT,{{"Kế hoạch sử dụng 2023", type number}, {"Kế hoạch sử dụng 2024", type number}, {"Kế hoạch sử dụng 2025", type number}, {"Kế hoạch sử dụng 2026", type number}, {"Kế hoạch sử dụng 2027", type number}, {"Kế hoạch sử dụng 2028", type number}, {"Kế hoạch sử dụng 2029", type number}, {"Kế hoạch sử dụng 2030", type number}, {"SL đề xuất thanh lý", type number}, {"SLSD 2023 (TK-ĐM)", type number}, {"SLSD 2024 (TK-ĐM)", type number}, {"SLSD 2025 (TK-ĐM)", type number}, {"SLSD 2026 (TK-ĐM)", type number}, {"SLSD 2027 (TK-ĐM)", type number}, {"SLSD 2028 (TK-ĐM)", type number}, {"SLSD 2029 (TK-ĐM)", type number}, {"SLSD 2030 (TK-ĐM)", type number}, {"GTSD 2023 (TK-ĐM)", type number}, {"GTSD 2024 (TK-ĐM)", type number}, {"GTSD 2025 (TK-ĐM)", type number}, {"GTSD 2026 (TK-ĐM)", type number}, {"GTSD 2027 (TK-ĐM)", type number}, {"GTSD 2028 (TK-ĐM)", type number}, {"GTSD 2029 (TK-ĐM)", type number}, {"GTSD 2030 (TK-ĐM)", type number}, {"GTĐX thanh lý", type number}, {"GTTK còn lại", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

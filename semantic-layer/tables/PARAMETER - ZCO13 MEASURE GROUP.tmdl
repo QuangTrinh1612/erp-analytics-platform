@@ -1,0 +1,38 @@
+table 'PARAMETER - ZCO13 MEASURE GROUP'
+	lineageTag: 487ed9ab-0dfc-4068-99da-763b0af86b46
+
+	column STT
+		dataType: int64
+		lineageTag: ee9f9490-a031-4d3f-8145-68f31eb46108
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Số liệu'
+		dataType: string
+		lineageTag: 1d5b145e-2f14-4b37-94c8-d788a4eb38ae
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Số liệu]
+		sortByColumn: STT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "STT",INTEGER,
+				    "Số liệu",STRING,
+				    {
+				        {1,"Kế hoạch"},
+				        {2,"Thực hiện"},
+				        {3,"So sánh TH & KH - Giá trị"},
+				        {4,"So sánh TH & KH - %"}
+				    }
+				 )
+

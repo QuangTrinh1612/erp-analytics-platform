@@ -1,0 +1,136 @@
+table 'FACT - FIXED ASSET BALANCE'
+	lineageTag: c79d6a73-4a4b-4304-8072-479e709dc385
+
+	column FISCAL_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 39cb4333-bfc2-4ab4-bab6-270b28fe930a
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: f973195e-7f48-4488-8428-8a7721eeb961
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSET_NO
+		dataType: string
+		lineageTag: a3604b52-77b7-49be-a22a-389fb808f855
+		summarizeBy: none
+		sourceColumn: ASSET_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSET_SUB_NO
+		dataType: string
+		lineageTag: 0ac150a9-1e9e-4bd5-8e69-7c1cff782bbc
+		summarizeBy: none
+		sourceColumn: ASSET_SUB_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPRECIATION_AREA
+		dataType: string
+		lineageTag: b400ec16-5a11-46dc-acdb-33ec6d3978b3
+		summarizeBy: none
+		sourceColumn: DEPRECIATION_AREA
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEBIT_AMT
+		dataType: double
+		lineageTag: cbd8ff3b-eba2-414b-8dea-89f98fdd8e61
+		summarizeBy: sum
+		sourceColumn: DEBIT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREDIT_AMT
+		dataType: double
+		lineageTag: 7355a5a9-fe5a-49a2-bfc3-89fe86538ebe
+		summarizeBy: sum
+		sourceColumn: CREDIT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DEBIT_DEPR_AMT
+		dataType: double
+		lineageTag: e3b01482-7a4f-4b48-b3f1-9f27626c44ec
+		summarizeBy: sum
+		sourceColumn: DEBIT_DEPR_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREDIT_DEPR_AMT
+		dataType: double
+		lineageTag: fe25811f-edbf-4894-b5af-e2e4dae4f320
+		summarizeBy: sum
+		sourceColumn: CREDIT_DEPR_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COST_CENTRE
+		dataType: string
+		lineageTag: b97d9f57-d461-43a7-be40-23cee77ed58b
+		summarizeBy: none
+		sourceColumn: COST_CENTRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FA_KEY
+		dataType: string
+		lineageTag: 27ba9bb8-6586-4411-8725-443be4330101
+		summarizeBy: none
+		sourceColumn: FA_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ASSET_VALUE
+		dataType: double
+		lineageTag: ad2c48ca-3bd6-4b31-a271-e34d586c0870
+		summarizeBy: sum
+		sourceColumn: ASSET_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DEPRECIATION_VALUE
+		dataType: double
+		lineageTag: ed389650-8b53-4184-9bb4-e4c828156686
+		summarizeBy: sum
+		sourceColumn: DEPRECIATION_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - FIXED ASSET BALANCE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    FACT_FIXED_ASSET_BALANCE = pvcfcprodsqlpool{[Schema="gld",Item="FACT_FIXED_ASSET_BALANCE"]}[Data],
+				    #"Added Custom" = Table.AddColumn(FACT_FIXED_ASSET_BALANCE, "FA_KEY", each [ASSET_NO] & "-" & [ASSET_SUB_NO] & "-" & [COMPANY_CODE]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"FA_KEY", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

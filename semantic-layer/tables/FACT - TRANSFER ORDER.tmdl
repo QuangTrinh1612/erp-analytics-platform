@@ -1,0 +1,615 @@
+table 'FACT - TRANSFER ORDER'
+	lineageTag: 5038b37a-375c-46dd-8a01-03c793273cc2
+
+	measure 'Source Actual Qty' =
+			
+			CALCULATE(
+			    SUM('FACT - TRANSFER ORDER'[SRC_ACTL_QTY_AUOM]),
+			    'FACT - TRANSFER ORDER'[REQ_TYPE] = "D"
+			)
+		lineageTag: b1c2417d-f7a5-406b-85dc-a8ddfbf7bce7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WAREHOUSE_NO
+		dataType: string
+		lineageTag: 6e85dfcc-a4aa-4f7d-a95f-f95a55ae36e3
+		summarizeBy: none
+		sourceColumn: WAREHOUSE_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATE_DATE
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: da1305dc-6bdf-43bd-beaa-2ed5bdd4053b
+		summarizeBy: none
+		sourceColumn: CREATE_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column DELI_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ac15a14f-4e44-43e8-a9f5-eb796a8122eb
+		summarizeBy: none
+		sourceColumn: DELI_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 42c662f3-49e4-4222-894f-0023e51aa742
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NUM
+		dataType: string
+		lineageTag: c3ce953e-5454-42d9-a01b-8ec931c831bc
+		summarizeBy: none
+		sourceColumn: BATCH_NUM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMERATOR
+		dataType: double
+		lineageTag: 88d9a72f-fca0-48bd-985b-7b405c520af1
+		summarizeBy: sum
+		sourceColumn: NUMERATOR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DENOMINATOR
+		dataType: double
+		lineageTag: e3e92845-1201-4943-867f-41fa7e1eaa5c
+		summarizeBy: sum
+		sourceColumn: DENOMINATOR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WGH_UNIT
+		dataType: string
+		lineageTag: 554da178-0749-43ba-a2d0-a248ef7cebf5
+		summarizeBy: none
+		sourceColumn: WGH_UNIT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CERT_NUM
+		dataType: string
+		lineageTag: de75d647-90ca-44f3-9365-c9333548636a
+		summarizeBy: none
+		sourceColumn: CERT_NUM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SRC_S_TYPE
+		dataType: string
+		lineageTag: e5b281b0-6485-427f-a078-cbb3276c2dca
+		summarizeBy: none
+		sourceColumn: SRC_S_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SRC_S_SECT
+		dataType: string
+		lineageTag: 9e99b1f5-887a-4952-a9f3-ac46f7e27dd4
+		summarizeBy: none
+		sourceColumn: SRC_S_SECT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SRC_S_BIN
+		dataType: string
+		lineageTag: 38c9c411-02b7-46d4-b419-6bce6b2bf283
+		summarizeBy: none
+		sourceColumn: SRC_S_BIN
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEST_S_TYPE
+		dataType: string
+		lineageTag: 6c2611ee-480c-4e73-a1d6-8a1a8f1b77b9
+		summarizeBy: none
+		sourceColumn: DEST_S_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEST_S_SECT
+		dataType: string
+		lineageTag: 3afbdf30-21d8-469a-b908-b9877fe930c1
+		summarizeBy: none
+		sourceColumn: DEST_S_SECT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEST_S_BIN
+		dataType: string
+		lineageTag: 61cc3e71-4d80-42e7-ab47-1032c532334d
+		summarizeBy: none
+		sourceColumn: DEST_S_BIN
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column RET_S_TYPE
+		dataType: string
+		lineageTag: c6939389-e0a9-44f5-b5da-01c0d2adc9a6
+		summarizeBy: none
+		sourceColumn: RET_S_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column RET_S_AREA
+		dataType: string
+		lineageTag: 36adc4cb-9085-4bb2-a5b1-17c1d14975ed
+		summarizeBy: none
+		sourceColumn: RET_S_AREA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column RET_S_BIN
+		dataType: string
+		lineageTag: 4794dbf8-7315-4618-b4e8-9c30b2bba815
+		summarizeBy: none
+		sourceColumn: RET_S_BIN
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TO_DOC_NO
+		dataType: string
+		lineageTag: 5bdf0b5d-cd2f-4eb4-a8f8-b464824bd101
+		summarizeBy: none
+		sourceColumn: TO_DOC_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TO_DOC_ITEM
+		dataType: string
+		lineageTag: 2270a737-d5fe-4f7d-8494-04912db37d5e
+		summarizeBy: none
+		sourceColumn: TO_DOC_ITEM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: 5783af2d-c22f-4bdb-b5f1-e46967f85469
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: c8b63364-4496-4479-bb01-451526a323bd
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column STOCK_CAT
+		dataType: string
+		lineageTag: d760ba12-258f-45ce-af38-82bb5b46020b
+		summarizeBy: none
+		sourceColumn: STOCK_CAT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIAL_STOCK
+		dataType: string
+		lineageTag: 141bc19c-8285-4541-9df4-c51c5e978f28
+		summarizeBy: none
+		sourceColumn: SPECIAL_STOCK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIAL_STOCK_NO
+		dataType: string
+		lineageTag: fd8cde8a-a9b1-4e71-b694-bd6280c411c8
+		summarizeBy: none
+		sourceColumn: SPECIAL_STOCK_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROSS_WEIGHT
+		dataType: double
+		lineageTag: e8e4a09f-d16d-47a9-8fe4-1f541801b217
+		summarizeBy: sum
+		sourceColumn: GROSS_WEIGHT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VOLUME
+		dataType: double
+		lineageTag: 2e429207-39af-497d-9764-4f9c2c5b3eae
+		summarizeBy: sum
+		sourceColumn: VOLUME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VOLUME_UNIT
+		dataType: string
+		lineageTag: cdedddf2-dc12-407f-9292-abae7583a683
+		summarizeBy: none
+		sourceColumn: VOLUME_UNIT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONFIRM_COMPLETE
+		dataType: string
+		lineageTag: aa8bbb00-2f8c-4e5c-a678-f726dd029f3b
+		summarizeBy: none
+		sourceColumn: CONFIRM_COMPLETE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONFIRM_DATE
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 9086b0f2-58f4-46cb-9f6c-588d24903af5
+		summarizeBy: none
+		sourceColumn: CONFIRM_DATE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column STORAGE_UNIT_TYPE
+		dataType: string
+		lineageTag: 448c7bf8-c287-4fb8-94e7-511f3cdcae11
+		summarizeBy: none
+		sourceColumn: STORAGE_UNIT_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONFIRM_USER
+		dataType: string
+		lineageTag: d1ab08b6-419d-4bec-8145-c51eee3a7f0a
+		summarizeBy: none
+		sourceColumn: CONFIRM_USER
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_SUBSYS
+		dataType: string
+		lineageTag: 84c05bba-41fa-47b7-99fe-c88ae4ba095b
+		summarizeBy: none
+		sourceColumn: ITEM_SUBSYS
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TR_DOC_NO
+		dataType: string
+		lineageTag: ad8155c6-0c11-48ca-ac78-54da94e368b1
+		summarizeBy: none
+		sourceColumn: TR_DOC_NO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TR_DOC_ITEM
+		dataType: string
+		lineageTag: 0dffd395-53b5-40fd-9a10-5ce62cd4bf87
+		summarizeBy: none
+		sourceColumn: TR_DOC_ITEM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUOM
+		dataType: string
+		lineageTag: a1ea59a2-ee71-4410-8c5a-12163a14e82a
+		summarizeBy: none
+		sourceColumn: BUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AUOM
+		dataType: string
+		lineageTag: b17a52c7-7144-4c0f-894c-6b8ca037bda0
+		summarizeBy: none
+		sourceColumn: AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SRC_TGT_QTY_AUOM
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: 036185fe-4c94-40e7-8e97-e8f0835e471a
+		summarizeBy: sum
+		sourceColumn: SRC_TGT_QTY_AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column SRC_ACTL_QTY_AUOM
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: fd72ff01-0ace-4459-9550-adad9e421f5e
+		summarizeBy: sum
+		sourceColumn: SRC_ACTL_QTY_AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column SRC_DIFF_QTY_AUOM
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: 59fcdcac-fe95-4d35-95e8-3a30bf494fc9
+		summarizeBy: sum
+		sourceColumn: SRC_DIFF_QTY_AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column SRC_QUANT
+		dataType: string
+		lineageTag: 84d1152f-9185-4370-b8bf-a9a4fe9101f9
+		summarizeBy: none
+		sourceColumn: SRC_QUANT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEST_TGT_QTY_AUOM
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: 08698d5d-1962-4b6d-b035-db41211c3818
+		summarizeBy: sum
+		sourceColumn: DEST_TGT_QTY_AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column DEST_ACTL_QTY_AUOM
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: 86d5f5cd-1bfd-4811-8003-7d7c2414b627
+		summarizeBy: sum
+		sourceColumn: DEST_ACTL_QTY_AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column DEST_DIFF_QTY_AUOM
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: c6c0b396-d06a-4e25-85d7-41b0519360be
+		summarizeBy: sum
+		sourceColumn: DEST_DIFF_QTY_AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column DEST_QUANT
+		dataType: string
+		lineageTag: 13075d9e-3ca2-42a5-8ed1-1827ea22c022
+		summarizeBy: none
+		sourceColumn: DEST_QUANT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column RET_TGT_QTY_AUOM
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: cb40378a-2064-4fcb-827c-8022f9cb45f1
+		summarizeBy: sum
+		sourceColumn: RET_TGT_QTY_AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column RET_ACTL_QTY_AUOM
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: b4027f5b-25ea-4588-8277-435f7b0eec82
+		summarizeBy: sum
+		sourceColumn: RET_ACTL_QTY_AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column RET_DIFF_QTY_AUOM
+		dataType: double
+		formatString: #,#.###;(#,#.###);"Zero"
+		lineageTag: 6e7ed472-8479-4daa-b189-d5842a646d34
+		summarizeBy: sum
+		sourceColumn: RET_DIFF_QTY_AUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column RET_QUANT
+		dataType: string
+		lineageTag: 59c48d7e-2fbe-4cc6-8c13-7c6666715022
+		summarizeBy: none
+		sourceColumn: RET_QUANT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONFIRM
+		dataType: string
+		lineageTag: f3ae6554-443f-45f6-8a36-a67259d82727
+		summarizeBy: none
+		sourceColumn: CONFIRM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: 0e8b6bc9-b42b-45c1-83ee-c7c7448e1b9e
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPMENT_TYPE
+		dataType: string
+		lineageTag: c2057178-a8cc-47e3-9f1a-7488f0ddd8e7
+		summarizeBy: none
+		sourceColumn: SHIPMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAT_DOC_NO
+		dataType: string
+		lineageTag: 737cb2b9-2b8a-4039-a2a8-7f2d0b2a4950
+		summarizeBy: none
+		sourceColumn: MAT_DOC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQ_TYPE
+		dataType: string
+		lineageTag: 1e94958e-e83b-4152-94cc-a1d7afd18043
+		summarizeBy: none
+		sourceColumn: REQ_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQ_NUM
+		dataType: string
+		lineageTag: 418e57eb-2dc6-4929-9b97-26c031381b32
+		summarizeBy: none
+		sourceColumn: REQ_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Transfer Order' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_TRANSFER_ORDER = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_TRANSFER_ORDER"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_TRANSFER_ORDER,{{"CONFIRM_DATE", type date}, {"CREATE_DATE", type date}, {"DELI_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Exception
+

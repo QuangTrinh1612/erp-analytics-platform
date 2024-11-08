@@ -1,0 +1,87 @@
+table 'DIM - KEYSHOP LEVEL DMS'
+	lineageTag: 3d1bc4ff-6d27-4648-8704-a4f15e3757d5
+
+	column NAME
+		dataType: string
+		lineageTag: 7ea70d07-df1e-49a8-a682-6dd9d2bff646
+		summarizeBy: none
+		sourceColumn: NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column KS_LEVEL_ID
+		dataType: double
+		lineageTag: 85a59bfa-23e1-4f53-a747-b090ff28e9fd
+		summarizeBy: none
+		sourceColumn: KS_LEVEL_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column KS_ID
+		dataType: double
+		lineageTag: d671a021-175d-4b3d-b9ac-af91a14cabaa
+		summarizeBy: none
+		sourceColumn: KS_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FROM_POINT
+		dataType: double
+		lineageTag: 9ca26016-d777-44e3-9499-2c03f34fd37c
+		summarizeBy: none
+		sourceColumn: FROM_POINT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TO_POINT
+		dataType: double
+		lineageTag: 0d837946-852f-4506-ade8-3f88f81be14c
+		summarizeBy: none
+		sourceColumn: TO_POINT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STATUS
+		dataType: double
+		lineageTag: b7503aa4-ad87-44a0-90aa-b7b117a9bdc3
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column KS_LEVEL_CODE
+		dataType: string
+		lineageTag: 7f45de8c-f476-41ee-83b0-9c77b62ae5ad
+		summarizeBy: none
+		sourceColumn: KS_LEVEL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NAME_TEXT
+		dataType: string
+		lineageTag: e8a88207-ac95-4568-8cbe-2c67e2bbb1eb
+		summarizeBy: none
+		sourceColumn: NAME_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - KEYSHOP LEVEL DMS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_KEYSHOP_LEVEL_DMS = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_KEYSHOP_LEVEL_DMS"]}[Data]
+				in
+				    gld_VW_DIM_KEYSHOP_LEVEL_DMS
+

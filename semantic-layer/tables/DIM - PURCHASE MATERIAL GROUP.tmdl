@@ -1,0 +1,39 @@
+table 'DIM - PURCHASE MATERIAL GROUP'
+	lineageTag: 257773c4-2cf7-4e7a-8c0d-6377ad70e326
+
+	column MATERIAL_GROUP
+		dataType: string
+		lineageTag: 7ab1478c-1f3b-40ce-b591-d70343af564d
+		summarizeBy: none
+		sourceColumn: MATERIAL_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_DESCRIPTION
+		dataType: string
+		lineageTag: be0c56f1-cd5a-4ed1-8ef4-456deb3ac92c
+		summarizeBy: none
+		sourceColumn: MATERIAL_DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column LONG_MATERIAL_DESCRIPTION
+		dataType: string
+		lineageTag: ee547304-8fbb-40d8-acd6-a0bd1f53d836
+		summarizeBy: none
+		sourceColumn: LONG_MATERIAL_DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PURCHASE MATERIAL GROUP' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PURCHASE_MATERIAL_GROUP = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_PURCHASE_MATERIAL_GROUP"]}[Data]
+				in
+				    gld_VW_DIM_PURCHASE_MATERIAL_GROUP
+
+	annotation PBI_ResultType = Table
+

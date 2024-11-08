@@ -1,0 +1,88 @@
+/// Bảng thông tin về thành phần chi phí
+table 'DIM - COST COMPONENT'
+	lineageTag: 328b6607-d563-4a0f-8f13-8965b422f94d
+
+	column COST_COMPONENT_STRUCTURE
+		dataType: string
+		lineageTag: dbbad1de-a15f-4d1c-9d3b-5b2f960b06e6
+		summarizeBy: none
+		sourceColumn: COST_COMPONENT_STRUCTURE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_COMPONENT
+		dataType: string
+		lineageTag: d1c3006a-d571-481d-a913-ac96bf025e23
+		summarizeBy: none
+		sourceColumn: COST_COMPONENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_COMPONENT_STRUCTURE_DES
+		dataType: string
+		lineageTag: 374be914-b559-4947-92aa-5be9e8d07096
+		summarizeBy: none
+		sourceColumn: COST_COMPONENT_STRUCTURE_DES
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_COMPONENT_DES
+		dataType: string
+		lineageTag: 7711b268-191a-499b-90c7-d7b1fd27db77
+		summarizeBy: none
+		sourceColumn: COST_COMPONENT_DES
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_COMPONENT_GRP
+		dataType: string
+		lineageTag: 0ae1cacf-9bbb-4349-8a24-07aa6844fb47
+		summarizeBy: none
+		sourceColumn: COST_COMPONENT_GRP
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_COMPONENT_GRP_DES
+		dataType: string
+		lineageTag: 3dee00c2-3f0d-4922-b94d-055b88018110
+		summarizeBy: none
+		sourceColumn: COST_COMPONENT_GRP_DES
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHART_OF_ACCT
+		dataType: string
+		lineageTag: 62a932d1-2954-4951-ad88-4b9c58803f4b
+		summarizeBy: none
+		sourceColumn: CHART_OF_ACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELEMENT_FROM
+		dataType: string
+		lineageTag: 8bf5a042-f731-4ff2-8567-b8e8682ff96c
+		summarizeBy: none
+		sourceColumn: COST_ELEMENT_FROM
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELEMENT_TO
+		dataType: string
+		lineageTag: 93fd7302-62b0-458a-b8c2-b3ec2b7109b6
+		summarizeBy: none
+		sourceColumn: COST_ELEMENT_TO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - COST COMPONENT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_DIM_COST_COMPONENT = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_COST_COMPONENT"]}[Data]
+				in
+				    VW_DIM_COST_COMPONENT
+
+	annotation PBI_ResultType = Exception
+

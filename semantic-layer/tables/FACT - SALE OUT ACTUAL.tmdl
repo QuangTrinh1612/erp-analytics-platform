@@ -1,0 +1,262 @@
+table 'FACT - SALE OUT ACTUAL'
+	lineageTag: d3ec2d26-5fc3-480b-9ad0-9e6f8cfb6b3b
+
+	column SALE_ORDER_ID
+		dataType: double
+		lineageTag: 516e4819-0335-4686-9665-f227c3ad738a
+		summarizeBy: none
+		sourceColumn: SALE_ORDER_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_ORDER_DETAIL_ID
+		dataType: double
+		lineageTag: ab4fc292-bcb6-40d1-87ce-3e939cc41a92
+		summarizeBy: count
+		sourceColumn: SALE_ORDER_DETAIL_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDER_DATE
+		dataType: int64
+		formatString: 0
+		lineageTag: 8df478b9-7777-48e8-95ad-19a2c0064e05
+		summarizeBy: none
+		sourceColumn: ORDER_DATE
+
+		changedProperty = IsHidden
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHOP_ID
+		dataType: double
+		lineageTag: aacac8b0-c9fe-48e2-9575-cd849c16a70c
+		summarizeBy: none
+		sourceColumn: SHOP_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STAFF_ID
+		dataType: double
+		lineageTag: 16d71607-3e64-4e9c-9541-9fb23b6e4286
+		summarizeBy: none
+		sourceColumn: STAFF_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUSTOMER_ID
+		dataType: int64
+		lineageTag: a6eb784e-3d6a-4609-a22f-da6dbde8a02e
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ID
+
+		changedProperty = IsHidden
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRODUCT_ID
+		dataType: double
+		lineageTag: 60c23b3d-8101-4e3d-a9a5-e79711564ac2
+		summarizeBy: none
+		sourceColumn: PRODUCT_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRICE
+		dataType: double
+		lineageTag: 36fc64a1-467b-43b3-bb0f-dc5b8a4303d8
+		summarizeBy: sum
+		sourceColumn: PRICE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRICE_NOT_VAT
+		dataType: double
+		lineageTag: 1b23ba05-2311-4cb2-92f2-adb2a79a006f
+		summarizeBy: sum
+		sourceColumn: PRICE_NOT_VAT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_QUANTITY
+		dataType: double
+		lineageTag: f68bee13-dc33-4a29-8939-073093afd86c
+		summarizeBy: sum
+		sourceColumn: SALE_QUANTITY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_AMOUNT
+		dataType: double
+		lineageTag: b2aae455-4054-42ac-94a1-1c6d2f0dd6ef
+		summarizeBy: sum
+		sourceColumn: SALE_AMOUNT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DISCOUNT_AMOUNT
+		dataType: double
+		lineageTag: 71b7af60-389a-44fd-9b28-fdf655d45bff
+		summarizeBy: sum
+		sourceColumn: DISCOUNT_AMOUNT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QUANTITY_PROMOTION
+		dataType: double
+		lineageTag: 41f25679-c6df-405d-a53e-74ece471ab43
+		summarizeBy: sum
+		sourceColumn: QUANTITY_PROMOTION
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TYPE
+		dataType: double
+		lineageTag: 69d2c759-d540-4683-a392-43ba4096a2dd
+		summarizeBy: none
+		sourceColumn: TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDER_TYPE
+		dataType: string
+		lineageTag: 0698bb49-0e9e-42b9-a3c9-d7d283d6505c
+		summarizeBy: none
+		sourceColumn: ORDER_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHOP_C1_SAP
+		dataType: string
+		lineageTag: 6148e612-16eb-4352-8db8-d0fcd698f460
+		summarizeBy: none
+		sourceColumn: SHOP_C1_SAP
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_CODE_SAP
+		dataType: string
+		lineageTag: eb282047-10ca-4d8a-a17d-90eb7916596d
+		summarizeBy: none
+		sourceColumn: PRODUCT_CODE_SAP
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Day Order' = ```
+			
+			 VAR CurrentCustomer = 'FACT - SALE OUT ACTUAL'[CUSTOMER_ID]
+			 VAR CurrentProduct = 'FACT - SALE OUT ACTUAL'[PRODUCT_ID]
+			RETURN
+			 CALCULATE(
+			  EOMONTH(MIN('FACT - SALE OUT ACTUAL'[ORDER_DATE_2]),0),
+			   FILTER(
+			    'FACT - SALE OUT ACTUAL',
+			    'FACT - SALE OUT ACTUAL'[CUSTOMER_ID] = CurrentCustomer && 'FACT - SALE OUT ACTUAL'[PRODUCT_ID] = CurrentProduct))
+			```
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2d81e0a1-f07c-47bd-88b2-f1c30275d9d6
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DATE_2 = DATE(LEFT('FACT - SALE OUT ACTUAL'[ORDER_DATE],4), MID('FACT - SALE OUT ACTUAL'[ORDER_DATE],5,2), RIGHT('FACT - SALE OUT ACTUAL'[ORDER_DATE],2))
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 43dda8c4-e7e0-4eaa-bbd9-4c7fb06a2833
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUANTITY_CONVER =
+			SWITCH(RELATED('DIM - PRODUCT DMS'[SUB_CAT_ID]),
+			                        37,1* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY], --Ure-DCM
+			                        53,6* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY],--N46
+			                        45,8* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY], --NPK Tu Doanh
+			                        56,6* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY], --Bio
+			                        58,8* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY], --Huu co
+			                        55,8* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY], --NPK DCM
+			                        52,2* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY], --Kali
+			                        51,2* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY], --DAP
+			                        27,6* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY], --N.Humate
+			                        62,2* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY], --SA
+			                        1* 'FACT - SALE OUT ACTUAL'[SALE_QUANTITY])
+		dataType: double
+		lineageTag: 62ca2160-dfa4-4534-bd51-e92fddcff0a7
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - SALE OUT ACTUAL' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_SALE_OUT_ACTUAL = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_SALE_OUT_ACTUAL"]}[Data]
+				in
+				    gld_VW_FACT_SALE_OUT_ACTUAL
+
+	annotation PBI_ResultType = Table
+

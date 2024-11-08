@@ -1,0 +1,74 @@
+/// Bảng thông tin về trung tâm chi phí giá thành
+table 'DIM - COST ELEMENT'
+	lineageTag: c3a7960d-3947-4023-92a0-dcd6853e0600
+
+	column COA
+		dataType: string
+		lineageTag: 8ce71cad-e966-4581-be03-9c19ebbc67de
+		summarizeBy: none
+		sourceColumn: COA
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELEMENT
+		dataType: string
+		lineageTag: e7d3be14-a79b-46bf-9361-a71105241857
+		summarizeBy: none
+		sourceColumn: COST_ELEMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CE_NAME
+		dataType: string
+		lineageTag: 3bdf8ccb-0695-4a84-b443-2645960983eb
+		summarizeBy: none
+		sourceColumn: CE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_ASSIGN_ZCO14 =
+			
+			IF(
+			    ([COST_ELEMENT] >= "6210000000" && [COST_ELEMENT] <= "6211010003")
+			    || ([COST_ELEMENT] >= "6211020002" && [COST_ELEMENT] <= "6219999999")
+			    || ([COST_ELEMENT] >= "6220000000" && [COST_ELEMENT] <= "6229999999")
+			    || ([COST_ELEMENT] >= "6271000000" && [COST_ELEMENT] <= "6271999999")
+			    || ([COST_ELEMENT] >= "6272000000" && [COST_ELEMENT] <= "6272999999")
+			    || ([COST_ELEMENT] >= "6273000000" && [COST_ELEMENT] <= "6273999999")
+			    || ([COST_ELEMENT] >= "6274000000" && [COST_ELEMENT] <= "6274999999")
+			    || ([COST_ELEMENT] >= "6277000000" && [COST_ELEMENT] <= "6277999999")
+			    || ([COST_ELEMENT] >= "6278000000" && [COST_ELEMENT] <= "6278999999")
+			    || [COST_ELEMENT] IN {
+			        "6211010004",
+			        "6211010005",
+			        "6211010007",
+			        "6211010008",
+			        "6211010009",
+			        "6279000000",
+			        "6279000001",
+			        "6279000003",
+			        "6279000002"
+			    },
+			    1,
+			    0
+			)
+		dataType: int64
+		formatString: 0
+		lineageTag: 2f3d2708-e770-42c6-8679-f48ac968de08
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - COST ELEMENT' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_DIM_COST_ELEMENT = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_COST_ELEMENT"]}[Data]
+				in
+				    VW_DIM_COST_ELEMENT
+
+	annotation PBI_ResultType = Exception
+

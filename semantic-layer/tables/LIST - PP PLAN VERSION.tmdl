@@ -1,0 +1,19 @@
+table 'LIST - PP PLAN VERSION'
+	lineageTag: 911a0f9f-07f9-42f1-a731-abbf7e12e49b
+
+	column VERSION
+		dataType: string
+		lineageTag: 2a56f0f9-c836-4b56-8d95-53d83098f994
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: FACT - PRODUCTION PLAN[VERSION]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'List Version' = calculated
+		mode: import
+		source = DISTINCT('FACT - PRODUCTION PLAN'[VERSION])
+
+	annotation PBI_Id = 199670d5f8354c17b486bc40a763cad2
+

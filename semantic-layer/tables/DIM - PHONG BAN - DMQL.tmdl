@@ -1,0 +1,51 @@
+/// Bảng thông tin về trung tâm chi phí giá thành
+table 'DIM - PHONG BAN - DMQL'
+	isHidden
+	lineageTag: 1d81afbe-e581-4aaa-935d-74850c5e63fe
+
+	column COST_ELEMENT
+		dataType: string
+		isHidden
+		lineageTag: ef542b96-2ab2-4f20-86d9-1f320038ec57
+		summarizeBy: none
+		sourceColumn: COST_ELEMENT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PHONG_BAN
+		dataType: string
+		isHidden
+		lineageTag: ecc7d753-9bd8-4b08-b08f-d6524a296600
+		summarizeBy: none
+		sourceColumn: PHONG_BAN
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_DMQL
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: aa8caed2-275c-4136-9531-084a3b0427c6
+		summarizeBy: sum
+		sourceColumn: IS_DMQL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PHONG BAN - DMQL' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("sg-sea-prod-syn-01.sql.azuresynapse.net", "pvcfcprodsqlpool", [Query="WITH raw AS (#(lf)    SELECT#(lf)        KSTAR AS COST_ELEMENT,#(lf)        ZNOTE2 AS PHONG_BAN,#(lf)        MAX(ZDMQL) AS DMQL#(lf)    FROM#(lf)        sri_sap.ZTB_COST_ELEMENT#(lf)    GROUP BY#(lf)        KSTAR, ZNOTE2#(lf)    HAVING MAX(ZDMQL) = 'X'#(lf))#(lf)SELECT#(lf)    COST_ELEMENT,#(lf)    PHONG_BAN,#(lf)    CASE#(lf)        WHEN DMQL = 'X' THEN 1#(lf)        ELSE 0#(lf)    END AS IS_DMQL#(lf)FROM#(lf)    raw"])
+				in
+				    Source
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

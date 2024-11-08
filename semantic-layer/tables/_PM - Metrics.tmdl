@@ -1,0 +1,733 @@
+table '_PM - Metrics'
+	lineageTag: e0871d41-d750-48b4-b0d6-3cce416c61a0
+
+	measure 'Số lượng vật tư yêu cầu kế hoạch' = sum('FACT - TASK COMPONENT'[COMPO_QUANTITY])
+		formatString: 0.0
+		displayFolder: Task Componet
+		lineageTag: 1d361954-c079-44e9-8ae3-cda93d7d5079
+
+	measure 'Số lượng vật tư theo định mức' = sum('FACT - BOM COMPONENT'[COMPO_QUANTITY])
+		formatString: 0.0
+		displayFolder: Bom Component
+		lineageTag: f59e96c4-7aa6-47ae-a677-9efe1a010736
+
+	measure Downtimes = SUM('FACT - BREAKDOWN STATISTICS'[TIME_TO_REPAIR])
+		displayFolder: Breakdown Statistics
+		lineageTag: 95d4c557-3167-477c-8802-b930469daa9b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Uptime = SUM('FACT - BREAKDOWN STATISTICS'[TIME_BETWEEN_REPAIR])
+		displayFolder: Breakdown Statistics
+		lineageTag: 9e56936b-b925-4d13-8302-37453e394b5c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Failures = SUM('FACT - BREAKDOWN STATISTICS'[ACTUAL_BREAKDOWN])
+		displayFolder: Breakdown Statistics
+		lineageTag: b72ee9e3-c381-4af8-b2e9-1253d48a1b32
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Duration = [Downtimes] + [Uptime]
+		displayFolder: Breakdown Statistics
+		lineageTag: 3d77562e-39c2-4877-bb1f-ecf4393f06ec
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Mean Time To Repair' = [Downtimes] / [Failures]
+		displayFolder: Breakdown Statistics
+		lineageTag: db580ed4-6e02-442f-bd09-7a84a51375a5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Mean Time Between Repair' = [Uptime]/[Failures]
+		displayFolder: Breakdown Statistics
+		lineageTag: df936125-dc48-4c94-8f35-f37fe272ad8e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Failure Rate' = [Downtimes]/[Duration]
+		displayFolder: Breakdown Statistics
+		lineageTag: 31c5c001-2617-4172-90a5-6942eefd2f06
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Availability = ([Mean Time Between Repair]/([Mean Time To Repair]+[Mean Time Between Repair]))*100
+		displayFolder: Breakdown Statistics
+		lineageTag: e77d424f-2d76-43d4-8008-6a05f9f6b3af
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí vật tư kế hoạch còn thiếu (ZPM13)' = sum('FACT - MP ESTIMATED COST'[MISSING_PLAN_COST])
+		displayFolder: Estimated Cost of Maintenance Plan
+		lineageTag: 0dc32fa1-d492-4715-bda7-33e7dfc6404c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Đơn giá tồn kho dự kiến (ZPM13)' = sum('FACT - MP ESTIMATED COST'[PRICE])
+		displayFolder: Estimated Cost of Maintenance Plan
+		lineageTag: 4a211f1e-1249-45de-b5dd-e1bc2f62728a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí vật tư kế hoạch Plant 1000 (ZPM13)' = sum('FACT - MP ESTIMATED COST'[PLAN_COST])
+		displayFolder: Estimated Cost of Maintenance Plan
+		lineageTag: 513b1f30-fba1-405e-8ec0-1dd201c98aa2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số lượng vật tư tồn kho 1901 (ZPM13)' = CALCULATE(SUM('FACT - MP ESTIMATED COST'[STOCK_SLOC_1901]),CROSSFILTER('DIM - MATERIAL'[MATERIAL_CODE],'FACT - MATERIAL RESERVATION'[MATERIAL_CODE],Both))
+		formatString: 0.0
+		displayFolder: Estimated Cost of Maintenance Plan
+		lineageTag: 450a1a49-ac84-40de-9e80-2d81e42a35f8
+
+	measure 'Số lượng vật tư tồn kho 1000 (ZPM13)' = CALCULATE(sum('FACT - MP ESTIMATED COST'[STOCK_PLANT_1000 ]),CROSSFILTER('DIM - MATERIAL'[MATERIAL_CODE],'FACT - MATERIAL RESERVATION'[MATERIAL_CODE],Both))
+		formatString: 0.0
+		displayFolder: Estimated Cost of Maintenance Plan
+		lineageTag: 2f5455a8-c1fb-4c58-a661-ab8bc3a90dca
+
+	measure 'Số lượng vật tư Plant 1000 (ZPM13)' = sum('FACT - MP ESTIMATED COST'[QUANTITY_PLANT_1000])
+		formatString: 0.0
+		displayFolder: Estimated Cost of Maintenance Plan
+		lineageTag: c23c6117-d568-4dec-af27-69c6583b89bd
+
+	measure 'Số lượng vật tư yêu cầu (ZPM13)' = sum('FACT - MP ESTIMATED COST'[COMPO_QUANTITY])
+		formatString: 0.0
+		displayFolder: Estimated Cost of Maintenance Plan
+		lineageTag: 24c36eec-ab1a-4170-80c7-b37cbc84dd08
+
+	measure 'Incompleted PR quantity (ZPM13)' = sum('FACT - MP ESTIMATED COST'[STOCK_PR])
+		displayFolder: Estimated Cost of Maintenance Plan
+		lineageTag: d666cb9b-665a-46f7-92f5-d130cef10237
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí thực tế xuất kho (ZPM27)' = sum('FACT - SETTLE RECEIVER COST'[VALUE])
+		displayFolder: Settlement Receiver Cost
+		lineageTag: 44c32161-bf3d-404f-8837-277bac333901
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Đơn giá (ZPM27)' = sum('FACT - SETTLE RECEIVER COST'[PRICE])
+		displayFolder: Settlement Receiver Cost
+		lineageTag: 30501ca0-efdb-4c8e-bc8d-2090a7560a38
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số lượng vật tư xuất kho (ZPM27)' = sum('FACT - SETTLE RECEIVER COST'[EXPORT_QUANTITY])
+		formatString: 0.0
+		displayFolder: Settlement Receiver Cost
+		lineageTag: 34fe6a8f-6ef3-4c55-8b8e-4b14141b88a9
+
+	measure 'Tỷ trọng chi phí MAT/Tổng chi phí' = [Chi phí thực tế xuất kho (ZPM27)]/CALCULATE([Chi phí thực tế xuất kho (ZPM27)],ALLSELECTED('DIM - MAINT ACT TYPE'))
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Settlement Receiver Cost
+		lineageTag: d73ad7db-0d5d-4339-b794-f660b724f2bd
+
+	measure 'Tỷ trọng chi phí SCĐX/BDĐK' =
+			var chi_phi_SCDX = CALCULATE([Chi phí thực tế xuất kho (ZPM27)],'DIM - MAINT ACT TYPE'[ACT_TYPE_CODE] ="02")
+			VAR CHI_PHI_BDDK =CALCULATE([Chi phí thực tế xuất kho (ZPM27)],'DIM - MAINT ACT TYPE'[ACT_TYPE_CODE] ="01")
+			RETURN chi_phi_SCDX/CHI_PHI_BDDK
+		formatString: 0.0
+		displayFolder: Settlement Receiver Cost
+		lineageTag: 8bc3071e-b48f-4be4-8568-776610cb89f9
+
+	measure 'Số giờ thực hiện dự kiến (ZPM17)' = sum('FACT - MAINT TASK LIST'[PLANNED_TIME])
+		formatString: 0.0
+		displayFolder: Maintenance Task List
+		lineageTag: 01c67e14-bfde-43d5-8297-ae63cb0c1be9
+
+	measure 'Số lượng vật tư đã sử dụng (ZPM23)' = sum('FACT - MATERIAL CONFIRM WO'[USED_QUANTITY])
+		formatString: 0.0
+		displayFolder: Material Confirmation Work Order
+		lineageTag: 87ceca9a-02ee-4dca-b665-9402f865c2c4
+
+	measure 'Quantity Withdrawn (ZPM23)' = sum('FACT - MATERIAL CONFIRM WO'[WITHDRAWN_QUANTITY])
+		formatString: 0.0
+		displayFolder: Material Confirmation Work Order
+		lineageTag: 29d244c6-6a0f-4e8a-bb5b-537d9d3ffa55
+
+	measure 'Số lượng vật tư mới trả lại kho' = CALCULATE(sum('FACT - MATERIAL CONFIRM WO'[REFUNDED_QUANTITY]),CROSSFILTER('FACT - MATERIAL CONFIRM WO'[ORDER_NUMBER],'LIST - ORDER NUMBER'[ORDER_NUMBER],Both))
+		formatString: 0.0
+		displayFolder: Material Confirmation Work Order
+		lineageTag: 9ea4709c-b4e6-4ffd-a24e-304072497ae8
+
+	measure 'Số lượng vật tư cũ thu hồi về kho' =
+			var _total = CALCULATE(sum('FACT - MATERIAL CONFIRM WO'[RECEIVED_QUANTITY]),CROSSFILTER('FACT - MATERIAL RESERVATION'[ORDER_NUMBER],'LIST - ORDER NUMBER'[ORDER_NUMBER],Both))
+			 return _total
+		formatString: 0.0
+		displayFolder: Material Confirmation Work Order
+		lineageTag: 79e29e30-3094-4c78-81d9-27cdb330ea72
+
+	measure 'Số lượng vật tư yêu cầu thực tế (Tách phiếu theo E-Office)' = sum('FACT - MATERIAL CONFIRM WO'[REQUI_QUANTITY])
+		formatString: 0.0
+		displayFolder: Material Confirmation Work Order
+		lineageTag: 329603c5-d1f4-4b94-a978-43c888e8576b
+
+	measure 'Chi phí bảo dưỡng kế hoạch (ZPM03, ZPM15B)' = sum('FACT - MATERIAL RESERVATION'[PLAN_COST])
+		displayFolder: Material Reservation\Chi phí
+		lineageTag: 67a54744-fcc3-43aa-8afc-fec4e1b119f5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí bảo dưỡng thực tế (ZPM03, ZPM15B)' = CALCULATE(SUMX(SUMMARIZE('FACT - MATERIAL RESERVATION', 'FACT - MATERIAL RESERVATION'[MATERIAL_CODE],'FACT - MATERIAL RESERVATION'[ACTUAL_COST]),'FACT - MATERIAL RESERVATION'[ACTUAL_COST]))
+		displayFolder: Material Reservation\Chi phí
+		lineageTag: 937d8881-452a-47f1-98d9-8ea5679e700b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Đơn giá vật tư tồn kho dự kiến' = CALCULATE(sum('DIM - MATERIAL PLANT'[MOVING_PRICE]),CROSSFILTER('DIM - MATERIAL PLANT'[MATERIAL_PLANT_KEY],'FACT - MATERIAL RESERVATION'[MATERIAL_PLANT_KEY],Both))
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: 30a49430-d84e-4d1a-b64b-97dd2d064d66
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Est. cost for Req.quantity' = sumx(SUMMARIZE('FACT - MATERIAL RESERVATION','DIM - MATERIAL'[MATERIAL_CODE],"sl",[Số lượng vật tư yêu cầu thực tế (ZPM03)]),[sl]*[Đơn giá vật tư tồn kho dự kiến])
+		displayFolder: Material Reservation\Chi phí
+		lineageTag: 98643590-8668-4957-901c-a4fd62e515e8
+
+	measure 'Số lượng vật tư yêu cầu thực tế (ZPM03)' = ```
+			sum('FACT - MATERIAL RESERVATION'[REQUI_QUANTITY]) 
+			```
+		formatString: #,0.0
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: 17d32e74-e27c-4b07-83fc-1a7d2f424a71
+
+	measure 'Số lượng vật tư tồn kho' = CALCULATE( CALCULATE(sum('FACT - ALLOCATED INVENTORY'[ALLOCATED_INVENTORY]),CROSSFILTER('DIM - MATERIAL'[MATERIAL_CODE],'FACT - MATERIAL RESERVATION'[MATERIAL_CODE],Both)))
+		formatString: 0.0
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: 16f87a9e-92e8-4f6a-9339-a1c4d9c6e6a2
+
+	measure 'Giá trị vật tư tồn kho dự kiến' = [Đơn giá vật tư tồn kho dự kiến] * [Số lượng vật tư tồn kho]
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: 3c3de53e-8de7-498e-a585-7e570b3027f3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số lượng tồn kho 1901 (ZWMPM)' = ```
+			var _total = CALCULATE(sum('FACT - ALLOCATED INVENTORY'[ALLOCATED_INVENTORY]),FILTER('FACT - ALLOCATED INVENTORY', 'FACT - ALLOCATED INVENTORY'[STORAGE_LOCATION] ="1901"))
+			 return CALCULATE(SUMX(SUMMARIZE('FACT - ALLOCATED INVENTORY',"_tonkho", 
+			_total),[_tonkho]),CROSSFILTER('DIM - MATERIAL'[MATERIAL_CODE],'FACT - MATERIAL RESERVATION'[MATERIAL_CODE],Both)) 
+			```
+		formatString: 0.0
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: 4fc15e76-7e16-45ad-a2eb-72cafddbd432
+
+	measure 'Số lượng tồn kho chỉ định (ZWMPM)' = ```
+			var _total = CALCULATE(sum('FACT - ALLOCATED INVENTORY'[ALLOCATED_INVENTORY]),CROSSFILTER('DIM - STORAGE LOCATION'[STORAGE_LOCATION],'FACT - MATERIAL RESERVATION'[ISSUE_STORAGE_LOC],Both))
+			 return CALCULATE(SUMX(SUMMARIZE('FACT - ALLOCATED INVENTORY',"_tkcđ", 
+			_total),[_tkcđ]),CROSSFILTER('DIM - MATERIAL'[MATERIAL_CODE],'FACT - MATERIAL RESERVATION'[MATERIAL_CODE],Both))
+			```
+		formatString: 0.0
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: 90c20238-bed9-45cd-9d2a-c53d740471c8
+
+	measure 'Số lượng vật tư đã xuất kho' = sum('FACT - MATERIAL RESERVATION'[ISSUED_QUANTITY])
+		formatString: 0.0
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: 94672028-cc50-4051-b037-035638fb86b2
+
+	measure 'Số lượng vật tư tồn kho 1000' =
+			VAR _FILTERTABLE = TREATAS({"1000"},'FACT - ALLOCATED INVENTORY'[PLANT_CODE])
+			RETURN CALCULATE([Số lượng vật tư tồn kho],_FILTERTABLE)
+		formatString: 0.0
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: 23099c0a-2d94-470a-bb5a-f68b31d6c8b1
+
+	measure 'Số lượng vật tư tồn kho 1001' =
+			VAR _FILTERTABLE = TREATAS({"1001"},'FACT - ALLOCATED INVENTORY'[STORAGE_LOCATION])
+			RETURN CALCULATE([Số lượng vật tư tồn kho],_FILTERTABLE)
+		formatString: 0.0
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: 50357800-fbde-49b7-bc04-03b239df70de
+
+	measure 'Số lượng vật tư tồn kho 1005' =
+			VAR _FILTERTABLE = TREATAS({"1005"},'FACT - ALLOCATED INVENTORY'[STORAGE_LOCATION])
+			RETURN CALCULATE([Số lượng vật tư tồn kho],_FILTERTABLE)
+		formatString: 0.0
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: 00c14d90-4b5d-4a5f-9854-27a5bdd60392
+
+	measure 'Số lượng vật tư tồn kho 1901' =
+			VAR _FILTERTABLE = TREATAS({"1901"},'FACT - ALLOCATED INVENTORY'[STORAGE_LOCATION])
+			RETURN CALCULATE([Số lượng vật tư tồn kho],_FILTERTABLE)
+		formatString: 0.0
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: 850709e7-1cd2-4803-82e5-df044bddab1a
+
+	measure 'Số lượng vật tư tồn kho 1999' =
+			VAR _FILTERTABLE = TREATAS({"1999"},'FACT - ALLOCATED INVENTORY'[STORAGE_LOCATION])
+			RETURN CALCULATE([Số lượng vật tư tồn kho],_FILTERTABLE)
+		formatString: 0.0
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: f7e85e89-93b7-41b0-9f4e-f72611099df2
+
+	measure 'Số lượng vật tư yêu cầu thực tế (ZWM01PM)' = sum('FACT - MATERIAL RESERVATION'[ISSUED_REQ_QUANTITY])
+		formatString: 0.0
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: 73a86789-7eaf-47cc-a9ef-d7e6ddc2a7b2
+
+	measure 'Tổng chi phí vật tư thực tế' = [Số lượng vật tư yêu cầu thực tế (ZWM01PM)]* [Đơn giá vật tư tồn kho dự kiến]
+		displayFolder: Material Reservation\Chi phí
+		lineageTag: 140983ab-d611-4dff-b4a2-2e921ee121d2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Plan Price (ZPM15B)' = sum('FACT - MATERIAL RESERVATION'[PLAN_PRICE])
+		displayFolder: Material Reservation\Chi phí
+		lineageTag: 05e06052-d4fa-4ed8-808a-fc48d4545db0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Quantity for available check' = sum('FACT - MATERIAL RESERVATION'[AVAILABLE_QUANTITY])
+		displayFolder: Material Reservation\Chi phí
+		lineageTag: 5a97c783-d047-4763-badf-ae6526056cbe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Quantity Withdrawn' = sum('FACT - MATERIAL RESERVATION'[WITHDRAWN_QUANTITY])
+		formatString: #,0.0
+		displayFolder: Material Reservation\Chi phí
+		lineageTag: d208280f-5453-4de7-a9e6-d819edc46b17
+
+	measure 'Missing Quantity' = [Số lượng vật tư yêu cầu thực tế (ZPM03)] - [Quantity Withdrawn] - [Quantity for available check]
+		formatString: 0.0
+		displayFolder: Material Reservation\Chi phí
+		lineageTag: 9761e554-b1bc-4816-a337-e5a269852067
+
+	measure 'Missing Quantity (ZPM15B)' = [Số lượng vật tư yêu cầu thực tế (ZPM03)] - [Số lượng vật tư tồn kho 1000]-[Số lượng vật tư tồn kho 1999]
+		displayFolder: Material Reservation\Chi phí
+		lineageTag: 86d90610-3d7b-4528-8fab-4eb3cff98bf7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Remaining Quantity' = [Số lượng vật tư yêu cầu thực tế (ZPM03)] - [Quantity Withdrawn]
+		formatString: 0.0
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: de3909f8-f67b-449d-8484-0116fb5f6e48
+
+	measure 'Safety Stock' = CALCULATE(sum('DIM - MATERIAL PLANT'[SAFTETY_STOCK]),CROSSFILTER('DIM - MATERIAL PLANT'[MATERIAL_PLANT_KEY],'FACT - MATERIAL RESERVATION'[MATERIAL_PLANT_KEY],Both))
+		displayFolder: Material Reservation\Tồn kho
+		lineageTag: a346fd86-3db9-4dc7-a6ce-978140bb01c8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Trạng thái Item' = switch(true(),NOT  ISBLANK([Số lượng vật tư yêu cầu thực tế (ZWM01PM)] ) && [Số lượng vật tư yêu cầu thực tế (ZWM01PM)] <= [Số lượng tồn kho chỉ định (ZWMPM)],"Vật tư sẵn sàng",NOT  ISBLANK([Số lượng vật tư yêu cầu thực tế (ZWM01PM)] ) &&  [Số lượng vật tư yêu cầu thực tế (ZWM01PM)] > [Số lượng tồn kho chỉ định (ZWMPM)],"Kiểm tra lại tình trạng tồn kho vật tư")
+		displayFolder: Material Reservation\Trạng thái
+		lineageTag: c3e644da-fd54-4398-808d-c340d1b199fe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số giờ thực hiện dự kiến' = sum('FACT - WORK ORDER'[TOTAL_PLANNED_TIME])
+		displayFolder: Work Order\Chi phí
+		lineageTag: 59c01b58-94a8-49f8-b6a7-13e1454ee0d5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số giờ thực hiện thực tế' = sum('FACT - WORK ORDER' [TOTAL_ACTUAL_TIME])
+		displayFolder: Work Order\Chi phí
+		lineageTag: dbc1fa56-85c3-401a-8292-d5e9de3eee39
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số người thực hiện dự kiến' = calculate(SUM('FACT - WORK ORDER'[TOTAL_PLANNED_PERFORMERS]),CROSSFILTER('LIST - ORDER NUMBER'[ORDER_NUMBER],'FACT - MATERIAL RESERVATION'[ORDER_NUMBER],Both))
+		formatString: 0
+		displayFolder: Work Order\Chi phí
+		lineageTag: 75481757-ac75-40a8-a516-1878d12779e2
+
+	measure 'Số người thực hiện thực tế' = CALCULATE(SUM('FACT - WORK ORDER'[TOTAL_ACTUAL_PERFORMERS]),CROSSFILTER('LIST - ORDER NUMBER'[ORDER_NUMBER],'FACT - MATERIAL RESERVATION'[ORDER_NUMBER],Both))
+		formatString: 0
+		displayFolder: Work Order\Chi phí
+		lineageTag: eb3516b3-b212-4d2a-8568-c60cf119daf8
+
+	measure 'Số lượng WO chờ vật tư (theo trạng thái User)' =
+			VAR _TOTAL = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - USER STATUS EXCHANGE','DIM - USER STATUS EXCHANGE'[USER_STATUS_EXCHANGE_DESC]="Chờ vật tư"))
+			RETURN _TOTAL
+		formatString: #,0
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 2b4d1568-8b55-4c3b-93ca-107ebc7f43e9
+
+	measure 'Số lượng WO đang thực hiện (theo trạng thái System)' =
+			VAR _TOTAL = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - SYSTEM STATUS EXCHANGE','DIM - SYSTEM STATUS EXCHANGE'[SYSTEM_STATUS_EXCHANGE_DESC]="Đang thực hiện"))
+			RETURN _TOTAL
+		formatString: #,0
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 3748c7a0-6e7d-4ead-a010-21a8e15ea0ef
+
+	measure 'Số lượng WO đang thực hiện (theo trạng thái User)' =
+			VAR _TOTAL = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - USER STATUS EXCHANGE','DIM - USER STATUS EXCHANGE'[USER_STATUS_EXCHANGE_DESC]="Đang thực hiện"))
+			RETURN _TOTAL
+		formatString: #,0
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: fdb83959-27a0-4de9-b1ac-0c0a4ef0af44
+
+	measure 'Số lượng WO hoàn thành (theo trạng thái System)' =
+			VAR _TOTAL = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - SYSTEM STATUS EXCHANGE','DIM - SYSTEM STATUS EXCHANGE'[SYSTEM_STATUS_EXCHANGE_DESC]="Hoàn thành"))
+			RETURN _TOTAL
+		formatString: #,0
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 3b6be0d2-3215-44e2-b34a-e7f7f4482a5e
+
+	measure 'Số lượng WO hoàn thành (theo trạng thái User)' =
+			VAR _TOTAL = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - USER STATUS EXCHANGE','DIM - USER STATUS EXCHANGE'[USER_STATUS_EXCHANGE_DESC]="Hoàn thành"))
+			RETURN _TOTAL
+		formatString: #,0
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 85df83ee-f5da-45a7-9b22-a19067dfc6c3
+
+	measure 'Số lượng WO hủy (theo trạng thái System)' =
+			VAR _TOTAL = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - SYSTEM STATUS EXCHANGE','DIM - SYSTEM STATUS EXCHANGE'[SYSTEM_STATUS_EXCHANGE_DESC]="Hủy"))
+			RETURN _TOTAL
+		formatString: #,0
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 5953294d-7967-452f-895b-0a10d8a2cd46
+
+	measure 'Số lượng WO hủy (theo trạng thái User)' =
+			VAR _TOTAL = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - USER STATUS EXCHANGE','DIM - USER STATUS EXCHANGE'[USER_STATUS_EXCHANGE_DESC]="Hủy"))
+			RETURN _TOTAL
+		formatString: #,0
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 4c911839-cb62-4484-94a2-9c180c7e1871
+
+	measure 'Số lượng WO khởi tạo (theo trạng thái System)' =
+			VAR _TOTAL = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - SYSTEM STATUS EXCHANGE','DIM - SYSTEM STATUS EXCHANGE'[SYSTEM_STATUS_EXCHANGE_DESC]="Khởi tạo"))
+			RETURN _TOTAL
+		formatString: #,0
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 213b5b4d-0165-4736-82d9-898302143441
+
+	measure 'Số lượng WO khởi tạo (theo trạng thái User)' =
+			VAR _TOTAL = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - USER STATUS EXCHANGE','DIM - USER STATUS EXCHANGE'[USER_STATUS_EXCHANGE_DESC]="Khởi tạo"))
+			RETURN _TOTAL
+		formatString: #,0
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 991ff7a8-c6ea-4a2a-98d4-d709a71669c8
+
+	measure 'Số lượng Work Order' = DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER])
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: e444cd14-c713-4ec4-96d4-5fa0760926a6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tỷ trọng hạng mục WO' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]))/ CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),ALLSELECTED('DIM - MAINT ACT TYPE'),ALLSELECTED('DIM - PLANNER GRP'),ALLSELECTED('DIM - SUPERVISOR'),ALLSELECTED('DIM - WORK CENTER'),ALLSELECTED('DIM - PLANT SECTION'),ALLSELECTED('DIM - WORK CENTER HIERARCHY'),ALLSELECTED('DIM - DATE'),ALLSELECTED('LIST - ORDER NUMBER'[ORDER_NUMBER]))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: ddae4126-6060-478e-ba2a-504ce10d13fa
+
+	measure 'Tỷ trọng hạng mục WO chờ vật tư (theo trạng thái User)' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - USER STATUS EXCHANGE','DIM - USER STATUS EXCHANGE'[USER_STATUS_EXCHANGE_DESC]="Chờ vật tư"))/ CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: b246005d-6c01-4521-8cdf-43ff1626afdb
+
+	measure 'Tỷ trọng hạng mục WO đang thực hiện (theo trạng thái System)' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - SYSTEM STATUS EXCHANGE','DIM - SYSTEM STATUS EXCHANGE'[SYSTEM_STATUS_EXCHANGE_DESC]="Đang thực hiện"))/ CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: a6743f0e-ccc4-408e-8164-2f3636e125da
+
+	measure 'Tỷ trọng hạng mục WO đang thực hiện (theo trạng thái User)' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - USER STATUS EXCHANGE','DIM - USER STATUS EXCHANGE'[USER_STATUS_EXCHANGE_DESC]="Đang thực hiện"))/ CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 8dd6ce88-4748-43d4-bea5-bde244c934a4
+
+	measure 'Tỷ trọng hạng mục WO hoàn thành (theo trạng thái System)' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - SYSTEM STATUS EXCHANGE','DIM - SYSTEM STATUS EXCHANGE'[SYSTEM_STATUS_EXCHANGE_DESC]="Hoàn thành"))/ CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 673bf33d-1fe2-4198-af77-202b92fd0177
+
+	measure 'Tỷ trọng hạng mục WO hoàn thành (theo trạng thái User)' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - USER STATUS EXCHANGE','DIM - USER STATUS EXCHANGE'[USER_STATUS_EXCHANGE_DESC]="Hoàn thành"))/ CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 60297f09-7891-492e-a324-bff52cddada9
+
+	measure 'Tỷ trọng hạng mục WO hủy (theo trạng thái System)' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - SYSTEM STATUS EXCHANGE','DIM - SYSTEM STATUS EXCHANGE'[SYSTEM_STATUS_EXCHANGE_DESC]="Hủy"))/ CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: c31ab12f-34ee-49cb-aee1-133386ef757e
+
+	measure 'Tỷ trọng hạng mục WO hủy (theo trạng thái User)' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - USER STATUS EXCHANGE','DIM - USER STATUS EXCHANGE'[USER_STATUS_EXCHANGE_DESC]="Hủy"))/ CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 6b63f915-4cf8-4c03-ade3-d1fbdb3d237d
+
+	measure 'Tỷ trọng hạng mục WO khởi tạo (theo trạng thái System)' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - SYSTEM STATUS EXCHANGE','DIM - SYSTEM STATUS EXCHANGE'[SYSTEM_STATUS_EXCHANGE_DESC]="Khởi tạo"))/ CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: 24e7e2ca-fe70-4fd3-970f-88e1e1cfc010
+
+	measure 'Tỷ trọng hạng mục WO khởi tạo (theo trạng thái User)' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]),FILTER('DIM - USER STATUS EXCHANGE','DIM - USER STATUS EXCHANGE'[USER_STATUS_EXCHANGE_DESC]="Khởi tạo"))/ CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Work Order theo trạng thái
+		lineageTag: bec0d1c9-7c33-4248-94eb-94d8c33306f1
+
+	measure 'Tỷ trọng hạng mục WO chưa chạy luồng nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "5")/DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: 6d008c7c-adac-45c0-bd60-f26a13041ca8
+
+	measure 'Tỷ trọng hạng mục WO chưa Permit CLS-DVTH' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "7")/DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: e892e66b-b860-4e44-84a6-33aaa6e801b6
+
+	measure 'Tỷ trọng hạng mục WO chưa TECO vì lý do khác' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "6")/DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: 99c50cd4-ce8d-40de-b6fe-374868afa199
+
+	measure 'Tỷ trọng hạng mục WO đã hoàn thành nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "4")/DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: dc683ea5-21bc-4055-9892-83abad081f96
+
+	measure 'Tỷ trọng hạng mục WO đơn vị thực hiện chưa đóng TECO' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "2")/DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: a38f92eb-2ef3-4859-9c7f-7af3e038b698
+
+	measure 'Tỷ trọng hạng mục WO ĐVCQ chưa nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "1")/DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: 44fd4865-e980-4e99-985c-2c86411abd6c
+
+	measure 'Tỷ trọng hạng mục WO Planner chưa nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER]), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "3")/DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: 133459e3-9bca-48d7-bb9b-18784533b46c
+
+	measure 'Số lượng hạng mục WO chưa chạy luồng nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "5")
+		formatString: 0
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: c3c71c45-da21-40c7-b333-4ae609508c9a
+
+	measure 'Số lượng hạng mục WO chưa Permit CLS-DVTH' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "7")
+		formatString: 0
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: ef72ea52-4959-4d2c-bb33-c4d46eeacc6b
+
+	measure 'Số lượng hạng mục WO chưa TECO vì lý do khác' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "6")
+		formatString: 0
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: 1c25ad35-e820-4e41-8303-2c3ec08184a5
+
+	measure 'Số lượng hạng mục WO đã hoàn thành nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "4")
+		formatString: 0
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: 77a6fc26-16e3-478c-b028-74e656b95429
+
+	measure 'Số lượng hạng mục WO đơn vị thực hiện chưa đóng TECO' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "2")
+		formatString: 0
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: a78f61fb-f084-4b15-9a51-fc4aaf43ed6c
+
+	measure 'Số lượng hạng mục WO ĐVCQ chưa nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "1")
+		formatString: 0
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: 0c296a66-1467-401b-a689-e894a634c1e0
+
+	measure 'Số lượng hạng mục WO Planner chưa nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - WORK ORDER'[ORDER_NUMBER] ), 'DIM - PERMIT STATUS'[PERMIT_STATUS] = "3")
+		formatString: 0
+		displayFolder: Work Order\Công tác nghiệm thu
+		lineageTag: bca2392d-e46e-4069-b089-fb2dd1c17858
+
+	measure 'Tỷ trọng % WO chờ đơn vị chủ quản nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM] ), FILTER('FACT - NOTIFICATION','FACT - NOTIFICATION'[NOTIF_STATUS] = "1"))/ CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM] ), FILTER('FACT - NOTIFICATION','FACT - NOTIFICATION'[NOTIF_STATUS] in{ "1","2","3"}))
+		formatString: 0
+		displayFolder: Notification\Công tác nghiệm thu
+		lineageTag: e830ea65-a527-4458-bd79-0af25d683180
+
+	measure 'Tỷ trọng % WO chờ Planner nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM] ), FILTER('FACT - NOTIFICATION','FACT - NOTIFICATION'[NOTIF_STATUS] = "3"))/ CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM] ), FILTER('FACT - NOTIFICATION','FACT - NOTIFICATION'[NOTIF_STATUS] in{ "1","2","3"}))
+		formatString: 0
+		displayFolder: Notification\Công tác nghiệm thu
+		lineageTag: e3e1453d-b6a9-4a78-9a64-c225c36e2013
+
+	measure 'Tỷ trọng % WO chờ Supervisor nghiệm thu' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM] ), FILTER('FACT - NOTIFICATION','FACT - NOTIFICATION'[NOTIF_STATUS] = "2"))/ CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM] ), FILTER('FACT - NOTIFICATION','FACT - NOTIFICATION'[NOTIF_STATUS] in{ "1","2","3"}))
+		formatString: 0
+		displayFolder: Notification\Công tác nghiệm thu
+		lineageTag: fdc8722f-7db0-4199-a9e9-c9fcd9f49422
+
+	measure 'Tỷ trọng Noti chưa khảo sát' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),'DIM - STATUS NOTI CONVERTED'[CONVERTED_NOTI_STATUS_DESC]="Chưa khảo sát")/ CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]))
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: 7eaf46ae-9d0e-44f4-b884-c852f9130772
+
+	measure 'Tỷ trọng Noti đang thực hiện' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),'DIM - STATUS NOTI CONVERTED'[CONVERTED_NOTI_STATUS_DESC]="Đang thực hiện")/ CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]))
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: c206c00e-8c90-4727-9d54-fc099629c19b
+
+	measure 'Tỷ trọng Noti hoàn thành' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),'DIM - STATUS NOTI CONVERTED'[CONVERTED_NOTI_STATUS_DESC]="Hoàn thành")/ CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]))
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: a7e2d343-c2e2-4a7c-a036-fe93d353d204
+
+	measure 'Tỷ trọng Noti hủy' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),'DIM - STATUS NOTI CONVERTED'[CONVERTED_NOTI_STATUS_DESC]="Hủy")/ CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]))
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: c391ef3a-6f11-4b33-8f83-96bb6b9ed5c1
+
+	measure 'Tỷ trọng Noti khởi tạo' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),'DIM - STATUS NOTI CONVERTED'[CONVERTED_NOTI_STATUS_DESC]="Khởi tạo")/ CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]))
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: b8465c53-c513-4528-9fce-2ae085e57ff5
+
+	measure 'Tỷ trọng Notification' =
+			var _tytrong = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]))/ CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),ALLSELECTED('DIM - MAINT ACT TYPE'),ALLSELECTED('DIM - PLANNER GRP'),ALLSELECTED('DIM - SUPERVISOR'),ALLSELECTED('DIM - WORK CENTER'),ALLSELECTED('DIM - PLANT SECTION'),ALLSELECTED('DIM - WORK CENTER HIERARCHY'),ALLSELECTED('DIM - DATE'))
+			return _tytrong
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: d8a47eb7-e34a-485d-9ac0-36ed9be70b43
+
+	measure 'Số lượng Noti chưa khảo sát' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),'DIM - STATUS NOTI CONVERTED'[CONVERTED_NOTI_STATUS_DESC]="Chưa khảo sát")
+		formatString: #,0
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: 54324749-e0f5-4f9a-ae5e-1f3f45e13b69
+
+	measure 'Số lượng Noti đang thực hiện' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),'DIM - STATUS NOTI CONVERTED'[CONVERTED_NOTI_STATUS_DESC]="Đang thực hiện")
+		formatString: #,0
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: 78e9e321-8a72-4831-8b20-96bca556ab50
+
+	measure 'Số lượng Noti hoàn thành' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),'DIM - STATUS NOTI CONVERTED'[CONVERTED_NOTI_STATUS_DESC]="Hoàn thành")
+		formatString: #,0
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: 797d2b57-df53-4ce6-a553-0378ead24b2e
+
+	measure 'Số lượng Noti hủy' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),'DIM - STATUS NOTI CONVERTED'[CONVERTED_NOTI_STATUS_DESC]="Hủy")
+		formatString: #,0
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: beb06c4f-36d2-4171-b6e8-2019fb07fe8f
+
+	measure 'Số lượng Noti khởi tạo' = CALCULATE(DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM]),'DIM - STATUS NOTI CONVERTED'[CONVERTED_NOTI_STATUS_DESC]="Khởi tạo")
+		formatString: #,0
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: 90b7c94f-e29c-4c82-b4cd-2fffe9bd433b
+
+	measure 'Số lượng Notification' = DISTINCTCOUNT('FACT - NOTIFICATION'[NOTIF_NUM])
+		formatString: #,0
+		displayFolder: Notification\Tỷ trọng Noti
+		lineageTag: 933f706d-b05f-48f5-b93a-2f77cc866b39
+
+	measure Reliability = 2.718^(-[Mean Time Between Repair]*[Failure Rate])
+		displayFolder: Breakdown Statistics
+		lineageTag: baed3ffe-3723-4519-8fab-ecbd651c9a45
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số lượng vật tư theo PR chưa chuyển thành PO' = sum('FACT - MATERIAL RESERVATION' [PUR_WITHOUT_QUANTITY])
+		formatString: 0.0
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: 43721138-4489-45ec-a05d-2df182cfe3e0
+
+	measure 'Số lượng vật tư theo PR đã chuyển thành PO, chưa nhập kho' = sum('FACT - MATERIAL RESERVATION' [PUR_QUANTITY])
+		formatString: 0.0
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: aea7aec4-a15d-44b4-92ee-2c21cb64acc1
+
+	measure 'Số lượng vật tư hoàn trả (ZWM02PM)' = SUM('FACT - MATERIAL RESERVATION'[RETURN_QTY1])
+		formatString: 0.0
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: 4c9c9305-616d-4fec-ac18-4ad04718ab11
+
+	measure 'Số lượng vật tư sử dụng (ZWM02PM)' = [Số lượng vật tư đã xuất kho]-[Số lượng vật tư hoàn trả (ZWM02PM)]
+		formatString: #,0.0
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: 3b86dfd3-e169-4551-89d0-66642f1b70ff
+
+	measure 'Chi phí bảo dưỡng kế hoạch' = ```
+			
+			var _total = IF(ISBLANK(CALCULATE(sum('FACT - MATERIAL RESERVATION'[PLAN_COST]))),0,CALCULATE(sum('FACT - MATERIAL RESERVATION'[PLAN_COST])))
+			 return CALCULATE(SUMX(SUMMARIZE('FACT - WORK ORDER',"_total", 
+			_total),[_total]),CROSSFILTER('FACT - MATERIAL RESERVATION'[ORDER_NUMBER],'LIST - ORDER NUMBER'[ORDER_NUMBER],Both))
+			```
+		displayFolder: Work Order\Chi phí
+		lineageTag: 98c62ae2-5440-411c-b7c2-0e0b5746bfff
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chi phí bảo dưỡng thực tế' = ```
+			var _total = IF(ISBLANK(CALCULATE(sum('FACT - MATERIAL RESERVATION'[ACTUAL_COST]))),0,CALCULATE(sum('FACT - MATERIAL RESERVATION'[ACTUAL_COST])))
+			 return CALCULATE(SUMX(SUMMARIZE('FACT - WORK ORDER',"_total", 
+			_total),[_total]),CROSSFILTER('FACT - MATERIAL RESERVATION'[ORDER_NUMBER],'LIST - ORDER NUMBER'[ORDER_NUMBER],Both))
+			
+			```
+		displayFolder: Work Order\Chi phí
+		lineageTag: d72ab5a9-0624-453d-9ba8-3e0d4f48b5e6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Số lượng vật tư cần mua bổ sung' = [Số lượng vật tư yêu cầu thực tế (ZWM01PM)] - [Số lượng tồn kho chỉ định (ZWMPM)]
+		formatString: 0.0
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: 3956e1a5-f2e9-4e9d-bbbf-e1a1e5a9acdc
+
+	measure 'Số lượng vật tư hủy chứng từ nhập kho' = ```
+			sum('FACT - MATERIAL RESERVATION' [CANCEL_RECEIPT_QUANTITY]) 
+			```
+		formatString: 0.0
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: db162561-cdc5-4fee-b679-4b7484c3ded7
+
+	measure 'Số lượng vật tư nhập kho thành công' = ```
+			sum('FACT - MATERIAL RESERVATION'[RECEIPT_QUANTITY]) 
+			```
+		formatString: 0.0
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: 7fee56e9-aa33-40b8-92cc-d2923f9d4d80
+
+	measure 'PR Quantity incompleted' = ```
+			[Số lượng vật tư theo PR chưa chuyển thành PO] + [Số lượng vật tư theo PR đã chuyển thành PO, chưa nhập kho] + [Số lượng vật tư hủy chứng từ nhập kho] - [Số lượng vật tư nhập kho thành công]
+			
+			```
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: 3e36c8be-799a-4779-8e6a-f95858d0a183
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Giá trị vật tư chưa cấp phát' = [Đơn giá vật tư tồn kho dự kiến]*[Remaining Quantity]
+		displayFolder: Material Reservation\Vật tư
+		lineageTag: 5482aeb2-68de-489d-a87a-fb0a53f2ee32
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Module
+		dataType: string
+		lineageTag: f7ac1a0d-97f9-4b0c-a2a2-49d4550f47b7
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Module]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '_PM - Metrics' = calculated
+		mode: import
+		source = ```
+				DATATABLE (
+				    "Module", STRING, 
+				    { 
+				        {"PM"}
+				    } )
+				```
+
+	annotation PBI_Id = 0956b4609c8a42848d855cf392faa8ff
+

@@ -1,0 +1,34 @@
+table 'DIM - OUTAGE'
+	lineageTag: 2cfd74e8-75ee-4d2e-9e33-72c25a3d920c
+
+	column OUTAGE_CODE
+		dataType: string
+		lineageTag: 51578dfa-9a0b-4902-94aa-347954f7129b
+		summarizeBy: none
+		sourceColumn: OUTAGE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OUTAGE_NAME
+		dataType: string
+		lineageTag: a3042555-b1a3-4c5e-bc9a-52086fd26a55
+		summarizeBy: none
+		sourceColumn: OUTAGE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - OUTAGE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_OUTAGE = pvcfcprodsqlpool{[Schema="sil",Item="DIM_OUTAGE"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_OUTAGE,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

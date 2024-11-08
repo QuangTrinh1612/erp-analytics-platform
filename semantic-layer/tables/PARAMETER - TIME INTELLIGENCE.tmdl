@@ -1,0 +1,166 @@
+table 'PARAMETER - TIME INTELLIGENCE'
+	lineageTag: 5ac4341c-50de-4c7f-a426-e2531f8d3792
+
+	calculationGroup
+
+		calculationItem Current = SELECTEDMEASURE()
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem LM = CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date],-1,MONTH))
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem LQ = CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date],-1,QUARTER))
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem LY = CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date],-1,YEAR))
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem MTD = TOTALMTD(SELECTEDMEASURE(), 'DIM - DATE'[Date])
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem YTD = TOTALYTD(SELECTEDMEASURE(), 'DIM - DATE'[Date])
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem QTD = TOTALQTD(SELECTEDMEASURE(), 'DIM - DATE'[Date])
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem 'vs LM' =
+				VAR __PREV_MONTH = CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date], -1, MONTH))
+				RETURN
+				SELECTEDMEASURE() - __PREV_MONTH
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem 'vs LY' =
+				VAR __PREV_YEAR = CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date], -1, YEAR))
+				RETURN
+				SELECTEDMEASURE() - __PREV_YEAR
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem MoM% =
+				VAR __PREV_MONTH = CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date], -1, MONTH))
+				RETURN
+				    DIVIDE(SELECTEDMEASURE() - __PREV_MONTH, __PREV_MONTH)
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem QoQ% =
+				VAR __PREV_QUARTER = CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date], -1, QUARTER))
+				RETURN
+				    DIVIDE(SELECTEDMEASURE() - __PREV_QUARTER, __PREV_QUARTER)
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem YoY% =
+				VAR __PREV_YEAR = CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date], -1, YEAR))
+				RETURN
+				    DIVIDE(SELECTEDMEASURE() - __PREV_YEAR, __PREV_YEAR)
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem 'LY vs CY' = ```
+				SELECTEDMEASURE() - CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date],-1,YEAR))
+				
+				```
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem '% L2Y vs CY' =
+				FORMAT(DIVIDE (
+				    SELECTEDMEASURE ()
+				        - CALCULATE ( SELECTEDMEASURE (), DATEADD ( 'DIM - DATE'[Date], -2, YEAR ) ),
+				    SELECTEDMEASURE (),
+				    BLANK ()
+				) ,"#,0.00%")
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem '% LY vs CY' =
+				FORMAT(DIVIDE (
+				    SELECTEDMEASURE ()
+				        - CALCULATE ( SELECTEDMEASURE (), DATEADD ( 'DIM - DATE'[Date], -1, YEAR ) ),
+				    SELECTEDMEASURE (),
+				    BLANK ()
+				) ,"#,0.00%")
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem 'L2Y (Last 2 Years)' = CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date],-2,YEAR))
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+		calculationItem 'L2Y vs CY' = ```
+				SELECTEDMEASURE() - CALCULATE(SELECTEDMEASURE(), DATEADD('DIM - DATE'[Date],-2,YEAR))
+				
+				```
+
+			formatStringDefinition = IF(CONTAINSSTRING(SELECTEDVALUE('PARAMETER - TIME INTELLIGENCE'[Name]), "%"),"#,##0.00 %", "#,##0.0")
+
+	column Name
+		dataType: string
+		lineageTag: 0a983d05-b33e-415b-9186-dacb1d552ede
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"PARAMETER - TIME INTELLIGENCE","TableItemName":"Name (groups)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column Ordinal
+		dataType: int64
+		lineageTag: e7894be1-316b-4241-ba8c-5f41a89f63cc
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Name (groups)' =
+			SWITCH(
+				TRUE,
+				ISBLANK('PARAMETER - TIME INTELLIGENCE'[Name]),
+				"(Blank)",
+				'PARAMETER - TIME INTELLIGENCE'[Name] IN {"Current"},
+				"Giá trị hiện tại",
+				'PARAMETER - TIME INTELLIGENCE'[Name] IN {"vs LY",
+					"YoY%"},
+				"So với cùng kỳ năm trước",
+				'PARAMETER - TIME INTELLIGENCE'[Name] IN {"vs LM",
+					"MoM%"},
+				"So với tháng trước",
+				"Other"
+			)
+		dataType: string
+		lineageTag: cca046d7-f543-40e7-a3d1-d48ef8c7b09b
+		summarizeBy: none
+		isDataTypeInferred
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "PARAMETER - TIME INTELLIGENCE"
+				          }
+				        },
+				        "Property": "Name"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"p","Entity":"PARAMETER - TIME INTELLIGENCE"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"Name"}}],"GroupItems":[{"DisplayName":"(Blank)","BlankDefaultPlaceholder":true},{"DisplayName":"Giá trị hiện tại","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"Name"}}],"Values":[[{"Literal":{"Value":"'Current'"}}]]}}},{"DisplayName":"So với cùng kỳ năm trước","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"Name"}}],"Values":[[{"Literal":{"Value":"'vs LY'"}}],[{"Literal":{"Value":"'YoY%'"}}]]}}},{"DisplayName":"So với tháng trước","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"Name"}}],"Values":[[{"Literal":{"Value":"'vs LM'"}}],[{"Literal":{"Value":"'MoM%'"}}]]}}},{"DisplayName":"Other"}]}
+
+		annotation SummarizationSetBy = Automatic
+

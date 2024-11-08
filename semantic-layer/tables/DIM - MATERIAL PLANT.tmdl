@@ -1,0 +1,246 @@
+table 'DIM - MATERIAL PLANT'
+	lineageTag: f8af4428-935d-4dd7-a5ef-fb7a93aeca5f
+
+	column MATERIAL_PLANT_KEY
+		dataType: string
+		lineageTag: 8728eb2f-d5fa-4f2f-a6d7-bc923906d978
+		summarizeBy: none
+		sourceColumn: MATERIAL_PLANT_KEY
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 333b27a3-f1a0-4f6f-beeb-a7b63a01bbca
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: fec0b4ae-61f7-439c-a234-7c5f26e8e4d1
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALUATION_CLASS
+		dataType: string
+		lineageTag: 5b9f32ea-3b87-4936-ae7e-ed572241bb6c
+		summarizeBy: none
+		sourceColumn: VALUATION_CLASS
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_DES
+		dataType: string
+		lineageTag: 302d65fe-6bcf-4b7a-8556-3e56b6bf93bc
+		summarizeBy: none
+		sourceColumn: MATERIAL_DES
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_TYPE
+		dataType: string
+		lineageTag: ab68a33f-e1d1-42b1-90c3-6e6b665630b3
+		summarizeBy: none
+		sourceColumn: MATERIAL_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_GROUP
+		dataType: string
+		lineageTag: 8c4bc785-3d04-457e-83be-3fb3b45b297c
+		summarizeBy: none
+		sourceColumn: MATERIAL_GROUP
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUOM
+		dataType: string
+		lineageTag: 44abcf23-f107-47c6-9809-99c73e86d404
+		summarizeBy: none
+		sourceColumn: BUOM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PUR_GROUP
+		dataType: string
+		lineageTag: 5e41c5ea-b0cd-4a01-a397-bac046da5d60
+		summarizeBy: none
+		sourceColumn: PUR_GROUP
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ABC_IND
+		dataType: string
+		lineageTag: 940a0b9e-75b8-4deb-9594-2cd0057a2f49
+		summarizeBy: none
+		sourceColumn: ABC_IND
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MRP_TYPE
+		dataType: string
+		lineageTag: 2507151b-4f08-42b8-a2cc-7d4085df46ab
+		summarizeBy: none
+		sourceColumn: MRP_TYPE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SAFTETY_STOCK
+		dataType: double
+		lineageTag: 95f78240-8707-4b78-970c-3867ab37b042
+		summarizeBy: sum
+		sourceColumn: SAFTETY_STOCK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RE_ORDER_POINT
+		dataType: double
+		lineageTag: a4ae0679-11b8-48bd-834c-4d54238fcda2
+		summarizeBy: sum
+		sourceColumn: RE_ORDER_POINT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MIN_SAFETY_STOCK
+		dataType: double
+		lineageTag: 965a02f0-2fa7-47a3-b4f4-a665185655e3
+		summarizeBy: sum
+		sourceColumn: MIN_SAFETY_STOCK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MAX_STOCK_LEVEL
+		dataType: double
+		lineageTag: 622814a6-33b4-4e0d-8d8e-a3f867ef179f
+		summarizeBy: sum
+		sourceColumn: MAX_STOCK_LEVEL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRICE_CONTROL
+		dataType: string
+		lineageTag: 9579673a-3d50-43ba-a091-0274dd0d254e
+		summarizeBy: none
+		sourceColumn: PRICE_CONTROL
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRICE
+		dataType: double
+		lineageTag: 2ae1b0c3-f1a2-4a3b-9030-5d86d50eb773
+		summarizeBy: sum
+		sourceColumn: PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CURRENCY
+		dataType: string
+		lineageTag: 30a34a8e-030b-487b-b5c2-897f0c3c1381
+		summarizeBy: none
+		sourceColumn: CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_LOCKED
+		dataType: string
+		lineageTag: cebedce0-a27d-4a29-b568-c66e488ef450
+		summarizeBy: none
+		sourceColumn: MATERIAL_LOCKED
+
+		annotation SummarizationSetBy = Automatic
+
+	column STANDARD_PRICE
+		dataType: double
+		lineageTag: 0f6cc07a-7e94-4e32-ac72-dfd493032794
+		summarizeBy: sum
+		sourceColumn: STANDARD_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MOVING_PRICE
+		dataType: double
+		lineageTag: 8bdc92b0-4add-48c8-8cdc-3991a8b26f44
+		summarizeBy: sum
+		sourceColumn: MOVING_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PLANNED_PRICE
+		dataType: double
+		lineageTag: 5c05e072-9093-41f7-ae5c-765b8c0949a6
+		summarizeBy: sum
+		sourceColumn: PLANNED_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VALUATION_CLASS_NAME
+		dataType: string
+		lineageTag: e7980d47-9ee1-4967-ac56-e37567e2c618
+		summarizeBy: none
+		sourceColumn: VALUATION_CLASS_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim Material Plant' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_MATERIAL = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_MATERIAL_PLANT"]}[Data]
+				in
+				    gld_VW_DIM_MATERIAL
+
+	annotation PBI_ResultType = Table
+

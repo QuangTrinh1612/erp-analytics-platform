@@ -1,0 +1,73 @@
+table 'PARAMETER - SALE DIMENSION'
+	lineageTag: ed55bcbe-0069-42d8-8b29-31184c9743ea
+
+	column Parameter
+		dataType: string
+		lineageTag: 2727ef2b-c5b8-43fc-9e18-f1907b0d98dd
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		dataType: string
+		isHidden
+		lineageTag: e32bff6c-1ec1-43c7-bb4e-d83a74e62752
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ce38b89e-5302-4a10-9971-0c7806e10adc
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parameter = calculated
+		mode: import
+		source =
+				{
+				    ("YEAR", NAMEOF('DIM - DATE'[YEAR]), 0),
+				    ("MONTHNAME", NAMEOF('DIM - DATE'[MonthName]), 1),
+				    ("DATE", NAMEOF('DIM - DATE'[Date]), 2),
+				    ("CHANNEL_NAME", NAMEOF('DIM - CHANNEL'[CHANNEL_NAME]), 3),
+				    ("CUSTOMER_GROUP_NAME", NAMEOF('DIM - CUSTOMER GROUP'[CUSTOMER_GROUP_NAME]), 4),
+				    ("DIVISION_NAME", NAMEOF('DIM - DIVISION'[DIVISION_NAME]), 5),
+				    ("PRODUCT_NAME_LV2", NAMEOF('DIM - PRODUCT'[PRODUCT_NAME_LV2]), 6),
+				    ("PRODUCT_NAME_LV3", NAMEOF('DIM - PRODUCT'[PRODUCT_NAME_LV3]), 7),
+				    ("PRODUCT_NAME_LV4", NAMEOF('DIM - PRODUCT'[PRODUCT_NAME_LV4]), 8),
+				    ("PRODUCT_NAME", NAMEOF('DIM - PRODUCT'[PRODUCT_NAME]), 9),
+				    ("SALE_GRP_NAME", NAMEOF('DIM - REGION'[SALE_GRP_NAME]), 10),
+				    ("SALE_OFF_NAME", NAMEOF('DIM - REGION'[SALE_OFF_NAME]), 11),
+				    ("STORAGE_LOCATION", NAMEOF('DIM - STORAGE LOCATION'[STORAGE_LOCATION]), 12),
+				    ("STORAGE_LOCATION_NAME", NAMEOF('DIM - STORAGE LOCATION'[DESCRIPTION]), 13),
+				    ("CAT_NAME_DMS", NAMEOF('DIM - PRODUCT DMS'[CAT_ID]), 14),
+				    ("SUB_CAT_NAME_DMS", NAMEOF('DIM - PRODUCT DMS'[SUB_CAT_NAME]), 15),
+				    ("PRODUCT_NAME_DMS", NAMEOF('DIM - PRODUCT DMS'[PRODUCT_NAME]), 16),
+				    ("PROVINCE_CUSTOMER_C2_DMS",NAMEOF('DIM - CUSTOMER C2 DMS'[PROVINCE_NAME]), 17),
+				    ("REGION_SHOP_DMS",NAMEOF('DIM - SHOP DMS'[REGION_NAME]), 18),
+				    ("SUB_REGION_SHOP_DMS",NAMEOF('DIM - SHOP DMS'[SUB_REGION_NAME]), 19),
+				    ("PROVINCE_SHOP_DMS",NAMEOF('DIM - SHOP DMS'[PROVINCE_NAME]), 20)
+				}
+
+	annotation PBI_Id = c1ee451181134017b863841a0eb04ab3
+

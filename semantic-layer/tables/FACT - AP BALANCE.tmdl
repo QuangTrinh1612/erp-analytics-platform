@@ -1,0 +1,105 @@
+table 'FACT - AP BALANCE'
+	lineageTag: a5cedf77-f6c4-45f7-a02b-db0ebf48c6a2
+
+	column POSTING_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 238a8201-78ef-4fc5-9d82-bd2472f684da
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column COMPANY_CODE
+		dataType: string
+		lineageTag: c601b6bb-ca36-4414-ac47-edcb1e132d11
+		summarizeBy: none
+		sourceColumn: COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_ACCOUNT
+		dataType: string
+		lineageTag: b6f8dc7c-b9b9-4b12-857c-a11635a81f19
+		summarizeBy: none
+		sourceColumn: GL_ACCOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDOR_CODE
+		dataType: string
+		lineageTag: 497a5dea-33df-48eb-a256-1d7756338d9f
+		summarizeBy: none
+		sourceColumn: VENDOR_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_CODE
+		dataType: string
+		lineageTag: b74bba1a-b414-4191-9257-7e2e20c895f0
+		summarizeBy: none
+		sourceColumn: CURRENCY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column AP_BUCKET
+		dataType: int64
+		formatString: 0
+		lineageTag: e2142251-0676-4f97-90ba-80bd71010c92
+		summarizeBy: sum
+		sourceColumn: AP_BUCKET
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPENING_AP
+		dataType: double
+		lineageTag: 091dd78c-ba4d-4a6e-9c6d-ae0fa0d91beb
+		summarizeBy: sum
+		sourceColumn: OPENING_AP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DEBIT_AP
+		dataType: double
+		lineageTag: 9f761687-6e08-48ac-9e05-43d6f4cc39e8
+		summarizeBy: sum
+		sourceColumn: DEBIT_AP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREDIT_AP
+		dataType: double
+		lineageTag: bd04c978-6ced-46de-85d8-6549d3131175
+		summarizeBy: sum
+		sourceColumn: CREDIT_AP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLOSING_AP
+		dataType: double
+		lineageTag: eb11eb93-1010-4997-96ce-374d62abef86
+		summarizeBy: sum
+		sourceColumn: CLOSING_AP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - AP BALANCE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_AP_BALANCE = pvcfcprodsqlpool{[Schema="gld",Item="FACT_AP_BALANCE"]}[Data]
+				in
+				    gld_FACT_AP_BALANCE
+

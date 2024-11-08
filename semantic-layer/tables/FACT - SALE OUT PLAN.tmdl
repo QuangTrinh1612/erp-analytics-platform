@@ -1,0 +1,295 @@
+table 'FACT - SALE OUT PLAN'
+	lineageTag: bedd79ee-585e-4486-8bf5-58cfa0f2ef24
+
+	column PLAN_TYPE
+		dataType: double
+		isHidden
+		lineageTag: ac836ea8-ac6d-4817-b075-79800f6f7ec9
+		summarizeBy: sum
+		sourceColumn: PLAN_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SUB_CAT_ID
+		dataType: double
+		isHidden
+		lineageTag: 4da864b0-04d8-4eed-a28b-46ed4d89f1d9
+		summarizeBy: none
+		sourceColumn: SUB_CAT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALE_PLAN_ID
+		dataType: double
+		isHidden
+		lineageTag: 0bee91cc-06d1-42bb-91bf-db04c7bce722
+		summarizeBy: count
+		sourceColumn: SALE_PLAN_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OBJECT_TYPE
+		dataType: double
+		isHidden
+		lineageTag: b2e40c0a-b28e-42a0-b8ce-3d976c607d4d
+		summarizeBy: sum
+		sourceColumn: OBJECT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OBJECT_ID
+		dataType: double
+		isHidden
+		lineageTag: 1d1fa958-fc4a-4247-9201-d36fe891881e
+		summarizeBy: none
+		sourceColumn: OBJECT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CAT_ID
+		dataType: double
+		isHidden
+		lineageTag: 78589f27-baa4-4d4c-8af3-3f3683efc6b9
+		summarizeBy: count
+		sourceColumn: CAT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRODUCT_ID
+		dataType: double
+		isHidden
+		lineageTag: e2dc5fbc-38b7-43ad-b209-c8a79f552af7
+		summarizeBy: count
+		sourceColumn: PRODUCT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRICE
+		dataType: double
+		isHidden
+		lineageTag: 4e430093-da7e-42e4-a037-6f4ce76fc7b9
+		summarizeBy: sum
+		sourceColumn: PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QUANTITY
+		dataType: double
+		isHidden
+		lineageTag: 372ff693-c69a-4aea-93f3-ab02e2897202
+		summarizeBy: sum
+		sourceColumn: QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AMOUNT
+		dataType: double
+		isHidden
+		lineageTag: 364fb17b-17d5-4bd3-8aa0-ba9b8e7ca9c6
+		summarizeBy: sum
+		sourceColumn: AMOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QUANTITY_ASSIGNED
+		dataType: double
+		isHidden
+		lineageTag: 60b0c011-f508-4899-9006-e7c312379605
+		summarizeBy: sum
+		sourceColumn: QUANTITY_ASSIGNED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AMOUNT_ASSIGNED
+		dataType: double
+		isHidden
+		lineageTag: bdd18bd9-67f5-4a8b-a929-f295670a2f51
+		summarizeBy: sum
+		sourceColumn: AMOUNT_ASSIGNED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TYPE
+		dataType: double
+		isHidden
+		lineageTag: 312a4098-b79e-45e2-ba19-f4453c51413f
+		summarizeBy: sum
+		sourceColumn: TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column YEAR
+		dataType: double
+		isHidden
+		lineageTag: 92e295a7-7246-4201-a311-c5bf76202edf
+		summarizeBy: sum
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CYCLE_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 38463a4f-6492-405b-bffe-8b31ed765ed0
+		summarizeBy: none
+		sourceColumn: CYCLE_ID
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: double
+		isHidden
+		lineageTag: 8a9e9ed5-2cfc-4d8c-b434-585f063096ce
+		summarizeBy: sum
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LOCK_STATUS
+		dataType: double
+		isHidden
+		lineageTag: 103baf07-9600-4453-98b7-ce1d88add326
+		summarizeBy: sum
+		sourceColumn: LOCK_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MANAGER_USER
+		dataType: double
+		isHidden
+		lineageTag: ad24d600-cc41-4811-b033-01aab3a550b8
+		summarizeBy: sum
+		sourceColumn: MANAGER_USER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column APPROVED_USER
+		dataType: double
+		isHidden
+		lineageTag: c804c9f1-18a7-4ffb-bbc9-67d166ded8d9
+		summarizeBy: sum
+		sourceColumn: APPROVED_USER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column UNIT
+		dataType: double
+		isHidden
+		lineageTag: 9feb291e-ea1d-4c03-899b-fff7f767cd1f
+		summarizeBy: sum
+		sourceColumn: UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column QUANTITY_NEED
+		dataType: double
+		isHidden
+		lineageTag: d5da6d25-a3d2-42fd-ae08-07eec4516cd1
+		summarizeBy: sum
+		sourceColumn: QUANTITY_NEED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SUB_REGION_ID
+		dataType: double
+		isHidden
+		lineageTag: a09b4a23-3e2f-40b5-9221-e9b104f1660d
+		summarizeBy: none
+		sourceColumn: SUB_REGION_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRODUCT_SAP
+		dataType: string
+		isHidden
+		lineageTag: 3067fd72-6d1d-4095-bad9-fbb91eea640e
+		summarizeBy: none
+		sourceColumn: PRODUCT_SAP
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUANTITY_CONVER =
+			SWITCH('FACT - SALE OUT PLAN'[SUB_CAT_ID],
+			                        37,1* 'FACT - SALE OUT PLAN'[QUANTITY], --Ure-DCM
+			                        53,6* 'FACT - SALE OUT PLAN'[QUANTITY],--N46
+			                        45,8* 'FACT - SALE OUT PLAN'[QUANTITY], --NPK Tu Doanh
+			                        56,6* 'FACT - SALE OUT PLAN'[QUANTITY], --Bio
+			                        58,8* 'FACT - SALE OUT PLAN'[QUANTITY], --Huu co
+			                        55,8* 'FACT - SALE OUT PLAN'[QUANTITY], --NPK DCM
+			                        52,2* 'FACT - SALE OUT PLAN'[QUANTITY], --Kali
+			                        51,2* 'FACT - SALE OUT PLAN'[QUANTITY], --DAP
+			                        27,6* 'FACT - SALE OUT PLAN'[QUANTITY], --N.Humate
+			                        62,2* 'FACT - SALE OUT PLAN'[QUANTITY], --SA
+			                        1* 'FACT - SALE OUT PLAN'[QUANTITY])
+		dataType: double
+		isHidden
+		formatString: 0
+		lineageTag: 708f9833-3ae1-4b6e-9022-1bc484b60471
+		summarizeBy: sum
+		isDataTypeInferred
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - SALE OUT PLAN' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_SALE_OUT_PLAN = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_SALE_OUT_PLAN"]}[Data]
+				in
+				    gld_VW_FACT_SALE_OUT_PLAN
+
+	annotation PBI_ResultType = Table
+

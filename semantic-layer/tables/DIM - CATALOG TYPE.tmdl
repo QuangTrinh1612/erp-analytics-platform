@@ -1,0 +1,34 @@
+table 'DIM - CATALOG TYPE'
+	lineageTag: da5951d0-a746-4ff2-ab0a-e4bf85ed695a
+
+	column CATALOG_TYPE
+		dataType: string
+		lineageTag: 3bd153b3-d2ec-4410-a602-6025a7295b1e
+		summarizeBy: none
+		sourceColumn: CATALOG_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CATALOG_DESC
+		dataType: string
+		lineageTag: f93fdf32-a709-40d3-8565-00df5553651f
+		summarizeBy: none
+		sourceColumn: CATALOG_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - CATALOG TYPE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_CATALOG_TYPE = pvcfcprodsqlpool{[Schema="sil",Item="DIM_CATALOG_TYPE"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(sil_DIM_CATALOG_TYPE,{"W_INSERT_DT", "W_BATCH_ID"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

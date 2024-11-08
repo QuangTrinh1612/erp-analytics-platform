@@ -1,0 +1,59 @@
+table 'Parameter COPA'
+	lineageTag: 32052881-aa15-4e30-bae2-2d9c519d66d9
+
+	column 'Parameter COPA'
+		dataType: string
+		lineageTag: 24e84b4b-50a4-43fb-b697-c1c2fd0eaa92
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter COPA Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter COPA Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter COPA Fields'
+		dataType: string
+		isHidden
+		lineageTag: 99c91f70-99bf-40cf-a789-18e024beab80
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter COPA Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter COPA Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f2df8d6e-fa7a-4e6b-abc2-6c0a4ee35f64
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter COPA' = calculated
+		mode: import
+		source =
+				{
+				    ("Doanh Thu", NAMEOF('_CO - Metrics'[Sale Amount]), 0),
+				    ("GVHB", NAMEOF('_CO - Metrics'[COGS Amount]), 1),
+				    ("Lãi gộp", NAMEOF('_CO - Metrics'[Lãi gộp]), 2),
+				    ("Sản Lượng sản xuất", NAMEOF('_CO - Metrics'[Sản lượng tiêu thụ]), 3),
+				    ("Sản Lượng thực hiện", NAMEOF('_CO - Metrics'[Sale Quantity]), 4),
+				    ("Giá Bán", NAMEOF('_CO - Metrics'[Giá bán]), 5),
+				    ("Giá Thành SX", NAMEOF('_CO - Metrics'[Giá thành sản xuất - PVCFC]), 6)
+				}
+
+	annotation PBI_Id = 5bbeeb3fb5d14b94b21d25fcff1ff99a
+

@@ -1,0 +1,31 @@
+table 'DIM - COST TYPE ZCO10'
+	lineageTag: d764a3e0-caae-4cfd-a205-d82bb9933bc6
+
+	column TYPE_OF_COST_ZCO10
+		dataType: string
+		lineageTag: 4dd42708-35eb-4346-a8a7-84612ec8a47b
+		summarizeBy: none
+		sourceColumn: TYPE_OF_COST_ZCO10
+
+		annotation SummarizationSetBy = Automatic
+
+	column TYPE_OF_COST_SUMMARY
+		dataType: string
+		lineageTag: 219542d3-5420-4fe1-a22b-648926b2d3e0
+		summarizeBy: none
+		sourceColumn: TYPE_OF_COST_SUMMARY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - COST TYPE ZCO10' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    VW_DIM_COST_TYPE_ZCO10 = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_COST_TYPE_ZCO10"]}[Data]
+				in
+				    VW_DIM_COST_TYPE_ZCO10
+
+	annotation PBI_ResultType = Exception
+

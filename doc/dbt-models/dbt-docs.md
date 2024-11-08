@@ -19,6 +19,11 @@ dbt run --profiles-dir config --project-dir transform/oracle_analytics
 dbt run --profiles-dir config --project-dir transform/sap_analytics
 ```
 
+dbt elementary commands
+```bash
+dbt run --select elementary --profiles-dir config --project-dir transform/oracle_analytics
+```
+
 dbt documentation commands
 ```bash
 dbt docs generate --profiles-dir config --project-dir transform/oracle_analytics

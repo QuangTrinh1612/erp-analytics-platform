@@ -1,0 +1,173 @@
+table 'FACT - PURCHASE INVENTORY QUANTITY'
+	lineageTag: c394c642-be23-4ffb-9952-8d98bce0b007
+
+	column DOC_DATE
+		dataType: string
+		lineageTag: 8c220594-3587-4b0f-85b0-a86100eca24d
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: f2cea968-17fe-4bf4-a463-a5397dc28b10
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		lineageTag: 234cb6d2-f353-43c6-90e0-d6ebeca02395
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NO
+		dataType: string
+		lineageTag: f46b9387-a0c8-4888-a971-a29dfa257c9a
+		summarizeBy: none
+		sourceColumn: BATCH_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: 072fe7be-a888-4c2c-8d0b-e2c7ddb6206c
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: aa8358b5-3c2f-4275-bb05-1e436abf18f8
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_TYPE
+		dataType: string
+		lineageTag: 1becf35a-ee4f-41f5-a63f-616a486f5aff
+		summarizeBy: none
+		sourceColumn: MATERIAL_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: 9d4845ac-e051-4254-9409-a50ebb246418
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_SLOC_BATCH_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: 93f76eee-efab-4c9c-b6e3-60abcacdce09
+		summarizeBy: sum
+		sourceColumn: IS_SLOC_BATCH_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_VALUATED_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: 12f40774-3514-4389-9b06-b82d24baaed4
+		summarizeBy: sum
+		sourceColumn: IS_VALUATED_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column IS_SPECIAL_STOCK
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c3c5378-4ab5-4fd6-9082-5ff1b4024561
+		summarizeBy: sum
+		sourceColumn: IS_SPECIAL_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIAL_STOCK
+		dataType: string
+		lineageTag: febd4277-cedd-43d2-ac25-95de1502e560
+		summarizeBy: none
+		sourceColumn: SPECIAL_STOCK
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECEIPT_QTY
+		dataType: double
+		lineageTag: 0da47e57-37e3-4058-b22e-1ee12317320a
+		summarizeBy: sum
+		sourceColumn: RECEIPT_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_QTY
+		dataType: double
+		lineageTag: 6702ba1e-9a0f-4388-930c-014d214507c6
+		summarizeBy: sum
+		sourceColumn: ISSUE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_REVERSE_QTY
+		dataType: double
+		lineageTag: 84f8d94a-8a62-459e-aa50-d43fb12aaa3f
+		summarizeBy: sum
+		sourceColumn: RECEIPT_REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUE_REVERSE_QTY
+		dataType: double
+		lineageTag: ae310b42-8d80-453b-8c53-5c9406529da1
+		summarizeBy: sum
+		sourceColumn: ISSUE_REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column REVERSE_QTY
+		dataType: double
+		lineageTag: 8c7d92ec-bc76-473c-8420-54e1d5afd6e9
+		summarizeBy: sum
+		sourceColumn: REVERSE_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MATERIAL_PLANT_KEY
+		dataType: string
+		lineageTag: c0429a4e-361e-4fd8-a237-bdd0cfd0cfde
+		summarizeBy: none
+		sourceColumn: MATERIAL_PLANT_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - PURCHASE INVENTORY QUANTITY' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PLANT = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_PURCHASE_INVENTORY_QTY"]}[Data],
+				    #"Added Custom" = Table.AddColumn(gld_VW_DIM_PLANT, "MATERIAL_PLANT_KEY", each Text.Trim([MATERIAL_CODE]) &"-"& [PLANT_CODE])
+				in
+				    #"Added Custom"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,81 @@
+table 'DIM - BASE UOM'
+	lineageTag: 83fbf45f-61ab-41fb-98d6-8a70c7ed862d
+
+	column LANGUAGE
+		dataType: string
+		lineageTag: 9854f29b-7833-4551-95bc-56d6aa1baaa9
+		summarizeBy: none
+		sourceColumn: LANGUAGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UNIT
+		dataType: string
+		lineageTag: 51b5e9d9-ceaa-44ab-8790-6f99b70f2698
+		summarizeBy: none
+		sourceColumn: BASE_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMERCIAL
+		dataType: string
+		lineageTag: 670e9e4f-ee5b-44cb-97e9-23ea491c615f
+		summarizeBy: none
+		sourceColumn: COMMERCIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column TECHNICAL
+		dataType: string
+		lineageTag: 0f669e22-fe83-4c93-b9a3-9a7562b005b2
+		summarizeBy: none
+		sourceColumn: TECHNICAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT_TEXT
+		dataType: string
+		lineageTag: 3d0aef16-3ce7-494d-8f36-6ec68eb298d9
+		summarizeBy: none
+		sourceColumn: UNIT_TEXT
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT_TEXT_LONG
+		dataType: string
+		lineageTag: 0b63c5c3-09d1-4b60-bc54-5a7f19b194ec
+		summarizeBy: none
+		sourceColumn: UNIT_TEXT_LONG
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_INSERT_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d5804eef-3e48-4569-b85e-2d580c776fc7
+		summarizeBy: none
+		sourceColumn: W_INSERT_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column W_BATCH_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: ad3ee101-fb4e-48bf-83a7-2998338a9058
+		summarizeBy: count
+		sourceColumn: W_BATCH_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - BASE UOM' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    sil_DIM_BASE_UOM = pvcfcprodsqlpool{[Schema="sil",Item="DIM_BASE_UOM"]}[Data]
+				in
+				    sil_DIM_BASE_UOM
+
+	annotation PBI_ResultType = Table
+

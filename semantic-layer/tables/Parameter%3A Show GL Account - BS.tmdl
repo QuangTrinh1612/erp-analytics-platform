@@ -1,0 +1,55 @@
+table 'Parameter: Show GL Account - BS'
+	lineageTag: dbd2e1d3-7738-4708-b78e-2c8340e3611a
+
+	column 'Parameter: AP Bucket Metrics'
+		dataType: string
+		lineageTag: b854f12b-1698-41d1-b245-02bb6f57c96c
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter: AP Bucket Metrics Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter: AP Bucket Metrics Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: AP Bucket Metrics Fields'
+		dataType: string
+		isHidden
+		lineageTag: 104f1038-2c17-4da0-b1ee-dabb65cd991a
+		summarizeBy: none
+		isDataTypeInferred
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter: AP Bucket Metrics Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter: AP Bucket Metrics Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 26421899-1012-43af-a86e-6b8f2de5c409
+		summarizeBy: sum
+		isDataTypeInferred
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parameter: AP Bucket Metrics' = calculated
+		mode: import
+		source =
+				{
+				    ("BS Item No", NAMEOF('DIM - REPORTING LINE BS'[ITEM_NO]), 0),
+				    ("GL Account", NAMEOF('FACT - BALANCE SHEET'[GL_ACCOUNT_NO]), 1),
+				    ("GL Account Name", NAMEOF('DIM - GL ACCOUNT'[LONG_DESC]), 2)
+				}
+
+	annotation PBI_Id = 2d5bdbed050947718ae6d7f49bf40fee
+

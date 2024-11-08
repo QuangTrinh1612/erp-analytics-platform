@@ -1,0 +1,32 @@
+/// Bảng thông tin nhà cung cấp
+table 'Last Refresh Date'
+	isHidden
+	lineageTag: e6c596d2-c582-4f57-ac84-8583b4e22dce
+
+	column 'Last Refresh Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d1e6e398-1252-464b-940d-2f3cdb4ea0d4
+		summarizeBy: none
+		sourceColumn: Last Refresh Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Last Refresh Date' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = DateTime.LocalNow() + #duration(0, 7, 0, 0),
+				    #"Converted to Table" = #table(1, {{pvcfcprodsqlpool}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table",{{"Column1", type datetime}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Column1", "Last Refresh Date"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

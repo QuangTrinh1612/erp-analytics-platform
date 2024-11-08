@@ -1,0 +1,676 @@
+table 'FACT - MATERIAL RESERVATION'
+	lineageTag: 09a546fc-f375-4e7b-a4d0-294c600a645a
+
+	column RESERV_NUM
+		dataType: string
+		lineageTag: 4e67a3c0-c432-4716-b763-04c4b0f21b10
+		summarizeBy: none
+		sourceColumn: RESERV_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DESC
+		dataType: string
+		lineageTag: 3b2ee106-eb5f-4fbe-9c0a-7c5d3a698ebd
+		summarizeBy: none
+		sourceColumn: ORDER_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANNER_GRP_CODE
+		dataType: string
+		lineageTag: c8b5c00e-b31b-4878-9134-62172a5c9637
+		summarizeBy: none
+		sourceColumn: PLANNER_GRP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_TYPE
+		dataType: string
+		lineageTag: cef3a26d-7bf0-4570-9edf-0ea056766f25
+		summarizeBy: none
+		sourceColumn: ORDER_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACT_TYPE_CODE
+		dataType: string
+		lineageTag: 1a6d9bff-98ee-478c-b783-818fbf85def9
+		summarizeBy: none
+		sourceColumn: ACT_TYPE_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: aa9c7bd8-282d-4991-89ab-5216482144e4
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_ACT_NUM
+		dataType: string
+		lineageTag: ed7e4034-3053-40f8-af49-25f70862855b
+		summarizeBy: none
+		sourceColumn: OPER_ACT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column EARL_STAT_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 131ecaed-5f58-484e-a816-f48edae4f1ab
+		summarizeBy: none
+		sourceColumn: EARL_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column LATE_STAT_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 5cc4671c-288f-4211-839e-795b5322592f
+		summarizeBy: none
+		sourceColumn: LATE_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PLAN_STAT_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 53f50f69-c810-44af-ab31-173d7bb698e9
+		summarizeBy: none
+		sourceColumn: PLAN_STAT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PLAN_END_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 042b75fc-11eb-456b-b8c5-4b4a1a4cbde1
+		summarizeBy: none
+		sourceColumn: PLAN_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column MAIN_WORK_CENTER
+		dataType: string
+		lineageTag: a54fa267-1b9d-4850-bd22-1d2ef68daa9e
+		summarizeBy: none
+		sourceColumn: MAIN_WORK_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_CODE
+		dataType: string
+		lineageTag: ff454200-df2d-4e2e-a7ea-65508721a037
+		summarizeBy: none
+		sourceColumn: SUP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column FINAL_ISSUE
+		dataType: string
+		lineageTag: 1ea90cd5-4af2-42cf-828f-a3a795db15bd
+		summarizeBy: none
+		sourceColumn: FINAL_ISSUE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAHD_CODE
+		dataType: string
+		lineageTag: b2c9737e-f8f3-4f3a-8ca6-ae86eef8b91d
+		summarizeBy: none
+		sourceColumn: PAHD_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURR_KEY
+		dataType: string
+		lineageTag: 5b9e6217-e0f7-40d0-8ed6-8060ef78d92d
+		summarizeBy: none
+		sourceColumn: CURR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISSUE_STORAGE_LOC
+		dataType: string
+		lineageTag: b115ea92-1aff-4f21-9ffd-37001a60fb7a
+		summarizeBy: none
+		sourceColumn: ISSUE_STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECEIVED_STORAGE_LOC
+		dataType: string
+		lineageTag: 23072f4c-c45d-456c-b2a1-fe2a7ae20509
+		summarizeBy: none
+		sourceColumn: RECEIVED_STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQUI_QUANTITY
+		dataType: double
+		lineageTag: bd33fbdf-f408-4e1c-8659-3d06de311536
+		summarizeBy: sum
+		sourceColumn: REQUI_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WITHDRAWN_QUANTITY
+		dataType: double
+		lineageTag: e6bc548a-9dfd-4def-9e28-95ecfc6930b0
+		summarizeBy: sum
+		sourceColumn: WITHDRAWN_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVAILABLE_QUANTITY
+		dataType: double
+		lineageTag: eb4785dd-a8a6-4ba6-a158-fa8dc84e7d98
+		summarizeBy: sum
+		sourceColumn: AVAILABLE_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BASE_UNIT
+		dataType: string
+		lineageTag: c85a6152-942f-4f0e-80cb-e4c24e3b6551
+		summarizeBy: none
+		sourceColumn: BASE_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		lineageTag: 470a2c8a-b642-4d77-8150-a3b658f56b59
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH_NUM
+		dataType: string
+		lineageTag: c9b587fa-d97c-40e6-94ae-80a7f3cf03a2
+		summarizeBy: none
+		sourceColumn: BATCH_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQUI_TYPE
+		dataType: string
+		lineageTag: 3f774014-b5fb-4ea4-a032-c15a2c0f0dcb
+		summarizeBy: none
+		sourceColumn: REQUI_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQUI_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 5f61b661-49a5-4045-b814-b53eb5127034
+		summarizeBy: none
+		sourceColumn: REQUI_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column DEB_CRE_INDI
+		dataType: string
+		lineageTag: db093145-8e40-436c-9df5-06af3fccd9b4
+		summarizeBy: none
+		sourceColumn: DEB_CRE_INDI
+
+		annotation SummarizationSetBy = Automatic
+
+	column WITHDRAWN_VALUE
+		dataType: double
+		lineageTag: 595105bf-4b7f-4578-ae8c-aa4e7680bfc2
+		summarizeBy: sum
+		sourceColumn: WITHDRAWN_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MOVEMENT_TYPE
+		dataType: string
+		lineageTag: f389e376-f5fd-4ec7-8466-254841e45c73
+		summarizeBy: none
+		sourceColumn: MOVEMENT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 2388025f-5d3a-413f-a6a5-c321a9e7a2dd
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_BOM_ITEM
+		dataType: string
+		lineageTag: 07346936-0c54-4016-ac3e-78bb1fe76096
+		summarizeBy: none
+		sourceColumn: MAINT_BOM_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_CAT
+		dataType: string
+		lineageTag: 4c73422c-3827-4b8c-a9fb-83e09428831f
+		summarizeBy: none
+		sourceColumn: ITEM_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELETED_ITEM
+		dataType: string
+		lineageTag: 23708ce1-da3d-462c-b236-77609af77393
+		summarizeBy: none
+		sourceColumn: DELETED_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_RESERV_NUM
+		dataType: string
+		lineageTag: 163cfdc3-8685-4cb0-9688-223a0f4bcb82
+		summarizeBy: none
+		sourceColumn: ITEM_RESERV_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECIPIENT
+		dataType: string
+		lineageTag: 80beb348-4eea-4ddd-8928-165511e00d95
+		summarizeBy: none
+		sourceColumn: RECIPIENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISSUED_REQ_QUANTITY
+		dataType: double
+		lineageTag: 749be0f0-d598-4361-b377-4931c6f3a9bb
+		summarizeBy: sum
+		sourceColumn: ISSUED_REQ_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ENTRY_UNIT
+		dataType: string
+		lineageTag: c0772454-65c4-40df-91dc-79b7d5d93a6a
+		summarizeBy: none
+		sourceColumn: ENTRY_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PUR_WITHOUT_QUANTITY
+		dataType: double
+		lineageTag: 00cafc41-7ec6-4d66-afa6-cddc084226d0
+		summarizeBy: sum
+		sourceColumn: PUR_WITHOUT_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PUR_QUANTITY
+		dataType: double
+		lineageTag: 6917d26f-3d95-4bd1-8799-670bad5049cd
+		summarizeBy: sum
+		sourceColumn: PUR_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RECEIPT_QUANTITY
+		dataType: double
+		lineageTag: 7a1bf3c1-3bbe-4855-9586-d446a2413fa9
+		summarizeBy: sum
+		sourceColumn: RECEIPT_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CANCEL_RECEIPT_QUANTITY
+		dataType: double
+		lineageTag: 8b96d336-a0a2-4e21-a648-52feeff77b70
+		summarizeBy: sum
+		sourceColumn: CANCEL_RECEIPT_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PLAN_COST
+		dataType: double
+		lineageTag: 97082be8-158b-4fa4-bc5d-fb405250da3e
+		summarizeBy: sum
+		sourceColumn: PLAN_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ACTUAL_COST
+		dataType: double
+		lineageTag: 7bcf43de-871c-476d-bd6c-0d6033ef9e13
+		summarizeBy: sum
+		sourceColumn: ACTUAL_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ISSUED_QUANTITY
+		dataType: double
+		lineageTag: 860845ee-d97a-4f4b-8da6-eb188d42f3e7
+		summarizeBy: sum
+		sourceColumn: ISSUED_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RESERV_RELEVANCE
+		dataType: string
+		lineageTag: fd7654d1-4730-4dfa-bcc4-369a8ef5581d
+		summarizeBy: none
+		sourceColumn: RESERV_RELEVANCE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		lineageTag: 404d6af1-321b-41da-96e9-2fdbc713fb67
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_USER_STATUS
+		dataType: string
+		lineageTag: cc77cbb1-524e-42e9-a921-f3cbe72df704
+		summarizeBy: none
+		sourceColumn: ORDER_USER_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_SYSTEM_STATUS
+		dataType: string
+		lineageTag: 52fdb119-5a12-4a80-a03a-dc7f38d6905c
+		summarizeBy: none
+		sourceColumn: ORDER_SYSTEM_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_SYSTEM_STATUS_ALL
+		dataType: string
+		lineageTag: 7c20ca72-59b6-4904-aa00-445fcc95d9f3
+		summarizeBy: none
+		sourceColumn: ORDER_SYSTEM_STATUS_ALL
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		lineageTag: 006e9d06-5d26-4b1e-970d-360ff415c4e3
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACTUAL_REL_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: f37ee6bb-70cc-407e-b6a1-26d67e1c64be
+		summarizeBy: none
+		sourceColumn: ACTUAL_REL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column DELETE_IND
+		dataType: string
+		lineageTag: b0e1da98-3960-4bd1-87fc-191204560b2b
+		summarizeBy: none
+		sourceColumn: DELETE_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAINT_ITEM
+		dataType: string
+		lineageTag: d5bf1a9a-80da-4ff1-bfce-89398bafa9a0
+		summarizeBy: none
+		sourceColumn: MAINT_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column NO_DISPLAY
+		dataType: string
+		lineageTag: 49c3cded-8f35-48e0-9323-6117f55b6c93
+		summarizeBy: none
+		sourceColumn: NO_DISPLAY
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIM_TASK_LIST_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ce00c4a-3efc-4721-87f7-8148935fe5e5
+		summarizeBy: none
+		sourceColumn: DIM_TASK_LIST_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLNT_SECT_CODE
+		dataType: string
+		lineageTag: 913f8e6e-7f95-49a8-a054-b0eda7c3f8d5
+		summarizeBy: none
+		sourceColumn: PLNT_SECT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SYST_COND
+		dataType: string
+		lineageTag: a12a146e-7ed1-4830-b919-6ad870f41440
+		summarizeBy: none
+		sourceColumn: SYST_COND
+
+		annotation SummarizationSetBy = Automatic
+
+	column MANUFACTOR
+		dataType: string
+		lineageTag: 7fe69c87-41f9-471e-a967-19fcc1d5c6ea
+		summarizeBy: none
+		sourceColumn: MANUFACTOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELEMENT
+		dataType: string
+		lineageTag: c9a733ab-7539-48ab-a900-b5ec837a9d6c
+		summarizeBy: none
+		sourceColumn: COST_ELEMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLAN_PRICE
+		dataType: double
+		lineageTag: 79fc6b27-4f8b-430f-bb97-c4c940de1130
+		summarizeBy: sum
+		sourceColumn: PLAN_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RETURN_QTY
+		dataType: double
+		lineageTag: 21010283-f1fe-4225-8f75-acf1c530df93
+		summarizeBy: sum
+		sourceColumn: RETURN_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DEPART_REQUI
+		dataType: string
+		lineageTag: e091c9d6-e3cd-431d-adda-34ddeb0c884a
+		summarizeBy: none
+		sourceColumn: DEPART_REQUI
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPER_SHORT_DESC
+		dataType: string
+		lineageTag: 85ae185e-6396-42a6-84a8-158bfffe3c4c
+		summarizeBy: none
+		sourceColumn: OPER_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ENTERED_BY
+		dataType: string
+		lineageTag: 7566e59b-24f2-43a1-9701-d8217f405116
+		summarizeBy: none
+		sourceColumn: ENTERED_BY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATE_ON
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: cf162e65-f92d-4bce-b924-981908652bce
+		summarizeBy: none
+		sourceColumn: CREATE_ON
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column SYSTEM_STATUS_EXCHANGE
+		dataType: string
+		lineageTag: 58a42f9b-8af0-44bb-b744-a7334230b58c
+		summarizeBy: none
+		sourceColumn: SYSTEM_STATUS_EXCHANGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column APPROVAL_STATUS
+		dataType: string
+		lineageTag: d6e90c11-0feb-474b-887f-e5104a029d2d
+		summarizeBy: none
+		sourceColumn: APPROVAL_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONFIRMED_IND
+		dataType: string
+		lineageTag: 551feb3b-95b2-4032-8efe-1829b1f41db8
+		summarizeBy: none
+		sourceColumn: CONFIRMED_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column ZPM23_PLANT
+		dataType: string
+		lineageTag: 0657a110-b8f7-450e-a86b-6dd0c685ea7e
+		summarizeBy: none
+		sourceColumn: ZPM23_PLANT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ZPM03_IND
+		dataType: string
+		lineageTag: 4e50c291-0489-422a-b232-83071564694f
+		summarizeBy: none
+		sourceColumn: ZPM03_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQ_NO_DISPLAY
+		dataType: string
+		lineageTag: 30470475-75e0-4821-83e6-68a1f9c37035
+		summarizeBy: none
+		sourceColumn: REQ_NO_DISPLAY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_PLANT_KEY = 'FACT - MATERIAL RESERVATION'[MATERIAL_CODE] &"-"& 'FACT - MATERIAL RESERVATION'[PLANT_CODE]
+		dataType: string
+		lineageTag: 211ea620-c218-410b-b867-73d8d962e75e
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column RETURN_QTY1 = IF(ISBLANK('FACT - MATERIAL RESERVATION'[RETURN_QTY]),0,'FACT - MATERIAL RESERVATION'[RETURN_QTY])
+		dataType: double
+		lineageTag: dd423ddd-7f62-4b35-9d3f-e9109a2ddd26
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - MATERIAL RESERVATION' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_MATERIAL_RESERVATION = pvcfcprodsqlpool{[Schema="gld",Item="FACT_MATERIAL_RESERVATION"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_MATERIAL_RESERVATION,{"W_INSERT_DT"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns","00000000","99991231",Replacer.ReplaceText,{"EARL_STAT_DATE"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","00000000","99991231",Replacer.ReplaceText,{"LATE_STAT_DATE"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","00000000","99991231",Replacer.ReplaceText,{"PLAN_STAT_DATE"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","00000000","99991231",Replacer.ReplaceText,{"PLAN_END_DATE"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","00000000","99991231",Replacer.ReplaceText,{"REQUI_DATE"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4","00000000","99991231",Replacer.ReplaceText,{"CREATE_ON"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","00000000","99991231",Replacer.ReplaceText,{"ACTUAL_REL_DATE"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value6",{{"EARL_STAT_DATE", type date}, {"LATE_STAT_DATE", type date}, {"PLAN_STAT_DATE", type date}, {"PLAN_END_DATE", type date}, {"REQUI_DATE", type date}, {"ACTUAL_REL_DATE", type date}, {"CREATE_ON", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

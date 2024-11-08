@@ -1,0 +1,93 @@
+table 'DIM - REPORTING LINE BS'
+	lineageTag: 1350fcd3-eb4d-4997-bfe4-f8f8f51cf266
+
+	measure 'Is Highlight Color BS' = SELECTEDVALUE('DIM - REPORTING LINE BS'[BOLD])
+		lineageTag: 71f62a0b-f11a-48a9-a21e-54123dfb1093
+
+	column ITEM_NO
+		dataType: string
+		isKey
+		lineageTag: a960e4c8-cc88-4072-a802-11601bc77f63
+		summarizeBy: none
+		sourceColumn: ITEM_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESC_VN
+		dataType: string
+		lineageTag: 5df7f28d-93e3-42f9-b576-fdc2e770c8f7
+		summarizeBy: none
+		sourceColumn: DESC_VN
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESC_EN
+		dataType: string
+		lineageTag: 9007ae2f-a821-4a13-a32f-c579f41816bc
+		summarizeBy: none
+		sourceColumn: DESC_EN
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE
+		dataType: string
+		lineageTag: d5c71e27-e314-4aa2-a453-f64930face51
+		summarizeBy: none
+		sourceColumn: NOTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BOLD
+		dataType: string
+		lineageTag: e4cd4b60-bf3f-42a8-bd9e-6bc8c312aafb
+		summarizeBy: none
+		sourceColumn: BOLD
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITALIC
+		dataType: string
+		lineageTag: 6e501a34-1b3c-4562-83ba-cbf69480b2ac
+		summarizeBy: none
+		sourceColumn: ITALIC
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SIGN (Hide)'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2caf1b73-2d99-497a-98cf-daa0b7ff1246
+		summarizeBy: sum
+		sourceColumn: SIGN (Hide)
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SIGN = ```
+			SWITCH( TRUE(),
+			        LEFT('DIM - REPORTING LINE BS'[ITEM_NO],1) IN {"1", "2"}, 1, 
+			        LEFT('DIM - REPORTING LINE BS'[ITEM_NO],1) IN {"3", "4"}, -1, 
+			        1)
+			```
+		dataType: int64
+		formatString: 0
+		lineageTag: c69caf4e-1b2c-44d9-b325-df23c6d424c5
+		summarizeBy: sum
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - REPORTING LINE BS' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("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", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [ITEM_NO = _t, DESC_VN = _t, DESC_EN = _t, NOTE = _t, BOLD = _t, ITALIC = _t, SIGN = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"SIGN", Int64.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"SIGN", "SIGN (Hide)"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

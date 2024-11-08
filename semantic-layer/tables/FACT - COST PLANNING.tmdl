@@ -1,0 +1,128 @@
+table 'FACT - COST PLANNING'
+	lineageTag: 17607089-f8a0-40ad-a5f5-e0d6a46bf15e
+
+	column FISCAL_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e0587f48-9e68-4796-9e20-d25d816bee4d
+		summarizeBy: none
+		sourceColumn: FISCAL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FISCAL_YEAR
+		dataType: string
+		lineageTag: 1e65f302-d29c-4839-b603-b88b1c32222b
+		summarizeBy: none
+		sourceColumn: FISCAL_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column FISCAL_PERIOD
+		dataType: int64
+		formatString: 0
+		lineageTag: e6f74c16-8038-474e-aa9b-036fabeba79d
+		summarizeBy: sum
+		sourceColumn: FISCAL_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_ELEMENT
+		dataType: string
+		lineageTag: cfdf073c-21bc-455f-b492-1c4843b1916e
+		summarizeBy: none
+		sourceColumn: COST_ELEMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column VERSION
+		dataType: string
+		lineageTag: e8d16a27-685b-44e2-a47b-f61f06c28d07
+		summarizeBy: none
+		sourceColumn: VERSION
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANS_CURR
+		dataType: string
+		lineageTag: 5da8cced-0752-470f-b93e-058f3abf02d0
+		summarizeBy: none
+		sourceColumn: TRANS_CURR
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NO
+		dataType: string
+		lineageTag: 74bf3c6d-05bf-49bd-8da5-c5157df443e2
+		summarizeBy: none
+		sourceColumn: OBJECT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_NAME
+		dataType: string
+		lineageTag: 18543d52-1f69-4d5e-b398-d1eeef2244a6
+		summarizeBy: none
+		sourceColumn: ACCOUNT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TYPE_OF_COST
+		dataType: string
+		lineageTag: a7aec8ca-213d-4c83-86ed-c5cff5675fa6
+		summarizeBy: none
+		sourceColumn: TYPE_OF_COST
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRANSACTION_AMT
+		dataType: double
+		lineageTag: 1137c3af-e13a-4a2b-bed1-0d33682be725
+		summarizeBy: sum
+		sourceColumn: TRANSACTION_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TYPE_OF_COST_ZCO10
+		dataType: string
+		lineageTag: 01bee892-36a7-443b-b6d6-03cb48aff6ab
+		summarizeBy: none
+		sourceColumn: TYPE_OF_COST_ZCO10
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER
+		dataType: string
+		lineageTag: bd89c171-d7f8-402d-92f2-09d9f10e574c
+		summarizeBy: none
+		sourceColumn: COST_CENTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column COST_CENTER_ELEMENT_KEY =
+			
+			
+			[COST_CENTER] & "-" & [COST_ELEMENT]
+		dataType: string
+		lineageTag: 13bef91f-c15a-47cd-91bc-1661aee3d333
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT - COST PLANNING' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_COST_PLANNING = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_COST_PLANNING"]}[Data]
+				in
+				    gld_VW_FACT_COST_PLANNING
+
+	annotation PBI_ResultType = Exception
+

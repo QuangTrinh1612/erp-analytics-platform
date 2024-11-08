@@ -1,0 +1,40 @@
+table 'PARAMETER - ZCO06 MEASURE GROUP'
+	lineageTag: 1a06e0de-a552-46f3-b74b-4b74a00e9044
+
+	column STT
+		dataType: int64
+		formatString: 0
+		lineageTag: f46cad8b-a154-4cf6-b572-f9a8c317d6ea
+		summarizeBy: sum
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measure group'
+		dataType: string
+		lineageTag: d9c554e1-f74f-4003-ab90-c679cc0b8417
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Measure group]
+		sortByColumn: STT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "STT",INTEGER,
+				    "Measure group",STRING,
+				   {
+				    {1,"Giá thành sản xuất"},
+				    {2,"Giá thành kế hoạch nội bộ"},
+				    {3,"Giá thành kế hoạch tập đoàn"},
+				    {4,"Tỷ lệ % giá thành SX so với nội bộ"},
+				    {5,"Tỷ lệ % giá thành SX so với tập đoàn"}
+				   }
+				 )
+

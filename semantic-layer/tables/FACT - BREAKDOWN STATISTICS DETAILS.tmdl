@@ -1,0 +1,100 @@
+table 'FACT - BREAKDOWN STATISTICS DETAILS'
+	lineageTag: 4e3a4ee7-aa22-4429-9a81-e234e7121e70
+
+	column NOTIF_NUM
+		dataType: string
+		lineageTag: d14280ad-fa2b-49de-80ae-ded80312ada8
+		summarizeBy: none
+		sourceColumn: NOTIF_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUM
+		dataType: string
+		lineageTag: 419a6c1e-8cad-4d13-a9fa-9c5662d0a782
+		summarizeBy: none
+		sourceColumn: OBJECT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column EQUI_NUMBER
+		dataType: string
+		lineageTag: 92381322-8036-435d-83b5-ce678268b442
+		summarizeBy: none
+		sourceColumn: EQUI_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column END_MALF_DATE
+		dataType: string
+		lineageTag: 58d50626-86a9-4c88-86c6-c17cd2a671c3
+		summarizeBy: none
+		sourceColumn: END_MALF_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column START_MALF_TIME
+		dataType: string
+		lineageTag: 104fb70b-bcb1-4023-9cf5-4f584e481616
+		summarizeBy: none
+		sourceColumn: START_MALF_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+	column END_MALF_TIME
+		dataType: string
+		lineageTag: b54a502c-812c-42db-aba5-a12f918f2a8c
+		summarizeBy: none
+		sourceColumn: END_MALF_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DURATION_UNIT
+		dataType: string
+		lineageTag: 12ec4931-1d4b-457a-9277-e0d74b25af39
+		summarizeBy: none
+		sourceColumn: DURATION_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_NUMBER
+		dataType: string
+		lineageTag: 2f66066f-97d8-44a4-ab19-56848c8317a6
+		summarizeBy: none
+		sourceColumn: ORDER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column START_MALF_DATE
+		dataType: string
+		lineageTag: 09d698a9-26c8-439d-bd67-db17055628e0
+		summarizeBy: none
+		sourceColumn: START_MALF_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DURATION
+		dataType: double
+		lineageTag: a1efc83f-8d0f-480d-b3a6-15115f239f8f
+		summarizeBy: sum
+		sourceColumn: DURATION
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT - BREAKDOWN STATISTICS DETAILS' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_FACT_BREAKDOWN_STATISTICS_DETAILS = pvcfcprodsqlpool{[Schema="gld",Item="FACT_BREAKDOWN_STATISTICS_DETAILS"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_FACT_BREAKDOWN_STATISTICS_DETAILS,{"W_INSERT_DT"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

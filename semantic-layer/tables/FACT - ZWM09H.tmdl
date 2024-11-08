@@ -1,0 +1,235 @@
+table 'FACT - ZWM09H'
+	lineageTag: 318110a6-3df9-4a59-afb6-81703cfc42f4
+
+	column KHO
+		dataType: string
+		lineageTag: 5ccd21e3-f083-4dba-826a-ace0ba063efa
+		summarizeBy: none
+		sourceColumn: KHO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLANT_CODE
+		dataType: string
+		isHidden
+		lineageTag: 9edd1cb7-9313-4288-a9e6-91cb83bde871
+		summarizeBy: none
+		sourceColumn: PLANT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_LOC
+		dataType: string
+		isHidden
+		lineageTag: 67a73e76-32a5-40f2-a007-dc1f47df9d1d
+		summarizeBy: none
+		sourceColumn: STORAGE_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MATERIAL_CODE
+		dataType: string
+		isHidden
+		lineageTag: 40db731f-4cc6-4219-be31-e70767b572e9
+		summarizeBy: none
+		sourceColumn: MATERIAL_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column WAREHOUSE_NO
+		dataType: string
+		lineageTag: 11d108cb-0bf9-45f0-8722-45ad1e1ae214
+		summarizeBy: none
+		sourceColumn: WAREHOUSE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BASE_UOM
+		dataType: string
+		lineageTag: 2a83f378-12db-4130-9802-cabaa4ca5051
+		summarizeBy: none
+		sourceColumn: BASE_UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column BATCH
+		dataType: string
+		lineageTag: 0a39911e-8209-452e-a3d3-48b5358355f8
+		summarizeBy: none
+		sourceColumn: BATCH
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_BIN
+		dataType: string
+		lineageTag: e06b366f-ea1f-4d07-a4f2-260f650537c1
+		summarizeBy: none
+		sourceColumn: STORAGE_BIN
+
+		annotation SummarizationSetBy = Automatic
+
+	column REMAIN_GOOD_QTY
+		dataType: double
+		lineageTag: c0ce35d4-f27b-4bf9-97f1-34cbb78ec2de
+		summarizeBy: sum
+		sourceColumn: REMAIN_GOOD_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LOST_50_PC
+		dataType: double
+		lineageTag: 5662c424-c537-415e-b5ab-8b67917f7579
+		summarizeBy: sum
+		sourceColumn: LOST_50_PC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LOST_100_PC
+		dataType: double
+		lineageTag: 509eb6b5-767c-41e2-96ac-374686666dc2
+		summarizeBy: sum
+		sourceColumn: LOST_100_PC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PHY_INV_DOC_NO
+		dataType: string
+		lineageTag: 320355a3-e689-4617-b58a-2110cded089e
+		summarizeBy: none
+		sourceColumn: PHY_INV_DOC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column INV_REC_ITEM
+		dataType: string
+		lineageTag: 41b0bfaf-1ac7-4964-b6e6-442e41453ec8
+		summarizeBy: none
+		sourceColumn: INV_REC_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_TYPE
+		dataType: string
+		lineageTag: 77f3477c-999f-4db4-bac4-b627837b144a
+		summarizeBy: none
+		sourceColumn: STORAGE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNT_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7cd18d9b-67bf-4b2f-ad32-82969361954c
+		summarizeBy: none
+		sourceColumn: COUNT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column POSTING_DATE
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: d3dd6c85-a531-41cb-bf1b-bae2aa969dd2
+		summarizeBy: none
+		sourceColumn: POSTING_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DOC_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fbba7af6-a681-4273-958d-065381cf3db7
+		summarizeBy: none
+		sourceColumn: DOC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column UOM
+		dataType: string
+		lineageTag: 8566d936-c36c-4fce-9cde-a8f701a92250
+		summarizeBy: none
+		sourceColumn: UOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column TO_DOC
+		dataType: string
+		lineageTag: 8d2ce5f0-ec13-4ca4-b9f7-778de8319f2a
+		summarizeBy: none
+		sourceColumn: TO_DOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOTE
+		dataType: string
+		lineageTag: 8b8ebf48-8bb8-458d-86f1-5f8c1ebe55b2
+		summarizeBy: none
+		sourceColumn: NOTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SL_TONKHO
+		dataType: double
+		lineageTag: f4eb2733-699d-4f83-a3c4-770111d5de81
+		summarizeBy: sum
+		sourceColumn: SL_TONKHO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SL_THUCTE
+		dataType: double
+		lineageTag: 5565d83e-86d6-4cf8-8e79-ccdc93613f93
+		summarizeBy: sum
+		sourceColumn: SL_THUCTE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SL_THUA
+		dataType: double
+		lineageTag: 53edbdc2-11a1-4b6a-bae9-799cbc73c32c
+		summarizeBy: sum
+		sourceColumn: SL_THUA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SL_THIEU
+		dataType: double
+		lineageTag: 3153643c-192e-4be7-a83d-6e49de408542
+		summarizeBy: sum
+		sourceColumn: SL_THIEU
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition ZWM09H = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_FACT_ZWM09H = pvcfcprodsqlpool{[Schema="gld",Item="VW_FACT_ZWM09H"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gld_VW_FACT_ZWM09H,{{"COUNT_DATE", type date}, {"POSTING_DATE", type date}, {"DOC_DATE", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Exception
+

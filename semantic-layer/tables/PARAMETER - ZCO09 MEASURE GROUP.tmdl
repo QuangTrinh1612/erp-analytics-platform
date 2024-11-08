@@ -1,0 +1,57 @@
+table 'PARAMETER - ZCO09 MEASURE GROUP'
+	lineageTag: f16c8ec7-693b-44d2-b0d4-53fcae63592f
+
+	column STT
+		dataType: string
+		lineageTag: dae8d552-3d13-4c6f-9d14-034b3968190e
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [STT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Measure
+		dataType: string
+		lineageTag: ee3d5d02-a9b0-42a2-b5eb-c78a0e3dd5c1
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Measure]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sub Measure'
+		dataType: string
+		lineageTag: a4a48261-daeb-48b3-b723-c54b0d03368a
+		summarizeBy: none
+		isNameInferred
+		isDataTypeInferred
+		sourceColumn: [Sub Measure]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Calculated Table' = calculated
+		mode: import
+		source = ```
+				DATATABLE(
+				    "STT",STRING,
+				    "Measure",STRING,
+				    "Sub Measure",STRING,
+				{
+				    {"A","Kế hoạch tháng","Giá trị"},
+				    {"B","Kế hoạch tháng","Đơn giá 1 tấn SP"},
+				    {"C","Kế hoạch tháng","%"},
+				    {"D","Thực hiện tháng","Giá trị"},
+				    {"E","Thực hiện tháng","Đơn giá 1 tấn SP"},
+				    {"F","Thực hiện tháng","%"},
+				    {"G","Lũy kế kế hoạch","Giá trị"},
+				    {"H","Lũy kế kế hoạch","Đơn giá 1 tấn SP"},
+				    {"I","Lũy kế kế hoạch","%"},
+				    {"K","Lũy kế thực hiện","Giá trị"},
+				    {"L","Lũy kế thực hiện","Đơn giá 1 tấn SP"},
+				    {"M","Lũy kế thực hiện","%"}    
+				}
+				)
+				```
+

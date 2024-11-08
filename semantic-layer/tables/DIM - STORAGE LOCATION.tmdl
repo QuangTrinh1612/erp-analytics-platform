@@ -1,0 +1,176 @@
+table 'DIM - STORAGE LOCATION'
+	lineageTag: ee1d1a63-0c75-488e-9cea-32dad2bcaafd
+
+	column STORAGE_LOCATION
+		dataType: string
+		lineageTag: 1289b4f3-ecb1-4c16-b3c9-02a656c61332
+		summarizeBy: none
+		sourceColumn: STORAGE_LOCATION
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESCRIPTION
+		dataType: string
+		lineageTag: 5e69d453-1d1f-413f-8c1e-cdeb03c6f468
+		summarizeBy: none
+		sourceColumn: DESCRIPTION
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NGAY_HDTK
+		dataType: string
+		lineageTag: c43c1efa-3277-4a6f-84aa-e06b92c14902
+		summarizeBy: none
+		sourceColumn: NGAY_HDTK
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRUSO
+		dataType: string
+		lineageTag: 847569f8-210a-4a0a-94b6-98579c4d0d22
+		summarizeBy: none
+		sourceColumn: TRUSO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLKHO
+		dataType: string
+		lineageTag: 978c0509-4f69-40ba-850f-d2ab71ecdbd9
+		summarizeBy: none
+		sourceColumn: PLKHO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HDTKHO
+		dataType: string
+		lineageTag: c76b383f-bffe-4e7d-a87e-fb05275dcb8f
+		summarizeBy: none
+		sourceColumn: HDTKHO
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIENTHOAI
+		dataType: string
+		lineageTag: 7e372e9a-f307-4de4-b05f-493a002f7f2d
+		summarizeBy: none
+		sourceColumn: DIENTHOAI
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FAX
+		dataType: string
+		lineageTag: eef3bd31-e6db-4055-972a-8073913fa111
+		summarizeBy: none
+		sourceColumn: FAX
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TINH_TP
+		dataType: string
+		lineageTag: 5699b8e7-7250-415f-8d0f-826cfdbb8cf8
+		summarizeBy: none
+		sourceColumn: TINH_TP
+
+		annotation SummarizationSetBy = Automatic
+
+	column STORAGE_CATEGORY
+		dataType: string
+		lineageTag: 0e706d67-a932-4f40-8ca4-bf0f504552d1
+		summarizeBy: none
+		sourceColumn: STORAGE_CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_OFFICE
+		dataType: string
+		lineageTag: 9ff28537-cb04-47a8-94f2-1a37cd8dfdcf
+		summarizeBy: none
+		sourceColumn: SALE_OFFICE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_OFFICE_NAME
+		dataType: string
+		lineageTag: 28a9fc66-e57b-48cb-9ca6-54f51c88b664
+		summarizeBy: none
+		sourceColumn: SALE_OFFICE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_GROUP
+		dataType: string
+		lineageTag: c9bce21a-f911-4b20-8f11-f776df162df3
+		summarizeBy: none
+		sourceColumn: SALE_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALE_GROUP_NAME
+		dataType: string
+		lineageTag: 3e9b7059-ed7f-4d57-9ac2-f1903ddce720
+		summarizeBy: none
+		sourceColumn: SALE_GROUP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Storage Group' =
+			SWITCH([STORAGE_LOCATION],
+			"1001", "Vật Tư",
+			"1005", "Vật Tư",
+			"1002", "NPL, Hóa Chất",
+			"1003", "NPL, Hóa Chất",
+			"1004", "NPL, Hóa Chất",
+			"1303", "NPL, Hóa Chất",
+			"1298", "NPL, Hóa Chất",
+			"1401", "NPL, Hóa Chất",
+			"1431", "NPL, Hóa Chất",
+			"1202", "Thành Phẩm",
+			"1422", "Thành Phẩm"
+			)
+		dataType: string
+		lineageTag: e8693016-20ac-4929-b0dc-dba918de75a8
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Đổi tên Kho' =
+			SWITCH(TRUE(),
+			[STORAGE_LOCATION] = "1202" , "Kho TP Ure",
+			[DESCRIPTION])
+		dataType: string
+		lineageTag: 3b7a36ab-43b4-4f5d-a824-833645608a45
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim Storage Location' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_STORAGE_LOCATION = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_STORAGE_LOCATION"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gld_VW_DIM_STORAGE_LOCATION,{"STORAGE_TYPE"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

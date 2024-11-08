@@ -1,0 +1,31 @@
+table 'DIM - PRICE LIST TYPE'
+	lineageTag: 13436494-4fb4-4639-94e0-0664ea43e5ad
+
+	column PRICE_LIST
+		dataType: string
+		lineageTag: 4384dcbc-d40d-4fd8-94d8-f26e3ca49433
+		summarizeBy: none
+		sourceColumn: PRICE_LIST
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRICE_LIST_NAME
+		dataType: string
+		lineageTag: 8bf5198d-630c-40cc-8e72-c3922452ed8f
+		summarizeBy: none
+		sourceColumn: PRICE_LIST_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM - PRICE LIST TYPE' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("sg-sea-prod-syn-01.sql.azuresynapse.net"),
+				    pvcfcprodsqlpool = Source{[Name="pvcfcprodsqlpool"]}[Data],
+				    gld_VW_DIM_PRICE_LIST_TYPE = pvcfcprodsqlpool{[Schema="gld",Item="VW_DIM_PRICE_LIST_TYPE"]}[Data]
+				in
+				    gld_VW_DIM_PRICE_LIST_TYPE
+
+	annotation PBI_ResultType = Table
+
