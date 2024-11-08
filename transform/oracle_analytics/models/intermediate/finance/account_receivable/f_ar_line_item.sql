@@ -72,6 +72,7 @@ SELECT
     line.amount_due_remaining,
     line.tax_rate,
     line.uom_code,
+    line.last_update_date as line_last_update_date,
 
     dist.distribution_items, -- JSON string of distribution items for each line,
     NOW() AS _etl_ingestion_time
@@ -81,5 +82,5 @@ JOIN ar_line line ON hdr.customer_trx_id = line.customer_trx_id
 LEFT JOIN ar_distribution dist ON line.customer_trx_line_id = dist.customer_trx_line_id
 
 {% if is_incremental() %}
-WHERE l.last_update_date > (SELECT COALESCE(MAX(line_last_update_date), '1970-01-01') FROM {{ this }})
+WHERE line.last_update_date > (SELECT COALESCE(MAX(line_last_update_date), '1970-01-01') FROM {{ this }})
 {% endif %}

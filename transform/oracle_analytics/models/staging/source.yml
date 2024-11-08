@@ -78,3 +78,27 @@ sources:
 
       - name: HZ_Customer_Account_PVO
         identifier: fscmtopmodelam_partiesanalyticsam_customeraccount
+
+      - name: Customer_PVO
+        identifier: fscmtopmodelam_partiesanalyticsam_customer
+      
+      - name: Customer_Account_PVO
+        identifier: fscmtopmodelam_partiesanalyticsam_customeraccount
+
+      - name: Customer_Account_Site_Use_PVO
+        identifier: fscmtopmodelam_partiesanalyticsam_custaccountsiteuse
+
+      - name: Invoice_Header_PVO
+        identifier: fscmtopmodelam_finextractam_apbiccextractam_invoiceheaderextractpvo
+
+      - name: Invoice_Line_PVO
+        identifier: fscmtopmodelam_finextractam_apbiccextractam_invoicelineextractpvo
+
+      - name: Invoice_Distribution_PVO
+        identifier: fscmtopmodelam_finextractam_apbiccextractam_invoicedistributionextractpvo
+
+      - name: Supplier
+        identifier: FscmTopModelAM_PrcExtractAM_PozBiccExtractAM_SupplierExtractPVO
+
+      - name: Supplier_Site
+        identifier: FscmTopModelAM_PrcExtractAM_PozBiccExtractAM_SupplierSiteExtractPVO
